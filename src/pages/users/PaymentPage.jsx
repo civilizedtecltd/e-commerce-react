@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Table, Form, Button} from 'react-bootstrap';
 import './assets/css/user.css';
-import {Liai,Liis, Lia} from '../../components/LiComponent/CommonLiComponent';
+import {Liai,Liis} from '../../components/LiComponent/CommonLiComponent';
 import {headerPopbars,asideData,headerFeatureList} from '../../inc/users/users';
 
 const PaymentPage = () => {

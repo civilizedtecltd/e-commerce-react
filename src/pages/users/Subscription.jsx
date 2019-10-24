@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Button, Form} from 'react-bootstrap';
-import {Liai,Liis, Lia} from '../../components/LiComponent/CommonLiComponent';
+import {Liai,Liis} from '../../components/LiComponent/CommonLiComponent';
 import {headerPopbars,asideData,headerFeatureList} from '../../inc/users/users';
 const Subscription = () => {
   return (<> 
