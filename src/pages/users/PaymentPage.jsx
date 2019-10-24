@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Table, Form, Button} from 'react-bootstrap';
 import './assets/css/user.css';
+import {Liai,Liis, Lia} from '../../components/LiComponent/CommonLiComponent';
+import {headerPopbars,asideData,headerFeatureList} from '../../inc/users/users';
 
 const PaymentPage = () => {
   return (<>
@@ -19,13 +21,14 @@ const PaymentPage = () => {
             <Col className="col-auto">
               <div className="headFeature">
                 <ul className="headFeatureList d-flex justify-content-between">
-                  <li><i className="fas fa-truck"></i> <span>Free delivery</span></li>
-                  <li><i className="fas fa-award"></i> <span>Genuine goods</span></li>
-                  <li><i className="fas fa-headset"></i> <span>Customer support</span></li>
+                {headerFeatureList.map(feature=><Liis
+                    ListClass={feature.LIST_CLASS}
+                    IconName={feature.ICON_NAME}
+                    Title={feature.TITLE}
+                />)}
                 </ul>{/* end of headFeatureList */}
               </div>{/* end of headFeature */}
             </Col>{/* end of Col */}
-
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </div>{/* end of headerTopBar */}
@@ -57,9 +60,13 @@ const PaymentPage = () => {
             <Col className="col-auto">
               <div className="headPopBar clearfix" id="headPopBar">
                 <ul className="headPopBarList d-flex justify-content-between align-items-center">
-                  <li><Link to="/"><i className="fas fa-search"></i> Search</Link></li>
-                  <li><Link to="/"><i className="far fa-star"></i> Favorites</Link></li>
-                  <li><Link to="/"><i className="fas fa-shopping-cart"></i> Cart</Link></li>
+                {headerPopbars.map((datum)=><Liai
+                    key={Math.floor(Math.random() * 10)}
+                    IconName={datum.ICON_NAME}
+                    Title={datum.TITLE}
+                    Url={datum.URL}
+                    AnchorClass={datum.ANCHOR_CLASS}
+                  />)}
                   <li>
                     <div className="userLogged d-flex align-items-center">
                       <div className="userAvater"><img src="./assets/images/reviews_avater.jpg" alt="" /></div>
@@ -78,28 +85,17 @@ const PaymentPage = () => {
         <Container fluid="{true}" className="pl-0 pr-0">
           <Row noGutters>
             <Col sm="2">
-              <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
+            <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
                 <nav className="userNav">
                   <ul className="userNavBar">
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="fas fa-clipboard-list"></i> My orders</Link>
-                    </li>{/* end of li */}
-                    
-                    <li className="nav-item active">
-                      <Link className="nav-link" to="#"><i className="fas fa-wallet"></i> Payment methods</Link>
-                    </li>{/* end of li */}
-
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="fas fa-cog"></i> Profile settings</Link>
-                    </li>{/* end of li */}
-
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="far fa-envelope"></i> Email subscription</Link>
-                    </li>{/* end of li */}
-
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="fas fa-sign-out-alt"></i> Log out</Link>
-                    </li>{/* end of li */}
+                    {asideData.map((aside)=><Liai
+                      key={Math.floor(Math.random() * 10)}
+                      ListClass={aside.LIST_CLASS}
+                      Title={aside.TITLE}
+                      Url={aside.URL}
+                      IconName={aside.ICON_NAME}
+                      AnchorClass={aside.ANCHOR_CLASS}
+                    />)}
 
                   </ul>{/* end of userNavBar */}
                 </nav>{/* end of userNav */}
@@ -111,7 +107,7 @@ const PaymentPage = () => {
 
                 <section className="myOrderArea secGap clearfix" id="myOrderArea">
 
-                  <Container fluid="{true}">
+                  <Container fluid={true}>
                     <Row>
                       <Col>
                         <Card>
@@ -135,19 +131,14 @@ const PaymentPage = () => {
                                   </td>{/* end of td */}
 
                                   <td class="actionBtntd">
-                                    <Link to="#" className="btn btnActionUpdate">Update</Link>
-                                    <Link to="#" className="btn btnActionDelete">Delete</Link>
+                                    <Link to="/" className="btn btnActionUpdate">Update</Link>
+                                    <Link to="/" className="btn btnActionDelete">Delete</Link>
                                   </td>{/* end of td */}
                                 </tr>{/* end of tr */}
-
                               </tbody>{/* end of tbody */}
-
                             </Table>{/* end of Table */}
-
                             <Link to="#" className="btn btn-primary btnSm">Add payment method</Link>
-
                           </Card.Body>{/* end of Card.Body */}
-
                           <Card.Body className="addPaymentCard">
                             <Row>
                               <Col sm="6">
@@ -159,11 +150,9 @@ const PaymentPage = () => {
                                       name="formHorizontalRadios"
                                       id="formHorizontalRadios1"
                                     />
-
                                   </div>{/* end of formBody */}
                                   
-                                  <div className="formRadioGroup bgGray mb-2">
-                                    
+                                  <div className="formRadioGroup bgGray mb-2">                        
                                     <Form.Check className="formRadio"
                                       type="radio"
                                       label="Paypal"

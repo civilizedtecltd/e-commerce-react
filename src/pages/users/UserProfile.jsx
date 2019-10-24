@@ -2,10 +2,10 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Form, Button} from 'react-bootstrap';
 import './assets/css/user.css';
-
+import {Liai,Liis, Lia} from '../../components/LiComponent/CommonLiComponent';
+import {headerPopbars,asideData,headerFeatureList} from '../../inc/users/users';
 const UserProfile = () => {
   return (<>
-
     <div className="allWrapper">
       <div className="headerTopBar clearfix bgBlack" id="headerTopBar">
         <Container fluid={true}>
@@ -19,9 +19,11 @@ const UserProfile = () => {
             <Col className="col-auto">
               <div className="headFeature">
                 <ul className="headFeatureList d-flex justify-content-between">
-                  <li><i className="fas fa-truck"></i> <span>Free delivery</span></li>
-                  <li><i className="fas fa-award"></i> <span>Genuine goods</span></li>
-                  <li><i className="fas fa-headset"></i> <span>Customer support</span></li>
+                {headerFeatureList.map(feature=><Liis
+                    ListClass={feature.LIST_CLASS}
+                    IconName={feature.ICON_NAME}
+                    Title={feature.TITLE}
+                />)}
                 </ul>{/* end of headFeatureList */}
               </div>{/* end of headFeature */}
             </Col>{/* end of Col */}
@@ -69,7 +71,6 @@ const UserProfile = () => {
                 </ul>{/* end of headPopBarList */}
               </div>{/* end of headPopBar */}
             </Col>{/* end of Col */}
-
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </header>{/* end of header */}
@@ -78,28 +79,17 @@ const UserProfile = () => {
         <Container fluid="{true}" className="pl-0 pr-0">
           <Row noGutters>
             <Col sm="2">
-              <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
+            <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
                 <nav className="userNav">
                   <ul className="userNavBar">
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="fas fa-clipboard-list"></i> My orders</Link>
-                    </li>{/* end of li */}
-                    
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="fas fa-wallet"></i> Payment methods</Link>
-                    </li>{/* end of li */}
-
-                    <li className="nav-item active">
-                      <Link className="nav-link" to="#"><i className="fas fa-cog"></i> Profile settings</Link>
-                    </li>{/* end of li */}
-
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="far fa-envelope"></i> Email subscription</Link>
-                    </li>{/* end of li */}
-
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="fas fa-sign-out-alt"></i> Log out</Link>
-                    </li>{/* end of li */}
+                    {asideData.map((aside)=><Liai
+                      key={Math.floor(Math.random() * 10)}
+                      ListClass={aside.LIST_CLASS}
+                      Title={aside.TITLE}
+                      Url={aside.URL}
+                      IconName={aside.ICON_NAME}
+                      AnchorClass={aside.ANCHOR_CLASS}
+                    />)}
 
                   </ul>{/* end of userNavBar */}
                 </nav>{/* end of userNav */}
@@ -111,7 +101,7 @@ const UserProfile = () => {
 
                 <section className="myOrderArea secGap clearfix" id="myOrderArea">
 
-                  <Container fluid="{true}">
+                  <Container fluid={true}>
                     <Row>
                       <Col>
                         <Card>
@@ -193,14 +183,11 @@ const UserProfile = () => {
                               </Form>{/* end of userProfile */}
                             </div>{/* end of userProfile */}
                           </Card.Body>{/* end of Card.Body */}
-
                         </Card>{/* end of Card */}
                       </Col>{/* end of Col */}
                     </Row>{/* end of Row */}
                   </Container>{/* end of Container */}
-
                 </section>{/* end of myOrderArea */}
-                
               </main>{/* end of mainContent */}
             </Col>{/* end of Col */}
           </Row>{/* end of Row */}
