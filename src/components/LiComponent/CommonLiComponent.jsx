@@ -1,9 +1,19 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+
+
 // only list component
 function Li({Listclass,Title}) {
    return(
     <li className={Listclass}>{Title}</li>
+   )
+}
+
+//list anchor tag
+
+function Lia({Listclass,Title,Url}) {
+   return(
+    <li className={Listclass}><Link to={Url}>{Title}</Link></li>
    )
 }
 
@@ -18,10 +28,10 @@ function Liis({Listclass,Title,IconName}){
 }
 
 //list anchor icon
-function Liai({Title,Url,AnchorClass}){
+function Liai({ListClass,Title,Url,IconName,AnchorClass}){
   return (
-    <li>
-        <Link className={AnchorClass} to={Url}><i></i>{Title}</Link>
+    <li className={ListClass}>
+        <Link className={AnchorClass} to={Url}><i className={IconName}></i>{Title}</Link>
     </li>
   )
 }
@@ -42,6 +52,7 @@ function Liai({Title,Url,AnchorClass}){
 
 export {
     Li,
+    Lia,
     Lii,
     Liis,
     Liai

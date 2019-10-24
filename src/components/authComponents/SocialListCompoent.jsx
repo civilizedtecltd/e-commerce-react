@@ -1,5 +1,5 @@
 import React from "react";
-import {Lii} from '../LiComponent/CommonLi'
+import {Lii} from '../LiComponent/CommonLiComponent'
 import {icons} from '../../inc/auth/login'
 export default function SocialListComponent() {
   return (

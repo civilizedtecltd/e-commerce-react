@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Row, Col, Button, Form} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
-import SocialListCompoent from '../../components/authComponents/SocialListCompoent';
+import SocialListComponent from '../../components/authComponents/SocialListCompoent';
 
 const Signup = () => {
     return (<>
@@ -19,7 +19,7 @@ const Signup = () => {
 
             <Row>
               <Col sm={6}>
-                <SocialListCompoent/>
+                <SocialListComponent/>
 
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>

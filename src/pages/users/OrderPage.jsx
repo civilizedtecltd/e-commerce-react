@@ -2,7 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Table} from 'react-bootstrap';
 import './assets/css/user.css';
-import {Lia} from '../../components/LiComponent/CommonLi'
+import {Liai, Lia} from '../../components/LiComponent/CommonLiComponent';
+import {headerPopbars,asideData,categoryClass} from '../../inc/users/Orderpage'
 
 const OrderPage = () => {
   return (<>
@@ -44,10 +45,10 @@ const OrderPage = () => {
             <Col>
               <nav className="mainMenu mainNav" id="mainNav">
                 <ul className="navTabs">
-                  <Lia
-                  AnchorClass={"active"}
+                  <Liai
+                   AnchorClass={"active"}
                    Url={'/'}
-                   Title={Home}
+                   Title={"Home"}
                   />
                 </ul>{/* end of navTabs */}
 
@@ -60,9 +61,13 @@ const OrderPage = () => {
             <Col className="col-auto">
               <div className="headPopBar clearfix" id="headPopBar">
                 <ul className="headPopBarList d-flex justify-content-between align-items-center">
-                  <li><Link to="/"><i className="fas fa-search"></i> Search</Link></li>
-                  <li><Link to="/"><i className="far fa-star"></i> Favorites</Link></li>
-                  <li><Link to="/"><i className="fas fa-shopping-cart"></i> Cart</Link></li>
+                  {headerPopbars.map((datum)=><Liai
+                    key={Math.floor(Math.random() * 10)}
+                    IconName={datum.ICON_NAME}
+                    Title={datum.TITLE}
+                    Url={datum.URL}
+                    AnchorClass={datum.ANCHOR_CLASS}
+                  />)}
                   <li>
                     <div className="userLogged d-flex align-items-center">
                       <div className="userAvater"><img src="./assets/images/reviews_avater.jpg" alt="" /></div>
@@ -72,7 +77,6 @@ const OrderPage = () => {
                 </ul>{/* end of headPopBarList */}
               </div>{/* end of headPopBar */}
             </Col>{/* end of Col */}
-
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </header>{/* end of header */}
@@ -84,25 +88,16 @@ const OrderPage = () => {
               <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
                 <nav className="userNav">
                   <ul className="userNavBar">
-                    <li className="nav-item active">
-                      <Link className="nav-link" to="#"><i className="fas fa-clipboard-list"></i> My orders</Link>
-                    </li>{/* end of li */}
-                    
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="fas fa-wallet"></i> Payment methods</Link>
-                    </li>{/* end of li */}
+                
 
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="fas fa-cog"></i> Profile settings</Link>
-                    </li>{/* end of li */}
-
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="far fa-envelope"></i> Email subscription</Link>
-                    </li>{/* end of li */}
-
-                    <li className="nav-item">
-                      <Link className="nav-link" to="#"><i className="fas fa-sign-out-alt"></i> Log out</Link>
-                    </li>{/* end of li */}
+                    {asideData.map((aside)=><Liai
+                      key={Math.floor(Math.random() * 10)}
+                      ListClass={aside.LIST_CLASS}
+                      Title={aside.TITLE}
+                      Url={aside.URL}
+                      IconName={aside.ICON_NAME}
+                      AnchorClass={aside.ANCHOR_CLASS}
+                    />)}
 
                   </ul>{/* end of userNavBar */}
                 </nav>{/* end of userNav */}
@@ -129,50 +124,51 @@ const OrderPage = () => {
                                 <p>It’s not a problem. Just choose a category you’re intrested in and<br/> add goods to your cart
                                 </p>
                               </div>{/* end of orderSortDes */}
-                              <hr className="hrBorder mt-4 mb-4" />
+                             <hr className="hrBorder mt-4 mb-4" />
 
                               <div className="cardContentDetails">
                                 <Row>
                                   <Col sm="3">
                                     <h3 className="cardWidgetTitle mb-3">Kindergarten</h3>
                                     <ul className="cardWidgetList text-center">
-                                      <li><Link to="#">Pre 1</Link></li>
-                                      <li><Link to="#">Pre 2</Link></li>
-                                      <li><Link to="#">Pre 3</Link></li>
+                                    {categoryClass.primarySchool.map(priClass=><Lia
+                                       key={Math.floor(Math.random() * 10)}
+                                       Title={priClass} 
+                                       Url={'/'}
+                                     />)}
                                     </ul>{/* end of cardWidgetList */}
                                   </Col>{/* end of Col */}
 
                                   <Col sm="3">
                                     <h3 className="cardWidgetTitle mb-3">Primary school</h3>
                                     <ul className="cardWidgetList cardWidgetList2 text-center">
-                                      <li><Link to="#">Class 1</Link></li>
-                                      <li><Link to="#">Class 2</Link></li>
-                                      <li><Link to="#">Class 3</Link></li>
-                                      <li><Link to="#">Class 4</Link></li>
-                                      <li><Link to="#">Class 5</Link></li>
-                                      <li><Link to="#">Class 6</Link></li>
-                                      <li><Link to="#">Class 7</Link></li>
-                                      <li><Link to="#">Class 8</Link></li>
+                                     {categoryClass.primarySchool.map(priClass=><Lia
+                                       key={Math.floor(Math.random() * 10)}
+                                       Title={priClass} 
+                                       Url={'/'}
+                                     />)}
                                     </ul>{/* end of cardWidgetList */}
                                   </Col>{/* end of Col */}
 
                                   <Col sm="3">
                                     <h3 className="cardWidgetTitle mb-3">Secondary school</h3>
                                     <ul className="cardWidgetList text-center">
-                                      <li><Link to="#">Form 1</Link></li>
-                                      <li><Link to="#">Form 2</Link></li>
-                                      <li><Link to="#">Form 3</Link></li>
-                                      <li><Link to="#">Form 4</Link></li>
+                                    {categoryClass.primarySchool.map(priClass=><Lia
+                                       key={Math.floor(Math.random() * 10)}
+                                       Title={priClass} 
+                                       Url={'/'}
+                                     />)}
                                     </ul>{/* end of cardWidgetList */}
                                   </Col>{/* end of Col */}
 
                                   <Col sm="3">
                                     <h3 className="cardWidgetTitle mb-3">Stationery</h3>
                                     <ul className="cardWidgetList text-center">
-                                      <li><Link to="#">Stationery</Link></li>
-                                      <li><Link to="#">Stationery</Link></li>
-                                      <li><Link to="#"><strong>Bibles</strong></Link></li>
-                                      <li><Link to="#">Bibles</Link></li>
+                                     {categoryClass.primarySchool.map(priClass=><Lia
+                                       key={Math.floor(Math.random() * 10)}
+                                       Title={priClass} 
+                                       Url={'/'}
+                                     />)}
                                     </ul>{/* end of cardWidgetList */}
                                   </Col>{/* end of Col */}
                                 </Row>{/* end of Row */}
