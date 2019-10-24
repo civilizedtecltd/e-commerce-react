@@ -209,16 +209,13 @@ const OrderPage = () => {
                                   <td><span className="stockInfo">DELIVERED</span></td>
                                 </tr>{/* end of tr */}
                               </tbody>{/* end of tbody */}
-
                             </Table>{/* end of Table */}
                           </Card.Body>{/* end of Card.Body */}
                         </Card>{/* end of Card */}
                       </Col>{/* end of Col */}
                     </Row>{/* end of Row */}
                   </Container>{/* end of Container */}
-
                 </section>{/* end of myOrderArea */}
-                
               </main>{/* end of mainContent */}
             </Col>{/* end of Col */}
           </Row>{/* end of Row */}
