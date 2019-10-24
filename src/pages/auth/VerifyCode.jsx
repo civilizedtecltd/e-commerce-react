@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Col, Button, Form} from 'react-bootstrap';
+import {Container, Row, Col, Form} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
 import { InputFrom } from '../../components/FromComponents/InputComponent';

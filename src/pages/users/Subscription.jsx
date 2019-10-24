@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Container, Row, Col, Card, Button, Form} from 'react-bootstrap';
+import {Container, Row, Col, Card, Form} from 'react-bootstrap';
+import {CheckboxComponent} from '../../components/FromComponents/CheckboxComponents';
+import{ButtonComponents}from '../../components/ButtonComponents/ButtonComponents'
 
 const Subscription = () => {
   return (<>
@@ -122,21 +124,31 @@ const Subscription = () => {
                               <Row>
 
                                 <Col sm="12">
-                                  <Form.Group controlId="formCheckbox1" className="formCheckbox mt-2">
-                                    <Form.Check type="checkbox" label="Announcements" />
-                                  </Form.Group>{/* end of Form.Group */}
+                                  <CheckboxComponent
+                                    ControlId="formCheckbox1"
+                                    ClassName="formCheckbox mt-2"
+                                    Type="checkbox"
+                                    Label="Announcements"
+                                  />
                                 </Col>{/* end of col */}
                                 
                                 <Col sm="12">
-                                  <Form.Group controlId="formCheckbox2" className="formCheckbox mt-2">
-                                    <Form.Check type="checkbox" label="Sale invitations" />
-                                  </Form.Group>{/* end of Form.Group */}
+                                  
+                                  <CheckboxComponent
+                                    ControlId="formCheckbox2"
+                                    ClassName="formCheckbox mt-2"
+                                    Type="checkbox"
+                                    Label="Sale invitations"
+                                  />
                                 </Col>{/* end of col */}
                                 
                                 <Col sm="12">
-                                  <Form.Group controlId="formCheckbox3" className="formCheckbox mt-2">
-                                    <Form.Check type="checkbox" label="Weekly newsletter" />
-                                  </Form.Group>{/* end of Form.Group */}
+                                  <CheckboxComponent
+                                    ControlId="formCheckbox3"
+                                    ClassName="formCheckbox mt-2"
+                                    Type="checkbox"
+                                    Label="Weekly Newsletter"
+                                  />
                                 </Col>{/* end of col */}
                                 
                                 <Col sm="12">
@@ -144,13 +156,20 @@ const Subscription = () => {
                                 </Col>{/* end of col */}
                                 
                                 <Col sm="12">
-                                  <Form.Group controlId="formCheckbox4" className="formCheckbox mt-2">
-                                    <Form.Check type="checkbox" label="Unsubscribe" />
-                                  </Form.Group>{/* end of Form.Group */}
+                                  <CheckboxComponent
+                                    ControlId="formCheckbox3"
+                                    ClassName="formCheckbox mt-2"
+                                    Type="checkbox"
+                                    Label="Unsubscribe"
+                                  />
                                 </Col>{/* end of col */}
                                 
                                 <Col sm="12">
-                                  <Button variant="primary" className="mt-3" type="submit"> Save </Button>
+                                  <ButtonComponents
+                                    ClassName="mt-3"
+                                    Type="submit"
+                                    Name="Save"
+                                  />
                                 </Col>{/* end of col */}
 
                               </Row>{/* end of row */}

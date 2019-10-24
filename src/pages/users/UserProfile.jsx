@@ -1,8 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Container, Row, Col, Card, Form, Button} from 'react-bootstrap';
+import {Container, Row, Col, Card, Form} from 'react-bootstrap';
 import './assets/css/user.css';
-
+import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
+import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
 const UserProfile = () => {
   return (<>
 
@@ -121,44 +122,54 @@ const UserProfile = () => {
                               <Form className="profileSettingsForm">
                                 <Row>
                                   <Col sm="6">
-                                    <Form.Group controlId="exampleForm.ControlSelect1">
-                                      <Form.Label>Category</Form.Label>
-                                      <Form.Control as="select">
-                                        <option>Secondary school</option>
-                                        <option>Secondary school 2</option>
-                                        <option>Secondary school 3</option>
-                                        <option>Secondary school 4</option>
-                                        <option>Secondary school 5</option>
-                                      </Form.Control>
-                                    </Form.Group>{/* end of Form.Group */}
+                                    <SelectFrom
+                                      LableTitle="Category"
+                                      controlId="exampleForm.ControlSelect1"
+                                    />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
-                                    <Form.Group controlId="firstName">
-                                      <Form.Label>First Name</Form.Label>
-                                      <Form.Control type="text" />
-                                    </Form.Group>{/* end of Form.Group */}
+                                    <InputFrom
+                                      controlId="firstName"
+                                      LableTitle="First Name"
+                                      TypeName="text"
+                                      Name="first_name"
+                                      Value=""
+                                      Placeholder="First Name"
+                                    />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
-                                    <Form.Group controlId="lastName">
-                                      <Form.Label>Last Name</Form.Label>
-                                      <Form.Control type="text" />
-                                    </Form.Group>{/* end of Form.Group */}
+                                    <InputFrom
+                                      controlId="lastName"
+                                      LableTitle="Last Name"
+                                      TypeName="text"
+                                      Name="lastName"
+                                      Value=""
+                                      Placeholder="Last Name"
+                                    />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
-                                    <Form.Group controlId="userEmail">
-                                      <Form.Label>Email Address</Form.Label>
-                                      <Form.Control type="email" />
-                                    </Form.Group>{/* end of Form.Group */}
+                                    <InputFrom
+                                      controlId="userEmail"
+                                      LableTitle="Email Address"
+                                      TypeName="email"
+                                      Name="email"
+                                      Value=""
+                                      Placeholder="Email Address"
+                                    />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
-                                    <Form.Group controlId="userPhone">
-                                      <Form.Label>Phone Number</Form.Label>
-                                      <Form.Control type="text" />
-                                    </Form.Group>{/* end of Form.Group */}
+                                    <InputFrom
+                                      controlId="userPhone"
+                                      LableTitle="Phone Number"
+                                      TypeName="text"
+                                      Name="phone"
+                                      Value=""
+                                      Placeholder="Phone Number"
+                                    />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="12">
@@ -166,28 +177,45 @@ const UserProfile = () => {
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
-                                    <Form.Group controlId="currentPassword">
-                                      <Form.Label>Current password</Form.Label>
-                                      <Form.Control type="password" />
-                                    </Form.Group>{/* end of Form.Group */}
+                                    
+                                    <InputFrom
+                                      controlId="currentPassword"
+                                      LableTitle="Current Password"
+                                      TypeName="password"
+                                      Name="password"
+                                      Value=""
+                                      Placeholder="Current Password"
+                                    />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
-                                    <Form.Group controlId="newPassword">
-                                      <Form.Label>Create new password</Form.Label>
-                                      <Form.Control type="password" />
-                                    </Form.Group>{/* end of Form.Group */}
+                                    <InputFrom
+                                      controlId="newPassword"
+                                      LableTitle="Create New Password"
+                                      TypeName="password"
+                                      Name="password"
+                                      Value=""
+                                      Placeholder="Create New Password"
+                                    />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
-                                    <Form.Group controlId="repeatNewPassword">
-                                      <Form.Label>Repeat new password</Form.Label>
-                                      <Form.Control type="password" />
-                                    </Form.Group>{/* end of Form.Group */}
+                                    <InputFrom
+                                      controlId="repeatNewPassword"
+                                      LableTitle="Repeat new password"
+                                      TypeName="password"
+                                      Name="password"
+                                      Value=""
+                                      Placeholder="Repeat new password"
+                                    />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="12">
-                                    <Button variant="primary" type="submit">Save</Button>
+                                    <ButtonComponents
+                                      Type="submit"
+                                      ClassName="primary"
+                                      Name="Save"
+                                    />
                                   </Col>{/* end of Col */}
                                 </Row>{/* end of Row */}
                               </Form>{/* end of userProfile */}
