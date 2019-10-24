@@ -49,7 +49,6 @@ const UserProfile = () => {
                     <Link to="#" className="active">Home</Link>
                   </li>{/* end of li */}
                 </ul>{/* end of navTabs */}
-
               </nav>{/* end of Nav */}
               <Link to="#" className="generalLink" id="responsiveMainNavToggler"><i className="fa fa-bars"></i></Link>
               <div className="clearfix"></div>
@@ -59,9 +58,14 @@ const UserProfile = () => {
             <Col className="col-auto">
               <div className="headPopBar clearfix" id="headPopBar">
                 <ul className="headPopBarList d-flex justify-content-between align-items-center">
-                  <li><Link to="/"><i className="fas fa-search"></i> Search</Link></li>
-                  <li><Link to="/"><i className="far fa-star"></i> Favorites</Link></li>
-                  <li><Link to="/"><i className="fas fa-shopping-cart"></i> Cart</Link></li>
+                {headerPopbars.map((datum)=><Liai
+                    key={Math.floor(Math.random() * 10)}
+                    IconName={datum.ICON_NAME}
+                    Title={datum.TITLE}
+                    Url={datum.URL}
+                    AnchorClass={datum.ANCHOR_CLASS}
+                  />)}
+
                   <li>
                     <div className="userLogged d-flex align-items-center">
                       <div className="userAvater"><img src="./assets/images/reviews_avater.jpg" alt="" /></div>
