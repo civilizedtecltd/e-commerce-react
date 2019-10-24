@@ -9,7 +9,6 @@ function Li({Listclass,Title}) {
 
 
 /// list icon span
-
 function Liis({Listclass,Title,IconName}){
  return(
      <li className={Listclass}>
@@ -19,11 +18,10 @@ function Liis({Listclass,Title,IconName}){
 }
 
 //list anchor icon
-
-function Liai({Title,Url}){
+function Liai({Title,Url,AnchorClass}){
   return (
     <li>
-        <Link to={Url}><i></i>{Title}</Link>
+        <Link className={AnchorClass} to={Url}><i></i>{Title}</Link>
     </li>
   )
 }
@@ -33,9 +31,10 @@ function Liai({Title,Url}){
   return (
       <>
           <li className={ListClass}>
-              <Link to={Url}>
+            <Link to={Url}>
                   <i className={SocialIcon}></i>
-          </Link></li>
+            </Link>
+          </li>
       </>
   )
 }

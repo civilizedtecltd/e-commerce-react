@@ -60,16 +60,10 @@ const Signup = () => {
                     </Form.Group>{/* end of Form.Group */}
 
                     <Link className="linkText mb-3" to="/">Forgot password?</Link>
-
                     <Button type="submit" className="btn submitBtn mb-3">SIGN UP</Button>
-
                     <p>I already have an account! <Link className="linkText mb-3" to="/">Sign In</Link></p>
-                    
-    
                   </Form>{/* end of form */}
                 </div>{/* end of formWrapper */}
-
-
               </Col>{/* end of Col */}
             </Row>{/* end of row */}
           </Container>{/* end of Container */}

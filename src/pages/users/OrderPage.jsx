@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Table} from 'react-bootstrap';
 import './assets/css/user.css';
+import {Lia} from '../../components/LiComponent/CommonLi'
 
 const OrderPage = () => {
   return (<>
@@ -43,9 +44,11 @@ const OrderPage = () => {
             <Col>
               <nav className="mainMenu mainNav" id="mainNav">
                 <ul className="navTabs">
-                  <li>
-                    <Link to="#" className="active">Home</Link>
-                  </li>{/* end of li */}
+                  <Lia
+                  AnchorClass={"active"}
+                   Url={'/'}
+                   Title={Home}
+                  />
                 </ul>{/* end of navTabs */}
 
               </nav>{/* end of Nav */}
