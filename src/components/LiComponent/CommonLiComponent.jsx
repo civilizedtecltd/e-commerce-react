@@ -13,7 +13,9 @@ function Li({Listclass,Title}) {
 
 function Lia({Listclass,Title,Url}) {
    return(
-    <li className={Listclass}><Link to={Url}>{Title}</Link></li>
+    <li className={Listclass}>
+      <Link to={Url}>{Title}</Link>
+    </li>
    )
 }
 
@@ -22,7 +24,9 @@ function Lia({Listclass,Title,Url}) {
 function Liis({Listclass,Title,IconName}){
  return(
      <li className={Listclass}>
-         <i className={IconName}><span>{Title}</span></i>
+         <i className={IconName}>
+           <span>{Title}</span>
+          </i>
      </li>
  )
 }

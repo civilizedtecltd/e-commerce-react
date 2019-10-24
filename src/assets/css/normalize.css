@@ -293,6 +293,63 @@ a:hover {color: inherit;}
 .bgBlack {background-color: #333333;}
 .bgGray {background-color: #f6f6f6;}
 
+/* Section Background Image */
+.sectionBgImage {
+background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.sectionBgImg01 {
+  background-image: url('../images/bg_img_01.jpg');
+}
+
+.sectionBgImg02 {
+  background-image: url('../images/banner_img_01.jpg');
+}
+
 
 /* --- sectionGap --------------------- */
 .secGap{padding-top:3rem;padding-bottom: 5rem;}
+
+.form-control, input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="search"], textarea, select {
+    border: 1px solid #999999;
+    padding: 8px 9px;
+    outline: none;
+    color: #363636;
+    margin: 0;
+    max-width: 100%;
+    background-color: #ffffff;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -khtml-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -o-border-radius: 5px 5px 5px 5px;
+    -ms-border-radius: 5px 5px 5px 5px;
+    -khtml-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/*Scroll Bars Style*/
+
+.webScrollbar::-webkit-scrollbar-track{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: rgb(228, 228, 228);
+}
+
+.webScrollbar::-webkit-scrollbar{
+	width: 5px;
+	background-color: #3897cf;
+}
+
+.webScrollbar::-webkit-scrollbar-thumb{
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #3897cf;
+}

@@ -73,4 +73,22 @@ export const categoryClass={
     ]
 }
 
+export const headerFeatureList=[
+    {
+        LIST_CLASS:"",
+        ICON_NAME:"fas fa-truck",
+        TITLE:"Free delivery"
+    },
+    {
+        LIST_CLASS:"",
+        ICON_NAME:"fas fa-award",
+        TITLE:"Genuine goods"
+    },
+    {
+        LIST_CLASS:"",
+        ICON_NAME:"fas fa-headset",
+        TITLE:"Customer support"
+    }
+]
+
 
