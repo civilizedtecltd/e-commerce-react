@@ -6,6 +6,7 @@ import SocialListCompoent from '../../components/authComponents/SocialListCompoe
 import {InputFrom, SelectFrom} from '../../components/FromComponents/InputComponent';
 import {ButtonComponents} from '../../components/ButtonComponents/ButtonComponents';
 
+
 const Signup = () => {
     return (<>
       <div className="allWrapper fullHeight">
@@ -21,7 +22,7 @@ const Signup = () => {
 
             <Row>
               <Col sm={6}>
-                <SocialListCompoent/>
+                <SocialListComponent/>
 
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
@@ -44,7 +45,6 @@ const Signup = () => {
                       Value=""
                       Placeholder="Enter Your Last Name"
                     />
-
                     <InputFrom
                       LableId="email"
                       TypeName="email"
@@ -80,12 +80,9 @@ const Signup = () => {
                       Name="SIGN UP"
                     />
                     <p>I already have an account! <Link className="linkText mb-3" to="/login">Sign In</Link></p>
-                    
-    
+
                   </Form>{/* end of form */}
                 </div>{/* end of formWrapper */}
-
-
               </Col>{/* end of Col */}
             </Row>{/* end of row */}
           </Container>{/* end of Container */}
