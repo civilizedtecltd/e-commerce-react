@@ -22,7 +22,7 @@ const Signup = () => {
 
             <Row>
               <Col sm={6}>
-                <SocialListComponent/>
+                <SocialListCompoent/>
 
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
