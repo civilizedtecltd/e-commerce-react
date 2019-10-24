@@ -1,0 +1,375 @@
+
+
+/* Header Top Bar End */
+.headerTopBar {min-height: 40px;}
+.headFeature{
+	color: #ffffff;
+	font-size: 15px;
+	line-height: 30px;
+	font-family: 'Crimson Text', serif;
+}
+.headFeature i{font-size: 12px;padding-right: 5px;}
+.headerTopBar{min-height: 40px;}
+.headFeatureList li{margin-right: 1rem;}
+.headFeatureList li:last-child{margin-right: 0;}
+
+
+/* Header Style */
+
+.logoText a{font-size: 30px;}
+.logoText a:hover{color: #3897cf;}
+
+/* Logo Style */
+
+.header {
+    border-bottom: 1px solid #dcdcdc;
+    min-height: 60px;
+}
+
+/* --- mainNav --------------------- */
+.mainNav {
+	padding-right: 15px;
+	float: right;
+  }
+  .mainNav .navTabs {
+	float: right;
+  }
+  .mainNav .navTabs > li {
+	float: left;
+	margin-left: 10px;
+	position: relative;
+  }
+  .mainNav .navTabs > li > a,
+  .mainNav .navTabs > li > button {
+	display: block;
+	height: 33px;
+	line-height: 33px;
+	text-align: center;
+	padding: 0px 12px;
+	color: #21242e;
+	font-size: 14px;
+	font-weight: 700;
+	-webkit-border-radius: 2px 2px 2px 2px;
+	-moz-border-radius: 2px 2px 2px 2px;
+	-o-border-radius: 2px 2px 2px 2px;
+	-ms-border-radius: 2px 2px 2px 2px;
+	-khtml-border-radius: 2px 2px 2px 2px;
+	border-radius: 2px 2px 2px 2px;
+  }
+  .mainNav .navTabs > li .active {
+	background-color: #ff6b6b;
+	color: #ffffff !important;
+  }
+  /* --- responsiveMainNav --------------------- */
+  #responsiveMainNavToggler {
+	padding: 0;
+	height: 33px;
+	width: 33px;
+	text-align: center;
+	line-height: 33px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 18px;
+	overflow: hidden;
+	margin-right: 15px;
+	float: right;
+	display: none;;
+  }
+  #responsiveMainNavToggler.opened {
+	background-color: #ff6b6b;
+	color: #ffffff;
+  }
+  .style-5 #responsiveMainNavToggler {
+	background-color: #ff6b6b;
+	color: #ffffff;
+  }
+  .style-5 #responsiveMainNavToggler:hover {
+	background-color: #21242e;
+  }
+  .responsiveMainNav {
+	padding: 0 15px;
+	margin-bottom: 30px;
+	position: relative;
+	display: none;
+  }
+  .responsiveMainNav > ul.navTabs > li a,
+  .responsiveMainNav > ul.navTabs > li > button {
+	display: block;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 15px;
+	background-color: #f5f6f8;
+	color: #21242e;
+	border-bottom: 1px solid #cccccc;
+	text-align: left;
+	font-weight: 700;
+  }
+  .responsiveMainNav > ul.navTabs > li a:hover,
+  .responsiveMainNav > ul.navTabs > li > button:hover {
+	background-color: #ff6b6b;
+	color: #ffffff;
+  }
+  .responsiveMainNav > ul.navTabs > li a:hover:after,
+  .responsiveMainNav > ul.navTabs > li > button:hover:after {
+	color: #ffffff !important;
+  }
+  .responsiveMainNav > ul.navTabs > li a.toggleResponsive:after,
+  .responsiveMainNav > ul.navTabs > li > button.toggleResponsive:after {
+	content: '+';
+	font-family: 'tahoma';
+	float: right;
+	color: #21242e;
+	font-size: 17px;
+	font-weight: 700;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	-khtml-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+  }
+  .responsiveMainNav > ul.navTabs > li .toggleResponsive.activeLine {
+	background-color: #ff6b6b;
+	color: #ffffff;
+  }
+  .responsiveMainNav > ul.navTabs > li .toggleResponsive.activeLine:after {
+	content: '-';
+	font-family: 'tahoma';
+	float: right;
+	color: #ffffff;
+	font-size: 17px;
+	font-weight: 700;
+  }
+  .responsiveMainNav > ul.navTabs > li .active {
+	background-color: #ff6b6b;
+	color: #ffffff;
+  }
+  .responsiveMainNav > ul.navTabs > li .active:after {
+	color: #ffffff !important;
+  }
+/* Header Nav End */
+
+.headPopBarList li a{
+	color:#363636;
+	font-size: 16px;
+}
+.cardInfotd{width: 70%;}
+.headPopBarList li a i{font-size: 12px;padding-right: 5px;}
+.headPopBarList li{margin-right: 1rem;}
+.headPopBarList li:last-child{margin-right: 0rem;}
+
+/*Head Pop Bar Style End*/
+
+.cardWidgetTitle{
+    font-size: 20px;
+    color: #363636;
+    text-transform: uppercase;
+    text-align: center;
+}
+.cardWidgetList li a{
+    font-size: 18px;
+    color: #363636;
+    font-weight: 600;
+    line-height: 35px;
+}
+.cardWidgetList2{
+    display: flex;
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+}
+.cardWidgetList2 li{
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.cardWidgetList li strong{text-transform: uppercase;}
+.productContent{position: relative;}
+.favoritIcon{
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: #ea4f4b;
+}
+
+/* Card Widget Style End*/
+
+.formCheckbox label {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    padding-left: 5px;
+  }
+  
+  .formCheckbox label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 0;
+    margin-left: -20px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    background-color: #fff;
+    -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  }
+  
+  .formCheckbox label::after {
+    display: inline-block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 0;
+    top: 0;
+    margin-left: -20px;
+    padding-left: 3px;
+    padding-top: 1px;
+    font-size: 11px;
+    color: #555555;
+  }
+  
+  .formCheckbox input[type="checkbox"] {
+    opacity: 0;
+    z-index: 1;
+  }
+  
+  .formCheckbox input[type="checkbox"]:focus + label::before {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+  }
+  
+  .formCheckbox input[type="checkbox"]:checked + label::after {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f00c";
+  }
+.formCheckbox label{
+    font-size: 17px;
+    color: #363636;
+}
+
+/*Radio Style */
+.radioLabel {
+    display: block;
+}
+.formRadio input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+.formRadio label{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+.formRadio input[type="radio"] + label:before {
+    content: '';
+    background: transparent;
+    border-radius: 100%;
+    border: 1px solid #363636;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    position: relative;
+    top: 0;
+    margin-right: 0.5rem;
+    vertical-align: top;
+    cursor: pointer;
+    text-align: center;
+    transition: all 250ms ease;
+}
+.formRadio input[type="radio"]:checked + label:before {
+    background-color: #3897cf;
+    box-shadow: inset 0 0 0 2px #f4f4f4;
+}
+.formCheckbox a{text-decoration: underline!important;}
+.formRadioGroup {
+	padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.cardBl {
+    font-size: 20px;
+    padding: 0 1rem;
+}
+
+
+/* Radio Style End*/
+
+
+.cardTable{border: 1px solid rgba(0, 0, 0, 0.1);}
+.cardTable thead th{
+    background-color: #f7f7f7;
+    font-size: 18px;
+    color: #363636;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 0px;
+}
+.cardTable td{
+    font-size: 16px;
+    color: #363636;
+    font-family: 'Crimson Text', serif;
+    font-weight: 600;
+    line-height: 35px;
+}
+.cardTable td a{color: #3897cf;}
+.stockInfo{
+    text-transform: uppercase;
+    background-color: #f7f7f7;
+    padding:10px 15px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+.cardTable .btn{
+    font-size: 12px;
+    color: #363636;
+    background-color: #f7f7f7;
+    margin-right: 15px;
+}
+.cardTable .btnActionUpdate:hover{
+    color: #ffffff;
+    background-color: #3897cf;
+}
+.cardTable .btnActionDelete:hover{
+    color: #ffffff;
+    background-color: #dc3545;
+}
+
+.cardTableStyle2 .card-body{padding:0px;}
+.cardTableStyle2 td{vertical-align: middle;}
+
+/*Card Table End*/
+
+
+  /*------------------------------------------------------------------------------*/
+/*                    Width : 767px
+/*------------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px){
+	/* responsive nav */
+	#responsiveMainNavToggler {
+		display: block;
+	}
+	#responsiveMainNavToggler .register > a,
+	#responsiveMainNavToggler .login > a {
+		display: block;
+	}
+	#responsiveMainNavToggler .formSwitcher {
+		display: none !important;
+	}
+	.mainNav {
+		display: none;
+	}
+}

@@ -1,0 +1,298 @@
+/*Crimson Font*/
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i&display=swap');
+
+/*CSs File Import */
+@import url('theme.css');
+
+
+/*FontAwesome */
+@import url('../fonts/fontawesome/css/fontawesome.min.css');
+
+/*==============================================
+ 2. General resets
+==============================================*/
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+embed,
+object {
+	-webkit-font-smoothing: antialiased !important;
+	-moz-osx-font-smoothing: grayscale !important;
+	text-rendering: optimizeLegibility !important;
+	vertical-align: baseline;
+	font-family: inherit;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	outline: 0px;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	font-variant: normal;
+	text-transform: none;
+	speak: none;
+}
+/* --- HTML5 display-role reset for older browsers --------------------- */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+body{
+	font-size: 12px;
+	font-family: 'Crimson Text', serif;
+	height: auto;
+}
+/* --- typography --------------------- */
+/*headings*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Crimson Text', serif;
+	font-weight: 700;
+	color: #363636;
+}
+h1 {
+	font-size: 45px;
+}
+h2 {
+	font-size: 28px;
+}
+h3 {
+	font-size: 20px;
+}
+h4 {
+	font-size: 18px;
+}
+h5 {
+	font-size: 17px;
+}
+h6 {
+	font-size: 15px;
+}
+/* paragraphs */
+p {
+	font-size: 18px;
+	line-height: 25px;
+	font-family: 'Crimson Text', serif;
+	color: #404041;
+	font-weight: 600;
+}
+p:last-child {margin-bottom: 0px;}
+p:before {width: 30px;display: inline-block;}
+/* small */
+small,
+sup,
+sub {
+	font-size: 85%;
+}
+abbr,
+acronym {
+	text-transform: capitalize;
+}
+a abbr,
+a acronym {
+	border: none;
+}
+abbr[title],
+acronym[title],
+dfn[title] {
+	cursor: help;
+	border-bottom: 1px dotted #cccccc;
+}
+cite,
+em,
+dfn {font-style: italic;}
+i {
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	display: inline-block;
+}
+/*strong*/
+strong {
+	font-weight: 700;
+}
+/* Lists */
+ol,
+ul {
+	list-style: none;
+}
+
+/* buttons */
+button,
+input[type="button"],
+.btn{
+	padding:0 25px;
+	background: #3897cf;
+	display: inline-block;
+	text-align: center;
+	border: none;
+	font-family: 'Crimson Text', serif;
+    color: #ffffff;
+    font-weight: 700;
+	font-size: 14px;
+	min-height: 40px;
+	line-height: 40px;
+	text-transform: uppercase;
+	letter-spacing: 0.05rem;
+}
+button:focus{outline: unset;}
+.btn i{font-size: 0.7rem;padding-right: 5px;}
+.btn:hover {
+    transform: translateY(-1px);
+    color: #ffffff;
+	box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+}
+label{
+	color: #363636;
+	font-family: 'Crimson Text', serif;
+	font-size: 17px;
+	font-weight: 600;
+}
+/* --- tables --------------------- */
+
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+caption,
+th,
+td {
+	text-align: left;
+	font-weight: 400;
+	vertical-align: middle;
+}
+/* --- images --------------------- */
+img {
+	max-width: 100%;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+/* --- links --------------------- */
+a,
+a:link,
+a:visited,
+a:active,
+a:focus {
+    text-decoration: none !important;
+    color: #3897cf;
+    /* font-size: 17px; */
+	font-family: 'Crimson Text', serif;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	-khtml-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+a,
+a:visited{outline: 0px;}
+a:hover {color: inherit;}
+
+/* --- clearing --------------------- */
+.clearfix:before,
+.clearfix:after {
+	display: table;
+	content: " ";
+}
+.clearfix:after {
+	clear: both;
+}
+
+/* Background Color */
+.bgBlack {background-color: #333333;}
+.bgGray {background-color: #f6f6f6;}
+
+
+/* --- sectionGap --------------------- */
+.secGap{padding-top:3rem;padding-bottom: 5rem;}

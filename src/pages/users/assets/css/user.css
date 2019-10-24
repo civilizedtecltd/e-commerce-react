@@ -1,0 +1,74 @@
+.userAsideBar{
+    height: 100vh;
+}
+.userName{
+    font-size: 16px;
+    font-weight: 600;
+    color: #363636;
+    padding-left: 10px;
+    font-family: 'Crimson Text', serif;
+}
+.userAvater{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.userNavBar .nav-link{
+    font-size: 16px;
+    color: #363636;
+    font-family: 'Crimson Text', serif;
+    font-weight: 600;
+}
+.userNavBar .nav-link i{padding-right: 10px;}
+.userNavBar .active .nav-link, .userNavBar .nav-link:hover{
+    color: #3897cf;
+    background-color: #f9f9f9;
+    border-left: 3px solid #3897cf;
+}
+
+/*User Main Content*/
+
+.userMainContent{height: 100vh;}
+.bgImg03{
+    background-image: url('../images/bg_img_02.jpg');
+    background-size: cover;
+}
+.headTitle{
+    color: #363636;
+    text-transform: uppercase;
+}
+.headTitle span{
+    text-transform: uppercase;
+    color: #3897cf;
+}
+.payTitle{
+    font-size: 18px;
+    font-weight: 600;
+}
+.payExp{
+    font-size: 14px;
+    color: #363636;
+}
+.btnSm{
+    font-size: 12px!important;
+    color: #ffffff!important;
+    
+}
+.cardBtBorder{
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.addPaymentCard{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+/*User Profile*/
+
+.cardSecTitle{font-size: 16px;color: #363636;text-transform: uppercase;}
+.cardSubtitle{
+    font-size: 17px;
+    color: #363636;
+    font-weight: 600;
+}

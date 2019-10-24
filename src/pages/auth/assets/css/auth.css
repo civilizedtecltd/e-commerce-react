@@ -1,0 +1,160 @@
+/* html,body, .fullHeight, #root{
+    height: 100%!important;
+    position: relative;
+} */
+
+.authHeader{
+    margin-left: 4rem;
+    position: absolute;
+}
+.loginMainArea{height: 100vh;}
+
+/*Login Page*/
+
+.loginMainArea{
+    display: flex;
+    align-items: center;
+    margin-left: 4rem;
+}
+.bgImage{
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: contain;
+}
+.loginBodyBg{
+    background-image: url('../images/login_bg_img.jpg');
+}
+.headTitle{font-size: 30px;}
+.submitBtn{
+    text-transform: uppercase;
+}
+
+/*Login Page*/
+.loginMainArea {
+    background-size: 50% 100%!important;
+    background-position: center right!important;
+}
+
+/*SignUp Page*/
+
+.signUpBodyBg{
+    background-image: url('../images/signup_bg_img.jpg');
+    background-size: 50% 100%;
+}
+
+/*Social List*/
+
+.socialList {
+    display: flex;
+    flex-flow: row wrap;
+}
+.socialList li a{
+    border: 1px solid #464646;
+    padding: 6px 19px;
+    margin-right: 10px;
+    -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 22px;
+}
+.socialList li:last-child a{margin-right: 0;}
+.socialList .facebook a{color: #3b5998;}
+.socialList .googlePlus a{color: #da4b42;}
+
+/*Forget Pass*/
+.formWrapper .linkText{
+    color: #3897cf;
+    text-decoration: underline!important;
+    display: block;
+    font-size: 17px;
+    font-weight: 700;
+}
+.formWrapper p .linkText{display: initial;}
+
+/*Forgot Pass Page */
+
+.loginBodyContent h5{
+    line-height: 22px;
+    font-weight: 600;
+}
+
+/*------------------------------------------------------------------------------*/
+/*                    Width : 1050px
+/*------------------------------------------------------------------------------*/
+@media only screen and (max-width: 1050px){
+    .authHeader{z-index: 9999;margin-left: 0px;}
+    .loginMainArea {
+        position: relative;
+        margin-left: 0px;
+        z-index: 99;
+    }
+    .loginMainArea .row{
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+    .loginMainArea:after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.7);
+        z-index: -1;
+    }
+    .bgImage{
+        background-image: none!important;
+    }
+    .signUpPage{
+        background-image: none!important;
+        height: auto!important;
+    }
+
+}
+
+/*------------------------------------------------------------------------------*/
+/*                    Width : 991px
+/*------------------------------------------------------------------------------*/
+@media only screen and (max-width: 991px){
+    
+    .loginMainArea .col-sm-4{
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/*------------------------------------------------------------------------------*/
+/*                    Width : 767px
+/*------------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px){
+   
+    #signUpBody{
+        height: auto!important;
+    }
+    
+}
+/*------------------------------------------------------------------------------*/
+/*                    Width : landscape
+/*------------------------------------------------------------------------------*/
+@media (min-width : 0px) and (max-width : 767px) and (orientation : landscape) {
+    #loginBody{
+        height: auto!important;
+    }
+
+}
+
+/*------------------------------------------------------------------------------*/
+/*                    Width : 560px
+/*------------------------------------------------------------------------------*/
+@media only screen and (max-width: 560px){
+    .loginMainArea .col-sm-4{
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
