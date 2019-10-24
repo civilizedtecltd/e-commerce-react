@@ -1,0 +1,1 @@
+export const category=['Admin','Author','Employee']

@@ -2,7 +2,8 @@ import React from 'react';
 import {Container, Row, Col, Button, Form} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
-
+import { InputFrom } from '../../components/FromComponents/InputComponent';
+import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
 
 const Changepass = () => {
   return (<>
@@ -31,17 +32,30 @@ const Changepass = () => {
 
               <div class="formWrapper clearfix" id="formWrapper">
                 <Form>
-                  <Form.Group>
-                    <Form.Label htmlFor="createPass">Create password</Form.Label>
-                    <Form.Control type="password" id="createPass" />
-                  </Form.Group>{/* end of Form.Group */}
-  
-                  <Form.Group>
-                    <Form.Label htmlFor="confirmPass">Confirm password</Form.Label>
-                    <Form.Control type="password" id="confirmPass" />
-                  </Form.Group>{/* end of Form.Group */}
-  
-                  <Button type="submit" class="btn mt-2 mb-3 submitBtn">Save</Button>
+
+                  <InputFrom 
+                   LableId="createPass"
+                   TypeName="password"
+                   LableTitle="Create Password"
+                   Name="password"
+                   Value=""
+                   Placeholder="Create Password"
+                  />
+
+                  <InputFrom 
+                   LableId="confirmPass"
+                   TypeName="password"
+                   LableTitle="Confirm password"
+                   Name="password"
+                   Value=""
+                   Placeholder="Confirm password"
+                  />
+                  
+                  <ButtonComponents
+                    Type="submit"
+                    ClassName="btn mt-2 mb-3 submitBtn"
+                    Name="Save"
+                  />
                 
                 </Form>{/* end of Form */}
               </div>{/* end of formWrapper */}

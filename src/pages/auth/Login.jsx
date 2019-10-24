@@ -1,8 +1,10 @@
 import React from 'react';
-import { Container, Row, Col, Form, Button} from 'react-bootstrap';
+import { Container, Row, Col, Form,} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
 import SocialListCompoent from '../../components/authComponents/SocialListCompoent';
+import { InputFrom } from '../../components/FromComponents/InputComponent';
+import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
 
 const Login = () => {
   return (<>
@@ -22,19 +24,31 @@ const Login = () => {
               <SocialListCompoent/>
               <div className="formWrapper clearfix" id="formWrapper">
                 <Form>
-                  <Form.Group>
-                    <Form.Label htmlFor="email">Email</Form.Label>
-                    <Form.Control type="email" id="email" />
-                  </Form.Group>{/* end of Form.Group */}
+                  <InputFrom 
+                   LableId="email"
+                   TypeName="email"
+                   LableTitle="Email"
+                   Name="name"
+                   Value=""
+                   Placeholder="Enter Your Email"
+                  />
   
-                  <Form.Group>
-                    <Form.Label htmlFor="password">Password</Form.Label>
-                    <Form.Control type="password" id="password" />
-                  </Form.Group>{/* end of Form.Group */}
+                  <InputFrom 
+                   LableId="password"
+                   TypeName="password"
+                   LableTitle="Password"
+                   Name="password"
+                   Value=""
+                   Placeholder="Enter Your Password"
+                  />{/* end of Form.Group */}
 
-                  <Link className="linkText mb-3" to="/">Forgot password?</Link>
-                  <Button type="submit" className="btn submitBtn mb-3">LOGIN</Button>
-                  <p>Don’t have an account yet? <Link className="linkText" to="#">Sign up</Link></p>
+                  <Link className="linkText mb-3" to="/forgotpass">Forgot password?</Link>
+                  <ButtonComponents
+                    Type="submit"
+                    ClassName="btn submitBtn mb-3"
+                    Name="LOGIN"
+                  />
+                  <p>Don’t have an account yet? <Link className="linkText" to="/signup">Sign up</Link></p>
                   
   
                 </Form>{/* end of form */}

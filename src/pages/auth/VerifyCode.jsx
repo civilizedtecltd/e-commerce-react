@@ -2,7 +2,8 @@ import React from 'react';
 import {Container, Row, Col, Button, Form} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
-
+import { InputFrom } from '../../components/FromComponents/InputComponent';
+import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
 const VerifyCode = () => {
   return (<>
     
@@ -30,12 +31,22 @@ const VerifyCode = () => {
 
               <div class="formWrapper clearfix" id="formWrapper">
                 <Form>
-                  <Form.Group>
-                    <Form.Label htmlFor="codeVerify">Code</Form.Label>
-                    <Form.Control type="codeVerify" id="codeVerify" />
-                  </Form.Group>{/* end of Form.Group */}
-  
-                  <Button type="submit" class="btn mt-2 mb-3 submitBtn">Verify</Button>
+                 
+
+                  <InputFrom 
+                   LableId="codeVerify"
+                   TypeName="text"
+                   LableTitle="Verify Code"
+                   Name="codeVerify"
+                   Value=""
+                   Placeholder="Verify Code"
+                  />
+                  
+                  <ButtonComponents
+                    Type="submit"
+                    ClassName="btn mt-2 mb-3 submitBtn"
+                    Name="Verify"
+                  />
                 
                 </Form>{/* end of Form */}
               </div>{/* end of formWrapper */}
