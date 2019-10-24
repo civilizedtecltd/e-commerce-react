@@ -3,6 +3,8 @@ import {Container, Row, Col, Button, Form} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
 import SocialListCompoent from '../../components/authComponents/SocialListCompoent';
+import {InputFrom, SelectFrom} from '../../components/FromComponents/InputComponent';
+import {ButtonComponents} from '../../components/ButtonComponents/ButtonComponents';
 
 const Signup = () => {
     return (<>
@@ -23,47 +25,61 @@ const Signup = () => {
 
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
-                    <Form.Group>
-                      <Form.Label>Select the category</Form.Label>
-                      <Form.Control as="select">
-                        <option>Secondary school</option>
-                        <option>Secondary school 2</option>
-                        <option>Secondary school 3</option>
-                        <option>Secondary school 4</option>
-                        <option>Secondary school 5</option>
-                      </Form.Control> {/* end of Form.Control */}
-                    </Form.Group> {/* end of Form.Group */}
+                    <SelectFrom/>
 
-                    <Form.Group>
-                      <Form.Label htmlFor="firstName">First Name</Form.Label>
-                      <Form.Control type="text" id="firstName" />
-                    </Form.Group>{/* end of Form.Group */}
+                    <InputFrom
+                      LableId="firstName"
+                      TypeName="text"
+                      LableTitle="First Name"
+                      Name="firstName"
+                      Value=""
+                      Placeholder="Enter Your First Name"
+                    />
 
-                    <Form.Group>
-                      <Form.Label htmlFor="lastName">Last Name</Form.Label>
-                      <Form.Control type="text" id="lastName" />
-                    </Form.Group>{/* end of Form.Group */}
-    
-                    <Form.Group>
-                      <Form.Label htmlFor="email">Email</Form.Label>
-                      <Form.Control type="email" id="email" />
-                    </Form.Group>{/* end of Form.Group */}
-    
-                    <Form.Group>
-                      <Form.Label htmlFor="password">Password</Form.Label>
-                      <Form.Control type="password" id="password" />
-                    </Form.Group>{/* end of Form.Group */}
-    
-                    <Form.Group>
-                      <Form.Label htmlFor="repeatPassword">Repeat password</Form.Label>
-                      <Form.Control type="password" id="repeatPassword" />
-                    </Form.Group>{/* end of Form.Group */}
+                    <InputFrom
+                      LableId="lastName"
+                      TypeName="text"
+                      LableTitle="Last Name"
+                      Name="lastName"
+                      Value=""
+                      Placeholder="Enter Your Last Name"
+                    />
 
-                    <Link className="linkText mb-3" to="/">Forgot password?</Link>
+                    <InputFrom
+                      LableId="email"
+                      TypeName="email"
+                      LableTitle="Email"
+                      Name="email"
+                      Value=""
+                      Placeholder="Enter Your Email"
+                    />
 
-                    <Button type="submit" className="btn submitBtn mb-3">SIGN UP</Button>
+                    <InputFrom
+                      LableId="password"
+                      TypeName="password"
+                      LableTitle="Password"
+                      Name="password"
+                      Value=""
+                      Placeholder="Enter Your Password"
+                    />
+                    <InputFrom
+                      LableId="repeatPassword"
+                      TypeName="password"
+                      LableTitle="Repeat Password"
+                      Name="repeatPassword"
+                      Value=""
+                      Placeholder="Enter Your Repeat Password"
+                    />
 
-                    <p>I already have an account! <Link className="linkText mb-3" to="/">Sign In</Link></p>
+                    <Link className="linkText mb-3" to="/forgotpass">Forgot password?</Link>
+
+                    
+                    <ButtonComponents 
+                      Type="submit"
+                      ClassName="btn submitBtn mb-3"
+                      Name="SIGN UP"
+                    />
+                    <p>I already have an account! <Link className="linkText mb-3" to="/login">Sign In</Link></p>
                     
     
                   </Form>{/* end of form */}

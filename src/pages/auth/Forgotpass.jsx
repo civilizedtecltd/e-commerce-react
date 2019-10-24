@@ -2,7 +2,8 @@ import React from 'react';
 import {Container, Row, Col, Button, Form } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
-
+import { InputFrom } from '../../components/FromComponents/InputComponent';
+import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
 
 const Forgotpass = () => {
   return (<>
@@ -30,13 +31,21 @@ const Forgotpass = () => {
 
               <div class="formWrapper clearfix" id="formWrapper">
                 <Form>
+
+                <InputFrom 
+                   LableId="email"
+                   TypeName="email"
+                   LableTitle="Email"
+                   Name="name"
+                   Value=""
+                   Placeholder="Enter Your Email"
+                  />
                   
-                  <Form.Group>
-                    <Form.Label for="email">Email</Form.Label>
-                    <Form.Control type="email" id="email" />
-                  </Form.Group>{/* end of Form.Group */}
-  
-                  <Button type="submit" class="btn mt-2 mb-3 submitBtn">Send code</Button>
+                  <ButtonComponents
+                    Type="submit"
+                    ClassName="btn mt-2 mb-3 submitBtn"
+                    Name="Send Code"
+                  />
                 
                 </Form>{/* end of Form */}
               </div>{/* end of formWrapper */}
