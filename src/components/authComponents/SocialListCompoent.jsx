@@ -1,5 +1,5 @@
 import React from "react";
-import SocailIconComponent from "./SocailIconComponent";
+import {Lii} from '../LiComponent/CommonLi'
 import {icons} from '../../inc/auth/login'
 export default function SocialListCompoent() {
   return (
@@ -7,7 +7,7 @@ export default function SocialListCompoent() {
       <h2 className="headTitle">Login to Your Account</h2>
       <div className="socialLogin mb-4">
         <ul className="socialList mt-4 mb-4">
-        {icons.map((icon)=><SocailIconComponent
+        {icons.map((icon)=><Lii
             ListClass={icon.ListClass}
             Url={icon.Url}
             SocialIcon={icon.Icon_name}

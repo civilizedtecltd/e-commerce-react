@@ -23,13 +23,27 @@ function Liis({Listclass,Title,IconName}){
 function Liai({Title,Url}){
   return (
     <li>
-        <Link to={url}><i></i>{Title}</Link>
+        <Link to={Url}><i></i>{Title}</Link>
     </li>
   )
 }
 
+//List Icon
+ function Lii({ListClass, Url, SocialIcon }) {
+  return (
+      <>
+          <li className={ListClass}>
+              <Link to={Url}>
+                  <i className={SocialIcon}></i>
+          </Link></li>
+      </>
+  )
+}
+
+
 export {
     Li,
+    Lii,
     Liis,
     Liai
 } ;
