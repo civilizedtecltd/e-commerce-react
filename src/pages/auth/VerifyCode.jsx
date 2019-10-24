@@ -44,10 +44,7 @@ const VerifyCode = () => {
           </Row>{/* end of Row  */}
         </Container>{/* end of Container  */}
       </main>{/* end of loginMainArea  */}
-      
-
     </div>{/* end of allWrapper */}
-    
   </>);
 }
 

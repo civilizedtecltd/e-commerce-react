@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+
+
 // only list component
 function Li({Listclass,Title}) {
    return(
@@ -7,9 +9,16 @@ function Li({Listclass,Title}) {
    )
 }
 
+//list anchor tag
+
+function Lia({Listclass,Title,Url}) {
+   return(
+    <li className={Listclass}><Link to={Url}>{Title}</Link></li>
+   )
+}
+
 
 /// list icon span
-
 function Liis({Listclass,Title,IconName}){
  return(
      <li className={Listclass}>
@@ -19,11 +28,10 @@ function Liis({Listclass,Title,IconName}){
 }
 
 //list anchor icon
-
-function Liai({Title,Url}){
+function Liai({ListClass,Title,Url,IconName,AnchorClass}){
   return (
-    <li>
-        <Link to={Url}><i></i>{Title}</Link>
+    <li className={ListClass}>
+        <Link className={AnchorClass} to={Url}><i className={IconName}></i>{Title}</Link>
     </li>
   )
 }
@@ -33,9 +41,10 @@ function Liai({Title,Url}){
   return (
       <>
           <li className={ListClass}>
-              <Link to={Url}>
+            <Link to={Url}>
                   <i className={SocialIcon}></i>
-          </Link></li>
+            </Link>
+          </li>
       </>
   )
 }
@@ -43,6 +52,7 @@ function Liai({Title,Url}){
 
 export {
     Li,
+    Lia,
     Lii,
     Liis,
     Liai
