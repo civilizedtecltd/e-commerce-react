@@ -1,8 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Container, Row, Col, Card, Button, Form} from 'react-bootstrap';
-import {Liai,Liis} from '../../components/LiComponent/CommonLiComponent';
-import {headerPopbars,asideData,headerFeatureList} from '../../inc/users/users';
+import {Container, Row, Col, Card, Form} from 'react-bootstrap';
+import {CheckboxComponent} from '../../components/FromComponents/CheckboxComponents';
+import{ButtonComponents}from '../../components/ButtonComponents/ButtonComponents'
+
+
 const Subscription = () => {
   return (<> 
   <div className="allWrapper">
@@ -101,6 +103,37 @@ const Subscription = () => {
                             <h5 className="cardSubtitle mb-2">Please choose which types of emails you would like to receive from us</h5>
                             <Form className="profileSettingsForm">
                               <Row>
+
+
+                                <Col sm="12">
+                                  <CheckboxComponent
+                                    ControlId="formCheckbox1"
+                                    ClassName="formCheckbox mt-2"
+                                    Type="checkbox"
+                                    Label="Announcements"
+                                  />
+                                </Col>{/* end of col */}
+                                
+                                <Col sm="12">
+                                  
+                                  <CheckboxComponent
+                                    ControlId="formCheckbox2"
+                                    ClassName="formCheckbox mt-2"
+                                    Type="checkbox"
+                                    Label="Sale invitations"
+                                  />
+                                </Col>{/* end of col */}
+                                
+                                <Col sm="12">
+                                  <CheckboxComponent
+                                    ControlId="formCheckbox3"
+                                    ClassName="formCheckbox mt-2"
+                                    Type="checkbox"
+                                    Label="Weekly Newsletter"
+                                  />
+                                </Col>{/* end of col */}
+                                
+
                                  <Col sm="12">
                                   <Form.Group controlId="formCheckbox1" className="formCheckbox mt-2">
                                     <Form.Check type="checkbox" label="Announcements" />
@@ -116,16 +149,32 @@ const Subscription = () => {
                                     <Form.Check type="checkbox" label="Weekly newsletter" />
                                   </Form.Group>{/* end of Form.Group */}
                                 </Col>{/* end of col */}                              
+
                                 <Col sm="12">
                                   <h5 className="cardSubtitle mt-3 mb-2">Click below to unsubscribe from all emails</h5>
                                 </Col>{/* end of col */}                              
                                 <Col sm="12">
+
+                                  <CheckboxComponent
+                                    ControlId="formCheckbox3"
+                                    ClassName="formCheckbox mt-2"
+                                    Type="checkbox"
+                                    Label="Unsubscribe"
+                                  />
+                                </Col>{/* end of col */}
+                                
+
                                   <Form.Group controlId="formCheckbox4" className="formCheckbox mt-2">
                                     <Form.Check type="checkbox" label="Unsubscribe" />
                                   </Form.Group>{/* end of Form.Group */}
                                 </Col>{/* end of col */}                              
+
                                 <Col sm="12">
-                                  <Button variant="primary" className="mt-3" type="submit"> Save </Button>
+                                  <ButtonComponents
+                                    ClassName="mt-3"
+                                    Type="submit"
+                                    Name="Save"
+                                  />
                                 </Col>{/* end of col */}
                               </Row>{/* end of row */}
                             </Form>{/* end of profileSettingsForm */}
