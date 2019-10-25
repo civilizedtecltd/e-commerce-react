@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Form} from 'react-bootstrap';
 import {CheckboxComponent} from '../../components/FromComponents/CheckboxComponents';
 import{ButtonComponents}from '../../components/ButtonComponents/ButtonComponents'
-
+import {Liai,Liis} from '../../components/LiComponent/CommonLiComponent';
+import {headerFeatureList, headerPopbars, asideData} from '../../inc/users/users'
 
 const Subscription = () => {
   return (<> 
@@ -19,7 +20,8 @@ const Subscription = () => {
             <Col className="col-auto">
               <div className="headFeature">
                 <ul className="headFeatureList d-flex justify-content-between">
-                {headerFeatureList.map(feature=><Liis
+                {headerFeatureList.map((feature, index)=><Liis
+                    key={index}
                     ListClass={feature.LIST_CLASS}
                     IconName={feature.ICON_NAME}
                     Title={feature.TITLE}
@@ -30,6 +32,7 @@ const Subscription = () => {
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </div>{/* end of headerTopBar */}
+      
       <header className="header userHeader clearfix" id="header">
         <Container fluid="{true}">
           <Row>
@@ -53,8 +56,8 @@ const Subscription = () => {
             <Col className="col-auto">
               <div className="headPopBar clearfix" id="headPopBar">
                 <ul className="headPopBarList d-flex justify-content-between align-items-center">
-                {headerPopbars.map((datum)=><Liai
-                    key={Math.floor(Math.random() * 10)}
+                {headerPopbars.map((datum, index)=><Liai
+                    key={index}
                     IconName={datum.ICON_NAME}
                     Title={datum.TITLE}
                     Url={datum.URL}
@@ -72,6 +75,7 @@ const Subscription = () => {
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </header>{/* end of header */}
+
       <div className="userBodyArea clearfix" id="userBodyArea">
         <Container fluid="{true}" className="pl-0 pr-0">
           <Row noGutters>
@@ -79,8 +83,8 @@ const Subscription = () => {
             <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
                 <nav className="userNav">
                   <ul className="userNavBar">
-                    {asideData.map((aside)=><Liai
-                      key={Math.floor(Math.random() * 10)}
+                    {asideData.map((aside,index)=><Liai
+                      key={index}
                       ListClass={aside.LIST_CLASS}
                       Title={aside.TITLE}
                       Url={aside.URL}
@@ -131,28 +135,8 @@ const Subscription = () => {
                                     Type="checkbox"
                                     Label="Weekly Newsletter"
                                   />
-                                </Col>{/* end of col */}
-                                
+                                </Col>
 
-                                 <Col sm="12">
-                                  <Form.Group controlId="formCheckbox1" className="formCheckbox mt-2">
-                                    <Form.Check type="checkbox" label="Announcements" />
-                                  </Form.Group>{/* end of Form.Group */}
-                                </Col>{/* end of col */}                            
-                                <Col sm="12">
-                                  <Form.Group controlId="formCheckbox2" className="formCheckbox mt-2">
-                                    <Form.Check type="checkbox" label="Sale invitations" />
-                                  </Form.Group>{/* end of Form.Group */}
-                                </Col>{/* end of col */}                             
-                                <Col sm="12">
-                                  <Form.Group controlId="formCheckbox3" className="formCheckbox mt-2">
-                                    <Form.Check type="checkbox" label="Weekly newsletter" />
-                                  </Form.Group>{/* end of Form.Group */}
-                                </Col>{/* end of col */}                              
-
-                                <Col sm="12">
-                                  <h5 className="cardSubtitle mt-3 mb-2">Click below to unsubscribe from all emails</h5>
-                                </Col>{/* end of col */}                              
                                 <Col sm="12">
 
                                   <CheckboxComponent
@@ -161,13 +145,7 @@ const Subscription = () => {
                                     Type="checkbox"
                                     Label="Unsubscribe"
                                   />
-                                </Col>{/* end of col */}
-                                
-
-                                  <Form.Group controlId="formCheckbox4" className="formCheckbox mt-2">
-                                    <Form.Check type="checkbox" label="Unsubscribe" />
-                                  </Form.Group>{/* end of Form.Group */}
-                                </Col>{/* end of col */}                              
+                                </Col>
 
                                 <Col sm="12">
                                   <ButtonComponents
@@ -189,7 +167,8 @@ const Subscription = () => {
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </div>{/* end of userBodyArea */}
-    </div>{/* end of allWrapper */}
+      </div>{/* end of allWrapper */}
+
     </>);
 }
 
