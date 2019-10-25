@@ -2,11 +2,11 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Form} from 'react-bootstrap';
 import './assets/css/user.css';
-
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
 import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
-
 import {Liai,Liis} from '../../components/LiComponent/CommonLiComponent';
+import {headerFeatureList, headerPopbars, asideData} from '../../inc/users/users'
+
 
 const UserProfile = () => {
   return (<>
@@ -23,7 +23,8 @@ const UserProfile = () => {
             <Col className="col-auto">
               <div className="headFeature">
                 <ul className="headFeatureList d-flex justify-content-between">
-                {headerFeatureList.map(feature=><Liis
+                {headerFeatureList.map((feature, index)=><Liis
+                    key={index}
                     ListClass={feature.LIST_CLASS}
                     IconName={feature.ICON_NAME}
                     Title={feature.TITLE}
@@ -170,7 +171,7 @@ const UserProfile = () => {
                                   </Col>{/* end of Col */}
 
                                   <Col sm="12">
-                                    <hr class="hrBorder" />
+                                    <hr className="hrBorder" />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
