@@ -173,6 +173,10 @@
     font-weight: 600;
     line-height: 35px;
 }
+.cardWidgetList li a:hover{
+  margin-left: 5px;
+  color: #3897cf;
+}
 .cardWidgetList2{
     display: flex;
     flex-wrap: wrap;
@@ -304,7 +308,6 @@
     padding: 0 1rem;
 }
 
-
 /* Radio Style End*/
 
 
@@ -352,6 +355,326 @@
 .cardTableStyle2 td{vertical-align: middle;}
 
 /*Card Table End*/
+.productCatCard {
+    padding: 15px;
+    border: 2px solid #000000;
+    border-radius: unset;
+}
+.productCatTitle {
+    text-transform: uppercase;
+    font-size: 23px;
+}
+/*Category Style End*/
+
+.sectionTitle {
+    text-transform: uppercase;
+}
+.sectionTitle span {
+    color: #3897cf;
+    text-transform: uppercase;
+}
+.singleFeature .card-body h4 {
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+.singleFeature .card-body p {
+    font-size: 15px;
+    line-height: 20px;
+}
+
+/* Feature End */
+.footerLogo .logoText {
+    line-height: 25px;
+}
+.footerWidgetHeader {
+    font-size: 25px;
+    margin-bottom: 1rem;
+}
+.footerLinksList {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+}
+.footerLinksList li {
+    max-width: 50%;
+    width: 50%;
+    margin-bottom: 0.5rem;
+}
+.footerLinksList li a {
+    color: #404041;
+    font-size: 18px;
+    font-weight: 600;
+}
+.footerLinksList li a:hover {
+    color: #3897cf;
+    margin-left: 5px;
+}
+
+.getInTouchList li a, .getInTouchList li p {
+    font-size: 18px;
+    color: #404041;
+    font-weight: 600;
+}
+.getInTouchList li {
+    margin-bottom: 0.5rem;
+}
+
+.footerSocial {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+.footerSocial li a {
+	font-size: 17px;
+    color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333333;
+    margin-right: 10px;
+    padding: 5px;
+    width: 35px;
+    height: 35px;
+    display: block;
+    text-align: center;
+}
+.footerSocial li a:hover {
+    color: #3897cf;
+    border: 2px solid #3897cf;
+}
+/* Footer Top End */
+.subscribeCard {
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.subscribeCard .card-body {
+    border: 5px solid #000000;
+}
+.subscribeForm input {
+    width: 440px;
+    margin-right: 10px;
+    border: 1px solid #000000;
+    background-color: transparent;
+}
+/* Subscribe Form Sectoin End */
+
+.offerBanner .row {
+    min-height: 550px;
+}
+.offerBannerTitle {
+    text-transform: uppercase;
+}
+.discountTxt {
+  color: #3897cf;
+  font-size: 90px;
+  font-style: italic;
+  position: relative;
+  max-width: 60%;
+  margin: 0 auto;
+}
+.discountTxt:after, .discountTxt:before {
+  content: '';
+  position: absolute;
+  top: 45px;
+  width: 60px;
+  height: 3px;
+  background-color: #3897cf;
+}
+.discountTxt:before {
+  right: 0;
+}
+.discountTxt:after {
+  left: 0;
+}
+.offerBannerPara {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+.offerBannerCard .offerBannerBtn {
+  color: #3897cf;
+  font-size: 15px;
+  max-width: 300px;
+  width: 300px;
+  min-height: 50px;
+  line-height: 50px;
+  background-color: #ffffff;
+}
+.offerBannerCard .offerBannerBtn:hover {
+  background-color: #3897cf;
+  color: #ffffff;
+}
+/* Offer Page End */
+
+.productMedia {
+  padding: 15px;
+  text-align: center;
+  min-height: 250px;
+}
+.productTitle {
+  color: #3897cf;
+}
+.authorName {
+  font-size: 16px;
+  color: #363636;
+}
+.productPrice {
+  font-size: 15px;
+  color: #363636;
+}
+/* Product Section End */
+
+.singleArticle {
+  position: relative;
+}
+.singleArticle:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1825105042016807) 0%, rgba(0,0,0,0.7819502801120448) 100%);
+}
+.postTitle a {
+  color: #ffffff;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+.articleArea .articleBody {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+}
+.postPara {
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 20px;
+}
+.linkBtn {
+  color: #ffffff!important;
+  font-size: 14px!important;
+}
+/* Blog Section End */
+
+/*Home Page Style End*/
+
+.breadcrumb-item, .breadcrumb-item a {
+  font-size: 16px;
+  color: #363636;
+}
+.breadcrumb-item a {
+  text-decoration: underline!important;
+}
+.breadcrumb-item.active {
+  color: #6c757d;
+}
+.cartProductMedia {
+  max-width: 110px;
+  padding: 10px;
+  max-height: 140px;
+}
+.cartProductTitle h3 {
+  font-size: 18px;
+  font-weight: 400;
+  padding-left: 10px;
+}
+.cartTableBody td{
+  vertical-align: middle;
+}
+.productQut {
+  font-size: 16px;
+  color: #363636;
+  font-weight: 600;
+  width: 50%;
+}
+.btnGraySm {
+  color: #363636;
+  background-color: #e2e2e2;
+  font-size: 16px;
+  min-height: 25px;
+  line-height: 25px;
+  text-transform: capitalize;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+.cartPriceList li, .cartPriceList li span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #363636;
+}
+.cartPromo .form-control {
+  max-width: 155px;
+}
+.cartQntN{width: 10%;}
+
+/*Cart Page Style End*/
+
+.productCartList {
+  height: 130px;
+  overflow: auto;
+}
+.productValue li {
+  font-size: 18px;
+  color: #363636;
+  font-weight: 600;
+}
+/*Checkout Page Style End*/
+
+.asideBody {
+  padding: 1rem;
+}
+.asideTitle {
+  margin-bottom: 2.8rem;
+  margin-top: 5rem;
+}
+.singleFilterCard {
+  border-bottom: 1px solid #d4d4d4;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+.singleFilterCard h5 {
+  font-size: 20px;
+  color: #363636;
+  margin-bottom: 15px;
+}
+.filterList li a span {
+  font-size: 14px;
+  color: #888888;
+  padding-left: 10px;
+}
+.filterList li a {
+  font-size: 16px;
+  color: #363636;
+  font-weight: 600;
+  line-height: 30px;
+}
+.filterList li a:hover {
+  color: #3897cf;
+  margin-left: 2px;
+}
+.pageTitle, .pageTitle span {
+  font-size: 25px;
+  text-transform: uppercase;
+}
+.pageTitle span {
+  color: #3897cf;
+}
+.singleFilter label {
+  font-size: 18px;
+  color: #363636;
+  font-weight: 600;
+  margin-right: 10px;
+}
+.filterSelect .form-control{
+  font-size: 17px;
+  color: #363636;
+  width: auto;
+}
+/*Shop Page Style End*/
 
 
   /*------------------------------------------------------------------------------*/

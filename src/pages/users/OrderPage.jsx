@@ -2,12 +2,11 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Table} from 'react-bootstrap';
 import './assets/css/user.css';
-import {Liai, Lia} from '../../components/LiComponent/CommonLiComponent';
-import {headerPopbars,asideData,categoryClass} from '../../inc/users/Orderpage'
+import {Liai,Liis, Lia} from '../../components/LiComponent/CommonLiComponent';
+import {headerPopbars,asideData,categoryClass,headerFeatureList} from '../../inc/users/users'
 
 const OrderPage = () => {
   return (<>
-
     <div className="allWrapper">
       <div className="headerTopBar clearfix bgBlack" id="headerTopBar">
         <Container fluid={true}>
@@ -21,9 +20,11 @@ const OrderPage = () => {
             <Col className="col-auto">
               <div className="headFeature">
                 <ul className="headFeatureList d-flex justify-content-between">
-                  <li><i className="fas fa-truck"></i> <span>Free delivery</span></li>
-                  <li><i className="fas fa-award"></i> <span>Genuine goods</span></li>
-                  <li><i className="fas fa-headset"></i> <span>Customer support</span></li>
+                {headerFeatureList.map(feature=><Liis
+                    ListClass={feature.LIST_CLASS}
+                    IconName={feature.ICON_NAME}
+                    Title={feature.TITLE}
+                />)}
                 </ul>{/* end of headFeatureList */}
               </div>{/* end of headFeature */}
             </Col>{/* end of Col */}
@@ -88,8 +89,6 @@ const OrderPage = () => {
               <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
                 <nav className="userNav">
                   <ul className="userNavBar">
-                
-
                     {asideData.map((aside)=><Liai
                       key={Math.floor(Math.random() * 10)}
                       ListClass={aside.LIST_CLASS}
@@ -104,12 +103,10 @@ const OrderPage = () => {
               </aside>{/* end of aside */}
             </Col>{/* end of Col */}
 
-            <Col>
+             <Col>
               <main className="userMainContent clearfix bgImage bgImg03" id="userMainContent">
-
                 <section className="myOrderArea secGap clearfix" id="myOrderArea">
-
-                  <Container fluid="{true}">
+                  <Container fluid={true}>
                     <Row>
                       <Col sm="12">
                         <Card>
@@ -209,25 +206,19 @@ const OrderPage = () => {
                                   <td><span className="stockInfo">DELIVERED</span></td>
                                 </tr>{/* end of tr */}
                               </tbody>{/* end of tbody */}
-
                             </Table>{/* end of Table */}
                           </Card.Body>{/* end of Card.Body */}
                         </Card>{/* end of Card */}
                       </Col>{/* end of Col */}
                     </Row>{/* end of Row */}
                   </Container>{/* end of Container */}
-
                 </section>{/* end of myOrderArea */}
-                
               </main>{/* end of mainContent */}
             </Col>{/* end of Col */}
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </div>{/* end of userBodyArea */}
-
-
     </div> {/* end of allWrapper */}
-   
   </>);
 }
 
