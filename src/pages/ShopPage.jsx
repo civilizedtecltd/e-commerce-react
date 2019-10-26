@@ -8,12 +8,12 @@ import {Container, Row, Col, Breadcrumb, Form, Pagination, Card} from 'react-boo
 // Product Images
 import bookImage1 from '../assets/images/books/book_img_01.jpg';
 import FooterComponent from '../components/FooterComponent/FooterComponent';
+import { NewsLetterComponent } from '../components/offerPageComponents/NewsLetterComponent';
 
 const ShopPage = () => {
   return (<>
 
     <div className="allWrapper">
-
       <div className="headerTopBar clearfix bgBlack" id="headerTopBar">
         <Container>
           <Row className="justify-content-between">
@@ -133,7 +133,7 @@ const ShopPage = () => {
                     <div className="singleFilterCard">
                       <h5>Price Range</h5>
                       <Form>
-                        <Form.Group controlId="formBasicEmail">
+                        <Form.Group>
                           <Form.Control type="range" id="formControlRange" />
                         </Form.Group>{/* end of Form.Group */}
 
@@ -310,8 +310,14 @@ const ShopPage = () => {
             </Row>{/* end of Row */}
           </Container>{/* end of Container */}
         </section>{/* end of productsBodyAsidebar */}
+        <section className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap" id="mailSubscribe">
+          <Container className="container">
+
+              <NewsLetterComponent/>
+
+          </Container>{/* end of Container */}
+        </section>{/* end of mailSubscribe */}
       </main>{/* end of mainContent */}
-      
        <FooterComponent/>
     </div>{/* end of allWrapper */}
 

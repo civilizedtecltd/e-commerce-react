@@ -16,7 +16,7 @@ function FooterComponent() {
               <div className="footerWidget">
                 <div className="footerLogo">
                   <div className="logoWrapper">
-                    <h1 className="logoText"><Link to="#">LOGO</Link></h1>
+                    <h1 className="logoText"><Link to="/">LOGO</Link></h1>
                   </div>{/*  end of logoWrapper */}
                 </div>{/*  end of footerLogo */}
               </div>{/*  end of footerWidget */}
@@ -36,8 +36,8 @@ function FooterComponent() {
                     "Our support center"
                     ].map((list,index)=><Lia
                       key={index}
-                      Title={list.Title}
-                      Url={list.Url}
+                      Title={list}
+                      Url={'/'}
                     />)}
                 </ul>{/*  end of footerLinksList */}
               </div>{/*  end of footerWidget */}
@@ -72,7 +72,6 @@ function FooterComponent() {
                     ListClass={list.ListClass}
                     Url={list.IconName}
                     IconName={list.IconName}
-                    Title={""}
                   />)}
                 </ul>{/*  end of footerSocial */}
               </div>{/*  end of footerWidget */}
@@ -92,13 +91,13 @@ function FooterComponent() {
             <Col sm="3">
               <ul className="paymentsNav d-flex justify-content-between align-items-center">
                 <li className="paypal">
-                  <Link to="//paypal.com" title="paypal"><img alt="paypal" src={paypalIcon} title="paypal" /></Link>
+                  <Link to="//paypal.com" title="paypal" target="_blank" ><img alt="paypal" src={paypalIcon} title="paypal" /></Link>
                 </li>{/* end of li */}
                 <li className="visa">
-                  <Link href="#" title="visa"><img alt="visa card" src={visaIcon} title="visa card" /></Link>
+                  <Link to="//visa.com" title="visa" target="_blank"><img alt="visa card" src={visaIcon} title="visa card" /></Link>
                 </li>{/* end of li */}
                 <li className="master">
-                  <Link to="#" title="master card"><img alt="master card" src={masterCardIcon} title="master card" /></Link>
+                  <Link to="//www.mastercard.us/en-us.html" title="master card" target="_blank"><img alt="master card" src={masterCardIcon} title="master card" /></Link>
                 </li>{/* end of li */}
               </ul>{/* end of paymentsNav */}
             </Col>{/* end of Col */}
