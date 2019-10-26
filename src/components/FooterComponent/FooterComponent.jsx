@@ -104,7 +104,7 @@ function FooterComponent() {
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </div>{/* end of footerBottom */}
-        </>)
+    </>)
 }
 
 export default FooterComponent;
