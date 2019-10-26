@@ -45,10 +45,10 @@ function App() {
         <UserProfile />
        </Route>
        <Route path="/email-subscription">
-         <Subscription />>
+         <Subscription />
        </Route>
        <Route path="/order">
-        <OrderPage />>
+        <OrderPage />
        </Route>
        <Route path="/payment-methods">
         <PaymentPage />
