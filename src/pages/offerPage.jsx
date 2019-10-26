@@ -8,9 +8,12 @@ import masterCardIcon from '../assets/images/master_card_icon_img.png';
 import visaIcon from '../assets/images/visa_icon_img.png';
 
 // Product Images
-import bookImage1 from '../assets/images/books/book_img_01.jpg';
 import blogPostImage1 from '../assets/images/post_img_01.jpg';
 
+import {NewBookDB}from '../inc/offerPage/NewBook'
+import{NewBookComponent} from '../components/offerPageComponents/NewBookComponent'
+import{NewsLetterComponent} from '../components/offerPageComponents/NewsLetterComponent'
+ 
 
 const offerPage = () => {
   return (<>
@@ -106,75 +109,15 @@ const offerPage = () => {
 
             <Row className="justify-content-between">
 
-              <Col className="col-auto">
-                <Card className="productCard border-0 bg-transparent">
-                  <div className="productMedia mb-3 bg-white">
-                    <img src={bookImage1} alt="" />
-                  </div>{/* end of productMedia */}
+              {NewBookDB.map((newBook, index) => <NewBookComponent
+                key={index}
+                BookImage={newBook.Img}
+                ProductTitle={newBook.Title}
+                AuthorName={newBook.Author}
+                ProductPrice={newBook.Price}
+              />)
 
-                  <div className="productContent">
-                    <Link to="#"><h4 className="productTitle mb-1">Maths time for class 1</h4></Link> 
-                    <h5 className="authorName mb-1">Author name</h5>
-                    <p className="productPrice">$ 43.00</p>
-                  </div>{/* end of productContent */}
-                </Card>{/* end of productCard */}
-              </Col>{/* end of Col */}
-              
-              <Col className="col-auto">
-                <Card className="productCard border-0 bg-transparent">
-                  <div className="productMedia mb-3 bg-white">
-                    <img src={bookImage1} alt="" />
-                  </div>{/* end of productMedia */}
-
-                  <div className="productContent">
-                    <Link to="#"><h4 className="productTitle mb-1">Maths time for class 1</h4></Link> 
-                    <h5 className="authorName mb-1">Author name</h5>
-                    <p className="productPrice">$ 43.00</p>
-                  </div>{/* end of productContent */}
-                </Card>{/* end of productCard */}
-              </Col>{/* end of Col */}
-
-              <Col className="col-auto">
-                <Card className="productCard border-0 bg-transparent">
-                  <div className="productMedia mb-3 bg-white">
-                    <img src={bookImage1} alt="" />
-                  </div>{/* end of productMedia */}
-
-                  <div className="productContent">
-                    <Link to="#"><h4 className="productTitle mb-1">Maths time for class 1</h4></Link> 
-                    <h5 className="authorName mb-1">Author name</h5>
-                    <p className="productPrice">$ 43.00</p>
-                  </div>{/* end of productContent */}
-                </Card>{/* end of productCard */}
-              </Col>{/* end of Col */}
-
-              <Col className="col-auto">
-                <Card className="productCard border-0 bg-transparent">
-                  <div className="productMedia mb-3 bg-white">
-                    <img src={bookImage1} alt="" />
-                  </div>{/* end of productMedia */}
-
-                  <div className="productContent">
-                    <Link to="#"><h4 className="productTitle mb-1">Maths time for class 1</h4></Link> 
-                    <h5 className="authorName mb-1">Author name</h5>
-                    <p className="productPrice">$ 43.00</p>
-                  </div>{/* end of productContent */}
-                </Card>{/* end of productCard */}
-              </Col>{/* end of Col */}
-
-              <Col className="col-auto">
-                <Card className="productCard border-0 bg-transparent">
-                  <div className="productMedia mb-3 bg-white">
-                    <img src={bookImage1} alt="" />
-                  </div>{/* end of productMedia */}
-
-                  <div className="productContent">
-                    <Link to="#"><h4 className="productTitle mb-1">Maths time for class 1</h4></Link> 
-                    <h5 className="authorName mb-1">Author name</h5>
-                    <p className="productPrice">$ 43.00</p>
-                  </div>{/* end of productContent */}
-                </Card>{/* end of productCard */}
-              </Col>{/* end of Col */}
+              }
 
             </Row>{/* end of Row */}
           </Container>{/* end of Container */}
@@ -238,104 +181,24 @@ const offerPage = () => {
 
             <Row className="justify-content-between">
 
-              <Col className="col-auto">
-                <div className="card productCard border-0 bg-transprant">
-                  <div className="productMedia mb-3 bgGray">
-                    <img src={bookImage1} alt="" />
-                  </div>{/* end of productMedia */}
+              {NewBookDB.map((newBook, index) => <NewBookComponent
+                  key={index}
+                  BookImage={newBook.Img}
+                  ProductTitle={newBook.Title}
+                  AuthorName={newBook.Author}
+                  ProductPrice={newBook.Price}
+                />)
+              }
 
-                  <div className="productContent">
-                   <Link to="#"><h4 className="productTitle mb-1">Maths time for class 1</h4></Link> 
-                    <h5 className="authorName mb-1">Author name</h5>
-                    <p className="productPrice">$ 43.00</p>
-                  </div>{/* end of productContent */}
-                </div>{/* end of productCard */}
-              </Col>{/* end of Col */}
-              
-
-              <Col className="col-auto">
-                <div className="card productCard border-0 bg-transprant">
-                  <div className="productMedia mb-3 bgGray">
-                    <img src={bookImage1} alt="" />
-                  </div>{/* end of productMedia */}
-
-                  <div className="productContent">
-                   <Link to="#"><h4 className="productTitle mb-1">Maths time for class 1</h4></Link> 
-                    <h5 className="authorName mb-1">Author name</h5>
-                    <p className="productPrice">$ 43.00</p>
-                  </div>{/* end of productContent */}
-                </div>{/* end of productCard */}
-              </Col>{/* end of Col */}
-              
-
-              <Col className="col-auto">
-                <div className="card productCard border-0 bg-transprant">
-                  <div className="productMedia mb-3 bgGray">
-                    <img src={bookImage1} alt="" />
-                  </div>{/* end of productMedia */}
-
-                  <div className="productContent">
-                   <Link to="#"><h4 className="productTitle mb-1">Maths time for class 1</h4></Link> 
-                    <h5 className="authorName mb-1">Author name</h5>
-                    <p className="productPrice">$ 43.00</p>
-                  </div>{/* end of productContent */}
-                </div>{/* end of productCard */}
-              </Col>{/* end of Col */}
-              
-              <Col className="col-auto">
-                <div className="card productCard border-0 bg-transprant">
-                  <div className="productMedia mb-3 bgGray">
-                    <img src={bookImage1} alt="" />
-                  </div>{/* end of productMedia */}
-
-                  <div className="productContent">
-                   <Link to="#"><h4 className="productTitle mb-1">Maths time for class 1</h4></Link> 
-                    <h5 className="authorName mb-1">Author name</h5>
-                    <p className="productPrice">$ 43.00</p>
-                  </div>{/* end of productContent */}
-                </div>{/* end of productCard */}
-              </Col>{/* end of Col */}
-
-              <Col className="col-auto">
-                <div className="card productCard border-0 bg-transprant">
-                  <div className="productMedia mb-3 bgGray">
-                    <img src={bookImage1} alt="" />
-                  </div>{/* end of productMedia */}
-
-                  <div className="productContent">
-                   <Link to="#"><h4 className="productTitle mb-1">Maths time for class 1</h4></Link> 
-                    <h5 className="authorName mb-1">Author name</h5>
-                    <p className="productPrice">$ 43.00</p>
-                  </div>{/* end of productContent */}
-                </div>{/* end of productCard */}
-              </Col>{/* end of Col */}
-            
             </Row>{/* end of Row */}
           </Container>{/* end of Container */}
         </section>{/* end of newProduct */}
 
         <section className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap" id="mailSubscribe">
           <Container className="container">
-            <Row className="justify-content-center">
-              <Col sm="10">
-                <Card className="subscribeCard border-0 rounded-0">
-                  <Card.Body className="text-center pt-5 pb-5">
-                    <h1>Subscribe to our newsletter</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor<br /> enim ipsam voluptatem quia voluptas quia non numquam eius</p>
-                    
-                    <Form className="d-flex subscribeForm justify-content-center mt-3">
 
-                      <Form.Group controlId="mailSubscribe" className="mb-2">
-                        <Form.Control type="email" placeholder="Enter email" />
-                      </Form.Group>{/* end of Form.Group */}
-
-                      <Button type="submit" className="mb-2">Subscribe</Button>
-
-                    </Form>{/* end of Form */}
-                  </Card.Body>{/* end of Card.Body */}
-                </Card>{/* end of Card */}
-              </Col>{/* end of Col */}
-            </Row>{/* end of Row */}
+              <NewsLetterComponent/>
+              
           </Container>{/* end of Container */}
         </section>{/* end of mailSubscribe */}
 

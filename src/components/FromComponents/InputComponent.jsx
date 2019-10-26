@@ -2,9 +2,9 @@ import React from 'react';
 import {Form} from 'react-bootstrap';
 import {category} from '../../inc/auth/Singup'
 //Input From Components
-function InputFrom({LableId, TypeName, LableTitle, Name, Value, Placeholder,controlId}) {
+function InputFrom({LableId, TypeName, LableTitle, Name, Value, Placeholder,controlId, ClassName}) {
     return(
-        <Form.Group controlId={controlId}>
+        <Form.Group controlId={controlId}  className={ClassName}>
             <Form.Label htmlFor={LableId}>{LableTitle}</Form.Label>
             <Form.Control type={TypeName} id={LableId} name={Name} value={Value} placeholder={Placeholder}/>
         </Form.Group>
