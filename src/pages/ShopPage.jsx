@@ -3,12 +3,11 @@ import {Link} from 'react-router-dom';
 import {Container, Row, Col, Breadcrumb, Form, Pagination, Card} from 'react-bootstrap';
 
 //Payment Icon Images
-import paypalIcon from '../assets/images/paypal_icon_img.png';
-import masterCardIcon from '../assets/images/master_card_icon_img.png';
-import visaIcon from '../assets/images/visa_icon_img.png';
+
 
 // Product Images
 import bookImage1 from '../assets/images/books/book_img_01.jpg';
+import FooterComponent from '../components/FooterComponent/FooterComponent';
 
 const ShopPage = () => {
   return (<>
@@ -65,14 +64,13 @@ const ShopPage = () => {
             <Col className="col-auto">
               <div className="headPopBar clearfix" id="headPopBar">
                 <ul className="headPopBarList d-flex justify-content-between align-items-center">
-                  <li><Link to="/"><i className="fas fa-search"></i> Search</Link></li>
-                  <li><Link to="/"><i className="far fa-star"></i> Favorites</Link></li>
-                  <li><Link to="/"><i className="fas fa-shopping-cart"></i> Cart</Link></li>
-                  <li><Link to="/"><i className="far fa-user"></i> Login</Link></li>
+                  <li><Link to="/search"><i className="fas fa-search"></i> Search</Link></li>
+                  <li><Link to="/Favorites"><i className="far fa-star"></i> Favorites</Link></li>
+                  <li><Link to="/Cart"><i className="fas fa-shopping-cart"></i> Cart</Link></li>
+                  <li><Link to="/login"><i className="far fa-user"></i> Login</Link></li>
                 </ul>{/* end of headPopBarList */}
               </div>{/* end of headPopBar */}
             </Col>{/* end of Col */}
-
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </header>{/* end of header */}
@@ -98,13 +96,13 @@ const ShopPage = () => {
             <Row>
               <Col sm="3">
                 <aside className="asideFilterBar secGap clearfix" id="asideFilterBar">
-                  <h2 class="asideTitle">Filters</h2>
+                  <h2 className="asideTitle">Filters</h2>
 
-                  <div class="asideBody bgGray" id="asideBody">
+                  <div className="asideBody bgGray" id="asideBody">
 
-                    <div class="singleFilterCard">
+                    <div className="singleFilterCard">
                       <h5>Stage</h5>
-                      <ul class="filterList">
+                      <ul className="filterList">
                         <li><Link to="#"> Class 1 <span>6 </span></Link></li>
                         <li><Link to="#"> Class 2 <span>10 </span></Link></li>
                         <li><Link to="#"> Class 3 <span>5</span></Link></li>
@@ -114,9 +112,9 @@ const ShopPage = () => {
                       </ul>{/* end of filterList */}
                     </div>{/* end of singleFilterCard */}
                     
-                    <div class="singleFilterCard">
+                    <div className="singleFilterCard">
                       <h5>Discipline</h5>
-                      <ul class="filterList">
+                      <ul className="filterList">
                         <li><Link to="#"> Mathematics activities <span>5</span></Link></li>
                         <li><Link to="#"> Kiswahili activities <span>3</span></Link></li>
                         <li><Link to="#"> Hygiene and nutrition <br />activities <span>10</span></Link></li>
@@ -132,7 +130,7 @@ const ShopPage = () => {
                       </ul>{/* end of filterList */}
                     </div>{/* end of singleFilterCard */}
                     
-                    <div class="singleFilterCard">
+                    <div className="singleFilterCard">
                       <h5>Price Range</h5>
                       <Form>
                         <Form.Group controlId="formBasicEmail">
@@ -142,9 +140,9 @@ const ShopPage = () => {
                       </Form>{/* end of Form */}
                     </div>{/* end of singleFilterCard */}
 
-                    <div class="singleFilterCard">
+                    <div className="singleFilterCard">
                       <h5>Author</h5>
-                      <ul class="filterList">
+                      <ul className="filterList">
                         <li><Link to="#"> Sam Smith <span>5</span></Link></li>
                         <li><Link to="#"> Barbara Cartland <span>3</span></Link></li>
                         <li><Link to="#"> William Shakespeare <span>10</span></Link></li>
@@ -153,18 +151,18 @@ const ShopPage = () => {
                       </ul>{/* end of filterList */}
                     </div>{/* end of singleFilterCard */}
 
-                    <div class="singleFilterCard">
+                    <div className="singleFilterCard">
                       <h5>Publishing house</h5>
-                      <ul class="filterList">
+                      <ul className="filterList">
                         <li><Link to="#"> Lorem ipsum<span>5</span></Link></li>
                         <li><Link to="#"> Dolor set amet <span>3</span></Link></li>
                         <li><Link to="#"> Adipiscing <span>10</span></Link></li>
                       </ul>{/* end of filterList */}
                     </div>{/* end of singleFilterCard */}
                   
-                    <div class="singleFilterCard">
+                    <div className="singleFilterCard">
                       <h5>Publishing Year</h5>
-                      <ul class="filterList">
+                      <ul className="filterList">
                         <li><Link to="#"> 2012<span>5</span></Link></li>
                         <li><Link to="#"> 2013 <span>3</span></Link></li>
                         <li><Link to="#"> 2014 <span>10</span></Link></li>
@@ -176,17 +174,17 @@ const ShopPage = () => {
                       </ul>{/* end of filterList */}
                     </div>{/* end of singleFilterCard */}
                     
-                    <div class="singleFilterCard">
+                    <div className="singleFilterCard">
                       <h5>Book Cover</h5>
-                      <ul class="filterList">
+                      <ul className="filterList">
                         <li><Link to="#"> Lorem ipsum<span>5</span></Link></li>
                         <li><Link to="#"> Dolor set amet <span>3</span></Link></li>
                       </ul>{/* end of filterList */}
                     </div>{/* end of singleFilterCard */}
                     
-                    <div class="singleFilterCard p-0 border-0 m-0">
+                    <div className="singleFilterCard p-0 border-0 m-0">
                       <h5>Language</h5>
-                      <ul class="filterList">
+                      <ul className="filterList">
                         <li><Link to="#"> Swahili <span>5</span></Link></li>
                         <li><Link to="#"> English <span>3</span></Link></li>
                       </ul>{/* end of filterList */}
@@ -306,105 +304,15 @@ const ShopPage = () => {
                         </div>{/* end of productContent */}
                       </Card>{/* end of productCard */}
                     </Col>{/* end of Container */}
-
                   </Row>{/* end of Container */}
-
                 </div>{/* end of allProductContent */}
               </Col>{/* end of Col */}
-
             </Row>{/* end of Row */}
-
-            
-            
           </Container>{/* end of Container */}
         </section>{/* end of productsBodyAsidebar */}
       </main>{/* end of mainContent */}
-
-      <footer className="footer clearfix bg-white pt-5 pb-5" id="footer">
-        <Container>
-          <Row>
-            <Col>
-              <div className="footerWidget">
-                <div className="footerLogo">
-                  <div className="logoWrapper">
-                    <h1 className="logoText"><Link to="#">LOGO</Link></h1>
-                  </div>{/*  end of logoWrapper */}
-                </div>{/*  end of footerLogo */}
-              </div>{/*  end of footerWidget */}
-            </Col> {/*  end of col */}
-
-            <Col sm="5">
-              <div className="footerWidget">
-                <h4 className="footerWidgetHeader">Information</h4>
-                <ul className="footerLinksList">
-                  <li><Link to="#">Order status</Link></li>
-                  <li><Link to="#">How to place an order</Link></li>
-                  <li><Link to="#">Return</Link></li>
-                  <li><Link to="#">Terms & Conditions</Link></li>
-                  <li><Link to="#">Delivery details</Link></li>
-                  <li><Link to="#">Privacy Policy</Link></li>
-                  <li><Link to="#">Blog</Link></li>
-                  <li><Link to="#">Our support center</Link></li>
-                </ul>{/*  end of footerLinksList */}
-              </div>{/*  end of footerWidget */}
-            </Col>{/*  end of col */}
-
-            <Col sm="2">
-              <div className="footerWidget">
-                <h4 className="footerWidgetHeader">Contact us</h4>
-                <ul className="getInTouchList">
-                  <li>
-                    <Link to="mailto:you@example.com" title="click to mail us">you@example.com</Link>
-                  </li>{/*  end of li */}
-                  <li>
-                    <Link to="tele:1234567890" title="click to call us">+(123) 456 7890</Link>
-                  </li>{/*  end of li */}
-                  <li>
-                    <p>Your long address, city, region, zip code</p>
-                  </li>{/*  end of li */}
-                </ul>{/*  end of getInTouchList */}
-              </div>{/*  end of footerWidget */}
-            </Col>{/*  end of col */}
-
-            <Col className="align-self-center">
-              <div className="footerWidget">
-                <ul className="footerSocial">
-                  <li className="facebook"><Link to="#"><i className="fab fa-facebook-f"></i></Link></li>
-                  <li className="facebook"><Link to="#"><i className="fab fa-instagram"></i></Link></li>
-                  <li className="facebook"><Link to="#"><i className="fab fa-twitter"></i></Link></li>
-                </ul>{/*  end of footerSocial */}
-              </div>{/*  end of footerWidget */}
-            </Col>{/*  end of col */}
-
-          </Row>{/* end of Row */}
-        </Container>{/* end of Container */}
-      </footer>{/* end of footer */}
-
-      <div className="footerBottom clearfix pb-3" id="footerBottom">
-        <Container>
-          <hr className="hrBorder" />
-          <Row className="align-items-center justify-content-between">
-            <Col>
-              <p className="copyrights">© 2019 All Rights Reserved</p>
-            </Col>{/* end of Col */}
-
-            <Col sm="3">
-              <ul className="paymentsNav d-flex justify-content-between align-items-center">
-                <li className="paypal">
-                  <Link to="#" title="paypal"><img alt="paypal" src={paypalIcon} title="paypal" /></Link>
-                </li>{/* end of li */}
-                <li className="visa">
-                  <Link href="#" title="visa"><img alt="visa card" src={visaIcon} title="visa card" /></Link>
-                </li>{/* end of li */}
-                <li className="master">
-                  <Link to="#" title="master card"><img alt="master card" src={masterCardIcon} title="master card" /></Link>
-                </li>{/* end of li */}
-              </ul>{/* end of paymentsNav */}
-            </Col>{/* end of Col */}
-          </Row>{/* end of Row */}
-        </Container>{/* end of Container */}
-      </div>{/* end of footerBottom */}
-
+      
+       <FooterComponent/>
     </div>{/* end of allWrapper */}
 
   </>);
