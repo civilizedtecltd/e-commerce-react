@@ -2,12 +2,13 @@ import React from 'react';
 import{Link} from 'react-router-dom'
 import {Col, Card} from 'react-bootstrap';
 
-function NewBookComponent({BookImage, ProductTitle, AuthorName, ProductPrice }){
+function NewBookComponent({BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg }){
     return(
         <Col className="col-auto">
         <Card className="productCard border-0 bg-transparent">
-          <div className="productMedia mb-3 bg-white">
-            <img src={BookImage} alt="" />
+              <div className={`productMedia mb-3 ${ImageBg}`}>
+
+              <img src={BookImage} alt="" />
           </div>
 
           <div className="productContent">
@@ -17,6 +18,7 @@ function NewBookComponent({BookImage, ProductTitle, AuthorName, ProductPrice }){
           </div>
         </Card>
       </Col>
+
     )
 }
 
