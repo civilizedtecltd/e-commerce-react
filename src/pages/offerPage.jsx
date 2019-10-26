@@ -99,7 +99,7 @@ const offerPage = () => {
           </Container>{/* end of Container */}
         </section>{/* end of banner */}
 
-        <section class="newProduct productView secGap bgGray clearfix" id="newProduct">
+        <section className="newProduct productView secGap bgGray clearfix" id="newProduct">
           <Container>
             <Row>
               <Col className="text-center">
@@ -111,6 +111,7 @@ const offerPage = () => {
 
               {NewBookDB.map((newBook, index) => <NewBookComponent
                 key={index}
+                ImageBg="bg-white"
                 BookImage={newBook.Img}
                 ProductTitle={newBook.Title}
                 AuthorName={newBook.Author}
@@ -183,6 +184,7 @@ const offerPage = () => {
 
               {NewBookDB.map((newBook, index) => <NewBookComponent
                   key={index}
+                  ImageBg="bgGray"
                   BookImage={newBook.Img}
                   ProductTitle={newBook.Title}
                   AuthorName={newBook.Author}
@@ -278,7 +280,7 @@ const offerPage = () => {
                   <Link to="#" title="paypal"><img alt="paypal" src={paypalIcon} title="paypal" /></Link>
                 </li>{/* end of li */}
                 <li className="visa">
-                  <Link href="#" title="visa"><img alt="visa card" src={visaIcon} title="visa card" /></Link>
+                  <Link to="#" title="visa"><img alt="visa card" src={visaIcon} title="visa card" /></Link>
                 </li>{/* end of li */}
                 <li className="master">
                   <Link to="#" title="master card"><img alt="master card" src={masterCardIcon} title="master card" /></Link>
