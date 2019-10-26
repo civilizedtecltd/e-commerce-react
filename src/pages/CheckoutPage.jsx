@@ -1,14 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Nav, Tab} from 'react-bootstrap';
-
 // Book Images
 import bookImage1 from '../assets/images/books/book_img_01.jpg';
-
 const CheckoutPage = () => {
   return (<>
     <div className="allWrapper bgGray">
-
       <header className="header clearfix border-0 pt-5 pb-5" id="header">
         <Container>
           <Row>
@@ -17,7 +14,6 @@ const CheckoutPage = () => {
                 <h1 className="logoText"><Link to="#">LOGO</Link></h1>
               </div>{/* end of logoWrapper */}
             </Col>{/* end of Col */}
-
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </header>{/* end of header */}
@@ -96,16 +92,13 @@ const CheckoutPage = () => {
                     <Col sm={12}>
                       
                     </Col>{/* end of Col */}
-
                   </Row>{/* end of Row */}
                 </Tab.Container>{/* end of Row */}
               </Card.Body>{/* end of Card.Body */}
             </Card>{/* end of Card */}
           </Container>{/* end of Container */}
         </section>{/* end of checkoutInfoDetails */}
-
       </main>{/* end of mainContent */}
-
     </div>{/* end of allWrapper */}
 
   </>);
