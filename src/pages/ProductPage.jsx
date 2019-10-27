@@ -1,85 +1,11 @@
 import React from 'react';
 import FooterComponent from '../components/FooterComponent/FooterComponent';
+import HeaderComponent from '../components/header/Header';
 
 function ProductPage() {
     return(<>
-        <div class="allWrapper">
-
-<div class="headerTopBar clearfix bgBlack" id="headerTopBar">
-  <div class="container">
-    <div class="row justify-content-between">
-      <div class="col-auto">
-        <div class="headFeature">
-          <i class="fas fa-map-marker-alt"></i> <span>Delivery region: Nairobi</span>
-        </div>
-      </div>
-
-      <div class="col-auto">
-        <div class="headFeature">
-          <ul class="headFeatureList d-flex justify-content-between">
-            <li><i class="fas fa-truck"></i> <span>Free delivery</span></li>
-            <li><i class="fas fa-award"></i> <span>Genuine goods</span></li>
-            <li><i class="fas fa-headset"></i> <span>Customer support</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<header class="header clearfix" id="header">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-sm-2">
-        <div class="logoWrapper">
-          <h1 class="logoText"><a href="#">LOGO</a></h1>
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="headerNav clearfix" id="headerNav">
-          <nav class="navbar navbar-expand-lg navbar-light bg-white">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Kindergarten <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Primary school</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Secondary school</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Stationery</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Bibles</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
-
-      <div class="col-sm-4">
-        <div class="headPopBar clearfix" id="headPopBar">
-          <ul class="headPopBarList d-flex justify-content-between">
-            <li><a href="#"><i class="fas fa-search"></i> Search</a></li>
-            <li><a href="#"><i class="far fa-star"></i> Favorites</a></li>
-            <li><a href="#"><i class="fas fa-shopping-cart"></i> Cart</a></li>
-            <li><a href="#"><i class="far fa-user"></i> Login</a></li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</header>
-
+    <div class="allWrapper">
+    <HeaderComponent/>
 <main class="mainContent clearfix" id="mainContent">
 
   <section class="breadcrumbArea secGap pb-0 clearfix" id="breadcrumb">

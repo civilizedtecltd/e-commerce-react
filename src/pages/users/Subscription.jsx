@@ -1,81 +1,16 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+
 import {Container, Row, Col, Card, Form} from 'react-bootstrap';
 import {CheckboxComponent} from '../../components/FromComponents/CheckboxComponents';
 import{ButtonComponents}from '../../components/ButtonComponents/ButtonComponents'
-import {Liai,Liis} from '../../components/LiComponent/CommonLiComponent';
-import {headerFeatureList, headerPopbars, asideData} from '../../inc/users/users'
+import {Liai} from '../../components/LiComponent/CommonLiComponent';
+import {asideData} from '../../inc/users/users'
+import HeaderComponent from '../../components/header/Header';
 
 const Subscription = () => {
   return (<> 
   <div className="allWrapper">
-      <div className="headerTopBar clearfix bgBlack" id="headerTopBar">
-        <Container fluid={true}>
-          <Row className="justify-content-between">
-            <Col>
-              <div className="headFeature">
-                <i className="fas fa-map-marker-alt"></i> <span>Delivery region: Nairobi</span>
-              </div>{/* end of headFeature */}
-            </Col>{/* end of Col */}
-            <Col className="col-auto">
-              <div className="headFeature">
-                <ul className="headFeatureList d-flex justify-content-between">
-                {headerFeatureList.map((feature, index)=><Liis
-                    key={index}
-                    ListClass={feature.LIST_CLASS}
-                    IconName={feature.ICON_NAME}
-                    Title={feature.TITLE}
-                />)}
-                </ul>{/* end of headFeatureList */}
-              </div>{/* end of headFeature */}
-            </Col>{/* end of Col */}
-          </Row>{/* end of Row */}
-        </Container>{/* end of Container */}
-      </div>{/* end of headerTopBar */}
-      
-      <header className="header userHeader clearfix" id="header">
-        <Container fluid="{true}">
-          <Row>
-            <Col sm="2">
-              <div className="logoWrapper">
-                <h1 className="logoText"><Link to="#">LOGO</Link></h1>
-              </div>{/* end of logoWrapper */}
-            </Col>{/* end of Col */}
-            <Col>
-              <nav className="mainMenu mainNav" id="mainNav">
-                <ul className="navTabs">
-                  <li>
-                    <Link to="#" className="active">Home</Link>
-                  </li>{/* end of li */}
-                </ul>{/* end of navTabs */}
-              </nav>{/* end of Nav */}
-              <Link to="#" className="generalLink" id="responsiveMainNavToggler"><i className="fa fa-bars"></i></Link>
-              <div className="clearfix"></div>
-              <div className="responsiveMainNav"></div>{/* end of Nav */}
-            </Col>{/* end of Col */}
-            <Col className="col-auto">
-              <div className="headPopBar clearfix" id="headPopBar">
-                <ul className="headPopBarList d-flex justify-content-between align-items-center">
-                {headerPopbars.map((datum, index)=><Liai
-                    key={index}
-                    IconName={datum.ICON_NAME}
-                    Title={datum.TITLE}
-                    Url={datum.URL}
-                    AnchorClass={datum.ANCHOR_CLASS}
-                  />)}
-                  <li>
-                    <div className="userLogged d-flex align-items-center">
-                      <div className="userAvater"><img src="./assets/images/reviews_avater.jpg" alt="" /></div>
-                      <span className="userName">Sam Smith</span>
-                    </div>{/* end of userLogged */}
-                  </li>{/* end of li */}
-                </ul>{/* end of headPopBarList */}
-              </div>{/* end of headPopBar */}
-            </Col>{/* end of Col */}
-          </Row>{/* end of Row */}
-        </Container>{/* end of Container */}
-      </header>{/* end of header */}
-
+      <HeaderComponent/>
       <div className="userBodyArea clearfix" id="userBodyArea">
         <Container fluid="{true}" className="pl-0 pr-0">
           <Row noGutters>

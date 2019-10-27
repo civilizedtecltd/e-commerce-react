@@ -1,82 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Container, Row, Col, Breadcrumb, Form, Pagination, Card} from 'react-bootstrap';
-
-//Payment Icon Images
+import {Container, Row, Col, Breadcrumb, Form, Card} from 'react-bootstrap';
 
 
 // Product Images
 import bookImage1 from '../assets/images/books/book_img_01.jpg';
 import FooterComponent from '../components/FooterComponent/FooterComponent';
 import { NewsLetterComponent } from '../components/offerPageComponents/NewsLetterComponent';
+import PriceRanger from '../components/PriceRangeSlider/PriceRangeSlider';
+import HeaderComponent from '../components/header/Header';
 
 const ShopPage = () => {
   return (<>
-
     <div className="allWrapper">
-      <div className="headerTopBar clearfix bgBlack" id="headerTopBar">
-        <Container>
-          <Row className="justify-content-between">
-            <Col>
-              <div className="headFeature">
-                <i className="fas fa-map-marker-alt"></i> <span>Delivery region: Nairobi</span>
-              </div>{/* end of headFeature */}
-            </Col>{/* end of Col */}
-
-            <Col className="col-auto">
-              <div className="headFeature">
-                <ul className="headFeatureList d-flex justify-content-between">
-                  <li><i className="fas fa-truck"></i> <span>Free delivery</span></li>
-                  <li><i className="fas fa-award"></i> <span>Genuine goods</span></li>
-                  <li><i className="fas fa-headset"></i> <span>Customer support</span></li>
-                </ul>{/* end of headFeatureList */}
-              </div>{/* end of headFeature */}
-            </Col>{/* end of Col */}
-
-          </Row>{/* end of Row */}
-        </Container>{/* end of Container */}
-      </div>{/* end of headerTopBar */}
-
-      <header className="header userHeader clearfix" id="header">
-        <Container>
-          <Row className="align-items-center">
-            <Col sm="2">
-              <div className="logoWrapper">
-                <h1 className="logoText"><Link to="#">LOGO</Link></h1>
-              </div>{/* end of logoWrapper */}
-
-            </Col>{/* end of Col */}
-
-            <Col>
-              <nav className="mainMenu mainNav" id="mainNav">
-                <ul className="navTabs">
-                  <li>
-                    <Link to="#" className="active">Home</Link>
-                  </li>{/* end of li */}
-                </ul>{/* end of navTabs */}
-
-              </nav>{/* end of Nav */}
-              <Link to="#" className="generalLink" id="responsiveMainNavToggler"><i className="fa fa-bars"></i></Link>
-              <div className="clearfix"></div>
-              <div className="responsiveMainNav"></div>{/* end of Nav */}
-            </Col>{/* end of Col */}
-
-            <Col className="col-auto">
-              <div className="headPopBar clearfix" id="headPopBar">
-                <ul className="headPopBarList d-flex justify-content-between align-items-center">
-                  <li><Link to="/search"><i className="fas fa-search"></i> Search</Link></li>
-                  <li><Link to="/Favorites"><i className="far fa-star"></i> Favorites</Link></li>
-                  <li><Link to="/Cart"><i className="fas fa-shopping-cart"></i> Cart</Link></li>
-                  <li><Link to="/login"><i className="far fa-user"></i> Login</Link></li>
-                </ul>{/* end of headPopBarList */}
-              </div>{/* end of headPopBar */}
-            </Col>{/* end of Col */}
-          </Row>{/* end of Row */}
-        </Container>{/* end of Container */}
-      </header>{/* end of header */}
-
+     <HeaderComponent/>
       <main className="mainContent clearfix" id="mainContent">
-
         <section className="sectionBreadcrumb secGap clearfix pb-0" id="sectionBreadcrumb">
           <Container>
             <Row>
@@ -87,7 +25,6 @@ const ShopPage = () => {
                 </Breadcrumb>{/* end of Breadcrumb */}
               </Col>{/* end of Col */}
             </Row>{/* end of Row */}
-
           </Container>{/* end of Container */}
         </section>{/* end of Breadcrumb */}
 
@@ -115,7 +52,7 @@ const ShopPage = () => {
                     <div className="singleFilterCard">
                       <h5>Discipline</h5>
                       <ul className="filterList">
-                        <li><Link to="#"> Mathematics activities <span>5</span></Link></li>
+                        <li><Link to="# "> Mathematics activities <span>5</span></Link></li>
                         <li><Link to="#"> Kiswahili activities <span>3</span></Link></li>
                         <li><Link to="#"> Hygiene and nutrition <br />activities <span>10</span></Link></li>
                         <li><Link to="#"> Environmental activities <span>6</span></Link></li>
@@ -133,10 +70,7 @@ const ShopPage = () => {
                     <div className="singleFilterCard">
                       <h5>Price Range</h5>
                       <Form>
-                        <Form.Group>
-                          <Form.Control type="range" id="formControlRange" />
-                        </Form.Group>{/* end of Form.Group */}
-
+                        <PriceRanger/>
                       </Form>{/* end of Form */}
                     </div>{/* end of singleFilterCard */}
 
@@ -200,54 +134,54 @@ const ShopPage = () => {
                       <h2 className="pageTitle"><span>Primary</span> school Books</h2>
                     </Col>{/* end of Col */}
                   </Row>{/* end of Row */}
+                  <div className="row mb-4">
+                  <div className="col">
+                    <ul className="singleFilter d-flex align-items-center">
+                      <li>
+                        <label htmlFor="">Sort By</label>
+                      </li>
+                      <li>
+                        <select className="filterSelect form-control">
+                          <option>Popular</option>
+                          <option>New</option>
+                          <option>Price: low to high</option>
+                          <option>Price: high to low</option>
+                        </select>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="col">
+                    <ul className="singleFilter d-flex align-items-center">
+                      <li>
+                        <label htmlFor="">Show</label>
+                      </li>
 
-                  <Row className="mb-4">
+                      <li>
+                        <select className="filterSelect form-control">
+                          <option>16</option>
+                          <option>10</option>
+                          <option>5</option>
+                        </select>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="col">
+                    <nav aria-label="Page navigation">
+                      <ul className="pagination align-items-center justify-content-between">
+                        <li className="page-item"><a className="page-link" href="#"><i className="fas fa-chevron-left"></i></a></li>
+                        <li className="page-item">Page</li>
+                        <li className="page-item"><a className="page-link" href="#">1</a></li>
+                        <li className="page-item">of</li>
+                        <li className="page-item"><a className="page-link" href="#">7</a></li>
+                        <li className="page-item"><a className="page-link" href="#"><i className="fas fa-chevron-right"></i></a></li>
+                      </ul>
+                    </nav>
+                  </div>
 
-                    <Col>
-                      <div className="singleFilter">
-                        <Form>
-                          <Form.Group controlId="filterForm.ControlSelect1" className="d-flex align-items-center filterSelect">
-                            <Form.Label>Sort By</Form.Label>
-                            <Form.Control as="select">
-                              <option>Popular</option>
-                              <option>New</option>
-                              <option>Price: low to high</option>
-                              <option>Price: high to low</option>
-                            </Form.Control>{/* end of Form.Control */}
-                          </Form.Group>{/* end of Form.Group */}
-                        
-                        </Form>{/* end of Form */}
-                      </div>{/* end of singleFilter */}
-                    </Col>{/* end of Col */}
-
-                    <Col>
-                      <div className="singleFilter">
-                        <Form>
-                          <Form.Group controlId="filterForm.ControlSelect1" className="d-flex align-items-center filterSelect">
-                            <Form.Label>Show</Form.Label>
-                            <Form.Control as="select">
-                              <option>16</option>
-                              <option>10</option>
-                              <option>5</option>
-                            </Form.Control>{/* end of Form.Control */}
-                          </Form.Group>{/* end of Form.Group */}
-                        
-                        </Form>{/* end of Form */}
-                      </div>{/* end of singleFilter */}
-                    </Col>{/* end of Col */}
-
-                    <Col>
-                      <Pagination>
-                        <Pagination.Prev />
-                        <Pagination.Item active>{1}</Pagination.Item>
-                        <Pagination.Ellipsis />
-                        <Pagination.Item>{7}</Pagination.Item>
-                        <Pagination.Next />
-                      </Pagination>{/* end of Pagination */}
-                    </Col>{/* end of Col */}
-
-                  </Row>{/* end of Row */}
-
+                </div>
+                
                   <Row>
                     <Col sm="3">
                       <Card className="productCard border-0 bg-transparent">
@@ -312,9 +246,7 @@ const ShopPage = () => {
         </section>{/* end of productsBodyAsidebar */}
         <section className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap" id="mailSubscribe">
           <Container className="container">
-
               <NewsLetterComponent/>
-
           </Container>{/* end of Container */}
         </section>{/* end of mailSubscribe */}
       </main>{/* end of mainContent */}

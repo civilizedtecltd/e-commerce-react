@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Form, Button} from 'react-bootstrap';
+import HeaderComponent from '../components/header/Header';
 
 // Category Section Images
 import productCatImg from '../assets/images/product_cat_img_01.jpg';
@@ -13,10 +14,7 @@ import freatureIcon2 from '../assets/images/feature_icon_img_02.png';
 import freatureIcon3 from '../assets/images/feature_icon_img_03.png';
 import freatureIcon4 from '../assets/images/feature_icon_img_04.png';
 
-//Payment Icon Images
-import paypalIcon from '../assets/images/paypal_icon_img.png';
-import masterCardIcon from '../assets/images/master_card_icon_img.png';
-import visaIcon from '../assets/images/visa_icon_img.png';
+
 
 //Carousel Images
 import carouselItem1 from '../assets/images/partners_logo_img_01.png';
@@ -32,68 +30,7 @@ const Home = () => {
   return (<>
 
     <div className="allWrapper">
-      <div className="headerTopBar clearfix bgBlack" id="headerTopBar">
-        <Container>
-          <Row className="justify-content-between">
-            <Col>
-              <div className="headFeature">
-                <i className="fas fa-map-marker-alt"></i> <span>Delivery region: Nairobi</span>
-              </div>{/* end of headFeature */}
-            </Col>{/* end of Col */}
-
-            <Col className="col-auto">
-              <div className="headFeature">
-                <ul className="headFeatureList d-flex justify-content-between">
-                  <li><i className="fas fa-truck"></i> <span>Free delivery</span></li>
-                  <li><i className="fas fa-award"></i> <span>Genuine goods</span></li>
-                  <li><i className="fas fa-headset"></i> <span>Customer support</span></li>
-                </ul>{/* end of headFeatureList */}
-              </div>{/* end of headFeature */}
-            </Col>{/* end of Col */}
-
-          </Row>{/* end of Row */}
-        </Container>{/* end of Container */}
-      </div>{/* end of headerTopBar */}
-
-      <header className="header userHeader clearfix" id="header">
-        <Container>
-          <Row className="align-items-center">
-            <Col sm="2">
-              <div className="logoWrapper">
-                <h1 className="logoText"><Link to="#">LOGO</Link></h1>
-              </div>{/* end of logoWrapper */}
-
-            </Col>{/* end of Col */}
-
-            <Col>
-              <nav className="mainMenu mainNav" id="mainNav">
-                <ul className="navTabs">
-                  <li>
-                    <Link to="#" className="active">Home</Link>
-                  </li>{/* end of li */}
-                </ul>{/* end of navTabs */}
-
-              </nav>{/* end of Nav */}
-              <Link to="#" className="generalLink" id="responsiveMainNavToggler"><i className="fa fa-bars"></i></Link>
-              <div className="clearfix"></div>
-              <div className="responsiveMainNav"></div>{/* end of Nav */}
-            </Col>{/* end of Col */}
-
-            <Col className="col-auto">
-              <div className="headPopBar clearfix" id="headPopBar">
-                <ul className="headPopBarList d-flex justify-content-between align-items-center">
-                  <li><Link to="/"><i className="fas fa-search"></i> Search</Link></li>
-                  <li><Link to="/"><i className="far fa-star"></i> Favorites</Link></li>
-                  <li><Link to="/"><i className="fas fa-shopping-cart"></i> Cart</Link></li>
-                  <li><Link to="/"><i className="far fa-user"></i> Login</Link></li>
-                </ul>{/* end of headPopBarList */}
-              </div>{/* end of headPopBar */}
-            </Col>{/* end of Col */}
-
-          </Row>{/* end of Row */}
-        </Container>{/* end of Container */}
-      </header>{/* end of header */}
-
+    <HeaderComponent/>
       <main className="mainContent clearfix" id="mainContent">
         <section className="productCat secGap clearfix" id="productCat">
           <Container>

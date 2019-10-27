@@ -88,9 +88,7 @@ const CheckoutPage = () => {
                         </Nav.Item>
                       </Nav>
                     </Col>{/* end of Col */}
-
                     <Col sm={12}>
-                      
                     </Col>{/* end of Col */}
                   </Row>{/* end of Row */}
                 </Tab.Container>{/* end of Row */}
