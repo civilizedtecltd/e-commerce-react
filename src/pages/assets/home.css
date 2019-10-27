@@ -1,0 +1,23 @@
+.partnersCarousel   .slick-prev:before {
+    content: "\f053";
+    font-family: "Font Awesome 5 Free";
+}
+
+.partnersCarousel  .slick-next:before {
+    content: "\f054";
+    font-family: "Font Awesome 5 Free";
+}
+.partnersCarousel .slick-slide img{
+    width: auto;
+    margin: 0 auto;
+}
+.partnersCarousel .slick-slide {
+    display: flex!important;
+}
+.partnersCarousel .slick-slide {
+    display: flex;
+    height: auto;
+    min-height: 36px;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Form, Button} from 'react-bootstrap';
-
+import '../pages/assets/home.css'
 // Category Section Images
 import productCatImg from '../assets/images/product_cat_img_01.jpg';
 import productCatImg2 from '../assets/images/product_cat_img_02.jpg';
@@ -18,14 +18,9 @@ import paypalIcon from '../assets/images/paypal_icon_img.png';
 import masterCardIcon from '../assets/images/master_card_icon_img.png';
 import visaIcon from '../assets/images/visa_icon_img.png';
 
-//Carousel Images
-import carouselItem1 from '../assets/images/partners_logo_img_01.png';
-import carouselItem2 from '../assets/images/partners_logo_img_02.png';
-import carouselItem3 from '../assets/images/partners_logo_img_03.png';
-import carouselItem4 from '../assets/images/partners_logo_img_04.png';
-import carouselItem5 from '../assets/images/partners_logo_img_05.png';
-import carouselItem6 from '../assets/images/partners_logo_img_06.png';
 import FooterComponent from '../components/FooterComponent/FooterComponent';
+import {HomeCarosellFotter} from "../components/HomePage/HomeCarosellFotter";
+import {NewsLetterComponent} from "../components/offerPageComponents/NewsLetterComponent";
 
 
 const Home = () => {
@@ -202,19 +197,15 @@ const Home = () => {
           </Container>{/* end of Container */}
         </section>{/* end of ourBenefits */}
 
-        <section className="ourPartners clearfix secGap" id="ourPartners">
+        <section className="ourPartners clearfix p-5" id="ourPartners">
           <Container>
             <Row>
               <Col>
                 <div className="partnersCarousel">
-                  <ul className="d-flex partnerCarouselItem align-items-center justify-content-between">
-                    <li className="item"><img src={carouselItem1} alt="" /></li>
-                    <li className="item"><img src={carouselItem2} alt="" /></li>
-                    <li className="item"><img src={carouselItem3} alt="" /></li>
-                    <li className="item"><img src={carouselItem4} alt="" /></li>
-                    <li className="item"><img src={carouselItem5} alt="" /></li>
-                    <li className="item"><img src={carouselItem6} alt="" /></li>
-                  </ul>{/* end of partnerCarousel */}
+
+
+                    <HomeCarosellFotter/>
+
                 </div>{/* end of partnersCarousel */}
               </Col>{/* end of Col */}
             </Row>{/* end of Row */}
@@ -223,26 +214,7 @@ const Home = () => {
 
         <section className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap" id="mailSubscribe">
           <Container className="container">
-            <Row className="justify-content-center">
-              <Col sm="10">
-                <Card className="subscribeCard border-0 rounded-0">
-                  <Card.Body className="text-center pt-5 pb-5">
-                    <h1>Subscribe to our newsletter</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor<br /> enim ipsam voluptatem quia voluptas quia non numquam eius</p>
-                    
-                    <Form className="d-flex subscribeForm justify-content-center mt-3">
-
-                      <Form.Group controlId="mailSubscribe" className="mb-2">
-                        <Form.Control type="email" placeholder="Enter email" />
-                      </Form.Group>{/* end of Form.Group */}
-
-                      <Button type="submit" className="mb-2">Subscribe</Button>
-
-                    </Form>{/* end of Form */}
-                  </Card.Body>{/* end of Card.Body */}
-                </Card>{/* end of Card */}
-              </Col>{/* end of Col */}
-            </Row>{/* end of Row */}
+            <NewsLetterComponent/>
           </Container>{/* end of Container */}
         </section>{/* end of mailSubscribe */}
 
