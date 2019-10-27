@@ -68,10 +68,10 @@ function FooterComponent() {
                       {ListClass:"facebook" ,Url:"//instagram.com",IconName:"fab fa-instagram"},
                       {ListClass:"facebook",Url:"//twitter.com",IconName:"fab fa-twitter"},
                     ].map((list,index)=><Liai
-                    Key={index}
-                    ListClass={list.ListClass}
-                    Url={list.IconName}
-                    IconName={list.IconName}
+                      Key={index}
+                      ListClass={list.ListClass}
+                      Url={list.IconName}
+                      IconName={list.IconName}
                   />)}
                 </ul>{/*  end of footerSocial */}
               </div>{/*  end of footerWidget */}

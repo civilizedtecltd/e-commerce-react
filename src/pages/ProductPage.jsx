@@ -4,15 +4,11 @@ import FooterComponent from '../components/FooterComponent/FooterComponent';
 import {NewsLetterComponent} from "../components/offerPageComponents/NewsLetterComponent";
 import {Col, Container, Row ,Modal ,Button} from "react-bootstrap";
 import {NewBookDB} from "../inc/offerPage/NewBook";
-import {NewBookComponent} from "../components/offerPageComponents/NewBookComponent";
-import ProductImgCarosell from "../components/ProductImgCarosellComponents/ProductImgCarosell";
+import {ImgSlick, NewBookComponent} from "../components/offerPageComponents/NewBookComponent";
+import { ImageCarrosull} from "../components/ProductImgCarosellComponents/ProductImgCarosell";
 import reviews_avater from "../assets/images/reviews_avater.jpg"
 import {Link} from 'react-router-dom';
 
-// import result12 from '../pages/assets/images/product_big_img_01.jpg'
-// // import CaroSell from '../pages/assets/images/product_big_img_01.jpg'
-// // import CaroSell1 from '../pages/assets/images/book_img_04.jpg'
-// // import CaroSell2 from '../pages/assets/images/book_img_05.jpg'
 
 function ProductPage() {
   const [show, setShow] = useState(false);
@@ -128,7 +124,7 @@ function ProductPage() {
               <div className="row">
 
                 <div className="col-sm-6">
-                  <ProductImgCarosell/>
+                  <ImageCarrosull/>
                 </div>
                 <div className="col-sm-6">
                   <div className="card productCardDetails border-0">
@@ -335,7 +331,7 @@ function ProductPage() {
               </div>
             </div>
           </section>
-
+          <hr/>
           <section className="similarBooks productView secGap clearfix secBorder" id="similarBooks">
             <div className="container">
               <div className="row">
@@ -344,19 +340,8 @@ function ProductPage() {
                 </div>
               </div>
 
-              <Row className="justify-content-between">
+              <ImgSlick/>
 
-                {NewBookDB.map((newBook, index) => <NewBookComponent
-                    key={index}
-                    ImageBg="bgGray"
-                    BookImage={newBook.Img}
-                    ProductTitle={newBook.Title}
-                    AuthorName={newBook.Author}
-                    ProductPrice={newBook.Price}
-                />)
-                }
-
-              </Row>{/* end of Row */}
             </div>
           </section>
 
