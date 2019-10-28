@@ -1,0 +1,16 @@
+.react-search {
+    color: #000000;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 20px;
+    transition: width 0.5s linear;
+}
+.searchbar:hover > .react-search{
+    padding: 0 10px;
+    background-color: #f1f2f3;
+    width: 13.5rem;
+    caret-color: #000000;
+    transition: width 0.5s linear;
+}

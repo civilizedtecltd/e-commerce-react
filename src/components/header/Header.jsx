@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-
+import '../../assets/css/heder.css'
 function HeaderComponent() {
     return(
     <>
@@ -30,13 +30,13 @@ function HeaderComponent() {
       <header class="header clearfix" id="header">
         <div class="container">
           <div class="row align-items-center">
-            <div class="col-sm-2">
+            <div class="col-sm-1">
               <div class="logoWrapper">
                 <h1 class="logoText"><Link to="#">LOGO</Link></h1>
               </div>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-5">
               <div class="headerNav clearfix" id="headerNav">
                 <nav class="navbar navbar-expand-lg navbar-light bg-white">
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,10 +65,23 @@ function HeaderComponent() {
               </div>
             </div>
 
-            <div class="col-sm-4">
-              <div class="headPopBar clearfix" id="headPopBar">
+            <div class="col-sm-6">
+              <div class="headPopBar clearfix float-right" id="headPopBar">
                 <ul class="headPopBarList d-flex justify-content-between">
-                  <li><Link to="#"><i class="fas fa-search"></i> Search</Link></li>
+                  <li>
+                    <div className="input-group searchbar">
+                      <input type="search" className="react-search border-0" placeholder="Search" />
+                      <span><Link to="#"><i className="fa fa-search"></i> Search</Link></span>
+                    </div>
+                    {/*<div className="container h-100">*/}
+                    {/*  <div className="d-flex justify-content-center h-100">*/}
+                    {/*    <div className="searchbar">*/}
+                    {/*      <input className="search_input" type="text" name="" placeholder="Search..." />*/}
+                    {/*        <span><a href="#" className="search_icon"><i className="fa fa-search"></i></a></span>*/}
+                    {/*    </div>*/}
+                    {/*  </div>*/}
+                    {/*</div>*/}
+                  </li>
                   <li><Link to="#"><i class="far fa-star"></i> Favorites</Link></li>
                   <li><Link to="#"><i class="fas fa-shopping-cart"></i> Cart</Link></li>
                   <li><Link to="#"><i class="far fa-user"></i> Login</Link></li>
