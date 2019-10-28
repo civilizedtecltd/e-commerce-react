@@ -1,6 +1,7 @@
+
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Container, Row, Col, Card, Form, Button} from 'react-bootstrap';
+import {Container, Row, Col, Card,} from 'react-bootstrap';
 import '../pages/assets/home.css'
 // Category Section Images
 import productCatImg from '../assets/images/product_cat_img_01.jpg';
@@ -12,11 +13,6 @@ import freatureIcon1 from '../assets/images/feature_icon_img_01.png';
 import freatureIcon2 from '../assets/images/feature_icon_img_02.png';
 import freatureIcon3 from '../assets/images/feature_icon_img_03.png';
 import freatureIcon4 from '../assets/images/feature_icon_img_04.png';
-
-//Payment Icon Images
-import paypalIcon from '../assets/images/paypal_icon_img.png';
-import masterCardIcon from '../assets/images/master_card_icon_img.png';
-import visaIcon from '../assets/images/visa_icon_img.png';
 
 import FooterComponent from '../components/FooterComponent/FooterComponent';
 import {HomeCarosellFotter} from "../components/HomePage/HomeCarosellFotter";
@@ -197,15 +193,12 @@ const Home = () => {
           </Container>{/* end of Container */}
         </section>{/* end of ourBenefits */}
 
-        <section className="ourPartners clearfix p-5" id="ourPartners">
+        <section className="ourPartners clearfix secGap" id="ourPartners">
           <Container>
             <Row>
               <Col>
                 <div className="partnersCarousel">
-
-
-                    <HomeCarosellFotter/>
-
+                  <HomeCarosellFotter/>
                 </div>{/* end of partnersCarousel */}
               </Col>{/* end of Col */}
             </Row>{/* end of Row */}

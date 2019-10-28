@@ -3,9 +3,9 @@ import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Form, Button, Breadcrumb, Table} from 'react-bootstrap';
 
 //Payment Icon Images
-import paypalIcon from '../assets/images/paypal_icon_img.png';
-import masterCardIcon from '../assets/images/master_card_icon_img.png';
-import visaIcon from '../assets/images/visa_icon_img.png';
+// import paypalIcon from '../assets/images/paypal_icon_img.png';
+// import masterCardIcon from '../assets/images/master_card_icon_img.png';
+// import visaIcon from '../assets/images/visa_icon_img.png';
 
 //Product Images
 import productImage1 from '../assets/images/books/book_img_01.jpg';
@@ -84,7 +84,7 @@ const CartPage = () => {
             <Row>
               <Col>
                 <Breadcrumb>
-                  <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+                  <Breadcrumb.Item to="#">Home</Breadcrumb.Item>
                   <Breadcrumb.Item active>Cart</Breadcrumb.Item>
                 </Breadcrumb>{/* end of Breadcrumb */}
               </Col>{/* end of Col */}

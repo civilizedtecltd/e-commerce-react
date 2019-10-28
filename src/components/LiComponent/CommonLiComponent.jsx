@@ -1,11 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import carouselItem1 from "../../assets/images/partners_logo_img_01.png";
-import carouselItem2 from "../../assets/images/partners_logo_img_02.png";
-import carouselItem3 from "../../assets/images/partners_logo_img_03.png";
-import carouselItem4 from "../../assets/images/partners_logo_img_04.png";
-import carouselItem5 from "../../assets/images/partners_logo_img_05.png";
-import carouselItem6 from "../../assets/images/partners_logo_img_06.png";
+
 
 
 // only list component
@@ -30,9 +25,8 @@ function Lia({Listclass,Title,Url}) {
 function Liis({Listclass,Title,IconName}){
  return(
      <li className={Listclass}>
-         <i className={IconName}>
-           <span>{Title}</span>
-          </i>
+         <i className={IconName}></i>
+          <span>{Title}</span>
      </li>
  )
 }
