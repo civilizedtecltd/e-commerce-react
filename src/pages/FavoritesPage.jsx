@@ -127,7 +127,9 @@ const FavoritesPage = () => {
         
         <section className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap" id="mailSubscribe">
           <Container className="container">
+
            <NewsLetterComponent/>
+
           </Container>{/* end of Container */}
         </section>{/* end of mailSubscribe */}
 

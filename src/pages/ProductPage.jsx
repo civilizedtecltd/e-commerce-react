@@ -1,106 +1,30 @@
+
 import React , { useState } from 'react';
+
+//
 import '../pages/assets/product.css'
+//
 import FooterComponent from '../components/FooterComponent/FooterComponent';
+//
 import {NewsLetterComponent} from "../components/offerPageComponents/NewsLetterComponent";
-import {Col, Container, Row ,Modal ,Button} from "react-bootstrap";
-import {NewBookDB} from "../inc/offerPage/NewBook";
-import {ImgSlick, NewBookComponent} from "../components/offerPageComponents/NewBookComponent";
+//
+import {Container, Modal ,Button} from "react-bootstrap";
+import {ImgSlick,} from "../components/offerPageComponents/NewBookComponent";
 import { ImageCarrosull} from "../components/ProductImgCarosellComponents/ProductImgCarosell";
 import reviews_avater from "../assets/images/reviews_avater.jpg"
 import {Link} from 'react-router-dom';
+import HeaderComponent from "../components/header/Header";
 
 
 function ProductPage() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-
-
     return (<>
+
+
       <div className="allWrapper">
-
-        <div className="headerTopBar clearfix bgBlack" id="headerTopBar">
-          <Container>
-            <Row className="justify-content-between">
-              <Col>
-                <div className="headFeature">
-                  <i className="fas fa-map-marker-alt"></i> <span>Delivery region: Nairobi</span>
-                </div>
-                {/* end of headFeature */}
-              </Col>{/* end of Col */}
-
-              <Col className="col-auto">
-                <div className="headFeature">
-                  <ul className="headFeatureList d-flex justify-content-between">
-                    <li><i className="fas fa-truck"></i> <span>Free delivery</span></li>
-                    <li><i className="fas fa-award"></i> <span>Genuine goods</span></li>
-                    <li><i className="fas fa-headset"></i> <span>Customer support</span></li>
-                  </ul>
-                  {/* end of headFeatureList */}
-                </div>
-                {/* end of headFeature */}
-              </Col>{/* end of Col */}
-
-            </Row>{/* end of Row */}
-          </Container>{/* end of Container */}
-        </div>
-        {/* end of headerTopBar */}
-
-        <header className="header clearfix" id="header">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-sm-2">
-                <div className="logoWrapper">
-                  <h1 className="logoText"><a href="#">LOGO</a></h1>
-                </div>
-              </div>
-
-              <div className="col-sm-6">
-                <div className="headerNav clearfix" id="headerNav">
-                  <nav className="navbar navbar-expand-lg navbar-light bg-white">
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                      <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                      <ul className="navbar-nav">
-                        <li className="nav-item active">
-                          <a className="nav-link" href="#">Kindergarten <span className="sr-only">(current)</span></a>
-                        </li>
-                        <li className="nav-item">
-                          <a className="nav-link" href="#">Primary school</a>
-                        </li>
-                        <li className="nav-item">
-                          <a className="nav-link" href="#">Secondary school</a>
-                        </li>
-                        <li className="nav-item">
-                          <a className="nav-link" href="#">Stationery</a>
-                        </li>
-                        <li className="nav-item">
-                          <a className="nav-link" href="#">Bibles</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </nav>
-                </div>
-              </div>
-
-              <div className="col-sm-4">
-                <div className="headPopBar clearfix" id="headPopBar">
-                  <ul className="headPopBarList d-flex justify-content-between">
-                    <li><a href="#"><i className="fas fa-search"></i> Search</a></li>
-                    <li><a href="#"><i className="far fa-star"></i> Favorites</a></li>
-                    <li><a href="#"><i className="fas fa-shopping-cart"></i> Cart</a></li>
-                    <li><a href="#"><i className="far fa-user"></i> Login</a></li>
-                  </ul>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </header>
-
+        <HeaderComponent/>
         <main className="mainContent clearfix" id="mainContent">
 
           <section className="breadcrumbArea secGap pb-0 clearfix" id="breadcrumb">
@@ -126,6 +50,7 @@ function ProductPage() {
                 <div className="col-sm-6">
                   <ImageCarrosull/>
                 </div>
+
                 <div className="col-sm-6">
                   <div className="card productCardDetails border-0">
                     <div className="card-header border-0 bg-white">
@@ -155,7 +80,7 @@ function ProductPage() {
                           </div>
 
                           <div className="col text-center">
-                            <a href="#" className="btn linkBtn"  onClick={handleShow} ><i
+                            <a href="#" className="btn linkBtn"  onClick={handleShow} > <i
                                 className="fas fa-shopping-cart"></i> Add to cart</a>
                           </div>
 
@@ -314,8 +239,11 @@ function ProductPage() {
                               </ul>
 
                               <form className="postReviewsForm">
-                                <textarea name="" id="" cols="30" rows="5"
-                                          placeholder="Share your experience"></textarea>
+                                <textarea
+                                    name="post" id="" cols="30" rows="5"
+                                          placeholder="Share your experience">
+
+                                </textarea>
                                 <button className="btn btn-primary mt-3">Post a review</button>
                               </form>
                             </div>

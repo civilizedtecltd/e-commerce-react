@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {ProductCarosellImg} from '../../inc/product/ImgCarosell';
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import {Button} from "react-bootstrap";
 
 
 function ImageCarrosull(){

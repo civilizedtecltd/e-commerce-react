@@ -41,18 +41,18 @@ function ImgSlick() {
     return (
         <div>
             <Slider {...settings}>
-                {NewBookDB.map((sdim) =>
+                {NewBookDB.map((value, index) =>
                     <div>
                         <Col className="col-auto">
                             <Card className="productCard border-0 bg-transparent">
                                 <div className= "productMedia mb-3 bgGray">
-                                     <img src={sdim.Img} alt=""/>
+                                     <img src={value.Img} alt=""/>
                                 </div>
 
                                 <div className="productContent">
-                                    <Link to="#"><h4 className="productTitle mb-1">{sdim.Title}</h4></Link>
-                                    <h5 className="authorName mb-1">{sdim.Author}</h5>
-                                    <p className="productPrice">$ {sdim.Price}</p>
+                                    <Link to="#"><h4 className="productTitle mb-1">{value.Title}</h4></Link>
+                                    <h5 className="authorName mb-1">{value.Author}</h5>
+                                    <p className="productPrice">$ {value.Price}</p>
                                 </div>
                             </Card>
                         </Col>

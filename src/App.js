@@ -21,6 +21,7 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import FavoritesPage from './pages/FavoritesPage';
 import ShopPage from './pages/ShopPage';
+import ProductPage from "./pages/ProductPage";
 function App() {
   return (
     <Router>
@@ -40,6 +41,7 @@ function App() {
         <Route path="/checkout" component={CheckoutPage} />
         <Route path="/favorites" component={FavoritesPage} />
         <Route path="/shop" component={ShopPage} />
+        <Route path="/product" component={ProductPage} />
       </Switch>
     </Router>
   );

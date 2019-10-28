@@ -1,0 +1,29 @@
+
+.ImageSlickOfferPage .slick-prev:before {
+    content: "\f060";
+    font-family: "Font Awesome 5 Free";
+    color: black;
+    font-size: 16px;
+    padding: 9px;
+}
+
+.ImageSlickOfferPage .slick-next:before {
+    content: "\f061";
+    font-family: "Font Awesome 5 Free";
+    color: black;
+    font-size: 16px;
+    padding: 11px;
+}
+
+/*left arrow*/
+.ImageSlickOfferPage .slick-arrow.slick-prev {
+    background-color: #fff;
+    border-radius: 50%;
+    width: 2.5rem;
+}
+
+.ImageSlickOfferPage .slick-arrow.slick-next {
+    background-color: #fff;
+    border-radius: 50%;
+    width: 2.5rem;
+}

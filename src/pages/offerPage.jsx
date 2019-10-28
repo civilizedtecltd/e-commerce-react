@@ -1,14 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
-
-
-
+import  './assets/offerPage.css'
 // Product Images
 import blogPostImage1 from '../assets/images/post_img_01.jpg';
 
 import {NewBookDB}from '../inc/offerPage/NewBook'
-import{NewBookComponent} from '../components/offerPageComponents/NewBookComponent'
+import {ImgSlick, NewBookComponent} from '../components/offerPageComponents/NewBookComponent'
 import{NewsLetterComponent} from '../components/offerPageComponents/NewsLetterComponent'
 import FooterComponent from '../components/FooterComponent/FooterComponent';
 import HeaderComponent from '../components/header/Header';
@@ -42,21 +40,9 @@ const offerPage = () => {
                 <h2 className="sectionTitle mb-5"><span>New</span> Book</h2>
               </Col>{/* end of Col */}
             </Row>{/* end of Row */}
-
-            <Row className="justify-content-between">
-
-              {NewBookDB.map((newBook, index) => <NewBookComponent
-                key={index}
-                ImageBg="bg-white"
-                BookImage={newBook.Img}
-                ProductTitle={newBook.Title}
-                AuthorName={newBook.Author}
-                ProductPrice={newBook.Price}
-              />)
-
-              }
-
-            </Row>{/* end of Row */}
+            <div className="ImageSlickOfferPage">
+              <ImgSlick/>
+            </div>
           </Container>{/* end of Container */}
         </section>{/* end of newProduct */}
 
