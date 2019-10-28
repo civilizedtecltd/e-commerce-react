@@ -3,7 +3,6 @@ import {PartnerDB} from '../../inc/HomePage/PartnerCarousel'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import img6 from '../../assets/images/partners_logo_img_06.png'
 function HomeCarosellFotter() {
     const settings = {
         dots: false,
@@ -18,7 +17,7 @@ function HomeCarosellFotter() {
                 {PartnerDB.map((Partner, index) =>
 
                         <ul className=" partnerCarouselItem"  key={index}>
-                        <li className="item"><img src={Partner} alt="" /></li>
+                            <li className="item"><img src={Partner} alt="" /></li>
                         </ul>
                 )
 
