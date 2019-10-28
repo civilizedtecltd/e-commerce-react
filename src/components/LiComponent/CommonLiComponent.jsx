@@ -30,9 +30,8 @@ function Lia({Listclass,Title,Url}) {
 function Liis({Listclass,Title,IconName}){
  return(
      <li className={Listclass}>
-         <i className={IconName}>
-           <span>{Title}</span>
-          </i>
+         <i className={IconName}></i>
+          <span>{Title}</span>
      </li>
  )
 }
