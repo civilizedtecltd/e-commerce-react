@@ -311,7 +311,7 @@ background-position: center center;
 /* --- sectionGap --------------------- */
 .secGap{padding-top:3rem;padding-bottom: 5rem;}
 
-.form-control, input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="search"], textarea, select {
+.form-control, input[type="text"], input[type="password"], input[type="email"], input[type="url"], textarea, select {
     border: 1px solid #999999;
     padding: 8px 9px;
     outline: none;
