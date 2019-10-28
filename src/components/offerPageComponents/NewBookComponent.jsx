@@ -15,7 +15,7 @@ function NewBookComponent({BookImage, ProductTitle, AuthorName, ProductPrice, Im
         <Card className="productCard border-0 bg-transparent">
               <div className={`productMedia mb-3 ${ImageBg}`}>
 
-              <img src={BookImage} alt="" />
+              <img src={BookImage} alt="Book Image" />
           </div>
 
           <div className="productContent">
@@ -24,9 +24,7 @@ function NewBookComponent({BookImage, ProductTitle, AuthorName, ProductPrice, Im
             <p className="productPrice">$ {ProductPrice}</p>
           </div>
         </Card>
-      </Col>
-
-    )
+      </Col>)
 }
 
 function ImgSlick() {
@@ -42,11 +40,11 @@ function ImgSlick() {
         <div>
             <Slider {...settings}>
                 {NewBookDB.map((value, index) =>
-                    <div>
+                    <div key={index}>
                         <Col className="col-auto">
                             <Card className="productCard border-0 bg-transparent">
                                 <div className= "productMedia mb-3 bgGray">
-                                     <img src={value.Img} alt=""/>
+                                     <img src={value.Img} alt="Book Image"/>
                                 </div>
 
                                 <div className="productContent">
