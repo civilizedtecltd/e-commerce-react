@@ -17,23 +17,19 @@ function ImageCarrosull(){
           }
     })
 
+    const image={index:0}
 
     const NextPhoto=()=>{
-       const image={index:0}
-      
        const SingleImage=document.getElementById('photo');
-       setCount(++count)
-       image.index=count;
-       if(count>=3) image.index=2 
+       image.index +=1;
+       if(image.index>=3) image.index=2 
        SingleImage.src=ProductCarosellImg[image.index]
        console.log(image.index)
     }
     const PrevPhoto=()=>{
-        let image={index:0}
         const SingleImage=document.getElementById('photo');
-        setCount(--count)
-        image.index=count;
-        if(count==-1 || count<0) image.index=0;
+        image.index-=1
+        if(image.index==-1 || image.index<0) image.index=0;
         SingleImage.src=ProductCarosellImg[image.index] 
         console.log(image.index)
     }

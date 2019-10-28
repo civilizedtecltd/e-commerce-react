@@ -8,12 +8,13 @@ import FooterComponent from '../components/FooterComponent/FooterComponent';
 //
 import {NewsLetterComponent} from "../components/offerPageComponents/NewsLetterComponent";
 //
-import {Container, Modal ,Button} from "react-bootstrap";
+import {Container, Modal ,Button,Tab,Tabs} from "react-bootstrap";
 import {ImgSlick,} from "../components/offerPageComponents/NewBookComponent";
 import { ImageCarrosull} from "../components/ProductImgCarosellComponents/ProductImgCarosell";
 import reviews_avater from "../assets/images/reviews_avater.jpg"
 import {Link} from 'react-router-dom';
 import HeaderComponent from "../components/header/Header";
+import TabComponent from '../components/TabComponent/TabComponent';
 
 
 function ProductPage() {
@@ -90,168 +91,7 @@ function ProductPage() {
                         </div>
                         <hr className="hrBorder mt-4"/>
                       </div>
-
-                      <div className="productDetailsNavTabs mt-3 clearfix">
-                        <ul className="nav nav-pills productNavTabs mb-3" id="pills-tab" role="tablist">
-                          <li className="nav-item">
-                            <a className="nav-link active" id="pills-description-tab" data-toggle="pill"
-                               href="#pills-description" role="tab" aria-controls="pills-description"
-                               aria-selected="true">Description</a>
-                          </li>
-                          <li className="nav-item">
-                            <a className="nav-link" id="pills-specifications-tab" data-toggle="pill"
-                               href="#pills-specifications" role="tab" aria-controls="pills-specifications"
-                               aria-selected="false">Specifications</a>
-                          </li>
-                          <li className="nav-item">
-                            <a className="nav-link" id="pills-reviews-tab" data-toggle="pill" href="#pills-reviews"
-                               role="tab" aria-controls="pills-reviews" aria-selected="false">Reviews (7)</a>
-                          </li>
-                        </ul>
-
-                        <div className="tab-content productTabContent" id="pills-tabContent">
-                          <div className="tab-pane fade show active" id="pills-description" role="tabpanel"
-                               aria-labelledby="pills-description-tab">
-                            <div className="productDes">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                temporenim ipsam voluptatem quia voluptas quia non numquam eius. Duis aute
-                                irure dolor in reprehenderit in voluptate velit esse cillum. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                temporenim ipsam voluptatem quia voluptas quia non numquam eius. Duis aute
-                                irure dolor in reprehenderit in voluptate velit esse cillum. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                temporenim ipsam voluptatem quia voluptas quia non numquam eius. Duis aute
-                                irure dolor in reprehenderit in voluptate velit esse cillum. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                            </div>
-                          </div>
-                          <div className="tab-pane fade" id="pills-specifications" role="tabpanel"
-                               aria-labelledby="pills-specifications-tab">
-                            <ul className="specifications">
-                              <li><strong>Author :</strong> Sam Smith</li>
-                              <li><strong>Discipline : </strong> Math</li>
-                              <li><strong>Stage : </strong> Class 2</li>
-                              <li><strong>Publishing house : </strong> Lorem Ipsum</li>
-                              <li><strong>Publishing year </strong> 2012</li>
-                              <li><strong>Book cover : </strong> Lorem ipsum</li>
-                              <li><strong>Language : </strong> English</li>
-                              <li><strong>Number of pages : </strong> 135</li>
-                            </ul>
-
-                          </div>
-
-                          <div className="tab-pane fade" id="pills-reviews" role="tabpanel"
-                               aria-labelledby="pills-reviews-tab">
-                            <div className="productReviews clearfix">
-
-                              <div className="card singleReview border-0">
-                                <div className="row no-gutters">
-                                  <div className="col-auto">
-                                    <div className="reviewUserAvater">
-                                      <img src="assets/images/reviews_avater.jpg" alt=""/>
-                                    </div>
-                                  </div>
-
-                                  <div className="col pl-2">
-                                    <div className="reviewCardBody">
-                                      <div className="row reviewUserInfo">
-                                        <div className="col mb-2">
-                                          <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span>
-                                          </h6>
-                                        </div>
-                                        <div className="col">
-                                          <ul className="productReviewStar justify-content-end">
-                                            {[1,2,3,4,5].map(rating=><li className="5star"><i className="fas fa-star"></i></li>)}
-                                          </ul>
-                                        </div>
-                                      </div>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                        enim ipsam voluptatem quia voluptas quia non numquam eius.</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div className="card singleReview border-0">
-                                <div className="row no-gutters">
-                                  <div className="col-auto">
-                                    <div className="reviewUserAvater">
-                                      <img src={reviews_avater} alt=""/>
-                                    </div>
-                                  </div>
-
-                                  <div className="col pl-2">
-                                    <div className="reviewCardBody">
-                                      <div className="row reviewUserInfo">
-                                        <div className="col mb-2">
-                                          <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span>
-                                          </h6>
-                                        </div>
-                                        <div className="col">
-                                          <ul className="productReviewStar justify-content-end">
-                                            {[1,2,3,4,5].map(rating=><li className="5star"><i className="fas fa-star"></i></li>)}
-                                          </ul>
-                                        </div>
-                                      </div>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                        enim ipsam voluptatem quia voluptas quia non numquam eius.</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div className="card singleReview border-0">
-                                <div className="row no-gutters">
-                                  <div className="col-auto">
-                                    <div className="reviewUserAvater">
-                                      <img src={reviews_avater} alt=""/>
-                                    </div>
-                                  </div>
-
-                                  <div className="col pl-2">
-                                    <div className="reviewCardBody">
-                                      <div className="row reviewUserInfo">
-                                        <div className="col mb-2">
-                                          <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span>
-                                          </h6>
-                                        </div>
-                                        <div className="col">
-                                          <ul className="productReviewStar justify-content-end">
-                                            {[1,2,3,4,5].map(rating=><li className="5star"><i className="fas fa-star"></i></li>)}
-                                          </ul>
-                                        </div>
-                                      </div>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                        enim ipsam voluptatem quia voluptas quia non numquam eius.</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                            </div>
-
-                            <div className="postReviews clearfix">
-                              <h3>Post a review</h3>
-                              <ul className="productReviewStar postReviewStar mb-3">
-                                {[1,2,3,4,5].map(rating=><li className="5star"><i className="fas fa-star"></i></li>)}
-                              </ul>
-
-                              <form className="postReviewsForm">
-                                <textarea
-                                    name="post" id="" cols="30" rows="5"
-                                          placeholder="Share your experience">
-
-                                </textarea>
-                                <button className="btn btn-primary mt-3">Post a review</button>
-                              </form>
-                            </div>
-
-                          </div>
-
-                        </div>
-                      </div>
+                       <TabComponent/>
                     </div>
                   </div>
                 </div>
