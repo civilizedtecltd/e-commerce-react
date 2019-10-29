@@ -3,6 +3,11 @@ import {PartnerDB} from '../../inc/HomePage/PartnerCarousel'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {Animated} from "react-animated-css";
+
+
+
+
 function HomeCarosellFotter() {
     const settings = {
         dots: false,
@@ -26,6 +31,7 @@ function HomeCarosellFotter() {
         </>
     )
 }
+
 
 export {
     HomeCarosellFotter

@@ -1,16 +1,45 @@
-.react-search {
-    color: #000000;
-    outline: 0;
-    background: none;
-    width: 0;
-    caret-color:transparent;
-    line-height: 20px;
-    transition: width 0.5s linear;
+
+.searchBarProduct{position: relative;}
+.searchBarProduct span{position: absolute;right: 10px;top: 5px;font-size: 20px;color: #cecece; cursor: pointer;}
+.searchBarProduct .searchProduct{
+    border: 1px solid #f5f5f5;
+    background-color: #f9f9f9;
+    font-size: 15px;
+    min-height: 0px;
+    padding: 0px;
+    height: 0px;
+     opacity: 0;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+-o-transition: all 0.5s ease;
+transition: all 0.5s ease;
 }
-.searchbar:hover > .react-search{
-    padding: 0 10px;
-    background-color: #f1f2f3;
-    width: 13.5rem;
-    caret-color: #000000;
-    transition: width 0.5s linear;
+[type=search] {
+outline-offset: 0px;
+-webkit-appearance: none;
 }
+
+    .alert-enter {
+        opacity: 0;
+    }
+    .alert-enter-active {
+        opacity: 1;
+        transition: opacity 300ms
+    }
+    .alert-exit {
+        opacity: 1;
+    }
+    .alert-exit-active {
+        opacity: 0;
+        transition: opacity 300ms
+    }
+
+    .alert-enter-done .searchProduct{
+        min-height: auto;
+        padding: 8px 10px;
+        height: auto;
+        opacity: 1;
+    }
+
+
+

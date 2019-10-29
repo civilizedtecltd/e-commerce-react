@@ -15,7 +15,7 @@ import freatureIcon3 from '../assets/images/feature_icon_img_03.png';
 import freatureIcon4 from '../assets/images/feature_icon_img_04.png';
 
 import FooterComponent from '../components/FooterComponent/FooterComponent';
-import {HomeCarosellFotter} from "../components/HomePage/HomeCarosellFotter";
+import { HomeCarosellFotter} from "../components/HomePage/HomeCarosellFotter";
 import {NewsLetterComponent} from "../components/offerPageComponents/NewsLetterComponent";
 import HeaderComponent from "../components/header/Header";
 
@@ -24,7 +24,8 @@ const Home = () => {
   return (<>
 
     <div className="allWrapper">
-      <HeaderComponent/>
+
+          <HeaderComponent/>
 
       <main className="mainContent clearfix" id="mainContent">
         <section className="productCat secGap clearfix" id="productCat">
@@ -52,7 +53,7 @@ const Home = () => {
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of productCatCard */}
               </Col>{/* end of Col */}
-              
+
               <Col sm="4">
                 <Card className="productCatCard">
                   <div className="productCatMedia">
@@ -63,7 +64,7 @@ const Home = () => {
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of productCatCard */}
               </Col>{/* end of Col */}
-              
+
             </Row>{/* end of Row */}
           </Container>{/* end of Container */}
         </section>{/* end of productCat */}
@@ -83,7 +84,7 @@ const Home = () => {
                   <div className="featureMedia text-center">
                     <img src={freatureIcon1} alt="" />
                   </div>{/* end of featureMedia */}
-                  
+
                   <Card.Body className="text-center">
                     <h4>Fast delivery</h4>
                     <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed do eiusmod</p>
@@ -96,7 +97,7 @@ const Home = () => {
                   <div className="featureMedia text-center">
                     <img src={freatureIcon2} alt="" />
                   </div>{/* end of featureMedia */}
-                  
+
                   <Card.Body className="text-center">
                     <h4>LOREM IPSUM</h4>
                     <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed do eiusmod</p>
@@ -109,7 +110,7 @@ const Home = () => {
                   <div className="featureMedia text-center">
                     <img src={freatureIcon3} alt="" />
                   </div>{/* end of featureMedia */}
-                  
+
                   <Card.Body className="text-center">
                     <h4>Dolor set amet</h4>
                     <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed do eiusmod</p>
@@ -122,7 +123,7 @@ const Home = () => {
                   <div className="featureMedia text-center">
                     <img src={freatureIcon4} alt="" />
                   </div>{/* end of featureMedia */}
-                  
+
                   <Card.Body className="text-center">
                     <h4>Adipiscing vero</h4>
                     <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed do eiusmod</p>
@@ -154,10 +155,11 @@ const Home = () => {
 
       </main>{/* end of mainContent */}
 
+
       <FooterComponent/>
 
     </div>{/* end of allWrapper */}
-    
+
   </>);
 }
 
