@@ -9,25 +9,25 @@ export const NewBookDB=[
         Img:bookImage1,
         Title:'Maths time for class 1',
         Author:'Mamun Ahmed',
-        Price:'43.00'
+        Price:'88.00'
     },
     {
         Img:bookImage2,
         Title:'Maths time for class 2',
         Author:'Mamun Ahmed',
-        Price:'43.00'
+        Price:'88.00'
     },
     {
         Img:bookImage3,
         Title:'Maths time for class 3',
         Author:'Mamun Ahmed',
-        Price:'43.00'
+        Price:'88.00'
     },
     {
         Img:bookImage4,
         Title:'Maths time for class 4',
         Author:'Mamun Ahmed',
-        Price:'43.00'
+        Price:'88.00'
     },
     {
         Img:bookImage5,
