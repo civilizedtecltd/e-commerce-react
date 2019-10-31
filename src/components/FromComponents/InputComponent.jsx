@@ -8,8 +8,7 @@ import { Form } from 'react-bootstrap';
 function InputFrom({ LableId, TypeName, LableTitle, Name, Value, Placeholder, controlId, ClassName, callback }) {
     const handleOnchange = event => {
         let data = {
-            name : Name,
-            value: event.target.value
+            [event.target.name] : event.target.value
         }
         callback(data)
     }
@@ -22,14 +21,20 @@ function InputFrom({ LableId, TypeName, LableTitle, Name, Value, Placeholder, co
 }
 
 //Select From Components
-function SelectFrom({ LableTitle, controlId, category }) {
+function SelectFrom({ LableTitle, controlId, category, callback }) {
+    const handleOnchange = (event) => {
+        callback({
+            category_id: event.target.value
+        });
+    }
     return (
         <Form.Group controlId={controlId}>
-            <Form.Label>{LableTitle}</Form.Label>
-            <Form.Control as="select">
+            <Form.Label> {LableTitle} </Form.Label>
+            <Form.Control as="select" onChange = {handleOnchange}>
+                        <option defaultValue>Select Category</option>
                 {
-                    category.map((value) =>
-                        <option key={value.id}>{value.category}</option>
+                    category.map((element) =>
+                        <option key = {element.id} value = {element.id}>{element.category}</option>
                     )
                 }
             </Form.Control>

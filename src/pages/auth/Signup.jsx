@@ -11,15 +11,14 @@ import axios from 'axios'
 const Signup = () => {
 
   const [data, setData] = useState([])
-  const [formData, setFromData] = useState([]);
+  const [formData, setFromData] = useState({});
 
 
-  const apiUrl = `${API_URL}/api/category`;
+  const apiUrl = `${API_URL}/category`;
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(apiUrl);
-      console.log(`Data from backend: ${result.data}`)
       setData(result.data);
     };
 
@@ -27,18 +26,28 @@ const Signup = () => {
 
   }, []);
 
+
+const categoryData = (data) => {
+    if(data.category_id !== undefined || data.category_id !== 'Select Category')
+        formData.category_id = Number(data.category_id);
+}
+
 const fromFileData = (data) => {
-   console.log(data)
+    Object.keys(data).map( key => {
+        formData[key] = data[key];
+    });
 }
 
-const handleSubmit = () =>{
-   fromFileData()
+const handleSubmit = (event) =>{
+   event.preventDefault();
+   console.log(formData);
+   if(formData.category_id === undefined){
+
+    }
+// axios.post(`${API_URL}/auth/register`);
 }
 
 
-
-   console.log(data)
-   
     return (<>
       <div className="allWrapper fullHeight">
         <main className="loginMainArea clearfix fullHeight bgImage signUpBodyBg pb-3" id="signUpBody">
@@ -58,7 +67,8 @@ const handleSubmit = () =>{
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
                     <SelectFrom
-                      category={(data.data !== undefined) ? data.data : []}
+                      category = {(data.data !== undefined) ? data.data : []}
+                      callback = {categoryData}
                     />
 
                     <InputFrom
@@ -111,8 +121,8 @@ const handleSubmit = () =>{
 
                     <Link className="linkText mb-3" to="/forgotpass">Forgot password?</Link>
 
-                    
-                    <Button type="button" className="btn submitBtn mb-3 " onClick={handleSubmit} ></Button>
+
+                    <Button type="submit" className="btn submitBtn mb-3 " onClick={handleSubmit} >Sign Up</Button>
                     <p>I already have an account! <Link className="linkText mb-3" to="/login">Sign In</Link></p>
 
                   </Form>{/* end of form */}
