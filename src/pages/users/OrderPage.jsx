@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Table} from 'react-bootstrap';
 import './assets/css/user.css';
-import {Liai, Lia} from '../../components/LiComponent/CommonLiComponent';
+import {LiAi, Lia} from '../../components/LiComponent/CommonLiComponent';
 import {asideData,categoryClass} from '../../inc/users/users'
 import HeaderComponent from '../../components/header/Header';
 
@@ -17,7 +17,7 @@ const OrderPage = () => {
               <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
                 <nav className="userNav">
                   <ul className="userNavBar">
-                    {asideData.map((aside)=><Liai
+                    {asideData.map((aside)=><LiAi
                       key={Math.floor(Math.random() * 10)}
                       ListClass={aside.LIST_CLASS}
                       Title={aside.TITLE}
@@ -46,7 +46,7 @@ const OrderPage = () => {
                               
                               <div className="orderSortDes">
                                 <h2 className="headTitle mb-3">You don’t have any <span>Orders</span></h2>
-                                <p>It’s not a problem. Just choose a category you’re intrested in and<br/> add goods to your cart
+                                <p>It’s not a problem. Just choose a category you’re interested in and<br/> add goods to your cart
                                 </p>
                               </div>{/* end of orderSortDes */}
                              <hr className="hrBorder mt-4 mb-4" />
@@ -118,7 +118,7 @@ const OrderPage = () => {
 
                               <tbody>
                                 <tr>
-                                  <td><Link to="#">Lorem ipsum dolor sit amet irure dolor</Link></td>
+                                  <td><Link to="#">Lorem ipsum dolor sit ament inure dolor</Link></td>
                                   <td>$16.00</td>
                                   <td>1</td>
                                   <td>$16.00</td>
@@ -126,7 +126,7 @@ const OrderPage = () => {
                                   <td><span className="stockInfo">In stock</span></td>
                                 </tr>{/* end of tr */}
                                 <tr>
-                                  <td><Link to="#">Lorem ipsum dolor sit amet irure dolor</Link></td>
+                                  <td><Link to="#">Lorem ipsum dolor sit ament inure dolor</Link></td>
                                   <td>$16.00</td>
                                   <td>1</td>
                                   <td>$16.00</td>

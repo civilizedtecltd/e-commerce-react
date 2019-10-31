@@ -9,13 +9,13 @@ import productCatImg2 from '../assets/images/product_cat_img_02.jpg';
 import productCatImg3 from '../assets/images/product_cat_img_03.jpg';
 
 // Feature Icon Images
-import freatureIcon1 from '../assets/images/feature_icon_img_01.png';
-import freatureIcon2 from '../assets/images/feature_icon_img_02.png';
-import freatureIcon3 from '../assets/images/feature_icon_img_03.png';
-import freatureIcon4 from '../assets/images/feature_icon_img_04.png';
+import featureIcon1 from '../assets/images/feature_icon_img_01.png';
+import featureIcon2 from '../assets/images/feature_icon_img_02.png';
+import featureIcon3 from '../assets/images/feature_icon_img_03.png';
+import featureIcon4 from '../assets/images/feature_icon_img_04.png';
 
 import FooterComponent from '../components/FooterComponent/FooterComponent';
-import { HomeCarosellFotter} from "../components/HomePage/HomeCarosellFotter";
+import { HomeCarouselFooter} from "../components/HomePage/HomeCarouselFooter";
 import {NewsLetterComponent} from "../components/offerPageComponents/NewsLetterComponent";
 import HeaderComponent from "../components/header/Header";
 
@@ -82,12 +82,12 @@ const Home = () => {
               <Col sm="3">
                 <Card className="singleFeature pt-3 pb-3 border-0">
                   <div className="featureMedia text-center">
-                    <img src={freatureIcon1} alt="" />
+                    <img src={featureIcon1} alt="" />
                   </div>{/* end of featureMedia */}
 
                   <Card.Body className="text-center">
                     <h4>Fast delivery</h4>
-                    <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed do eiusmod</p>
+                    <p>Lorem ipsum dolor sit ament, consent etui advising elite, sed do elusion</p>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of Card */}
               </Col>{/* end of Col */}
@@ -95,12 +95,12 @@ const Home = () => {
               <Col sm="3">
                 <Card className="singleFeature pt-3 pb-3 border-0">
                   <div className="featureMedia text-center">
-                    <img src={freatureIcon2} alt="" />
+                    <img src={featureIcon2} alt="" />
                   </div>{/* end of featureMedia */}
 
                   <Card.Body className="text-center">
                     <h4>LOREM IPSUM</h4>
-                    <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed do eiusmod</p>
+                    <p>Lorem ipsum dolor sit ament, consent etui advising elite, sed do elusion</p>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of Card */}
               </Col>{/* end of Col */}
@@ -108,12 +108,12 @@ const Home = () => {
               <Col sm="3">
                 <Card className="singleFeature pt-3 pb-3 border-0">
                   <div className="featureMedia text-center">
-                    <img src={freatureIcon3} alt="" />
+                    <img src={featureIcon3} alt="" />
                   </div>{/* end of featureMedia */}
 
                   <Card.Body className="text-center">
-                    <h4>Dolor set amet</h4>
-                    <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed do eiusmod</p>
+                    <h4>Dolor set ament</h4>
+                    <p>Lorem ipsum dolor sit ament, consent etui advising elite, sed do elusion</p>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of Card */}
               </Col>{/* end of Col */}
@@ -121,12 +121,12 @@ const Home = () => {
               <Col sm="3">
                 <Card className="singleFeature pt-3 pb-3 border-0">
                   <div className="featureMedia text-center">
-                    <img src={freatureIcon4} alt="" />
+                    <img src={featureIcon4} alt="" />
                   </div>{/* end of featureMedia */}
 
                   <Card.Body className="text-center">
-                    <h4>Adipiscing vero</h4>
-                    <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed do eiusmod</p>
+                    <h4>Advising vera</h4>
+                    <p>Lorem ipsum dolor sit ament, consent etui advising elite, sed do elusion</p>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of Card */}
               </Col>{/* end of Col */}
@@ -140,7 +140,7 @@ const Home = () => {
             <Row>
               <Col>
                 <div className="partnersCarousel">
-                  <HomeCarosellFotter/>
+                  <HomeCarouselFooter/>
                 </div>{/* end of partnersCarousel */}
               </Col>{/* end of Col */}
             </Row>{/* end of Row */}

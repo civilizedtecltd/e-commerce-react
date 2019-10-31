@@ -1,49 +1,33 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
-
+import {Form} from 'react-bootstrap';
+import {category} from '../../inc/auth/Singup'
 //Input From Components
-
-
-
-function InputFrom({ LableId, TypeName, LableTitle, Name, Value, Placeholder, controlId, ClassName, callback }) {
-    const handleOnchange = event => {
-        let data = {
-            [event.target.name] : event.target.value
-        }
-        callback(data)
-    }
-    return (
-        <Form.Group controlId={controlId} className={ClassName}>
-            <Form.Label htmlFor={LableId}>{LableTitle}</Form.Label>
-            <Form.Control type={TypeName} id={LableId} name={Name} defaultValue={Value} placeholder={Placeholder} onChange = {handleOnchange} />
+function InputFrom({LabelId, TypeName, LabelTitle, Name, Value, Placeholder,controlId, ClassName}) {
+    return(
+        <Form.Group controlId={controlId}  className={ClassName}>
+            <Form.Label htmlFor={LabelId}>{LabelTitle}</Form.Label>
+            <Form.Control type={TypeName} id={LabelId} name={Name} value={Value} placeholder={Placeholder}/>
         </Form.Group>
     )
-}
+ }
 
 //Select From Components
-function SelectFrom({ LableTitle, controlId, category, callback }) {
-    const handleOnchange = (event) => {
-        callback({
-            category_id: event.target.value
-        });
-    }
-    return (
+ function SelectFrom({LabelTitle, controlId}){
+     return(
         <Form.Group controlId={controlId}>
-            <Form.Label> {LableTitle} </Form.Label>
-            <Form.Control as="select" onChange = {handleOnchange}>
-                        <option defaultValue>Select Category</option>
-                {
-                    category.map((element) =>
-                        <option key = {element.id} value = {element.id}>{element.category}</option>
+            <Form.Label>{LabelTitle}</Form.Label>
+            <Form.Control as="select">
+                {category.map(value=>
+                        <option>{value}</option>
                     )
                 }
             </Form.Control>
-        </Form.Group>
-    )
-}
+      </Form.Group> 
+     )
+ }
 
 
-export {
+ export{
     InputFrom,
     SelectFrom
-}
+ }

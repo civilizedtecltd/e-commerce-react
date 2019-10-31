@@ -1,14 +1,14 @@
 import React, {useState,useEffect} from "react";
 import {Image} from 'react-bootstrap';
-import {ProductCarosellImg} from '../../inc/product/ImgCarosell';
+import {ProductCarouselImg} from '../../inc/product/ImgCarousel';
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 
 
-function ImageCarrosull(){
+function ImageCarousel(){
     const [hidden, setHidden] = useState(false);
     const [photoIndex,setPhotoIndex] =useState(0);
-    let [result1, setResult1] = useState(ProductCarosellImg[0]);
+    let [result1, setResult1] = useState(ProductCarouselImg[0]);
     let ImgHandler = e =>{setResult1(e.target.src);};
     var [count,setCount]=useState(0)
 
@@ -24,14 +24,14 @@ function ImageCarrosull(){
        const SingleImage=document.getElementById('photo');
        image.index +=1;
        if(image.index>=3) image.index=2 
-       SingleImage.src=ProductCarosellImg[image.index]
+       SingleImage.src=ProductCarouselImg[image.index]
     //    console.log(image.index)
     }
     const PrevPhoto=()=>{
         const SingleImage=document.getElementById('photo');
         image.index-=1
         if(image.index==-1 || image.index<0) image.index=0;
-        SingleImage.src=ProductCarosellImg[image.index] 
+        SingleImage.src=ProductCarouselImg[image.index] 
         // console.log(image.index)
     }
 
@@ -44,16 +44,16 @@ function ImageCarrosull(){
                 <div className="col-sm-3">
                     <div className="productGallery">
 
-                        {ProductCarosellImg.map((CaroImg, index)=>
+                        {ProductCarouselImg.map((item, index)=>
                             <div key={index} className="singleItem bgGray p-2 mb-2">
-                                <img  src={CaroImg} alt="" onClick={ImgHandler}/>
+                                <img  src={item} alt="" onClick={ImgHandler}/>
                             </div>
 
                         )}
 
                     </div>
                 </div>
-                {/* {console.log(ProductCarosellImg[0])} */}
+                {/* {console.log(ProductCarouselImg[0])} */}
                 <div className="col-sm-9">
                     <div className="productSingleView bgGray p-3 text-center">
                         <span onClick={()=>setHidden( true )}><i className="fas fa-expand-arrows-alt Modal"></i></span>
@@ -70,14 +70,14 @@ function ImageCarrosull(){
         <div>
             {hidden && (
                 <Lightbox
-                    mainSrc={ProductCarosellImg[photoIndex]}
-                    nextSrc={ProductCarosellImg[(photoIndex + 1) % ProductCarosellImg.length]}
-                    prevSrc={ProductCarosellImg[(photoIndex + ProductCarosellImg.length - 1) % ProductCarosellImg.length]}
+                    mainSrc={ProductCarouselImg[photoIndex]}
+                    nextSrc={ProductCarouselImg[(photoIndex + 1) % ProductCarouselImg.length]}
+                    prevSrc={ProductCarouselImg[(photoIndex + ProductCarouselImg.length - 1) % ProductCarouselImg.length]}
                     onCloseRequest={() => setHidden(false )}
                     onMovePrevRequest={() =>
-                        setPhotoIndex(photoIndex + ProductCarosellImg.length - 1 % ProductCarosellImg.length)
+                        setPhotoIndex(photoIndex + ProductCarouselImg.length - 1 % ProductCarouselImg.length)
                     }
-                    onMoveNextRequest={() =>setPhotoIndex((photoIndex + 1) % ProductCarosellImg.length)
+                    onMoveNextRequest={() =>setPhotoIndex((photoIndex + 1) % ProductCarouselImg.length)
                     }
                 />
             )}
@@ -89,5 +89,5 @@ function ImageCarrosull(){
 
 
 export {
-    ImageCarrosull
+    ImageCarousel
 }
