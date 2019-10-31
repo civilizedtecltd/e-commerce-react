@@ -30,12 +30,10 @@ function ImageCarousel(){
     const PrevPhoto=()=>{
         const SingleImage=document.getElementById('photo');
         image.index-=1
-        if(image.index==-1 || image.index<0) image.index=0;
+        if(image.index===-1 || image.index<0) image.index=0;
         SingleImage.src=ProductCarouselImg[image.index] 
         // console.log(image.index)
     }
-
-
 
     return (<>
 

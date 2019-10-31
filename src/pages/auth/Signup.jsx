@@ -4,26 +4,23 @@ import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import {InputFrom, SelectFrom} from '../../components/FromComponents/InputComponent';
-import {ButtonComponents} from '../../components/ButtonComponents/ButtonComponents';
 import {API_URL} from '../../constants/config'
 import axios from 'axios'
 
 const Signup = () => {
 
   const [data, setData] = useState([])
-  const [formData, setFromData] = useState({});
+  const [formData] = useState({});
 
 
-  const apiUrl = `${API_URL}/category`;
+  const apiUrl = `${API_URL}/category`
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(apiUrl);
       setData(result.data);
     };
-
     fetchData();
-
   }, []);
 
 
@@ -40,9 +37,9 @@ const fromFileData = (data) => {
 
 const handleSubmit = (event) =>{
    event.preventDefault();
-   console.log(formData);
-   if(formData.category_id === undefined){
-
+   const {category_id} =formData;
+   if(category_id !== undefined){
+     console.log(category_id)
     }
 // axios.post(`${API_URL}/auth/register`);
 }
@@ -62,10 +59,7 @@ const handleSubmit = (event) =>{
 
             <Row>
               <Col sm={6}>
-                <SocialListComponent
-
-                />
-
+                <SocialListComponent/>
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
                     <SelectFrom LabelTitle="Category"
