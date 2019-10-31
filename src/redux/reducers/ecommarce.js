@@ -23,7 +23,20 @@ export default function(state = initialState, action) {
         data:{...state}
       };
     }
+
+    case RESET_PASSWORD:{
+      const {email} =action.payload
+      return{
+        ...state,
+        email:{...state}
+      }
+    }
+
+
     default:
       return state;
+
+    
   }
+ 
 }

@@ -18,4 +18,12 @@ export const signup = data=> ({
   }
 });
 
+
+export const resetpassword=data=>({
+  type:RESET_PASSWORD,
+  payload:{
+    email:data.email
+  }
+})
+
 export const setFilter = filter => ({ type: SET_FILTER, payload: { filter } });
