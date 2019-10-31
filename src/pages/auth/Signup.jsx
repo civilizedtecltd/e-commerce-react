@@ -1,4 +1,4 @@
-import React ,{useState, useEffect}from 'react';
+import React, {useState, useEffect}from 'react';
 import axios from 'axios'
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
@@ -22,9 +22,7 @@ const SignUp = () => {
       const result = await axios(category);
       setData(result.data);
     };
-
     fetchData();
-
   }, []);
 
 
@@ -80,10 +78,7 @@ const handleSubmit = (event) => {
 
             <Row>
               <Col sm={6}>
-                <SocialListComponent
-
-                />
-
+                <SocialListComponent/>
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
                     <SelectFrom LabelTitle="Category"

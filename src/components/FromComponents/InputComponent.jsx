@@ -17,7 +17,7 @@ function InputFrom({ LabelId, TypeName, LabelTitle, Name, Value, Placeholder, co
             <Form.Control type={TypeName} id={LabelId} name={Name} defaultValue={Value} placeholder={Placeholder} onChange = {handleOnchange} />
         </Form.Group>
     )
- }
+}
 
 //Select From Components
 function SelectFrom({ LabelTitle, controlId, category, callback }) {
@@ -62,7 +62,7 @@ function SelectFrom({ LabelTitle, controlId, category, callback }) {
  }
 
 
- export{
+export {
     InputFrom,
     SelectFrom
- }
+}
