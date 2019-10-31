@@ -8,7 +8,7 @@ function NewsLetterComponent() {
           <Card className="subscribeCard border-0 rounded-0">
             <Card.Body className="text-center pt-5 pb-5">
               <h1>Subscribe to our newsletter</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor<br /> enim ipsam voluptatem quia voluptas quia non numquam eius</p>
+              <p>Lorem ipsum dolor sit ament, consecrator advising elite, sed do elusion temper<br /> enif ipsum  quia volutes quia non nunquam emus</p>
               
               <Form className="d-flex subscribeForm justify-content-center mt-3">
 

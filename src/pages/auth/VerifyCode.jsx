@@ -26,7 +26,8 @@ const VerifyCode = () => {
             <Col sm={4}>
               <div class="loginBodyContent clearfix mb-4" id="loginBody">
                 <h2 class="headTitle mb-3">Verify code</h2>
-                <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </h5>
+                <h5> Lorem ipsum dolor sit ament, consecrator advising elite, sed
+                    do elusion temporal incipient </h5>
               </div>{/* end of loginBodyContent */}
 
               <div class="formWrapper clearfix" id="formWrapper">
@@ -34,9 +35,9 @@ const VerifyCode = () => {
                  
 
                   <InputFrom 
-                   LableId="codeVerify"
+                   LabelId="codeVerify"
                    TypeName="text"
-                   LableTitle="Verify Code"
+                   LabelTitle="Verify Code"
                    Name="codeVerify"
                    Value=""
                    Placeholder="Verify Code"

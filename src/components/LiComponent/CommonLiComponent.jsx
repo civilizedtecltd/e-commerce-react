@@ -4,17 +4,17 @@ import {Link} from 'react-router-dom';
 
 
 // only list component
-function Li({Listclass,Title}) {
+function Li({ListClass,Title}) {
    return(
-    <li className={Listclass}>{Title}</li>
+    <li className={ListClass}>{Title}</li>
    )
 }
 
 //list anchor tag
 
-function Lia({Listclass,Title,Url}) {
+function Lia({ListClass,Title,Url}) {
    return(
-    <li className={Listclass}>
+    <li className={ListClass}>
       <Link to={Url}>{Title}</Link>
     </li>
    )
@@ -22,9 +22,9 @@ function Lia({Listclass,Title,Url}) {
 
 
 /// list icon span
-function Liis({Listclass,Title,IconName}){
+function LiIs({ListClass,Title,IconName}){
  return(
-     <li className={Listclass}>
+     <li className={ListClass}>
          <i className={IconName}></i>
           <span>{Title}</span>
      </li>
@@ -32,7 +32,7 @@ function Liis({Listclass,Title,IconName}){
 }
 
 //list anchor icon
-function Liai({ListClass,Title,Url,IconName,AnchorClass}){
+function LiAi({ListClass,Title,Url,IconName,AnchorClass}){
   return (
     <li className={ListClass}>
         <Link className={AnchorClass} to={Url}><i className={IconName}></i>{Title}</Link>
@@ -59,6 +59,6 @@ export {
     Li,
     Lia,
     Lii,
-    Liis,
-    Liai,
+    LiIs,
+    LiAi,
 } ;

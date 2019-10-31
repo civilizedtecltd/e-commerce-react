@@ -7,7 +7,7 @@ export default function SocialListComponent({icon}) {
       <h2 className="headTitle">Login to Your Account</h2>
       <div className="socialLogin mb-4">
         <ul className="socialList mt-4 mb-4">
-          
+
         {icons.map((icon,index)=><Lii
             key={index}
             ListClass={icon.ListClass}

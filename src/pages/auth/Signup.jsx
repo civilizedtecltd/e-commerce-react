@@ -2,7 +2,7 @@ import React ,{useState,useEffect}from 'react';
 import {Container, Row, Col, Form, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
-import SocialListCompoent from '../../components/authComponents/SocialListCompoent';
+import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import {InputFrom, SelectFrom} from '../../components/FromComponents/InputComponent';
 import {ButtonComponents} from '../../components/ButtonComponents/ButtonComponents';
 import {API_URL} from '../../constants/config'
@@ -62,19 +62,21 @@ const handleSubmit = (event) =>{
 
             <Row>
               <Col sm={6}>
-                <SocialListCompoent/>
+                <SocialListComponent
+
+                />
 
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
-                    <SelectFrom
+                    <SelectFromLabelTitle="Category"
                       category = {(data.data !== undefined) ? data.data : []}
                       callback = {categoryData}
                     />
 
                     <InputFrom
-                      LableId="firstName"
+                      LabelId="firstName"
                       TypeName="text"
-                      LableTitle="First Name"
+                      LabelTitle="First Name"
                       Name="firstName"
                       Value=""
                       Placeholder="Enter Your First Name"
@@ -82,18 +84,18 @@ const handleSubmit = (event) =>{
                     />
 
                     <InputFrom
-                      LableId="lastName"
+                      LabelId="lastName"
                       TypeName="text"
-                      LableTitle="Last Name"
+                      LabelTitle="Last Name"
                       Name="lastName"
                       Value=""
                       Placeholder="Enter Your Last Name"
                       callback = {fromFileData}
                     />
                     <InputFrom
-                      LableId="email"
+                      LabelId="email"
                       TypeName="email"
-                      LableTitle="Email"
+                      LabelTitle="Email"
                       Name="email"
                       Value=""
                       Placeholder="Enter Your Email"
@@ -101,25 +103,25 @@ const handleSubmit = (event) =>{
                     />
 
                     <InputFrom
-                      LableId="password"
+                      LabelId="password"
                       TypeName="password"
-                      LableTitle="Password"
+                      LabelTitle="Password"
                       Name="password"
                       Value=""
                       Placeholder="Enter Your Password"
                       callback = {fromFileData}
                     />
                     <InputFrom
-                      LableId="repeatPassword"
+                      LabelId="repeatPassword"
                       TypeName="password"
-                      LableTitle="Repeat Password"
+                      LabelTitle="Repeat Password"
                       Name="repeatPassword"
                       Value=""
                       Placeholder="Enter Your Repeat Password"
                       callback = {fromFileData}
                     />
 
-                    <Link className="linkText mb-3" to="/forgotpass">Forgot password?</Link>
+                    <Link className="linkText mb-3" to="/forgotPassword">Forgot password?</Link>
 
 
                     <Button type="submit" className="btn submitBtn mb-3 " onClick={handleSubmit} >Sign Up</Button>

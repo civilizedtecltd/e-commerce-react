@@ -3,7 +3,7 @@ import React from 'react';
 import {Container, Row, Col, Card, Form} from 'react-bootstrap';
 import {CheckboxComponent} from '../../components/FromComponents/CheckboxComponents';
 import{ButtonComponents}from '../../components/ButtonComponents/ButtonComponents'
-import {Liai} from '../../components/LiComponent/CommonLiComponent';
+import {LiAi} from '../../components/LiComponent/CommonLiComponent';
 import {asideData} from '../../inc/users/users'
 import HeaderComponent from '../../components/header/Header';
 
@@ -18,7 +18,7 @@ const Subscription = () => {
             <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
                 <nav className="userNav">
                   <ul className="userNavBar">
-                    {asideData.map((aside,index)=><Liai
+                    {asideData.map((aside,index)=><LiAi
                       key={index}
                       ListClass={aside.LIST_CLASS}
                       Title={aside.TITLE}

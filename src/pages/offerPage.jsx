@@ -57,7 +57,7 @@ const offerPage = () => {
 
                   <div className="articleBody p-5">
                     <h2 className="postTitle mb-2"><Link to="#">New books on math</Link></h2>
-                    <p className="postPara">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
+                    <p className="postPara">Lorem ipsum dolor sit ament, connecter advising elite, sed do elusion</p>
                   </div>{/* end of articleBody */}
                 </article>{/* end of singleArticle */}
               </Col>{/* end of Col */}
@@ -69,8 +69,8 @@ const offerPage = () => {
                   </div>{/* end of articleMedia */}
 
                   <div className="articleBody p-3">
-                    <h2 className="postTitle mb-1"><Link to="#">Environment programm</Link></h2>
-                    <p className="postPara">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
+                    <h2 className="postTitle mb-1"><Link to="#">Environment programme</Link></h2>
+                    <p className="postPara">Lorem ipsum dolor sit ament, connecter advising elite, sed do elusion</p>
                   </div>{/* end of articleBody */}
                 </article>{/* end of singleArticle */}
 
@@ -80,8 +80,8 @@ const offerPage = () => {
                   </div>{/* end of articleMedia */}
 
                   <div className="articleBody p-3">
-                    <h2 className="postTitle mb-1"><Link to="#">Environment programm</Link></h2>
-                    <p className="postPara">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
+                    <h2 className="postTitle mb-1"><Link to="#">Environment programme</Link></h2>
+                    <p className="postPara">Lorem ipsum dolor sit ament, connecter advising elite, sed do elusion</p>
                     </div>{/* end of articleBody */}
                 </article>{/* end of singleArticle */}
               </Col>{/* end of Col */}
