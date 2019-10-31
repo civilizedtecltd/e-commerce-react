@@ -68,7 +68,7 @@ const handleSubmit = (event) =>{
 
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
-                    <SelectFromLabelTitle="Category"
+                    <SelectFrom LabelTitle="Category"
                       category = {(data.data !== undefined) ? data.data : []}
                       callback = {categoryData}
                     />
