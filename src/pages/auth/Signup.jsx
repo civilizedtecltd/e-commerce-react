@@ -1,24 +1,25 @@
 import React ,{useState, useEffect}from 'react';
-import {Container, Row, Col, Form, Button} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
-import './assets/css/auth.css';
-import SocialListCompoent from '../../components/authComponents/SocialListCompoent';
-import {InputFrom, SelectFrom} from '../../components/FromComponents/InputComponent';
-import {ButtonComponents} from '../../components/ButtonComponents/ButtonComponents';
-import {API_URL} from '../../constants/config'
 import axios from 'axios'
 
-const Signup = () => {
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
+import SocialListComponent from '../../components/authComponents/SocialListComponent';
+import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
+import { URL } from '../../constants/config'
+import './assets/css/auth.css';
+
+const SignUp = () => {
 
   const [data, setData] = useState([])
-  const [formData, setFromData] = useState({});
-
-
-  const apiUrl = `${API_URL}/category`;
+  const [formData] = useState({});
 
   useEffect(() => {
+
+    const category = URL._CATEGORY;
+
     const fetchData = async () => {
-      const result = await axios(apiUrl);
+      const result = await axios(category);
       setData(result.data);
     };
 
@@ -41,12 +42,12 @@ const fromFileData = (data) => {
 const handleSubmit = (event) => {
    event.preventDefault();
 
-    if( formData.category_id == undefined   ||
-        formData.first_name == undefined    ||
-        formData.last_name == undefined     ||
-        formData.email == undefined         ||
-        formData.password == undefined      ||
-        formData.repeatPassword == undefined
+    if( formData.category_id === undefined   ||
+        formData.first_name === undefined    ||
+        formData.last_name === undefined     ||
+        formData.email === undefined         ||
+        formData.password === undefined      ||
+        formData.repeatPassword === undefined
         ){
             console.log(`sweetealert: field data missing`);
         }
@@ -79,19 +80,21 @@ const handleSubmit = (event) => {
 
             <Row>
               <Col sm={6}>
-                <SocialListCompoent/>
+                <SocialListComponent
+
+                />
 
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
-                    <SelectFrom
+                    <SelectFrom LabelTitle="Category"
                       category = {(data.data !== undefined) ? data.data : []}
                       callback = {categoryData}
                     />
 
                     <InputFrom
-                      LableId="firstName"
+                      LabelId="firstName"
                       TypeName="text"
-                      LableTitle="First Name"
+                      LabelTitle="First Name"
                       Name="first_name"
                       Value=""
                       Placeholder="Enter Your First Name"
@@ -99,18 +102,18 @@ const handleSubmit = (event) => {
                     />
 
                     <InputFrom
-                      LableId="lastName"
+                      LabelId="lastName"
                       TypeName="text"
-                      LableTitle="Last Name"
+                      LabelTitle="Last Name"
                       Name="last_name"
                       Value=""
                       Placeholder="Enter Your Last Name"
                       callback = {fromFileData}
                     />
                     <InputFrom
-                      LableId="email"
+                      LabelId="email"
                       TypeName="email"
-                      LableTitle="Email"
+                      LabelTitle="Email"
                       Name="email"
                       Value=""
                       Placeholder="Enter Your Email"
@@ -118,25 +121,25 @@ const handleSubmit = (event) => {
                     />
 
                     <InputFrom
-                      LableId="password"
+                      LabelId="password"
                       TypeName="password"
-                      LableTitle="Password"
+                      LabelTitle="Password"
                       Name="password"
                       Value=""
                       Placeholder="Enter Your Password"
                       callback = {fromFileData}
                     />
                     <InputFrom
-                      LableId="repeatPassword"
+                      LabelId="repeatPassword"
                       TypeName="password"
-                      LableTitle="Repeat Password"
+                      LabelTitle="Repeat Password"
                       Name="repeatPassword"
                       Value=""
                       Placeholder="Enter Your Repeat Password"
                       callback = {fromFileData}
                     />
 
-                    <Link className="linkText mb-3" to="/forgotpass">Forgot password?</Link>
+                    <Link className="linkText mb-3" to="/forgotPassword">Forgot password?</Link>
 
 
                     <Button type="submit" className="btn submitBtn mb-3 " onClick={handleSubmit} >Sign Up</Button>
@@ -153,4 +156,4 @@ const handleSubmit = (event) => {
     </>);
 }
 
-export default Signup;
+export default SignUp;

@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 
 //Input From Components
 
-function InputFrom({ LableId, TypeName, LableTitle, Name, Value, Placeholder, controlId, ClassName, callback }) {
+function InputFrom({ LabelId, TypeName, LabelTitle, Name, Value, Placeholder, controlId, ClassName, callback }) {
     const handleOnchange = event => {
         let data = {
             [event.target.name] : event.target.value
@@ -13,16 +13,14 @@ function InputFrom({ LableId, TypeName, LableTitle, Name, Value, Placeholder, co
     }
     return (
         <Form.Group controlId={controlId} className={ClassName}>
-            <Form.Label htmlFor={LableId}>{LableTitle}</Form.Label>
-            <Form.Control type={TypeName} id={LableId} name={Name} defaultValue={Value} placeholder={Placeholder} onChange = {handleOnchange} />
+            <Form.Label htmlFor={LabelId}>{LabelTitle}</Form.Label>
+            <Form.Control type={TypeName} id={LabelId} name={Name} defaultValue={Value} placeholder={Placeholder} onChange = {handleOnchange} />
         </Form.Group>
     )
-}
+ }
 
 //Select From Components
-function SelectFrom({ LableTitle, controlId, category, callback }) {
-
-
+function SelectFrom({ LabelTitle, controlId, category, callback }) {
 
     useEffect(() => {
 
@@ -50,7 +48,7 @@ function SelectFrom({ LableTitle, controlId, category, callback }) {
 
     return (
         <Form.Group controlId={controlId}>
-            <Form.Label> {LableTitle} </Form.Label>
+            <Form.Label> {LabelTitle} </Form.Label>
             <Form.Control as="select" id="category" onChange = {handleOnchange}>
                         <option defaultValue>Select Category</option>
                 {
@@ -59,12 +57,12 @@ function SelectFrom({ LableTitle, controlId, category, callback }) {
                     )
                 }
             </Form.Control>
-        </Form.Group>
-    )
-}
+      </Form.Group>
+     )
+ }
 
 
-export {
+ export{
     InputFrom,
     SelectFrom
-}
+ }

@@ -6,8 +6,8 @@ import {
 // User Area
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
-import Forgotpass from './pages/auth/Forgotpass';
-import Changepass from './pages/auth/Changepass';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ChangePassword from './pages/auth/changePassword';
 import VerifyCode from './pages/auth/VerifyCode';
 // Logged User Profile
 import UserProfile from './pages/users/UserProfile';
@@ -28,8 +28,8 @@ function App() {
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/forgotpass" component={Forgotpass} />
-        <Route path="/changepass" component={Changepass} />
+        <Route path="/forgotPassword" component={ForgotPassword} />
+        <Route path="/changePassword" component={ChangePassword} />
         <Route path="/verify-code" component={VerifyCode} />
         <Route path="/profile-settings" component={UserProfile} />
         <Route path="/email-subscription" component={Subscription} />

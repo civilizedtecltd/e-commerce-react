@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Form,} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
-import SocialListCompoent from '../../components/authComponents/SocialListCompoent';
+import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom } from '../../components/FromComponents/InputComponent';
 import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
 
@@ -21,28 +21,28 @@ const Login = () => {
 
           <Row>
             <Col sm={6}>
-              <SocialListCompoent/>
+              <SocialListComponent/>
               <div className="formWrapper clearfix" id="formWrapper">
                 <Form>
                   <InputFrom 
-                   LableId="email"
+                   LabelId="email"
                    TypeName="email"
-                   LableTitle="Email"
+                   LabelTitle="Email"
                    Name="name"
                    Value=""
                    Placeholder="Enter Your Email"
                   />
   
                   <InputFrom 
-                   LableId="password"
+                   LabelId="password"
                    TypeName="password"
-                   LableTitle="Password"
+                   LabelTitle="Password"
                    Name="password"
                    Value=""
                    Placeholder="Enter Your Password"
                   />{/* end of Form.Group */}
 
-                  <Link className="linkText mb-3" to="/forgotpass">Forgot password?</Link>
+                  <Link className="linkText mb-3" to="/forgotPassword">Forgot password?</Link>
                   <ButtonComponents
                     Type="submit"
                     ClassName="btn submitBtn mb-3"

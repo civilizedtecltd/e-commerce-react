@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container,Row,Col} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import {Lia ,Liai } from '../LiComponent/CommonLiComponent'
+import {Lia ,LiAi } from '../LiComponent/CommonLiComponent'
 
 import paypalIcon from '../../assets/images/paypal_icon_img.png';
 import masterCardIcon from '../../assets/images/master_card_icon_img.png';
@@ -48,7 +48,7 @@ function FooterComponent() {
                 <h4 className="footerWidgetHeader">Contact us</h4>
                 <ul className="getInTouchList">
                   <li>
-                    <Link to="mailto:you@example.com" title="click to mail us">noreplay@example.com</Link>
+                    <Link to="mailto:you@example.com" title="click to mail us">nobelPay@example.com</Link>
                   </li>{/*  end of li */}
                   <li>
                     <Link to="tele:1234567890" title="click to call us">+(123) 456 7890</Link>
@@ -67,7 +67,7 @@ function FooterComponent() {
                       {ListClass:"facebook", Url:"//facebook.com",IconName:"fab fa-facebook-f"},
                       {ListClass:"facebook" ,Url:"//instagram.com",IconName:"fab fa-instagram"},
                       {ListClass:"facebook",Url:"//twitter.com",IconName:"fab fa-twitter"},
-                    ].map((list,index)=><Liai
+                    ].map((list,index)=><LiAi
                       key={index}
                       ListClass={list.ListClass}
                       Url={list.IconName}

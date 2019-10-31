@@ -3,7 +3,7 @@ import {Container, Row, Col, Card, Form} from 'react-bootstrap';
 import './assets/css/user.css';
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
 import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
-import {Liai} from '../../components/LiComponent/CommonLiComponent';
+import {LiAi} from '../../components/LiComponent/CommonLiComponent';
 import {asideData} from '../../inc/users/users'
 import HeaderComponent from '../../components/header/Header';
 
@@ -19,7 +19,7 @@ const UserProfile = () => {
             <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
                 <nav className="userNav">
                   <ul className="userNavBar">
-                    {asideData.map((aside)=><Liai
+                    {asideData.map((aside)=><LiAi
                       key={Math.floor(Math.random() * 10)}
                       ListClass={aside.LIST_CLASS}
                       Title={aside.TITLE}
@@ -49,7 +49,7 @@ const UserProfile = () => {
                                 <Row>
                                   <Col sm="6">
                                     <SelectFrom
-                                      LableTitle="Category"
+                                      LabelTitle="Category"
                                       controlId="exampleForm.ControlSelect1"
                                     />
                                   </Col>{/* end of Col */}
@@ -57,7 +57,7 @@ const UserProfile = () => {
                                   <Col sm="6">
                                     <InputFrom
                                       controlId="firstName"
-                                      LableTitle="First Name"
+                                      LabelTitle="First Name"
                                       TypeName="text"
                                       Name="first_name"
                                       Value=""
@@ -68,7 +68,7 @@ const UserProfile = () => {
                                   <Col sm="6">
                                     <InputFrom
                                       controlId="lastName"
-                                      LableTitle="Last Name"
+                                      LabelTitle="Last Name"
                                       TypeName="text"
                                       Name="lastName"
                                       Value=""
@@ -79,7 +79,7 @@ const UserProfile = () => {
                                   <Col sm="6">
                                     <InputFrom
                                       controlId="userEmail"
-                                      LableTitle="Email Address"
+                                      LabelTitle="Email Address"
                                       TypeName="email"
                                       Name="email"
                                       Value=""
@@ -90,7 +90,7 @@ const UserProfile = () => {
                                   <Col sm="6">
                                     <InputFrom
                                       controlId="userPhone"
-                                      LableTitle="Phone Number"
+                                      LabelTitle="Phone Number"
                                       TypeName="text"
                                       Name="phone"
                                       Value=""
@@ -106,7 +106,7 @@ const UserProfile = () => {
                                     
                                     <InputFrom
                                       controlId="currentPassword"
-                                      LableTitle="Current Password"
+                                      LabelTitle="Current Password"
                                       TypeName="password"
                                       Name="password"
                                       Value=""
@@ -117,7 +117,7 @@ const UserProfile = () => {
                                   <Col sm="6">
                                     <InputFrom
                                       controlId="newPassword"
-                                      LableTitle="Create New Password"
+                                      LabelTitle="Create New Password"
                                       TypeName="password"
                                       Name="password"
                                       Value=""
@@ -128,7 +128,7 @@ const UserProfile = () => {
                                   <Col sm="6">
                                     <InputFrom
                                       controlId="repeatNewPassword"
-                                      LableTitle="Repeat new password"
+                                      LabelTitle="Repeat new password"
                                       TypeName="password"
                                       Name="password"
                                       Value=""
