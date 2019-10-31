@@ -1,4 +1,4 @@
-import React ,{useState,useEffect}from 'react';
+import React ,{useState, useEffect}from 'react';
 import {Container, Row, Col, Form, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
@@ -38,9 +38,9 @@ const fromFileData = (data) => {
     });
 }
 
-const handleSubmit = (event) =>{
+const handleSubmit = (event) => {
    event.preventDefault();
-   console.log(formData);
+
    if(formData.category_id === undefined){
 
     }
@@ -75,7 +75,7 @@ const handleSubmit = (event) =>{
                       LableId="firstName"
                       TypeName="text"
                       LableTitle="First Name"
-                      Name="firstName"
+                      Name="first_name"
                       Value=""
                       Placeholder="Enter Your First Name"
                       callback = {fromFileData}
@@ -85,7 +85,7 @@ const handleSubmit = (event) =>{
                       LableId="lastName"
                       TypeName="text"
                       LableTitle="Last Name"
-                      Name="lastName"
+                      Name="last_name"
                       Value=""
                       Placeholder="Enter Your Last Name"
                       callback = {fromFileData}
