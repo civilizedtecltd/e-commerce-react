@@ -8,10 +8,9 @@ import FooterComponent from '../components/FooterComponent/FooterComponent';
 //
 import {NewsLetterComponent} from "../components/offerPageComponents/NewsLetterComponent";
 //
-import {Container, Modal ,Button,Tab,Tabs} from "react-bootstrap";
+import {Container, Modal ,Button,} from "react-bootstrap";
 import {ImgSlick,} from "../components/offerPageComponents/NewBookComponent";
 import { ImageCarrosull} from "../components/ProductImgCarosellComponents/ProductImgCarosell";
-import reviews_avater from "../assets/images/reviews_avater.jpg"
 import {Link} from 'react-router-dom';
 import HeaderComponent from "../components/header/Header";
 import TabComponent from '../components/TabComponent/TabComponent';
@@ -34,8 +33,8 @@ function ProductPage() {
                 <div className="col">
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
-                      <li className="breadcrumb-item"><a href="#">Primary school </a></li>
-                      <li className="breadcrumb-item"><a href="#">Shop </a></li>
+                      <li className="breadcrumb-item"><Link to=''>Primary school </Link></li>
+                      <li className="breadcrumb-item"><Link to=''>Shop </Link></li>
                       <li className="breadcrumb-item active" aria-current="page">Product Page</li>
                     </ol>
                   </nav>
@@ -58,11 +57,11 @@ function ProductPage() {
                       <div className="productCardHead">
                         <h2 className="productSingleTitle">Math time className - 2</h2>
                         <ul className="productReviewStar">
-                          {[1,2,3,4,5].map(rating=><li className="5star"><i className="fas fa-star"></i></li>)}
+                          {[1,2,3,4,5].map((rating, index) => <li key={index} className="5star"><i className="fas fa-star"></i></li>)}
                         </ul>
                         <p>(7 reviews)</p>
                       </div>
-                      <h6 className="authName">by <a href="#">Sam Smith</a></h6>
+                      <h6 className="authName">by <Link to='#'>Sam Smith</Link></h6>
                     </div>
 
                     <div className="card-body productCardBody">
@@ -77,12 +76,12 @@ function ProductPage() {
                       <div className="productBtnGroup mt-4 clearfix">
                         <div className="row no-gutters">
                           <div className="col-sm-2">
-                            <input className="form-control inputValue" type="number" value="1"/>
+                            <input className="form-control inputValue" type="number" placeholder="1" />
                           </div>
 
                           <div className="col text-center">
-                            <a href="#" className="btn linkBtn"  onClick={handleShow} > <i
-                                className="fas fa-shopping-cart"></i> Add to cart</a>
+                            <Link to="#" className="btn linkBtn"  onClick={handleShow} > <i
+                                className="fas fa-shopping-cart"></i> Add to cart</Link>
                           </div>
 
                           <div className="col text-center">

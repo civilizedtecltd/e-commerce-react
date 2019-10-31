@@ -170,12 +170,12 @@ const ShopPage = () => {
                   <div className="col">
                     <nav aria-label="Page navigation">
                       <ul className="pagination align-items-center justify-content-between">
-                        <li className="page-item"><a className="page-link" href="#"><i className="fas fa-chevron-left"></i></a></li>
+                        <li className="page-item"><Link className="page-link" to="#"><i className="fas fa-chevron-left"></i></Link></li>
                         <li className="page-item">Page</li>
-                        <li className="page-item"><a className="page-link" href="#">1</a></li>
+                        <li className="page-item"><Link className="page-link" to="#">1</Link></li>
                         <li className="page-item">of</li>
-                        <li className="page-item"><a className="page-link" href="#">7</a></li>
-                        <li className="page-item"><a className="page-link" href="#"><i className="fas fa-chevron-right"></i></a></li>
+                        <li className="page-item"><Link className="page-link" to="#">7</Link></li>
+                        <li className="page-item"><Link className="page-link" to="#"><i className="fas fa-chevron-right"></i></Link></li>
                       </ul>
                     </nav>
                   </div>

@@ -1,9 +1,8 @@
 import React ,{useState} from 'react';
-import {Container,Row, Col, Form, FormControl,
-  Button} from 'react-bootstrap'
+import {Container,Row, Col, Form} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import '../../assets/css/heder.css'
-import { CSSTransition,TransitionGroup } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 function HeaderComponent() {
 
@@ -75,7 +74,7 @@ function HeaderComponent() {
               <div className="headPopBar clearfix float-right" id="headPopBar">
                 <ul className="headPopBarList d-flex justify-content-between">
                   <li>
-                    <div classNameName="input-group searchbar">
+                    <div className="input-group searchbar">
                       <Link to="#" onClick={() => setShowSearchHide(!showSearch)}><i className="fa fa-search"></i> Search</Link>
                     </div>
                   </li>

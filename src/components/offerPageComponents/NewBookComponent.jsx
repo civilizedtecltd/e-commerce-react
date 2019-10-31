@@ -1,7 +1,7 @@
 
 import React from 'react';
 import{Link} from 'react-router-dom'
-import {Col, Card} from 'react-bootstrap';
+import {Col, Card, Image} from 'react-bootstrap';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -13,10 +13,9 @@ function NewBookComponent({BookImage, ProductTitle, AuthorName, ProductPrice, Im
     return(
         <Col className="col-auto">
         <Card className="productCard border-0 bg-transparent">
-              <div className={`productMedia mb-3 ${ImageBg}`}>
-
-              <img src={BookImage} alt="Book Image" />
-          </div>
+            <div className={`productMedia mb-3 ${ImageBg}`}>
+              <Image src={BookImage} alt="Book Image" />
+            </div>
 
           <div className="productContent">
             <Link to="#"><h4 className="productTitle mb-1">{ProductTitle}</h4></Link>
@@ -44,7 +43,7 @@ function ImgSlick() {
                         <Col className="col-auto">
                             <Card className="productCard border-0 bg-transparent">
                                 <div className= "productMedia mb-3 bgGray">
-                                     <img src={value.Img} alt="Book Image"/>
+                                     <Image src={value.Img} alt="Book Image" />
                                 </div>
 
                                 <div className="productContent">
