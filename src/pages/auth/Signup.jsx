@@ -1,8 +1,9 @@
 import React, {useState, useEffect}from 'react';
+import SweetAlert from 'sweetalert2-react';
 import axios from 'axios'
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
@@ -13,16 +14,30 @@ const SignUp = () => {
 
   const [data, setData] = useState([])
   const [formData] = useState({});
+  const [state, setState] = useState({
+        sweetAlert : {
+            show: false,
+            title: "",
+            text: "",
+            type: "",
+            showCancelButton: false,
+            confirmButtonText: "",
+        }
+  });
+
+  const [auth, setAuth] = useState({
+        status: false,
+        redirect: ''
+  });
 
   useEffect(() => {
 
-    const category = URL._CATEGORY;
-
     const fetchData = async () => {
-      const result = await axios(category);
+      const result = await axios(URL._CATEGORY);
       setData(result.data);
     };
     fetchData();
+
   }, []);
 
 
@@ -47,17 +62,43 @@ const handleSubmit = (event) => {
         formData.password === undefined      ||
         formData.repeatPassword === undefined
         ){
-            console.log(`sweetealert: field data missing`);
+            setState({
+                sweetAlert: {
+                    show: true,
+                    title: "OPPS!",
+                    text: "Field Data missing",
+                    type: 'warning',
+                    confirmButtonText: "Try Again!"
+                }
+            });
         }
     else{
 
         if(String(formData.password) !== String(formData.repeatPassword)){
 
-            console.log(`password miss matched`);
+            setState({
+                sweetAlert: {
+                    show: true,
+                    title: "OPPS!",
+                    text: "Password did not match.",
+                    type: 'error',
+                    confirmButtonText: "Try Again!"
+                }
+            });
 
         }else{
-            console.log(`post axios`);
-            // axios.post(`${API_URL}/auth/register`);
+            axios.post(
+                        URL._REGISTER,
+                        formData
+                    ).then( response => {
+                        console.log(response);
+                        setAuth({
+                            status: true,
+                            redirect: '/login'
+                        });
+                    }).catch( error => {
+                        console.log(error);
+                    });
         }
     }
 
@@ -65,6 +106,7 @@ const handleSubmit = (event) => {
 
 
     return (<>
+      ({auth.status === true}) ? <Redirect to={auth.redirect} /> : <Redirect to="/signup" />
       <div className="allWrapper fullHeight">
         <main className="loginMainArea clearfix fullHeight bgImage signUpBodyBg pb-3" id="signUpBody">
           <Container fluid={true}>
@@ -80,6 +122,15 @@ const handleSubmit = (event) => {
               <Col sm={6}>
                 <SocialListComponent/>
                 <div className="formWrapper clearfix" id="formWrapper">
+                    <SweetAlert
+                            show = {state.sweetAlert.show}
+                            title = {state.sweetAlert.title}
+                            text = {state.sweetAlert.text}
+                            type = {state.sweetAlert.type}
+                            showCancelButton = {state.sweetAlert.showCancelButton}
+                            confirmButtonText = {state.sweetAlert.confirmButtonText}
+                            onConfirm = {() => { console.log(`confirmed`) }}
+                    />
                   <Form>
                     <SelectFrom LabelTitle="Category"
                       category = {(data.data !== undefined) ? data.data : []}

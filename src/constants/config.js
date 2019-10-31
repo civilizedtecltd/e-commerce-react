@@ -8,6 +8,10 @@
      get _CATEGORY(){
          return `${this.API}/category`
      }
+
+     get _REGISTER(){
+         return `${this.API}/auth/register`
+     }
  }
 
  const URL = new APP_URL();
