@@ -22,19 +22,14 @@ function InputFrom({ LableId, TypeName, LableTitle, Name, Value, Placeholder, co
 //Select From Components
 function SelectFrom({ LableTitle, controlId, category, callback }) {
 
-    const handleOnchange = (event) => {
 
-        const redBorder = "border: 1px solid #d82626";
-        const grayBorder = "border: 1px solid #999999;";
-
-        (event.target.value !== "Select Category") ? event.target.style = grayBorder : event.target.style = redBorder;
-
-        callback({
-            category_id: event.target.value
-        });
-    }
 
     useEffect(() => {
+
+        selectBorderAlert();
+    });
+
+    const selectBorderAlert = () => {
 
         const selectCategory = document.getElementById('category');
 
@@ -42,7 +37,16 @@ function SelectFrom({ LableTitle, controlId, category, callback }) {
         const grayBorder = "border: 1px solid #999999;";
 
         (selectCategory.value === "Select Category") ? selectCategory.style = redBorder : selectCategory.style = grayBorder;
-    });
+    }
+
+    const handleOnchange = (event) => {
+
+        selectBorderAlert();
+
+        callback({
+            category_id: event.target.value
+        });
+    }
 
     return (
         <Form.Group controlId={controlId}>

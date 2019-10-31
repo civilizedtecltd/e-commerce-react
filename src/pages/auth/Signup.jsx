@@ -41,10 +41,27 @@ const fromFileData = (data) => {
 const handleSubmit = (event) => {
    event.preventDefault();
 
-   if(formData.category_id === undefined){
+    if( formData.category_id == undefined   ||
+        formData.first_name == undefined    ||
+        formData.last_name == undefined     ||
+        formData.email == undefined         ||
+        formData.password == undefined      ||
+        formData.repeatPassword == undefined
+        ){
+            console.log(`sweetealert: field data missing`);
+        }
+    else{
 
+        if(String(formData.password) !== String(formData.repeatPassword)){
+
+            console.log(`password miss matched`);
+
+        }else{
+            console.log(`post axios`);
+            // axios.post(`${API_URL}/auth/register`);
+        }
     }
-// axios.post(`${API_URL}/auth/register`);
+
 }
 
 
