@@ -1,23 +1,25 @@
-import React ,{useState,useEffect}from 'react';
-import {Container, Row, Col, Form, Button} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
-import './assets/css/auth.css';
-import SocialListComponent from '../../components/authComponents/SocialListComponent';
-import {InputFrom, SelectFrom} from '../../components/FromComponents/InputComponent';
-import {API_URL} from '../../constants/config'
+import React, {useState, useEffect}from 'react';
 import axios from 'axios'
 
-const Signup = () => {
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
+import SocialListComponent from '../../components/authComponents/SocialListComponent';
+import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
+import { URL } from '../../constants/config'
+import './assets/css/auth.css';
+
+const SignUp = () => {
 
   const [data, setData] = useState([])
   const [formData] = useState({});
 
-
-  const apiUrl = `${API_URL}/category`
-
   useEffect(() => {
+
+    const category = URL._CATEGORY;
+
     const fetchData = async () => {
-      const result = await axios(apiUrl);
+      const result = await axios(category);
       setData(result.data);
     };
     fetchData();
@@ -35,13 +37,30 @@ const fromFileData = (data) => {
     });
 }
 
-const handleSubmit = (event) =>{
+const handleSubmit = (event) => {
    event.preventDefault();
-   const {category_id} =formData;
-   if(category_id !== undefined){
-     console.log(category_id)
+
+    if( formData.category_id === undefined   ||
+        formData.first_name === undefined    ||
+        formData.last_name === undefined     ||
+        formData.email === undefined         ||
+        formData.password === undefined      ||
+        formData.repeatPassword === undefined
+        ){
+            console.log(`sweetealert: field data missing`);
+        }
+    else{
+
+        if(String(formData.password) !== String(formData.repeatPassword)){
+
+            console.log(`password miss matched`);
+
+        }else{
+            console.log(`post axios`);
+            // axios.post(`${API_URL}/auth/register`);
+        }
     }
-// axios.post(`${API_URL}/auth/register`);
+
 }
 
 
@@ -71,7 +90,7 @@ const handleSubmit = (event) =>{
                       LabelId="firstName"
                       TypeName="text"
                       LabelTitle="First Name"
-                      Name="firstName"
+                      Name="first_name"
                       Value=""
                       Placeholder="Enter Your First Name"
                       callback = {fromFileData}
@@ -81,7 +100,7 @@ const handleSubmit = (event) =>{
                       LabelId="lastName"
                       TypeName="text"
                       LabelTitle="Last Name"
-                      Name="lastName"
+                      Name="last_name"
                       Value=""
                       Placeholder="Enter Your Last Name"
                       callback = {fromFileData}
@@ -132,4 +151,4 @@ const handleSubmit = (event) =>{
     </>);
 }
 
-export default Signup;
+export default SignUp;
