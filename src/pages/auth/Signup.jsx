@@ -1,13 +1,33 @@
-import React from 'react';
+import React ,{useState,useEffect}from 'react';
 import {Container, Row, Col, Form} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
 import SocialListCompoent from '../../components/authComponents/SocialListCompoent';
 import {InputFrom, SelectFrom} from '../../components/FromComponents/InputComponent';
 import {ButtonComponents} from '../../components/ButtonComponents/ButtonComponents';
-
+import {API_URL} from '../../constants/config'
+import axios from 'axios'
 
 const Signup = () => {
+
+  const [data, setData] = useState([])
+
+  const apiUrl = "http://localhost:3333/api/category";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(apiUrl);
+      setData(result.data);
+    };
+    fetchData();
+  }, []);
+
+
+
+
+
+   console.log(data)
+   
     return (<>
       <div className="allWrapper fullHeight">
         <main className="loginMainArea clearfix fullHeight bgImage signUpBodyBg pb-3" id="signUpBody">
@@ -22,7 +42,9 @@ const Signup = () => {
 
             <Row>
               <Col sm={6}>
-                <SocialListCompoent/>
+                <SocialListCompoent
+                
+                />
 
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
