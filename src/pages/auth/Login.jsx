@@ -1,15 +1,73 @@
-import React from 'react';
-import { Container, Row, Col, Form,} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
-import './assets/css/auth.css';
+import React, {useState}  from 'react';
+import SweetAlert from 'sweetalert2-react';
+import axios from 'axios';
+
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom } from '../../components/FromComponents/InputComponent';
-import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
+import { URL } from '../../constants/config'
+
+import './assets/css/auth.css';
 
 const Login = () => {
+
+  const [formData] = useState({});
+  const [state, setState] = useState({
+        sweetAlert : {
+          show: false,
+          title: "",
+          text: "",
+          type: "",
+          showCancelButton: false,
+          confirmButtonText: "",
+      }
+  });
+
+  const loginData = (data) => {
+    Object.keys(data).map( key => {
+      formData[key] = data[key];
+    });
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios.post(
+        URL._LOGIN,
+        formData
+    ).then( res => {
+      if(res.status === 200){            
+          const authData = res.data.data;          
+          localStorage.setItem('auth-data', JSON.stringify(authData));          
+      }           
+    }).catch( error => {
+      console.log(error);
+      setState({
+        sweetAlert: {
+          show: true,
+          title: "OPPS!",
+          text: "Could not login. Please check Credentials.",
+          type: 'error',
+          confirmButtonText: "Try Again!"
+        }
+      });
+    });
+  }
+
   return (<>
     <div className="AllWrapper fullHeight">
       <main className="loginMainArea clearfix fullHeight bgImage loginBodyBg pb-4" id="loginBody">
+          <SweetAlert
+              show = {state.sweetAlert.show}
+              title = {state.sweetAlert.title}
+              text = {state.sweetAlert.text}
+              type = {state.sweetAlert.type}
+              showCancelButton = {state.sweetAlert.showCancelButton}
+              confirmButtonText = {state.sweetAlert.confirmButtonText}
+              onConfirm = {() => { console.log(`confirmed`) }}
+          />
         <Container fluid={true}>
           <Row>
             <Col sm={6}>
@@ -28,9 +86,10 @@ const Login = () => {
                    LabelId="email"
                    TypeName="email"
                    LabelTitle="Email"
-                   Name="name"
+                   Name="email"
                    Value=""
                    Placeholder="Enter Your Email"
+                   callback = {loginData}
                   />
   
                   <InputFrom 
@@ -40,14 +99,13 @@ const Login = () => {
                    Name="password"
                    Value=""
                    Placeholder="Enter Your Password"
+                   callback = {loginData}
                   />{/* end of Form.Group */}
 
                   <Link className="linkText mb-3" to="/forgotPassword">Forgot password?</Link>
-                  <ButtonComponents
-                    Type="submit"
-                    ClassName="btn submitBtn mb-3"
-                    Name="LOGIN"
-                  />
+                 
+                  <Button type="submit" className="btn submitBtn mb-3 " onClick={handleSubmit} >LOGIN</Button>
+
                   <p>Don’t have an account yet? <Link className="linkText" to="/signup">Sign up</Link></p>
                   
   
