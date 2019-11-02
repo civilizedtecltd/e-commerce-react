@@ -1,45 +1,86 @@
 
-.searchBarProduct{position: relative;}
-.searchBarProduct span{position: absolute;right: 10px;top: 5px;font-size: 20px;color: #cecece; cursor: pointer;}
-.searchBarProduct .searchProduct{
+.searchBarNew span{position: absolute;right: 10px;top: 5px;font-size: 20px;color: #cecece; cursor: pointer;}
+.searchBarNew{
     border: 1px solid #f5f5f5;
     background-color: #f9f9f9;
-    font-size: 15px;
-    min-height: 0px;
-    padding: 0px;
-    height: 0px;
-     opacity: 0;
--webkit-transition: all 0.5s ease;
--moz-transition: all 0.5s ease;
--o-transition: all 0.5s ease;
-transition: all 0.5s ease;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+#SearchBarMenu{
+    position: relative;
 }
 [type=search] {
 outline-offset: 0px;
 -webkit-appearance: none;
 }
 
-    .alert-enter {
-        opacity: 0;
-    }
-    .alert-enter-active {
-        opacity: 1;
-        transition: opacity 300ms
-    }
-    .alert-exit {
-        opacity: 1;
-    }
-    .alert-exit-active {
-        opacity: 0;
-        transition: opacity 300ms
+.navbar-expand-lg .navbar-nav .nav-link{
+    color: #363636;
+    font-size: 16px;
+    font-family: 'Crimson Text', serif;
+    font-weight: 600;
+}
+    .navbar-expand-lg .navbar-nav .active .nav-link,
+    .navbar-expand-lg .navbar-nav .nav-link:hover{
+        color:#3897cf;
     }
 
-    .alert-enter-done .searchProduct{
-        min-height: auto;
-        padding: 8px 10px;
-        height: auto;
-        opacity: 1;
-    }
+.cartBadge{
+    position: relative;
+}
+.cartBadge .badge {
+    position: absolute;
+    top: -10px;
+    left: 5px;
+    border-radius: 50%;
+    font-size: 0.7rem;
+}
 
 
+/*mobile*/
+.ModaCloseBtn.modal-header {
+    padding-right: 1rem !important;
+    border-bottom: 0;
+    padding-top: 0.5rem !important;
+    padding: 0;
+}
+.mobileNav{
+display: flex;
+flex-flow: row wrap;
+justify-content: space-between;
+}
+
+.mobileNav li {
+max-width: 50%;
+width: 50%;
+}
+.mobileNav li a{
+    font-size: 1.3rem;
+    color: #363636;
+    line-height: 3rem;
+    font-weight: 600;
+}
+.mobileNav li a:hover{
+    color: #3897cf;
+}
+
+/*Modal Footer*/
+.modal-footer-btn-group .btn{
+    width: 100%;
+    font-size: 15px;
+}
+.modal-footer-btn-group a{
+    font-size: 1.3rem;
+    color: #363636!important;
+}
+.btn-border {
+    transform:none!important;
+    background: transparent!important;
+    border: 2px solid #363636!important;
+    color: #363636 !important;
+}
+.btn-border:hover {
+    color: #3897cf!important;
+    border: 2px solid #3897cf !important;
+}
 

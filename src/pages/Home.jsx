@@ -17,7 +17,7 @@ import featureIcon4 from '../assets/images/feature_icon_img_04.png';
 import FooterComponent from '../components/FooterComponent/FooterComponent';
 import { HomeCarouselFooter} from "../components/HomePage/HomeCarouselFooter";
 import {NewsLetterComponent} from "../components/offerPageComponents/NewsLetterComponent";
-import HeaderComponent from "../components/header/Header";
+import {HeaderComponent, MobileHeader} from "../components/header/Header";
 
 
 const Home = () => {
@@ -26,7 +26,7 @@ const Home = () => {
     <div className="allWrapper">
 
           <HeaderComponent/>
-
+          <MobileHeader />
       <main className="mainContent clearfix" id="mainContent">
         <section className="productCat secGap clearfix" id="productCat">
           <Container>

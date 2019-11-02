@@ -4,12 +4,13 @@ import {Container, Row, Col, Card, Table} from 'react-bootstrap';
 import './assets/css/user.css';
 import {LiAi, Lia} from '../../components/LiComponent/CommonLiComponent';
 import {asideData,categoryClass} from '../../inc/users/users'
-import HeaderComponent from '../../components/header/Header';
+import {HeaderComponent, MobileHeader} from '../../components/header/Header';
 
 const OrderPage = () => {
   return (<>
     <div className="allWrapper">
       <HeaderComponent/>
+      <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
         <Container fluid="{true}" className="pl-0 pr-0">
           <Row noGutters>
@@ -43,7 +44,7 @@ const OrderPage = () => {
                               <div className="orderMedia">
                                 <img src="assets/images/order_page_icon_img.png" alt="" />
                               </div>{/* end of orderMedia */}
-                              
+
                               <div className="orderSortDes">
                                 <h2 className="headTitle mb-3">You don’t have any <span>Orders</span></h2>
                                 <p>It’s not a problem. Just choose a category you’re interested in and<br/> add goods to your cart
@@ -58,7 +59,7 @@ const OrderPage = () => {
                                     <ul className="cardWidgetList text-center">
                                     {categoryClass.primarySchool.map(priClass=><Lia
                                        key={Math.floor(Math.random() * 10)}
-                                       Title={priClass} 
+                                       Title={priClass}
                                        Url={'/'}
                                      />)}
                                     </ul>{/* end of cardWidgetList */}
@@ -69,7 +70,7 @@ const OrderPage = () => {
                                     <ul className="cardWidgetList cardWidgetList2 text-center">
                                      {categoryClass.primarySchool.map(priClass=><Lia
                                        key={Math.floor(Math.random() * 10)}
-                                       Title={priClass} 
+                                       Title={priClass}
                                        Url={'/'}
                                      />)}
                                     </ul>{/* end of cardWidgetList */}
@@ -80,7 +81,7 @@ const OrderPage = () => {
                                     <ul className="cardWidgetList text-center">
                                     {categoryClass.primarySchool.map(priClass=><Lia
                                        key={Math.floor(Math.random() * 10)}
-                                       Title={priClass} 
+                                       Title={priClass}
                                        Url={'/'}
                                      />)}
                                     </ul>{/* end of cardWidgetList */}
@@ -91,7 +92,7 @@ const OrderPage = () => {
                                     <ul className="cardWidgetList text-center">
                                      {categoryClass.primarySchool.map(priClass=><Lia
                                        key={Math.floor(Math.random() * 10)}
-                                       Title={priClass} 
+                                       Title={priClass}
                                        Url={'/'}
                                      />)}
                                     </ul>{/* end of cardWidgetList */}
@@ -101,7 +102,7 @@ const OrderPage = () => {
 
                             </div>{/* end of orderHeadDetails */}
                           </Card.Body>{/* end of Card.Body */}
-                          
+
                           <Card.Body className="pt-5">
 
                             <Table responsive className="cardTable">

@@ -5,13 +5,14 @@ import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComp
 import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
 import {LiAi} from '../../components/LiComponent/CommonLiComponent';
 import {asideData} from '../../inc/users/users'
-import HeaderComponent from '../../components/header/Header';
+import {HeaderComponent, MobileHeader} from '../../components/header/Header';
 
 
 const UserProfile = () => {
   return (<>
     <div className="allWrapper">
       <HeaderComponent/>
+      <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
         <Container fluid="{true}" className="pl-0 pr-0">
           <Row noGutters>
@@ -103,7 +104,7 @@ const UserProfile = () => {
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
-                                    
+
                                     <InputFrom
                                       controlId="currentPassword"
                                       LabelTitle="Current Password"
@@ -160,7 +161,7 @@ const UserProfile = () => {
 
 
     </div>{/* end of allWrapper */}
-    
+
   </>);
 }
 

@@ -1,16 +1,26 @@
 import React ,{useState} from 'react';
-import {Container,Row, Col, Form} from 'react-bootstrap'
+import {Container, Row, Col, Form, Badge, Collapse, Modal} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import '../../assets/css/heder.css'
-import { CSSTransition } from 'react-transition-group';
+import { useMediaQuery } from 'react-responsive'
+
+
+const Mobile = ({ children }) => {
+  const isMobile = useMediaQuery({ maxWidth: 767 })
+  return isMobile ? children : null
+}
+const Default = ({ children }) => {
+  const isNotMobile = useMediaQuery({ minWidth: 768 })
+  return isNotMobile ? children : null
+}
 
 function HeaderComponent() {
 
-  const [showSearch, setShowSearchHide] = useState(false);
+  const [open, setOpen] = useState(false);
 
     return(
     <>
-
+      <Default>
       <div className="headerTopBar clearfix bgBlack" id="headerTopBar">
         <Container>
           <Row className="justify-content-between">
@@ -32,18 +42,19 @@ function HeaderComponent() {
           </Row>
         </Container>
       </div>
+
       <header className="header clearfix" id="header">
         <Container>
           <Row className="align-items-center">
-            <Col sm="1">
+            <Col sm="2">
               <div className="logoWrapper">
                 <h1 className="logoText"><Link to="#">LOGO</Link></h1>
               </div>
             </Col>
 
-            <Col sm="5">
+            <Col sm="6">
               <div className="headerNav clearfix" id="headerNav">
-                <nav className="navbar navbar-expand-lg navbar-light bg-white">
+                <nav className="navbar navbar-expand-lg  bg-white">
                   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                   </button>
@@ -70,16 +81,16 @@ function HeaderComponent() {
               </div>
             </Col>
 
-            <Col sm="6">
-              <div className="headPopBar clearfix float-right" id="headPopBar">
+            <Col sm="4">
+              <div className="headPopBar clearfix" id="headPopBar">
                 <ul className="headPopBarList d-flex justify-content-between">
                   <li>
-                    <div className="input-group searchbar">
-                      <Link to="#" onClick={() => setShowSearchHide(!showSearch)}><i className="fa fa-search"></i> Search</Link>
+                    <div className="input-group">
+                      <Link onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</Link>
                     </div>
                   </li>
-                  <li><Link to="#"><i className="far fa-star"></i> Favorites</Link></li>
-                  <li><Link to="#"><i className="fas fa-shopping-cart"></i> Cart</Link></li>
+                  <li><Link to="#"><span className="cartBadge"><i className="far fa-star"></i><Badge variant="danger">10</Badge></span> Favorites</Link></li>
+                  <li><Link to="#"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge variant="primary">10</Badge></span> Cart</Link></li>
                   <li><Link to="#"><i className="far fa-user"></i> Login</Link></li>
                 </ul>
               </div>
@@ -88,19 +99,110 @@ function HeaderComponent() {
 
           <Row>
             <Col>
-              <CSSTransition in={showSearch} timeout={100} unmountOnExit classNames="alert">
-                <div className="searchBarProduct mb-3">
-                  <Form.Control type="search" className="searchProduct shadow-none" placeholder="Search" />
-                  <span onClick={() => setShowSearchHide(false)}><i className="fas fa-times"></i></span>
+              <Collapse in={open} >
+                <div  className="searchBarNew">
+                  <div id="SearchBarMenu">
+                    <Form.Control type="text" className="shadow-none" placeholder="Search" />
+                    <span onClick={() => setOpen(false)}><i className="fas fa-times"></i></span>
+                  </div>
                 </div>
-              </CSSTransition>
+              </Collapse>
+
             </Col>
           </Row>
         </Container>
       </header>
-
+      </Default>
         </>
     )
 }
 
-export default HeaderComponent;
+
+
+
+
+  function MobileHeader () {
+    const [open, setOpen] = useState(false);
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+     return(<>
+       <Mobile>
+         <header className="header clearfix" id="header">
+           <Container>
+             <Row className="align-items-center justify-content-between">
+               <Col className="col-auto">
+                 <div className="logoWrapper">
+                   <h1 className="logoText"><Link to="#">LOGO</Link></h1>
+                 </div>
+               </Col>
+
+               <Col className="col-auto">
+                 <div className="headPopBar clearfix" id="headPopBar">
+                   <ul className="headPopBarList d-flex">
+                     <li>
+                       <div className="input-group searchbar">
+                         <Link onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
+                             className="fa fa-search"></i> Search</Link>
+                       </div>
+                     </li>
+                     <li><Link to="#"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge
+                         variant="primary">10</Badge></span> Cart</Link></li>
+                     <li>
+                       <div className="mobileNavModal">
+                         <a onClick={handleShow}><i className="fas fa-bars"></i></a>
+                       </div>
+                     </li>
+                   </ul>
+                 </div>
+
+               </Col>
+             </Row>
+
+             <Row>
+               <Col>
+                 <Collapse in={open}>
+                   <div className="searchBarNew">
+                     <div id="SearchBarMenu">
+                       <Form.Control type="text" className="shadow-none" placeholder="Search"/>
+                       <span onClick={() => setOpen(false)}><i className="fas fa-times"></i></span>
+                     </div>
+                   </div>
+                 </Collapse>
+               </Col>
+             </Row>
+           </Container>
+         </header>
+
+         <Modal show={show} onHide={handleClose}>
+           <Modal.Header className="ModaCloseBtn" closeButton></Modal.Header>
+           <Modal.Body>
+             <ul className="mobileNav">
+               <li><a href="#">Kindergarten </a></li>
+               <li><a href="#">Kindergarten </a></li>
+               <li><a href="#">Kindergarten </a></li>
+               <li><a href="#">Kindergarten </a></li>
+               <li><a href="#">Kindergarten </a></li>
+               <li><a href="#">Kindergarten </a></li>
+             </ul>
+
+           </Modal.Body>
+           <Modal.Footer className="modal-footer-btn-group pt-4 pb-4 pl-1 pr-1">
+             <Col>
+               <Link className="btn btn-border">Login</Link>
+             </Col>
+             <Col>
+               <Link href="/home"><span className="cartBadge"><i className="far fa-star"></i><span
+                   className="badge badge-danger">10</span></span> Favorites</Link>
+             </Col>
+           </Modal.Footer>
+         </Modal>
+        </Mobile>
+     </>)
+  }
+
+export {
+    HeaderComponent,
+    MobileHeader
+}
