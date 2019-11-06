@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Breadcrumb, Form, Card } from "react-bootstrap";
+import axios from 'axios';
 
 // Product Images
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
@@ -9,7 +10,22 @@ import FooterComponent from "../components/FooterComponent/FooterComponent";
 import PriceRanger from "../components/PriceRangeSlider/PriceRangeSlider";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 
+import { URL } from '../constants/config';
+
 const ShopPage = () => {
+
+    const [state, setState] = useState([])
+
+    useEffect(() => {
+
+        const fetchBooks = async () => {
+          const result = await axios(URL._ALL_BOOKS);
+          setState(result.data.data);
+        };
+        fetchBooks();
+
+      }, []);
+
   return (
     <>
       <div className="allWrapper">
@@ -429,93 +445,50 @@ const ShopPage = () => {
                     </div>
 
                     <Row>
-                      <Col sm="3">
-                        <Card className="productCard border-0 bg-transparent">
-                          <div className="productMedia mb-3 bgGray">
-                            <img src={bookImage1} alt="" />
-                          </div>
-                          {/* end of productMedia */}
 
-                          <div className="productContent">
-                            <Link to="#">
-                              <h4 className="productTitle mb-1">
-                                Maths time for class 1
-                              </h4>
-                            </Link>
-                            <h5 className="authorName mb-1">Author name</h5>
-                            <p className="productPrice">$ 43.00</p>
-                          </div>
-                          {/* end of productContent */}
-                        </Card>
-                        {/* end of productCard */}
-                      </Col>
-                      {/* end of Container */}
+                      {state.map((book, index) => {
 
-                      <Col sm="3">
-                        <Card className="productCard border-0 bg-transparent">
-                          <div className="productMedia mb-3 bgGray">
-                            <img src={bookImage1} alt="" />
-                          </div>
-                          {/* end of productMedia */}
+                          let bookCover = {
+                                img1: `${URL.BASE}/images/books/default.png`,
+                                img2: `${URL.BASE}/images/books/default.png`,
+                                img3: `${URL.BASE}/images/books/default.png`
+                            }
 
-                          <div className="productContent">
-                            <Link to="#">
-                              <h4 className="productTitle mb-1">
-                                Maths time for class 1
-                              </h4>
-                            </Link>
-                            <h5 className="authorName mb-1">Author name</h5>
-                            <p className="productPrice">$ 43.00</p>
-                          </div>
-                          {/* end of productContent */}
-                        </Card>
-                        {/* end of productCard */}
-                      </Col>
-                      {/* end of Container */}
+                          if(book.cover_images !== null){
 
-                      <Col sm="3">
-                        <Card className="productCard border-0 bg-transparent">
-                          <div className="productMedia mb-3 bgGray">
-                            <img src={bookImage1} alt="" />
-                          </div>
-                          {/* end of productMedia */}
+                            const cover = JSON.parse(book.cover_images)
 
-                          <div className="productContent">
-                            <Link to="#">
-                              <h4 className="productTitle mb-1">
-                                Maths time for class 1
-                              </h4>
-                            </Link>
-                            <h5 className="authorName mb-1">Author name</h5>
-                            <p className="productPrice">$ 43.00</p>
-                          </div>
-                          {/* end of productContent */}
-                        </Card>
-                        {/* end of productCard */}
-                      </Col>
-                      {/* end of Container */}
+                              bookCover = {
+                                  img1 : `${URL.BASE}/${cover.img_1}`,
+                                  img2 : `${URL.BASE}/${cover.img_2}`,
+                                  img3 : `${URL.BASE}/${cover.img_3}`
+                              }
+                          }
 
-                      <Col sm="3">
-                        <Card className="productCard border-0 bg-transparent">
-                          <div className="productMedia mb-3 bgGray">
-                            <img src={bookImage1} alt="" />
-                          </div>
-                          {/* end of productMedia */}
+                          return (
+                            <Col key = {index} sm="3">
+                            <Card className="productCard border-0 bg-transparent">
+                              <div className="productMedia mb-3 bgGray">
+                                <img src={bookCover.img1} alt="" />
+                              </div>
+                              {/* end of productMedia */}
 
-                          <div className="productContent">
-                            <Link to="#">
-                              <h4 className="productTitle mb-1">
-                                Maths time for class 1
-                              </h4>
-                            </Link>
-                            <h5 className="authorName mb-1">Author name</h5>
-                            <p className="productPrice">$ 43.00</p>
-                          </div>
-                          {/* end of productContent */}
-                        </Card>
-                        {/* end of productCard */}
-                      </Col>
-                      {/* end of Container */}
+                              <div className="productContent">
+                                <Link to="/product/">
+                                  <h4 className="productTitle mb-1">
+                                    {book.name}
+                                  </h4>
+                                </Link>
+                                <h5 className="authorName mb-1">{book.book_author.name}</h5>
+                                <p className="productPrice">$ {book.price}</p>
+                              </div>
+                              {/* end of productContent */}
+                            </Card>
+                            {/* end of productCard */}
+                          </Col>
+                          );
+                      })}
+
                     </Row>
                     {/* end of Container */}
                   </div>
