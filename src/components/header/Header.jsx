@@ -86,7 +86,7 @@ function HeaderComponent() {
                 <ul className="headPopBarList d-flex justify-content-between">
                   <li>
                     <div className="input-group">
-                      <Link onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</Link>
+                      <Link to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</Link>
                     </div>
                   </li>
                   <li><Link to="#"><span className="cartBadge"><i className="far fa-star"></i><Badge variant="danger">10</Badge></span> Favorites</Link></li>
@@ -143,7 +143,7 @@ function HeaderComponent() {
                    <ul className="headPopBarList d-flex">
                      <li>
                        <div className="input-group searchbar">
-                         <Link onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
+                         <Link to="" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
                              className="fa fa-search"></i> Search</Link>
                        </div>
                      </li>
@@ -190,10 +190,10 @@ function HeaderComponent() {
            </Modal.Body>
            <Modal.Footer className="modal-footer-btn-group pt-4 pb-4 pl-1 pr-1">
              <Col>
-               <Link className="btn btn-border">Login</Link>
+               <Link to="" className="btn btn-border">Login</Link>
              </Col>
              <Col>
-               <Link href="/home"><span className="cartBadge"><i className="far fa-star"></i><span
+               <Link to="/home"><span className="cartBadge"><i className="far fa-star"></i><span
                    className="badge badge-danger">10</span></span> Favorites</Link>
              </Col>
            </Modal.Footer>
