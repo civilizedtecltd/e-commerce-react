@@ -11,7 +11,7 @@ import { Container, Modal, Button } from "react-bootstrap";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
 import { ImageCarousel } from "../components/ProductImgCarosellComponents/ProductImgCarosell";
 import { Link } from "react-router-dom";
-import HeaderComponent from "../components/header/Header";
+import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import TabComponent from "../components/TabComponent/TabComponent";
 
 function ProductPage() {
@@ -22,6 +22,7 @@ function ProductPage() {
     <>
       <div className="allWrapper">
         <HeaderComponent />
+        <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
             className="breadcrumbArea secGap pb-0 clearfix"

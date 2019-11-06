@@ -5,12 +5,13 @@ import {CheckboxComponent} from '../../components/FromComponents/CheckboxCompone
 import{ButtonComponents}from '../../components/ButtonComponents/ButtonComponents'
 import {LiAi} from '../../components/LiComponent/CommonLiComponent';
 import {asideData} from '../../inc/users/users'
-import HeaderComponent from '../../components/header/Header';
+import {HeaderComponent, MobileHeader} from '../../components/header/Header';
 
 const Subscription = () => {
-  return (<> 
+  return (<>
   <div className="allWrapper">
       <HeaderComponent/>
+    <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
         <Container fluid="{true}" className="pl-0 pr-0">
           <Row noGutters>
@@ -52,9 +53,9 @@ const Subscription = () => {
                                     Label="Announcements"
                                   />
                                 </Col>{/* end of col */}
-                                
+
                                 <Col sm="12">
-                                  
+
                                   <CheckboxComponent
                                     ControlId="formCheckbox2"
                                     ClassName="formCheckbox mt-2"
@@ -62,7 +63,7 @@ const Subscription = () => {
                                     Label="Sale invitations"
                                   />
                                 </Col>{/* end of col */}
-                                
+
                                 <Col sm="12">
                                   <CheckboxComponent
                                     ControlId="formCheckbox3"

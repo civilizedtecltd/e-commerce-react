@@ -1,0 +1,21 @@
+.productDetailsTabs .nav-tabs .nav-link{
+    font-size: 18px;
+    color: #363636;
+}
+.productDetailsTabs .nav-tabs .nav-item.show .nav-link,
+.productDetailsTabs .nav-tabs .nav-link.active,
+.productDetailsTabs .nav-tabs .nav-link:hover,
+.productDetailsTabs .nav-tabs .nav-link:focus{
+    background-color: transparent;
+    color: #3897cf;
+    border-color: transparent;
+    border-bottom: 2px solid #3897cf;
+}
+.productDetailsTabs .nav-tabs{
+    margin-bottom: 1rem;
+    border-bottom: 0px;
+}
+.productDes p{
+    font-size: 18px;
+    margin-bottom: 0.5rem;
+}

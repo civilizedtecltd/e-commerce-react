@@ -14,7 +14,7 @@ import {
 //Product Images
 import productImage1 from "../assets/images/books/book_img_01.jpg";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
-import HeaderComponent from "../components/header/Header";
+import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 
 const CartPage = () => {
@@ -22,7 +22,7 @@ const CartPage = () => {
     <>
       <div className="allWrapper">
         <HeaderComponent />
-
+        <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
             className="sectionBreadcrumb secGap clearfix pb-0"

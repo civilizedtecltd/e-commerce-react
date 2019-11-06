@@ -8,7 +8,7 @@ import { NewsLetterComponent } from "../components/offerPageComponents/NewsLette
 import bookImage1 from "../assets/images/books/book_img_01.jpg";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import PriceRanger from "../components/PriceRangeSlider/PriceRangeSlider";
-import HeaderComponent from "../components/header/Header";
+import {HeaderComponent, MobileHeader} from "../components/header/Header";
 
 import { URL } from '../constants/config';
 
@@ -30,6 +30,7 @@ const ShopPage = () => {
     <>
       <div className="allWrapper">
         <HeaderComponent />
+        <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
             className="sectionBreadcrumb secGap clearfix pb-0"

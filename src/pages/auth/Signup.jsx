@@ -1,13 +1,13 @@
 import React, {useState, useEffect}from 'react';
 import SweetAlert from 'sweetalert2-react';
-import axios from 'axios';
+import axios from 'axios'
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
-import { URL } from '../../constants/config';
+import { URL } from '../../constants/config'
 import './assets/css/auth.css';
 
 const SignUp = () => {

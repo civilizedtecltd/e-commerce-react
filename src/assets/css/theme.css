@@ -188,7 +188,7 @@
     max-width: 50%;
 }
 .cardWidgetList li strong{text-transform: uppercase;}
-.productContent{position: relative;}
+.productContent{position: relative; width: 190px}
 .favoritIcon{
 	position: absolute;
 	top: 0;
@@ -204,7 +204,7 @@
     position: relative;
     padding-left: 5px;
   }
-  
+
   .formCheckbox label::before {
     content: "";
     display: inline-block;
@@ -220,7 +220,7 @@
     -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
     transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
   }
-  
+
   .formCheckbox label::after {
     display: inline-block;
     position: absolute;
@@ -234,18 +234,18 @@
     font-size: 11px;
     color: #555555;
   }
-  
+
   .formCheckbox input[type="checkbox"] {
     opacity: 0;
     z-index: 1;
   }
-  
+
   .formCheckbox input[type="checkbox"]:focus + label::before {
     outline: thin dotted;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
   }
-  
+
   .formCheckbox input[type="checkbox"]:checked + label::after {
     font-family: 'Font Awesome 5 Free';
     content: "\f00c";
