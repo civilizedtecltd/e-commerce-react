@@ -6,11 +6,19 @@
      }
 
      get _CATEGORY(){
-         return `${this.API}/category`
+         return `${this.API}/category`;
      }
 
      get _REGISTER(){
-         return `${this.API}/auth/register`
+         return `${this.API}/auth/register`;
+     }
+
+     get _LOGIN(){
+         return `${this.API}/auth/login`;
+     }
+
+     get _ALL_BOOKS(){
+         return `${this.API}/product/book`;
      }
  }
 
