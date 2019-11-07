@@ -61,6 +61,7 @@
     "react-router-transition": "^2.0.0",
     "react-slick": "^0.25.2",
     "react-transition-group": "^4.3.0",
+    "reactstrap": "^8.1.1",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import {Container, Card} from 'react-bootstrap'
+import {Container, Card ,Form} from 'react-bootstrap'
+import { Collapse, CardBody} from 'reactstrap';
 import {Link} from 'react-router-dom'
 import './checkout.css';
 import card_icon_img from '../assets/images/user/card_icon_img.png'
+
 
 
   function CheckoutTab() {
@@ -73,7 +75,8 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
 
      }
 
-    const handlePayment = () => {
+    const handlePayment = (e) => {
+        e.preventDefault()
         setStep({show:!step.show})
     }
    
@@ -172,31 +175,22 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                 <div id="payment-section" className="tab payment-section mt-5">
                    <div className="row">
                        <div className="col col-12">
-                            <div className="form-group payment-header">
-                                 <input className="ml-2" type="radio" name="payment" id="mpesa"/>
-                                 <label className="ml-2" htmlFor="mpesa">Mpesa</label>
-                            </div>
-                             <div className="form-group payment-header">
-                                 <input className="ml-2" type="radio" onClick={handlePayment} name="payment" id="Visa"/>
-                                 <label className="ml-2" htmlFor="visa"  >Visa</label>
-
-                                {step.show===true ?(<div className="payment-form ">
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium alias dignissimos qui quam nam minus deleniti nulla quia. Mollitia cupiditate vel ipsum? Adipisci natus illum recusandae, unde mollitia vel incidunt!
-                                 </div>) : ""}
-                            </div>
-                             <div className="form-group payment-header">
-                                 <input className="ml-2" type="radio" name="payment" id="paypal"/>
-                                 <label className="ml-2" htmlFor="paypal">Paypal</label>
-                            </div>
-                             <div className="form-group payment-header">
-                                 <input className="ml-2" type="radio" name="payment" id="mpesa"/>
-                                 <label className="ml-2" htmlFor="mpesa">Standard</label>
-                            </div>
-
-                             <div className="form-group payment-header">
-                                 <input className="ml-2" type="radio" name="payment" id="dd"/>
-                                 <label className="ml-2" htmlFor="mpesa">Express</label>
-                            </div>
+                            <PaymentsMethod
+                              paymentName="Visa"
+                            />
+                            <PaymentsMethod
+                              paymentName="Visa"
+                            />
+                            <PaymentsMethod
+                              paymentName="Visa"
+                            />
+                            <PaymentsMethod
+                              paymentName="Visa"
+                            />
+                            <PaymentsMethod
+                              paymentName="Visa"
+                            />
+                           
 
                            <form id="mpesa" action="" role="form">
                            <div className="clearfix">
@@ -313,6 +307,36 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
       </Container>
      
     )
+}
+
+
+function PaymentsMethod({paymentName}){
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
+
+  return(<>
+  <div>
+ <div className="payment-header mt-3">    
+  <Form.Check
+        className="ml-2"
+        onClick={toggle}
+        type="radio"
+        id={paymentName.toLowerCase()}
+        label={paymentName}
+      />
+ </div>
+      <Collapse isOpen={isOpen}>
+        <Card>
+          <CardBody>
+          Anim pariatur cliche reprehenderit,
+           enim eiusmod high life accusamus terry richardson ad squid. Nihil
+           anim keffiyeh helvetica, craft beer labore wes anderson cred
+           nesciunt sapiente ea proident.
+          </CardBody>
+        </Card>
+      </Collapse>
+    </div>
+  </>)
 }
 
 export default CheckoutTab;
