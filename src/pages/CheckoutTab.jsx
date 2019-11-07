@@ -177,8 +177,8 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                                  <label className="ml-2" htmlFor="mpesa">Mpesa</label>
                             </div>
                              <div className="form-group payment-header">
-                                 <input className="ml-2" type="radio" name="payment" id="Visa"/>
-                                 <label className="ml-2" htmlFor="visa" onClick={handlePayment} >Visa</label>
+                                 <input className="ml-2" type="radio" onClick={handlePayment} name="payment" id="Visa"/>
+                                 <label className="ml-2" htmlFor="visa"  >Visa</label>
 
                                 {step.show===true ?(<div className="payment-form ">
                                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium alias dignissimos qui quam nam minus deleniti nulla quia. Mollitia cupiditate vel ipsum? Adipisci natus illum recusandae, unde mollitia vel incidunt!
