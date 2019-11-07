@@ -7,13 +7,14 @@ import { NewBookDB } from "../inc/offerPage/NewBook";
 import { NewBookComponent } from "../components/offerPageComponents/NewBookComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
-import HeaderComponent from "../components/header/Header";
+import {HeaderComponent, MobileHeader} from "../components/header/Header";
 
 const FavoritesPage = () => {
   return (
     <>
       <div className="allWrapper">
         <HeaderComponent />
+        <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
             className="sectionBreadcrumb secGap clearfix pb-0"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { spring, AnimatedSwitch} from "react-router-transition"; 
+import { spring, AnimatedSwitch} from "react-router-transition";
 import {
   BrowserRouter as Router,
   Route} from "react-router-dom";
@@ -68,7 +68,7 @@ function App() {
        mapStyles={mapStyles}
        className="route-wrapper"
     >
-      {/* <Switch> */}
+
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/forgotPassword" component={ForgotPassword} />
@@ -85,7 +85,7 @@ function App() {
         <Route path="/favorites" component={FavoritesPage} />
         <Route path="/shop" component={ShopPage} />
         <Route path="/product" component={ProductPage} />
-      {/* </Switch> */}
+
       </AnimatedSwitch>
      </Router>
   );
