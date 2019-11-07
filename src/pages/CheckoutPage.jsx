@@ -1,9 +1,12 @@
-import React from "react";
+import React, { createElement } from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col, Card, Nav, Tab } from "react-bootstrap";
+import { Container, Row, Col, Card, Tab,Tabs,Button } from "react-bootstrap";
+import CheckoutTab from './CheckoutTab';
 // Book Images
 import bookImage1 from "../assets/images/books/book_img_01.jpg";
+import './checkout.css'
 const CheckoutPage = () => {
+
   return (
     <>
       <div className="allWrapper bgGray">
@@ -20,7 +23,7 @@ const CheckoutPage = () => {
               </Col>
               {/* end of Col */}
             </Row>
-            {/* end of Row */}
+            {/* end of Row */} 
           </Container>
           {/* end of Container */}
         </header>
@@ -129,37 +132,7 @@ const CheckoutPage = () => {
             className="checkoutInfoDetails pb-5 clearfix"
             id="checkoutInfoDetails"
           >
-            <Container>
-              <Card>
-                <Card.Body>
-                  <Tab.Container
-                    id="left-tabs-example"
-                    defaultActiveKey="first"
-                  >
-                    <Row>
-                      <Col sm={12}>
-                        <Nav variant="pills" className="flex-column">
-                          <Nav.Item>
-                            <Nav.Link eventKey="first">Tab 1</Nav.Link>
-                          </Nav.Item>
-                          <Nav.Item>
-                            <Nav.Link eventKey="second">Tab 2</Nav.Link>
-                          </Nav.Item>
-                        </Nav>
-                      </Col>
-                      {/* end of Col */}
-                      <Col sm={12}></Col>
-                      {/* end of Col */}
-                    </Row>
-                    {/* end of Row */}
-                  </Tab.Container>
-                  {/* end of Row */}
-                </Card.Body>
-                {/* end of Card.Body */}
-              </Card>
-              {/* end of Card */}
-            </Container>
-            {/* end of Container */}
+           <CheckoutTab/>
           </section>
           {/* end of checkoutInfoDetails */}
         </main>

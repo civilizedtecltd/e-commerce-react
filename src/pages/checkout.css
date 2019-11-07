@@ -1,0 +1,35 @@
+.header-section{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;   
+}
+.header-section button{
+  width: 10rem;
+  background-color:#e2e2e2;
+}
+.header-section button:hover{
+  background-color:#e2e2e2 !important;
+}
+.active-tab{
+    background-color: rgb(16, 54, 179) !important;
+}
+
+.payment-header{
+    background-color: #e2e2e2;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.button-section-next-prev{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.tab{
+    display: none;
+}
+
+.tab-active-content{
+    display: block;
+}
