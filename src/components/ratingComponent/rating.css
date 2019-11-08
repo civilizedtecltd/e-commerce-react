@@ -1,0 +1,26 @@
+.rating {
+  line-height: 1;
+  display: inline-block;
+}
+.rating__item {
+  display: inline;
+  font-size: 0;
+}
+.rating__item::before {
+  font-size: 18px;
+  content: "★";
+  color: lightgray;
+}
+.rating__input {
+  position: absolute;
+  visibility: hidden;
+}
+.rating:hover .rating__item::before {
+  color: orange;
+}
+.rating__item:hover ~ .rating__item::before {
+  color: lightgray;
+}
+.rating__item--selected::before {
+  color: orange;
+}
