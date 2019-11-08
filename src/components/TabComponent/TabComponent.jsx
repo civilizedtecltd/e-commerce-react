@@ -3,6 +3,7 @@ import React,{useState} from 'react';
 import {Tabs,Tab}  from 'react-bootstrap';
 import '../../assets/css/productTab.css'
 import reviewAvatar from "../../assets/images/reviews_avater.jpg"
+import RatingComponent from '../ratingComponent/Rating'
 
 function TabComponent() {
     const [key, setKey] = useState('description');
@@ -52,13 +53,7 @@ function TabComponent() {
                                                 <h6 class="reviewUserName">Sam Smith <span class="reviewDate">May 26, 12:31</span></h6>
                                             </div>
                                             <div class="col">
-                                                <ul class="productReviewStar justify-content-end">
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="star"><i class="fas fa-star"></i></li>
-                                                </ul>
+                                            <RatingComponent/>
                                             </div>
                                         </div>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -83,13 +78,7 @@ function TabComponent() {
                                                 <h6 class="reviewUserName">Sam Smith <span class="reviewDate">May 26, 12:31</span></h6>
                                             </div>
                                             <div class="col">
-                                                <ul class="productReviewStar justify-content-end">
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="star"><i class="fas fa-star"></i></li>
-                                                </ul>
+                                            <RatingComponent/>
                                             </div>
                                         </div>
                                         <p>
@@ -116,13 +105,7 @@ function TabComponent() {
                                                 <h6 class="reviewUserName">Sam Smith <span class="reviewDate">May 26, 12:31</span></h6>
                                             </div>
                                             <div class="col">
-                                                <ul class="productReviewStar justify-content-end">
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="5star"><i class="fas fa-star"></i></li>
-                                                    <li class="star"><i class="fas fa-star"></i></li>
-                                                </ul>
+                                             <RatingComponent/>
                                             </div>
                                         </div>
                                         <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -135,13 +118,7 @@ function TabComponent() {
                     </div>
                     <div class="postReviews clearfix">
                         <h3>Post a review</h3>
-                        <ul class="productReviewStar postReviewStar mb-3">
-                            <li class="5star"><i class="fas fa-star"></i></li>
-                            <li class="5star"><i class="fas fa-star"></i></li>
-                            <li class="5star"><i class="fas fa-star"></i></li>
-                            <li class="5star"><i class="fas fa-star"></i></li>
-                            <li class="star"><i class="fas fa-star"></i></li>
-                        </ul>
+                       <RatingComponent/>
 
                         <form class="postReviewsForm">
                             <textarea name="" id="" cols="30" rows="5" placeholder="Share your experience"></textarea>

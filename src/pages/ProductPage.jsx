@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-//
 import "../pages/assets/product.css";
 //
 import FooterComponent from "../components/FooterComponent/FooterComponent";
@@ -13,6 +12,8 @@ import { ImageCarousel } from "../components/ProductImgCarosellComponents/Produc
 import { Link } from "react-router-dom";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import TabComponent from "../components/TabComponent/TabComponent";
+import RatingComponent from "../components/ratingComponent/Rating";
+
 
 function ProductPage() {
   const [show, setShow] = useState(false);
@@ -69,13 +70,7 @@ function ProductPage() {
                         <h2 className="productSingleTitle">
                           Math time className - 2
                         </h2>
-                        <ul className="productReviewStar">
-                          {[1, 2, 3, 4, 5].map((rating, index) => (
-                            <li key={index} className="5star">
-                              <i className="fas fa-star"></i>
-                            </li>
-                          ))}
-                        </ul>
+                        <RatingComponent/>
                         <p>(7 reviews)</p>
                       </div>
                       <h6 className="authName">
