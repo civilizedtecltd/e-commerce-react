@@ -194,7 +194,8 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	color: #ea4f4b;
+  color: #ea4f4b;
+  font-size: 12px;
 }
 
 /* Card Widget Style End*/

@@ -1,6 +1,6 @@
 import React, { createElement } from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col, Card, Tab,Tabs,Button } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import CheckoutTab from './CheckoutTab';
 // Book Images
 import bookImage1 from "../assets/images/books/book_img_01.jpg";

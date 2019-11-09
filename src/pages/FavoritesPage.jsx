@@ -176,7 +176,7 @@ const FavoritesPage = () => {
           {/* end of chooseCategory */}
 
           <section
-            className="favoritesItems secGap clearfix"
+            className="favoritesItems secGap productView clearfix"
             id="favoritesItems"
           >
             <Container>
@@ -189,6 +189,7 @@ const FavoritesPage = () => {
                     ProductTitle={newBook.Title}
                     AuthorName={newBook.Author}
                     ProductPrice={newBook.Price}
+                    isFev={true}
                   />
                 ))}
               </Row>

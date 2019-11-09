@@ -115,7 +115,7 @@ function ProductPage() {
                           </div>
 
                           <div className="col text-center">
-                            <Link to="/" className="btn linkBtnBorder">
+                            <Link to="/add-to-fev" className="btn linkBtnBorder">
                               <i className="far fa-star"></i>Add to favorites
                             </Link>
                           </div>
@@ -142,7 +142,6 @@ function ProductPage() {
                   </h2>
                 </div>
               </div>
-
               <ImgSlick />
             </div>
           </section>
