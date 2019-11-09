@@ -6,11 +6,11 @@ import { useMediaQuery } from 'react-responsive'
 
 
 const Mobile = ({ children }) => {
-  const isMobile = useMediaQuery({ maxWidth: 767 })
+  const isMobile = useMediaQuery({ maxWidth: 991 })
   return isMobile ? children : null
 }
 const Default = ({ children }) => {
-  const isNotMobile = useMediaQuery({ minWidth: 768 })
+  const isNotMobile = useMediaQuery({ minWidth: 992 })
   return isNotMobile ? children : null
 }
 
@@ -129,6 +129,27 @@ function HeaderComponent() {
     const handleShow = () => setShow(true);
      return(<>
        <Mobile>
+        <div className="headerTopBar clearfix bgBlack" id="headerTopBar">
+          <Container>
+            <Row className="justify-content-between">
+              <Col className="col-auto">
+                <div className="headFeature">
+                  <i className="fas fa-map-marker-alt"></i> <span>Delivery region: Nairobi</span>
+                </div>
+              </Col>
+
+              <Col className="col-auto">
+                <div className="headFeature">
+                  <ul className="headFeatureList d-flex justify-content-between">
+                    <li><i className="fas fa-truck"></i> <span>Free delivery</span></li>
+                    <li><i className="fas fa-award"></i> <span>Genuine goods</span></li>
+                    <li><i className="fas fa-headset"></i> <span>Customer support</span></li>
+                  </ul>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </div>
          <header className="header clearfix" id="header">
            <Container>
              <Row className="align-items-center justify-content-between">
@@ -143,7 +164,7 @@ function HeaderComponent() {
                    <ul className="headPopBarList d-flex">
                      <li>
                        <div className="input-group searchbar">
-                         <Link to="" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
+                         <Link to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
                              className="fa fa-search"></i> Search</Link>
                        </div>
                      </li>
@@ -180,11 +201,10 @@ function HeaderComponent() {
            <Modal.Body>
              <ul className="mobileNav">
                <li><a href="#">Kindergarten </a></li>
-               <li><a href="#">Kindergarten </a></li>
-               <li><a href="#">Kindergarten </a></li>
-               <li><a href="#">Kindergarten </a></li>
-               <li><a href="#">Kindergarten </a></li>
-               <li><a href="#">Kindergarten </a></li>
+               <li><a href="#">Primary school </a></li>
+               <li><a href="#">Secondary school </a></li>
+               <li><a href="#">Stationery </a></li>
+               <li><a href="#">Bibles </a></li>
              </ul>
 
            </Modal.Body>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Container, Card ,Form} from 'react-bootstrap'
+import {Container, Card ,Form, Col, Row, Button} from 'react-bootstrap'
 import { Collapse, CardBody} from 'reactstrap';
 import {Link} from 'react-router-dom'
 import './checkout.css';
@@ -89,103 +89,101 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
             <div className="checkout-tab">
 
                 <div className="header-section">
-                 <button id='step-1' className="btn btn-primary active-tab">Tab Two</button>
+                 <button id='step-1' className="btn btn-primary active-tab">Address details</button>
                  <i className="fas fa-angle-double-right"></i>
-                 <button id="step-2" className="btn btn-primary">Tab Two</button>
+                 <button id="step-2" className="btn btn-primary">Payment and delivery</button>
                  <i className="fas fa-angle-double-right"></i>
-                 <button id="step-3" className="btn btn-primary">Tab Two</button>
+                 <button id="step-3" className="btn btn-primary">Order confirmation</button>
                 </div>
 
                 <div id="address-section" className="tab address-section tab-active-content mt-5">
-                    <div className="row">
-                        <div className="col-12">
-                            <form className='mt-5' action="">
-                               <div className="row">
+                  <Row>
+                    <Col sm="12">
+                        <Form className='mt-5' action="">
+                            <Row>
 
-                                  <div className="form-group col-md-6">
-                                      <label htmlFor="first-name">First Name</label>
-                                      <input type="text" name='first_name' id="first-name" className="form-control"/>
-                                  </div>
+                              <Col className="form-group col-md-6">
+                                <label htmlFor="first-name">First Name</label>
+                                <input type="text" name='first_name' id="first-name" className="form-control"/>
+                              </Col>
 
-                                  <div className="form-group col-md-6">
-                                      <label htmlFor="last-name">Last Name</label>
-                                      <input type="text" name='last_name' id="last-name" className="form-control"/>
-                                  </div>
+                              <Col className="form-group col-md-6">
+                                <label htmlFor="last-name">Last Name</label>
+                                <input type="text" name='last_name' id="last-name" className="form-control"/>
+                              </Col>
 
-                                <div className="form-group col-md-12">
-                                    <label htmlFor="estate">Estate</label>
-                                    <input type="text" name="estate" id="estate" className="form-control"/>
-                                </div>
+                            <Col className="form-group col-md-12">
+                              <label htmlFor="estate">Estate</label>
+                              <input type="text" name="estate" id="estate" className="form-control"/>
+                            </Col>
 
-                                <div className="form-group col-md-12">
-                                    <label htmlFor="country">Country</label>
-                                    <input type="text" name="country"  id="country" className="form-control"/>
-                                </div>
+                            <Col className="form-group col-md-12">
+                              <label htmlFor="country">Country</label>
+                              <input type="text" name="country"  id="country" className="form-control"/>
+                            </Col>
 
-                                <div className="form-group col-md-12">
-                                    <label htmlFor="address">Address</label>
-                                    <input type="text" name="address" id="address" className="form-control"/>
-                                </div>
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="zip-code">Zip Code</label>
-                                    <input type="text" name="zipcode" id="zipcode" className="form-control"/>
-                                </div>
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="house">House/apartment number</label>
-                                    <input type="text" name="house" id="house" className="form-control"/>
-                                </div>
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="">Email</label>
-                                    <input type="text" name="email" id="email" className="form-control"/>
-                                </div>
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="phone-number">Phone Number</label>
-                                    <input type="text" name="phone_number" id="phone-number" className="form-control"/>
-                                </div>
-                                <div className="form-group col-md-12">
-                                    <label htmlFor="comment">Comments</label>
-                                    <textarea name="comment" id="comment" cols="30" rows="10" className="form-control"></textarea>
-                                </div>
+                            <Col className="form-group col-md-12">
+                              <label htmlFor="address">Address</label>
+                              <input type="text" name="address" id="address" className="form-control"/>
+                            </Col>
+                            <Col className="form-group col-md-6">
+                              <label htmlFor="zip-code">Zip Code</label>
+                              <input type="text" name="zipcode" id="zipcode" className="form-control"/>
+                            </Col>
+                            <Col className="form-group col-md-6">
+                              <label htmlFor="house">House/apartment number</label>
+                              <input type="text" name="house" id="house" className="form-control"/>
+                            </Col>
+                            <Col className="form-group col-md-6">
+                              <label htmlFor="">Email</label>
+                              <input type="text" name="email" id="email" className="form-control"/>
+                            </Col>
+                            <Col className="form-group col-md-6">
+                              <label htmlFor="phone-number">Phone Number</label>
+                              <input type="text" name="phone_number" id="phone-number" className="form-control"/>
+                            </Col>
+                            <Col className="form-group col-md-12">
+                              <label htmlFor="comment">Comments</label>
+                              <textarea name="comment" id="comment" cols="30" rows="4" className="form-control"></textarea>
+                            </Col>
+                            
+                            <Col className="col-md-12 form-group fromCheckbox mt-1">
+                              <Form.Check
+                                custom
+                                type={"checkbox"}
+                                label={`I agree with `}
+                                id={`checkboxTerms`}
+                              />
+                              <Link to="#" className="termsTxt">Terms and Conditions</Link>
+                            </Col>
+                            
+                            <Col className="col-md-12 form-group fromCheckbox mt-1">
+                              <Form.Check
+                                custom
+                                type={"checkbox"}
+                                label={`I agree with `}
+                                id={`checkboxPrivacy`}
+                              />
+                              <Link to="#" className="termsTxt">Privacy Policy</Link>
+                            </Col>
 
-                               <div className="col-md-12 form-group fromCheckbox mt-1 ml-3">
-                                 <input className="form-check-input" type="checkbox" value="" id="check1"/>
-                                 <label className="form-check-label" htmlFor="check1">I agree with <Link to="#">Terms and Conditions</Link></label>
-                               </div>
-
-                               <div className="col-md-12 form-group fromCheckbox mt-1 ml-3">
-                                 <input className="form-check-input" type="checkbox" value="" id="check1"/>
-                                 <label className="form-check-label" htmlFor="check1">I agree with <Link to="#">Terms and Conditions</Link></label>
-                               </div>
-                               </div>
-                              <div className="row">
-                              <div className="col-6">
-                                
-                              </div>
-                              
-                              <div className="col-6 text-right">
-                                <button type="button" className="btn btn-primary" onClick={handleNext} >Next</button>
-                              </div>
-                              </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>{/* tab-section -1 */}
-                
+                            <Col className="text-right">
+                              <Button className="btn btn-primary" onClick={handleNext} >Next</Button>
+                            </Col>
+                            
+                        </Row>
+                      </Form>
+                </Col>
+            </Row>{/* tab-section -1 */}
+            
+                </div>
                
                 <div id="payment-section" className="tab payment-section mt-5">
                    <div className="row">
                        <div className="col col-12">
+                          <h3>Choose a delivery method</h3>
                             <PaymentsMethod
-                              paymentName="Visa"
-                            />
-                            <PaymentsMethod
-                              paymentName="Visa"
-                            />
-                            <PaymentsMethod
-                              paymentName="Visa"
-                            />
-                            <PaymentsMethod
-                              paymentName="Visa"
+                              paymentName="Mpesa"
                             />
                             <PaymentsMethod
                               paymentName="Visa"
@@ -193,46 +191,6 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                            
 
                            <form id="mpesa" action="" role="form">
-                           <div className="clearfix">
-                                <hr style={{borderColor:"#e2e2e2"}}/>
-                                <div className="p-3">
-                                  <div className="row align-items-center">
-                                    <div className="col-sm-10 form-group">
-                                      <label htmlFor="card-number">Card number</label>
-                                      <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp"/>
-                                    </div>
-                                    <div className="col">
-                                      <img src={card_icon_img} alt=""/>
-                                    </div>
-                                  </div>
-                                  
-                                  <div className="row align-items-center justify-content-between">
-                                    <div className="col-sm-3 form-group">
-                                      <label htmlFor="card-number">Expiry date</label>
-                                      <ul className="cardPayFiled d-flex align-items-center justify-content-end">
-                                        <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM"/></li>
-                                        <li className="cardBl">/</li>
-                                        <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY"/></li>
-                                      </ul>
-                                    </div>
-
-                                    <div className="col offset-sm-4 form-group">
-                                      <label htmlFor="card-number">CVV</label>
-                                      <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder=""/>
-                                    </div>
-                                    <div className="col-sm-2">
-                                      <img src={card_icon_img} alt=""/>
-                                    </div>
-                                  </div>
-
-                                  <div className="row">
-                                    <div className="col">
-                                      <button type="button" className="btn btn-primary">Add</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div> 
-
                               <div className="row">
                               <div className="col-6">
                                 <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
@@ -318,6 +276,7 @@ function PaymentsMethod({paymentName}){
   <div>
  <div className="payment-header mt-3">    
   <Form.Check
+       custom
         className="ml-2"
         onClick={toggle}
         type="radio"
@@ -328,10 +287,45 @@ function PaymentsMethod({paymentName}){
       <Collapse isOpen={isOpen}>
         <Card>
           <CardBody>
-          Anim pariatur cliche reprehenderit,
-           enim eiusmod high life accusamus terry richardson ad squid. Nihil
-           anim keffiyeh helvetica, craft beer labore wes anderson cred
-           nesciunt sapiente ea proident.
+          <div className="clearfix">
+                                <hr style={{borderColor:"#e2e2e2"}}/>
+                                <div className="p-3">
+                                  <div className="row align-items-center">
+                                    <div className="col-sm-10 form-group">
+                                      <label htmlFor="card-number">Card number</label>
+                                      <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp"/>
+                                    </div>
+                                    <div className="col">
+                                      <img src={card_icon_img} alt=""/>
+                                    </div>
+                                  </div>
+                                  
+                                  <div className="row align-items-center justify-content-between">
+                                    <div className="col-sm-3 form-group">
+                                      <label htmlFor="card-number">Expiry date</label>
+                                      <ul className="cardPayFiled d-flex align-items-center justify-content-end">
+                                        <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM"/></li>
+                                        <li className="cardBl">/</li>
+                                        <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY"/></li>
+                                      </ul>
+                                    </div>
+
+                                    <div className="col offset-sm-4 form-group">
+                                      <label htmlFor="card-number">CVV</label>
+                                      <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder=""/>
+                                    </div>
+                                    <div className="col-sm-2">
+                                      <img src={card_icon_img} alt=""/>
+                                    </div>
+                                  </div>
+
+                                  <div className="row">
+                                    <div className="col">
+                                      <button type="button" className="btn btn-primary">Add</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div> 
           </CardBody>
         </Card>
       </Collapse>

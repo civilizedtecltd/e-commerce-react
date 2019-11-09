@@ -4,14 +4,13 @@
     align-items: center;   
 }
 .header-section button{
-  width: 10rem;
   background-color:#e2e2e2;
 }
 .header-section button:hover{
   background-color:#e2e2e2 !important;
 }
 .active-tab{
-    background-color: rgb(16, 54, 179) !important;
+    background-color: #3897cf!important;
 }
 
 .payment-header{
@@ -33,3 +32,5 @@
 .tab-active-content{
     display: block;
 }
+.fromCheckbox {display: flex;align-items: center;}
+.termsTxt{font-size: 17px;padding-left: 5px;}

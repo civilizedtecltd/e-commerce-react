@@ -3,7 +3,7 @@ import {Image} from 'react-bootstrap';
 import {ProductCarouselImg} from '../../inc/product/ImgCarousel';
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-
+import '../../pages/assets/product.css';
 
 function ImageCarousel(){
     const [hidden, setHidden] = useState(false);

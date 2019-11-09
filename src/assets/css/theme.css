@@ -675,24 +675,114 @@
   width: auto;
 }
 /*Shop Page Style End*/
+.productView .col-auto{margin-bottom: 20px;}
 
+/*------------------------------------------------------------------------------*/
+/*                    Width : 1199px
+/*------------------------------------------------------------------------------*/
+@media only screen and (max-width: 1199px){
+  .navbar-expand-lg .navbar-nav .nav-link{font-size: 13px;}
+  .productCatTitle{font-size: 20px;}
+  .productSingleTitle{font-size: 18px;}
+  .slick-slider .productMedia{min-height: 200px!important;}
+  .productBtnGroup .btn{font-size:11px;}
 
-  /*------------------------------------------------------------------------------*/
+}
+
+/*------------------------------------------------------------------------------*/
+/*                    Width : 991px
+/*------------------------------------------------------------------------------*/
+@media only screen and (max-width: 991px){
+  .subscribeForm input{width: 100%;}
+  .subscribeForm .btn{margin-left: 10px;}
+  .subscribeCard .card-body h1{line-height: 40px;margin-bottom: 20px;font-size: 30px;}
+  .subscribeCard .card-body p br{display: none;}
+  .ourBenefits .col-sm-3{flex: 0 0 50%;max-width: 50%;margin-bottom: 20px;}
+  .productCatCard .card-body{padding-left: 0px;padding-right: 0px;}
+  .productCatTitle {font-size: 16px;}
+  .footer .col,
+  .footer .col-sm-5,
+  .footer .col-sm-2{flex: 0 0 50%;max-width: 50%;}
+  .productsBodyAsidebar .col-sm-3{flex: 0 0 100%;max-width: 100%;}
+  .productDetails .col-sm-6{flex: 0 0 100%;max-width: 100%;}
+  .cartSection .col-sm-4{flex:0 0 50%;max-width: 50%;}
+
+}
+
+/*------------------------------------------------------------------------------*/
 /*                    Width : 767px
 /*------------------------------------------------------------------------------*/
 @media only screen and (max-width: 767px){
-	/* responsive nav */
-	#responsiveMainNavToggler {
-		display: block;
-	}
-	#responsiveMainNavToggler .register > a,
-	#responsiveMainNavToggler .login > a {
-		display: block;
-	}
-	#responsiveMainNavToggler .formSwitcher {
-		display: none !important;
-	}
-	.mainNav {
-		display: none;
-	}
+  .mailSubscribe  .col-sm-10{flex: 0 0 100%;max-width: 100%;}
+  .offerBanner{background-position: 20% 100%;}
+  .productView  .col-auto{margin-bottom: 20px;}
+  .cartSection .col-sm-4{flex:0 0 100%;max-width: 100%;}
+  .cardContentDetails .col-sm-3{flex: 0 0 50%;max-width: 50%;margin-bottom: 20px;}
+  .cartPromo .form-control {max-width: 100%;margin-bottom: 20px;}
+  .cartProductMedia{width: 160px;}
+  .cardTable .btn{display:flex;align-items: center;}
+  .cardTable .btn i{margin-top: -5px;padding-left: 5px;}
+
 }
+
+/*------------------------------------------------------------------------------*/
+/*                    Width : 575px
+/*------------------------------------------------------------------------------*/
+@media only screen and (max-width: 575px){
+  .headFeatureList li {margin-right: 0.5rem;font-size: 15px;}
+  .productCat .col-sm-4{margin-bottom: 20px;}
+  .productCatMedia img{max-width: 100%;width: 100%;}
+  .productCatTitle {font-size: 25px;}
+  .paymentsNav {justify-content: space-around!important;margin-top: 20px;}
+  .footer .col, .footer .col-sm-5, .footer .col-sm-2{flex: 0 0 100%;max-width: 100%;margin-bottom: 20px;}
+  .ourBenefits .col-sm-3 {flex: 0 0 100%;max-width: 100%;}
+  .subscribeForm {flex-flow:row wrap;}
+  .subscribeForm .form-group{width: 100%;}
+  .subscribeForm .btn{width: 100%;margin-left: 0px;margin-top: 10px;}
+  .subscribeCard .card-body h1{line-height: 30px;}
+  .offerBannerTitle{font-size: 30px;}
+  .discountTxt{max-width: 80%;}
+  .sectionTitle{font-size: 20px;}
+  .productGallery{display: flex;}
+  .productGallery .singleItem {padding: 10px!important;margin-right: 10px;}
+  .productGallery .singleItem:last-child {margin-right: 0px;}
+  .productBtnGroup .col-sm-2{flex:0 0 100%;max-width: 100%;margin-bottom: 20px;}
+  .productCardDetails {margin-top: 20px;}
+  .productCardHead{justify-content: flex-start;flex-flow: row wrap;}
+  .productSingleTitle{width: 100%;}
+
+}
+
+/*------------------------------------------------------------------------------*/
+/*                    Width : 453px
+/*------------------------------------------------------------------------------*/
+@media only screen and (max-width: 453px){
+  .productView .col-auto{flex: 0 0 50%;max-width: 50%;}
+  .productView .slick-slider .col-auto{flex: 0 0 auto;width: auto;max-width: 100%;}
+  .productMedia{min-height: auto;}
+  .productTitle{font-size: 15px;}
+  .ImageSlickOfferPage .slick-arrow.slick-next{right: 0px;}
+  .ImageSlickOfferPage .slick-arrow.slick-prev{left: 0px;}
+  .actualProduct .justify-content-between{justify-content: center!important;}
+  .productContent{width: auto;}
+  .productMedia{height: 200px;}
+  .productMedia img{height: 100%;}
+  .linkBtn{padding-left: 10px;padding-right: 10px;}
+
+}
+
+/*------------------------------------------------------------------------------*/
+/*                    Width : 380px
+/*------------------------------------------------------------------------------*/
+@media only screen and (max-width: 380px){
+  .headFeatureList {flex-flow:row wrap;}
+  .footerLinksList li a{font-size: 16px;}
+  .discountTxt{max-width: 100%;}
+  .productMedia {height: 180px;}
+  .sectionTitle {font-size: 18px;}
+  .productBtnGroup .col{flex: 0 0 100%;max-width: 100%;margin-bottom: 20px;}
+  .productBtnGroup .btn{padding: 0 10px;width: 100%;}
+
+}
+
+
