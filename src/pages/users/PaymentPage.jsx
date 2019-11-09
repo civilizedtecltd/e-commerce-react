@@ -1,14 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Table,
-  Form,
-  Button
-} from "react-bootstrap";
+import {Container, Row, Col, Card, Table, Form, Button} from "react-bootstrap";
 import "./assets/css/user.css";
 import { LiAi, LiIs } from "../../components/LiComponent/CommonLiComponent";
 import {

@@ -1,8 +1,8 @@
 import React ,{useState} from 'react';
-import {Container, Row, Col, Form, Badge, Collapse, Modal} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
-import '../../assets/css/heder.css'
-import { useMediaQuery } from 'react-responsive'
+import {Container, Row, Col, Form, Badge, Collapse, Modal} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import '../../assets/css/heder.css';
+import { useMediaQuery } from 'react-responsive';
 
 
 const Mobile = ({ children }) => {
@@ -92,6 +92,7 @@ function HeaderComponent() {
                   <li><Link to="#"><span className="cartBadge"><i className="far fa-star"></i><Badge variant="danger">10</Badge></span> Favorites</Link></li>
                   <li><Link to="#"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge variant="primary">10</Badge></span> Cart</Link></li>
                   <li><Link to="#"><i className="far fa-user"></i> Login</Link></li>
+                  {/* <li><Link to="#"><span className="loginUserAvater">SS</span> Sam Smith</Link></li> */}
                 </ul>
               </div>
             </Col>
@@ -161,7 +162,7 @@ function HeaderComponent() {
 
                <Col className="col-auto">
                  <div className="headPopBar clearfix" id="headPopBar">
-                   <ul className="headPopBarList d-flex">
+                   <ul className="headPopBarList d-flex align-items-center">
                      <li>
                        <div className="input-group searchbar">
                          <Link to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
@@ -170,9 +171,10 @@ function HeaderComponent() {
                      </li>
                      <li><Link to="#"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge
                          variant="primary">10</Badge></span> Cart</Link></li>
+                      <li><Link to="#" className="loginUser"><span className="loginUserAvater">SS</span> <span className="loginuserName">Sam Smith</span> </Link></li>
                      <li>
                        <div className="mobileNavModal">
-                         <a onClick={handleShow}><i className="fas fa-bars"></i></a>
+                         <span onClick={handleShow}><i className="fas fa-bars"></i></span>
                        </div>
                      </li>
                    </ul>
