@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {Container, Card ,Form, Col, Row, Button} from 'react-bootstrap'
 import { Collapse, CardBody} from 'reactstrap';
+import CheckboxComponent from '../components/checkboxComponent/CheckboxComponent'
 import {Link} from 'react-router-dom'
 import './checkout.css';
 import card_icon_img from '../assets/images/user/card_icon_img.png'
@@ -15,9 +16,11 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
         show:false
     })
 
+   const [isCheck , setCheck] = useState(false)
 
-          
-      
+   
+      const handleCheck = () => {setCheck(!isCheck)}
+
       const handleNext = () => {
 
           const payment_section = document.getElementById('payment-section');
@@ -75,10 +78,6 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
 
      }
 
-    const handlePayment = (e) => {
-        e.preventDefault()
-        setStep({show:!step.show})
-    }
    
 
     return(
@@ -87,7 +86,6 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
           <Card.Body>
 
             <div className="checkout-tab">
-
                 <div className="header-section">
                  <button id='step-1' className="btn btn-primary active-tab">Address details</button>
                  <i className="fas fa-angle-double-right"></i>
@@ -102,52 +100,57 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                         <Form className='mt-5' action="">
                             <Row>
 
-                              <Col className="form-group col-md-6">
+                              <Col sm={6} className="form-group">
                                 <label htmlFor="first-name">First Name</label>
                                 <input type="text" name='first_name' id="first-name" className="form-control"/>
                               </Col>
 
-                              <Col className="form-group col-md-6">
+                              <Col sm={6} className="form-group">
                                 <label htmlFor="last-name">Last Name</label>
                                 <input type="text" name='last_name' id="last-name" className="form-control"/>
                               </Col>
 
-                            <Col className="form-group col-md-12">
-                              <label htmlFor="estate">Estate</label>
-                              <input type="text" name="estate" id="estate" className="form-control"/>
-                            </Col>
+                              <Col sm={12} className="form-group">
+                                <label htmlFor="estate">Estate</label>
+                                <input type="text" name="estate" id="estate" className="form-control"/>
+                              </Col>
 
-                            <Col className="form-group col-md-12">
-                              <label htmlFor="country">Country</label>
-                              <input type="text" name="country"  id="country" className="form-control"/>
-                            </Col>
+                              <Col col={12} className="form-group">
+                                <label htmlFor="country">Country</label>
+                                <input type="text" name="country"  id="country" className="form-control"/>
+                              </Col>
 
-                            <Col className="form-group col-md-12">
-                              <label htmlFor="address">Address</label>
-                              <input type="text" name="address" id="address" className="form-control"/>
-                            </Col>
-                            <Col className="form-group col-md-6">
-                              <label htmlFor="zip-code">Zip Code</label>
-                              <input type="text" name="zipcode" id="zipcode" className="form-control"/>
-                            </Col>
-                            <Col className="form-group col-md-6">
-                              <label htmlFor="house">House/apartment number</label>
-                              <input type="text" name="house" id="house" className="form-control"/>
-                            </Col>
-                            <Col className="form-group col-md-6">
-                              <label htmlFor="">Email</label>
-                              <input type="text" name="email" id="email" className="form-control"/>
-                            </Col>
-                            <Col className="form-group col-md-6">
-                              <label htmlFor="phone-number">Phone Number</label>
-                              <input type="text" name="phone_number" id="phone-number" className="form-control"/>
-                            </Col>
-                            <Col className="form-group col-md-12">
-                              <label htmlFor="comment">Comments</label>
-                              <textarea name="comment" id="comment" cols="30" rows="4" className="form-control"></textarea>
-                            </Col>
+                              <Col sm={12} className="form-group">
+                                <label htmlFor="address">Address</label>
+                                <input type="text" name="address" id="address" className="form-control"/>
+                              </Col>
+
+                              <Col sm={12} className="form-group">
+                                <label htmlFor="zip-code">Zip Code</label>
+                                <input type="text" name="zipcode" id="zipcode" className="form-control"/>
+                              </Col>
+
+                              <Col sm={6} className="form-group">
+                                <label htmlFor="house">House/apartment number</label>
+                                <input type="text" name="house" id="house" className="form-control"/>
+                              </Col>
+
+                              <Col sm={6} className="form-group">
+                                <label htmlFor="email">Email</label>
+                                <input type="text" name="email" id="email" className="form-control"/>
+                              </Col>
+
+                              <Col sm={6} className="form-group">
+                                <label htmlFor="phone-number">Phone Number</label>
+                                <input type="text" name="phone_number" id="phone-number" className="form-control"/>
+                              </Col>
+
+                              <Col sm={12} className="form-group">
+                                <label htmlFor="comment">Comments</label>
+                                <textarea name="comment" id="comment" cols="30" rows="4" className="form-control"></textarea>
+                              </Col>
                             
-                            <Col className="col-md-12 form-group fromCheckbox mt-1">
+                            <Col className="form-group fromCheckbox mt-1">
                               <Form.Check
                                 custom
                                 type={"checkbox"}
@@ -175,22 +178,62 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                       </Form>
                 </Col>
             </Row>{/* tab-section -1 */}
-            
-                </div>
+          </div>
+
                
                 <div id="payment-section" className="tab payment-section mt-5">
                    <div className="row">
                        <div className="col col-12">
                           <h3>Choose a delivery method</h3>
+                            
                             <PaymentsMethod
+                              prev={true}
+                              tab={1}
                               paymentName="Mpesa"
                             />
                             <PaymentsMethod
+                              prev={true}
+                              tab={2}
                               paymentName="Visa"
                             />
-                           
 
-                           <Form id="mpesa" action="" role="form">
+                      <div className="payment-header mt-3 d-flex justify-content-between"> 
+                       <div>
+                        <CheckboxComponent
+                         type="radio"
+                         classNames="ml-2"
+                         id="standard"
+                         label="Standard"
+                        />
+                        </div>
+                        <div>
+                        <div class="col text-right shippingCostPrice">
+                            <span class="shippingCost"><strong>Time:</strong> 170 hours</span> <span class="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
+                         </div>
+                        </div>
+                        </div>
+
+                       <div className="payment-header mt-3 d-flex justify-content-between"> 
+
+                       <div className="radio-div">
+                          <CheckboxComponent
+                            type="radio"
+                            classNames="ml-2"
+                            id="express"
+                            label="Express"
+                            />
+                        </div>
+
+                        <div className="price-time-div">
+                        <div class="col text-right shippingCostPrice">
+                            <span class="shippingCost"><strong>Time:</strong> 170 hours</span> <span class="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
+                         </div>
+                        </div>
+
+                      </div>
+                                                
+
+                           <Form className="mt-5">
                             <Row>
                               <Col sm="6">
                                 <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
@@ -200,7 +243,6 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                                 <button type="button" className="btn btn-primary" onClick={handleNext}>Next</button>
                               </Col>
                             </Row>
-
                            </Form>
                        </div>
                    </div>
@@ -268,64 +310,69 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
 }
 
 
-function PaymentsMethod({paymentName}){
+
+
+function PaymentsMethod(props){
   const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle = () =>{ 
+    setIsOpen(!isOpen);
+  }
 
   return(<>
   <div>
  <div className="payment-header mt-3">    
   <Form.Check
-       custom
+        custom
         className="ml-2"
         onClick={toggle}
         type="radio"
-        id={paymentName.toLowerCase()}
-        label={paymentName}
+        id={props.paymentName.toLowerCase()}
+        label={props.paymentName}
+        checked={isOpen} 
       />
  </div>
       <Collapse isOpen={isOpen}>
         <Card>
           <CardBody>
           <div className="clearfix">
-                                <hr style={{borderColor:"#e2e2e2"}}/>
-                                <div className="p-3">
-                                  <div className="row align-items-center">
-                                    <div className="col-sm-10 form-group">
-                                      <label htmlFor="card-number">Card number</label>
-                                      <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp"/>
-                                    </div>
-                                    <div className="col">
-                                      <img src={card_icon_img} alt=""/>
-                                    </div>
-                                  </div>
-                                  
-                                  <div className="row align-items-center justify-content-between">
-                                    <div className="col-sm-3 form-group">
-                                      <label htmlFor="card-number">Expiry date</label>
-                                      <ul className="cardPayFiled d-flex align-items-center justify-content-end">
-                                        <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM"/></li>
-                                        <li className="cardBl">/</li>
-                                        <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY"/></li>
-                                      </ul>
-                                    </div>
+              <hr style={{borderColor:"#e2e2e2"}}/>
+              <div className="p-3">
+                <div className="row align-items-center">
+                  <div className="col-sm-10 form-group">
+                    <label htmlFor="card-number">Card number</label>
+                    <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp"/>
+                  </div>
+                  <div className="col">
+                    <img src={card_icon_img} alt=""/>
+                  </div>
+                </div>
+                
+                <div className="row align-items-center justify-content-between">
+                  <div className="col-sm-3 form-group">
+                    <label htmlFor="card-number">Expiry date</label>
+                    <ul className="cardPayFiled d-flex align-items-center justify-content-end">
+                      <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM"/></li>
+                      <li className="cardBl">/</li>
+                      <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY"/></li>
+                    </ul>
+                  </div>
 
-                                    <div className="col offset-sm-4 form-group">
-                                      <label htmlFor="card-number">CVV</label>
-                                      <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder=""/>
-                                    </div>
-                                    <div className="col-sm-2">
-                                      <img src={card_icon_img} alt=""/>
-                                    </div>
-                                  </div>
+                  <div className="col offset-sm-4 form-group">
+                    <label htmlFor="card-number">CVV</label>
+                    <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder=""/>
+                  </div>
+                  <div className="col-sm-2">
+                    <img src={card_icon_img} alt=""/>
+                  </div>
+                </div>
 
-                                  <div className="row">
-                                    <div className="col">
-                                      <button type="button" className="btn btn-primary">Add</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div> 
+                <div className="row">
+                  <div className="col">
+                    <button type="button" className="btn btn-primary">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
           </CardBody>
         </Card>
       </Collapse>
