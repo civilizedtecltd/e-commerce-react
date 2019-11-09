@@ -207,6 +207,14 @@ function HeaderComponent() {
                <li><a href="#">Bibles </a></li>
              </ul>
 
+             <hr className="borderHr" />
+
+             <ul className="mobileNav userMbNav">
+               <li className="active"><a href="#"><i class="fas fa-clipboard-list"></i> My orders </a></li>
+               <li><a href="#"><i class="fas fa-wallet"></i> Payment methods </a></li>
+               <li><a href="#"><i class="fas fa-cog"></i> Profile settings </a></li>
+               <li><a href="#"><i class="far fa-envelope"></i> Email subscription </a></li>
+             </ul>
            </Modal.Body>
            <Modal.Footer className="modal-footer-btn-group pt-4 pb-4 pl-1 pr-1">
              <Col>

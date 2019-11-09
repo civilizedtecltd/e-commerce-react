@@ -706,6 +706,7 @@
   .productsBodyAsidebar .col-sm-3{flex: 0 0 100%;max-width: 100%;}
   .productDetails .col-sm-6{flex: 0 0 100%;max-width: 100%;}
   .cartSection .col-sm-4{flex:0 0 50%;max-width: 50%;}
+  .userBodyArea .col-sm-2{display: none;}
 
 }
 
@@ -782,6 +783,7 @@
   .sectionTitle {font-size: 18px;}
   .productBtnGroup .col{flex: 0 0 100%;max-width: 100%;margin-bottom: 20px;}
   .productBtnGroup .btn{padding: 0 10px;width: 100%;}
+  .mobileNav li a {font-size: 0.95rem;}
 
 }
 
