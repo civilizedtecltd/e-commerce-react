@@ -171,7 +171,7 @@ function HeaderComponent() {
                      </li>
                      <li><Link to="#"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge
                          variant="primary">10</Badge></span> Cart</Link></li>
-                      <li><Link to="#" className="loginUser"><span className="loginUserAvater">SS</span> <span className="loginuserName">Sam Smith</span> </Link></li>
+                      {/* <li><Link to="#" className="loginUser"><span className="loginUserAvater">SS</span> <span className="loginuserName">Sam Smith</span> </Link></li> */}
                      <li>
                        <div className="mobileNavModal">
                          <span onClick={handleShow}><i className="fas fa-bars"></i></span>
