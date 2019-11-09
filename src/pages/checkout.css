@@ -34,3 +34,9 @@
 }
 .fromCheckbox {display: flex;align-items: center;}
 .termsTxt{font-size: 17px;padding-left: 5px;}
+.orderConfrimationList li {
+    font-size: 18px;
+    font-weight: 600;
+    color: #363636;
+    line-height: 30px;
+}

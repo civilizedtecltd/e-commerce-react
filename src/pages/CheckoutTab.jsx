@@ -190,18 +190,18 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                             />
                            
 
-                           <form id="mpesa" action="" role="form">
-                              <div className="row">
-                              <div className="col-6">
+                           <Form id="mpesa" action="" role="form">
+                            <Row>
+                              <Col sm="6">
                                 <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
-                              </div>
+                              </Col>
                               
-                              <div className="col-6 text-right">
+                              <Col sm="6" className="col-6 text-right">
                                 <button type="button" className="btn btn-primary" onClick={handleNext}>Next</button>
-                              </div>
-                              </div>
+                              </Col>
+                            </Row>
 
-                           </form>
+                           </Form>
                        </div>
                    </div>
                 </div>{/* tab-section -2 */}
@@ -211,49 +211,49 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
 
                
                 <div id='order-confirmation-section' className="tab order-confirmation-section">
-                          <form className="userInfoForm">
+                          <Form className="userInfoForm mt-3">
                             <h3>Choose a delivery method</h3>
 
-                            <div className="row mt-4">
-                              <div className="col-sm-6">
-                                <ul className="text-large">
+                            <Row className="row mt-4">
+                              <Col sm="6">
+                                <ul className="orderConfrimationList text-large">
                                   <li><strong>First name:</strong> Sam</li>
                                   <li><strong>Last name:</strong> Smith</li>
                                   <li><strong>Phone:</strong> +123 456 7890</li>
                                   <li><strong>Email:</strong> you@example.com</li>
                                 </ul>
-                              </div>
+                              </Col>
 
   
-                              <div className="col-sm-6">
-                                <ul className="">
+                              <Col sm="6">
+                                <ul className="orderConfrimationList">
                                   <li><strong>City:</strong> Lorem ipsum</li>
                                   <li><strong>Estate:</strong> Lorem ipsum</li>
                                   <li><strong>Address:</strong> set amet adipiscing</li>
                                   <li><strong>Zip code:</strong> 56437</li>
                                 </ul>
-                              </div>
+                              </Col>
 
-                              <div className="col-sm-6 mt-4">
-                                <ul className="text-large">
+                              <Col sm="6" className="mt-4">
+                                <ul className="orderConfrimationList text-large">
                                   <li><strong>Total Price:</strong> 50.00</li>
                                   <li><strong>Delivery method:</strong> Standard</li>
                                   <li><strong>Expected arrival:</strong>  Monday, 27.05.2019</li>
                                 </ul>
-                              </div>
-                            </div>
+                              </Col>
+                            </Row>
 
-                            <div className="row form-group mt-5">
-                              <div className="col">
+                            <Row className="form-group mt-5">
+                              <Col>
                                 <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
-                              </div>
+                              </Col>
                               
-                              <div className="col text-right">
+                              <Col className="text-right">
                                 <button type="submit" className="btn btn-primary" data-target="#confirmOrder" data-toggle="modal">Confirm order</button>
-                              </div>
-                            </div>
+                              </Col>
+                            </Row>
     
-                          </form>
+                          </Form>
                         </div>{/* tab section -3 */}
 
 
