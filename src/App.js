@@ -70,7 +70,7 @@ function App() {
        className="route-wrapper"
     >
 
-        <Route exact path="/home" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/forgotPassword" component={ForgotPassword} />
@@ -87,7 +87,7 @@ function App() {
         <Route path="/favorites" component={FavoritesPage} />
         <Route path="/shop" component={ShopPage} />
         <Route path="/product" component={ProductPage} />
-        <Route path='*' exact={true} component={ErrorPage} />
+        <Route path='*'  component={ErrorPage} />
 
       </AnimatedSwitch>
      </Router>

@@ -10,7 +10,7 @@ function ErrorPage() {
                 <h1 className='text-center'>404</h1>
                 <h2 className="text-center">Page Not found</h2>
                 <div className="text-center" style={{fontSize:40}}>
-                <Link to="/home">GO HOME</Link>
+                <Link to="/">GO HOME</Link>
                 </div>
             </Col>
         </Row>

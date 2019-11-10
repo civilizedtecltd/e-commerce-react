@@ -48,7 +48,7 @@ function HeaderComponent() {
           <Row className="align-items-center">
             <Col sm="2">
               <div className="logoWrapper">
-                <h1 className="logoText"><Link to="/home">LOGO</Link></h1>
+                <h1 className="logoText"><Link to="/">LOGO</Link></h1>
               </div>
             </Col>
 
@@ -156,7 +156,7 @@ function HeaderComponent() {
              <Row className="align-items-center justify-content-between">
                <Col className="col-auto">
                  <div className="logoWrapper">
-                   <h1 className="logoText"><Link to="/home">LOGO</Link></h1>
+                   <h1 className="logoText"><Link to="/">LOGO</Link></h1>
                  </div>
                </Col>
 
