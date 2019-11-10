@@ -225,8 +225,8 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                         </div>
 
                         <div className="price-time-div">
-                        <div class="col text-right shippingCostPrice">
-                            <span class="shippingCost"><strong>Time:</strong> 170 hours</span> <span class="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
+                        <div className="col text-right shippingCostPrice">
+                            <span className="shippingCost"><strong>Time:</strong> 170 hours</span> <span class="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
                          </div>
                         </div>
 
