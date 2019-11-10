@@ -50,10 +50,10 @@ function SelectFrom({ LabelTitle, controlId, category, callback }) {
         <Form.Group controlId={controlId}>
             <Form.Label> {LabelTitle} </Form.Label>
             <Form.Control as="select" id="category" onChange = {handleOnchange}>
-                        <option defaultValue>Select Category</option>
+                        <option defaultValue="" >Select Category</option>
                 {
                     category.map((element) =>
-                        <option key = {element.id} value = {element.id}>{element.category}</option>
+                        <option key = {element.id} value = {element.id}>{ element.category }</option>
                     )
                 }
             </Form.Control>
