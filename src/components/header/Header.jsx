@@ -91,7 +91,7 @@ function HeaderComponent() {
                   </li>
                   <li><Link to="#"><span className="cartBadge"><i className="far fa-star"></i><Badge variant="danger">10</Badge></span> Favorites</Link></li>
                   <li><Link to="#"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge variant="primary">10</Badge></span> Cart</Link></li>
-                  <li><Link to="#"><i className="far fa-user"></i> Login</Link></li>
+                  <li><Link to="/login"><i className="far fa-user"></i> Login</Link></li>
                   {/* <li><Link to="#"><span className="loginUserAvater">SS</span> Sam Smith</Link></li> */}
                 </ul>
               </div>
@@ -124,10 +124,10 @@ function HeaderComponent() {
 
   function MobileHeader () {
     const [open, setOpen] = useState(false);
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
      return(<>
        <Mobile>
         <div className="headerTopBar clearfix bgBlack" id="headerTopBar">
@@ -214,17 +214,18 @@ function HeaderComponent() {
              <ul className="mobileNav userMbNav">
                <li className="active"><a href="#"><i class="fas fa-clipboard-list"></i> My orders </a></li>
                <li><a href="#"><i class="fas fa-wallet"></i> Payment methods </a></li>
-               <li><a href="#"><i class="fas fa-cog"></i> Profile settings </a></li>
-               <li><a href="#"><i class="far fa-envelope"></i> Email subscription </a></li>
+               <li><a href="/profile-settings"><i class="fas fa-cog"></i> Profile settings </a></li>
+               <li><a href="/email-subscription"><i class="far fa-envelope"></i> Email subscription </a></li>
              </ul>
            </Modal.Body>
            <Modal.Footer className="modal-footer-btn-group pt-4 pb-4 pl-1 pr-1">
              <Col>
-               <Link to="" className="btn btn-border">Login</Link>
+               <Link to="/login" className="btn btn-border">Login</Link>
              </Col>
              <Col>
-               <Link to="/home"><span className="cartBadge"><i className="far fa-star"></i><span
-                   className="badge badge-danger">10</span></span> Favorites</Link>
+               <Link to="/favorites"><span className="cartBadge">
+                 <i className="far fa-star"></i><span className="badge badge-danger">10</span></span> Favorites
+               </Link>
              </Col>
            </Modal.Footer>
          </Modal>
