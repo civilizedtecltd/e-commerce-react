@@ -1,18 +1,18 @@
 export const headerPoppers=[
     {
-        URL:'/',
+        URL:'/search',
         ICON_NAME:"fas fa-search",
         TITLE:"Search",
         ANCHOR_CLASS:""
     },
     {
-        URL:'/',
+        URL:'/favorites',
         ICON_NAME:"far fa-star",
         TITLE:"Favorites",
         ANCHOR_CLASS:""
     },
     {
-        URL:'/',
+        URL:'/cart',
         ICON_NAME:"fas fa-shopping-cart",
         TITLE:"Cart",
         ANCHOR_CLASS:""
@@ -24,35 +24,35 @@ export const headerPoppers=[
 export const asideData=[
     {
         LIST_CLASS:'nav-item active',
-        URL:'/',
+        URL:'/order',
         ICON_NAME:"fas fa-clipboard-list",
         TITLE:"My orders",
         ANCHOR_CLASS:"nav-link"
     },
     {
         LIST_CLASS:'nav-item',
-        URL:'/',
+        URL:'/payment-methods',
         ICON_NAME:"fas fa-wallet",
         TITLE:"Payment methods",
         ANCHOR_CLASS:"nav-link"
     },
     {
         LIST_CLASS:'nav-item',
-        URL:'/',
+        URL:'/profile-settings',
         ICON_NAME:"fas fa-cog",
         TITLE:"Profile settings",
         ANCHOR_CLASS:"nav-link"
     },
     {
         LIST_CLASS:'nav-item',
-        URL:'/',
+        URL:'/email-subscription',
         ICON_NAME:"far fa-envelope",
         TITLE:"Email subscription",
         ANCHOR_CLASS:"nav-link"
     },
     {
         LIST_CLASS:'nav-item',
-        URL:'/',
+        URL:'/logout',
         ICON_NAME:"fas fa-sign-out-alt",
         TITLE:"Log out",
         ANCHOR_CLASS:"nav-link"
