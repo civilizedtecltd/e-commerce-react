@@ -48,7 +48,7 @@ function HeaderComponent() {
           <Row className="align-items-center">
             <Col sm="2">
               <div className="logoWrapper">
-                <h1 className="logoText"><Link to="#">LOGO</Link></h1>
+                <h1 className="logoText"><Link to="/">LOGO</Link></h1>
               </div>
             </Col>
 
@@ -89,8 +89,8 @@ function HeaderComponent() {
                       <Link to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</Link>
                     </div>
                   </li>
-                  <li><Link to="#"><span className="cartBadge"><i className="far fa-star"></i><Badge variant="danger">10</Badge></span> Favorites</Link></li>
-                  <li><Link to="#"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge variant="primary">10</Badge></span> Cart</Link></li>
+                  <li><Link to="/favorites"><span className="cartBadge"><i className="far fa-star"></i><Badge variant="danger">10</Badge></span> Favorites</Link></li>
+                  <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge variant="primary">10</Badge></span> Cart</Link></li>
                   <li><Link to="/login"><i className="far fa-user"></i> Login</Link></li>
                   {/* <li><Link to="#"><span className="loginUserAvater">SS</span> Sam Smith</Link></li> */}
                 </ul>
@@ -156,7 +156,7 @@ function HeaderComponent() {
              <Row className="align-items-center justify-content-between">
                <Col className="col-auto">
                  <div className="logoWrapper">
-                   <h1 className="logoText"><Link to="#">LOGO</Link></h1>
+                   <h1 className="logoText"><Link to="/">LOGO</Link></h1>
                  </div>
                </Col>
 
@@ -202,11 +202,11 @@ function HeaderComponent() {
            <Modal.Header className="ModaCloseBtn" closeButton></Modal.Header>
            <Modal.Body>
              <ul className="mobileNav">
-               <li><Link to="#">Kindergarten </Link></li>
-               <li><Link to="#">Primary school </Link></li>
-               <li><Link to="#">Secondary school </Link></li>
-               <li><Link href="#">Stationery </Link></li>
-               <li><Link href="#">Bibles </Link></li>
+               <li><Link to="/kindergarten">Kindergarten </Link></li>
+               <li><Link to="/primary-school">Primary school </Link></li>
+               <li><Link to="/secondary-school">Secondary school </Link></li>
+               <li><Link to="/stationary">Stationery </Link></li>
+               <li><Link to="/bibles">Bibles </Link></li>
              </ul>
 
              <hr className="borderHr" />
