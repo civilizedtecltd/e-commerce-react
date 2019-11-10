@@ -202,11 +202,11 @@ function HeaderComponent() {
            <Modal.Header className="ModaCloseBtn" closeButton></Modal.Header>
            <Modal.Body>
              <ul className="mobileNav">
-               <li><Link to="#">Kindergarten </Link></li>
-               <li><Link to="#">Primary school </Link></li>
-               <li><Link to="#">Secondary school </Link></li>
-               <li><Link href="#">Stationery </Link></li>
-               <li><Link href="#">Bibles </Link></li>
+               <li><Link to="/kindergarten">Kindergarten </Link></li>
+               <li><Link to="/primary-school">Primary school </Link></li>
+               <li><Link to="/secondary-school">Secondary school </Link></li>
+               <li><Link to="/stationary">Stationery </Link></li>
+               <li><Link to="/bibles">Bibles </Link></li>
              </ul>
 
              <hr className="borderHr" />
