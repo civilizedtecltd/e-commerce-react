@@ -61,19 +61,19 @@ function HeaderComponent() {
                   <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                       <li className="nav-item active">
-                        <Link className="nav-link" to="#">Kindergarten <span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link" to="/kindergarten">Kindergarten <span className="sr-only">(current)</span></Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="#">Primary school</Link>
+                        <Link className="nav-link" to="/primary-school">Primary school</Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="#">Secondary school</Link>
+                        <Link className="nav-link" to="/secondary-school">Secondary school</Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="#">Stationery</Link>
+                        <Link className="nav-link" to="/stationery">Stationery</Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="#">Bibles</Link>
+                        <Link className="nav-link" to="/bibles">Bibles</Link>
                       </li>
                     </ul>
                   </div>
@@ -202,20 +202,20 @@ function HeaderComponent() {
            <Modal.Header className="ModaCloseBtn" closeButton></Modal.Header>
            <Modal.Body>
              <ul className="mobileNav">
-               <li><a href="#">Kindergarten </a></li>
-               <li><a href="#">Primary school </a></li>
-               <li><a href="#">Secondary school </a></li>
-               <li><a href="#">Stationery </a></li>
-               <li><a href="#">Bibles </a></li>
+               <li><Link to="#">Kindergarten </Link></li>
+               <li><Link to="#">Primary school </Link></li>
+               <li><Link to="#">Secondary school </Link></li>
+               <li><Link href="#">Stationery </Link></li>
+               <li><Link href="#">Bibles </Link></li>
              </ul>
 
              <hr className="borderHr" />
 
              <ul className="mobileNav userMbNav">
-               <li className="active"><a href="#"><i class="fas fa-clipboard-list"></i> My orders </a></li>
-               <li><a href="#"><i class="fas fa-wallet"></i> Payment methods </a></li>
-               <li><a href="/profile-settings"><i class="fas fa-cog"></i> Profile settings </a></li>
-               <li><a href="/email-subscription"><i class="far fa-envelope"></i> Email subscription </a></li>
+               <li className="active"><Link to="/order"><i class="fas fa-clipboard-list"></i> My orders </Link></li>
+               <li><Link to="/payment-method"><i class="fas fa-wallet"></i> Payment methods </Link></li>
+               <li><Link to="/profile-settings"><i class="fas fa-cog"></i> Profile settings </Link></li>
+               <li><Link to="/email-subscription"><i class="far fa-envelope"></i> Email subscription </Link></li>
              </ul>
            </Modal.Body>
            <Modal.Footer className="modal-footer-btn-group pt-4 pb-4 pl-1 pr-1">
@@ -223,7 +223,8 @@ function HeaderComponent() {
                <Link to="/login" className="btn btn-border">Login</Link>
              </Col>
              <Col>
-               <Link to="/favorites"><span className="cartBadge">
+               <Link to="/favorites">
+                 <span className="cartBadge">
                  <i className="far fa-star"></i><span className="badge badge-danger">10</span></span> Favorites
                </Link>
              </Col>
