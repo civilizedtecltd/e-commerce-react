@@ -1,4 +1,4 @@
-import { LOG_IN, SIGN_UP,RESET_PASSWORD } from "../actionTypes";
+import { LOG_IN, SIGN_UP, RESET_PASSWORD } from "../actionTypes";
 
 const initialState = {
    data:{},
@@ -6,6 +6,7 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
+
   switch (action.type) {
     case LOG_IN: {
       const { state } = action.payload;
@@ -13,7 +14,6 @@ export default function(state = initialState, action) {
         data: [...state],
       };
     }
-
 
     case SIGN_UP: {
       const { state } = action.payload;
@@ -29,9 +29,8 @@ export default function(state = initialState, action) {
       }
     }
 
-
     default:
       return state;
   }
- 
+
 }

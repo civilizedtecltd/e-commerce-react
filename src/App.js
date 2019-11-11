@@ -3,17 +3,20 @@ import { spring, AnimatedSwitch} from "react-router-transition";
 import {
   BrowserRouter as Router,
   Route} from "react-router-dom";
+
 // User Area
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ChangePassword from './pages/auth/changePassword';
 import VerifyCode from './pages/auth/VerifyCode';
+
 // Logged User Profile
 import UserProfile from './pages/users/UserProfile';
 import Subscription from './pages/users/Subscription';
 import OrderPage from './pages/users/OrderPage';
 import PaymentPage from './pages/users/PaymentPage';
+
 // Theme Page
 import Home from './pages/Home';
 import OfferPage from './pages/offerPage';
