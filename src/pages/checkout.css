@@ -1,0 +1,44 @@
+.header-section{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;   
+}
+.header-section button{
+  background-color:#e2e2e2;
+}
+.header-section button:hover{
+  background-color:#e2e2e2 !important;
+}
+.active-tab{
+    background-color: #3897cf!important;
+}
+
+.payment-header{
+    background-color: #e2e2e2;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.button-section-next-prev{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.tab{
+    display: none;
+}
+
+.tab-active-content{
+    display: block;
+}
+.fromCheckbox {display: flex;align-items: center;}
+.termsTxt{font-size: 17px;padding-left: 5px;}
+.orderConfrimationList li {
+    font-size: 18px;
+    font-weight: 600;
+    color: #363636;
+    line-height: 30px;
+}
+
+

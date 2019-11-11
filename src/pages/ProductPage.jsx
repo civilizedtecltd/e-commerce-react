@@ -2,12 +2,24 @@ import React, { useState } from "react";
 import { Container, Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+<<<<<<< HEAD
+=======
+import "../pages/assets/product.css";
+//
+>>>>>>> master
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
 import { ImageCarousel } from "../components/ProductImgCarosellComponents/ProductImgCarosell";
+<<<<<<< HEAD
 import HeaderComponent from "../components/header/Header";
+=======
+import { Link } from "react-router-dom";
+import {HeaderComponent, MobileHeader} from "../components/header/Header";
+>>>>>>> master
 import TabComponent from "../components/TabComponent/TabComponent";
+import RatingComponent from "../components/ratingComponent/Rating";
+
 
 import "../pages/assets/product.css";
 
@@ -19,6 +31,7 @@ function ProductPage() {
     <>
       <div className="allWrapper">
         <HeaderComponent />
+        <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
             className="breadcrumbArea secGap pb-0 clearfix"
@@ -65,13 +78,7 @@ function ProductPage() {
                         <h2 className="productSingleTitle">
                           Math time className - 2
                         </h2>
-                        <ul className="productReviewStar">
-                          {[1, 2, 3, 4, 5].map((rating, index) => (
-                            <li key={index} className="5star">
-                              <i className="fas fa-star"></i>
-                            </li>
-                          ))}
-                        </ul>
+                        <RatingComponent/>
                         <p>(7 reviews)</p>
                       </div>
                       <h6 className="authName">
@@ -116,7 +123,7 @@ function ProductPage() {
                           </div>
 
                           <div className="col text-center">
-                            <Link to="/" className="btn linkBtnBorder">
+                            <Link to="/add-to-fev" className="btn linkBtnBorder">
                               <i className="far fa-star"></i>Add to favorites
                             </Link>
                           </div>
@@ -143,7 +150,6 @@ function ProductPage() {
                   </h2>
                 </div>
               </div>
-
               <ImgSlick />
             </div>
           </section>

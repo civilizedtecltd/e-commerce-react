@@ -8,8 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import {NewBookDB} from "../../inc/offerPage/NewBook";
 
 
-
-function NewBookComponent({BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg }){
+function NewBookComponent({BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg ,isFev=false }){
     return(
         <Col className="col-auto">
         <Card className="productCard border-0 bg-transparent">
@@ -18,7 +17,7 @@ function NewBookComponent({BookImage, ProductTitle, AuthorName, ProductPrice, Im
             </div>
 
           <div className="productContent">
-            <Link to="#"><h4 className="productTitle mb-1">{ProductTitle}</h4></Link>
+            <Link to="#"><h4 className="productTitle mb-1">{ProductTitle} {(isFev===true) ?<span className="favoritIcon"><i className="fas fa-star"></i></span> :''}</h4></Link>
             <h5 className="authorName mb-1">{AuthorName}</h5>
             <p className="productPrice">$ {ProductPrice}</p>
           </div>
@@ -32,7 +31,33 @@ function ImgSlick() {
         infinite: true,
         speed: 500,
         slidesToShow: 5,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                initialSlide: 2
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
     };
 
     return (
@@ -47,7 +72,7 @@ function ImgSlick() {
                                 </div>
 
                                 <div className="productContent">
-                                    <Link to="#"><h4 className="productTitle mb-1">{value.Title}</h4></Link>
+                                    <Link to="#"><h4 className="productTitle mb-1">{value.Title} </h4></Link>
                                     <h5 className="authorName mb-1">{value.Author}</h5>
                                     <p className="productPrice">$ {value.Price}</p>
                                 </div>

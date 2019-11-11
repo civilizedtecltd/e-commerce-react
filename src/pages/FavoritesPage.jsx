@@ -7,13 +7,14 @@ import { NewBookDB } from "../inc/offerPage/NewBook";
 import { NewBookComponent } from "../components/offerPageComponents/NewBookComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
-import HeaderComponent from "../components/header/Header";
+import {HeaderComponent, MobileHeader} from "../components/header/Header";
 
 const FavoritesPage = () => {
   return (
     <>
       <div className="allWrapper">
         <HeaderComponent />
+        <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
             className="sectionBreadcrumb secGap clearfix pb-0"
@@ -175,7 +176,7 @@ const FavoritesPage = () => {
           {/* end of chooseCategory */}
 
           <section
-            className="favoritesItems secGap clearfix"
+            className="favoritesItems secGap productView clearfix"
             id="favoritesItems"
           >
             <Container>
@@ -188,6 +189,7 @@ const FavoritesPage = () => {
                     ProductTitle={newBook.Title}
                     AuthorName={newBook.Author}
                     ProductPrice={newBook.Price}
+                    isFev={true}
                   />
                 ))}
               </Row>

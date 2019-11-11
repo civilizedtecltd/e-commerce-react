@@ -5,10 +5,13 @@ import axios from 'axios';
 
 // Product Images
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
+<<<<<<< HEAD
 //import bookImage1 from "../assets/images/books/book_img_01.jpg";
+=======
+>>>>>>> master
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import PriceRanger from "../components/PriceRangeSlider/PriceRangeSlider";
-import HeaderComponent from "../components/header/Header";
+import {HeaderComponent, MobileHeader} from "../components/header/Header";
 
 import { URL } from '../constants/config';
 
@@ -31,6 +34,7 @@ const ShopPage = () => {
     <>
       <div className="allWrapper">
         <HeaderComponent />
+        <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
             className="sectionBreadcrumb secGap clearfix pb-0"

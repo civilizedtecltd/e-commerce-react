@@ -9,14 +9,15 @@ import {NewBookDB}from '../inc/offerPage/NewBook'
 import {ImgSlick, NewBookComponent} from '../components/offerPageComponents/NewBookComponent'
 import{NewsLetterComponent} from '../components/offerPageComponents/NewsLetterComponent'
 import FooterComponent from '../components/FooterComponent/FooterComponent';
-import HeaderComponent from '../components/header/Header';
- 
+import {HeaderComponent, MobileHeader} from '../components/header/Header';
+
 
 const offerPage = () => {
   return (<>
 
     <div className="allWrapper">
       <HeaderComponent/>
+      <MobileHeader />
       <main className="mainContent clearfix" id="mainContent">
         <section className="offerBanner clearfix sectionBgImage sectionBgImg02" id="offerBanner">
           <Container className="container">
@@ -122,7 +123,7 @@ const offerPage = () => {
           <Container className="container">
 
               <NewsLetterComponent/>
-              
+
           </Container>{/* end of Container */}
         </section>{/* end of mailSubscribe */}
 
