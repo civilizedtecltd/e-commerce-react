@@ -5,10 +5,6 @@ import axios from 'axios';
 
 // Product Images
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
-<<<<<<< HEAD
-//import bookImage1 from "../assets/images/books/book_img_01.jpg";
-=======
->>>>>>> master
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import PriceRanger from "../components/PriceRangeSlider/PriceRangeSlider";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";

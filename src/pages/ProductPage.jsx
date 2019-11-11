@@ -2,21 +2,14 @@ import React, { useState } from "react";
 import { Container, Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-<<<<<<< HEAD
-=======
 import "../pages/assets/product.css";
 //
->>>>>>> master
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
 import { ImageCarousel } from "../components/ProductImgCarosellComponents/ProductImgCarosell";
-<<<<<<< HEAD
-import HeaderComponent from "../components/header/Header";
-=======
-import { Link } from "react-router-dom";
+
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
->>>>>>> master
 import TabComponent from "../components/TabComponent/TabComponent";
 import RatingComponent from "../components/ratingComponent/Rating";
 
