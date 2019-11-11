@@ -73,15 +73,15 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/forgotPassword" component={ForgotPassword} />
-        <Route path="/changePassword" component={ChangePassword} />
+        <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/change-password" component={ChangePassword} />
         <Route path="/verify-code" component={VerifyCode} />
         <Route path="/profile-settings" component={UserProfile} />
         <Route path="/email-subscription" component={Subscription} />
-        <Route path="/order" component={OrderPage} />
+        <Route path="/my-order" component={OrderPage} />
         <Route path="/payment-methods" component={PaymentPage} />
         
-        <Route path="/offer" component={OfferPage} />
+        <Route path="/book-offer" component={OfferPage} />
         <Route path="/cart" component={CartPage} />
         <Route path="/checkout" component={CheckoutPage} />
         <Route path="/favorites" component={FavoritesPage} />
