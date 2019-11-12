@@ -6,6 +6,7 @@
 .authHeader{
     margin-left: 4rem;
     position: absolute;
+    border: 0px!important;
 }
 .loginMainArea{height: 100vh;}
 

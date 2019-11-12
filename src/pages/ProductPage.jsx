@@ -1,19 +1,20 @@
 import React, { useState } from "react";
+import { Container, Modal, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import "../pages/assets/product.css";
 //
 import FooterComponent from "../components/FooterComponent/FooterComponent";
-//
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
-//
-import { Container, Modal, Button } from "react-bootstrap";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
 import { ImageCarousel } from "../components/ProductImgCarosellComponents/ProductImgCarosell";
-import { Link } from "react-router-dom";
+
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import TabComponent from "../components/TabComponent/TabComponent";
 import RatingComponent from "../components/ratingComponent/Rating";
 
+
+import "../pages/assets/product.css";
 
 function ProductPage() {
   const [show, setShow] = useState(false);

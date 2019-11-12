@@ -38,10 +38,10 @@ const Login = () => {
         URL._LOGIN,
         formData
     ).then( res => {
-      if(res.status === 200){            
-          const authData = res.data.data;          
-          localStorage.setItem('auth-data', JSON.stringify(authData));          
-      }           
+      if(res.status === 200){
+          const authData = res.data.data;
+          localStorage.setItem('auth-data', JSON.stringify(authData));
+      }
     }).catch( error => {
       console.log(error);
       setState({
@@ -82,7 +82,7 @@ const Login = () => {
               <SocialListComponent/>
               <div className="formWrapper clearfix" id="formWrapper">
                 <Form>
-                  <InputFrom 
+                  <InputFrom
                    LabelId="email"
                    TypeName="email"
                    LabelTitle="Email"
@@ -91,8 +91,8 @@ const Login = () => {
                    Placeholder="Enter Your Email"
                    callback = {loginData}
                   />
-  
-                  <InputFrom 
+
+                  <InputFrom
                    LabelId="password"
                    TypeName="password"
                    LabelTitle="Password"
@@ -102,13 +102,13 @@ const Login = () => {
                    callback = {loginData}
                   />{/* end of Form.Group */}
 
-                  <Link className="linkText mb-3" to="/forgotPassword">Forgot password?</Link>
-                 
+                  <Link className="linkText mb-3" to="/forgot-password">Forgot password?</Link>
+
                   <Button type="submit" className="btn submitBtn mb-3 " onClick={handleSubmit} >LOGIN</Button>
 
                   <p>Don’t have an account yet? <Link className="linkText" to="/signup">Sign up</Link></p>
-                  
-  
+
+
                 </Form>{/* end of form */}
               </div>{/* end of col */}
             </Col>{/* end of col */}

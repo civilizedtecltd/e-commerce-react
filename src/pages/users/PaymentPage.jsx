@@ -2,19 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {Container, Row, Col, Card, Table, Form, Button} from "react-bootstrap";
 import "./assets/css/user.css";
-import { LiAi, LiIs } from "../../components/LiComponent/CommonLiComponent";
+import { LiAi } from "../../components/LiComponent/CommonLiComponent";
 import {
-  headerPoppers,
   asideData,
-  headerFeatureList
 } from "../../inc/users/users";
-import { HeaderComponent } from "../../components/header/Header";
+import { HeaderComponent, MobileHeader} from "../../components/header/Header";
 
 const PaymentPage = () => {
   return (
     <>
       <div className="allWrapper">
         <HeaderComponent/>
+        <MobileHeader />
         <div className="userBodyArea clearfix" id="userBodyArea">
           <Container fluid={true} className="pl-0 pr-0">
             <Row noGutters>

@@ -11,6 +11,7 @@ import {HeaderComponent, MobileHeader} from "../components/header/Header";
 
 import { URL } from '../constants/config';
 
+
 const ShopPage = () => {
 
     const [state, setState] = useState([])

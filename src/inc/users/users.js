@@ -61,6 +61,11 @@ export const asideData=[
 
 
 export const categoryClass={
+    kindergartenSchool:[
+        "Pre 1",
+        "Pre 2",
+        "Pre 3"
+    ],
     primarySchool:[
         "Class 1",
         "Class 2",
@@ -69,8 +74,21 @@ export const categoryClass={
         "Class 5",
         "Class 6",
         "Class 7",
-        "Class 7",
+        "Class 8"
+    ],
+    secondarySchool:[
+        "Form 1",
+        "Form 2",
+        "Form 3",
+        "Form 4"
+    ],
+    stationery:[
+        "Stationery",
+        "Stationery",
+        "Bibles",
+        "Bibles"
     ]
+   
 }
 
 export const headerFeatureList=[

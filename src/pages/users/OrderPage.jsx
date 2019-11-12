@@ -57,7 +57,7 @@ const OrderPage = () => {
                                   <Col sm="3">
                                     <h3 className="cardWidgetTitle mb-3">Kindergarten</h3>
                                     <ul className="cardWidgetList text-center">
-                                    {categoryClass.primarySchool.map(priClass=><Lia
+                                    {categoryClass.kindergartenSchool.map(priClass=><Lia
                                        key={Math.floor(Math.random() * 10)}
                                        Title={priClass}
                                        Url={'/'}
@@ -79,7 +79,7 @@ const OrderPage = () => {
                                   <Col sm="3">
                                     <h3 className="cardWidgetTitle mb-3">Secondary school</h3>
                                     <ul className="cardWidgetList text-center">
-                                    {categoryClass.primarySchool.map(priClass=><Lia
+                                    {categoryClass.secondarySchool.map(priClass=><Lia
                                        key={Math.floor(Math.random() * 10)}
                                        Title={priClass}
                                        Url={'/'}
@@ -90,7 +90,7 @@ const OrderPage = () => {
                                   <Col sm="3">
                                     <h3 className="cardWidgetTitle mb-3">Stationery</h3>
                                     <ul className="cardWidgetList text-center">
-                                     {categoryClass.primarySchool.map(priClass=><Lia
+                                     {categoryClass.stationery.map(priClass=><Lia
                                        key={Math.floor(Math.random() * 10)}
                                        Title={priClass}
                                        Url={'/'}
