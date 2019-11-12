@@ -1,8 +1,9 @@
 import React from 'react'
-import { spring, AnimatedSwitch} from "react-router-transition";
+import { spring, AnimatedSwitch } from "react-router-transition";
 import {
   BrowserRouter as Router,
-  Route} from "react-router-dom";
+  Route
+} from "react-router-dom";
 // User Area
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
