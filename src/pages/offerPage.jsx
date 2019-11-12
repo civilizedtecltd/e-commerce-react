@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
-import  './assets/offerPage.css'
+import  './assets/offerPage.css';
+import '../assets/css/theme.css';
 // Product Images
 import blogPostImage1 from '../assets/images/post_img_01.jpg';
 
@@ -27,7 +28,7 @@ const offerPage = () => {
                   <h1 className="offerBannerTitle mb-3">Back to school offer</h1>
                   <h2 className="discountTxt mb-3">50%</h2>
                   <h3 className="offerBannerPara mb-3">On all biology books</h3>
-                  <Link to="#" className="btn offerBannerBtn shadow">Shop now <i className="fas fa-arrow-right"></i></Link>
+                  <Link to="/shop" className="btn offerBannerBtn shadow">Shop now <i className="fas fa-arrow-right"></i></Link>
                 </div>{/* end of bannerCard */}
               </Col>{/* end of Col */}
             </Row>{/* end of Row */}

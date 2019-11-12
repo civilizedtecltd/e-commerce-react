@@ -185,7 +185,7 @@ const handleSubmit = (event) => {
                       callback = {fromFileData}
                     />
 
-                    <Link className="linkText mb-3" to="/forgotPassword">Forgot password?</Link>
+                    <Link className="linkText mb-3" to="/forgot-password">Forgot password?</Link>
 
 
                     <Button type="submit" className="btn submitBtn mb-3 " onClick={handleSubmit} >Sign Up</Button>
