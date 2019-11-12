@@ -1,4 +1,6 @@
-
+.productCatCard .productCatTitle:hover {
+    color: #3897cf;
+}
 .partnersCarousel   .slick-prev:before {
     content: "\f053";
     font-family: "Font Awesome 5 Free";
