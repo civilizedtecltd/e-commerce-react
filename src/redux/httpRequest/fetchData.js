@@ -1,8 +1,16 @@
-import axios from 'axios'
 
-export const ALL_PRODUCTS = axios({
-    url:'http://localhost:3333/api/product/book',
-    method:'GET'
-})
-.then(res=>res.json())
- .then(product=>product)
+import axios from 'axios'
+const allBooks = async ()=> {
+  const result = await axios('http://localhost:3333/api/product/book');
+  return result.data.data;
+}
+
+export default allBooks;
+
+
+
+
+
+
+
+

@@ -1,15 +1,15 @@
 import { LOAD_SHOP, SHOW_SINGLE_BOOK } from '../actions/actionTypes'
-const initialState =[]
+import { ALL_PRODUCTS } from '../httpRequest/fetchData';
 
-const shopReducer = (state = initialState , actions ) => {
-    switch(actions.type){
+const shopReducer = (state = [] , actions ) => {
+    const { type, payload } = actions
+    switch(type){
         case LOAD_SHOP:
-            return [
-                ...state,
-                {
-                   ...actions.payload 
-                }
-            ]
+            return {
+                    books: [ ...payload ]    
+                 }
+        default:
+            return state
     }
 }
 

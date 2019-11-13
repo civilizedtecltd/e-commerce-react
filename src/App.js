@@ -4,6 +4,8 @@ import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom";
+import { ALL_PRODUCTS }  from './redux/httpRequest/fetchData'
+
 // User Area
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
@@ -63,6 +65,7 @@ const bounceTransition = {
 };
 
 function App() {
+
   return (
     <Router>
       <AnimatedSwitch
