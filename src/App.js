@@ -1,8 +1,10 @@
 import React from 'react'
-import { spring, AnimatedSwitch} from "react-router-transition";
+import { spring, AnimatedSwitch } from "react-router-transition";
 import {
   BrowserRouter as Router,
-  Route} from "react-router-dom";
+  Route
+} from "react-router-dom";
+import { ALL_PRODUCTS }  from './redux/httpRequest/fetchData'
 
 // User Area
 import Login from './pages/auth/Login';
@@ -63,6 +65,7 @@ const bounceTransition = {
 };
 
 function App() {
+
   return (
     <Router>
       <AnimatedSwitch

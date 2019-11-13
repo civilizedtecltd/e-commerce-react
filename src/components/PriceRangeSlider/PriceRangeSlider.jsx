@@ -36,9 +36,6 @@ class PriceRanger extends Component{
     render(){
         return (
             <div>
-                <div className="priceTitle">{"Item found:"+15}</div>
-                <div className="rangeValues">Range : {this.state.firstValue} - {this.state.secondValue}</div>
-    
                 <section className="range-slider">
                     <div className="multi-range">
                     <input type="range"

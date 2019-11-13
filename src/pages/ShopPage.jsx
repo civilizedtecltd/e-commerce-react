@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Breadcrumb, Form, Card } from "react-bootstrap";
-import axios from 'axios';
-
+import { connect  } from 'react-redux';
+import { LoadProduct } from '../redux/actions/actions'
+import axios from 'axios'
 // Product Images
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
@@ -12,19 +13,24 @@ import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import { URL } from '../constants/config';
 
 
-const ShopPage = () => {
+const ShopPage = (props) => {
+
+   console.log(props.shop)
 
     const [state, setState] = useState([])
 
     useEffect(() => {
-
         const fetchBooks = async () => {
           const result = await axios(URL._ALL_BOOKS);
           setState(result.data.data);
+          props.loadProduct(result.data.data)
         };
         fetchBooks();
 
       }, []);
+
+
+
 
   return (
     <>
@@ -520,4 +526,16 @@ const ShopPage = () => {
   );
 };
 
-export default ShopPage;
+const mapToStateProps = (state) =>{
+        return {
+            ...state
+        }
+}
+
+const mapDispatchToProps =(dispatch) =>{
+  return {
+    loadProduct:(state)=>dispatch(LoadProduct(state))
+  }
+}
+
+export default connect(mapToStateProps,mapDispatchToProps)(ShopPage);
