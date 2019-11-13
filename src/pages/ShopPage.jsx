@@ -471,7 +471,7 @@ const ShopPage = (props) => {
                                 {/* end of productMedia */}
 
                                 <div className="productContent">
-                                  <Link to="/product/">
+                                  <Link to={`/product/${book.id}`}>
                                     <h4 className="productTitle mb-1">
                                       {book.name}
                                     </h4>
@@ -520,7 +520,7 @@ const ShopPage = (props) => {
 
 const mapToStateProps = (state) =>{
         return {
-            ...state
+          ...state
         }
 }
 

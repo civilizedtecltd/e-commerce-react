@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
+import { connect } from 'react-redux'
+import axios from 'axios'
 import { Container, Modal, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link , useParams } from "react-router-dom";
+
+import {addToCard , show_single_book} from '../redux/actions/actions'
 
 import "../pages/assets/product.css";
 //
@@ -12,14 +16,27 @@ import { ImageCarousel } from "../components/ProductImgCarosellComponents/Produc
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import TabComponent from "../components/TabComponent/TabComponent";
 import RatingComponent from "../components/ratingComponent/Rating";
-
+import { URL } from '../constants/config';
 
 import "../pages/assets/product.css";
 
-function ProductPage() {
+function ProductPage(props) {
+  console.log(props)
+
+  const { id } =  useParams()
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    const book = async () => {
+      const result = await axios(URL._SINGLE_BOOK(id));
+      return props.book(result.data.data)
+    };
+    book();
+  }, []);
+
+
   return (
     <>
       <div className="allWrapper">
@@ -61,7 +78,9 @@ function ProductPage() {
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">
-                  <ImageCarousel />
+                  <ImageCarousel
+                    mage={""}
+                   />
                 </div>
 
                 <div className="col-sm-6">
@@ -183,4 +202,19 @@ function ProductPage() {
     </>
   );
 }
-export default ProductPage;
+
+
+const mapStateToProps = (state)=> {
+  return{
+    ...state
+  }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+      addTocard:(id)=>dispatch(addToCard(id)),
+      book:(book)=>dispatch(show_single_book(book))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);
