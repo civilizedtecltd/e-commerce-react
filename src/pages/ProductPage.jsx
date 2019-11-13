@@ -21,12 +21,13 @@ import { URL } from '../constants/config';
 import "../pages/assets/product.css";
 
 function ProductPage(props) {
-  console.log(props)
 
   const { id } =  useParams()
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const book = (props.shop.book !== undefined ) ? props.shop.book : false;
 
   useEffect(() => {
     const book = async () => {
@@ -79,7 +80,19 @@ function ProductPage(props) {
               <div className="row">
                 <div className="col-sm-6">
                   <ImageCarousel
-                    mage={""}
+                    image={() => {
+                        const cover =  (book ? JSON.parse(book.cover_images) : false )
+
+                        if(cover){
+                            return [
+                                `${URL.BASE}/${cover.img_1}`,
+                                `${URL.BASE}/${cover.img_2}`,
+                                `${URL.BASE}/${cover.img_3}`
+                            ];
+                        }else{
+                            return [];
+                        }
+                    }}
                    />
                 </div>
 
@@ -88,27 +101,24 @@ function ProductPage(props) {
                     <div className="card-header border-0 bg-white">
                       <div className="productCardHead">
                         <h2 className="productSingleTitle">
-                          Math time className - 2
+                          { book ? book.name : ``}
                         </h2>
-                        <RatingComponent/>
+                        <RatingComponent  value= { book ? book.rating : 0 }/>
                         <p>(7 reviews)</p>
                       </div>
                       <h6 className="authName">
-                        by <Link to="#">Sam Smith</Link>
+                        by <Link to={book ? book.book_author.id : '#' }>{book ? book.book_author.name : `` }</Link>
                       </h6>
                     </div>
 
                     <div className="card-body productCardBody">
                       <h5 className="product-single-Price mb-4">
-                        $ 16.99{" "}
-                        <span className="productAvaility">Available</span>
+                        $ {book ? book.price : 0 }
+                        <span className="productAvaility">{book ? ((book.status === 1) ? `Available` : `Unavailable`) : ``}</span>
                       </h5>
                       <div className="productSortDes">
                         <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor enim ipsam voluptatem quia
-                          voluptas quia non numquam eius. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum.
+                          {book ? book.short_description : ``}
                         </p>
                       </div>
 
@@ -142,7 +152,22 @@ function ProductPage(props) {
                         </div>
                         <hr className="hrBorder mt-4" />
                       </div>
-                      <TabComponent />
+                      <TabComponent
+                        description = {book ? book.long_description : `` }
+                        specification = {book ? [{
+                            author          : book.book_author.name,
+                            discipline      : book.book_discipline.name,
+                            stage           : book.book_stage.name,
+                            publisher       : book.book_publisher.name,
+                            publishing_year : book.book_publishing_year.name,
+                            book_cover      : book.book_cover,
+                            language        : book.book_language.name,
+                            page_number     : book.page_number
+
+                        }] : {}}
+
+                        reviews = {[]}
+                        />
                     </div>
                   </div>
                 </div>
@@ -214,7 +239,7 @@ const mapStateToProps = (state)=> {
 const mapDispatchToProps = (dispatch) => {
     return{
       addTocard:(id)=>dispatch(addToCard(id)),
-      book:(book)=>dispatch(show_single_book(book))
+      book:(book) =>dispatch(show_single_book(book))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

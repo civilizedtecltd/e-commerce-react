@@ -16,8 +16,7 @@ import { URL } from '../constants/config';
 const ShopPage = (props) => {
 
 
-    const books = (props.shop.books !== undefined ) ? props.shop.books : [] ;
-    console.log(books);
+    const books = (props.shop.books !== undefined ) ? props.shop.books : [];
 
     useEffect(() => {
         const fetchBooks = async () => {

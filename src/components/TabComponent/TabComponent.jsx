@@ -5,34 +5,28 @@ import '../../assets/css/productTab.css'
 import reviewAvatar from "../../assets/images/reviews_avater.jpg"
 import RatingComponent from '../ratingComponent/Rating'
 
-function TabComponent() {
+function TabComponent({description, reviews, specification }) {
     const [key, setKey] = useState('description');
-    return (
-        <div className="productDetailsTabs">
-            <Tabs defaultActiveKey="description" id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
-                <Tab className="productDes" eventKey="description" title="Description">
-                    <p>Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Ratione in beatae earum
-                        , optio modi doloribus dolorem facilis, incidunt rerum molestias eligendi
-                        consequuntur adipisci dolore neque at a cupiditate expedita tenetur!
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum accusantium
-                        inventore nemo dolores quasi, veniam consequatur nulla iure distinctio totam tempora vel nam ad.
-                        Provident rem velit accusamus earum aliquam?
-                        nt magni, officia earum voluptatum. Quibusdam, minima perferendis voluptatem modi rem sapiente distinctio!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporenim ipsam voluptatem quia voluptas quia non numquam eius. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                </Tab>
+    const spec = specification[0];
 
+    return (
+            ( description === undefined || reviews === undefined || spec === undefined) ? <></> : (
+            <div className="productDetailsTabs">
+                <Tabs defaultActiveKey="description" id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
+                <Tab className="productDes" eventKey="description" title="Description">
+                    <p>{description}</p>
+                </Tab>
 
                 <Tab eventKey="specifications" title="Specifications">
                     <ul class="specifications">
-                        <li><strong>Author :</strong> Sam Smith</li>
-                        <li><strong>Discipline : </strong> Math</li>
-                        <li><strong>Stage : </strong> Class 2</li>
-                        <li><strong>Publishing house : </strong> Lorem Ipsum</li>
-                        <li><strong>Publishing year </strong> 2012</li>
-                        <li><strong>Book cover : </strong> Lorem ipsum</li>
-                        <li><strong>Language : </strong> English</li>
-                        <li><strong>Number of pages : </strong> 135</li>
+                        <li><strong>Author :</strong>{ (spec.author !== undefined )? spec.author : ``}</li>
+                        <li><strong>Discipline : </strong>{ (spec.discipline !== undefined )? spec.discipline : ``}</li>
+                        <li><strong>Stage : </strong>{ (spec.stage !== undefined )? spec.stage : ``}</li>
+                        <li><strong>Publishing house : </strong> { (spec.publisher !== undefined )? spec.publisher : ``}</li>
+                        <li><strong>Publishing year </strong> { (spec.publishing_year !== undefined )? spec.publishing_year : ``}</li>
+                        <li><strong>Book cover : </strong>{ (spec.book_cover !== undefined )? spec.book_cover : ``}</li>
+                        <li><strong>Language : </strong>{ (spec.language !== undefined )? spec.language : ``}</li>
+                        <li><strong>Number of pages : </strong>{ (spec.page_number !== undefined )? spec.page_number : 0 }</li>
                     </ul>
                 </Tab>
                 <Tab eventKey="Reviews" title={`Reviews(${7})`}>
@@ -128,7 +122,8 @@ function TabComponent() {
 
                 </Tab>
             </Tabs>
-        </div>
+            </div>
+        )
     );
 }
 
