@@ -15,22 +15,17 @@ import { URL } from '../constants/config';
 
 const ShopPage = (props) => {
 
-   console.log(props.shop)
 
-    const [state, setState] = useState([])
+    const books = (props.shop.books !== undefined ) ? props.shop.books : [] ;
+    console.log(books);
 
     useEffect(() => {
         const fetchBooks = async () => {
           const result = await axios(URL._ALL_BOOKS);
-          setState(result.data.data);
           props.loadProduct(result.data.data)
         };
         fetchBooks();
-
       }, []);
-
-
-
 
   return (
     <>
@@ -451,50 +446,47 @@ const ShopPage = (props) => {
                     </div>
 
                     <Row>
+                      {
+                        (books.length === 0) ?  <></> : books.map((book, index) => {
 
-                      {state.map((book, index) => {
+                            let bookCover = {
+                                  img1: `${URL.BASE}/images/books/default.png`,
+                                  img2: `${URL.BASE}/images/books/default.png`,
+                                  img3: `${URL.BASE}/images/books/default.png`
+                              }
 
-                          let bookCover = {
-                                img1: `${URL.BASE}/images/books/default.png`,
-                                img2: `${URL.BASE}/images/books/default.png`,
-                                img3: `${URL.BASE}/images/books/default.png`
+                            if(book.cover_images !== null){
+
+                              const cover = JSON.parse(book.cover_images)
+                              bookCover = `${URL.BASE}/${cover.img_1}`;
                             }
 
-                          if(book.cover_images !== null){
+                            return (
 
-                            const cover = JSON.parse(book.cover_images)
+                              <Col key = {index} sm="3">
+                              <Card className="productCard border-0 bg-transparent">
+                                <div className="productMedia mb-3 bgGray">
+                                  <img src={bookCover} alt="" />
+                                </div>
+                                {/* end of productMedia */}
 
-                              bookCover = {
-                                  img1 : `${URL.BASE}/${cover.img_1}`,
-                                  img2 : `${URL.BASE}/${cover.img_2}`,
-                                  img3 : `${URL.BASE}/${cover.img_3}`
-                              }
-                          }
+                                <div className="productContent">
+                                  <Link to="/product/">
+                                    <h4 className="productTitle mb-1">
+                                      {book.name}
+                                    </h4>
+                                  </Link>
+                                  <h5 className="authorName mb-1">{book.book_author.name}</h5>
+                                  <p className="productPrice">$ {book.price}</p>
+                                </div>
+                                {/* end of productContent */}
+                              </Card>
+                              {/* end of productCard */}
+                            </Col>
+                            );
+                        })
 
-                          return (
-                            <Col key = {index} sm="3">
-                            <Card className="productCard border-0 bg-transparent">
-                              <div className="productMedia mb-3 bgGray">
-                                <img src={bookCover.img1} alt="" />
-                              </div>
-                              {/* end of productMedia */}
-
-                              <div className="productContent">
-                                <Link to="/product/">
-                                  <h4 className="productTitle mb-1">
-                                    {book.name}
-                                  </h4>
-                                </Link>
-                                <h5 className="authorName mb-1">{book.book_author.name}</h5>
-                                <p className="productPrice">$ {book.price}</p>
-                              </div>
-                              {/* end of productContent */}
-                            </Card>
-                            {/* end of productCard */}
-                          </Col>
-                          );
-                      })}
-
+                      }
                     </Row>
                     {/* end of Container */}
                   </div>
@@ -534,7 +526,7 @@ const mapToStateProps = (state) =>{
 
 const mapDispatchToProps =(dispatch) =>{
   return {
-    loadProduct:(state)=>dispatch(LoadProduct(state))
+    loadProduct: (state) => dispatch (LoadProduct(state))
   }
 }
 
