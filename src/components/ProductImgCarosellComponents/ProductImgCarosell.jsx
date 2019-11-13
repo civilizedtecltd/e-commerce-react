@@ -6,6 +6,7 @@ import "react-image-lightbox/style.css";
 import '../../pages/assets/product.css';
 
 function ImageCarousel(props){
+
     const [hidden, setHidden] = useState(false);
     const [photoIndex,setPhotoIndex] =useState(0);
     let [result1, setResult1] = useState(ProductCarouselImg[0]);
@@ -23,15 +24,15 @@ function ImageCarousel(props){
     const NextPhoto=()=>{
        const SingleImage=document.getElementById('photo');
        image.index +=1;
-       if(image.index>=3) image.index=2 
-       SingleImage.src=ProductCarouselImg[image.index]
+       if(image.index>=3) image.index=2
+       SingleImage.src = ProductCarouselImg[image.index]
     //    console.log(image.index)
     }
     const PrevPhoto=()=>{
         const SingleImage=document.getElementById('photo');
         image.index-=1
         if(image.index===-1 || image.index<0) image.index=0;
-        SingleImage.src=ProductCarouselImg[image.index] 
+        SingleImage.src=ProductCarouselImg[image.index]
         // console.log(image.index)
     }
 
@@ -42,12 +43,15 @@ function ImageCarousel(props){
                 <div className="col-sm-3">
                     <div className="productGallery">
 
-                        {/* {props.image.map((item, index)=>
+                         {
+                             console.log(props.image)
+                           /*   props.image.map((item, index)=>
                             <div key={index} className="singleItem bgGray p-2 mb-2">
                                 <img  src={item} alt="" onClick={ImgHandler}/>
                             </div>
 
-                        )} */}
+                        ) */
+                        }
 
                     </div>
                 </div>
