@@ -1,4 +1,4 @@
-import {LOAD_SHOP, SHOW_SINGLE_BOOK ,CATEGORY_WISE_BOOK} from './actionTypes';
+import {LOAD_SHOP, SHOW_SINGLE_BOOK ,CATEGORY_WISE_BOOK, ADD_TO_CART} from './actionTypes';
 
 export const LoadProduct = ( products )=> {
     // console.log(products)
@@ -10,10 +10,10 @@ export const LoadProduct = ( products )=> {
     } 
 }
 
-export const show_single_book = (id)=> {
+export const show_single_book = (book)=> {
      return{
          type:SHOW_SINGLE_BOOK,
-         id:id
+         payload: book
      }
 }
 
@@ -23,4 +23,12 @@ export const showCategoryWiseBook = (category) => {
             type:CATEGORY_WISE_BOOK,
             category:category
         }
+}
+
+
+export const addToCard =(id) =>{
+    return {
+        type : ADD_TO_CART,
+        id:id,
+    }
 }

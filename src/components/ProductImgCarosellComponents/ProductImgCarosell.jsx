@@ -5,7 +5,7 @@ import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import '../../pages/assets/product.css';
 
-function ImageCarousel(){
+function ImageCarousel(props){
     const [hidden, setHidden] = useState(false);
     const [photoIndex,setPhotoIndex] =useState(0);
     let [result1, setResult1] = useState(ProductCarouselImg[0]);
@@ -42,12 +42,12 @@ function ImageCarousel(){
                 <div className="col-sm-3">
                     <div className="productGallery">
 
-                        {ProductCarouselImg.map((item, index)=>
+                        {/* {props.image.map((item, index)=>
                             <div key={index} className="singleItem bgGray p-2 mb-2">
                                 <img  src={item} alt="" onClick={ImgHandler}/>
                             </div>
 
-                        )}
+                        )} */}
 
                     </div>
                 </div>

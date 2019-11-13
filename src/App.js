@@ -92,7 +92,7 @@ function App() {
         <Route path="/checkout" component={CheckoutPage} />
         <Route path="/favorites" component={FavoritesPage} />
         <Route path="/shop" component={ShopPage} />
-        <Route path="/product" component={ProductPage} />
+        <Route path="/product/:id" component={ProductPage} />
         <Route path='*'  component={ErrorPage} />
 
       </AnimatedSwitch>

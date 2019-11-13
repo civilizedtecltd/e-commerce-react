@@ -8,6 +8,10 @@ const shopReducer = (state = [] , { type, payload } ) => {
             return {
                     books: [ ...payload ]
                 }
+        case SHOW_SINGLE_BOOK:
+            return {
+                book:payload
+            }
         default:
             return state
     }
