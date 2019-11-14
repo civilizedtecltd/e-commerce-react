@@ -77,7 +77,7 @@ function ProductPage(props) {
               <div className="row">
                 <div className="col-sm-6">
                   <ImageCarousel
-                    // image={book.cover_images}
+                    image = {(book ? book.cover_images : false )}
                    />
                 </div>
 
@@ -92,7 +92,7 @@ function ProductPage(props) {
                         <p>(7 reviews)</p>
                       </div>
                       <h6 className="authName">
-                        by <Link to={book ? `${book.book_author.id}` : '#' }>{book ? book.book_author.name : `` }</Link>
+                        by <Link to = {`${URL.BASE}/api/author/${book ? book.book_author.id : '#'}`} > {book ? book.book_author.name : `` } </Link>
                       </h6>
                     </div>
 

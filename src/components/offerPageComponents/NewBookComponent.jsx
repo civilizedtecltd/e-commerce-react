@@ -9,7 +9,7 @@ import '../../assets/css/theme.css'
 import {NewBookDB} from "../../inc/offerPage/NewBook";
 
 
-function NewBookComponent({BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg ,isFev=false }){
+function NewBookComponent({ BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg ,isFev = false }){
     return(
         <Col className="col-auto">
         <Card className="productCard border-0 bg-transparent">
@@ -27,6 +27,7 @@ function NewBookComponent({BookImage, ProductTitle, AuthorName, ProductPrice, Im
 }
 
 function ImgSlick() {
+
     const settings = {
         dots: false,
         infinite: true,
