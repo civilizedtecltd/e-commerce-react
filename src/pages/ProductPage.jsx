@@ -92,7 +92,8 @@ function ProductPage(props) {
                         }else{
                             return [];
                         }
-                    }}
+                    }
+                }
                    />
                 </div>
 
