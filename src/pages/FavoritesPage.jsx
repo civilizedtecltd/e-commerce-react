@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col, Card, Breadcrumb } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 
 // Product Images
 import { NewBookDB } from "../inc/offerPage/NewBook";
@@ -8,6 +8,7 @@ import { NewBookComponent } from "../components/offerPageComponents/NewBookCompo
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
+import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 
 const FavoritesPage = () => {
   return (
@@ -23,15 +24,13 @@ const FavoritesPage = () => {
             <Container>
               <Row>
                 <Col>
-                  <Breadcrumb>
-                    <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item active>Favorites</Breadcrumb.Item>
-                  </Breadcrumb>
-                  {/* end of Breadcrumb */}
+                <BreadCrumb
+                  url='/'
+                  option1='Home'
+                  option2="Favorite"
+                />
                 </Col>
-                {/* end of Col */}
               </Row>
-              {/* end of Row */}
             </Container>
             {/* end of Container */}
           </section>

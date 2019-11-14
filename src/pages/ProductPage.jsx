@@ -5,9 +5,6 @@ import { Container, Modal, Button } from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
 
 import {addToCard , show_single_book} from '../redux/actions/actions'
-
-import "../pages/assets/product.css";
-//
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
@@ -54,10 +51,10 @@ function ProductPage(props) {
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item">
-                        <Link to="">Primary school </Link>
+                        <Link to="#">Primary school </Link>
                       </li>
                       <li className="breadcrumb-item">
-                        <Link to="">Shop </Link>
+                        <Link to="#">Shop </Link>
                       </li>
                       <li
                         className="breadcrumb-item active"

@@ -36,7 +36,7 @@ function TabComponent({description, reviews, specification }) {
                             <div className="row no-gutters">
                                 <div className="col-auto">
                                     <div className="reviewUserAvater">
-                                        <img src={reviewAvatar} alt="" />
+                                        <img src={ reviewAvatar } alt="" />
                                     </div>
                                 </div>
 
