@@ -7,7 +7,6 @@ import {
   Card,
   Form,
   Button,
-  Breadcrumb,
   Table
 } from "react-bootstrap";
 
@@ -16,7 +15,7 @@ import productImage1 from "../assets/images/books/book_img_01.jpg";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
-
+import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 const CartPage = () => {
   return (
     <>
@@ -31,15 +30,13 @@ const CartPage = () => {
             <Container>
               <Row>
                 <Col>
-                  <Breadcrumb>
-                    <Breadcrumb.Item to="#">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item active>Cart</Breadcrumb.Item>
-                  </Breadcrumb>
-                  {/* end of Breadcrumb */}
+                <BreadCrumb
+                  url='/'
+                  option1='Home'
+                  option2="Cart"
+                />
                 </Col>
-                {/* end of Col */}
               </Row>
-              {/* end of Row */}
             </Container>
             {/* end of Container */}
           </section>

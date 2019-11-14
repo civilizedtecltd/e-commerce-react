@@ -9,6 +9,7 @@ import { NewsLetterComponent } from "../components/offerPageComponents/NewsLette
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import PriceRanger from "../components/PriceRangeSlider/PriceRangeSlider";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
+import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 
 import { URL } from '../constants/config';
 
@@ -36,18 +37,17 @@ const ShopPage = (props) => {
             className="sectionBreadcrumb secGap clearfix pb-0"
             id="sectionBreadcrumb"
           >
+               
             <Container>
               <Row>
                 <Col>
-                  <Breadcrumb>
-                    <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item active>Favorites</Breadcrumb.Item>
-                  </Breadcrumb>
-                  {/* end of Breadcrumb */}
+                <BreadCrumb
+                  url='/'
+                  option1='Home'
+                  option2="shop"
+                />
                 </Col>
-                {/* end of Col */}
               </Row>
-              {/* end of Row */}
             </Container>
             {/* end of Container */}
           </section>
