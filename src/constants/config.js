@@ -18,7 +18,10 @@
      }
 
      get _ALL_BOOKS(){
-         return `${this.API}/product/book`;
+         return `${this.API}/product/books`;
+     }
+     _SINGLE_BOOK(id){
+         return `${this.API}/product/book/${id}`
      }
  }
 

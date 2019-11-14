@@ -5,54 +5,48 @@ import '../../assets/css/productTab.css'
 import reviewAvatar from "../../assets/images/reviews_avater.jpg"
 import RatingComponent from '../ratingComponent/Rating'
 
-function TabComponent() {
+function TabComponent({description, reviews, specification }) {
     const [key, setKey] = useState('description');
+    const spec = specification[0];
+
     return (
-        <div className="productDetailsTabs">
-            <Tabs defaultActiveKey="description" id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
+            ( description === undefined || reviews === undefined || spec === undefined) ? <></> : (
+            <div className="productDetailsTabs">
+                <Tabs defaultActiveKey="description" id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
                 <Tab className="productDes" eventKey="description" title="Description">
-                    <p>Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Ratione in beatae earum
-                        , optio modi doloribus dolorem facilis, incidunt rerum molestias eligendi
-                        consequuntur adipisci dolore neque at a cupiditate expedita tenetur!
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum accusantium
-                        inventore nemo dolores quasi, veniam consequatur nulla iure distinctio totam tempora vel nam ad.
-                        Provident rem velit accusamus earum aliquam?
-                        nt magni, officia earum voluptatum. Quibusdam, minima perferendis voluptatem modi rem sapiente distinctio!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporenim ipsam voluptatem quia voluptas quia non numquam eius. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <p>{description}</p>
                 </Tab>
 
-
                 <Tab eventKey="specifications" title="Specifications">
-                    <ul class="specifications">
-                        <li><strong>Author :</strong> Sam Smith</li>
-                        <li><strong>Discipline : </strong> Math</li>
-                        <li><strong>Stage : </strong> Class 2</li>
-                        <li><strong>Publishing house : </strong> Lorem Ipsum</li>
-                        <li><strong>Publishing year </strong> 2012</li>
-                        <li><strong>Book cover : </strong> Lorem ipsum</li>
-                        <li><strong>Language : </strong> English</li>
-                        <li><strong>Number of pages : </strong> 135</li>
+                    <ul className="specifications">
+                        <li><strong>Author :</strong>{ (spec.author !== undefined )? spec.author : ``}</li>
+                        <li><strong>Discipline : </strong>{ (spec.discipline !== undefined )? spec.discipline : ``}</li>
+                        <li><strong>Stage : </strong>{ (spec.stage !== undefined )? spec.stage : ``}</li>
+                        <li><strong>Publishing house : </strong> { (spec.publisher !== undefined )? spec.publisher : ``}</li>
+                        <li><strong>Publishing year </strong> { (spec.publishing_year !== undefined )? spec.publishing_year : ``}</li>
+                        <li><strong>Book cover : </strong>{ (spec.book_cover !== undefined )? spec.book_cover : ``}</li>
+                        <li><strong>Language : </strong>{ (spec.language !== undefined )? spec.language : ``}</li>
+                        <li><strong>Number of pages : </strong>{ (spec.page_number !== undefined )? spec.page_number : 0 }</li>
                     </ul>
                 </Tab>
                 <Tab eventKey="Reviews" title={`Reviews(${7})`}>
-                    <div class="productReviews clearfix">
+                    <div className="productReviews clearfix">
 
-                        <div class="card singleReview border-0">
-                            <div class="row no-gutters">
-                                <div class="col-auto">
-                                    <div class="reviewUserAvater">
-                                        <img src={reviewAvatar} alt="" />
+                        <div className="card singleReview border-0">
+                            <div className="row no-gutters">
+                                <div className="col-auto">
+                                    <div className="reviewUserAvater">
+                                        <img src={ reviewAvatar } alt="" />
                                     </div>
                                 </div>
 
-                                <div class="col pl-2">
-                                    <div class="reviewCardBody">
-                                        <div class="row reviewUserInfo">
-                                            <div class="col mb-2">
-                                                <h6 class="reviewUserName">Sam Smith <span class="reviewDate">May 26, 12:31</span></h6>
+                                <div className="col pl-2">
+                                    <div className="reviewCardBody">
+                                        <div className="row reviewUserInfo">
+                                            <div className="col mb-2">
+                                                <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span></h6>
                                             </div>
-                                            <div class="col">
+                                            <div className="col">
                                             <RatingComponent/>
                                             </div>
                                         </div>
@@ -63,21 +57,21 @@ function TabComponent() {
                             </div>
                         </div>
 
-                        <div class="card singleReview border-0">
-                            <div class="row no-gutters">
-                                <div class="col-auto">
-                                    <div class="reviewUserAvater">
+                        <div className="card singleReview border-0">
+                            <div className="row no-gutters">
+                                <div className="col-auto">
+                                    <div className="reviewUserAvater">
                                         <img src={reviewAvatar} alt="" />
                                     </div>
                                 </div>
 
-                                <div class="col pl-2">
-                                    <div class="reviewCardBody">
-                                        <div class="row reviewUserInfo">
-                                            <div class="col mb-2">
-                                                <h6 class="reviewUserName">Sam Smith <span class="reviewDate">May 26, 12:31</span></h6>
+                                <div className="col pl-2">
+                                    <div className="reviewCardBody">
+                                        <div className="row reviewUserInfo">
+                                            <div className="col mb-2">
+                                                <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span></h6>
                                             </div>
-                                            <div class="col">
+                                            <div className="col">
                                             <RatingComponent/>
                                             </div>
                                         </div>
@@ -90,21 +84,21 @@ function TabComponent() {
                             </div>
                         </div>
 
-                        <div class="card singleReview border-0">
-                            <div class="row no-gutters">
-                                <div class="col-auto">
-                                    <div class="reviewUserAvater">
+                        <div className="card singleReview border-0">
+                            <div className="row no-gutters">
+                                <div className="col-auto">
+                                    <div className="reviewUserAvater">
                                         <img src={reviewAvatar} alt="" />
                                     </div>
                                 </div>
 
-                                <div class="col pl-2">
-                                    <div class="reviewCardBody">
-                                        <div class="row reviewUserInfo">
-                                            <div class="col mb-2">
-                                                <h6 class="reviewUserName">Sam Smith <span class="reviewDate">May 26, 12:31</span></h6>
+                                <div className="col pl-2">
+                                    <div className="reviewCardBody">
+                                        <div className="row reviewUserInfo">
+                                            <div className="col mb-2">
+                                                <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span></h6>
                                             </div>
-                                            <div class="col">
+                                            <div className="col">
                                              <RatingComponent/>
                                             </div>
                                         </div>
@@ -116,19 +110,20 @@ function TabComponent() {
                             </div>
                         </div>
                     </div>
-                    <div class="postReviews clearfix">
+                    <div className="postReviews clearfix">
                         <h3>Post a review</h3>
                        <RatingComponent/>
 
-                        <form class="postReviewsForm">
+                        <form className="postReviewsForm">
                             <textarea name="" id="" cols="30" rows="5" placeholder="Share your experience"></textarea>
-                            <button class="btn btn-primary mt-3">Post a review</button>
+                            <button className="btn btn-primary mt-3">Post a review</button>
                         </form>
                     </div>
 
                 </Tab>
             </Tabs>
-        </div>
+            </div>
+        )
     );
 }
 

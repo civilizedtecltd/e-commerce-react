@@ -28,8 +28,8 @@ function ErrorPage() {
                 <h1>404</h1>
                 <h2>Page Not found</h2>
                 <ul className="d-flex justify-content-center">
-                  <li><Link to="/"><i class="fas fa-home"></i> HOME</Link></li>
-                  <li><Link to="/shop"><i class="fas fa-shopping-cart"></i> Shop</Link></li>
+                  <li><Link to="/"><i className="fas fa-home"></i> HOME</Link></li>
+                  <li><Link to="/shop"><i className="fas fa-shopping-cart"></i> Shop</Link></li>
                 </ul>
               </div>
             </Col>

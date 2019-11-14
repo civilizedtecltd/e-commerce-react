@@ -1,7 +1,8 @@
-import React, { createElement } from "react";
+import React  from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import CheckoutTab from './CheckoutTab';
+import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 // Book Images
 import bookImage1 from "../assets/images/books/book_img_01.jpg";
 import './checkout.css'
@@ -11,21 +12,18 @@ const CheckoutPage = () => {
     <>
       <div className="allWrapper bgGray">
         <header className="header clearfix border-0 pt-5 pb-5" id="header">
-          <Container>
-            <Row>
-              <Col className="text-center">
-                <div className="logoWrapper">
-                  <h1 className="logoText">
-                    <Link to="#">LOGO</Link>
-                  </h1>
-                </div>
-                {/* end of logoWrapper */}
-              </Col>
-              {/* end of Col */}
-            </Row>
-            {/* end of Row */} 
-          </Container>
-          {/* end of Container */}
+
+        <Container>
+              <Row>
+                <Col>
+                <BreadCrumb
+                  url='/'
+                  option1='Home'
+                  option2="Checkout"
+                />
+                </Col>
+              </Row>
+            </Container>
         </header>
         {/* end of header */}
 

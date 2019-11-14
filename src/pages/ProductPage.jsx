@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
+import { connect } from 'react-redux'
+import axios from 'axios'
 import { Container, Modal, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link , useParams } from "react-router-dom";
 
-import "../pages/assets/product.css";
-//
+import {addToCard , show_single_book} from '../redux/actions/actions'
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
@@ -12,14 +13,28 @@ import { ImageCarousel } from "../components/ProductImgCarosellComponents/Produc
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import TabComponent from "../components/TabComponent/TabComponent";
 import RatingComponent from "../components/ratingComponent/Rating";
-
+import { URL } from '../constants/config';
 
 import "../pages/assets/product.css";
 
-function ProductPage() {
+function ProductPage(props) {
+
+  const { id } =  useParams()
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const book = (props.shop.book !== undefined ) ? props.shop.book : false;
+
+  useEffect(() => {
+    const book = async () => {
+      const result = await axios(URL._SINGLE_BOOK(id));
+      return props.book(result.data.data)
+    };
+    book();
+  }, []);
+
+
   return (
     <>
       <div className="allWrapper">
@@ -36,10 +51,10 @@ function ProductPage() {
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item">
-                        <Link to="">Primary school </Link>
+                        <Link to="#">Primary school </Link>
                       </li>
                       <li className="breadcrumb-item">
-                        <Link to="">Shop </Link>
+                        <Link to="#">Shop </Link>
                       </li>
                       <li
                         className="breadcrumb-item active"
@@ -61,7 +76,9 @@ function ProductPage() {
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">
-                  <ImageCarousel />
+                  <ImageCarousel
+                    image = {(book ? book.cover_images : false )}
+                   />
                 </div>
 
                 <div className="col-sm-6">
@@ -69,27 +86,24 @@ function ProductPage() {
                     <div className="card-header border-0 bg-white">
                       <div className="productCardHead">
                         <h2 className="productSingleTitle">
-                          Math time className - 2
+                          { book ? book.name : ``}
                         </h2>
-                        <RatingComponent/>
+                        <RatingComponent  value= { book ? book.rating : 0 }/>
                         <p>(7 reviews)</p>
                       </div>
                       <h6 className="authName">
-                        by <Link to="#">Sam Smith</Link>
+                        by <Link to = {`${URL.BASE}/api/author/${book ? book.book_author.id : '#'}`} > {book ? book.book_author.name : `` } </Link>
                       </h6>
                     </div>
 
                     <div className="card-body productCardBody">
                       <h5 className="product-single-Price mb-4">
-                        $ 16.99{" "}
-                        <span className="productAvaility">Available</span>
+                        $ {book ? book.price : 0 }
+                        <span className="productAvaility">{book ? ((book.status === 1) ? `Available` : `Unavailable`) : ``}</span>
                       </h5>
                       <div className="productSortDes">
                         <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor enim ipsam voluptatem quia
-                          voluptas quia non numquam eius. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum.
+                          {book ? book.short_description : ``}
                         </p>
                       </div>
 
@@ -123,7 +137,22 @@ function ProductPage() {
                         </div>
                         <hr className="hrBorder mt-4" />
                       </div>
-                      <TabComponent />
+                      <TabComponent
+                        description = {book ? book.long_description : `` }
+                        specification = {book ? [{
+                            author          : book.book_author.name,
+                            discipline      : book.book_discipline.name,
+                            stage           : book.book_stage.name,
+                            publisher       : book.book_publisher.name,
+                            publishing_year : book.book_publishing_year.name,
+                            book_cover      : book.book_cover,
+                            language        : book.book_language.name,
+                            page_number     : book.page_number
+
+                        }] : {}}
+
+                        reviews = {[]}
+                        />
                     </div>
                   </div>
                 </div>
@@ -183,4 +212,19 @@ function ProductPage() {
     </>
   );
 }
-export default ProductPage;
+
+
+const mapStateToProps = (state)=> {
+  return{
+    ...state
+  }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+      addTocard:(id)=>dispatch(addToCard(id)),
+      book:(book) =>dispatch(show_single_book(book))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);
