@@ -5,9 +5,6 @@ import { Container, Modal, Button } from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
 
 import {addToCard , show_single_book} from '../redux/actions/actions'
-
-import "../pages/assets/product.css";
-//
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
@@ -54,10 +51,10 @@ function ProductPage(props) {
                   <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item">
-                        <Link to="">Primary school </Link>
+                        <Link to="#">Primary school </Link>
                       </li>
                       <li className="breadcrumb-item">
-                        <Link to="">Shop </Link>
+                        <Link to="#">Shop </Link>
                       </li>
                       <li
                         className="breadcrumb-item active"
@@ -80,20 +77,7 @@ function ProductPage(props) {
               <div className="row">
                 <div className="col-sm-6">
                   <ImageCarousel
-                    image={() => {
-                        const cover =  (book ? JSON.parse(book.cover_images) : false )
-
-                        if(cover){
-                            return [
-                                `${URL.BASE}/${cover.img_1}`,
-                                `${URL.BASE}/${cover.img_2}`,
-                                `${URL.BASE}/${cover.img_3}`
-                            ];
-                        }else{
-                            return [];
-                        }
-                    }
-                }
+                    // image={book.cover_images}
                    />
                 </div>
 
@@ -108,7 +92,7 @@ function ProductPage(props) {
                         <p>(7 reviews)</p>
                       </div>
                       <h6 className="authName">
-                        by <Link to={book ? book.book_author.id : '#' }>{book ? book.book_author.name : `` }</Link>
+                        by <Link to={book ? `${book.book_author.id}` : '#' }>{book ? book.book_author.name : `` }</Link>
                       </h6>
                     </div>
 

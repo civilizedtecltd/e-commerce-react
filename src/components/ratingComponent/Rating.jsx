@@ -20,8 +20,9 @@ const Rating = ({ min, max, onChange, value }) => {
   return (
     <div className='rating'>
       {
-        range(min, max).map(item => (
+        range(min, max).map((item,index) => (
           <RatingItem
+            key={index}
             colored={value >= item}
             checked={value === item}
             value={item}
