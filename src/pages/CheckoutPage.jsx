@@ -1,4 +1,4 @@
-import React, { createElement } from "react";
+import React  from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import CheckoutTab from './CheckoutTab';
@@ -23,7 +23,7 @@ const CheckoutPage = () => {
               </Col>
               {/* end of Col */}
             </Row>
-            {/* end of Row */} 
+            {/* end of Row */}
           </Container>
           {/* end of Container */}
         </header>

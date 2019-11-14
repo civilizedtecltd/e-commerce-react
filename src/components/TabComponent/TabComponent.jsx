@@ -18,7 +18,7 @@ function TabComponent({description, reviews, specification }) {
                 </Tab>
 
                 <Tab eventKey="specifications" title="Specifications">
-                    <ul class="specifications">
+                    <ul className="specifications">
                         <li><strong>Author :</strong>{ (spec.author !== undefined )? spec.author : ``}</li>
                         <li><strong>Discipline : </strong>{ (spec.discipline !== undefined )? spec.discipline : ``}</li>
                         <li><strong>Stage : </strong>{ (spec.stage !== undefined )? spec.stage : ``}</li>
@@ -30,23 +30,23 @@ function TabComponent({description, reviews, specification }) {
                     </ul>
                 </Tab>
                 <Tab eventKey="Reviews" title={`Reviews(${7})`}>
-                    <div class="productReviews clearfix">
+                    <div className="productReviews clearfix">
 
-                        <div class="card singleReview border-0">
-                            <div class="row no-gutters">
-                                <div class="col-auto">
-                                    <div class="reviewUserAvater">
+                        <div className="card singleReview border-0">
+                            <div className="row no-gutters">
+                                <div className="col-auto">
+                                    <div className="reviewUserAvater">
                                         <img src={reviewAvatar} alt="" />
                                     </div>
                                 </div>
 
-                                <div class="col pl-2">
-                                    <div class="reviewCardBody">
-                                        <div class="row reviewUserInfo">
-                                            <div class="col mb-2">
-                                                <h6 class="reviewUserName">Sam Smith <span class="reviewDate">May 26, 12:31</span></h6>
+                                <div className="col pl-2">
+                                    <div className="reviewCardBody">
+                                        <div className="row reviewUserInfo">
+                                            <div className="col mb-2">
+                                                <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span></h6>
                                             </div>
-                                            <div class="col">
+                                            <div className="col">
                                             <RatingComponent/>
                                             </div>
                                         </div>
@@ -57,21 +57,21 @@ function TabComponent({description, reviews, specification }) {
                             </div>
                         </div>
 
-                        <div class="card singleReview border-0">
-                            <div class="row no-gutters">
-                                <div class="col-auto">
-                                    <div class="reviewUserAvater">
+                        <div className="card singleReview border-0">
+                            <div className="row no-gutters">
+                                <div className="col-auto">
+                                    <div className="reviewUserAvater">
                                         <img src={reviewAvatar} alt="" />
                                     </div>
                                 </div>
 
-                                <div class="col pl-2">
-                                    <div class="reviewCardBody">
-                                        <div class="row reviewUserInfo">
-                                            <div class="col mb-2">
-                                                <h6 class="reviewUserName">Sam Smith <span class="reviewDate">May 26, 12:31</span></h6>
+                                <div className="col pl-2">
+                                    <div className="reviewCardBody">
+                                        <div className="row reviewUserInfo">
+                                            <div className="col mb-2">
+                                                <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span></h6>
                                             </div>
-                                            <div class="col">
+                                            <div className="col">
                                             <RatingComponent/>
                                             </div>
                                         </div>
@@ -84,21 +84,21 @@ function TabComponent({description, reviews, specification }) {
                             </div>
                         </div>
 
-                        <div class="card singleReview border-0">
-                            <div class="row no-gutters">
-                                <div class="col-auto">
-                                    <div class="reviewUserAvater">
+                        <div className="card singleReview border-0">
+                            <div className="row no-gutters">
+                                <div className="col-auto">
+                                    <div className="reviewUserAvater">
                                         <img src={reviewAvatar} alt="" />
                                     </div>
                                 </div>
 
-                                <div class="col pl-2">
-                                    <div class="reviewCardBody">
-                                        <div class="row reviewUserInfo">
-                                            <div class="col mb-2">
-                                                <h6 class="reviewUserName">Sam Smith <span class="reviewDate">May 26, 12:31</span></h6>
+                                <div className="col pl-2">
+                                    <div className="reviewCardBody">
+                                        <div className="row reviewUserInfo">
+                                            <div className="col mb-2">
+                                                <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span></h6>
                                             </div>
-                                            <div class="col">
+                                            <div className="col">
                                              <RatingComponent/>
                                             </div>
                                         </div>
@@ -110,13 +110,13 @@ function TabComponent({description, reviews, specification }) {
                             </div>
                         </div>
                     </div>
-                    <div class="postReviews clearfix">
+                    <div className="postReviews clearfix">
                         <h3>Post a review</h3>
                        <RatingComponent/>
 
-                        <form class="postReviewsForm">
+                        <form className="postReviewsForm">
                             <textarea name="" id="" cols="30" rows="5" placeholder="Share your experience"></textarea>
-                            <button class="btn btn-primary mt-3">Post a review</button>
+                            <button className="btn btn-primary mt-3">Post a review</button>
                         </form>
                     </div>
 

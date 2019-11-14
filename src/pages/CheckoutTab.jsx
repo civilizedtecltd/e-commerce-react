@@ -16,10 +16,10 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
         show:false
     })
 
-   const [isCheck , setCheck] = useState(false)
+     //  const [isCheck , setCheck] = useState(false)
 
-   
-      const handleCheck = () => {setCheck(!isCheck)}
+
+     // const handleCheck = () => {setCheck(!isCheck)}
 
       const handleNext = () => {
 
@@ -30,7 +30,7 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
           const step_2_tab = document.getElementById('step-2')
           const step_3_tab = document.getElementById('step-3')
 
-           
+
 
        if(step.next === 1){
          address_section.classList.remove('tab-active-content')
@@ -38,7 +38,7 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
          step_1_tab.classList.remove('active-tab')
          step_2_tab.classList.add('active-tab')
          setStep({prev:1, next:2})
-         
+
        }else if(step.next === 2){
            payment_section.classList.remove('tab-active-content')
            order_confirmation_section.classList.add('tab-active-content')
@@ -46,21 +46,21 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
            step_3_tab.classList.add('active-tab')
            setStep({prev:2, next:3})
        }
-       
+
     }
 
 
     const handlePrev = () => {
-        
+
         var payment_section = document.getElementById('payment-section');
         var address_section = document.getElementById('address-section');
         var order_confirmation_section = document.getElementById('order-confirmation-section');
         const step_1_tab = document.getElementById('step-1')
         const step_2_tab = document.getElementById('step-2')
         const step_3_tab = document.getElementById('step-3')
-        
+
         if(step.prev === 1){
-            
+
             payment_section.classList.remove('tab-active-content')
             address_section.classList.add('tab-active-content')
             step_2_tab.classList.remove('active-tab')
@@ -74,11 +74,11 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
            step_2_tab.classList.add('active-tab')
            setStep({prev:1,next:2})
 
-        } 
+        }
 
      }
 
-   
+
 
     return(
         <Container>
@@ -149,7 +149,7 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                                 <label htmlFor="comment">Comments</label>
                                 <textarea name="comment" id="comment" cols="30" rows="4" className="form-control"></textarea>
                               </Col>
-                            
+
                             <Col className="form-group fromCheckbox mt-1">
                               <Form.Check
                                 custom
@@ -159,7 +159,7 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                               />
                               <Link to="#" className="termsTxt">Terms and Conditions</Link>
                             </Col>
-                            
+
                             <Col className="col-md-12 form-group fromCheckbox mt-1">
                               <Form.Check
                                 custom
@@ -173,19 +173,19 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                             <Col className="text-right">
                               <Button className="btn btn-primary" onClick={handleNext} >Next</Button>
                             </Col>
-                            
+
                         </Row>
                       </Form>
                 </Col>
             </Row>{/* tab-section -1 */}
           </div>
 
-               
+
                 <div id="payment-section" className="tab payment-section mt-5">
                    <div className="row">
                        <div className="col col-12">
                           <h3>Choose a delivery method</h3>
-                            
+
                             <PaymentsMethod
                               prev={true}
                               tab={1}
@@ -197,7 +197,7 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                               paymentName="Visa"
                             />
 
-                      <div className="payment-header mt-3 d-flex justify-content-between"> 
+                      <div className="payment-header mt-3 d-flex justify-content-between">
                        <div>
                         <CheckboxComponent
                          type="radio"
@@ -213,7 +213,7 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                         </div>
                         </div>
 
-                       <div className="payment-header mt-3 d-flex justify-content-between"> 
+                       <div className="payment-header mt-3 d-flex justify-content-between">
 
                        <div className="radio-div">
                           <CheckboxComponent
@@ -231,14 +231,14 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                         </div>
 
                       </div>
-                                                
+
 
                            <Form className="mt-5">
                             <Row>
                               <Col sm="6">
                                 <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
                               </Col>
-                              
+
                               <Col sm="6" className="col-6 text-right">
                                 <button type="button" className="btn btn-primary" onClick={handleNext}>Next</button>
                               </Col>
@@ -251,7 +251,7 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
 
 
 
-               
+
                 <div id='order-confirmation-section' className="tab order-confirmation-section">
                           <Form className="userInfoForm mt-3">
                             <h3>Choose a delivery method</h3>
@@ -266,7 +266,7 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                                 </ul>
                               </Col>
 
-  
+
                               <Col sm="6">
                                 <ul className="orderConfrimationList">
                                   <li><strong>City:</strong> Lorem ipsum</li>
@@ -289,12 +289,12 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                               <Col>
                                 <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
                               </Col>
-                              
+
                               <Col className="text-right">
                                 <button type="submit" className="btn btn-primary" data-target="#confirmOrder" data-toggle="modal">Confirm order</button>
                               </Col>
                             </Row>
-    
+
                           </Form>
                         </div>{/* tab section -3 */}
 
@@ -305,7 +305,7 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
         </Card>
         {/* end of Card */}
       </Container>
-     
+
     )
 }
 
@@ -314,13 +314,13 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
 
 function PaymentsMethod(props){
   const [isOpen, setIsOpen] = useState(false);
-  const toggle = () =>{ 
+  const toggle = () =>{
     setIsOpen(!isOpen);
   }
 
   return(<>
   <div>
- <div className="payment-header mt-3">    
+ <div className="payment-header mt-3">
   <Form.Check
         custom
         className="ml-2"
@@ -328,7 +328,7 @@ function PaymentsMethod(props){
         type="radio"
         id={props.paymentName.toLowerCase()}
         label={props.paymentName}
-        checked={isOpen} 
+        checked={isOpen}
       />
  </div>
       <Collapse isOpen={isOpen}>
@@ -346,7 +346,7 @@ function PaymentsMethod(props){
                     <img src={card_icon_img} alt=""/>
                   </div>
                 </div>
-                
+
                 <div className="row align-items-center justify-content-between">
                   <div className="col-sm-3 form-group">
                     <label htmlFor="card-number">Expiry date</label>
@@ -372,7 +372,7 @@ function PaymentsMethod(props){
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>
           </CardBody>
         </Card>
       </Collapse>
