@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Breadcrumb, Form, Card } from "react-bootstrap";
 import { connect  } from 'react-redux';
-import { LoadProduct } from '../redux/actions/actions'
+import { LoadProduct } from '../redux/actions/actions';
+import './assets/shop.css';
 import axios from 'axios'
 // Product Images
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
@@ -442,6 +443,7 @@ const ShopPage = (props) => {
                           </ul>
                         </nav>
                       </div>
+
                     </div>
 
                     <Row>
@@ -487,6 +489,71 @@ const ShopPage = (props) => {
 
                       }
                     </Row>
+
+                    <div className="row mt-4">
+
+                      <div className="col">
+                        <ul className="singleFilter d-flex align-items-center">
+                          <li>
+                            <label htmlFor="">Sort By</label>
+                          </li>
+                          <li>
+                            <select className="filterSelect form-control">
+                              <option>Popular</option>
+                              <option>New</option>
+                              <option>Price: low to high</option>
+                              <option>Price: high to low</option>
+                            </select>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div className="col">
+                        <ul className="singleFilter d-flex align-items-center">
+                          <li>
+                            <label htmlFor="">Show</label>
+                          </li>
+
+                          <li>
+                            <select className="filterSelect form-control">
+                              <option>16</option>
+                              <option>10</option>
+                              <option>5</option>
+                            </select>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div className="col">
+                        <nav aria-label="Page navigation">
+                          <ul className="pagination align-items-center justify-content-between">
+                            <li className="page-item">
+                              <Link className="page-link" to="#">
+                                <i className="fas fa-chevron-left"></i>
+                              </Link>
+                            </li>
+                            <li className="page-item">Page</li>
+                            <li className="page-item">
+                              <Link className="page-link" to="#">
+                                1
+                              </Link>
+                            </li>
+                            <li className="page-item">of</li>
+                            <li className="page-item">
+                              <Link className="page-link" to="#">
+                                7
+                              </Link>
+                            </li>
+                            <li className="page-item">
+                              <Link className="page-link" to="#">
+                                <i className="fas fa-chevron-right"></i>
+                              </Link>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+
+                    </div>
                     {/* end of Container */}
                   </div>
                   {/* end of allProductContent */}
