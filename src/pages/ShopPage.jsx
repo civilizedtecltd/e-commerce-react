@@ -10,7 +10,6 @@ import FooterComponent from "../components/FooterComponent/FooterComponent";
 import PriceRanger from "../components/PriceRangeSlider/PriceRangeSlider";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
-
 import { URL } from '../constants/config';
 
 

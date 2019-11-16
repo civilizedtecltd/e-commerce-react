@@ -202,10 +202,9 @@ function ProductPage(props) {
           </h2>{" "}
         </Modal.Body>
         <Modal.Footer className={"border-0"}>
-          <Button variant={"primary"}> Go to checkout</Button>
+          <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}> Go to checkout </Link>
           <button className="linkBtnBorder" style={{ borderRadius: "4px" }}>
-            {" "}
-            Continue shopping{" "}
+            Continue shopping
           </button>
         </Modal.Footer>
       </Modal>
