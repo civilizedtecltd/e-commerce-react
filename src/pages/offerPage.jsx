@@ -13,6 +13,7 @@ import FooterComponent from '../components/FooterComponent/FooterComponent';
 import {HeaderComponent, MobileHeader} from '../components/header/Header';
 
 
+
 const offerPage = () => {
   return (<>
 
@@ -106,6 +107,7 @@ const offerPage = () => {
 
             <Row className="justify-content-between">
 
+
               {NewBookDB.map((newBook, index) => <NewBookComponent
                   key={index}
                   ImageBg="bgGray"
@@ -113,8 +115,11 @@ const offerPage = () => {
                   ProductTitle={newBook.Title}
                   AuthorName={newBook.Author}
                   ProductPrice={newBook.Price}
-                />)
+                />
+
+                )
               }
+
 
             </Row>{/* end of Row */}
           </Container>{/* end of Container */}

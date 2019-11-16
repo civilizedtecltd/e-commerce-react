@@ -1,0 +1,10 @@
+.pagination li, .pagination .page-link{
+    font-size:16px;
+    color:#363636;
+    font-weight: 600;
+}
+.pagination .page-link{
+    border:1px solid #000000;
+    border-radius: 5px;
+    padding: 10px 14px 6px 14px;
+}

@@ -84,3 +84,16 @@ width: 50%;
     border: 2px solid #3897cf !important;
 }
 
+.customer-support{
+    color: #ffffff;
+}
+
+.customer-support span,
+.customer-support i{
+    color: #ffffff;
+}
+
+.customer-support span:hover,
+.customer-support i:hover{
+    color: #3897CF;
+}

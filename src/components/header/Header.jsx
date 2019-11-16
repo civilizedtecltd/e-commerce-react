@@ -35,7 +35,7 @@ function HeaderComponent() {
                 <ul className="headFeatureList d-flex justify-content-between">
                   <li><i className="fas fa-truck"></i> <span>Free delivery</span></li>
                   <li><i className="fas fa-award"></i> <span>Genuine goods</span></li>
-                  <li><Link to="#"> <i className="fas fa-headset"></i> <span>Customer support</span></Link></li>
+                  <li className="customer-support"><Link to="#"> <i className="fas fa-headset"></i> <span>Customer support</span></Link></li>
                 </ul>
               </div>
             </Col>
