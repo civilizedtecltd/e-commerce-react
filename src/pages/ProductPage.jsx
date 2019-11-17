@@ -21,25 +21,33 @@ function ProductPage(props) {
 
   const { id } =  useParams()
   const [show, setShow] = useState(false);
+  const [ localItems ] = useState(()=>{
+    let items = JSON.parse(localStorage.getItem('items'))
+    return items || [];
+  });
+
+  const [newItem] = useState({userId:1,productId:id});
+
+  const [ checkoutItems , setCheckoutItems] = useState([])
+
   const handleClose = () => setShow(false);
+
   const handleShow = () => {
-    let checkoutItems = []
-    let localItems = JSON.parse(localStorage.getItem('session'))
-    if(localItems !==null) checkoutItems=[...localItems];
-    checkoutItems.push(
-    {
-     userId:1,
-     productID:id 
-    }
-    )
-    localStorage.setItem('session', JSON.stringify(checkoutItems));
+    (localItems !== null) ? setCheckoutItems(...localItems) : setCheckoutItems([]);
+
+    (newItem !==null) ? setCheckoutItems([...localItems,{...newItem}]) : setCheckoutItems(...localItems);
+
+    localStorage.setItem('items',JSON.stringify(checkoutItems))
+    
+    console.log('====================================');
+    console.log(checkoutItems);
+    console.log('====================================');
     setShow(true)
   };
 
  
-  const cartItem = JSON.parse(window.localStorage.getItem('session'));
+  const cartItem = JSON.parse(window.localStorage.getItem('items'));
   let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
-  console.log(totalItem)
   const book = (props.shop.book !== undefined ) ? props.shop.book : false;
 
   useEffect(() => {
@@ -218,9 +226,7 @@ function ProductPage(props) {
         </Modal.Body>
         <Modal.Footer className={"border-0"}>
           <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}> Go to checkout </Link>
-          <button className="linkBtnBorder" style={{ borderRadius: "4px" }}>
-            Continue shopping
-          </button>
+          <Link to="/shop" className="linkBtnBorder" style={{color:'white', borderRadius: "4px" }}>Continue shopping</Link>
         </Modal.Footer>
       </Modal>
     </>
