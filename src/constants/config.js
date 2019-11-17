@@ -17,11 +17,19 @@
          return `${this.API}/auth/login`;
      }
 
+     _GET_USER(id){
+         return `${this.API}/user/${id}`;
+     }
+
      get _ALL_BOOKS(){
-         return `${this.API}/product/books`;
+         return `${this.API}/product/all-books`;
      }
      _SINGLE_BOOK(id){
          return `${this.API}/product/book/${id}`
+     }
+
+     _CATEGORY_BOOKS(id){
+        return `${this.API}/product/category/${id}`
      }
  }
 

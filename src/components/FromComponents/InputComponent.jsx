@@ -4,23 +4,25 @@ import { Form } from 'react-bootstrap';
 
 //Input From Components
 
-function InputFrom({ LabelId, TypeName, LabelTitle, Name, Value, Placeholder, controlId, ClassName, callback }) {
+function InputFrom ({ LabelId, TypeName, LabelTitle, Name, Value, Placeholder, ClassName, callback }) {
+
     const handleOnchange = event => {
         let data = {
             [event.target.name] : event.target.value
         }
         callback(data)
     }
+
     return (
-        <Form.Group controlId={controlId} className={ClassName}>
-            <Form.Label htmlFor={LabelId}>{LabelTitle}</Form.Label>
-            <Form.Control type={TypeName} id={LabelId} name={Name} defaultValue={Value} placeholder={Placeholder} onChange = {handleOnchange} />
+        <Form.Group className = {ClassName}>
+            <Form.Label htmlFor = {LabelId} > {LabelTitle} </Form.Label>
+            <Form.Control type = {TypeName} id = {LabelId} name={Name} defaultValue={Value} placeholder={Placeholder} onChange = {handleOnchange} />
         </Form.Group>
     )
 }
 
 //Select From Components
-function SelectFrom({ LabelTitle, controlId, category, callback }) {
+function SelectFrom({ LabelTitle, category, callback }) {
 
     useEffect(() => {
 
@@ -47,12 +49,12 @@ function SelectFrom({ LabelTitle, controlId, category, callback }) {
     }
 
     return (
-        <Form.Group controlId={controlId}>
+        <Form.Group>
             <Form.Label> {LabelTitle} </Form.Label>
             <Form.Control as="select" id="category" onChange = {handleOnchange}>
-                        <option defaultValue="" >Select Category</option>
+                <option defaultValue="" >Select Category</option>
                 {
-                    category.map((element) =>
+                    (category === undefined ) ? [] : category.map((element) =>
                         <option key = {element.id} value = {element.id}>{ element.category }</option>
                     )
                 }

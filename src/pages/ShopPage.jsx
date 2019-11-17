@@ -16,13 +16,16 @@ import { URL } from '../constants/config';
 
 const ShopPage = (props) => {
 
+    const { id } =  useParams();
+
     const cartItem = JSON.parse(window.localStorage.getItem('items'));
     let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
     const books = (props.shop.books !== undefined ) ? props.shop.books : [];
 
     useEffect(() => {
         const fetchBooks = async () => {
-          const result = await axios(URL._ALL_BOOKS);
+
+          const result = ( id === 'all') ? await axios(URL._ALL_BOOKS) : await axios(URL._CATEGORY_BOOKS(id)) ;
           props.loadProduct(result.data.data)
         };
         fetchBooks();
@@ -38,7 +41,7 @@ const ShopPage = (props) => {
             className="sectionBreadcrumb secGap clearfix pb-0"
             id="sectionBreadcrumb"
           >
-               
+
             <Container>
               <Row>
                 <Col>

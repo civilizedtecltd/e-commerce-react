@@ -85,12 +85,12 @@ function App() {
         <Route path="/email-subscription" component={Subscription} />
         <Route path="/my-order" component={OrderPage} />
         <Route path="/payment-methods" component={PaymentPage} />
-        
+
         <Route path="/book-offer" component={OfferPage} />
         <Route path="/cart" component={CartPage} />
         <Route path="/checkout" component={CheckoutPage} />
         <Route path="/favorites" component={FavoritesPage} />
-        <Route path="/shop" component={ShopPage} />
+        <Route path="/shop/category/:id?" component={ShopPage} />
         <Route path="/product/:id" component={ProductPage} />
         <Route path='*'  component={ErrorPage} />
 

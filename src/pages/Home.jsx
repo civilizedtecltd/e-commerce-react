@@ -26,50 +26,60 @@ const Home = () => {
   return (<>
 
     <div className="allWrapper">
+<<<<<<< HEAD
+          <HeaderComponent/>
+=======
 
           <HeaderComponent
           cartItem={totalItem}
           />
+>>>>>>> master
           <MobileHeader />
       <main className="mainContent clearfix" id="mainContent">
         <section className="productCat secGap clearfix" id="productCat">
           <Container>
             <Row>
 
-              <Col sm="4">
+                <Col sm="4">
+                   <Link to="/shop/category/1">
                 <Card className="productCatCard">
                   <div className="productCatMedia">
-                    <Link to="#"><img src={productCatImg} alt="" /></Link>
+                    <img src={productCatImg} alt="" />
                   </div>{/* end of productCatMedia*/}
                   <Card.Body className="text-center">
-                    <Link to="#"><h3 className="productCatTitle">Kindergarten</h3></Link>
+                    <h3 className="productCatTitle">Kindergarten</h3>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of productCatCard */}
+              </Link>
+                </Col>{/* end of Col */}
+
+              <Col sm="4">
+                <Link to="/shop/category/2">
+                    <Card className="productCatCard">
+                        <div className="productCatMedia">
+                            <img src={productCatImg2} alt="" />
+                        </div>{/* end of productCatMedia*/}
+                        <Card.Body className="text-center">
+                            <h3 className="productCatTitle">Primary school</h3>
+                        </Card.Body>{/* end of Card.Body */}
+                    </Card>{/* end of productCatCard */}
+                </Link>
               </Col>{/* end of Col */}
 
               <Col sm="4">
-                <Card className="productCatCard">
-                  <div className="productCatMedia">
-                    <Link to="#"><img src={productCatImg2} alt="" /></Link>
-                  </div>{/* end of productCatMedia*/}
-                  <Card.Body className="text-center">
-                    <Link to="#"><h3 className="productCatTitle">Primary school</h3></Link>
-                  </Card.Body>{/* end of Card.Body */}
-                </Card>{/* end of productCatCard */}
+                <Link to="/shop/category/3">
+                    <Card className="productCatCard">
+                        <div className="productCatMedia">
+                            <img src={productCatImg3} alt="" />
+                        </div>{/* end of productCatMedia*/}
+                        <Card.Body className="text-center">
+                            <h3 className="productCatTitle">Secondary school</h3>
+                        </Card.Body>{/* end of Card.Body */}
+                    </Card>{/* end of productCatCard */}
+                </Link>
               </Col>{/* end of Col */}
-
-              <Col sm="4">
-                <Card className="productCatCard">
-                  <div className="productCatMedia">
-                    <Link to="#"><img src={productCatImg3} alt="" /></Link>
-                  </div>{/* end of productCatMedia*/}
-                  <Card.Body className="text-center">
-                    <Link to="#"><h3 className="productCatTitle">Secondary school</h3></Link>
-                  </Card.Body>{/* end of Card.Body */}
-                </Card>{/* end of productCatCard */}
-              </Col>{/* end of Col */}
-
             </Row>{/* end of Row */}
+
           </Container>{/* end of Container */}
         </section>{/* end of productCat */}
 
