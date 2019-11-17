@@ -11,10 +11,16 @@ import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 
 const FavoritesPage = () => {
+  
+  const cartItem = JSON.parse(window.localStorage.getItem('session'));
+  let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
+
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent />
+        <HeaderComponent
+        cartItem={totalItem}
+        />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section

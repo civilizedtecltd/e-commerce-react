@@ -15,10 +15,14 @@ import {HeaderComponent, MobileHeader} from '../components/header/Header';
 
 
 const offerPage = () => {
+
+  const cartItem = JSON.parse(window.localStorage.getItem('session'));
+  let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
+
   return (<>
 
     <div className="allWrapper">
-      <HeaderComponent/>
+      <HeaderComponent cartItem={totalItem}/>
       <MobileHeader />
       <main className="mainContent clearfix" id="mainContent">
         <section className="offerBanner clearfix sectionBgImage sectionBgImg02" id="offerBanner">

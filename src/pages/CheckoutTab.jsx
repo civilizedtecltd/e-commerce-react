@@ -207,8 +207,8 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                         />
                         </div>
                         <div>
-                        <div class="col text-right shippingCostPrice">
-                            <span class="shippingCost"><strong>Time:</strong> 170 hours</span> <span class="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
+                        <div className="col text-right shippingCostPrice">
+                            <span className="shippingCost"><strong>Time:</strong> 170 hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
                          </div>
                         </div>
                         </div>
@@ -226,7 +226,7 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
 
                         <div className="price-time-div">
                         <div className="col text-right shippingCostPrice">
-                            <span className="shippingCost"><strong>Time:</strong> 170 hours</span> <span class="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
+                            <span className="shippingCost"><strong>Time:</strong> 170 hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
                          </div>
                         </div>
 
@@ -328,7 +328,7 @@ function PaymentsMethod(props){
         type="radio"
         id={props.paymentName.toLowerCase()}
         label={props.paymentName}
-        checked={isOpen}
+        defaultChecked={isOpen}
       />
  </div>
       <Collapse isOpen={isOpen}>
