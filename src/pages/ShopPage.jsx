@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useParams } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
 import { connect  } from 'react-redux';
