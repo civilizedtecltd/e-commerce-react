@@ -26,14 +26,10 @@ const Home = () => {
   return (<>
 
     <div className="allWrapper">
-<<<<<<< HEAD
-          <HeaderComponent/>
-=======
 
           <HeaderComponent
           cartItem={totalItem}
           />
->>>>>>> master
           <MobileHeader />
       <main className="mainContent clearfix" id="mainContent">
         <section className="productCat secGap clearfix" id="productCat">
