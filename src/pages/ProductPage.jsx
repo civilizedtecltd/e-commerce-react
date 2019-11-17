@@ -21,29 +21,35 @@ function ProductPage(props) {
 
   const { id } =  useParams()
   const [show, setShow] = useState(false);
-  const [ localItems ] = useState(()=>{
-    let items = JSON.parse(localStorage.getItem('items'))
-    return items || [];
-  });
 
-  const [newItem] = useState({userId:1,productId:id});
+  const [ localItems ] = useState(()=>JSON.parse(localStorage.getItem('items')));
 
-  const [ checkoutItems , setCheckoutItems] = useState([])
+  const [ newItem ] = useState({userId:1,productId:id});
+
+  const [ checkoutItems , setCheckoutItems] = useState(localItems);
 
   const handleClose = () => setShow(false);
-
+  
   const handleShow = () => {
-    (localItems !== null) ? setCheckoutItems(...localItems) : setCheckoutItems([]);
 
-    (newItem !==null) ? setCheckoutItems([...localItems,{...newItem}]) : setCheckoutItems(...localItems);
+    if(checkoutItems === null || checkoutItems === undefined || checkoutItems.length === 0 ) {
+        localStorage.setItem('items',JSON.stringify([newItem]))
+    }
+    else{
 
-    localStorage.setItem('items',JSON.stringify(checkoutItems))
-    
-    console.log('====================================');
-    console.log(checkoutItems);
-    console.log('====================================');
+      checkoutItems.map((item)=>{
+
+        if(item.productId !== newItem.productId){
+
+          setCheckoutItems([...checkoutItems,newItem])
+
+            return localStorage.setItem('items',JSON.stringify(checkoutItems))
+      }
+      
+      });
+    }
     setShow(true)
-  };
+};
 
  
   const cartItem = JSON.parse(window.localStorage.getItem('items'));
