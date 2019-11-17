@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Container, Row, Col, Breadcrumb, Form, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Container, Row, Col, Form, Card } from "react-bootstrap";
 import { connect  } from 'react-redux';
 import { LoadProduct } from '../redux/actions/actions';
 import './assets/shop.css';
@@ -11,7 +11,6 @@ import FooterComponent from "../components/FooterComponent/FooterComponent";
 import PriceRanger from "../components/PriceRangeSlider/PriceRangeSlider";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
-
 import { URL } from '../constants/config';
 
 
@@ -19,6 +18,8 @@ const ShopPage = (props) => {
 
     const { id } =  useParams();
 
+    const cartItem = JSON.parse(window.localStorage.getItem('items'));
+    let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
     const books = (props.shop.books !== undefined ) ? props.shop.books : [];
 
     useEffect(() => {
@@ -33,7 +34,7 @@ const ShopPage = (props) => {
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent />
+        <HeaderComponent cartItem={totalItem} />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section

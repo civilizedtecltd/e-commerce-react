@@ -21,39 +21,22 @@ function ProductPage(props) {
 
   const { id } =  useParams()
   const [show, setShow] = useState(false);
-
-  const [ localItems ] = useState(()=>JSON.parse(localStorage.getItem('items')));
-
-  const [ newItem ] = useState({userId:1,productId:id});
-
-  const [ checkoutItems , setCheckoutItems] = useState(localItems);
-
   const handleClose = () => setShow(false);
-  
   const handleShow = () => {
-
-    if(checkoutItems === null || checkoutItems === undefined || checkoutItems.length === 0 ) {
-        localStorage.setItem('items',JSON.stringify([newItem]))
+    let checkoutItems = []
+    let localItems = JSON.parse(localStorage.getItem('session'))
+    if(localItems !==null) checkoutItems=[...localItems];
+    checkoutItems.push(
+    {
+     userId:1,
+     productID:id 
     }
-    else{
-
-      checkoutItems.map((item)=>{
-
-        if(item.productId !== newItem.productId){
-
-          setCheckoutItems([...checkoutItems,newItem])
-
-            return localStorage.setItem('items',JSON.stringify(checkoutItems))
-      }
-      
-      });
-    }
+    )
+    localStorage.setItem('session', JSON.stringify(checkoutItems));
     setShow(true)
-};
+  };
 
- 
-  const cartItem = JSON.parse(window.localStorage.getItem('items'));
-  let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
+  console.log(window.localStorage.getItem('session'))
   const book = (props.shop.book !== undefined ) ? props.shop.book : false;
 
   useEffect(() => {
@@ -68,7 +51,7 @@ function ProductPage(props) {
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent cartItem={ totalItem } />
+        <HeaderComponent />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
@@ -232,7 +215,9 @@ function ProductPage(props) {
         </Modal.Body>
         <Modal.Footer className={"border-0"}>
           <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}> Go to checkout </Link>
-          <Link to="/shop" className="linkBtnBorder" style={{color:'white', borderRadius: "4px" }}>Continue shopping</Link>
+          <button className="linkBtnBorder" style={{ borderRadius: "4px" }}>
+            Continue shopping
+          </button>
         </Modal.Footer>
       </Modal>
     </>
@@ -249,8 +234,8 @@ const mapStateToProps = (state)=> {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-      addTocard:(id)=> dispatch(addToCard(id)),
-      book:(book) => dispatch(show_single_book(book))
+      addTocard:(id)=>dispatch(addToCard(id)),
+      book:(book) =>dispatch(show_single_book(book))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

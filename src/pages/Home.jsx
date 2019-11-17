@@ -21,10 +21,19 @@ import {HeaderComponent, MobileHeader} from "../components/header/Header";
 
 
 const Home = () => {
+  const cartItem = JSON.parse(window.localStorage.getItem('session'));
+  let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
   return (<>
 
     <div className="allWrapper">
+<<<<<<< HEAD
           <HeaderComponent/>
+=======
+
+          <HeaderComponent
+          cartItem={totalItem}
+          />
+>>>>>>> master
           <MobileHeader />
       <main className="mainContent clearfix" id="mainContent">
         <section className="productCat secGap clearfix" id="productCat">

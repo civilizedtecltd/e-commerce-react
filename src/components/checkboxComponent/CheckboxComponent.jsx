@@ -11,7 +11,7 @@ function CheckboxComponent(props) {
         type={props.type}
         id={props.id}
         label={props.label}
-        checked={isCheck}       
+        defaultChecked={isCheck}       
 />
     )
 }
