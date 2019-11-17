@@ -15,13 +15,13 @@ const Default = ({ children }) => {
 }
 
 
+let cartItem = JSON.parse(localStorage.getItem('session'))
+let card=0;
+useEffect(()=>cartItem !==null ? (card=cartItem.length) : card)
 
-
-function HeaderComponent(props) {
+function HeaderComponent() {
 
   const [open, setOpen] = useState(false);
-
-  console.log(props)
 
     return(
     <>
@@ -95,7 +95,7 @@ function HeaderComponent(props) {
                     </div>
                   </li>
                   <li><Link to="/favorites"><span className="cartBadge"><i className="far fa-star"></i><Badge variant="danger">10</Badge></span> Favorites</Link></li>
-    <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge variant="primary">{props.cartItem}</Badge></span> Cart</Link></li>
+    <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge variant="primary">{}</Badge></span> Cart</Link></li>
                   <li><Link to="/login"><i className="far fa-user"></i> Login</Link></li>
                   {/* <li><Link to="#"><span className="loginUserAvater">SS</span> Sam Smith</Link></li> */}
                 </ul>

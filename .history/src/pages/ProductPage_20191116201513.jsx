@@ -22,24 +22,8 @@ function ProductPage(props) {
   const { id } =  useParams()
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => {
-    let checkoutItems = []
-    let localItems = JSON.parse(localStorage.getItem('session'))
-    if(localItems !==null) checkoutItems=[...localItems];
-    checkoutItems.push(
-    {
-     userId:1,
-     productID:id 
-    }
-    )
-    localStorage.setItem('session', JSON.stringify(checkoutItems));
-    setShow(true)
-  };
+  const handleShow = () => setShow(true);
 
- 
-  const cartItem = JSON.parse(window.localStorage.getItem('session'));
-  let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
-  console.log(totalItem)
   const book = (props.shop.book !== undefined ) ? props.shop.book : false;
 
   useEffect(() => {
@@ -54,7 +38,7 @@ function ProductPage(props) {
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent cartItem={ totalItem } />
+        <HeaderComponent />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
@@ -139,6 +123,7 @@ function ProductPage(props) {
                               className="btn linkBtn"
                               onClick={handleShow}
                             >
+                              {" "}
                               <i className="fas fa-shopping-cart"></i> Add to
                               cart
                             </Link>

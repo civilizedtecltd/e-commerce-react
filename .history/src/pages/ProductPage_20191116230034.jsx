@@ -23,23 +23,14 @@ function ProductPage(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => {
-    let checkoutItems = []
-    let localItems = JSON.parse(localStorage.getItem('session'))
-    if(localItems !==null) checkoutItems=[...localItems];
-    checkoutItems.push(
-    {
-     userId:1,
-     productID:id 
+    const checkoutItems = {
+      userID:1,
+      productID:id
     }
-    )
-    localStorage.setItem('session', JSON.stringify(checkoutItems));
+    window.localStorage.setItem('checkoutItems',checkoutItems)
     setShow(true)
   };
 
- 
-  const cartItem = JSON.parse(window.localStorage.getItem('session'));
-  let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
-  console.log(totalItem)
   const book = (props.shop.book !== undefined ) ? props.shop.book : false;
 
   useEffect(() => {
@@ -54,7 +45,7 @@ function ProductPage(props) {
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent cartItem={ totalItem } />
+        <HeaderComponent />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section

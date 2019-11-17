@@ -36,10 +36,7 @@ function ProductPage(props) {
     setShow(true)
   };
 
- 
-  const cartItem = JSON.parse(window.localStorage.getItem('session'));
-  let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
-  console.log(totalItem)
+  console.log(window.localStorage.getItem('session'))
   const book = (props.shop.book !== undefined ) ? props.shop.book : false;
 
   useEffect(() => {
@@ -54,7 +51,7 @@ function ProductPage(props) {
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent cartItem={ totalItem } />
+        <HeaderComponent />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
