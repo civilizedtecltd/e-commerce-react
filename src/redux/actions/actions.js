@@ -1,13 +1,13 @@
 import {LOAD_SHOP, SHOW_SINGLE_BOOK ,CATEGORY_WISE_BOOK, ADD_TO_CART} from './actionTypes';
 
-export const LoadProduct = ( products )=> {
+export const LoadProduct = ( products ) => {
     // console.log(products)
     return{
         type:LOAD_SHOP,
         payload:[
             ...products
         ]
-    } 
+    }
 }
 
 export const show_single_book = (book)=> {
@@ -26,7 +26,7 @@ export const showCategoryWiseBook = (category) => {
 }
 
 
-export const addToCard =(id) =>{
+export const addToCard = (id) =>{
     return {
         type : ADD_TO_CART,
         id:id,

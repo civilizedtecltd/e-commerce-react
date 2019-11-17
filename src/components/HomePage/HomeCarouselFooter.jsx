@@ -68,14 +68,16 @@ function HomeCarouselFooter() {
   };
   return (
     <>
-      <Slider {...settings}>
-        {PartnerDB.map((Partner, index) => (
-          <ul className=" partnerCarouselItem" key={index}>
-            <li className="item">
-              <img src={Partner} alt="" />
-            </li>
-          </ul>
-        ))}
+      <Slider { ...settings } >
+        {
+            PartnerDB.map((Partner, index) => (
+            <ul className=" partnerCarouselItem" key = {index}>
+                <li className="item">
+                <img src = { Partner } alt="" />
+                </li>
+            </ul>
+            ))
+        }
       </Slider>
     </>
   );

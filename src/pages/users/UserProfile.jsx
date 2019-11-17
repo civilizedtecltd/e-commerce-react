@@ -1,16 +1,112 @@
-import React from 'react';
-import {Container, Row, Col, Card, Form} from 'react-bootstrap';
-import './assets/css/user.css';
+import React, { useState, useEffect } from 'react';
+import {Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import SweetAlert from 'sweetalert2-react';
+import axios from 'axios';
+import _ from 'lodash';
+
+import { URL } from '../../constants/config';
+
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
-import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
 import {LiAi} from '../../components/LiComponent/CommonLiComponent';
 import {asideData} from '../../inc/users/users'
 import {HeaderComponent, MobileHeader} from '../../components/header/Header';
+import './assets/css/user.css';
 
 
 const UserProfile = () => {
+
+    const [category, setCategory] = useState([]);
+    const [user, setUser] = useState({});
+    const [formData] = useState({});
+    const [state, setState] = useState({
+        sweetAlert : {
+            show: false,
+            title: "",
+            text: "",
+            type: "",
+            confirmButtonText: "",
+        }
+  });
+
+    useEffect(() => {
+        const fetchData = async () => {
+          const result = await axios(URL._CATEGORY);
+          setCategory(result.data);
+        };
+
+        const getUserData = async () => {
+            const result = await axios(URL._GET_USER(1));
+            setUser(result.data.data);
+        }
+
+        fetchData();
+        getUserData();
+
+      }, []);
+
+
+    const categoryData = (data) => {
+        if(data.category_id !== undefined || data.category_id !== 'Select Category')
+            formData.category_id = Number(data.category_id);
+    }
+
+    const fromFileData = (data) => {
+        Object.keys(data).map( key => {
+            formData[key] = data[key];
+        });
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        if(_.isEmpty(formData))
+            return;
+
+
+        if( formData.new_password !== undefined ){
+
+            if(formData.password !== undefined ){
+
+                if(String(formData.new_password) !== String(formData.repeat_new_password)){
+
+                    return setState({
+                        sweetAlert: {
+                            show: true,
+                            title: "OPPS!",
+                            text: "Password did not match.",
+                            type: 'error',
+                            confirmButtonText: "Try Again!"
+                        }
+                    });
+                }
+            }else {
+
+                return setState({
+                    sweetAlert: {
+                        show: true,
+                        title: "OPPS!",
+                        text: "Enter current password to set new password",
+                        type: 'error',
+                        confirmButtonText: "Try Again!"
+                    }
+                });
+            }
+        }
+
+        console.log(formData);
+
+    }
+
   return (<>
     <div className="allWrapper">
+        <SweetAlert
+                show = {state.sweetAlert.show}
+                title = {state.sweetAlert.title}
+                text = {state.sweetAlert.text}
+                type = {state.sweetAlert.type}
+                confirmButtonText = {state.sweetAlert.confirmButtonText}
+                onConfirm = {() => { console.log(`confirmed`) }}
+        />
       <HeaderComponent/>
       <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
@@ -20,14 +116,17 @@ const UserProfile = () => {
             <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
                 <nav className="userNav">
                   <ul className="userNavBar">
-                    {asideData.map((aside)=><LiAi
-                      key={Math.floor(Math.random() * 10)}
-                      ListClass={aside.LIST_CLASS}
-                      Title={aside.TITLE}
-                      Url={aside.URL}
-                      IconName={aside.ICON_NAME}
-                      AnchorClass={aside.ANCHOR_CLASS}
-                    />)}
+                    {
+                        asideData.map((aside, index) =>
+                        <LiAi
+                            key         =   { index }
+                            ListClass   =   { aside.LIST_CLASS }
+                            Title       =   { aside.TITLE }
+                            Url         =   { aside.URL }
+                            IconName    =   { aside.ICON_NAME }
+                            AnchorClass =   { aside.ANCHOR_CLASS }
+                        />)
+                    }
 
                   </ul>{/* end of userNavBar */}
                 </nav>{/* end of userNav */}
@@ -51,51 +150,52 @@ const UserProfile = () => {
                                   <Col sm="6">
                                     <SelectFrom
                                       LabelTitle="Category"
-                                      controlId="exampleForm.ControlSelect1"
+                                      category = { (category.data !== undefined) ? category.data : [] }
+                                      callback = { categoryData }
                                     />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
                                     <InputFrom
-                                      controlId="firstName"
-                                      LabelTitle="First Name"
-                                      TypeName="text"
-                                      Name="first_name"
-                                      Value=""
-                                      Placeholder="First Name"
+                                      LabelTitle    =   "First Name"
+                                      TypeName      =   "text"
+                                      Name          =   "first_name"
+                                      Value         =   { user.first_name }
+                                      Placeholder   =   "First Name"
+                                      callback      = { fromFileData }
                                     />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
                                     <InputFrom
-                                      controlId="lastName"
-                                      LabelTitle="Last Name"
-                                      TypeName="text"
-                                      Name="lastName"
-                                      Value=""
-                                      Placeholder="Last Name"
+                                      LabelTitle    =   "Last Name"
+                                      TypeName      =   "text"
+                                      Name          =   "last_name"
+                                      Value         =   { user.last_name }
+                                      Placeholder   =   "Last Name"
+                                      callback      = { fromFileData }
                                     />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
                                     <InputFrom
-                                      controlId="userEmail"
-                                      LabelTitle="Email Address"
-                                      TypeName="email"
-                                      Name="email"
-                                      Value=""
-                                      Placeholder="Email Address"
+                                      LabelTitle    =   "Email Address"
+                                      TypeName      =   "email"
+                                      Name          =   "email"
+                                      Value         =   { user.email }
+                                      Placeholder   =   "Email Address"
+                                      callback      = { fromFileData }
                                     />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
                                     <InputFrom
-                                      controlId="userPhone"
-                                      LabelTitle="Phone Number"
-                                      TypeName="text"
-                                      Name="phone"
-                                      Value=""
-                                      Placeholder="Phone Number"
+                                      LabelTitle    =   "Phone Number"
+                                      TypeName      =   "text"
+                                      Name          =   "phone"
+                                      Value         =   { user.phone }
+                                      Placeholder   =   "Phone Number"
+                                      callback      =  { fromFileData }
                                     />
                                   </Col>{/* end of Col */}
 
@@ -106,43 +206,44 @@ const UserProfile = () => {
                                   <Col sm="6">
 
                                     <InputFrom
-                                      controlId="currentPassword"
                                       LabelTitle="Current Password"
                                       TypeName="password"
                                       Name="password"
                                       Value=""
                                       Placeholder="Current Password"
+                                      callback      = { fromFileData }
                                     />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
                                     <InputFrom
-                                      controlId="newPassword"
                                       LabelTitle="Create New Password"
                                       TypeName="password"
-                                      Name="password"
+                                      Name="new_password"
                                       Value=""
                                       Placeholder="Create New Password"
+                                      callback      = { fromFileData }
                                     />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="6">
                                     <InputFrom
-                                      controlId="repeatNewPassword"
                                       LabelTitle="Repeat new password"
                                       TypeName="password"
-                                      Name="password"
+                                      Name="repeat_new_password"
                                       Value=""
                                       Placeholder="Repeat new password"
+                                      callback      = { fromFileData }
                                     />
                                   </Col>{/* end of Col */}
 
                                   <Col sm="12">
-                                    <ButtonComponents
-                                      Type="submit"
-                                      ClassName="primary"
-                                      Name="Save"
-                                    />
+                                    <Button
+                                        type="submit"
+                                        className="primary"
+                                        onClick = { handleSubmit } >
+                                            Save
+                                    </Button>
                                   </Col>{/* end of Col */}
                                 </Row>{/* end of Row */}
                               </Form>{/* end of userProfile */}

@@ -1,6 +1,6 @@
 import React, {useState, useEffect}from 'react';
 import SweetAlert from 'sweetalert2-react';
-import axios from 'axios'
+import axios from 'axios';
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
@@ -20,7 +20,6 @@ const SignUp = () => {
             title: "",
             text: "",
             type: "",
-            showCancelButton: false,
             confirmButtonText: "",
         }
   });
@@ -127,7 +126,6 @@ const handleSubmit = (event) => {
                             title = {state.sweetAlert.title}
                             text = {state.sweetAlert.text}
                             type = {state.sweetAlert.type}
-                            showCancelButton = {state.sweetAlert.showCancelButton}
                             confirmButtonText = {state.sweetAlert.confirmButtonText}
                             onConfirm = {() => { console.log(`confirmed`) }}
                     />

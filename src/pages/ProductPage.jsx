@@ -223,8 +223,8 @@ const mapStateToProps = (state)=> {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-      addTocard:(id)=>dispatch(addToCard(id)),
-      book:(book) =>dispatch(show_single_book(book))
+      addTocard:(id)=> dispatch(addToCard(id)),
+      book:(book) => dispatch(show_single_book(book))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

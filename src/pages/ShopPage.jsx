@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Container, Row, Col, Breadcrumb, Form, Card } from "react-bootstrap";
 import { connect  } from 'react-redux';
 import { LoadProduct } from '../redux/actions/actions';
@@ -17,12 +17,14 @@ import { URL } from '../constants/config';
 
 const ShopPage = (props) => {
 
+    const { id } =  useParams();
 
     const books = (props.shop.books !== undefined ) ? props.shop.books : [];
 
     useEffect(() => {
         const fetchBooks = async () => {
-          const result = await axios(URL._ALL_BOOKS);
+
+          const result = ( id === 'all') ? await axios(URL._ALL_BOOKS) : await axios(URL._CATEGORY_BOOKS(id)) ;
           props.loadProduct(result.data.data)
         };
         fetchBooks();
@@ -38,7 +40,7 @@ const ShopPage = (props) => {
             className="sectionBreadcrumb secGap clearfix pb-0"
             id="sectionBreadcrumb"
           >
-               
+
             <Container>
               <Row>
                 <Col>
