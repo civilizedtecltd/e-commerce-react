@@ -1,5 +1,5 @@
-import React, { useEffect, useParams } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect} from "react";
+import { Link, useParams  } from "react-router-dom";
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
 import { connect  } from 'react-redux';
 import { LoadProduct } from '../redux/actions/actions';
@@ -17,14 +17,12 @@ import { URL } from '../constants/config';
 const ShopPage = (props) => {
 
     const { id } =  useParams();
-
     const cartItem = JSON.parse(window.localStorage.getItem('items'));
     let totalItem = (cartItem !== null) ? (cartItem.length) : 0;
     const books = (props.shop.books !== undefined ) ? props.shop.books : [];
 
     useEffect(() => {
         const fetchBooks = async () => {
-
           const result = ( id === 'all') ? await axios(URL._ALL_BOOKS) : await axios(URL._CATEGORY_BOOKS(id)) ;
           props.loadProduct(result.data.data)
         };
@@ -76,37 +74,37 @@ const ShopPage = (props) => {
                         <ul className="filterList">
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Class 1 <span>6 </span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Class 2 <span>10 </span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Class 3 <span>5</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Class 4 <span>23 </span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Class 5 <span>100 </span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Class 6 <span>1 </span>
                             </Link>
                           </li>
@@ -120,74 +118,74 @@ const ShopPage = (props) => {
                         <ul className="filterList">
                           <li>
                             <Link to="# ">
-                              {" "}
+                             
                               Mathematics activities <span>5</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Kiswahili activities <span>3</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Hygiene and nutrition <br />
                               activities <span>10</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Environmental activities <span>6</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Religion activities <span>8</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Language activities <span>15</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Mathematics <span>10</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               English <span>10</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Kiswahili <span>3</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Science <span>10</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Social Studies <span>5</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Creire <span>3</span>
                             </Link>
                           </li>
@@ -210,31 +208,31 @@ const ShopPage = (props) => {
                         <ul className="filterList">
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Sam Smith <span>5</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Barbara Cartland <span>3</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               William Shakespeare <span>10</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Georges Simenon <span>6</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Enid Blythe <span>8</span>
                             </Link>
                           </li>
@@ -248,19 +246,19 @@ const ShopPage = (props) => {
                         <ul className="filterList">
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Lorem ipsum<span>5</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Dolor set amet <span>3</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Adipiscing <span>10</span>
                             </Link>
                           </li>
@@ -274,49 +272,46 @@ const ShopPage = (props) => {
                         <ul className="filterList">
                           <li>
                             <Link to="#">
-                              {" "}
-                              2012<span>5</span>
+                             
+                              2012 <span>5</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               2013 <span>3</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               2014 <span>10</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               2015 <span>2</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               2016 <span>0</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
                               2017 <span>15</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
                               2018 <span>80</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
                               2019 <span>180</span>
                             </Link>
                           </li>
@@ -330,13 +325,13 @@ const ShopPage = (props) => {
                         <ul className="filterList">
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Lorem ipsum<span>5</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Dolor set amet <span>3</span>
                             </Link>
                           </li>
@@ -350,13 +345,13 @@ const ShopPage = (props) => {
                         <ul className="filterList">
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               Swahili <span>5</span>
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              {" "}
+                             
                               English <span>3</span>
                             </Link>
                           </li>
