@@ -19,15 +19,13 @@ import "../pages/assets/product.css";
 
 function ProductPage(props) {
 
-  const { id } =  useParams()
+  const { id } = useParams();
   const [show, setShow] = useState(false);
-
-  const [ localItems ] = useState(()=>JSON.parse(localStorage.getItem('items')));
-
-  const [ newItem ] = useState({userId:1,productId:id});
-
-  const [ checkoutItems , setCheckoutItems] = useState(localItems);
-
+  const [localItems] = useState(() =>
+    JSON.parse(localStorage.getItem("items"))
+  );
+  const [newItem] = useState({ userId: 1, productId: id });
+  const [checkoutItems, setCheckoutItems] = useState(localItems);
   const handleClose = () => setShow(false);
 
   const handleShow = () => {
@@ -232,7 +230,7 @@ function ProductPage(props) {
         </Modal.Body>
         <Modal.Footer className={"border-0"}>
           <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}> Go to checkout </Link>
-          <Link to="/shop" className="linkBtnBorder" style={{color:'white', borderRadius: "4px" }}>Continue shopping</Link>
+          <Link to="/shop" className="btn btn-outline linkBtnBorder" style={{color:'white !important'}}> Continue shopping</Link>
         </Modal.Footer>
       </Modal>
     </>
