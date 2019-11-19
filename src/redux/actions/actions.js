@@ -26,7 +26,7 @@ export const showCategoryWiseBook = (category) => {
 }
 
 
-export const addToCard = (id) =>{
+export const addToCart = (id) =>{
     return {
         type : ADD_TO_CART,
         id:id,

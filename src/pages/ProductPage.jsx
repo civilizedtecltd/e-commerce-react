@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Container, Modal, Button } from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
 
-import {addToCard , show_single_book} from '../redux/actions/actions'
+import { addToCart , show_single_book} from '../redux/actions/actions'
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
@@ -29,7 +29,7 @@ function ProductPage(props) {
   const [ checkoutItems , setCheckoutItems] = useState(localItems);
 
   const handleClose = () => setShow(false);
-  
+
   const handleShow = () => {
 
     if(checkoutItems === null || checkoutItems === undefined || checkoutItems.length === 0 ) {
@@ -45,13 +45,13 @@ function ProductPage(props) {
 
             return localStorage.setItem('items',JSON.stringify(checkoutItems))
       }
-      
+
       });
     }
     setShow(true)
 };
 
- 
+
   const cartItem = JSON.parse(window.localStorage.getItem('items'));
   let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
   const book = (props.shop.book !== undefined ) ? props.shop.book : false;
@@ -220,7 +220,7 @@ function ProductPage(props) {
         <FooterComponent />
       </div>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show = {show} onHide = {handleClose}>
         <Modal.Header className={"border-0"} closeButton>
           {" "}
         </Modal.Header>
@@ -249,7 +249,7 @@ const mapStateToProps = (state)=> {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-      addTocard:(id)=> dispatch(addToCard(id)),
+      addToCart:(id)=> dispatch(addToCart(id)),
       book:(book) => dispatch(show_single_book(book))
     }
 }
