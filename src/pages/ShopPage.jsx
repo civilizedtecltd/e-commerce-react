@@ -19,7 +19,7 @@ const ShopPage = (props) => {
     const { id } =  useParams();
 
     const cartItem = JSON.parse(window.localStorage.getItem('items'));
-    let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
+    let totalItem = (cartItem !== null) ? (cartItem.length) : 0;
     const books = (props.shop.books !== undefined ) ? props.shop.books : [];
 
     useEffect(() => {
@@ -587,16 +587,16 @@ const ShopPage = (props) => {
   );
 };
 
-const mapToStateProps = (state) =>{
+const mapStateToProps = (state) =>{
         return {
           ...state
         }
 }
 
-const mapDispatchToProps =(dispatch) =>{
+const mapDispatchToProps =(dispatch) => {
   return {
     loadProduct: (state) => dispatch (LoadProduct(state))
   }
 }
 
-export default connect(mapToStateProps,mapDispatchToProps)(ShopPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);

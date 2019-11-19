@@ -26,8 +26,9 @@ import CheckoutPage from './pages/CheckoutPage';
 import FavoritesPage from './pages/FavoritesPage';
 import ShopPage from './pages/ShopPage';
 import ProductPage from "./pages/ProductPage";
-import './animation.css'
+
 import ErrorPage from './pages/Error404';
+import './animation.css'
 
 function mapStyles(styles) {
   return {
