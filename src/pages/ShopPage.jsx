@@ -1,9 +1,8 @@
-import React, { useEffect, useParams } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
 import { connect  } from 'react-redux';
 import { LoadProduct } from '../redux/actions/actions';
-import './assets/shop.css';
 import axios from 'axios'
 // Product Images
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
@@ -13,6 +12,7 @@ import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 import { URL } from '../constants/config';
 
+import './assets/shop.css';
 
 const ShopPage = (props) => {
 
@@ -595,7 +595,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps =(dispatch) => {
   return {
-    loadProduct: (state) => dispatch (LoadProduct(state))
+    loadProduct: (products) => dispatch (LoadProduct(products))
   }
 }
 
