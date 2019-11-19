@@ -1,29 +1,25 @@
 import React, {useState}  from 'react';
-import SweetAlert from 'sweetalert2-react';
 import axios from 'axios';
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
 
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom } from '../../components/FromComponents/InputComponent';
 import { URL } from '../../constants/config'
 
 import './assets/css/auth.css';
+import '../../assets/css/animate.css';
 
-const Login = () => {
+const mySwal = withReactContent(Swal);
+
+const Login = (props) => {
 
   const [formData] = useState({});
-  const [state, setState] = useState({
-        sweetAlert : {
-          show: false,
-          title: "",
-          text: "",
-          type: "",
-          showCancelButton: false,
-          confirmButtonText: "",
-      }
-  });
+  const [state, setState] = useState({});
 
   const loginData = (data) => {
     Object.keys(data).map( key => {
@@ -40,34 +36,38 @@ const Login = () => {
     ).then( res => {
       if(res.status === 200){
           const authData = res.data.data;
-          localStorage.setItem('auth-data', JSON.stringify(authData));
+          localStorage.setItem('authData', JSON.stringify(authData));
       }
     }).catch( error => {
       console.log(error);
-      setState({
-        sweetAlert: {
-          show: true,
-          title: "OPPS!",
-          text: "Could not login. Please check Credentials.",
-          type: 'error',
-          confirmButtonText: "Try Again!"
-        }
-      });
+      mySwal.fire({
+          icon: 'error',
+          title: 'Oops..',
+          text: 'Provide valid username and password.',
+          footer: 'Copyright@2019',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Try Again',
+          showClass: {
+            popup: 'animated fadeInDown fast'
+          },
+          hideClass: {
+            popup: 'animated fadeOutUp fast'
+          }
+      }).then(() => {
+            console.log('ok clicked')
+      }, (dismiss) => {
+         if(dismiss == 'cancel'){
+             console.log('cancel button clicked')
+         }
+      })
     });
   }
 
   return (<>
     <div className="AllWrapper fullHeight">
       <main className="loginMainArea clearfix fullHeight bgImage loginBodyBg pb-4" id="loginBody">
-          <SweetAlert
-              show = {state.sweetAlert.show}
-              title = {state.sweetAlert.title}
-              text = {state.sweetAlert.text}
-              type = {state.sweetAlert.type}
-              showCancelButton = {state.sweetAlert.showCancelButton}
-              confirmButtonText = {state.sweetAlert.confirmButtonText}
-              onConfirm = {() => { console.log(`confirmed`) }}
-          />
         <Container fluid={true}>
           <Row>
             <Col sm={6}>
@@ -104,7 +104,7 @@ const Login = () => {
 
                   <Link className="linkText mb-3" to="/forgot-password">Forgot password?</Link>
 
-                  <Button type="submit" className="btn submitBtn mb-3 " onClick={handleSubmit} >LOGIN</Button>
+                  <Button type="submit" className="btn submitBtn mb-3 " onClick = { handleSubmit } >LOGIN</Button>
 
                   <p>Don’t have an account yet? <Link className="linkText" to="/signup">Sign up</Link></p>
 
