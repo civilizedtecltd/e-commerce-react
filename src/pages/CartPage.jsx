@@ -1,23 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Form,
-  Button,
-  Table
-} from "react-bootstrap";
+import { Container, Row, Col, Card, Form, Button,Table } from "react-bootstrap";
 
 //Product Images
 import productImage1 from "../assets/images/books/book_img_01.jpg";
+
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 const CartPage = () => {
-  const cartItem = JSON.parse(window.localStorage.getItem('session'));
+  const cartItem = JSON.parse(window.localStorage.getItem('items'));
   let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
   return (
     <>
