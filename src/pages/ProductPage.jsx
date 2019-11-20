@@ -145,7 +145,7 @@ function ProductPage(props) {
 
                           <div className="col text-center">
                             <Link
-                              to="#"
+                              to="/checkout"
                               className="btn linkBtn"
                               onClick={handleShow}
                             >
