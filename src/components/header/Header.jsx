@@ -1,6 +1,7 @@
 import React ,{useState} from 'react';
 import {Container, Row, Col, Form, Badge, Collapse, Modal} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 import '../../assets/css/heder.css';
 import { useMediaQuery } from 'react-responsive';
 
@@ -40,7 +41,7 @@ function HeaderComponent(props) {
                 <ul className="headFeatureList d-flex justify-content-between">
                   <li><i className="fas fa-truck"></i> <span>Free delivery</span></li>
                   <li><i className="fas fa-award"></i> <span>Genuine goods</span></li>
-                  <li className="customer-support"><Link to="#"> <i className="fas fa-headset"></i> <span>Customer support</span></Link></li>
+                  <li className="customer-support"><AnchorLink offset={() => 100} href='#footer'><i className="fas fa-headset"></i><span>Customer support</span></AnchorLink></li>
                 </ul>
               </div>
             </Col>

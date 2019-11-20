@@ -37,20 +37,20 @@ const Home = () => {
             <Row>
 
                 <Col sm="4">
-                   <Link to="/shop/category/1">
+                   <Link to="/shop/category/1/Kindergarten school">
                 <Card className="productCatCard">
                   <div className="productCatMedia">
                     <img src={productCatImg} alt="" />
                   </div>{/* end of productCatMedia*/}
                   <Card.Body className="text-center">
-                    <h3 className="productCatTitle">Kindergarten</h3>
+                    <h3 className="productCatTitle">Kindergarten </h3>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of productCatCard */}
               </Link>
                 </Col>{/* end of Col */}
 
               <Col sm="4">
-                <Link to="/shop/category/2">
+                <Link to="/shop/category/2/Primary school">
                     <Card className="productCatCard">
                         <div className="productCatMedia">
                             <img src={productCatImg2} alt="" />
@@ -63,7 +63,7 @@ const Home = () => {
               </Col>{/* end of Col */}
 
               <Col sm="4">
-                <Link to="/shop/category/3">
+                <Link to="/shop/category/3/Secondary school">
                     <Card className="productCatCard">
                         <div className="productCatMedia">
                             <img src={productCatImg3} alt="" />
