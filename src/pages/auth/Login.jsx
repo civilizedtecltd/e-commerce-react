@@ -5,7 +5,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content'
+import withReactContent from 'sweetalert2-react-content';
 
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom } from '../../components/FromComponents/InputComponent';
@@ -19,7 +19,6 @@ const mySwal = withReactContent(Swal);
 const Login = (props) => {
 
   const [formData] = useState({});
-  const [state, setState] = useState({});
 
   const loginData = (data) => {
     Object.keys(data).map( key => {
@@ -35,8 +34,9 @@ const Login = (props) => {
         formData
     ).then( res => {
       if(res.status === 200){
-          const authData = res.data.data;
+          const authData = res.data.data;         
           localStorage.setItem('authData', JSON.stringify(authData));
+          props.history.push('/profile-settings');
       }
     }).catch( error => {
       console.log(error);
@@ -62,6 +62,7 @@ const Login = (props) => {
              console.log('cancel button clicked')
          }
       })
+
     });
   }
 

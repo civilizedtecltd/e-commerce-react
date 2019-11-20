@@ -1,32 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import {Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
-import SweetAlert from 'sweetalert2-react';
 import axios from 'axios';
 import _ from 'lodash';
+
+
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import {Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 
 import { URL } from '../../constants/config';
 
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
 import {LiAi} from '../../components/LiComponent/CommonLiComponent';
-import {asideData} from '../../inc/users/users'
+import {asideData} from '../../inc/users/users';
 import {HeaderComponent, MobileHeader} from '../../components/header/Header';
+
 import './assets/css/user.css';
 
+const mySwal = withReactContent(Swal);
 
 const UserProfile = () => {
 
     const [category, setCategory] = useState([]);
     const [user, setUser] = useState({});
     const [formData] = useState({});
-    const [state, setState] = useState({
-        sweetAlert : {
-            show: false,
-            title: "",
-            text: "",
-            type: "",
-            confirmButtonText: "",
-        }
-  });
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,45 +64,63 @@ const UserProfile = () => {
             if(formData.password !== undefined ){
 
                 if(String(formData.new_password) !== String(formData.repeat_new_password)){
+                   
+                    mySwal.fire({
+                      icon: 'error',
+                      title: 'Oops..',
+                      text: 'Password did not match.',
+                      footer: 'Copyright@2019',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Try Again',
+                      showClass: {
+                        popup: 'animated fadeInDown fast'
+                      },
+                      hideClass: {
+                        popup: 'animated fadeOutUp fast'
+                      }
+                  }).then(() => {
+                        console.log('ok clicked')
+                  }, (dismiss) => {
+                     if(dismiss === 'cancel'){
+                         console.log('cancel button clicked')
+                     }
+                  });
 
-                    return setState({
-                        sweetAlert: {
-                            show: true,
-                            title: "OPPS!",
-                            text: "Password did not match.",
-                            type: 'error',
-                            confirmButtonText: "Try Again!"
-                        }
-                    });
                 }
             }else {
-
-                return setState({
-                    sweetAlert: {
-                        show: true,
-                        title: "OPPS!",
-                        text: "Enter current password to set new password",
-                        type: 'error',
-                        confirmButtonText: "Try Again!"
-                    }
-                });
+             
+                mySwal.fire({
+                  icon: 'error',
+                  title: 'Oops..',
+                  text: 'Enter current password to set new password',
+                  footer: 'Copyright@2019',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Try Again',
+                  showClass: {
+                    popup: 'animated fadeInDown fast'
+                  },
+                  hideClass: {
+                    popup: 'animated fadeOutUp fast'
+                  }
+              }).then(() => {
+                    console.log('ok clicked')
+              }, (dismiss) => {
+                 if(dismiss === 'cancel'){
+                     console.log('cancel button clicked')
+                 }
+              });
+              
             }
         }
-
         console.log(formData);
-
     }
 
   return (<>
-    <div className="allWrapper">
-        <SweetAlert
-                show = {state.sweetAlert.show}
-                title = {state.sweetAlert.title}
-                text = {state.sweetAlert.text}
-                type = {state.sweetAlert.type}
-                confirmButtonText = {state.sweetAlert.confirmButtonText}
-                onConfirm = {() => { console.log(`confirmed`) }}
-        />
+    <div className="allWrapper">        
       <HeaderComponent/>
       <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
