@@ -30,10 +30,13 @@ outline-offset: 0px;
 }
 .cartBadge .badge {
     position: absolute;
-    top: -10px;
-    left: 5px;
+    top: -12px;
+    left: 4px;
     border-radius: 50%;
     font-size: 0.7rem;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
 }
 
 

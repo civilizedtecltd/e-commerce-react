@@ -30,6 +30,8 @@ import ProductPage from "./pages/ProductPage";
 import ErrorPage from './pages/Error404';
 import './animation.css'
 
+// we need to map the `scale` prop we define below
+// to the transform style property
 function mapStyles(styles) {
   return {
     opacity: styles.opacity,
@@ -40,8 +42,8 @@ function mapStyles(styles) {
 // wrap the `spring` helper to use a bouncy config
 function bounce(val) {
   return spring(val, {
-    stiffness: 330,
-    damping: 22,
+    stiffness:400,
+    damping:30,
   });
 }
 
@@ -50,12 +52,12 @@ const bounceTransition = {
   // start in a transparent, upscaled state
   atEnter: {
     opacity: 0,
-    scale: 1,
+    scale: 1.2,
   },
   // leave in a transparent, downscaled state
   atLeave: {
-    opacity: bounce(0.5),
-    scale: bounce(0.5),
+    opacity: bounce(0),
+    scale: bounce(1),
   },
   // and rest at an opaque, normally-scaled state
   atActive: {
@@ -63,6 +65,7 @@ const bounceTransition = {
     scale: bounce(1),
   },
 };
+
 
 function App() {
 
@@ -91,7 +94,7 @@ function App() {
         <Route path="/cart" component={CartPage} />
         <Route path="/checkout" component={CheckoutPage} />
         <Route path="/favorites" component={FavoritesPage} />
-        <Route path="/shop/category/:id?" component={ShopPage} />
+        <Route path="/shop/category/:id?/:title?" component={ShopPage} />
         <Route path="/product/:id" component={ProductPage} />
         <Route path='*'  component={ErrorPage} />
 

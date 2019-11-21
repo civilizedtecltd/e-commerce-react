@@ -54,6 +54,17 @@ function LiAi({ListClass,Title,Url,IconName,AnchorClass}){
 
 }
 
+//List Icon
+function LiSpan({itemName, Url, Value }) {
+    return (
+        <>
+            <li>
+                <Link to={Url}>{itemName}<span>{Value}</span></Link>
+            </li>
+        </>
+    )
+
+}
 
 export {
     Li,
@@ -61,4 +72,5 @@ export {
     Lii,
     LiIs,
     LiAi,
+    LiSpan
 } ;

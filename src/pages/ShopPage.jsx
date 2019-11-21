@@ -3,6 +3,15 @@ import { Link, useParams } from "react-router-dom";
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
 import { connect  } from 'react-redux';
 import { LoadProduct } from '../redux/actions/actions';
+import {LiSpan} from '../components/LiComponent/CommonLiComponent'
+import './assets/shop.css';
+import filter from '../inc/shop/stage';
+import discipline from '../inc/shop/discipline';
+import author from '../inc/shop/author';
+import publish_house from '../inc/shop/publish_house';
+import publish_year from '../inc/shop/publish_year';
+import book_cover from '../inc/shop/book_cover';
+import language from '../inc/shop/language';
 import axios from 'axios'
 // Product Images
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
@@ -16,7 +25,8 @@ import './assets/shop.css';
 
 const ShopPage = (props) => {
 
-    const { id } =  useParams();
+    const { id, title } =  useParams();
+
     const cartItem = JSON.parse(window.localStorage.getItem('items'));
     let totalItem = (cartItem !== null) ? (cartItem.length) : 0;
     const books = (props.shop.books !== undefined ) ? props.shop.books : [];
@@ -72,42 +82,15 @@ const ShopPage = (props) => {
                       <div className="singleFilterCard">
                         <h5>Stage</h5>
                         <ul className="filterList">
-                          <li>
-                            <Link to="#">
-                             
-                              Class 1 <span>6 </span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Class 2 <span>10 </span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Class 3 <span>5</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Class 4 <span>23 </span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Class 5 <span>100 </span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Class 6 <span>1 </span>
-                            </Link>
-                          </li>
+                          {filter.map((data, index) => (
+                              <LiSpan
+
+                            key={index}
+                            Url={data.url}
+                            itemName={data.name}
+                            Value={data.value}
+                          />)
+                          )}
                         </ul>
                         {/* end of filterList */}
                       </div>
@@ -116,79 +99,15 @@ const ShopPage = (props) => {
                       <div className="singleFilterCard">
                         <h5>Discipline</h5>
                         <ul className="filterList">
-                          <li>
-                            <Link to="# ">
-                             
-                              Mathematics activities <span>5</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Kiswahili activities <span>3</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Hygiene and nutrition <br />
-                              activities <span>10</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Environmental activities <span>6</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Religion activities <span>8</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Language activities <span>15</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Mathematics <span>10</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              English <span>10</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Kiswahili <span>3</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Science <span>10</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Social Studies <span>5</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Creire <span>3</span>
-                            </Link>
-                          </li>
+                            {discipline.map((data, index) => (
+                                <LiSpan
+
+                                    key={index}
+                                    Url={data.url}
+                                    itemName={data.name}
+                                    Value={data.value}
+                                />)
+                            )}
                         </ul>
                         {/* end of filterList */}
                       </div>
@@ -206,36 +125,15 @@ const ShopPage = (props) => {
                       <div className="singleFilterCard">
                         <h5>Author</h5>
                         <ul className="filterList">
-                          <li>
-                            <Link to="#">
-                             
-                              Sam Smith <span>5</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Barbara Cartland <span>3</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              William Shakespeare <span>10</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Georges Simenon <span>6</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Enid Blythe <span>8</span>
-                            </Link>
-                          </li>
+                          {author.map((data, index) => (
+                              <LiSpan
+
+                                  key={index}
+                                  Url={data.url}
+                                  itemName={data.name}
+                                  Value={data.value}
+                              />)
+                          )}
                         </ul>
                         {/* end of filterList */}
                       </div>
@@ -244,24 +142,15 @@ const ShopPage = (props) => {
                       <div className="singleFilterCard">
                         <h5>Publishing house</h5>
                         <ul className="filterList">
-                          <li>
-                            <Link to="#">
-                             
-                              Lorem ipsum<span>5</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Dolor set amet <span>3</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Adipiscing <span>10</span>
-                            </Link>
-                          </li>
+                          {publish_house.map((data, index) => (
+                              <LiSpan
+
+                                  key={index}
+                                  Url={data.url}
+                                  itemName={data.name}
+                                  Value={data.value}
+                              />)
+                          )}
                         </ul>
                         {/* end of filterList */}
                       </div>
@@ -270,51 +159,15 @@ const ShopPage = (props) => {
                       <div className="singleFilterCard">
                         <h5>Publishing Year</h5>
                         <ul className="filterList">
-                          <li>
-                            <Link to="#">
-                             
-                              2012 <span>5</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              2013 <span>3</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              2014 <span>10</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              2015 <span>2</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              2016 <span>0</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                              2017 <span>15</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                              2018 <span>80</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                              2019 <span>180</span>
-                            </Link>
-                          </li>
+                          {publish_year.map((data, index) => (
+                              <LiSpan
+
+                                  key={index}
+                                  Url={data.url}
+                                  itemName={data.name}
+                                  Value={data.value}
+                              />)
+                          )}
                         </ul>
                         {/* end of filterList */}
                       </div>
@@ -323,18 +176,15 @@ const ShopPage = (props) => {
                       <div className="singleFilterCard">
                         <h5>Book Cover</h5>
                         <ul className="filterList">
-                          <li>
-                            <Link to="#">
-                             
-                              Lorem ipsum<span>5</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              Dolor set amet <span>3</span>
-                            </Link>
-                          </li>
+                          {book_cover.map((data, index) => (
+                              <LiSpan
+
+                                  key={index}
+                                  Url={data.url}
+                                  itemName={data.name}
+                                  Value={data.value}
+                              />)
+                          )}
                         </ul>
                         {/* end of filterList */}
                       </div>
@@ -343,18 +193,14 @@ const ShopPage = (props) => {
                       <div className="singleFilterCard p-0 border-0 m-0">
                         <h5>Language</h5>
                         <ul className="filterList">
-                          <li>
-                            <Link to="#">
-                             
-                              Swahili <span>5</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                             
-                              English <span>3</span>
-                            </Link>
-                          </li>
+                          {language.map((data, index) => (
+                              <LiSpan
+                                  key={index}
+                                  Url={data.url}
+                                  itemName={data.name}
+                                  Value={data.value}
+                              />)
+                          )}
                         </ul>
                         {/* end of filterList */}
                       </div>
@@ -374,7 +220,7 @@ const ShopPage = (props) => {
                     <Row className="mb-5">
                       <Col className="col">
                         <h2 className="pageTitle">
-                          <span>Primary</span> school Books
+                          <span>{title}</span>  Books
                         </h2>
                       </Col>
                       {/* end of Col */}
@@ -590,7 +436,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps =(dispatch) => {
   return {
-    loadProduct: (products) => dispatch (LoadProduct(products))
+    loadProduct: (state) => dispatch (LoadProduct(state))
   }
 }
 
