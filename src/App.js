@@ -5,6 +5,8 @@ import {
   Route
 } from "react-router-dom";
 
+import AuthRoute from './components/authComponents/AuthRoute';
+
 // User Area
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
@@ -82,10 +84,11 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        {/* <Route path="/profile-settings" component={UserProfile} /> */}
+        <AuthRoute path="/profile-settings" component={UserProfile} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/change-password" component={ChangePassword} />
         <Route path="/verify-code" component={VerifyCode} />
-        <Route path="/profile-settings" component={UserProfile} />
         <Route path="/email-subscription" component={Subscription} />
         <Route path="/my-order" component={OrderPage} />
         <Route path="/payment-methods" component={PaymentPage} />
