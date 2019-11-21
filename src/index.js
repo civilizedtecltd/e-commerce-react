@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from "react-router-dom";
 import {Provider} from 'react-redux'
 import { createStore,compose, applyMiddleware } from 'redux'
 import App from './App';
@@ -22,8 +23,16 @@ const store = createStore(
     );
 
 
+const MainApp = () => (
+        <Router>
+          <div>
+            <App />
+          </div>
+        </Router>
+      );
+
 ReactDOM.render(
 <Provider store={store} >
-    <App/>
+    <MainApp/>
 </Provider>,document.getElementById('root'));
 serviceWorker.register();
