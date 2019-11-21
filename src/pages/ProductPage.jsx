@@ -8,7 +8,6 @@ import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
 import { ImageCarousel } from "../components/ProductImgCarosellComponents/ProductImgCarosell";
-
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import TabComponent from "../components/TabComponent/TabComponent";
 import RatingComponent from "../components/ratingComponent/Rating";
@@ -51,11 +50,8 @@ function ProductPage(props) {
     else{
       let existItem=items.indexOf(newItem)
       alert('Sorry Sir your Item is already exist')
-      console.log('==============your existing item is ======================');
-      console.log(items[existItem])
-      console.log('====================================');
-      
-
+      console.log(items[existItem]);
+      window.localStorage.setItem('items', JSON.stringify(items))
     }
   };
  
@@ -145,7 +141,7 @@ function ProductPage(props) {
 
                           <div className="col text-center">
                             <Link
-                              to="/checkout"
+                              to="#"
                               className="btn linkBtn"
                               onClick={handleShow}
                             >
