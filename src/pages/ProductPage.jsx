@@ -1,9 +1,8 @@
 import React, { useState ,useEffect } from "react";
-import { connect } from 'react-redux'
+import { connect} from 'react-redux'
 import axios from 'axios'
-import { Container, Modal, Button } from "react-bootstrap";
+import { Container, Modal} from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
-
 import { addToCart , show_single_book} from '../redux/actions/actions'
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
@@ -21,48 +20,47 @@ function ProductPage(props) {
 
   const { id } = useParams();
   const [show, setShow] = useState(false);
-  const [localItems] = useState(() =>
-    JSON.parse(localStorage.getItem("items"))
-  );
-  const [newItem] = useState({ userId: 1, productId: id });
-  const [checkoutItems, setCheckoutItems] = useState(localItems);
-  const handleClose = () => setShow(false);
-
-  const handleShow = () => {
-
-    if(checkoutItems === null || checkoutItems === undefined || checkoutItems.length === 0 ) {
-        localStorage.setItem('items',JSON.stringify([newItem]))
-    }
-    else{
-
-      checkoutItems.map((item)=>{
-
-        if(item.productId !== newItem.productId){
-
-          setCheckoutItems([...checkoutItems,newItem])
-
-            return localStorage.setItem('items',JSON.stringify(checkoutItems))
-      }
-
-      });
-    }
-    setShow(true)
-};
-
-
-  const cartItem = JSON.parse(window.localStorage.getItem('items'));
-  let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
   const book = (props.shop.book !== undefined ) ? props.shop.book : false;
 
+  const [localItems] = useState(()=>{
+    let items = JSON.parse(window.localStorage.getItem('items'))
+    if(items !== null || undefined) return items
+    else return [];
+  })
+
+  const [ newItem ,setNewItem ] = useState('');
+  const [ items, setItems ] = useState([...localItems]);
+  
   useEffect(() => {
     const book = async () => {
       const result = await axios(URL._SINGLE_BOOK(id));
+      setNewItem(result.data.data)
       return props.book(result.data.data)
     };
     book();
   }, []);
 
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    if(items.indexOf(newItem) === -1){
+      setItems([...items,newItem])
+      window.localStorage.setItem('items', JSON.stringify(items))
+      setShow(true)
+    }
+    else{
+      let existItem=items.indexOf(newItem)
+      alert('Sorry Sir your Item is already exist')
+      console.log('==============your existing item is ======================');
+      console.log(items[existItem])
+      console.log('====================================');
+      
+
+    }
+  };
+ 
+  let totalItem= items.length;
+  console.log(items)
   return (
     <>
       <div className="allWrapper">
@@ -147,7 +145,7 @@ function ProductPage(props) {
 
                           <div className="col text-center">
                             <Link
-                              to="#"
+                              to="/checkout"
                               className="btn linkBtn"
                               onClick={handleShow}
                             >
