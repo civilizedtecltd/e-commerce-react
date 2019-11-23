@@ -43,15 +43,14 @@ function App({location}) {
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
+              <AuthRoute path="/profile-settings" component={UserProfile} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/change-password" component={ChangePassword} />
               <Route path="/verify-code" component={VerifyCode} />
               <Route path="/profile-settings" component={UserProfile} />
-                <AuthRoute path="/profile-settings" component={UserProfile} />
               <Route path="/email-subscription" component={Subscription} />
               <Route path="/my-order" component={OrderPage} />
               <Route path="/payment-methods" component={PaymentPage} />
-
               <Route path="/book-offer" component={OfferPage} />
               <Route path="/cart" component={CartPage} />
               <Route path="/checkout" component={CheckoutPage} />
