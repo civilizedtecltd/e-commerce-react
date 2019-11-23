@@ -1,19 +1,8 @@
 import React from 'react'
-<<<<<<< HEAD
-import { spring, AnimatedSwitch } from "react-router-transition";
-import {
-  BrowserRouter as Router,
-  Route
-} from "react-router-dom";
-
-import AuthRoute from './components/authComponents/AuthRoute';
-
-=======
 import { Switch, Route, withRouter } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import AuthRoute from './components/authComponents/AuthRoute';
 import styled from "styled-components";
->>>>>>> master
 // User Area
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
@@ -87,23 +76,9 @@ opacity: 1;
 transition: opacity 300ms ease-in;
 }
 
-<<<<<<< HEAD
-        <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        {/* <Route path="/profile-settings" component={UserProfile} /> */}
-        <AuthRoute path="/profile-settings" component={UserProfile} />
-        <Route path="/forgot-password" component={ForgotPassword} />
-        <Route path="/change-password" component={ChangePassword} />
-        <Route path="/verify-code" component={VerifyCode} />
-        <Route path="/email-subscription" component={Subscription} />
-        <Route path="/my-order" component={OrderPage} />
-        <Route path="/payment-methods" component={PaymentPage} />
-=======
 .fade-exit {
 opacity: 1;
 }
->>>>>>> master
 
 .fade-exit.fade-exit-active {
 opacity: 0.01;
