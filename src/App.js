@@ -1,19 +1,8 @@
 import React from 'react'
-<<<<<<< HEAD
-import { spring, AnimatedSwitch } from "react-router-transition";
-import {
-  BrowserRouter as Router,
-  Route
-} from "react-router-dom";
-
-import AuthRoute from './components/authComponents/AuthRoute';
-
-=======
 import { Switch, Route, withRouter } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import AuthRoute from './components/authComponents/AuthRoute';
 import styled from "styled-components";
->>>>>>> master
 // User Area
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
