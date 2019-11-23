@@ -21,7 +21,7 @@ const Default = ({ children }) => {
 function HeaderComponent(props) {
 
   const [open, setOpen] = useState(false);
- 
+
     return(
     <>
       <Default>
@@ -90,7 +90,7 @@ function HeaderComponent(props) {
                 <ul className="headPopBarList d-flex justify-content-between">
                   <li>
                     <div className="input-group">
-                      <Link to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</Link>
+                      <a to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</a>
                     </div>
                   </li>
                   <li><Link to="/favorites"><span className="cartBadge"><i className="far fa-star"></i><Badge variant="danger">10</Badge></span> Favorites</Link></li>
