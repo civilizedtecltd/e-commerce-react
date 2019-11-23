@@ -1,7 +1,7 @@
 import React, { useState ,useEffect } from "react";
 import { connect} from 'react-redux'
 import axios from 'axios'
-import { Container, Modal} from "react-bootstrap";
+import { Container, Modal, Button} from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
 import { addToCart , show_single_book} from '../redux/actions/actions'
 import FooterComponent from "../components/FooterComponent/FooterComponent";
@@ -33,7 +33,15 @@ function ProductPage(props) {
   useEffect(() => {
     const book = async () => {
       const result = await axios(URL._SINGLE_BOOK(id));
-      setNewItem(result.data.data)
+      const { data } = result.data
+      setNewItem({
+        userEmail:'someone@example.com',
+        productId:id,
+        productName:data.name,
+        images:data.cover_images,
+        price:data.price,
+        quantity:1
+      })
       return props.book(result.data.data)
     };
     book();
@@ -41,22 +49,35 @@ function ProductPage(props) {
 
 
   const handleClose = () => setShow(false);
-  const handleShow = () => {
-    if(items.indexOf(newItem) === -1){
-      setItems([...items,newItem])
-      window.localStorage.setItem('items', JSON.stringify(items))
+
+  const handleShow = (e) => {
+    e.preventDefault()
+    console.log(items)
+    if(items.length===0){
+      localStorage.setItem('items',JSON.stringify([newItem]))
       setShow(true)
     }
     else{
-      let existItem=items.indexOf(newItem)
-      alert('Sorry Sir your Item is already exist')
-      console.log(items[existItem]);
-      window.localStorage.setItem('items', JSON.stringify(items))
+      items.map((item)=>{
+        if(item.productId === newItem.productId){
+          ++item.quantity;
+          window.localStorage.removeItem('items')
+          window.localStorage.setItem('items',JSON.stringify(items))
+          setShow(true)
+        }
+        if(item.userEmail !== newItem.userEmail){
+          setItems([...items, newItem])
+          window.localStorage.removeItem('items')
+          window.localStorage.setItem('items',items)
+          setShow(true)
+        }
+     })
     }
+  
   };
  
   let totalItem= items.length;
-  console.log(items)
+
   return (
     <>
       <div className="allWrapper">
@@ -136,18 +157,19 @@ function ProductPage(props) {
                               className="form-control inputValue"
                               type="number"
                               placeholder="1"
+                              defaultValue={items.length}
                             />
                           </div>
 
                           <div className="col text-center">
-                            <Link
-                              to="#"
+                            <Button
                               className="btn linkBtn"
                               onClick={handleShow}
                             >
                               <i className="fas fa-shopping-cart"></i> Add to
                               cart
-                            </Link>
+                            </Button>
+
                           </div>
 
                           <div className="col text-center">
