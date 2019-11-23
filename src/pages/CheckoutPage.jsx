@@ -9,7 +9,7 @@ import './checkout.css'
 const CheckoutPage = () => {
 
   const [ items ] = useState(()=>JSON.parse(localStorage.getItem('items')))
-  console.log(item)
+ 
 
   return (
     <>
