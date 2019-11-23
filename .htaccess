@@ -1,4 +1,0 @@
-# One month for css and js
-<filesMatch ".(css|js|jpg|jpeg|png|gif|ico)$">
-Header set Cache-Control "max-age=2628000, public"
-</filesMatch>
