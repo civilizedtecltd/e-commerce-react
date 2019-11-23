@@ -21,18 +21,23 @@ const mySwal = withReactContent(Swal);
 const UserProfile = () => {
 
     const [category, setCategory] = useState([]);
-    const [user, setUser] = useState({});
+    const [jwt, setJWT] = useState({});
+    const [user, setUser] = useState({});    
     const [formData] = useState({});
-
+   
     useEffect(() => {
+
         const fetchData = async () => {
           const result = await axios(URL._CATEGORY);
           setCategory(result.data);
         };
-
-        const getUserData = async () => {
-            const result = await axios(URL._GET_USER(1));
-            setUser(result.data.data);
+        
+        const getUserData = () => {          
+          const userData = JSON.parse(localStorage.getItem('authData'));                    
+          if(userData !== undefined || !_.isEmpty(userData)){
+            setJWT(userData.token);
+            setUser(userData.info);
+          }
         }
 
         fetchData();
