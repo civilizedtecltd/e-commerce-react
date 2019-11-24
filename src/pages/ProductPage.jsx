@@ -19,9 +19,8 @@ import { URL } from '../constants/config';
 import "../pages/assets/product.css";
 
 function ProductPage(props) {
-  console.log(props)
+
   const { id } = useParams();
-  console.log("ID: ", id)
 
   const [show, setShow] = useState(false);
 
@@ -30,31 +29,11 @@ function ProductPage(props) {
   const [localItems , setLocalItem] = useState([])
   const [ newItem ,setNewItem ] = useState('');
   const [ items, setItems ] = useState([...localItems]);
- 
+
 
   useEffect(() => {
-    const book = props.showSingleBook(id);
-    // console.log("this book: ", book);
-    return book;
+    return props.showSingleBook(id);
   }, []);
-
-
-/*  useEffect(() => {
-    const book = async () => {
-       setLocalItem(JSON.parse(localStorage.getItem('items')));
-      const result = await axios(URL._SINGLE_BOOK(id));
-      const { data } = result.data
-      setNewItem({
-        productId:id,
-        productName:data.name,
-        images:data.cover_images,
-        price:data.price,
-        quantity:1
-      })
-      return props.book(result.data.data)
-    };
-    book();
-  }, []);*/
 
 
   const handleClose = () => setShow(false);
@@ -79,20 +58,20 @@ function ProductPage(props) {
           setShow(true)
         }
         if( item.productId !== newItem.productId ){
-         
+
           items.push(newItem)
 
           window.localStorage.removeItem('items')
-          
+
           window.localStorage.setItem('items',JSON.stringify(items))
 
           setShow(true)
         }
      })
     }
-  
+
   };
- 
+
   let totalItem= items.length;
 
   return (
