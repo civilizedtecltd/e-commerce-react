@@ -1,4 +1,4 @@
-import React  from "react";
+import React, { useState }  from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import CheckoutTab from './CheckoutTab';
@@ -7,6 +7,9 @@ import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 import bookImage1 from "../assets/images/books/book_img_01.jpg";
 import './checkout.css'
 const CheckoutPage = () => {
+
+  const [ items ] = useState(()=>JSON.parse(localStorage.getItem('items')))
+ 
 
   return (
     <>
@@ -38,6 +41,7 @@ const CheckoutPage = () => {
                   <Row>
                     <Col sm="8">
                       <div className="productCartList webScrollbar">
+                        {}
                         <div className="productCartSingle d-flex align-items-center mb-2">
                           <div className="cartProductMedia bgGray">
                             <img src={bookImage1} alt="" />
@@ -64,31 +68,6 @@ const CheckoutPage = () => {
                         </div>
                         {/* end of cartProductDes */}
 
-                        <div className="productCartSingle d-flex align-items-center mb-2">
-                          <div className="cartProductMedia bgGray">
-                            <img src={bookImage1} alt="" />
-                          </div>
-                          {/* end of cartProductMedia */}
-
-                          <div className="cartProductDes pl-3">
-                            <h3>
-                              <Link to="#">
-                              Lorem ipsum dolor sit ament, consenter
-                              </Link>
-                            </h3>
-                            <p>
-                              Price <span className="price">$16.00</span>
-                            </p>
-                            <p>
-                              Price <span className="qut">1</span>
-                            </p>
-                            <p>
-                              Total <span className="totalPrice">$16.00</span>
-                            </p>
-                          </div>
-                          {/* end of productDes */}
-                        </div>
-                        {/* end of productCartSingle */}
                       </div>
                       {/* end of productCartList */}
                     </Col>

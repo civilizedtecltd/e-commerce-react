@@ -1,14 +1,16 @@
-import React, { useState ,useEffect } from "react";
+ import React, { useState ,useEffect } from "react";
 import { connect} from 'react-redux'
 import axios from 'axios'
-import { Container, Modal} from "react-bootstrap";
+import { Container, Modal, Button} from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
-import { addToCart , show_single_book} from '../redux/actions/actions'
+
+import { showSingleBook } from '../redux/actions/bookActions'
+
+
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
 import { ImageCarousel } from "../components/ProductImgCarosellComponents/ProductImgCarosell";
-
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import TabComponent from "../components/TabComponent/TabComponent";
 import RatingComponent from "../components/ratingComponent/Rating";
@@ -19,48 +21,59 @@ import "../pages/assets/product.css";
 function ProductPage(props) {
 
   const { id } = useParams();
+
   const [show, setShow] = useState(false);
-  const book = (props.shop.book !== undefined ) ? props.shop.book : false;
 
-  const [localItems] = useState(()=>{
-    let items = JSON.parse(window.localStorage.getItem('items'))
-    if(items !== null || undefined) return items
-    else return [];
-  })
+  const book = (props.book !== undefined ) ? props.book : false;
 
+  const [localItems , setLocalItem] = useState([])
   const [ newItem ,setNewItem ] = useState('');
   const [ items, setItems ] = useState([...localItems]);
-  
+
+
   useEffect(() => {
-    const book = async () => {
-      const result = await axios(URL._SINGLE_BOOK(id));
-      setNewItem(result.data.data)
-      return props.book(result.data.data)
-    };
-    book();
+    return props.showSingleBook(id);
   }, []);
 
 
   const handleClose = () => setShow(false);
-  const handleShow = () => {
-    if(items.indexOf(newItem) === -1){
-      setItems([...items,newItem])
-      window.localStorage.setItem('items', JSON.stringify(items))
+
+  const handleShow = (e) => {
+    e.preventDefault();
+    console.log(items);
+    if(items.length===0){
+      localStorage.setItem('items',JSON.stringify([newItem]));
       setShow(true)
     }
     else{
-      let existItem=items.indexOf(newItem)
-      alert('Sorry Sir your Item is already exist')
-      console.log('==============your existing item is ======================');
-      console.log(items[existItem])
-      console.log('====================================');
-      
+      items.map((item) => {
+        if( item.productId === newItem.productId ){
 
+          ++item.quantity;
+
+          window.localStorage.getItem('items');
+
+          window.localStorage.setItem('items',JSON.stringify(items))
+
+          setShow(true)
+        }
+        if( item.productId !== newItem.productId ){
+
+          items.push(newItem)
+
+          window.localStorage.removeItem('items')
+
+          window.localStorage.setItem('items',JSON.stringify(items))
+
+          setShow(true)
+        }
+     })
     }
+
   };
- 
+
   let totalItem= items.length;
-  console.log(items)
+
   return (
     <>
       <div className="allWrapper">
@@ -118,7 +131,7 @@ function ProductPage(props) {
                         <p>(7 reviews)</p>
                       </div>
                       <h6 className="authName">
-                        by <Link to = {`${URL.BASE}/api/author/${book ? book.book_author.id : '#'}`} > {book ? book.book_author.name : `` } </Link>
+                        by <Link to = {`${URL.BASE}/api/author/${book ? book.book_author.id : '/'}`} > {book ? book.book_author.name : `` } </Link>
                       </h6>
                     </div>
 
@@ -140,18 +153,19 @@ function ProductPage(props) {
                               className="form-control inputValue"
                               type="number"
                               placeholder="1"
+                              defaultValue={ items.length }
                             />
                           </div>
 
                           <div className="col text-center">
-                            <Link
-                              to="/checkout"
+                            <Button
                               className="btn linkBtn"
                               onClick={handleShow}
                             >
                               <i className="fas fa-shopping-cart"></i> Add to
                               cart
-                            </Link>
+                            </Button>
+
                           </div>
 
                           <div className="col text-center">
@@ -237,16 +251,15 @@ function ProductPage(props) {
 
 
 const mapStateToProps = (state)=> {
-  return{
-    ...state
+  return {
+    book: state.book[0]
   }
 }
 
 
 const mapDispatchToProps = (dispatch) => {
     return{
-      addToCart:(id)=> dispatch(addToCart(id)),
-      book:(book) => dispatch(show_single_book(book))
+      showSingleBook : (id) => dispatch(showSingleBook(id))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

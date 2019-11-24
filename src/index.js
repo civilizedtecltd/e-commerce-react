@@ -5,23 +5,11 @@ import {Provider} from 'react-redux'
 import { createStore,compose, applyMiddleware } from 'redux'
 import App from './App';
 // Bootstrap Style CSS
-import 'bootstrap/dist/css/bootstrap.min.css';
-// Normalize Style CSS
-import './assets/css/normalize.css';
 import * as serviceWorker from './serviceWorker';
-import rootReducer from './redux/reducer';
-import thunk from 'redux-thunk';
+import store from './redux/store'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-    rootReducer,
-    composeEnhancers(
-        compose(
-            applyMiddleware(thunk)
-            )
-        )
-    );
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/css/normalize.css';
 
 const MainApp = () => (
         <Router>

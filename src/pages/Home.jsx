@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card,} from 'react-bootstrap';
 import '../pages/assets/home.css'
@@ -15,9 +15,9 @@ import featureIcon3 from '../assets/images/feature_icon_img_03.png';
 import featureIcon4 from '../assets/images/feature_icon_img_04.png';
 
 import FooterComponent from '../components/FooterComponent/FooterComponent';
-import { HomeCarouselFooter} from "../components/HomePage/HomeCarouselFooter";
-import {NewsLetterComponent} from "../components/offerPageComponents/NewsLetterComponent";
-import {HeaderComponent, MobileHeader} from "../components/header/Header";
+import { HomeCarouselFooter } from "../components/HomePage/HomeCarouselFooter";
+import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
+import { HeaderComponent, MobileHeader } from "../components/header/Header";
 
 
 const Home = () => {

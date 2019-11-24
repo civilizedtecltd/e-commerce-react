@@ -21,7 +21,6 @@ const Default = ({ children }) => {
 function HeaderComponent(props) {
 
   const [open, setOpen] = useState(false);
-
     return(
     <>
       <Default>
