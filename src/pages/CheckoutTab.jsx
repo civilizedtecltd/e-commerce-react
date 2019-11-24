@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import {Container, Card ,Form, Col, Row, Button} from 'react-bootstrap'
-import { Collapse, CardBody} from 'reactstrap';
+import {Container, Card ,Form, Col, Row, Button, Accordion , useAccordionToggle} from 'react-bootstrap';
 import CheckboxComponent from '../components/checkboxComponent/CheckboxComponent'
 import {Link} from 'react-router-dom'
 import './checkout.css';
@@ -8,8 +7,10 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
 
 
 
+
   function CheckoutTab() {
 
+ 
     const [step, setStep] = useState({
         prev:0,
         next:1,
@@ -186,17 +187,9 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
                        <div className="col col-12">
                           <h3>Choose a delivery method</h3>
 
-                            <PaymentsMethod
-                              prev={true}
-                              tab={1}
-                              paymentName="Mpesa"
-                            />
-                            <PaymentsMethod
-                              prev={true}
-                              tab={2}
-                              paymentName="Visa"
-                            />
+                            <PaymentsMethod/>
 
+                           
                       <div className="payment-header mt-3 d-flex justify-content-between">
                        <div>
                         <CheckboxComponent
@@ -312,29 +305,46 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
 
 
 
-function PaymentsMethod(props){
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () =>{
-    setIsOpen(!isOpen);
-  }
 
+function CheckToggle({ children, eventKey, title }) {
+  const decoratedOnClick = useAccordionToggle(eventKey, () =>{
+      if(eventKey==0){
+
+       console.log( document.getElementById('ch-1').checked=false)
+      }
+      if(eventKey==1){
+
+        document.getElementById('ch-0').checked=false
+      }
+  })
+
+  return (
+    <Form.Check
+    custom
+    className="ml-2"
+    type="radio"
+    label={title}
+    name="formHorizontalRadios"
+    id={`ch-${eventKey}`}
+    onClick={decoratedOnClick}
+    >
+      {children}
+      
+    </Form.Check>
+  );
+}
+
+
+function PaymentsMethod(props){
   return(<>
-  <div>
- <div className="payment-header mt-3">
-  <Form.Check
-        custom
-        className="ml-2"
-        onClick={toggle}
-        type="radio"
-        id={props.paymentName.toLowerCase()}
-        label={props.paymentName}
-        defaultChecked={isOpen}
-      />
- </div>
-      <Collapse isOpen={isOpen}>
-        <Card>
-          <CardBody>
-          <div className="clearfix">
+        <Accordion defaultActiveKey="0">
+
+          <div className="payment-header-card">
+              <CheckToggle eventKey="0" title="Mpesa" />
+          </div>
+          <Accordion.Collapse eventKey="0">
+             
+              <div className="clearfix">
               <hr style={{borderColor:"#e2e2e2"}}/>
               <div className="p-3">
                 <div className="row align-items-center">
@@ -373,11 +383,59 @@ function PaymentsMethod(props){
                 </div>
               </div>
             </div>
-          </CardBody>
-        </Card>
-      </Collapse>
-    </div>
+             
+            </Accordion.Collapse>
+
+
+          <div className="payment-header-card mt-3">
+            <CheckToggle eventKey="1" title="Visa"/>
+          </div>
+          <Accordion.Collapse eventKey="1">
+             <div className="clearfix">
+              <hr style={{borderColor:"#e2e2e2"}}/>
+              <div className="p-3">
+                <div className="row align-items-center">
+                  <div className="col-sm-10 form-group">
+                    <label htmlFor="card-number">Card number</label>
+                    <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp"/>
+                  </div>
+                  <div className="col">
+                    <img src={card_icon_img} alt=""/>
+                  </div>
+                </div>
+
+                <div className="row align-items-center justify-content-between">
+                  <div className="col-sm-3 form-group">
+                    <label htmlFor="card-number">Expiry date</label>
+                    <ul className="cardPayFiled d-flex align-items-center justify-content-end">
+                      <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM"/></li>
+                      <li className="cardBl">/</li>
+                      <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY"/></li>
+                    </ul>
+                  </div>
+
+                  <div className="col offset-sm-4 form-group">
+                    <label htmlFor="card-number">CVV</label>
+                    <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder=""/>
+                  </div>
+                  <div className="col-sm-2">
+                    <img src={card_icon_img} alt=""/>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col">
+                    <button type="button" className="btn btn-primary">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </Accordion.Collapse>
+         
+         </Accordion>
   </>)
 }
+
+
 
 export default CheckoutTab;
