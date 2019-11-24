@@ -1,9 +1,12 @@
-import React, { useState ,useEffect } from "react";
+ import React, { useState ,useEffect } from "react";
 import { connect} from 'react-redux'
 import axios from 'axios'
 import { Container, Modal, Button} from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
-import { addToCart , show_single_book} from '../redux/actions/actions'
+
+import { showSingleBook } from '../redux/actions/bookActions'
+
+
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
@@ -16,26 +19,32 @@ import { URL } from '../constants/config';
 import "../pages/assets/product.css";
 
 function ProductPage(props) {
-
+  console.log(props)
   const { id } = useParams();
+  console.log("ID: ", id)
+
   const [show, setShow] = useState(false);
-  const book = (props.shop.book !== undefined ) ? props.shop.book : false;
 
-  const [localItems] = useState(()=>{
-    let items = JSON.parse(window.localStorage.getItem('items'))
-    if(items !== null || undefined) return items
-    else return [];
-  })
+  const book = (props.book !== undefined ) ? props.book : false;
 
+  const [localItems , setLocalItem] = useState([])
   const [ newItem ,setNewItem ] = useState('');
   const [ items, setItems ] = useState([...localItems]);
-  
+ 
+
   useEffect(() => {
+    const book = props.showSingleBook(id);
+    // console.log("this book: ", book);
+    return book;
+  }, []);
+
+
+/*  useEffect(() => {
     const book = async () => {
+       setLocalItem(JSON.parse(localStorage.getItem('items')));
       const result = await axios(URL._SINGLE_BOOK(id));
       const { data } = result.data
       setNewItem({
-        userEmail:'someone@example.com',
         productId:id,
         productName:data.name,
         images:data.cover_images,
@@ -45,30 +54,38 @@ function ProductPage(props) {
       return props.book(result.data.data)
     };
     book();
-  }, []);
+  }, []);*/
 
 
   const handleClose = () => setShow(false);
 
   const handleShow = (e) => {
-    e.preventDefault()
-    console.log(items)
+    e.preventDefault();
+    console.log(items);
     if(items.length===0){
-      localStorage.setItem('items',JSON.stringify([newItem]))
+      localStorage.setItem('items',JSON.stringify([newItem]));
       setShow(true)
     }
     else{
-      items.map((item)=>{
-        if(item.productId === newItem.productId){
+      items.map((item) => {
+        if( item.productId === newItem.productId ){
+
           ++item.quantity;
-          window.localStorage.removeItem('items')
+
+          window.localStorage.getItem('items');
+
           window.localStorage.setItem('items',JSON.stringify(items))
+
           setShow(true)
         }
-        if(item.userEmail !== newItem.userEmail){
-          setItems([...items, newItem])
+        if( item.productId !== newItem.productId ){
+         
+          items.push(newItem)
+
           window.localStorage.removeItem('items')
-          window.localStorage.setItem('items',items)
+          
+          window.localStorage.setItem('items',JSON.stringify(items))
+
           setShow(true)
         }
      })
@@ -135,7 +152,7 @@ function ProductPage(props) {
                         <p>(7 reviews)</p>
                       </div>
                       <h6 className="authName">
-                        by <Link to = {`${URL.BASE}/api/author/${book ? book.book_author.id : '#'}`} > {book ? book.book_author.name : `` } </Link>
+                        by <Link to = {`${URL.BASE}/api/author/${book ? book.book_author.id : '/'}`} > {book ? book.book_author.name : `` } </Link>
                       </h6>
                     </div>
 
@@ -157,7 +174,7 @@ function ProductPage(props) {
                               className="form-control inputValue"
                               type="number"
                               placeholder="1"
-                              defaultValue={items.length}
+                              defaultValue={ items.length }
                             />
                           </div>
 
@@ -255,16 +272,15 @@ function ProductPage(props) {
 
 
 const mapStateToProps = (state)=> {
-  return{
-    ...state
+  return {
+    book: state.book[0]
   }
 }
 
 
 const mapDispatchToProps = (dispatch) => {
     return{
-      addToCart:(id)=> dispatch(addToCart(id)),
-      book:(book) => dispatch(show_single_book(book))
+      showSingleBook : (id) => dispatch(showSingleBook(id))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);
