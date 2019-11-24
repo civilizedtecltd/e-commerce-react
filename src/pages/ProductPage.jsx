@@ -26,11 +26,6 @@ function ProductPage(props) {
 
   const book = (props.book !== undefined ) ? props.book : false;
 
-  const [localItems , setLocalItem] = useState([])
-  const [ newItem ,setNewItem ] = useState('');
-  const [ items, setItems ] = useState([...localItems]);
-
-
   useEffect(() => {
     return props.showSingleBook(id);
   }, []);
@@ -38,18 +33,21 @@ function ProductPage(props) {
 
   const handleClose = () => setShow(false);
 
+  const updateItemQty = (e) => {
+    book.quantity = Number(e.target.value)
+  }
+
   const addToCart = (e) => {
     e.preventDefault();
     props.addToCart(book);
     setShow(true);
   };
 
-  let totalItem= items.length;
 
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent cartItem={ totalItem } />
+        <HeaderComponent cartItem = { props.totalItems } />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
@@ -124,8 +122,9 @@ function ProductPage(props) {
                             <input
                               className="form-control inputValue"
                               type="number"
-                              placeholder="1"
-                              defaultValue={ items.length }
+                              placeholder="0"
+                              defaultValue = { props.cart.map( item => (item.id === Number(id)) ? item.quantity : 0 )}
+                              onChange = { updateItemQty }
                             />
                           </div>
 
@@ -224,7 +223,9 @@ function ProductPage(props) {
 
 const mapStateToProps = (state)=> {
   return {
-    book: state.book[0]
+    book: state.book[0],
+    cart: state.shop.cart,
+    totalItems: state.shop.cart.length
   }
 }
 
