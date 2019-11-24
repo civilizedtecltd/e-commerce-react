@@ -1,4 +1,8 @@
-export const LOAD_SHOP = 'LOAD_SHOP';
+export const FETCH_ALL_BOOKS = 'FETCH_ALL_BOOKS';
 export const SHOW_SINGLE_BOOK = 'SHOW_SINGLE_BOOK';
-export const CATEGORY_WISE_BOOK = 'CATEGORY_WISE_BOOK';
-export const ADD_TO_CART = 'ADD_TO_CART';
+export const FETCH_BOOK_BY_CATEGORY = 'FETCH_BOOK_BY_CATEGORY';
+export const FETCH_ALL_CATEGORY = 'FETCH_ALL_CATEGORY';
+
+
+
+

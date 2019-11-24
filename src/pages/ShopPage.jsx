@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
 import { connect  } from 'react-redux';
-import { LoadProduct } from '../redux/actions/actions';
-import {LiSpan} from '../components/LiComponent/CommonLiComponent'
+import {fetchAllBook, fetchBooksByCategory} from '../redux/actions/bookActions'
+import { LiSpan } from '../components/LiComponent/CommonLiComponent'
 import './assets/shop.css';
 import filter from '../inc/shop/stage';
 import discipline from '../inc/shop/discipline';
@@ -29,15 +29,11 @@ const ShopPage = (props) => {
 
     const cartItem = JSON.parse(window.localStorage.getItem('items'));
     let totalItem = (cartItem !== null) ? (cartItem.length) : 0;
-    const books = (props.shop.books !== undefined ) ? props.shop.books : [];
+    const books = (props.book !== undefined ) ? props.book : [];
 
     useEffect(() => {
-        const fetchBooks = async () => {
-          const result = ( id === 'all') ? await axios(URL._ALL_BOOKS) : await axios(URL._CATEGORY_BOOKS(id)) ;
-          props.loadProduct(result.data.data)
-        };
-        fetchBooks();
-      }, []);
+      return ( id === 'all') ? props.fetchAllBook() : props.fetchBooksByCategory(id) ;
+    },[]);
 
   return (
     <>
@@ -436,7 +432,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps =(dispatch) => {
   return {
-    loadProduct: (state) => dispatch (LoadProduct(state))
+    fetchAllBook        : () => dispatch(fetchAllBook()),
+    fetchBooksByCategory: (id) => dispatch(fetchBooksByCategory(id))
   }
 }
 
