@@ -1,6 +1,8 @@
 import * as Types from '../actions/actionTypes';
 import axios from 'axios';
 import { URL } from '../../constants/config'
+
+
  const fetchAllBook = () => dispatch=> {
     axios.get(URL._ALL_BOOKS).then(res=>{
         dispatch({

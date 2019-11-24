@@ -1,0 +1,95 @@
+import * as Types from '../actions/actionTypes';
+
+/*
+() => {
+        try{
+            const localState = JSON.parse(localState.getItem('state'));
+            return (localState.shop.cart !== undefined ) ? localState.shop.cart : []
+        }catch(ex){
+            console.log(ex);
+            return [];
+        }
+    }
+*/
+
+const initSate = {
+    cart: []
+};
+
+const shopReducer = (state = initSate, { type, payload }) => {
+
+    let updatedCart = [];
+    let updatedItemIndex;
+
+        switch(type){
+            case Types.ADD_TO_CART:
+
+                    const localState = JSON.parse(localStorage.getItem('state'));
+                    updatedCart = ((localState.shop.cart !== undefined ) ? localState.shop.cart : [] )
+
+                    updatedItemIndex = updatedCart.findIndex(item => item.id === payload.id )
+
+                    if(updatedItemIndex < 0 ){
+                        updatedCart.push({...payload, quantity: 1 })
+
+                    }else{
+                        const updatedItem = {
+                            ...updatedCart[updatedItemIndex]
+                        }
+
+                        updatedItem.quantity++;
+                        updatedCart[updatedItemIndex] = updatedItem;
+                    }
+
+                return {
+                    ...state,
+                    cart: updatedCart
+                }
+            case Types.REMOVE_FROM_CART:
+                updatedCart = [...state.cart];
+                updatedItemIndex = updatedCart.findIndex(item => item.id === payload);
+
+                updatedCart.splice(updatedItemIndex, 1);
+
+                return {
+                    ...state, cart: updatedCart
+                }
+
+            case Types.INCREASE_QUANTITY:
+                updatedCart = [...state.cart]
+                updatedItemIndex = updatedCart.findIndex( item => item.id === payload);
+
+                const incrementedItem = {
+                    ...updatedCart[updatedItemIndex]
+                }
+
+                incrementedItem.quantity++;
+                updatedCart[updatedItemIndex] = incrementedItem;
+
+                return {
+                     ...state,
+                     cart: updatedCart
+                }
+            case Types.DECREASE_QUANTITY:
+                updatedCart = [...state.cart];
+                updatedItemIndex = updatedCart.findIndex(item => item.id === payload);
+
+                const decrementedItem = {
+                    ...updatedCart[updatedItemIndex]
+                };
+
+                decrementedItem.quantity--;
+
+                updatedCart[updatedItemIndex] = decrementedItem;
+
+                return {
+                    ...state,
+                    cart: updatedCart
+                }
+
+            default:
+                return state;
+        }
+}
+
+export default shopReducer;

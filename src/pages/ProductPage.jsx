@@ -1,10 +1,10 @@
  import React, { useState ,useEffect } from "react";
 import { connect} from 'react-redux'
-import axios from 'axios'
 import { Container, Modal, Button} from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
 
 import { showSingleBook } from '../redux/actions/bookActions'
+import { addToCart } from '../redux/actions/shopActions'
 
 
 import FooterComponent from "../components/FooterComponent/FooterComponent";
@@ -38,38 +38,10 @@ function ProductPage(props) {
 
   const handleClose = () => setShow(false);
 
-  const handleShow = (e) => {
+  const addToCart = (e) => {
     e.preventDefault();
-    console.log(items);
-    if(items.length===0){
-      localStorage.setItem('items',JSON.stringify([newItem]));
-      setShow(true)
-    }
-    else{
-      items.map((item) => {
-        if( item.productId === newItem.productId ){
-
-          ++item.quantity;
-
-          window.localStorage.getItem('items');
-
-          window.localStorage.setItem('items',JSON.stringify(items))
-
-          setShow(true)
-        }
-        if( item.productId !== newItem.productId ){
-
-          items.push(newItem)
-
-          window.localStorage.removeItem('items')
-
-          window.localStorage.setItem('items',JSON.stringify(items))
-
-          setShow(true)
-        }
-     })
-    }
-
+    props.addToCart(book);
+    setShow(true);
   };
 
   let totalItem= items.length;
@@ -160,7 +132,7 @@ function ProductPage(props) {
                           <div className="col text-center">
                             <Button
                               className="btn linkBtn"
-                              onClick={handleShow}
+                              onClick = { addToCart }
                             >
                               <i className="fas fa-shopping-cart"></i> Add to
                               cart
@@ -259,7 +231,8 @@ const mapStateToProps = (state)=> {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-      showSingleBook : (id) => dispatch(showSingleBook(id))
+      showSingleBook : (id) => dispatch(showSingleBook(id)),
+      addToCart:       (book) => dispatch(addToCart(book))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);
