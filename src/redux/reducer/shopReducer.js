@@ -1,17 +1,5 @@
 import * as Types from '../actions/actionTypes';
 
-/*
-() => {
-        try{
-            const localState = JSON.parse(localState.getItem('state'));
-            return (localState.shop.cart !== undefined ) ? localState.shop.cart : []
-        }catch(ex){
-            console.log(ex);
-            return [];
-        }
-    }
-*/
-
 const initSate = {
     cart: []
 };
@@ -30,7 +18,11 @@ const shopReducer = (state = initSate, { type, payload }) => {
                     updatedItemIndex = updatedCart.findIndex(item => item.id === payload.id )
 
                     if(updatedItemIndex < 0 ){
-                        updatedCart.push({...payload, quantity: 1 })
+
+                        if(payload.quantity !== undefined)
+                            updatedCart.push(payload)
+                        else
+                            updatedCart.push({...payload, quantity: 1 })
 
                     }else{
                         const updatedItem = {
