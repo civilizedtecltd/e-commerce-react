@@ -9,9 +9,12 @@ import FooterComponent from "../components/FooterComponent/FooterComponent";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
+import store from '../redux/store'
+
 const CartPage = () => {
-  const cartItem = JSON.parse(window.localStorage.getItem('items'));
-  let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
+   
+  const totalItem = store.getState().shop.cart.length
+  
   return (
     <>
       <div className="allWrapper">

@@ -9,11 +9,11 @@ import { NewsLetterComponent } from "../components/offerPageComponents/NewsLette
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
+import store from '../redux/store'
 
 const FavoritesPage = () => {
   
-  const cartItem = JSON.parse(window.localStorage.getItem('session'));
-  let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
+  const totalItem = store.getState().shop.cart.length
 
   return (
     <>
