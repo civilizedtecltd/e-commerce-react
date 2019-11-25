@@ -79,9 +79,8 @@ const CartPage = () => {
                               />)}
 
                             </ul>
-                            {/* end of cardWidgetList */}
                           </Col>
-                          {/* end of Col */}
+                        
 
                           <Col sm="3">
                             <h3 className="cardWidgetTitle mb-3">
@@ -122,7 +121,6 @@ const CartPage = () => {
                                 Url={'/'}
                             />)}
                             </ul>
-                            {/* end of cardWidgetList */}
                           </Col>
                           {/* end of Col */}
                         </Row>

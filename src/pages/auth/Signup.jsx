@@ -15,26 +15,32 @@ import './assets/css/auth.css';
 
 const mySwal = withReactContent(Swal);
 
-const SignUp = () => {
+const SignUp = (props) => {
+
 
   const [data, setData] = useState([])
   const [formData] = useState({});
- 
+
   const [auth, setAuth] = useState({
         status: false,
         redirect: ''
   });
 
   useEffect(() => {
-
     const fetchData = async () => {
       const result = await axios(URL._CATEGORY);
-      setData(result.data);
+      return setData(result.data);
     };
+
     fetchData();
 
   }, []);
 
+
+const goToLoginPage = () => {
+    const { history } = props;
+    history.push('/login');
+}
 
 const categoryData = (data) => {
     if(data.category_id !== undefined || data.category_id !== 'Select Category')
@@ -56,7 +62,7 @@ const handleSubmit = (event) => {
         formData.email === undefined         ||
         formData.password === undefined      ||
         formData.repeatPassword === undefined
-        ){        
+        ){
             mySwal.fire({
               icon: 'error',
               title: 'Oops..',
@@ -84,7 +90,7 @@ const handleSubmit = (event) => {
     else{
 
         if(String(formData.password) !== String(formData.repeatPassword)){
-         
+
             mySwal.fire({
               icon: 'error',
               title: 'Oops..',
@@ -113,11 +119,9 @@ const handleSubmit = (event) => {
                         URL._REGISTER,
                         formData
                     ).then( response => {
-                        console.log(response);
-                        setAuth({
-                            status: true,
-                            redirect: '/login'
-                        });
+                        if(response.status === 201)
+                            goToLoginPage()
+
                     }).catch( error => {
                         console.log(error);
                     });
@@ -128,7 +132,7 @@ const handleSubmit = (event) => {
 
 
     return (<>
-      ({auth.status === true}) ? <Redirect to={auth.redirect} /> : <Redirect to="/signup" />
+      {/* ({auth.status === true}) ? <Redirect to={auth.redirect} /> : <Redirect to="/signup" /> */}
       <div className="allWrapper fullHeight">
         <main className="loginMainArea clearfix fullHeight bgImage signUpBodyBg pb-3" id="signUpBody">
           <Container fluid={true}>
@@ -143,7 +147,7 @@ const handleSubmit = (event) => {
             <Row>
               <Col sm={6}>
                 <SocialListComponent/>
-                <div className="formWrapper clearfix" id="formWrapper">                   
+                <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
                     <SelectFrom LabelTitle="Category"
                       category = {(data.data !== undefined) ? data.data : []}

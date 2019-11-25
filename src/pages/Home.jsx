@@ -22,7 +22,7 @@ import store from '../redux/store'
 
 const Home = () => {
 
- const totalItem = store.getState().shop.cart.length
+ const totalItem=store.getState().shop.cart.length
 
   return (<>
 
