@@ -2,9 +2,6 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 
-//Auth Router
-import AuthRoute from './components/authComponents/AuthRoute';
-
 // User Area
 import Login from './pages/auth/Login';
 import SignUp from './pages/auth/SignUp';
@@ -27,7 +24,7 @@ import FavoritesPage from './pages/FavoritesPage';
 import ShopPage from './pages/ShopPage';
 import ProductPage from "./pages/ProductPage";
 
-
+import PrivateRoute from './components/authComponents/PrivateRoute';
 import ErrorPage from './pages/Error404';
 
 
@@ -37,7 +34,7 @@ const Router = (props) => (
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={SignUp} />
-              <AuthRoute path="/profile-settings" component={UserProfile} />
+              <PrivateRoute path="/profile-settings" component={UserProfile} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/change-password" component={ChangePassword} />
               <Route path="/verify-code" component={VerifyCode} />
