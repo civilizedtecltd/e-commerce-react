@@ -14,7 +14,7 @@ import store from '../redux/store'
 const CartPage = () => {
    
   const totalItem = store.getState().shop.cart.length
-  
+
   return (
     <>
       <div className="allWrapper">
@@ -80,9 +80,8 @@ const CartPage = () => {
                                 <Link to="#">Pre 3</Link>
                               </li>
                             </ul>
-                            {/* end of cardWidgetList */}
                           </Col>
-                          {/* end of Col */}
+                        
 
                           <Col sm="3">
                             <h3 className="cardWidgetTitle mb-3">
@@ -158,7 +157,6 @@ const CartPage = () => {
                                 <Link to="#">Bibles</Link>
                               </li>
                             </ul>
-                            {/* end of cardWidgetList */}
                           </Col>
                           {/* end of Col */}
                         </Row>
