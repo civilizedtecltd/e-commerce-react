@@ -12,7 +12,6 @@ import publish_house from '../inc/shop/publish_house';
 import publish_year from '../inc/shop/publish_year';
 import book_cover from '../inc/shop/book_cover';
 import language from '../inc/shop/language';
-import axios from 'axios'
 // Product Images
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
@@ -22,13 +21,12 @@ import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 import { URL } from '../constants/config';
 
 import './assets/shop.css';
-
+import store from '../redux/store'
 const ShopPage = (props) => {
 
     const { id, title } =  useParams();
 
-    const cartItem = JSON.parse(window.localStorage.getItem('items'));
-    let totalItem = (cartItem !== null) ? (cartItem.length) : 0;
+    const totalItem = store.getState().shop.cart.length
     const books = (props.book !== undefined ) ? props.book : [];
 
     useEffect(() => {

@@ -18,11 +18,12 @@ import FooterComponent from '../components/FooterComponent/FooterComponent';
 import { HomeCarouselFooter } from "../components/HomePage/HomeCarouselFooter";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { HeaderComponent, MobileHeader } from "../components/header/Header";
-
+import store from '../redux/store'
 
 const Home = () => {
-  const cartItem = JSON.parse(window.localStorage.getItem('session'));
-  let totalItem= (cartItem !== null) ? (cartItem.length) : 0;
+
+ const totalItem = store.getState().shop.cart.length
+
   return (<>
 
     <div className="allWrapper">
