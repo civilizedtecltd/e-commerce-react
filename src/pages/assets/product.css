@@ -6,10 +6,17 @@
     display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: space-between;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    align-items: center;
+
+}
+.productSingleView img {
+    width: 327px;
+    height: 456px;
+    background-size: cover;
+}
+.Product-title-product-page{
+    width: 65%;
 }
 .productReviewStar{
     display: -webkit-box;

@@ -47,11 +47,7 @@ const ShopPage = (props) => {
             <Container>
               <Row>
                 <Col>
-                <BreadCrumb
-                  url='/'
-                  option1='Home'
-                  option2="shop"
-                />
+                <BreadCrumb />
                 </Col>
               </Row>
             </Container>

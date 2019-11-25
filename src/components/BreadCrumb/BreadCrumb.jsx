@@ -1,14 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-function BreadCrumb(props) {
-    return(
-        <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-            <li className="breadcrumb-item"><Link to={props.url}>{props.option1}</Link></li>
-            <li className="breadcrumb-item active" aria-current="page">{props.option2}</li>
-        </ol>
-       </nav>
-    )
-}
+import withBreadcrumbs from "react-router-breadcrumbs-hoc";
 
-export default BreadCrumb;
+const PureBreadcrumbs = ({ breadcrumbs }) => (
+    <div className="breadcrumbs">
+
+        <nav aria-label="breadcrumb">
+            <ol className="breadcrumb">
+                {breadcrumbs.map(({ breadcrumb, match }, index) => (
+                    <div key={match.url}>
+                        <li className="breadcrumb-item"><Link to={match.url || ""}>{breadcrumb}</Link>
+                            {'\u00A0'}{'\u00A0'}{'\u00A0'}{index < breadcrumbs.length - 1 && "/"}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                        </li>
+                    </div>
+                ))}
+            </ol>
+        </nav>
+
+    </div>
+);
+
+export default withBreadcrumbs()(PureBreadcrumbs);

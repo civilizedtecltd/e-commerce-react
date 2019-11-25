@@ -19,7 +19,7 @@ const CheckoutPage = () => {
 
   if(totalItemQuantity.length !==0){
   totalItemQuantity = totalItemQuantity.reduce((quantities, quantity) => quantities + quantity)
-  
+
   totalPrice = totalPrice.reduce((prices,price)=>prices+price);
   console.log(totalItemQuantity, totalPrice)
   }
@@ -30,11 +30,7 @@ const CheckoutPage = () => {
         <Container>
               <Row>
                 <Col>
-                <BreadCrumb
-                  url='/'
-                  option1='Home'
-                  option2="Checkout"
-                />
+                <BreadCrumb />
                 </Col>
               </Row>
             </Container>
@@ -49,7 +45,7 @@ const CheckoutPage = () => {
                   <Col sm="8">
                     <div className="productCartList webScrollbar">
                     { cartItems.map((item,index)=>(
-                    <>    
+                    <>
                       <div  key={ index } className="productCartSingle d-flex align-items-center mb-2">
                           <div className="cartProductMedia bgGray">
                             <img src={JSON.parse(item.cover_images).img_1} alt="" />
@@ -71,11 +67,11 @@ const CheckoutPage = () => {
                             </p>
                         </div>
                   </div>
-                                        
+
                   </>
                     ))}
                     </div>
-                 </Col> 
+                 </Col>
                   <Col className="align-self-end">
                         <div className="cartProductValue clearfix" id="cartProductValue">
                           <ul className="productValue text-right">

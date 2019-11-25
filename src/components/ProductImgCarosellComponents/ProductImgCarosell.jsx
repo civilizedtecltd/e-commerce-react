@@ -69,7 +69,7 @@ function ImageCarousel(props) {
                          {
                             images.map((item, index) =>
                                 <div key={index} className="singleItem bgGray p-2 mb-2">
-                                    <img  src={item} alt="" onClick={ ImgHandler }/>
+                                    <img  src={item} alt="" onClick={ ImgHandler } />
                                 </div>)
                         }
                     </div>
@@ -78,7 +78,7 @@ function ImageCarousel(props) {
                 <div className="col-sm-9">
                     <div className="productSingleView bgGray p-3 text-center">
                         <span onClick={() => setHidden( true )} > <i className="fas fa-expand-arrows-alt Modal"></i></span>
-                        <Image src= { coverImages } id = {"photo"} alt="image"/>
+                        <Image src= { coverImages } id = {"photo"} alt="image" />
                         <div className="mt-3">
                             <span className="mr-5" onClick={() => PrevPhoto()} ><i className="fas fa-arrow-left fa-2x"></i></span>
                             <span className="ml-5" onClick={() => NextPhoto()} ><i className="fas fa-arrow-right fa-2x"></i></span>

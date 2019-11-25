@@ -1,6 +1,6 @@
  import React, { useState ,useEffect } from "react";
 import { connect} from 'react-redux'
-import { Container, Modal, Button} from "react-bootstrap";
+import { Container, Modal, Button, Row, Col } from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
 
 import { showSingleBook } from '../redux/actions/bookActions'
@@ -14,6 +14,7 @@ import { ImageCarousel } from "../components/ProductImgCarosellComponents/Produc
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import TabComponent from "../components/TabComponent/TabComponent";
 import RatingComponent from "../components/ratingComponent/Rating";
+import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { URL } from '../constants/config';
 
 import "../pages/assets/product.css";
@@ -54,28 +55,13 @@ function ProductPage(props) {
             className="breadcrumbArea secGap pb-0 clearfix"
             id="breadcrumb"
           >
-            <div className="container">
-              <div className="row">
-                <div className="col">
-                  <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                      <li className="breadcrumb-item">
-                        <Link to="#">Primary school </Link>
-                      </li>
-                      <li className="breadcrumb-item">
-                        <Link to="#">Shop </Link>
-                      </li>
-                      <li
-                        className="breadcrumb-item active"
-                        aria-current="page"
-                      >
-                        Product Page
-                      </li>
-                    </ol>
-                  </nav>
-                </div>
-              </div>
-            </div>
+            <Container>
+              <Row>
+                <Col>
+                  <BreadCrumb />
+                </Col>
+              </Row>
+            </Container>
           </section>
 
           <section
@@ -93,16 +79,23 @@ function ProductPage(props) {
                 <div className="col-sm-6">
                   <div className="card productCardDetails border-0">
                     <div className="card-header border-0 bg-white">
+
                       <div className="productCardHead">
-                        <h2 className="productSingleTitle">
-                          { book ? book.name : ``}
-                        </h2>
-                        <RatingComponent  value= { book ? book.rating : 0 }/>
-                        <p>(7 reviews)</p>
+                        <div className="Product-title-product-page">
+                          <p className="productSingleTitle">
+                            { book ? book.name : ``}
+                          </p>
+                        </div>
+                        <div className="d-flex">
+                          <RatingComponent  value= { book ? book.rating : 0 }/>
+                          <div style={{marginTop:"-3px"}}><p>{'\u00A0'} {'\u00A0'} (7 reviews) </p></div>
+                        </div>
                       </div>
+
                       <h6 className="authName">
                         by <Link to = {`${URL.BASE}/api/author/${book ? book.book_author.id : '/'}`} > {book ? book.book_author.name : `` } </Link>
                       </h6>
+
                     </div>
 
                     <div className="card-body productCardBody">
