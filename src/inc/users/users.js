@@ -88,7 +88,7 @@ export const categoryClass={
         "Bibles",
         "Bibles"
     ]
-   
+
 }
 
 export const headerFeatureList=[
@@ -108,5 +108,7 @@ export const headerFeatureList=[
         TITLE:"Customer support"
     }
 ]
+
+
 
 
