@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
-import {Provider} from 'react-redux'
-import { createStore,compose, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
 import App from './App';
-// Bootstrap Style CSS
-import * as serviceWorker from './serviceWorker';
 import store from './redux/store'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/normalize.css';
+import * as serviceWorker from './serviceWorker';
 
 const MainApp = () => (
         <Router>
