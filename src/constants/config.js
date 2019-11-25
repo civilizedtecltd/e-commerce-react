@@ -1,6 +1,10 @@
+import * as path from 'path';
+
+require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce/e-commerce-react', '.env')});
 
   class APP_URL {
      constructor(){
+
         this.BASE = `http://localhost:3333`;
         this.API  = `${this.BASE}/api`;
      }

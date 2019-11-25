@@ -7,7 +7,7 @@ import AuthRoute from './components/authComponents/AuthRoute';
 
 // User Area
 import Login from './pages/auth/Login';
-import Signup from './pages/auth/Signup';
+import SignUp from './pages/auth/SignUp';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ChangePassword from './pages/auth/changePassword';
 import VerifyCode from './pages/auth/VerifyCode';
@@ -36,7 +36,7 @@ const Router = (props) => (
     <Switch location={props.location}>
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
+              <Route path="/signup" component={SignUp} />
               <AuthRoute path="/profile-settings" component={UserProfile} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/change-password" component={ChangePassword} />
