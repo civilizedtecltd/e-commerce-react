@@ -29,11 +29,7 @@ const CartPage = () => {
             <Container>
               <Row>
                 <Col>
-                <BreadCrumb
-                  url='/'
-                  option1='Home'
-                  option2="Cart"
-                />
+                <BreadCrumb />
                 </Col>
               </Row>
             </Container>
@@ -80,7 +76,7 @@ const CartPage = () => {
 
                             </ul>
                           </Col>
-                        
+
 
                           <Col sm="3">
                             <h3 className="cardWidgetTitle mb-3">
