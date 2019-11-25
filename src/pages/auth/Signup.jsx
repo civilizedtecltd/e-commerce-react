@@ -17,6 +17,7 @@ const mySwal = withReactContent(Swal);
 
 const SignUp = (props) => {
 
+
   const [data, setData] = useState([])
   const [formData] = useState({});
 
@@ -31,10 +32,15 @@ const SignUp = (props) => {
       return setData(result.data);
     };
 
-    (!auth.status) ? fetchData() : props.history.push(auth.redirect);
+    fetchData();
 
   }, []);
 
+
+const goToLoginPage = () => {
+    const { history } = props;
+    history.push('/login');
+}
 
 const categoryData = (data) => {
     if(data.category_id !== undefined || data.category_id !== 'Select Category')
@@ -113,11 +119,9 @@ const handleSubmit = (event) => {
                         URL._REGISTER,
                         formData
                     ).then( response => {
-                        console.log(response);
-                        setAuth({
-                            status: true,
-                            redirect: '/login'
-                        });
+                        if(response.status === 201)
+                            goToLoginPage()
+
                     }).catch( error => {
                         console.log(error);
                     });
