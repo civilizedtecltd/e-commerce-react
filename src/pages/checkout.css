@@ -1,7 +1,7 @@
 .header-section{
     display: flex;
     justify-content: space-around;
-    align-items: center;   
+    align-items: center;
 }
 .header-section button{
   background-color:#e2e2e2;
@@ -47,5 +47,4 @@
     color: #363636;
     line-height: 30px;
 }
-
 

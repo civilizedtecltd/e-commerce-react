@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card, Form, Button,Table } from "react-bootstrap";
-
+import {Lia} from '../components/LiComponent/CommonLiComponent';
 //Product Images
 import productImage1 from "../assets/images/books/book_img_01.jpg";
 
@@ -10,9 +10,10 @@ import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 import store from '../redux/store'
+import {categoryClass} from "../inc/users/users";
 
 const CartPage = () => {
-   
+
   const totalItem = store.getState().shop.cart.length
 
   return (
@@ -70,15 +71,13 @@ const CartPage = () => {
                               Kindergarten
                             </h3>
                             <ul className="cardWidgetList text-center">
-                              <li>
-                                <Link to="#">Pre 1</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Pre 2</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Pre 3</Link>
-                              </li>
+
+                              {categoryClass.kindergartenSchool.map( pre =><Lia
+                                  key={Math.floor(Math.random() * 10)}
+                                  Title={pre}
+                                  Url={'/'}
+                              />)}
+
                             </ul>
                           </Col>
                         
@@ -88,30 +87,11 @@ const CartPage = () => {
                               Primary school
                             </h3>
                             <ul className="cardWidgetList cardWidgetList2 text-center">
-                              <li>
-                                <Link to="#">Class 1</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 2</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 3</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 4</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 5</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 6</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 7</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 8</Link>
-                              </li>
+                              {categoryClass.primarySchool.map( pre =><Lia
+                                  key={Math.floor(Math.random() * 10)}
+                                  Title={pre}
+                                  Url={'/'}
+                              />)}
                             </ul>
                             {/* end of cardWidgetList */}
                           </Col>
@@ -122,18 +102,11 @@ const CartPage = () => {
                               Secondary school
                             </h3>
                             <ul className="cardWidgetList text-center">
-                              <li>
-                                <Link to="#">Form 1</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Form 2</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Form 3</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Form 4</Link>
-                              </li>
+                              {categoryClass.secondarySchool.map( pre =><Lia
+                                  key={Math.floor(Math.random() * 10)}
+                                  Title={pre}
+                                  Url={'/'}
+                              />)}
                             </ul>
                             {/* end of cardWidgetList */}
                           </Col>
@@ -142,20 +115,11 @@ const CartPage = () => {
                           <Col sm="3">
                             <h3 className="cardWidgetTitle mb-3">Stationery</h3>
                             <ul className="cardWidgetList text-center">
-                              <li>
-                                <Link to="#">Stationery</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Stationery</Link>
-                              </li>
-                              <li>
-                                <Link to="#">
-                                  <strong>Bibles</strong>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="#">Bibles</Link>
-                              </li>
+                              {categoryClass.stationery.map( pre =><Lia
+                                key={Math.floor(Math.random() * 10)}
+                                Title={pre}
+                                Url={'/'}
+                            />)}
                             </ul>
                           </Col>
                           {/* end of Col */}
