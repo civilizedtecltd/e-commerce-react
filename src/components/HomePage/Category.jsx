@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../assets/css/theme.css';
 import {ctgImg} from '../../inc/HomePage/categorydb'
+
 function CategoryHome () {
     const settings = {
         dots: false,
@@ -76,7 +77,7 @@ function CategoryHome () {
                 <Slider { ...settings } >
 
                             {ctgImg.map((slideImg, index) =>
-                                    <Col>
+                                    <Col key={index}>
                                         <Link to={slideImg.url}>
                                             <Card className="productCatCard">
                                                 <div className="productCatMedia">

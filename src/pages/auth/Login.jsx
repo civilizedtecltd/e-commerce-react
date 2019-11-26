@@ -37,7 +37,8 @@ const Login = (props) => {
       if(res.status === 200){
           const authData = res.data.data;
           localStorage.setItem('authData', JSON.stringify(authData));
-          props.history.goForward();
+          //props.history.goForward();
+          props.history.push('/profile-settings');
       }
     }).catch( error => {
       console.log(error);
