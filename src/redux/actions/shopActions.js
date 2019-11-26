@@ -29,11 +29,20 @@ const decreaseQuantity = (id) => {
 }
 
 
+const deleteAllFromCart = () => {
+    return {
+        type: Types.DELETE_ALL_FORM_CART,
+        payload:[]
+    }
+}
+
+
 
 export {
 
     addToCart,
     removeFromCart,
     increaseQuantity,
-    decreaseQuantity
+    decreaseQuantity,
+    deleteAllFromCart
 }
