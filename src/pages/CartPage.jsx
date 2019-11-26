@@ -1,20 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 import { Container, Row, Col, Card, Form, Button,Table } from "react-bootstrap";
 import {Lia} from '../components/LiComponent/CommonLiComponent';
 //Product Images
-import productImage1 from "../assets/images/books/book_img_01.jpg";
-
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 import store from '../redux/store'
 import {categoryClass} from "../inc/users/users";
+import { URL } from '../constants/config';
 
-const CartPage = () => {
+const CartPage = (props) => {
 
-  const totalItem = store.getState().shop.cart.length
+  const cartItem = props.cart;
+  const totalItem = cartItem.length
 
   return (
     <>
@@ -33,13 +33,12 @@ const CartPage = () => {
                 </Col>
               </Row>
             </Container>
-            {/* end of Container */}
           </section>
-          {/* end of Breadcrumb */}
+
 
           <section className="chooseCategory clearfix" id="chooseCategory">
             <Container>
-              <Row>
+            { (cartItem.length === 0) ? <Row>
                 <Col>
                   <div className="contentArea text-center mt-5 mb-5">
                     <h2 className="sectionTitle mb-3">
@@ -50,11 +49,104 @@ const CartPage = () => {
                       interested in and add goods to favorites list
                     </p>
                   </div>
-                  {/* end of contentArea */}
                 </Col>
-                {/* end of Col */}
+              </Row> :  <section className="cartSection clearfix" id="cartSection">
+            <Container>
+              <Row>
+                <Col>
+                  <Card className="table-responsive border-0 cartTableBody">
+                    <Card.Body className="p-0">
+                      <Table responsive className="cardTable">
+                        <thead>
+                          <tr>
+                            <th>Good</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                            <th>Total</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+
+
+                        <tbody>
+                          { cartItem.map( item =>(<tr>
+                            <td>
+                              <div className="cartProductDetails d-flex flex-fill align-items-center">
+                                <div className="cartProductMedia bgGray ">
+                                  <img src={URL.BASE +"/"+ JSON.parse(item.cover_images).img_1} alt="" />
+                                </div>
+                                <div className="cartProductTitle">
+                                  <h3>
+                                    { item.name }
+                                  </h3>
+                                </div>
+                              </div>
+                            </td>
+                          <td>${item.price}</td>
+                            <td className="cartQntN">
+                              <Form.Control type="number" placeholder="1" defaultValue={ item.quantity } />
+                            </td>
+                          <td>${item.price * item.quantity}</td>
+                            <td>
+                              <Button className="btn">
+                                Delete <i className="fas fa-times"></i>
+                              </Button>
+                            </td>
+                          </tr>
+                          ))}
+
+                        </tbody>
+                      </Table>
+                    </Card.Body>
+                  </Card>
+                </Col>
               </Row>
-              {/* end of Row */}
+
+              <Row>
+                <Col>
+                  <Button className="btnGraySm">
+                    Delete all <i className="fas fa-times"></i>
+                  </Button>
+                </Col>
+
+                <Col>
+                  <Form className="form-inline cartPromo justify-content-end">
+                    <Form.Group controlId="formBasicPassword">
+                      <Form.Control type="text" placeholder="Promo Code" />
+                    </Form.Group>
+                    <Button type="submit" className="ml-2">
+                      Apply
+                    </Button>
+                  </Form>
+                </Col>
+              </Row>
+              <Row className="justify-content-end text-right mt-4 mb-5">
+                <Col sm="4">
+                  <div className="cartProductPrice">
+                    <ul className="cartPriceList">
+                      <li>
+                        Price.....................................................
+                        <span className="pPrice">$50.00</span>
+                      </li>
+                      <li>
+                        Delivery.............................................
+                        <span className="pPrice">$00.00</span>
+                      </li>
+                      <li>
+                        Total.....................................................
+                        <span className="pPrice">$50.00</span>
+                      </li>
+                    </ul>
+                    <Button className="mt-3">Checkout</Button>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </section>
+
+}
+
+
 
               <Row>
                 <Col>
@@ -83,9 +175,9 @@ const CartPage = () => {
                               Primary school
                             </h3>
                             <ul className="cardWidgetList cardWidgetList2 text-center">
-                              {categoryClass.primarySchool.map( pre =><Lia
-                                  key={Math.floor(Math.random() * 10)}
-                                  Title={pre}
+                              {categoryClass.primarySchool.map( (item, index) => <Lia
+                                  key = {index}
+                                  Title= {item}
                                   Url={'/'}
                               />)}
                             </ul>
@@ -98,9 +190,9 @@ const CartPage = () => {
                               Secondary school
                             </h3>
                             <ul className="cardWidgetList text-center">
-                              {categoryClass.secondarySchool.map( pre =><Lia
-                                  key={Math.floor(Math.random() * 10)}
-                                  Title={pre}
+                              {categoryClass.secondarySchool.map( ( item, index ) =><Lia
+                                  key={ index }
+                                  Title={ item }
                                   Url={'/'}
                               />)}
                             </ul>
@@ -111,9 +203,9 @@ const CartPage = () => {
                           <Col sm="3">
                             <h3 className="cardWidgetTitle mb-3">Stationery</h3>
                             <ul className="cardWidgetList text-center">
-                              {categoryClass.stationery.map( pre =><Lia
-                                key={Math.floor(Math.random() * 10)}
-                                Title={pre}
+                              {categoryClass.stationery.map( (item, index) => <Lia
+                                key={index}
+                                Title={item}
                                 Url={'/'}
                             />)}
                             </ul>
@@ -136,155 +228,6 @@ const CartPage = () => {
           </section>
           {/* end of chooseCategory */}
 
-          <section className="cartSection clearfix" id="cartSection">
-            <Container>
-              <Row>
-                <Col>
-                  <Card className="table-responsive border-0 cartTableBody">
-                    <Card.Body className="p-0">
-                      <Table responsive className="cardTable">
-                        <thead>
-                          <tr>
-                            <th>Good</th>
-                            <th>Price</th>
-                            <th>Amount</th>
-                            <th>Total</th>
-                            <th></th>
-                          </tr>
-                          {/* end of tr */}
-                        </thead>
-                        {/* end of thead */}
-
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div className="cartProductDetails d-flex flex-fill align-items-center">
-                                <div className="cartProductMedia bgGray ">
-                                  <img src={productImage1} alt="" />
-                                </div>
-                                {/* end of cartProductTitle */}
-
-                                <div className="cartProductTitle">
-                                  <h3>
-                                    Lorem ipsum dolor sit ament, connecter
-                                  </h3>
-                                </div>
-                                {/* end of cartProductTitle */}
-                              </div>
-                              {/* end of td */}
-                            </td>
-                            {/* end of td */}
-                            <td>$16.00</td>
-                            <td className="cartQntN">
-                              <Form.Control type="number" placeholder="1" />
-                            </td>
-                            <td>$16.00</td>
-                            <td>
-                              <Button className="btn">
-                                Delete <i className="fas fa-times"></i>
-                              </Button>
-                            </td>
-                          </tr>
-                          {/* end of tr */}
-
-                          <tr>
-                            <td>
-                              <div className="cartProductDetails d-flex flex-fill align-items-center">
-                                <div className="cartProductMedia bgGray ">
-                                  <img src={productImage1} alt="" />
-                                </div>
-                                {/* end of cartProductTitle */}
-
-                                <div className="cartProductTitle">
-                                  <h3>
-                                    Lorem ipsum dolor sit ament, connecter
-                                  </h3>
-                                </div>
-                                {/* end of cartProductTitle */}
-                              </div>
-                              {/* end of td */}
-                            </td>
-                            {/* end of td */}
-                            <td>$16.00</td>
-                            <td className="cartQntN">
-                              <Form.Control type="number" placeholder="1" />
-                            </td>
-                            <td>$16.00</td>
-                            <td>
-                              <Button className="btn">
-                                Delete <i className="fas fa-times"></i>
-                              </Button>
-                            </td>
-                          </tr>
-                          {/* end of tr */}
-                        </tbody>
-                        {/* end of tbody */}
-                      </Table>
-                      {/* end of Table */}
-                    </Card.Body>
-                    {/* end of Card.Body */}
-                  </Card>
-                  {/* end of Card */}
-                </Col>
-                {/* end of Row */}
-              </Row>
-              {/* end of Row */}
-
-              <Row>
-                <Col>
-                  <Button className="btnGraySm">
-                    Delete all <i className="fas fa-times"></i>
-                  </Button>
-                </Col>
-                {/* end of Col */}
-
-                <Col>
-                  <Form className="form-inline cartPromo justify-content-end">
-                    <Form.Group controlId="formBasicPassword">
-                      <Form.Control type="text" placeholder="Promo Code" />
-                    </Form.Group>
-                    {/* end of Form.Group */}
-
-                    <Button type="submit" className="ml-2">
-                      Apply
-                    </Button>
-                  </Form>
-                  {/* end of Row */}
-                </Col>
-                {/* end of Col */}
-              </Row>
-              {/* end of Row */}
-
-              <Row className="justify-content-end text-right mt-4 mb-5">
-                <Col sm="4">
-                  <div className="cartProductPrice">
-                    <ul className="cartPriceList">
-                      <li>
-                        Price.....................................................
-                        <span className="pPrice">$50.00</span>
-                      </li>
-                      <li>
-                        Delivery.............................................
-                        <span className="pPrice">$00.00</span>
-                      </li>
-                      <li>
-                        Total.....................................................
-                        <span className="pPrice">$50.00</span>
-                      </li>
-                    </ul>
-                    {/* end of cartPriceList */}
-
-                    <Button className="mt-3">Checkout</Button>
-                  </div>
-                  {/* end of cartProductPrice */}
-                </Col>
-                {/* end of Col */}
-              </Row>
-              {/* end of Row */}
-            </Container>
-            {/* end of Container */}
-          </section>
-          {/* end of cartSection */}
 
           <section
             className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap"
@@ -306,4 +249,8 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+const mapStateToProps = (state) => ({
+    cart: state.shop.cart
+})
+
+export default connect(mapStateToProps, null)(CartPage);
