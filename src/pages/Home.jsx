@@ -1,14 +1,13 @@
 
-import React, {useEffect} from 'react';
+import React, { useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card,} from 'react-bootstrap';
+import { connect } from 'react-redux'
 import '../pages/assets/home.css'
-// Category Section Images
+
 import productCatImg from '../assets/images/product_cat_img_01.jpg';
 import productCatImg2 from '../assets/images/product_cat_img_02.jpg';
 import productCatImg3 from '../assets/images/product_cat_img_03.jpg';
-
-// Feature Icon Images
 import featureIcon1 from '../assets/images/feature_icon_img_01.png';
 import featureIcon2 from '../assets/images/feature_icon_img_02.png';
 import featureIcon3 from '../assets/images/feature_icon_img_03.png';
@@ -18,16 +17,15 @@ import FooterComponent from '../components/FooterComponent/FooterComponent';
 import { HomeCarouselFooter } from "../components/HomePage/HomeCarouselFooter";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { HeaderComponent, MobileHeader } from "../components/header/Header";
-import store from '../redux/store'
 
-const Home = () => {
 
- const totalItem=store.getState().shop.cart.length
+const Home = (props) => {
+
+ const totalItem = props.cart
 
   return (<>
 
     <div className="allWrapper">
-
           <HeaderComponent
           cartItem={totalItem}
           />
@@ -77,8 +75,8 @@ const Home = () => {
               </Col>{/* end of Col */}
             </Row>{/* end of Row */}
 
-          </Container>{/* end of Container */}
-        </section>{/* end of productCat */}
+          </Container>
+        </section>
 
         <section className="ourBenefits clearfix secGap bgGray" id="ourBenefits">
           <Container>
@@ -165,14 +163,17 @@ const Home = () => {
         </section>{/* end of mailSubscribe */}
 
       </main>{/* end of mainContent */}
-
-
       <FooterComponent/>
-
-    </div>{/* end of allWrapper */}
-
+    </div>
   </>);
 }
 
-export default Home;
+
+const mapStateToProps = ( state ) => {
+  return {
+    cart: state.shop.cart
+  }
+}
+
+export default connect(mapStateToProps , null) (Home);
 
