@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux';
 import { Container, Row, Col, Card, Form, Button,Table } from "react-bootstrap";
 import {Lia} from '../components/LiComponent/CommonLiComponent';
 //Product Images
@@ -8,10 +9,11 @@ import { NewsLetterComponent } from "../components/offerPageComponents/NewsLette
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 import store from '../redux/store'
 import {categoryClass} from "../inc/users/users";
-import { URL } from '../constants/config'
-const CartPage = () => {
+import { URL } from '../constants/config';
 
-  const cartItem = store.getState().shop.cart
+const CartPage = (props) => {
+
+  const cartItem = props.cart;
   const totalItem = cartItem.length
 
   return (
@@ -32,8 +34,8 @@ const CartPage = () => {
               </Row>
             </Container>
           </section>
-        
-      
+
+
           <section className="chooseCategory clearfix" id="chooseCategory">
             <Container>
             { (cartItem.length === 0) ? <Row>
@@ -92,7 +94,7 @@ const CartPage = () => {
                             </td>
                           </tr>
                           ))}
-                     
+
                         </tbody>
                       </Table>
                     </Card.Body>
@@ -117,7 +119,7 @@ const CartPage = () => {
                     </Button>
                   </Form>
                 </Col>
-              </Row>            
+              </Row>
               <Row className="justify-content-end text-right mt-4 mb-5">
                 <Col sm="4">
                   <div className="cartProductPrice">
@@ -141,10 +143,10 @@ const CartPage = () => {
               </Row>
             </Container>
           </section>
-         
+
 }
-            
-            
+
+
 
               <Row>
                 <Col>
@@ -173,9 +175,9 @@ const CartPage = () => {
                               Primary school
                             </h3>
                             <ul className="cardWidgetList cardWidgetList2 text-center">
-                              {categoryClass.primarySchool.map( pre =><Lia
-                                  key={Math.floor(Math.random() * 10)}
-                                  Title={pre}
+                              {categoryClass.primarySchool.map( (item, index) => <Lia
+                                  key = {index}
+                                  Title= {item}
                                   Url={'/'}
                               />)}
                             </ul>
@@ -188,9 +190,9 @@ const CartPage = () => {
                               Secondary school
                             </h3>
                             <ul className="cardWidgetList text-center">
-                              {categoryClass.secondarySchool.map( pre =><Lia
-                                  key={Math.floor(Math.random() * 10)}
-                                  Title={pre}
+                              {categoryClass.secondarySchool.map( ( item, index ) =><Lia
+                                  key={ index }
+                                  Title={ item }
                                   Url={'/'}
                               />)}
                             </ul>
@@ -201,9 +203,9 @@ const CartPage = () => {
                           <Col sm="3">
                             <h3 className="cardWidgetTitle mb-3">Stationery</h3>
                             <ul className="cardWidgetList text-center">
-                              {categoryClass.stationery.map( pre =><Lia
-                                key={Math.floor(Math.random() * 10)}
-                                Title={pre}
+                              {categoryClass.stationery.map( (item, index) => <Lia
+                                key={index}
+                                Title={item}
                                 Url={'/'}
                             />)}
                             </ul>
@@ -226,7 +228,7 @@ const CartPage = () => {
           </section>
           {/* end of chooseCategory */}
 
-         
+
           <section
             className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap"
             id="mailSubscribe"
@@ -247,4 +249,8 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+const mapStateToProps = (state) => ({
+    cart: state.shop.cart
+})
+
+export default connect(mapStateToProps, null)(CartPage);
