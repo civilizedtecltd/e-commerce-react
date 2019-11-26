@@ -4,7 +4,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Router from './Router';
 
-import AuthDataProvider from './components/authComponents/AuthDataProvider';
+//import AuthDataProvider from './components/authComponents/AuthDataProvider';
 
 import styled from "styled-components";
 
@@ -19,9 +19,9 @@ function App({location}) {
         classNames="fade"
       >
         <section className="route-section">
-            <AuthDataProvider>
+            {/* <AuthDataProvider> */}
                 <Router location = {location} />
-            </AuthDataProvider>
+            {/* </AuthDataProvider> */}
         </section>
       </CSSTransition>
     </TransitionGroup>

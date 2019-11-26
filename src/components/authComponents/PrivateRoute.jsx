@@ -1,14 +1,21 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import { useAuthDataContext } from './AuthDataProvider';
+import { Route, Redirect } from "react-router-dom";
 
-import SignUp from '../../pages/auth/SignUp';
+import checkAuth from '../../helpers/checkAuth';
 
-const PrivateRoute = ({component, ...options}) => {
-    const { user } = useAuthDataContext();
-    const finalComponent = user ? component : SignUp;
+const PrivateRoute = ({component: Component, ...rest}) => {
 
-    return <Route { ...options } component={finalComponent} />
+    const isAuthenticated = checkAuth();
+    const requestedPath = rest.location.pathname;
+
+
+    return (
+        <Route {...rest} render = { props => {
+
+            return ( (checkAuth()) ? <Component {...props} /> : <Redirect to={{pathname: "/login", state: {from: props.location }}} />)
+
+        }} />
+    )
 }
 
 export default PrivateRoute;

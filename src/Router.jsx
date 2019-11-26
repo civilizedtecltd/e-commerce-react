@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 
 // User Area
@@ -38,7 +38,6 @@ const Router = (props) => (
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/change-password" component={ChangePassword} />
               <Route path="/verify-code" component={VerifyCode} />
-              <Route path="/profile-settings" component={UserProfile} />
               <Route path="/email-subscription" component={Subscription} />
               <Route path="/my-order" component={OrderPage} />
               <Route path="/payment-methods" component={PaymentPage} />

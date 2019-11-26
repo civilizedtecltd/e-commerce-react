@@ -12,7 +12,7 @@ import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import store from '../redux/store'
 
 const FavoritesPage = () => {
-  
+
   const totalItem = store.getState().shop.cart.length
 
   return (
@@ -30,11 +30,7 @@ const FavoritesPage = () => {
             <Container>
               <Row>
                 <Col>
-                <BreadCrumb
-                  url='/'
-                  option1='Home'
-                  option2="Favorite"
-                />
+                  <BreadCrumb />
                 </Col>
               </Row>
             </Container>
