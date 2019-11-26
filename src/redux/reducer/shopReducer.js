@@ -78,6 +78,10 @@ const shopReducer = (state = initSate, { type, payload }) => {
                     ...state,
                     cart: updatedCart
                 }
+            case Types.DELETE_ALL_FORM_CART:
+                return{
+                    cart:[]
+                }
 
             default:
                 return state;

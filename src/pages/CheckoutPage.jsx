@@ -1,14 +1,14 @@
 import React  from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { connect } from 'react-redux'
 import CheckoutTab from './CheckoutTab';
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
+import { URL} from '../constants/config'
 import './checkout.css'
-import store from '../redux/store'
-
-const CheckoutPage = () => {
-
-  const cartItems = store.getState().shop.cart;
+const CheckoutPage = (props) => {
+  const cartItems = props.cart;
+  
   let totalItemQuantity=[];
   let totalPrice = [];
 
@@ -19,9 +19,7 @@ const CheckoutPage = () => {
 
   if(totalItemQuantity.length !==0){
   totalItemQuantity = totalItemQuantity.reduce((quantities, quantity) => quantities + quantity)
-
   totalPrice = totalPrice.reduce((prices,price)=>prices+price);
-  console.log(totalItemQuantity, totalPrice)
   }
   return (
     <>
@@ -37,7 +35,9 @@ const CheckoutPage = () => {
         </header>
 
         <main className="mainContent clearfix" id="mainContent">
-          {cartItems.length!==0 ? <section className="checkoutProductDetails clearfix pt-5 pb-5" id="checkoutProductDetails" >
+          {cartItems.length ===0 ? <h2 className="text-center text-primary mb-5">You haven't any product</h2> 
+
+          :<section className="checkoutProductDetails clearfix pt-5 pb-5" id="checkoutProductDetails" >
             <Container>
               <Card className="border-0">
                 <Card.Body>
@@ -48,7 +48,7 @@ const CheckoutPage = () => {
                     <>
                       <div  key={ index } className="productCartSingle d-flex align-items-center mb-2">
                           <div className="cartProductMedia bgGray">
-                            <img src={URL.BASE+"/"+JSON.parse(item.cover_images).img_1} alt="" />
+                            <img src={ URL.BASE +"/"+ JSON.parse( item.cover_images).img_1 } alt="" />
                           </div>
                           <div className="cartProductDes pl-3">
                             <h3>
@@ -91,7 +91,7 @@ const CheckoutPage = () => {
                 </Card.Body>
               </Card>
             </Container>
-          </section> :  <h2 className="text-center text-primary mb-5"> You haven't any product </h2>}
+          </section> }
           <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails" >
            <CheckoutTab/>
           </section>
@@ -101,4 +101,10 @@ const CheckoutPage = () => {
   );
 };
 
-export default CheckoutPage;
+const mapStateToProps = (state) => {
+return {
+  cart:state.shop.cart
+}
+}
+
+export default connect(mapStateToProps , null)(CheckoutPage);

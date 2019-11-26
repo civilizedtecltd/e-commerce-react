@@ -1,19 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
-
-// Product Images
+import { connect } from 'react-redux'
 import { NewBookDB } from "../inc/offerPage/NewBook";
 import { NewBookComponent } from "../components/offerPageComponents/NewBookComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
-import store from '../redux/store'
 
-const FavoritesPage = () => {
 
-  const totalItem = store.getState().shop.cart.length
+const FavoritesPage = (props) => {
+
+  const totalItem = props.cart.length
 
   return (
     <>
@@ -219,4 +218,10 @@ const FavoritesPage = () => {
   );
 };
 
-export default FavoritesPage;
+const mapStateToProps = (state) => {
+  return{
+    cart: state.shop.cart
+  }
+}
+
+export default connect(mapStateToProps, null) (FavoritesPage);
