@@ -5,9 +5,6 @@ import {Container, Row, Col, Card,} from 'react-bootstrap';
 import { connect } from 'react-redux'
 import '../pages/assets/home.css'
 
-import productCatImg from '../assets/images/product_cat_img_01.jpg';
-import productCatImg2 from '../assets/images/product_cat_img_02.jpg';
-import productCatImg3 from '../assets/images/product_cat_img_03.jpg';
 import featureIcon1 from '../assets/images/feature_icon_img_01.png';
 import featureIcon2 from '../assets/images/feature_icon_img_02.png';
 import featureIcon3 from '../assets/images/feature_icon_img_03.png';
@@ -17,7 +14,7 @@ import FooterComponent from '../components/FooterComponent/FooterComponent';
 import { HomeCarouselFooter } from "../components/HomePage/HomeCarouselFooter";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { HeaderComponent, MobileHeader } from "../components/header/Header";
-
+import {CategoryHome} from "../components/HomePage/Category";
 
 const Home = (props) => {
 
@@ -33,50 +30,11 @@ const Home = (props) => {
       <main className="mainContent clearfix" id="mainContent">
         <section className="productCat secGap clearfix" id="productCat">
           <Container>
-            <Row>
-
-                <Col sm="4">
-                   <Link to="/shop/category/1/Kindergarten school">
-                <Card className="productCatCard">
-                  <div className="productCatMedia">
-                    <img src={productCatImg} alt="" />
-                  </div>{/* end of productCatMedia*/}
-                  <Card.Body className="text-center">
-                    <h3 className="productCatTitle">Kindergarten </h3>
-                  </Card.Body>{/* end of Card.Body */}
-                </Card>{/* end of productCatCard */}
-              </Link>
-                </Col>{/* end of Col */}
-
-              <Col sm="4">
-                <Link to="/shop/category/2/Primary school">
-                    <Card className="productCatCard">
-                        <div className="productCatMedia">
-                            <img src={productCatImg2} alt="" />
-                        </div>{/* end of productCatMedia*/}
-                        <Card.Body className="text-center">
-                            <h3 className="productCatTitle">Primary school</h3>
-                        </Card.Body>{/* end of Card.Body */}
-                    </Card>{/* end of productCatCard */}
-                </Link>
-              </Col>{/* end of Col */}
-
-              <Col sm="4">
-                <Link to="/shop/category/3/Secondary school">
-                    <Card className="productCatCard">
-                        <div className="productCatMedia">
-                            <img src={productCatImg3} alt="" />
-                        </div>{/* end of productCatMedia*/}
-                        <Card.Body className="text-center">
-                            <h3 className="productCatTitle">Secondary school</h3>
-                        </Card.Body>{/* end of Card.Body */}
-                    </Card>{/* end of productCatCard */}
-                </Link>
-              </Col>{/* end of Col */}
-            </Row>{/* end of Row */}
-
-          </Container>
-        </section>
+              <div className="categorySlider">
+                <CategoryHome/>
+              </div>
+          </Container>{/* end of Container */}
+        </section>{/* end of productCat */}
 
         <section className="ourBenefits clearfix secGap bgGray" id="ourBenefits">
           <Container>
