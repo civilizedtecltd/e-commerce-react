@@ -18,6 +18,7 @@ const mySwal = withReactContent(Swal);
 
 const Login = (props) => {
 
+
   const [formData] = useState({});
 
   const loginData = (data) => {
@@ -34,9 +35,9 @@ const Login = (props) => {
         formData
     ).then( res => {
       if(res.status === 200){
-          const authData = res.data.data;         
+          const authData = res.data.data;
           localStorage.setItem('authData', JSON.stringify(authData));
-          props.history.push('/profile-settings');
+          props.history.goForward();
       }
     }).catch( error => {
       console.log(error);

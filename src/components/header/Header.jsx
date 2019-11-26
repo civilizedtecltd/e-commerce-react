@@ -64,13 +64,13 @@ function HeaderComponent(props) {
                   <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                       <li className="nav-item active">
-                        <Link className="nav-link" to="/kindergarten">Kindergarten <span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link" to="/shop/category/1/Kindergarten school">Kindergarten <span className="sr-only">(current)</span></Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/primary-school">Primary school</Link>
+                        <Link className="nav-link" to="/shop/category/2/Primary school">Primary school</Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/secondary-school">Secondary school</Link>
+                        <Link className="nav-link" to="/shop/category/3/Secondary school">Secondary school</Link>
                       </li>
                       <li className="nav-item">
                         <Link className="nav-link" to="/stationery">Stationery</Link>
