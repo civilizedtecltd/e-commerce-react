@@ -1,14 +1,10 @@
 
-import React, {useEffect} from 'react';
+import React, { useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card,} from 'react-bootstrap';
+import { connect } from 'react-redux'
 import '../pages/assets/home.css'
-// Category Section Images
-import productCatImg from '../assets/images/product_cat_img_01.jpg';
-import productCatImg2 from '../assets/images/product_cat_img_02.jpg';
-import productCatImg3 from '../assets/images/product_cat_img_03.jpg';
 
-// Feature Icon Images
 import featureIcon1 from '../assets/images/feature_icon_img_01.png';
 import featureIcon2 from '../assets/images/feature_icon_img_02.png';
 import featureIcon3 from '../assets/images/feature_icon_img_03.png';
@@ -18,16 +14,15 @@ import FooterComponent from '../components/FooterComponent/FooterComponent';
 import { HomeCarouselFooter } from "../components/HomePage/HomeCarouselFooter";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { HeaderComponent, MobileHeader } from "../components/header/Header";
-import store from '../redux/store'
+import {CategoryHome} from "../components/HomePage/Category";
 
-const Home = () => {
+const Home = (props) => {
 
- const totalItem=store.getState().shop.cart.length
+ const totalItem = props.cart
 
   return (<>
 
     <div className="allWrapper">
-
           <HeaderComponent
           cartItem={totalItem}
           />
@@ -35,48 +30,9 @@ const Home = () => {
       <main className="mainContent clearfix" id="mainContent">
         <section className="productCat secGap clearfix" id="productCat">
           <Container>
-            <Row>
-
-                <Col sm="4">
-                   <Link to="/shop/category/1/Kindergarten school">
-                <Card className="productCatCard">
-                  <div className="productCatMedia">
-                    <img src={productCatImg} alt="" />
-                  </div>{/* end of productCatMedia*/}
-                  <Card.Body className="text-center">
-                    <h3 className="productCatTitle">Kindergarten </h3>
-                  </Card.Body>{/* end of Card.Body */}
-                </Card>{/* end of productCatCard */}
-              </Link>
-                </Col>{/* end of Col */}
-
-              <Col sm="4">
-                <Link to="/shop/category/2/Primary school">
-                    <Card className="productCatCard">
-                        <div className="productCatMedia">
-                            <img src={productCatImg2} alt="" />
-                        </div>{/* end of productCatMedia*/}
-                        <Card.Body className="text-center">
-                            <h3 className="productCatTitle">Primary school</h3>
-                        </Card.Body>{/* end of Card.Body */}
-                    </Card>{/* end of productCatCard */}
-                </Link>
-              </Col>{/* end of Col */}
-
-              <Col sm="4">
-                <Link to="/shop/category/3/Secondary school">
-                    <Card className="productCatCard">
-                        <div className="productCatMedia">
-                            <img src={productCatImg3} alt="" />
-                        </div>{/* end of productCatMedia*/}
-                        <Card.Body className="text-center">
-                            <h3 className="productCatTitle">Secondary school</h3>
-                        </Card.Body>{/* end of Card.Body */}
-                    </Card>{/* end of productCatCard */}
-                </Link>
-              </Col>{/* end of Col */}
-            </Row>{/* end of Row */}
-
+              <div className="categorySlider">
+                <CategoryHome/>
+              </div>
           </Container>{/* end of Container */}
         </section>{/* end of productCat */}
 
@@ -165,14 +121,17 @@ const Home = () => {
         </section>{/* end of mailSubscribe */}
 
       </main>{/* end of mainContent */}
-
-
       <FooterComponent/>
-
-    </div>{/* end of allWrapper */}
-
+    </div>
   </>);
 }
 
-export default Home;
+
+const mapStateToProps = ( state ) => {
+  return {
+    cart: state.shop.cart
+  }
+}
+
+export default connect(mapStateToProps , null) (Home);
 
