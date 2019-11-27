@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 
 // User Area
@@ -38,15 +38,23 @@ const Router = (props) => (
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/change-password" component={ChangePassword} />
               <Route path="/verify-code" component={VerifyCode} />
-              <Route path="/email-subscription" component={Subscription} />
-              <Route path="/my-order" component={OrderPage} />
-              <Route path="/payment-methods" component={PaymentPage} />
+              <PrivateRoute path="/email-subscription" component={Subscription} />
+              <PrivateRoute path="/my-order" component={OrderPage} />
+              <PrivateRoute path="/payment-methods" component={PaymentPage} />
               <Route path="/book-offer" component={OfferPage} />
-              <Route path="/cart" component={CartPage} />
-              <Route path="/checkout" component={CheckoutPage} />
+              <PrivateRoute path="/cart" component={CartPage} />
+              <PrivateRoute path="/checkout" component={CheckoutPage} />
               <Route path="/favorites" component={FavoritesPage} />
               <Route path="/shop/category/:id?/:title?" component={ShopPage} />
               <Route path="/product/:id" component={ProductPage} />
+
+              <Route path="/logout" render={ (props)=> {
+
+                        localStorage.removeItem('authData');
+                        localStorage.removeItem('state');
+                        return <Redirect to={{ pathname: "/", state: {from: props.location} }} />
+                    }
+               } />
               <Route path='*'  component={ErrorPage} />
     </Switch>
 )

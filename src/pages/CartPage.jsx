@@ -40,7 +40,7 @@ const CartPage = (props) => {
         cartItems.splice(index,1)
       }
     })
-    
+
   }
 
   const handleDeleteAll = (event) =>{
@@ -92,7 +92,7 @@ const CartPage = (props) => {
                       <Table responsive className="cardTable">
                         <thead>
                           <tr>
-                            <th>Good</th>
+                            <th>Goods</th>
                             <th>Price</th>
                             <th>Amount</th>
                             <th>Total</th>

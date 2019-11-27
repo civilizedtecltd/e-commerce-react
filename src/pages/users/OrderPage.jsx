@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Table} from 'react-bootstrap';
 import './assets/css/user.css';
 import {LiAi, Lia} from '../../components/LiComponent/CommonLiComponent';
-import {asideData,categoryClass} from '../../inc/users/users'
+import { asideData, categoryClass } from '../../inc/users/users';
 import {HeaderComponent, MobileHeader} from '../../components/header/Header';
 
 const OrderPage = () => {
