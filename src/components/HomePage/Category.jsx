@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import '../../assets/css/theme.css';
 
 import {URL} from '../../constants/config';
-import {ctgImg} from '../../inc/HomePage/categorydb';
+
 
 function CategoryHome () {
 
