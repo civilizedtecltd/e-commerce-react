@@ -1,15 +1,32 @@
-import React, {Component} from 'react';
-import {Card, Col, Container, Row} from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import {Card, Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import axios from 'axios'
 
 //===============slider====================
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../assets/css/theme.css';
-import {ctgImg} from '../../inc/HomePage/categorydb'
+
+import {URL} from '../../constants/config';
+import {ctgImg} from '../../inc/HomePage/categorydb';
 
 function CategoryHome () {
+
+    const [category, setCategory] = useState([]);
+
+    useEffect(()=> {
+
+            axios.get(URL._CATEGORY)
+                .then(res => {
+                    setCategory(res.data.data)
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+    }, []);
+
     const settings = {
         dots: false,
         infinite: true,
@@ -74,17 +91,17 @@ function CategoryHome () {
         height:"420px"
     }
         return (
-                <Slider { ...settings } >
+                <Slider {...settings} >
 
-                            {ctgImg.map((slideImg, index) =>
+                            {category.map((item, index) =>
                                     <Col key={index}>
-                                        <Link to={slideImg.url}>
+                                        <Link to={`/shop/category/${item.id}/${item.category}`}>
                                             <Card className="productCatCard">
                                                 <div className="productCatMedia">
-                                                    <img src={slideImg.img} alt="" style={imgStyle} />
+                                                    <img src={`${URL.BASE}/${item.image}`} alt="" style={imgStyle} />
                                                 </div>{/* end of productCatMedia*/}
                                                 <Card.Body className="text-center">
-                                                    <h3 className="productCatTitle">{slideImg.title} </h3>
+                                                    <h3 className="productCatTitle">{item.category} </h3>
                                                 </Card.Body>{/* end of Card.Body */}
                                             </Card>{/* end of productCatCard */}
                                         </Link>
