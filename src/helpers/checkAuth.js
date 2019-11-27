@@ -1,24 +1,30 @@
 import decode from 'jwt-decode';
 
 const checkAuth = () => {
-
-    const clientData = JSON.parse(localStorage.getItem('authData'));  
-    console.log(clientData)  
-
-    const token = clientData.token.token;
-    const refreshToken = clientData.token.refreshToken;
-
-    if (!token || !refreshToken)
-        return false;
     try {
-        const { exp } = decode(refreshToken);
+        const clientData = JSON.parse(localStorage.getItem('authData'));
 
-        if( exp < new Date().getTime() / 1000 )
+        if(clientData === null)
             return false;
 
+        const token = clientData.jwt.token;
+        const refreshToken = clientData.jwt.refreshToken;
+
+        if (!token || !refreshToken)
+            return false;
+
+        const { exp } = decode(token);
+        console.log(exp);
+        if( exp < new Date().getTime() / 1000 ){
+            return false;
+        }
+
+        return true;
+
     } catch(ex) {
+        console.log(ex);
         return false;
-    }        
+    }
 }
 
 export default checkAuth;

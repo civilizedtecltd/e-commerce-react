@@ -1,8 +1,10 @@
 import React from 'react'
-import { Switch, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Router from './Router';
+
+//import AuthDataProvider from './components/authComponents/AuthDataProvider';
 
 import styled from "styled-components";
 
@@ -17,7 +19,9 @@ function App({location}) {
         classNames="fade"
       >
         <section className="route-section">
-            <Router location = {location} />
+            {/* <AuthDataProvider> */}
+                <Router location = {location} />
+            {/* </AuthDataProvider> */}
         </section>
       </CSSTransition>
     </TransitionGroup>

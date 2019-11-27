@@ -102,8 +102,8 @@ const CartPage = (props) => {
 
 
                         <tbody>
-                          { cartItems.map( item =>(<tr>
-                            <td>
+                          { cartItems.map( (item, index) =>(<tr>
+                            <td key={index}>
                               <div className="cartProductDetails d-flex flex-fill align-items-center">
                                 <div className="cartProductMedia bgGray ">
                                   <img src={URL.BASE +"/"+ JSON.parse( item.cover_images).img_1 } alt="" />

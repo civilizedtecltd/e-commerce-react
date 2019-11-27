@@ -27,3 +27,34 @@
     justify-content: center;
 }
 
+.categorySlider .slick-prev:before {
+    content: "\f060";
+    font-family: "Font Awesome 5 Free";
+    color: black;
+    font-size: 16px;
+    padding: 11px;
+
+}
+
+.categorySlider .slick-next:before {
+    content: "\f061";
+    font-family: "Font Awesome 5 Free";
+    color: black;
+    font-size: 16px;
+    padding: 11px;
+
+}
+
+.categorySlider .slick-arrow.slick-prev {
+    background-color: #f1f2f3;
+    border-radius: 50%;
+    width: 2.5rem;
+    margin-left: -1rem
+}
+
+.categorySlider .slick-arrow.slick-next {
+    background-color: #f1f2f3;
+    border-radius: 50%;
+    width: 2.5rem;
+    margin-right: -1rem
+}
