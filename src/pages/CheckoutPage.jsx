@@ -21,6 +21,8 @@ const CheckoutPage = (props) => {
   totalItemQuantity = totalItemQuantity.reduce((quantities, quantity) => quantities + quantity)
   totalPrice = totalPrice.reduce((prices,price)=>prices+price);
   }
+
+
   return (
     <>
       <div className="allWrapper bgGray">
@@ -45,15 +47,15 @@ const CheckoutPage = (props) => {
                   <Col sm="8">
                     <div className="productCartList webScrollbar">
                     { cartItems.map((item,index)=>(
-                    <>
-                      <div  key={ index } className="productCartSingle d-flex align-items-center mb-2">
+                  
+                      <div key={index} className="productCartSingle d-flex align-items-center mb-2">
                           <div className="cartProductMedia bgGray">
                             <img src={ URL.BASE +"/"+ JSON.parse( item.cover_images).img_1 } alt="" />
                           </div>
                           <div className="cartProductDes pl-3">
                             <h3>
                               <Link to="#">
-                               {item.name}
+                               { item.name }
                               </Link>
                             </h3>
                             <p>
@@ -66,17 +68,14 @@ const CheckoutPage = (props) => {
                             Total:<span className="totalPrice"> { item.price * item.quantity } </span>
                             </p>
                         </div>
-                  </div>
-
-                  </>
-                    ))}
+                  </div>))}
                     </div>
                  </Col>
                   <Col className="align-self-end">
                         <div className="cartProductValue clearfix" id="cartProductValue">
                           <ul className="productValue text-right">
                             <li>
-                              <strong>Total Product Price:</strong> {totalItemQuantity * totalPrice}
+                              <strong>Total Product Price: </strong> { totalItemQuantity * totalPrice }
                             </li>
                             <li>
                               <strong>Delivery:</strong> $00.00
@@ -107,4 +106,11 @@ return {
 }
 }
 
-export default connect(mapStateToProps , null)(CheckoutPage);
+
+// const mapDispatchToProps = (dispatch) =>{
+ 
+    
+  
+// }
+
+export default connect(mapStateToProps)(CheckoutPage);
