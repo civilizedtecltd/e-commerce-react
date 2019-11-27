@@ -14,9 +14,10 @@ const checkAuth = () => {
             return false;
 
         const { exp } = decode(token);
-
-        if( exp < new Date().getTime() / 1000 )
+        console.log(exp);
+        if( exp < new Date().getTime() / 1000 ){
             return false;
+        }
 
         return true;
 
