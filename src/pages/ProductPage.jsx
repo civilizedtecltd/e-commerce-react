@@ -187,22 +187,17 @@ function ProductPage(props) {
           <Container className="container">
             <NewsLetterComponent />
           </Container>
-          {/* end of Container */}
         </section>
-        {/* end of mailSubscribe */}
-
         <FooterComponent />
       </div>
 
       <Modal show = {show} onHide = {handleClose}>
         <Modal.Header className={"border-0"} closeButton>
-          {" "}
         </Modal.Header>
         <Modal.Body>
-          {" "}
           <h2 className={"text-center"}>
             Product added to cart successfully!
-          </h2>{" "}
+          </h2>
         </Modal.Body>
         <Modal.Footer className={"border-0"}>
           <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}> Go to checkout </Link>

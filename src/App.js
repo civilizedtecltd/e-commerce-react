@@ -20,7 +20,7 @@ function App({location}) {
       >
         <section className="route-section">
             {/* <AuthDataProvider> */}
-                <Router location = {location} />
+                <Router key={'router'} location = {location} />
             {/* </AuthDataProvider> */}
         </section>
       </CSSTransition>
