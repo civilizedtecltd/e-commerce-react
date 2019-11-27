@@ -27,10 +27,10 @@ function ProductPage(props) {
 
   const book = (props.book !== undefined ) ? props.book : false;
 
+
   useEffect(() => {
     return props.showSingleBook(id);
   }, []);
-
 
   const handleClose = () => setShow(false);
 
@@ -154,7 +154,7 @@ function ProductPage(props) {
 
                         }] : {}}
 
-                        reviews = {[]}
+                        reviews = {book.book_review ? book.book_review : []}
                         />
                     </div>
                   </div>

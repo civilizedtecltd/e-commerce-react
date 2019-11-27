@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './rating.css'
+import { callbackify } from 'util';
 
 const range = (min, max) =>
   Array(max - min + 1).fill().map((_, i) => min + i)
@@ -35,10 +36,9 @@ const Rating = ({ min, max, onChange, value }) => {
 }
 
 class RatingComponent extends Component {
-  constructor () {
-    super()
-
-    this.state = { rating: 0 }
+  constructor (props) {
+    super(props)
+    this.state = { rating: this.props.rating }
   }
 
   render () {
@@ -46,7 +46,10 @@ class RatingComponent extends Component {
       <Rating
         min={1}
         max={5}
-        onChange={(rating) => this.setState({ rating })}
+        onChange={(rating) => {
+            this.setState({ rating })
+            this.props.callback(rating)
+        }}
         value={this.state.rating}
       />
     )
