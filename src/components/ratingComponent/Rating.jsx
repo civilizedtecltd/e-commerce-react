@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './rating.css'
-import { callbackify } from 'util';
+import './rating.css';
 
 const range = (min, max) =>
   Array(max - min + 1).fill().map((_, i) => min + i)

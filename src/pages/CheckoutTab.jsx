@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Container, Card ,Form, Col, Row, Button, Accordion , useAccordionToggle} from 'react-bootstrap';
-import CheckboxComponent from '../components/checkboxComponent/CheckboxComponent'
+//import CheckboxComponent from '../components/checkboxComponent/CheckboxComponent'
 import {Link} from 'react-router-dom'
 import './checkout.css';
 import '../assets/css/theme.css'
@@ -274,11 +274,11 @@ function CheckoutTab() {
 
 function CheckToggle({ children, eventKey, title }) {
     const decoratedOnClick = useAccordionToggle(eventKey, () =>{
-        if(eventKey==0){
+        if(eventKey === 0){
 
             console.log( document.getElementById('ch-1').checked=false)
         }
-        if(eventKey==1){
+        if(eventKey === 1){
 
             document.getElementById('ch-0').checked=false
         }
