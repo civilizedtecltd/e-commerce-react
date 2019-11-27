@@ -24,9 +24,9 @@ const PaymentPage = () => {
                 >
                   <nav className="userNav">
                     <ul className="userNavBar">
-                      {asideData.map(aside => (
+                      {asideData.map((aside,index) => (
                         <LiAi
-                          key={Math.floor(Math.random() * 10)}
+                          key={index}
                           ListClass={aside.LIST_CLASS}
                           Title={aside.TITLE}
                           Url={aside.URL}
