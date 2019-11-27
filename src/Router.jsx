@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 
 // User Area
@@ -30,24 +30,32 @@ import ErrorPage from './pages/Error404';
 
 const Router = (props) => (
 
-    <Switch key={0} location={props.location}>
-              <Route key={1} exact path="/" component={Home} />
-              <Route key={2} path="/login" component={Login} />
-              <Route key={3} path="/signup" component={SignUp} />
-              <PrivateRoute key={4} path="/profile-settings" component={UserProfile} />
-              <Route key={5} path="/forgot-password" component={ForgotPassword} />
-              <Route key={6} path="/change-password" component={ChangePassword} />
-              <Route key={7} path="/verify-code" component={VerifyCode} />
-              <Route key={8} path="/email-subscription" component={Subscription} />
-              <Route key={9} path="/my-order" component={OrderPage} />
-              <Route key={10} path="/payment-methods" component={PaymentPage} />
-              <Route key={11} path="/book-offer" component={OfferPage} />
-              <Route key={12} path="/cart" component={CartPage} />
-              <Route key={13} path="/checkout" component={CheckoutPage} />
-              <Route key={14} path="/favorites" component={FavoritesPage} />
-              <Route key={15} path="/shop/category/:id?/:title?" component={ShopPage} />
-              <Route key={16} path="/product/:id" component={ProductPage} />
-              <Route key={17} path='*'  component={ErrorPage} />
+    <Switch location={props.location}>
+              <Route exact path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={SignUp} />
+              <PrivateRoute path="/profile-settings" component={UserProfile} />
+              <Route path="/forgot-password" component={ForgotPassword} />
+              <Route path="/change-password" component={ChangePassword} />
+              <Route path="/verify-code" component={VerifyCode} />
+              <PrivateRoute path="/email-subscription" component={Subscription} />
+              <PrivateRoute path="/my-order" component={OrderPage} />
+              <PrivateRoute path="/payment-methods" component={PaymentPage} />
+              <Route path="/book-offer" component={OfferPage} />
+              <PrivateRoute path="/cart" component={CartPage} />
+              <PrivateRoute path="/checkout" component={CheckoutPage} />
+              <Route path="/favorites" component={FavoritesPage} />
+              <Route path="/shop/category/:id?/:title?" component={ShopPage} />
+              <Route path="/product/:id" component={ProductPage} />
+
+              <Route path="/logout" render={ (props)=> {
+
+                        localStorage.removeItem('authData');
+                        localStorage.removeItem('state');
+                        return <Redirect to={{ pathname: "/", state: {from: props.location} }} />
+                    }
+               } />
+              <Route path='*'  component={ErrorPage} />
     </Switch>
 )
 
