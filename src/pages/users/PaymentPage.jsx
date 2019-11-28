@@ -69,7 +69,7 @@ const PaymentPage = () => {
                                       </div>
                                     </td>
 
-                                    <td class="actionBtntd">
+                                    <td className="actionBtntd">
                                       <Link
                                         to="#"
                                         className="btn btnActionUpdate"
@@ -90,10 +90,10 @@ const PaymentPage = () => {
                               <Button className="btn btn-primary btnSm" onClick={handleVisibility} >
                                 Add payment method
                               </Button>
-                            </Card.Body>
+
 
                             { visible ? <AddPaymentMethod/> : ''}
-                           
+                            </Card.Body>
                           </Card>
                         </Col>
                       </Row>
