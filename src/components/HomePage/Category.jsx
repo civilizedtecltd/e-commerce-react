@@ -16,7 +16,7 @@ function CategoryHome () {
 
     const [category, setCategory] = useState([]);
 
-    useEffect(()=> {
+    useEffect(() => {
 
             axios.get(URL._CATEGORY)
                 .then(res => {

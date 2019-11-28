@@ -51,7 +51,6 @@ const Router = (props) => (
               <Route path="/logout" render={ (props)=> {
 
                         localStorage.removeItem('authData');
-                        localStorage.removeItem('state');
                         return <Redirect to={{ pathname: "/", state: {from: props.location} }} />
                     }
                } />
