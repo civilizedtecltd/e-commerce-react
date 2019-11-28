@@ -1,6 +1,6 @@
 import React, {useState, useRef } from "react";
 import {Image} from 'react-bootstrap';
-
+import LazyLoad from 'react-lazyload';
 import { URL } from '../../constants/config';
 import {ProductCarouselImg} from '../../inc/product/ImgCarousel';
 import Lightbox from "react-image-lightbox";
@@ -20,7 +20,7 @@ function ImageCarousel(props) {
     useRef(() => {
         if(count === 3){
             count = 3
-          }
+        }
     })
 
 
@@ -42,13 +42,13 @@ function ImageCarousel(props) {
 
 
     const NextPhoto = ()=>{
-       const SingleImage = document.getElementById('photo');
+        const SingleImage = document.getElementById('photo');
 
-       image.index +=1;
+        image.index +=1;
 
-       if(image.index>=3) image.index=2
+        if(image.index>=3) image.index=2
 
-       SingleImage.src = images[image.index]
+        SingleImage.src = images[image.index]
     }
     const PrevPhoto = ()=>{
         const SingleImage=document.getElementById('photo');
@@ -64,9 +64,10 @@ function ImageCarousel(props) {
 
 
             <div className="row productImageGallery">
+                <LazyLoad once={true} height={200}>
                 <div className="col-sm-3">
                     <div className="productGallery">
-                         {
+                        {
                             images.map((item, index) =>
                                 <div key={index} className="singleItem bgGray p-2 mb-2">
                                     <img  src={item} alt="" onClick={ ImgHandler } />
@@ -86,24 +87,24 @@ function ImageCarousel(props) {
                     </div>
 
                 </div>
-
+                </LazyLoad>
             </div>
-        <div>
-            {hidden && (
-                <Lightbox
+            <div>
+                {hidden && (
+                    <Lightbox
 
-                    mainSrc = {images[photoIndex]}
-                    nextSrc = {images[(photoIndex + 1) % images.length]}
-                    prevSrc = {images[(photoIndex + ProductCarouselImg.length - 1) % images.length]}
-                    onCloseRequest={() => setHidden(false )}
-                    onMovePrevRequest={() =>
-                        setPhotoIndex(photoIndex + images.length - 1 % images.length)
-                    }
-                    onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % images.length)
-                    }
-                />
-            )}
-        </div>
+                        mainSrc = {images[photoIndex]}
+                        nextSrc = {images[(photoIndex + 1) % images.length]}
+                        prevSrc = {images[(photoIndex + ProductCarouselImg.length - 1) % images.length]}
+                        onCloseRequest={() => setHidden(false )}
+                        onMovePrevRequest={() =>
+                            setPhotoIndex(photoIndex + images.length - 1 % images.length)
+                        }
+                        onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % images.length)
+                        }
+                    />
+                )}
+            </div>
         </>
     );
 

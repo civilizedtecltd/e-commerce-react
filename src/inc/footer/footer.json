@@ -1,0 +1,30 @@
+[
+  {
+    "name":"Order status",
+    "url": "my-order"
+  },
+  {
+    "name":"How to place an order",
+    "url": ""
+  },
+  {
+    "name":"Return",
+    "url": ""
+  },
+  {
+    "name":"Terms & Conditions",
+    "url": ""
+  },
+  {
+    "name":"Delivery details",
+    "url": ""
+  },
+  {
+    "name":"Privacy Policy",
+    "url": ""
+  },
+  {
+    "name":"Blog",
+    "url": ""
+  }
+]

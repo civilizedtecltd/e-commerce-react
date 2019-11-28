@@ -128,7 +128,7 @@ function HeaderComponent(props) {
 
 
 
-  function MobileHeader () {
+  function MobileHeader (props) {
     const [open, setOpen] = useState(false);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -171,13 +171,11 @@ function HeaderComponent(props) {
                    <ul className="headPopBarList d-flex align-items-center">
                      <li>
                        <div className="input-group searchbar">
-                         <Link to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
-                             className="fa fa-search"></i> Search</Link>
+                         <a to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
+                             className="fa fa-search"></i> Search</a>
                        </div>
                      </li>
-                     <li><Link to="#"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge
-                         variant="primary">10</Badge></span> Cart</Link></li>
-                      {/* <li><Link to="#" className="loginUser"><span className="loginUserAvater">SS</span> <span className="loginuserName">Sam Smith</span> </Link></li> */}
+                     <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i>{props.cartItem !==0 ?<Badge variant="primary">{props.cartItem}</Badge> :'' }</span> Cart</Link></li>
                      <li>
                        <div className="mobileNavModal">
                          <span onClick={handleShow}><i className="fas fa-bars"></i></span>
@@ -208,9 +206,9 @@ function HeaderComponent(props) {
            <Modal.Header className="ModaCloseBtn" closeButton></Modal.Header>
            <Modal.Body>
              <ul className="mobileNav">
-               <li><Link to="/kindergarten">Kindergarten </Link></li>
-               <li><Link to="/primary-school">Primary school </Link></li>
-               <li><Link to="/secondary-school">Secondary school </Link></li>
+               <li><Link to="/shop/category/1/Kindergarten school">Kindergarten </Link></li>
+               <li><Link to="/shop/category/2/Primary school">Primary school </Link></li>
+               <li><Link to="/shop/category/3/Secondary school">Secondary school </Link></li>
                <li><Link to="/stationary">Stationery </Link></li>
                <li><Link to="/bibles">Bibles </Link></li>
              </ul>
