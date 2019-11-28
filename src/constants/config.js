@@ -21,6 +21,10 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
          return `${this.API}/auth/login`;
      }
 
+     get _LOGOUT(){
+        return `${this.API}/auth/logout`;
+     }
+
      _GET_USER(id){
          return `${this.API}/user/${id}`;
      }

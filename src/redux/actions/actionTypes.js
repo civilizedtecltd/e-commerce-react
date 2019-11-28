@@ -13,5 +13,12 @@ export const DECREASE_QUANTITY      =   'DECREASE_QUANTITY';
 
 export const DELETE_ALL_FORM_CART   =   'DELETE_ALL_FORM_CART';
 
+//Auth action types
+export const USER_LOGIN             =   'USER_LOGIN';
+export const USER_LOGIN_ERROR       =   'USER_LOGIN_ERROR';
+export const USER_LOGOUT            =   'USER_LOGOUT';
+export const AUTH_NOT_IN_STATE      =   'AUTH_NOT_IN_STATE';
+
+
 
 

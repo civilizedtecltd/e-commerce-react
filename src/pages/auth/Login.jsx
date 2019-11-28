@@ -1,5 +1,7 @@
 import React, {useState}  from 'react';
-import axios from 'axios';
+
+import { connect  } from 'react-redux';
+import { login } from '../../redux/actions/authActions';
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -9,15 +11,17 @@ import withReactContent from 'sweetalert2-react-content';
 
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom } from '../../components/FromComponents/InputComponent';
-import { URL } from '../../constants/config'
+
 
 import './assets/css/auth.css';
 import '../../assets/css/animate.css';
+
 
 const mySwal = withReactContent(Swal);
 
 const Login = (props) => {
 
+    console.log(props);
 
   const [formData] = useState({});
 
@@ -30,7 +34,10 @@ const Login = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.post(
+    props.login(formData)
+
+    /*
+        axios.post(
         URL._LOGIN,
         formData
     ).then( res => {
@@ -38,7 +45,7 @@ const Login = (props) => {
           const authData = res.data.data;
           localStorage.setItem('authData', JSON.stringify(authData));
           //props.history.goForward();
-          props.history.push('/profile-settings');
+          //props.history.push('/profile-settings');
       }
     }).catch( error => {
       console.log(error);
@@ -66,6 +73,9 @@ const Login = (props) => {
       })
 
     });
+
+    */
+
   }
 
   return (<>
@@ -107,7 +117,7 @@ const Login = (props) => {
 
                   <Link className="linkText mb-3" to="/forgot-password">Forgot password?</Link>
 
-                  <Button type="submit" className="btn submitBtn mb-3 " onClick = { handleSubmit } >LOGIN</Button>
+                  <input type="submit" className="btn submitBtn mb-3 " onClick = { handleSubmit } value="LOGIN"/>
 
                   <p>Don’t have an account yet? <Link className="linkText" to="/signup">Sign up</Link></p>
 
@@ -124,4 +134,12 @@ const Login = (props) => {
   );
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    ...state.auth
+});
+
+const mapDispatchToProps = dispatch =>  ({
+    login: (formData) => dispatch(login(formData))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
