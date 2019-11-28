@@ -6,6 +6,7 @@ import {Lia ,LiAi } from '../LiComponent/CommonLiComponent'
 import paypalIcon from '../../assets/images/paypal_icon_img.png';
 import masterCardIcon from '../../assets/images/master_card_icon_img.png';
 import visaIcon from '../../assets/images/visa_icon_img.png';
+import footer from "../../inc/footer/footer";
 
 function FooterComponent() {
     return(<>
@@ -26,18 +27,10 @@ function FooterComponent() {
               <div className="footerWidget">
                 <h4 className="footerWidgetHeader">Information</h4>
                 <ul className="footerLinksList">
-                    {["Order status",
-                    "How to place an order",
-                    "Return" ,
-                    "Terms & Conditions",
-                    "Delivery details",
-                    "Privacy Policy",
-                    "Blog",
-                    "Our support center"
-                    ].map((list,index)=><Lia
+                    {footer.map((list, index)=><Lia
                       key={index}
-                      Title={list}
-                      Url={'/'}
+                      Title={list.name}
+                      Url={list.url}
                     />)}
                 </ul>{/*  end of footerLinksList */}
               </div>{/*  end of footerWidget */}

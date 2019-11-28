@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
-
+import LazyLoad from 'react-lazyload';
 import { connect  } from 'react-redux';
 import {fetchAllBook, fetchBooksByCategory} from '../redux/actions/bookActions';
 import { LiSpan } from '../components/LiComponent/CommonLiComponent';
@@ -302,7 +302,8 @@ const ShopPage = (props) => {
                             return (
 
                               <Col key = {index} sm="3">
-                              <Card className="productCard border-0 bg-transparent">
+                                <LazyLoad once={true} height={200}>
+                                   <Card className="productCard border-0 bg-transparent">
                                 <div className="productMedia mb-3 bgGray">
                                   <img src={bookCover} alt="" />
                                 </div>
@@ -319,7 +320,7 @@ const ShopPage = (props) => {
                                 </div>
                                 {/* end of productContent */}
                               </Card>
-                              {/* end of productCard */}
+                                </LazyLoad>
                             </Col>
                             );
                         })
