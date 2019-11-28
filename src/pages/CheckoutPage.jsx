@@ -9,17 +9,22 @@ import './checkout.css'
 const CheckoutPage = (props) => {
   const cartItems = props.cart;
   
-  let totalItemQuantity=[];
+  let totalItemQuantity = [];
   let totalPrice = [];
 
-  let totalItem = (cartItems.length !== 0) ?  cartItems.map(item=> {
+  /* let totalItem = (cartItems.length !== 0) ?  cartItems.map(item=> {
     totalItemQuantity.push( item.quantity );
     totalPrice.push( item.price * item.quantity)
-  }) : totalItemQuantity && totalPrice;
+  }) : totalItemQuantity && totalPrice; 
+
+  const totalItem = (cartItems.length === 0) ? totalItemQuantity && totalPrice : cartItems.map( item => {
+    totalItemQuantity.push(item.quantity);
+    totalPrice.push(item.price * item.quantity)
+  }); */
 
   if(totalItemQuantity.length !==0){
-  totalItemQuantity = totalItemQuantity.reduce((quantities, quantity) => quantities + quantity)
-  totalPrice = totalPrice.reduce((prices,price)=>prices+price);
+    totalItemQuantity = totalItemQuantity.reduce((quantities, quantity) => quantities + quantity)
+    totalPrice = totalPrice.reduce((prices,price)=>prices+price);
   }
 
 
@@ -100,17 +105,8 @@ const CheckoutPage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-return {
+const mapStateToProps = (state) => ({
   cart:state.shop.cart
-}
-}
+})
 
-
-// const mapDispatchToProps = (dispatch) =>{
- 
-    
-  
-// }
-
-export default connect(mapStateToProps)(CheckoutPage);
+export default connect(mapStateToProps, null)(CheckoutPage);
