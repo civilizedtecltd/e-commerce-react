@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content'
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
@@ -18,13 +18,8 @@ const mySwal = withReactContent(Swal);
 const SignUp = (props) => {
 
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const [formData] = useState({});
-
-  const [auth, setAuth] = useState({
-        status: false,
-        redirect: ''
-  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,7 +115,7 @@ const handleSubmit = (event) => {
                         formData
                     ).then( response => {
                         if(response.status === 201)
-                            goToLoginPage()
+                            goToLoginPage();
 
                     }).catch( error => {
                         console.log(error);
@@ -131,8 +126,7 @@ const handleSubmit = (event) => {
 }
 
 
-    return (<>
-      {/* ({auth.status === true}) ? <Redirect to={auth.redirect} /> : <Redirect to="/signup" /> */}
+    return (<>      
       <div className="allWrapper fullHeight">
         <main className="loginMainArea clearfix fullHeight bgImage signUpBodyBg pb-3" id="signUpBody">
           <Container fluid={true}>
