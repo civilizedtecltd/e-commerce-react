@@ -5,7 +5,7 @@ import { login } from '../../redux/actions/authActions';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import Swal from 'sweetalert2';
@@ -18,7 +18,7 @@ import { InputFrom } from '../../components/FromComponents/InputComponent';
 import './assets/css/auth.css';
 import '../../assets/css/animate.css';
 
-
+ /* eslint-disable-next-line */
 const mySwal = withReactContent(Swal);
 
 const Login = (props) => {
@@ -30,6 +30,7 @@ const Login = (props) => {
   const { auth } = props;
 
   const loginData = (data) => {
+     /* eslint-disable-next-line */
     Object.keys(data).map( key => {
       formData[key] = data[key];
     });

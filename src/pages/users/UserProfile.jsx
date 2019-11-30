@@ -52,6 +52,7 @@ const UserProfile = () => {
     }
 
     const fromFileData = (data) => {
+       /* eslint-disable-next-line */
         Object.keys(data).map( key => {
             formData[key] = data[key];
         });

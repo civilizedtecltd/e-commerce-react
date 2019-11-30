@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Accordion, Card, useAccordionToggle} from "react-bootstrap";
+import {Form, Accordion, useAccordionToggle} from "react-bootstrap";
 import PaymentMethodComponent from './PaymentMethodComponent';
 
 function CheckToggle({ children, eventKey, title, name }) {
