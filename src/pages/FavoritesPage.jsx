@@ -8,15 +8,17 @@ import { NewsLetterComponent } from "../components/offerPageComponents/NewsLette
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { HeaderComponent, MobileHeader } from "../components/header/Header";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
+import {showFevItems} from '../redux/actions/favoriteActions'
 
 
 
 const FavoritesPage = (props) => {
 
-  const totalItem = props.cart.length
+  const totalItem = props.cart.length 
+  console.log(props)
 
   return (
-    <>
+ 
       <div className="allWrapper">
         <HeaderComponent
           cartItem={totalItem}
@@ -245,15 +247,22 @@ const FavoritesPage = (props) => {
         {/* end of mainContent */}
         <FooterComponent />
       </div>
-      {/* end of allWrapper */}
-    </>
+  
+
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.shop.cart
+    cart: state.shop.cart,
+    favorite: state.favorite
   }
 }
 
-export default connect(mapStateToProps, null)(FavoritesPage);
+const mapDispatchToProps =(dispatch) => {
+    return {
+       addToFav: (state) => dispatch(showFevItems(state))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesPage);
