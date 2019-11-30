@@ -3,6 +3,8 @@ import React, {useState}  from 'react';
 import { connect  } from 'react-redux';
 import { login } from '../../redux/actions/authActions';
 
+import isEmpty from 'lodash/isEmpty';
+
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -25,6 +27,8 @@ const Login = (props) => {
 
   const [formData] = useState({});
 
+  const { auth } = props;
+
   const loginData = (data) => {
     Object.keys(data).map( key => {
       formData[key] = data[key];
@@ -35,48 +39,39 @@ const Login = (props) => {
     event.preventDefault();
 
     props.login(formData)
-
-    /*
-        axios.post(
-        URL._LOGIN,
-        formData
-    ).then( res => {
-      if(res.status === 200){
-          const authData = res.data.data;
-          localStorage.setItem('authData', JSON.stringify(authData));
-          //props.history.goForward();
-          //props.history.push('/profile-settings');
-      }
-    }).catch( error => {
-      console.log(error);
-      mySwal.fire({
-          icon: 'error',
-          title: 'Oops..',
-          text: 'Provide valid username and password.',
-          footer: 'Copyright@2019',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Try Again',
-          showClass: {
-            popup: 'animated fadeInDown fast'
-          },
-          hideClass: {
-            popup: 'animated fadeOutUp fast'
-          }
-      }).then(() => {
-            console.log('ok clicked')
-      }, (dismiss) => {
-         if(dismiss == 'cancel'){
-             console.log('cancel button clicked')
-         }
-      })
-
-    });
-
-    */
-
   }
+
+    if(!isEmpty(auth)){
+        if(auth.status.success){
+            props.history.goBack();
+        }
+
+        if(!auth.status.success){
+            mySwal.fire({
+                    icon: 'error',
+                    title: 'Oops..',
+                    text: 'Provide valid username and password.',
+                    footer: 'Copyright@2019',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Try Again',
+                    showClass: {
+                    popup: 'animated fadeInDown fast'
+                    },
+                    hideClass: {
+                    popup: 'animated fadeOutUp fast'
+                    }
+            }).then(() => {
+                console.log('ok clicked')
+            }, (dismiss) => {
+                if(dismiss == 'cancel'){
+                    console.log('cancel button clicked')
+                }
+            })
+
+        }
+    }
 
   return (<>
     <div className="AllWrapper fullHeight">
@@ -135,7 +130,7 @@ const Login = (props) => {
 }
 
 const mapStateToProps = state => ({
-    ...state.auth
+    auth: state.auth
 });
 
 const mapDispatchToProps = dispatch =>  ({
