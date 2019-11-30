@@ -1,6 +1,8 @@
 import * as Types from '../actions/actionTypes';
+const initState = {
 
-const authReducer = (state = {}, {type, payload}) => {
+}
+const authReducer = (state = initState, {type, payload}) => {
     switch(type){
         case Types.USER_LOGIN:
         case Types.USER_LOGOUT:
