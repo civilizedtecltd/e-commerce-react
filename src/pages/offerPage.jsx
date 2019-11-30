@@ -12,12 +12,16 @@ import{NewsLetterComponent} from '../components/offerPageComponents/NewsLetterCo
 import FooterComponent from '../components/FooterComponent/FooterComponent';
 import {HeaderComponent, MobileHeader} from '../components/header/Header';
 
+import store from '../redux/store'
 
 const offerPage = () => {
+
+  const totalItem = store.getState().shop.cart.length
+
   return (<>
 
     <div className="allWrapper">
-      <HeaderComponent/>
+      <HeaderComponent cartItem={totalItem}/>
       <MobileHeader />
       <main className="mainContent clearfix" id="mainContent">
         <section className="offerBanner clearfix sectionBgImage sectionBgImg02" id="offerBanner">
@@ -106,6 +110,7 @@ const offerPage = () => {
 
             <Row className="justify-content-between">
 
+
               {NewBookDB.map((newBook, index) => <NewBookComponent
                   key={index}
                   ImageBg="bgGray"
@@ -113,8 +118,11 @@ const offerPage = () => {
                   ProductTitle={newBook.Title}
                   AuthorName={newBook.Author}
                   ProductPrice={newBook.Price}
-                />)
+                />
+
+                )
               }
+
 
             </Row>{/* end of Row */}
           </Container>{/* end of Container */}

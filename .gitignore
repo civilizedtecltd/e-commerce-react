@@ -10,8 +10,9 @@
 
 # production
 /build
-
+debug.log
 # misc
+.env
 .DS_Store
 .env.local
 .env.development.local

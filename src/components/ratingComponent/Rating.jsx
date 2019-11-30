@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './rating.css'
+import './rating.css';
 
 const range = (min, max) =>
   Array(max - min + 1).fill().map((_, i) => min + i)
@@ -20,8 +20,9 @@ const Rating = ({ min, max, onChange, value }) => {
   return (
     <div className='rating'>
       {
-        range(min, max).map(item => (
+        range(min, max).map((item,index) => (
           <RatingItem
+            key={index}
             colored={value >= item}
             checked={value === item}
             value={item}
@@ -34,10 +35,9 @@ const Rating = ({ min, max, onChange, value }) => {
 }
 
 class RatingComponent extends Component {
-  constructor () {
-    super()
-
-    this.state = { rating: 0 }
+  constructor (props) {
+    super(props)
+    this.state = { rating: this.props.rating }
   }
 
   render () {
@@ -45,7 +45,10 @@ class RatingComponent extends Component {
       <Rating
         min={1}
         max={5}
-        onChange={(rating) => this.setState({ rating })}
+        onChange={(rating) => {
+            this.setState({ rating })
+            this.props.callback(rating)
+        }}
         value={this.state.rating}
       />
     )

@@ -24,7 +24,7 @@ export const headerPoppers=[
 export const asideData=[
     {
         LIST_CLASS:'nav-item active',
-        URL:'/order',
+        URL:'/my-order',
         ICON_NAME:"fas fa-clipboard-list",
         TITLE:"My orders",
         ANCHOR_CLASS:"nav-link"
@@ -88,7 +88,7 @@ export const categoryClass={
         "Bibles",
         "Bibles"
     ]
-   
+
 }
 
 export const headerFeatureList=[
@@ -108,5 +108,7 @@ export const headerFeatureList=[
         TITLE:"Customer support"
     }
 ]
+
+
 
 

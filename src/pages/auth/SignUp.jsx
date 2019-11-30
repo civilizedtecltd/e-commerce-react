@@ -1,45 +1,41 @@
 import React, {useState, useEffect}from 'react';
-import SweetAlert from 'sweetalert2-react';
-import axios from 'axios'
+import axios from 'axios';
+
+
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
 import { URL } from '../../constants/config'
 import './assets/css/auth.css';
 
-const SignUp = () => {
+const mySwal = withReactContent(Swal);
 
-  const [data, setData] = useState([])
+const SignUp = (props) => {
+
+
+  const [data, setData] = useState([]);
   const [formData] = useState({});
-  const [state, setState] = useState({
-        sweetAlert : {
-            show: false,
-            title: "",
-            text: "",
-            type: "",
-            showCancelButton: false,
-            confirmButtonText: "",
-        }
-  });
-
-  const [auth, setAuth] = useState({
-        status: false,
-        redirect: ''
-  });
 
   useEffect(() => {
-
     const fetchData = async () => {
       const result = await axios(URL._CATEGORY);
-      setData(result.data);
+      return setData(result.data);
     };
+
     fetchData();
 
   }, []);
 
+
+const goToLoginPage = () => {
+    const { history } = props;
+    history.push('/login');
+}
 
 const categoryData = (data) => {
     if(data.category_id !== undefined || data.category_id !== 'Select Category')
@@ -62,40 +58,65 @@ const handleSubmit = (event) => {
         formData.password === undefined      ||
         formData.repeatPassword === undefined
         ){
-            setState({
-                sweetAlert: {
-                    show: true,
-                    title: "OPPS!",
-                    text: "Field Data missing",
-                    type: 'warning',
-                    confirmButtonText: "Try Again!"
-                }
-            });
+            mySwal.fire({
+              icon: 'error',
+              title: 'Oops..',
+              text: 'Field Data missing',
+              footer: 'Copyright@2019',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Try Again',
+              showClass: {
+                popup: 'animated fadeInDown fast'
+              },
+              hideClass: {
+                popup: 'animated fadeOutUp fast'
+              }
+          }).then(() => {
+                console.log('ok clicked')
+          }, (dismiss) => {
+             if(dismiss === 'cancel'){
+                 console.log('cancel button clicked')
+             }
+          })
+
         }
     else{
 
         if(String(formData.password) !== String(formData.repeatPassword)){
 
-            setState({
-                sweetAlert: {
-                    show: true,
-                    title: "OPPS!",
-                    text: "Password did not match.",
-                    type: 'error',
-                    confirmButtonText: "Try Again!"
-                }
-            });
+            mySwal.fire({
+              icon: 'error',
+              title: 'Oops..',
+              text: 'Password did not match.',
+              footer: 'Copyright@2019',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Try Again',
+              showClass: {
+                popup: 'animated fadeInDown fast'
+              },
+              hideClass: {
+                popup: 'animated fadeOutUp fast'
+              }
+          }).then(() => {
+                console.log('ok clicked')
+          }, (dismiss) => {
+             if(dismiss === 'cancel'){
+                 console.log('cancel button clicked')
+             }
+          })
 
         }else{
             axios.post(
                         URL._REGISTER,
                         formData
                     ).then( response => {
-                        console.log(response);
-                        setAuth({
-                            status: true,
-                            redirect: '/login'
-                        });
+                        if(response.status === 201)
+                            goToLoginPage();
+
                     }).catch( error => {
                         console.log(error);
                     });
@@ -105,8 +126,7 @@ const handleSubmit = (event) => {
 }
 
 
-    return (<>
-      ({auth.status === true}) ? <Redirect to={auth.redirect} /> : <Redirect to="/signup" />
+    return (<>      
       <div className="allWrapper fullHeight">
         <main className="loginMainArea clearfix fullHeight bgImage signUpBodyBg pb-3" id="signUpBody">
           <Container fluid={true}>
@@ -122,15 +142,6 @@ const handleSubmit = (event) => {
               <Col sm={6}>
                 <SocialListComponent/>
                 <div className="formWrapper clearfix" id="formWrapper">
-                    <SweetAlert
-                            show = {state.sweetAlert.show}
-                            title = {state.sweetAlert.title}
-                            text = {state.sweetAlert.text}
-                            type = {state.sweetAlert.type}
-                            showCancelButton = {state.sweetAlert.showCancelButton}
-                            confirmButtonText = {state.sweetAlert.confirmButtonText}
-                            onConfirm = {() => { console.log(`confirmed`) }}
-                    />
                   <Form>
                     <SelectFrom LabelTitle="Category"
                       category = {(data.data !== undefined) ? data.data : []}

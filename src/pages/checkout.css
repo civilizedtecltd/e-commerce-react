@@ -1,7 +1,7 @@
 .header-section{
     display: flex;
     justify-content: space-around;
-    align-items: center;   
+    align-items: center;
 }
 .header-section button{
   background-color:#e2e2e2;
@@ -17,6 +17,13 @@
     background-color: #e2e2e2;
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+.payment-header-card{
+    background-color: #e2e2e2 !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    border: none !important;
+    border-radius: 0 !important;
 }
 
 .button-section-next-prev{
@@ -40,5 +47,4 @@
     color: #363636;
     line-height: 30px;
 }
-
 

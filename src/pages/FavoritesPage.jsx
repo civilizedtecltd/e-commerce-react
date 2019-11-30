@@ -1,19 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col, Card, Breadcrumb } from "react-bootstrap";
-
-// Product Images
+import { Container, Row, Col, Card } from "react-bootstrap";
+import { connect } from 'react-redux'
 import { NewBookDB } from "../inc/offerPage/NewBook";
 import { NewBookComponent } from "../components/offerPageComponents/NewBookComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
+import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 
-const FavoritesPage = () => {
+
+const FavoritesPage = (props) => {
+
+  const totalItem = props.cart.length
+
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent />
+        <HeaderComponent
+        cartItem={totalItem}
+        />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
@@ -23,15 +29,9 @@ const FavoritesPage = () => {
             <Container>
               <Row>
                 <Col>
-                  <Breadcrumb>
-                    <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item active>Favorites</Breadcrumb.Item>
-                  </Breadcrumb>
-                  {/* end of Breadcrumb */}
+                  <BreadCrumb />
                 </Col>
-                {/* end of Col */}
               </Row>
-              {/* end of Row */}
             </Container>
             {/* end of Container */}
           </section>
@@ -218,4 +218,10 @@ const FavoritesPage = () => {
   );
 };
 
-export default FavoritesPage;
+const mapStateToProps = (state) => {
+  return{
+    cart: state.shop.cart
+  }
+}
+
+export default connect(mapStateToProps, null) (FavoritesPage);

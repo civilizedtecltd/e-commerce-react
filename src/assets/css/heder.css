@@ -13,7 +13,9 @@
 outline-offset: 0px;
 -webkit-appearance: none;
 }
-
+.headPopBarList li a {
+    cursor: pointer;
+}
 .navbar-expand-lg .navbar-nav .nav-link{
     color: #363636;
     font-size: 16px;
@@ -30,10 +32,13 @@ outline-offset: 0px;
 }
 .cartBadge .badge {
     position: absolute;
-    top: -10px;
-    left: 5px;
+    top: -12px;
+    left: 4px;
     border-radius: 50%;
     font-size: 0.7rem;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
 }
 
 
@@ -84,3 +89,16 @@ width: 50%;
     border: 2px solid #3897cf !important;
 }
 
+.customer-support{
+    color: #ffffff;
+}
+
+.customer-support span,
+.customer-support i{
+    color: #ffffff;
+}
+
+.customer-support span:hover,
+.customer-support i:hover{
+    color: #3897CF;
+}

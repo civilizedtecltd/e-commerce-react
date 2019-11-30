@@ -1,75 +1,67 @@
-import React, { useState ,useEffect } from "react";
+ import React, { useState ,useEffect } from "react";
 import { connect } from 'react-redux'
-import axios from 'axios'
-import { Container, Modal, Button } from "react-bootstrap";
+import { Container, Modal, Button, Row, Col } from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
 
-import {addToCard , show_single_book} from '../redux/actions/actions'
+import { showSingleBook } from '../redux/actions/bookActions'
+import { addToCart } from '../redux/actions/shopActions'
 
-import "../pages/assets/product.css";
-//
+
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
 import { ImageCarousel } from "../components/ProductImgCarosellComponents/ProductImgCarosell";
-
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import TabComponent from "../components/TabComponent/TabComponent";
 import RatingComponent from "../components/ratingComponent/Rating";
+import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { URL } from '../constants/config';
 
 import "../pages/assets/product.css";
 
 function ProductPage(props) {
 
-  const { id } =  useParams()
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const { id } = useParams();
 
-  const book = (props.shop.book !== undefined ) ? props.shop.book : false;
+  const [show, setShow] = useState(false);
+
+  const book = (props.book !== undefined ) ? props.book : false;
+
 
   useEffect(() => {
-    const book = async () => {
-      const result = await axios(URL._SINGLE_BOOK(id));
-      return props.book(result.data.data)
-    };
-    book();
+    return props.showSingleBook(id);
   }, []);
+
+  const handleClose = () => setShow(false);
+
+  const updateItemQty = (e) => {
+    book.quantity = Number(e.target.value)
+  }
+
+  const addToCart = (e) => {
+    e.preventDefault();
+    props.addToCart(book);
+    setShow(true);
+  };
 
 
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent />
+        <HeaderComponent cartItem = { props.totalItems } />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
             className="breadcrumbArea secGap pb-0 clearfix"
             id="breadcrumb"
           >
-            <div className="container">
-              <div className="row">
-                <div className="col">
-                  <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                      <li className="breadcrumb-item">
-                        <Link to="">Primary school </Link>
-                      </li>
-                      <li className="breadcrumb-item">
-                        <Link to="">Shop </Link>
-                      </li>
-                      <li
-                        className="breadcrumb-item active"
-                        aria-current="page"
-                      >
-                        Product Page
-                      </li>
-                    </ol>
-                  </nav>
-                </div>
-              </div>
-            </div>
+            <Container>
+              <Row>
+                <Col>
+                  <BreadCrumb />
+                </Col>
+              </Row>
+            </Container>
           </section>
 
           <section
@@ -80,36 +72,30 @@ function ProductPage(props) {
               <div className="row">
                 <div className="col-sm-6">
                   <ImageCarousel
-                    image={() => {
-                        const cover =  (book ? JSON.parse(book.cover_images) : false )
-
-                        if(cover){
-                            return [
-                                `${URL.BASE}/${cover.img_1}`,
-                                `${URL.BASE}/${cover.img_2}`,
-                                `${URL.BASE}/${cover.img_3}`
-                            ];
-                        }else{
-                            return [];
-                        }
-                    }
-                }
+                    image = {(book ? book.cover_images : false )}
                    />
                 </div>
 
                 <div className="col-sm-6">
                   <div className="card productCardDetails border-0">
                     <div className="card-header border-0 bg-white">
+
                       <div className="productCardHead">
-                        <h2 className="productSingleTitle">
-                          { book ? book.name : ``}
-                        </h2>
-                        <RatingComponent  value= { book ? book.rating : 0 }/>
-                        <p>(7 reviews)</p>
+                        <div className="Product-title-product-page">
+                          <p className="productSingleTitle">
+                            { book ? book.name : ``}
+                          </p>
+                        </div>
+                        <div className="d-flex">
+                          <RatingComponent  value= { book ? book.rating : 0 }/>
+                          <div style={{marginTop:"-3px"}}><p>{'\u00A0'} {'\u00A0'} (7 reviews) </p></div>
+                        </div>
                       </div>
+
                       <h6 className="authName">
-                        by <Link to={book ? book.book_author.id : '#' }>{book ? book.book_author.name : `` }</Link>
+                        by <Link to = {`${URL.BASE}/api/author/${book ? book.book_author.id : '/'}`} > {book ? book.book_author.name : `` } </Link>
                       </h6>
+
                     </div>
 
                     <div className="card-body productCardBody">
@@ -129,20 +115,21 @@ function ProductPage(props) {
                             <input
                               className="form-control inputValue"
                               type="number"
-                              placeholder="1"
+                              placeholder="0"
+                              defaultValue = { props.cart.map( item => (item.id === Number(id)) ? item.quantity : 0 )}
+                              onChange = { updateItemQty }
                             />
                           </div>
 
                           <div className="col text-center">
-                            <Link
-                              to="#"
+                            <Button
                               className="btn linkBtn"
-                              onClick={handleShow}
+                              onClick = { addToCart }
                             >
-                              {" "}
                               <i className="fas fa-shopping-cart"></i> Add to
                               cart
-                            </Link>
+                            </Button>
+
                           </div>
 
                           <div className="col text-center">
@@ -167,7 +154,7 @@ function ProductPage(props) {
 
                         }] : {}}
 
-                        reviews = {[]}
+                        reviews = {book.book_review ? book.book_review : []}
                         />
                     </div>
                   </div>
@@ -200,29 +187,21 @@ function ProductPage(props) {
           <Container className="container">
             <NewsLetterComponent />
           </Container>
-          {/* end of Container */}
         </section>
-        {/* end of mailSubscribe */}
-
         <FooterComponent />
       </div>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show = {show} onHide = {handleClose}>
         <Modal.Header className={"border-0"} closeButton>
-          {" "}
         </Modal.Header>
         <Modal.Body>
-          {" "}
           <h2 className={"text-center"}>
             Product added to cart successfully!
-          </h2>{" "}
+          </h2>
         </Modal.Body>
         <Modal.Footer className={"border-0"}>
-          <Button variant={"primary"}> Go to checkout</Button>
-          <button className="linkBtnBorder" style={{ borderRadius: "4px" }}>
-            {" "}
-            Continue shopping{" "}
-          </button>
+          <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}> Go to checkout </Link>
+          <Link to="/shop" className="btn btn-outline linkBtnBorder" style={{color:'white !important'}}> Continue shopping</Link>
         </Modal.Footer>
       </Modal>
     </>
@@ -231,16 +210,18 @@ function ProductPage(props) {
 
 
 const mapStateToProps = (state)=> {
-  return{
-    ...state
+  return {
+    book: state.book[0],
+    cart: state.shop.cart,
+    totalItems: state.shop.cart.length
   }
 }
 
 
 const mapDispatchToProps = (dispatch) => {
     return{
-      addTocard:(id)=>dispatch(addToCard(id)),
-      book:(book) =>dispatch(show_single_book(book))
+      showSingleBook : (id) => dispatch(showSingleBook(id)),
+      addToCart:       (book) => dispatch(addToCart(book))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

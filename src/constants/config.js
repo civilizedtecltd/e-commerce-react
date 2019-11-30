@@ -1,6 +1,10 @@
+import * as path from 'path';
+
+require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce/e-commerce-react', '.env')});
 
   class APP_URL {
      constructor(){
+
         this.BASE = `http://localhost:3333`;
         this.API  = `${this.BASE}/api`;
      }
@@ -17,11 +21,23 @@
          return `${this.API}/auth/login`;
      }
 
+     get _LOGOUT(){
+        return `${this.API}/auth/logout`;
+     }
+
+     _GET_USER(id){
+         return `${this.API}/user/${id}`;
+     }
+
      get _ALL_BOOKS(){
-         return `${this.API}/product/books`;
+         return `${this.API}/product/all-books`;
      }
      _SINGLE_BOOK(id){
          return `${this.API}/product/book/${id}`
+     }
+
+     _CATEGORY_BOOKS(id){
+        return `${this.API}/product/category/${id}`
      }
  }
 

@@ -1,8 +1,11 @@
 import React ,{useState} from 'react';
 import {Container, Row, Col, Form, Badge, Collapse, Modal} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import '../../assets/css/heder.css';
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 import { useMediaQuery } from 'react-responsive';
+
+import checkAuth from '../../helpers/checkAuth';
+import '../../assets/css/heder.css';
 
 
 const Mobile = ({ children }) => {
@@ -14,10 +17,13 @@ const Default = ({ children }) => {
   return isNotMobile ? children : null
 }
 
-function HeaderComponent() {
+
+
+
+function HeaderComponent(props) {
 
   const [open, setOpen] = useState(false);
-
+  
     return(
     <>
       <Default>
@@ -35,7 +41,7 @@ function HeaderComponent() {
                 <ul className="headFeatureList d-flex justify-content-between">
                   <li><i className="fas fa-truck"></i> <span>Free delivery</span></li>
                   <li><i className="fas fa-award"></i> <span>Genuine goods</span></li>
-                  <li><Link to="#"> <i className="fas fa-headset"></i> <span>Customer support</span></Link></li>
+                  <li className="customer-support"><AnchorLink offset={() => 100} href='#footer'><i className="fas fa-headset"></i><span>Customer support</span></AnchorLink></li>
                 </ul>
               </div>
             </Col>
@@ -61,13 +67,13 @@ function HeaderComponent() {
                   <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                       <li className="nav-item active">
-                        <Link className="nav-link" to="/kindergarten">Kindergarten <span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link" to="/shop/category/1/Kindergarten school">Kindergarten <span className="sr-only">(current)</span></Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/primary-school">Primary school</Link>
+                        <Link className="nav-link" to="/shop/category/2/Primary school">Primary school</Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/secondary-school">Secondary school</Link>
+                        <Link className="nav-link" to="/shop/category/3/Secondary school">Secondary school</Link>
                       </li>
                       <li className="nav-item">
                         <Link className="nav-link" to="/stationery">Stationery</Link>
@@ -86,12 +92,12 @@ function HeaderComponent() {
                 <ul className="headPopBarList d-flex justify-content-between">
                   <li>
                     <div className="input-group">
-                      <Link to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</Link>
+                      <a to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</a>
                     </div>
                   </li>
                   <li><Link to="/favorites"><span className="cartBadge"><i className="far fa-star"></i><Badge variant="danger">10</Badge></span> Favorites</Link></li>
-                  <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge variant="primary">10</Badge></span> Cart</Link></li>
-                  <li><Link to="/login"><i className="far fa-user"></i> Login</Link></li>
+                  <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i>{props.cartItem !==0 ?<Badge variant="primary">{ props.cartItem }</Badge> :'' }</span> Cart</Link></li>
+                  <li>{ (!checkAuth()) ? <Link to="/login"><i className="far fa-user"></i>Login</Link> : <Link to="/profile-settings"><i className="far fa-user"></i>My Profile</Link> }</li>
                   {/* <li><Link to="#"><span className="loginUserAvater">SS</span> Sam Smith</Link></li> */}
                 </ul>
               </div>
@@ -122,7 +128,7 @@ function HeaderComponent() {
 
 
 
-  function MobileHeader () {
+  function MobileHeader (props) {
     const [open, setOpen] = useState(false);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -165,13 +171,11 @@ function HeaderComponent() {
                    <ul className="headPopBarList d-flex align-items-center">
                      <li>
                        <div className="input-group searchbar">
-                         <Link to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
-                             className="fa fa-search"></i> Search</Link>
+                         <a to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
+                             className="fa fa-search"></i> Search</a>
                        </div>
                      </li>
-                     <li><Link to="#"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge
-                         variant="primary">10</Badge></span> Cart</Link></li>
-                      {/* <li><Link to="#" className="loginUser"><span className="loginUserAvater">SS</span> <span className="loginuserName">Sam Smith</span> </Link></li> */}
+                     <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i>{props.cartItem !==0 ?<Badge variant="primary">{props.cartItem}</Badge> :'' }</span> Cart</Link></li>
                      <li>
                        <div className="mobileNavModal">
                          <span onClick={handleShow}><i className="fas fa-bars"></i></span>
@@ -202,9 +206,9 @@ function HeaderComponent() {
            <Modal.Header className="ModaCloseBtn" closeButton></Modal.Header>
            <Modal.Body>
              <ul className="mobileNav">
-               <li><Link to="/kindergarten">Kindergarten </Link></li>
-               <li><Link to="/primary-school">Primary school </Link></li>
-               <li><Link to="/secondary-school">Secondary school </Link></li>
+               <li><Link to="/shop/category/1/Kindergarten school">Kindergarten </Link></li>
+               <li><Link to="/shop/category/2/Primary school">Primary school </Link></li>
+               <li><Link to="/shop/category/3/Secondary school">Secondary school </Link></li>
                <li><Link to="/stationary">Stationery </Link></li>
                <li><Link to="/bibles">Bibles </Link></li>
              </ul>

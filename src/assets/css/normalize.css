@@ -6,7 +6,7 @@
 
 
 /*FontAwesome */
-@import url('../fonts/fontawesome/css/fontawesome.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css');
 
 /*==============================================
  2. General resets
