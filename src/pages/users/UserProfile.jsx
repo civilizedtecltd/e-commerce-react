@@ -21,6 +21,7 @@ const mySwal = withReactContent(Swal);
 const UserProfile = () => {
 
     const [category, setCategory] = useState([]);
+    /* eslint-disable-next-line */
     const [jwt, setJWT] = useState({});
     const [user, setUser] = useState({});
     const [formData] = useState({});
@@ -52,6 +53,7 @@ const UserProfile = () => {
     }
 
     const fromFileData = (data) => {
+       /* eslint-disable-next-line */
         Object.keys(data).map( key => {
             formData[key] = data[key];
         });

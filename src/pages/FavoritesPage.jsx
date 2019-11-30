@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Table } from "react-bootstrap";
 import { connect } from 'react-redux'
 import { NewBookDB } from "../inc/offerPage/NewBook";
 import { NewBookComponent } from "../components/offerPageComponents/NewBookComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
-import {HeaderComponent, MobileHeader} from "../components/header/Header";
+import { HeaderComponent, MobileHeader } from "../components/header/Header";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
+
 
 
 const FavoritesPage = (props) => {
@@ -18,7 +19,7 @@ const FavoritesPage = (props) => {
     <>
       <div className="allWrapper">
         <HeaderComponent
-        cartItem={totalItem}
+          cartItem={totalItem}
         />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
@@ -39,22 +40,55 @@ const FavoritesPage = (props) => {
 
           <section className="chooseCategory clearfix" id="chooseCategory">
             <Container>
+
               <Row>
-                <Col>
+                <Col xs={12}>
                   <div className="contentArea text-center mt-5 mb-5">
                     <h2 className="sectionTitle mb-3">
                       You don’t have any <span>Favorites</span>
                     </h2>
+
                     <p>
                       It’s not a problem. Just choose a category you’re
                       interested in and add goods to favorites list
                     </p>
+
                   </div>
-                  {/* end of contentArea */}
                 </Col>
-                {/* end of Col */}
+
+                <Col xs={12}>
+                  <Table bordered>
+                    <thead>
+                      <tr>
+                        <th className="text-center">Product Name</th>
+                        <th className="text-center">Price</th>
+                        <th className="text-center">Discount</th>
+                        <th className="text-center">Image</th>
+                        <th className="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="text-center item-center" >Table cell</td>
+                        <td className="text-center" >Table cell</td>
+                        <td className="text-center" >Table cell</td>
+                        <td className="text-center">
+                          <img style={{height:100, width:100}} src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTRgjbFE_om3PsFCVPztEJWLEKiaAqWMq4-liWLu46JS4N3fNSH" alt="product"/>
+                          </td>
+                        <td className="text-center" >
+                          <button style={{backgroundColor:'red'}} className="btn btn-danger">&times;</button>
+                          &nbsp;
+                          &nbsp;
+                          &nbsp;
+                          <button style={{backgroundColor:'white' , color:"black"}} className="btn">Checkout</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </Col>
+
               </Row>
-              {/* end of Row */}
+
 
               <Row>
                 <Col>
@@ -77,9 +111,7 @@ const FavoritesPage = (props) => {
                                 <Link to="#">Pre 3</Link>
                               </li>
                             </ul>
-                            {/* end of cardWidgetList */}
                           </Col>
-                          {/* end of Col */}
 
                           <Col sm="3">
                             <h3 className="cardWidgetTitle mb-3">
@@ -219,9 +251,9 @@ const FavoritesPage = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return{
+  return {
     cart: state.shop.cart
   }
 }
 
-export default connect(mapStateToProps, null) (FavoritesPage);
+export default connect(mapStateToProps, null)(FavoritesPage);

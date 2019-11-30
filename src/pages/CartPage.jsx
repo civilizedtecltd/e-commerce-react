@@ -34,6 +34,7 @@ const CartPage = (props) => {
 
   const handleClick = (event) => {
     event.preventDefault()
+     /* eslint-disable-next-line */
     cartItems.find((book,index)=>{
       if(Number(book.id) === Number(event.target.id)){
         props.removeItem(book.id)

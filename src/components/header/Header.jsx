@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React ,{useState} from 'react';
 import {Container, Row, Col, Form, Badge, Collapse, Modal} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
@@ -7,7 +8,7 @@ import { useMediaQuery } from 'react-responsive';
 import checkAuth from '../../helpers/checkAuth';
 import '../../assets/css/heder.css';
 
-
+// eslint-disable-next-line
 const Mobile = ({ children }) => {
   const isMobile = useMediaQuery({ maxWidth: 991 })
   return isMobile ? children : null
@@ -19,7 +20,7 @@ const Default = ({ children }) => {
 
 
 
-
+// eslint-disable-next-line
 function HeaderComponent(props) {
 
   const [open, setOpen] = useState(false);
@@ -91,7 +92,9 @@ function HeaderComponent(props) {
               <div className="headPopBar clearfix" id="headPopBar">
                 <ul className="headPopBarList d-flex justify-content-between">
                   <li>
+                   {/* eslint-disable-next-line */}
                     <div className="input-group">
+                       {/* eslint-disable-next-line */}
                       <a to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</a>
                     </div>
                   </li>
@@ -171,8 +174,8 @@ function HeaderComponent(props) {
                    <ul className="headPopBarList d-flex align-items-center">
                      <li>
                        <div className="input-group searchbar">
-                         <a to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
-                             className="fa fa-search"></i> Search</a>
+                         <Link to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i
+                             className="fa fa-search"></i> Search</Link>
                        </div>
                      </li>
                      <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i>{props.cartItem !==0 ?<Badge variant="primary">{props.cartItem}</Badge> :'' }</span> Cart</Link></li>

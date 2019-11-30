@@ -34,7 +34,7 @@ const ShopPage = (props) => {
 
     useEffect(() => {
       return ( id === 'all') ? props.fetchAllBook() : props.fetchBooksByCategory(id) ;
-    },[]);
+    },[id,props]);
 
   return (
     <>
