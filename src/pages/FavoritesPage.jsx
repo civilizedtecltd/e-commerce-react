@@ -15,8 +15,6 @@ import {showFevItems} from '../redux/actions/favoriteActions'
 const FavoritesPage = (props) => {
 
   const totalItem = props.cart.length 
-  console.log(props)
-
   return (
  
       <div className="allWrapper">
