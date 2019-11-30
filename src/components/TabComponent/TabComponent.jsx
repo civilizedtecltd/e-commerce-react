@@ -1,17 +1,43 @@
 import React,{useState} from 'react';
 
 import {Tabs,Tab}  from 'react-bootstrap';
+import RatingComponent from '../ratingComponent/Rating';
+import ReviewComponent from './ReviewComponent';
+
 import '../../assets/css/productTab.css'
-import reviewAvatar from "../../assets/images/reviews_avater.jpg"
-import RatingComponent from '../ratingComponent/Rating'
+
 
 function TabComponent({description, reviews, specification }) {
     const [key, setKey] = useState('description');
+    const [newReview, setNewReview] = useState({});
+
     const spec = specification[0];
+
+    const getReview = (e) => {
+        setNewReview({
+            ...newReview,
+            comment: e.target.value
+        })
+    }
+
+    const getRating = (rating) => {
+        setNewReview({
+            ...newReview,
+            rating: rating
+        })
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        console.log(newReview);
+    }
+
 
     return (
             ( description === undefined || reviews === undefined || spec === undefined) ? <></> : (
-            <div className="productDetailsTabs">
+
+             <div className="productDetailsTabs">
                 <Tabs defaultActiveKey="description" id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
                 <Tab className="productDes" eventKey="description" title="Description">
                     <p>{description}</p>
@@ -29,98 +55,35 @@ function TabComponent({description, reviews, specification }) {
                         <li><strong>Number of pages : </strong>{ (spec.page_number !== undefined )? spec.page_number : 0 }</li>
                     </ul>
                 </Tab>
-                <Tab eventKey="Reviews" title={`Reviews(${7})`}>
+
+                <Tab eventKey="Reviews" title={`Reviews(${reviews.length})`}>
+
                     <div className="productReviews clearfix">
-
-                        <div className="card singleReview border-0">
-                            <div className="row no-gutters">
-                                <div className="col-auto">
-                                    <div className="reviewUserAvater">
-                                        <img src={ reviewAvatar } alt="" />
-                                    </div>
-                                </div>
-
-                                <div className="col pl-2">
-                                    <div className="reviewCardBody">
-                                        <div className="row reviewUserInfo">
-                                            <div className="col mb-2">
-                                                <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span></h6>
-                                            </div>
-                                            <div className="col">
-                                            <RatingComponent/>
-                                            </div>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            enim ipsam voluptatem quia voluptas quia non numquam eius.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="card singleReview border-0">
-                            <div className="row no-gutters">
-                                <div className="col-auto">
-                                    <div className="reviewUserAvater">
-                                        <img src={reviewAvatar} alt="" />
-                                    </div>
-                                </div>
-
-                                <div className="col pl-2">
-                                    <div className="reviewCardBody">
-                                        <div className="row reviewUserInfo">
-                                            <div className="col mb-2">
-                                                <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span></h6>
-                                            </div>
-                                            <div className="col">
-                                            <RatingComponent/>
-                                            </div>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            enim ipsam voluptatem quia voluptas quia non numquam eius.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="card singleReview border-0">
-                            <div className="row no-gutters">
-                                <div className="col-auto">
-                                    <div className="reviewUserAvater">
-                                        <img src={reviewAvatar} alt="" />
-                                    </div>
-                                </div>
-
-                                <div className="col pl-2">
-                                    <div className="reviewCardBody">
-                                        <div className="row reviewUserInfo">
-                                            <div className="col mb-2">
-                                                <h6 className="reviewUserName">Sam Smith <span className="reviewDate">May 26, 12:31</span></h6>
-                                            </div>
-                                            <div className="col">
-                                             <RatingComponent/>
-                                            </div>
-                                        </div>
-                                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            enim ipsam voluptatem quia voluptas quia non numquam eius.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            {
+                                reviews.map((item, index) => {
+                                    return <ReviewComponent
+                                             key={index}
+                                             name={item.reviewer_name}
+                                             date={item.review_date}
+                                             comment={item.comment}
+                                             rating={item.reviewer_rating}
+                                            />
+                                })
+                            }
                     </div>
+
                     <div className="postReviews clearfix">
                         <h3>Post a review</h3>
-                       <RatingComponent/>
+                        <RatingComponent callback = {getRating}/>
 
                         <form className="postReviewsForm">
-                            <textarea name="" id="" cols="30" rows="5" placeholder="Share your experience"></textarea>
-                            <button className="btn btn-primary mt-3">Post a review</button>
+                            <textarea cols="30" rows="5" placeholder="Share your experience" onChange={getReview}></textarea>
+                            <button className="btn btn-primary mt-3" onClick={onSubmit}>Post a review</button>
                         </form>
                     </div>
 
                 </Tab>
+
             </Tabs>
             </div>
         )

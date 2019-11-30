@@ -18,6 +18,7 @@ import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { URL } from '../constants/config';
 
 import "../pages/assets/product.css";
+import { addToFavorite } from "../redux/actions/favoriteActions";
 
 function ProductPage(props) {
 
@@ -27,16 +28,20 @@ function ProductPage(props) {
 
   const book = (props.book !== undefined ) ? props.book : false;
 
+
   useEffect(() => {
     return props.showSingleBook(id);
-  }, []);
-
+  }, [id,props]);
 
   const handleClose = () => setShow(false);
 
   const updateItemQty = (e) => {
     book.quantity = Number(e.target.value)
   }
+
+ 
+
+
 
   const addToCart = (e) => {
     e.preventDefault();
@@ -154,7 +159,7 @@ function ProductPage(props) {
 
                         }] : {}}
 
-                        reviews = {[]}
+                        reviews = {book.book_review ? book.book_review : []}
                         />
                     </div>
                   </div>
@@ -221,7 +226,8 @@ const mapStateToProps = (state)=> {
 const mapDispatchToProps = (dispatch) => {
     return{
       showSingleBook : (id) => dispatch(showSingleBook(id)),
-      addToCart:       (book) => dispatch(addToCart(book))
+      addToCart:       (book) => dispatch(addToCart(book)),
+      addToFav: (book)=> dispatch(addToFavorite(book))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

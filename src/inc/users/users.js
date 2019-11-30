@@ -23,7 +23,7 @@ export const headerPoppers=[
 
 export const asideData=[
     {
-        LIST_CLASS:'nav-item active',
+        LIST_CLASS:'nav-item',
         URL:'/my-order',
         ICON_NAME:"fas fa-clipboard-list",
         TITLE:"My orders",

@@ -1,6 +1,6 @@
 import * as Types from '../actions/actionTypes';
 import axios from 'axios';
-import { URL } from '../../constants/config'
+import { URL } from '../../constants/config';
 
 
  const fetchAllBook = () => dispatch=> {

@@ -1,19 +1,19 @@
 
-import { createStore, compose, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import rootReducers from "./reducer";
 
 const middleware = [thunk];
 
- const saveToLocalStorage = (state) => {
+/*  const saveToLocalStorage = (state) => {
      try{
         const serialize = JSON.stringify(state);
          localStorage.setItem('state', serialize);
      }catch(ex){
         console.log(ex)
     }
- }
+ } */
 
 const store = createStore(
     rootReducers,
@@ -23,6 +23,6 @@ const store = createStore(
 );
 
 
-store.subscribe(() => saveToLocalStorage(store.getState()));
+// store.subscribe(() => saveToLocalStorage(store.getState()));
 
 export default store

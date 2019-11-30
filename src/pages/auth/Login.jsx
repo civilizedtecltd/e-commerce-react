@@ -1,7 +1,11 @@
 import React, {useState}  from 'react';
-import axios from 'axios';
 
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { connect  } from 'react-redux';
+import { login } from '../../redux/actions/authActions';
+
+import isEmpty from 'lodash/isEmpty';
+
+import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import Swal from 'sweetalert2';
@@ -9,19 +13,24 @@ import withReactContent from 'sweetalert2-react-content';
 
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom } from '../../components/FromComponents/InputComponent';
-import { URL } from '../../constants/config'
+
 
 import './assets/css/auth.css';
 import '../../assets/css/animate.css';
 
+ /* eslint-disable-next-line */
 const mySwal = withReactContent(Swal);
 
 const Login = (props) => {
 
+    console.log(props);
 
   const [formData] = useState({});
 
+  const { auth } = props;
+
   const loginData = (data) => {
+     /* eslint-disable-next-line */
     Object.keys(data).map( key => {
       formData[key] = data[key];
     });
@@ -30,43 +39,40 @@ const Login = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.post(
-        URL._LOGIN,
-        formData
-    ).then( res => {
-      if(res.status === 200){
-          const authData = res.data.data;
-          localStorage.setItem('authData', JSON.stringify(authData));
-          //props.history.goForward();
-          props.history.push('/profile-settings');
-      }
-    }).catch( error => {
-      console.log(error);
-      mySwal.fire({
-          icon: 'error',
-          title: 'Oops..',
-          text: 'Provide valid username and password.',
-          footer: 'Copyright@2019',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Try Again',
-          showClass: {
-            popup: 'animated fadeInDown fast'
-          },
-          hideClass: {
-            popup: 'animated fadeOutUp fast'
-          }
-      }).then(() => {
-            console.log('ok clicked')
-      }, (dismiss) => {
-         if(dismiss == 'cancel'){
-             console.log('cancel button clicked')
-         }
-      })
-
-    });
+    props.login(formData)
   }
+
+    if(!isEmpty(auth)){
+        if(auth.status.success){
+            props.history.goBack();
+        }
+
+        if(!auth.status.success){
+            mySwal.fire({
+                    icon: 'error',
+                    title: 'Oops..',
+                    text: 'Provide valid username and password.',
+                    footer: 'Copyright@2019',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Try Again',
+                    showClass: {
+                    popup: 'animated fadeInDown fast'
+                    },
+                    hideClass: {
+                    popup: 'animated fadeOutUp fast'
+                    }
+            }).then(() => {
+                console.log('ok clicked')
+            }, (dismiss) => {
+                if(dismiss == 'cancel'){
+                    console.log('cancel button clicked')
+                }
+            })
+
+        }
+    }
 
   return (<>
     <div className="AllWrapper fullHeight">
@@ -107,7 +113,7 @@ const Login = (props) => {
 
                   <Link className="linkText mb-3" to="/forgot-password">Forgot password?</Link>
 
-                  <Button type="submit" className="btn submitBtn mb-3 " onClick = { handleSubmit } >LOGIN</Button>
+                  <input type="submit" className="btn submitBtn mb-3 " onClick = { handleSubmit } value="LOGIN"/>
 
                   <p>Don’t have an account yet? <Link className="linkText" to="/signup">Sign up</Link></p>
 
@@ -124,4 +130,12 @@ const Login = (props) => {
   );
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+const mapDispatchToProps = dispatch =>  ({
+    login: (formData) => dispatch(login(formData))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

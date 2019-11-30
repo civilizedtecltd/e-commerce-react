@@ -1,6 +1,5 @@
 
-import React, { useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import React from 'react';
 import {Container, Row, Col, Card,} from 'react-bootstrap';
 import { connect } from 'react-redux'
 import '../pages/assets/home.css'
@@ -24,7 +23,7 @@ const Home = (props) => {
 
     <div className="allWrapper">
           <HeaderComponent
-          cartItem={totalItem}
+            cartItem={totalItem}
           />
           <MobileHeader />
       <main className="mainContent clearfix" id="mainContent">
@@ -127,7 +126,7 @@ const Home = (props) => {
 }
 
 
-const mapStateToProps = ( state ) => {
+const mapStateToProps = (state) => {
   return {
     cart: state.shop.cart
   }

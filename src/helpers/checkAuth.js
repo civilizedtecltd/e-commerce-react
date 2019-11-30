@@ -1,22 +1,46 @@
 import decode from 'jwt-decode';
+import isEmpty from 'lodash/isEmpty';
+import store from '../redux/store';
+import {login, authNotInState} from '../redux/actions/authActions';
 
 const checkAuth = () => {
     try {
-        const clientData = JSON.parse(localStorage.getItem('authData'));
+        const jwt = JSON.parse(localStorage.getItem('authData'));
 
-        if(clientData === null)
+        if(jwt === null)
             return false;
 
-        const token = clientData.jwt.token;
-        const refreshToken = clientData.jwt.refreshToken;
+        const token = jwt.token;
+        const refreshToken = jwt.refreshToken;
 
         if (!token || !refreshToken)
             return false;
 
-        const { exp } = decode(token);
-        console.log(exp);
-        if( exp < new Date().getTime() / 1000 ){
-            return false;
+        const {data, exp} = decode(token);
+
+        const auth = store.getState().auth;
+        if(isEmpty(auth)){
+            const authData = {
+                jwt: jwt,
+                user: data,
+                status: {
+                    success: true
+                }
+            }
+
+            store.dispatch(authNotInState(authData));
+        }
+
+        const currentTime = new Date().getTime()/1000;
+        if(exp <= currentTime ){
+            console.log(`token expired....`);
+            store.dispatch(login({refreshToken: refreshToken}))
+            const auth = store.getState().auth;
+
+            if(!auth.status.success){
+                console.log(auth.status.error)
+                return false;
+            }
         }
 
         return true;

@@ -13,5 +13,19 @@ export const DECREASE_QUANTITY      =   'DECREASE_QUANTITY';
 
 export const DELETE_ALL_FORM_CART   =   'DELETE_ALL_FORM_CART';
 
+//Auth action types
+export const USER_LOGIN             =   'USER_LOGIN';
+export const USER_LOGIN_ERROR       =   'USER_LOGIN_ERROR';
+export const USER_LOGOUT            =   'USER_LOGOUT';
+export const AUTH_NOT_IN_STATE      =   'AUTH_NOT_IN_STATE';
+
+//add to favorite  types
+
+export const ADD_FAVORITE           =   'ADD_FAVORITE';
+export const REMOVE_FAVORITE_ITEM   =   'REMOVE_FAVORITE_ITEM';
+export const GO_TO_CHECKOUT         =   'GO_TO_CHECKOUT';
+export const SHOW_ALL_FAVORITE         =   'SHOW_ALL_FAVORITE';
+
+
 
 

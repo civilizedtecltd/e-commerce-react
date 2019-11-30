@@ -2,10 +2,10 @@ import React from 'react';
 import { Card, Form, Row, Col, Button } from "react-bootstrap";
 
 function PaymentMethodComponent() {
-    return(
-        <Card.Body className="addPaymentCard">
+  return(
+      <Card.Body className="addPaymentCard m-0 p-0">
         <Row>
-          <Col sm="6">
+          <Col>
             <Form className="selectPaymentOption">
               <div className="formRadioGroup bgGray mb-2">
                 <div className="payInfoDetails clearfix">
@@ -18,16 +18,16 @@ function PaymentMethodComponent() {
                             Card number
                           </Form.Label>
                           <Form.Control
-                            type="text"
-                            id="card-number"
+                              type="text"
+                              id="card-number"
                           />
                         </Form.Group>
                       </Col>
 
                       <Col>
                         <img
-                          src=""
-                          alt=""
+                            src=""
+                            alt=""
                         />
                       </Col>
                     </Row>
@@ -38,20 +38,20 @@ function PaymentMethodComponent() {
                           <Form.Label>
                             Expiry date
                           </Form.Label>
-                          <ul class="cardPayFiled d-flex align-items-center justify-content-end">
+                          <ul className="cardPayFiled d-flex align-items-center justify-content-end">
                             <li>
                               <Form.Control
-                                type="text"
-                                id="card-mm"
-                                placeholder="MM"
+                                  type="text"
+                                  id="card-mm"
+                                  placeholder="MM"
                               />
                             </li>
-                            <li class="cardBl">/</li>
+                            <li className="cardBl">/</li>
                             <li>
                               <Form.Control
-                                type="text"
-                                id="card-yy"
-                                placeholder="YY"
+                                  type="text"
+                                  id="card-yy"
+                                  placeholder="YY"
                               />
                             </li>
                           </ul>
@@ -63,8 +63,8 @@ function PaymentMethodComponent() {
                         <Form.Group>
                           <Form.Label> CVV </Form.Label>
                           <Form.Control
-                            type="text"
-                            id="card-cvv"
+                              type="text"
+                              id="card-cvv"
                           />
                         </Form.Group>
                       </Col>
@@ -77,8 +77,8 @@ function PaymentMethodComponent() {
                     <Row>
                       <Col>
                         <Button
-                          variant="primary"
-                          type="submit"
+                            variant="primary"
+                            type="submit"
                         >
                           Add
                         </Button>
@@ -91,8 +91,8 @@ function PaymentMethodComponent() {
           </Col>
         </Row>
       </Card.Body>
-      
-    )
+
+  )
 }
 
 export default PaymentMethodComponent;

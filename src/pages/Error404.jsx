@@ -10,8 +10,6 @@ const styles=`
 .errorPageContent ul li:last-child{margin-right:0px;}
 .errorPageContent ul li a{color:#363636;}
 .errorPageContent ul li a:hover{color:#3897cf;}
-
-
 `
 
 function ErrorPage() {

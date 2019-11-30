@@ -1,13 +1,14 @@
+// eslint-disable-next-line
 import React ,{useState} from 'react';
 import {Container, Row, Col, Form, Badge, Collapse, Modal} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import { useMediaQuery } from 'react-responsive';
 
 import checkAuth from '../../helpers/checkAuth';
 import '../../assets/css/heder.css';
 
-
+// eslint-disable-next-line
 const Mobile = ({ children }) => {
   const isMobile = useMediaQuery({ maxWidth: 991 })
   return isMobile ? children : null
@@ -19,11 +20,11 @@ const Default = ({ children }) => {
 
 
 
-
+// eslint-disable-next-line
 function HeaderComponent(props) {
 
   const [open, setOpen] = useState(false);
-  
+
     return(
     <>
       <Default>
@@ -66,20 +67,20 @@ function HeaderComponent(props) {
                   </button>
                   <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
-                      <li className="nav-item active">
-                        <Link className="nav-link" to="/shop/category/1/Kindergarten school">Kindergarten <span className="sr-only">(current)</span></Link>
+                      <li className="nav-item">
+                        <NavLink exact activeClassName="curent" className="nav-link " to="/shop/category/1/Kindergarten school">Kindergarten <span className="sr-only">(current)</span></NavLink>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/shop/category/2/Primary school">Primary school</Link>
+                        <NavLink exact activeClassName="curent" className="nav-link "  to="/shop/category/2/Primary school">Primary school</NavLink>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/shop/category/3/Secondary school">Secondary school</Link>
+                        <NavLink exact activeClassName="curent" className="nav-link " to="/shop/category/3/Secondary school">Secondary school</NavLink>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/stationery">Stationery</Link>
+                        <NavLink exact activeClassName="curent" className="nav-link " to="/stationery">Stationery</NavLink>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/bibles">Bibles</Link>
+                        <NavLink exact activeClassName="curent" className="nav-link " to="/bibles">Bibles</NavLink>
                       </li>
                     </ul>
                   </div>
@@ -91,13 +92,15 @@ function HeaderComponent(props) {
               <div className="headPopBar clearfix" id="headPopBar">
                 <ul className="headPopBarList d-flex justify-content-between">
                   <li>
+                   {/* eslint-disable-next-line */}
                     <div className="input-group">
+                       {/* eslint-disable-next-line */}
                       <a to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</a>
                     </div>
                   </li>
                   <li><Link to="/favorites"><span className="cartBadge"><i className="far fa-star"></i><Badge variant="danger">10</Badge></span> Favorites</Link></li>
                   <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i>{props.cartItem !==0 ?<Badge variant="primary">{ props.cartItem }</Badge> :'' }</span> Cart</Link></li>
-                  <li>{ (!checkAuth) ? <Link to="/login"><i className="far fa-user"></i> Login</Link> : <Link to="/profile-settings"><i className="far fa-user"></i>My Profile</Link> }</li>
+                  <li>{ (!checkAuth()) ? <Link to="/login"><i className="far fa-user"></i>Login</Link> : <Link to="/profile-settings"><i className="far fa-user"></i>My Profile</Link> }</li>
                   {/* <li><Link to="#"><span className="loginUserAvater">SS</span> Sam Smith</Link></li> */}
                 </ul>
               </div>
@@ -128,7 +131,7 @@ function HeaderComponent(props) {
 
 
 
-  function MobileHeader () {
+  function MobileHeader (props) {
     const [open, setOpen] = useState(false);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -175,9 +178,7 @@ function HeaderComponent(props) {
                              className="fa fa-search"></i> Search</Link>
                        </div>
                      </li>
-                     <li><Link to="#"><span className="cartBadge"><i className="fas fa-shopping-cart"></i> <Badge
-                         variant="primary">10</Badge></span> Cart</Link></li>
-                      {/* <li><Link to="#" className="loginUser"><span className="loginUserAvater">SS</span> <span className="loginuserName">Sam Smith</span> </Link></li> */}
+                     <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i>{props.cartItem !==0 ?<Badge variant="primary">{props.cartItem}</Badge> :'' }</span> Cart</Link></li>
                      <li>
                        <div className="mobileNavModal">
                          <span onClick={handleShow}><i className="fas fa-bars"></i></span>
@@ -208,9 +209,9 @@ function HeaderComponent(props) {
            <Modal.Header className="ModaCloseBtn" closeButton></Modal.Header>
            <Modal.Body>
              <ul className="mobileNav">
-               <li><Link to="/kindergarten">Kindergarten </Link></li>
-               <li><Link to="/primary-school">Primary school </Link></li>
-               <li><Link to="/secondary-school">Secondary school </Link></li>
+               <li><Link to="/shop/category/1/Kindergarten school">Kindergarten </Link></li>
+               <li><Link to="/shop/category/2/Primary school">Primary school </Link></li>
+               <li><Link to="/shop/category/3/Secondary school">Secondary school </Link></li>
                <li><Link to="/stationary">Stationery </Link></li>
                <li><Link to="/bibles">Bibles </Link></li>
              </ul>

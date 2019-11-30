@@ -8,7 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../assets/css/theme.css';
-
+import LazyLoad from 'react-lazyload';
 import {URL} from '../../constants/config';
 
 
@@ -16,7 +16,7 @@ function CategoryHome () {
 
     const [category, setCategory] = useState([]);
 
-    useEffect(()=> {
+    useEffect(() => {
 
             axios.get(URL._CATEGORY)
                 .then(res => {
@@ -95,16 +95,18 @@ function CategoryHome () {
 
                             {category.map((item, index) =>
                                     <Col key={index}>
-                                        <Link to={`/shop/category/${item.id}/${item.category}`}>
-                                            <Card className="productCatCard">
-                                                <div className="productCatMedia">
-                                                    <img src={`${URL.BASE}/${item.image}`} alt="" style={imgStyle} />
-                                                </div>{/* end of productCatMedia*/}
-                                                <Card.Body className="text-center">
-                                                    <h3 className="productCatTitle">{item.category} </h3>
-                                                </Card.Body>{/* end of Card.Body */}
-                                            </Card>{/* end of productCatCard */}
-                                        </Link>
+                                        <LazyLoad once={true} height={200}>
+                                            <Link to={`/shop/category/${item.id}/${item.category}`}>
+                                                <Card className="productCatCard">
+                                                    <div className="productCatMedia">
+                                                        <img src={`${URL.BASE}/${item.image}`} alt="" style={imgStyle} />
+                                                    </div>
+                                                    <Card.Body className="text-center">
+                                                        <h3 className="productCatTitle">{item.category} </h3>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Link>
+                                        </LazyLoad>
                                     </Col>
                                 )
                             }

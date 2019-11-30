@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
+import LazyLoad from 'react-lazyload';
 import { connect  } from 'react-redux';
-import {fetchAllBook, fetchBooksByCategory} from '../redux/actions/bookActions'
-import { LiSpan } from '../components/LiComponent/CommonLiComponent'
-import './assets/shop.css';
+import {fetchAllBook, fetchBooksByCategory} from '../redux/actions/bookActions';
+import { LiSpan } from '../components/LiComponent/CommonLiComponent';
+
 import filter from '../inc/shop/stage';
 import discipline from '../inc/shop/discipline';
 import author from '../inc/shop/author';
@@ -12,16 +13,18 @@ import publish_house from '../inc/shop/publish_house';
 import publish_year from '../inc/shop/publish_year';
 import book_cover from '../inc/shop/book_cover';
 import language from '../inc/shop/language';
+
 // Product Images
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import PriceRanger from "../components/PriceRangeSlider/PriceRangeSlider";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
-import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
+import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
 import { URL } from '../constants/config';
 
 import './assets/shop.css';
 import store from '../redux/store'
+
 const ShopPage = (props) => {
 
     const { id, title } =  useParams();
@@ -31,7 +34,7 @@ const ShopPage = (props) => {
 
     useEffect(() => {
       return ( id === 'all') ? props.fetchAllBook() : props.fetchBooksByCategory(id) ;
-    },[]);
+    },[id,props]);
 
   return (
     <>
@@ -299,7 +302,8 @@ const ShopPage = (props) => {
                             return (
 
                               <Col key = {index} sm="3">
-                              <Card className="productCard border-0 bg-transparent">
+                                <LazyLoad once={true} height={200}>
+                                   <Card className="productCard border-0 bg-transparent">
                                 <div className="productMedia mb-3 bgGray">
                                   <img src={bookCover} alt="" />
                                 </div>
@@ -316,7 +320,7 @@ const ShopPage = (props) => {
                                 </div>
                                 {/* end of productContent */}
                               </Card>
-                              {/* end of productCard */}
+                                </LazyLoad>
                             </Col>
                             );
                         })

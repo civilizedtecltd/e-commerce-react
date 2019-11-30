@@ -38,11 +38,14 @@ const deleteAllFromCart = () => {
 
 
 
+
+
 export {
 
     addToCart,
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
-    deleteAllFromCart
+    deleteAllFromCart,
+  
 }

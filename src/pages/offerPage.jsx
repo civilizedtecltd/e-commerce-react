@@ -34,7 +34,7 @@ const offerPage = () => {
                   <h3 className="offerBannerPara mb-3">On all biology books</h3>
                   <Link to="/shop" className="btn offerBannerBtn shadow">Shop now <i className="fas fa-arrow-right"></i></Link>
                 </div>{/* end of bannerCard */}
-              </Col>{/* end of Col */}
+              </Col>
             </Row>{/* end of Row */}
           </Container>{/* end of Container */}
         </section>{/* end of banner */}
@@ -44,7 +44,7 @@ const offerPage = () => {
             <Row>
               <Col className="text-center">
                 <h2 className="sectionTitle mb-5"><span>New</span> Book</h2>
-              </Col>{/* end of Col */}
+              </Col>
             </Row>{/* end of Row */}
             <div className="ImageSlickOfferPage">
               <ImgSlick/>
@@ -66,7 +66,7 @@ const offerPage = () => {
                     <p className="postPara">Lorem ipsum dolor sit ament, connecter advising elite, sed do elusion</p>
                   </div>{/* end of articleBody */}
                 </article>{/* end of singleArticle */}
-              </Col>{/* end of Col */}
+              </Col>
 
               <Col sm="4">
                 <article className="singleArticle articleArea">
@@ -90,7 +90,7 @@ const offerPage = () => {
                     <p className="postPara">Lorem ipsum dolor sit ament, connecter advising elite, sed do elusion</p>
                     </div>{/* end of articleBody */}
                 </article>{/* end of singleArticle */}
-              </Col>{/* end of Col */}
+              </Col>
 
             </Row>{/* end of Row */}
           </Container>{/* end of Container */}
@@ -101,11 +101,11 @@ const offerPage = () => {
             <Row className="justify-content-between align-items-center mb-5">
               <Col>
                 <h2 className="sectionTitle"><span>Actual </span> New</h2>
-              </Col>{/* end of Col */}
+              </Col>
 
               <Col className="text-right">
                 <Link to="#" className="btn linkBtn">View more</Link>
-              </Col>{/* end of Col */}
+              </Col>
             </Row>{/* end of Row */}
 
             <Row className="justify-content-between">

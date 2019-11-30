@@ -13,18 +13,22 @@
 outline-offset: 0px;
 -webkit-appearance: none;
 }
-
+.headPopBarList li a {
+    cursor: pointer;
+}
 .navbar-expand-lg .navbar-nav .nav-link{
     color: #363636;
     font-size: 16px;
     font-family: 'Crimson Text', serif;
     font-weight: 600;
 }
-    .navbar-expand-lg .navbar-nav .active .nav-link,
+    .navbar-expand-lg .navbar-nav .curent .nav-link,
     .navbar-expand-lg .navbar-nav .nav-link:hover{
         color:#3897cf;
     }
-
+a.curent{
+    color: #3897CF !important;
+}
 .cartBadge{
     position: relative;
 }

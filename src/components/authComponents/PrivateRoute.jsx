@@ -5,10 +5,6 @@ import checkAuth from '../../helpers/checkAuth';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
 
-    const isAuthenticated = checkAuth();
-    const requestedPath = rest.location.pathname;
-
-
     return (
         <Route {...rest} render = { props => {
 

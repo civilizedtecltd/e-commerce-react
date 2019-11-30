@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import decode from 'jwt-decode';
 import axios from 'axios';
-import _ from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 
 
 import Swal from 'sweetalert2';
@@ -21,22 +22,21 @@ const mySwal = withReactContent(Swal);
 const UserProfile = () => {
 
     const [category, setCategory] = useState([]);
-    const [jwt, setJWT] = useState({});
-    const [user, setUser] = useState({});    
+    const [user, setUser] = useState({});
     const [formData] = useState({});
-   
+
     useEffect(() => {
 
         const fetchData = async () => {
           const result = await axios(URL._CATEGORY);
           setCategory(result.data);
         };
-        
-        const getUserData = () => {          
-          const userData = JSON.parse(localStorage.getItem('authData'));                    
-          if(userData !== undefined || !_.isEmpty(userData)){
-            setJWT(userData.token);
-            setUser(userData.info);
+
+        const getUserData = () => {
+          const jwt = JSON.parse(localStorage.getItem('authData'));
+          if(jwt !== null){
+            const { data } = decode(jwt.token);
+            setUser(data);
           }
         }
 
@@ -52,6 +52,7 @@ const UserProfile = () => {
     }
 
     const fromFileData = (data) => {
+       /* eslint-disable-next-line */
         Object.keys(data).map( key => {
             formData[key] = data[key];
         });
@@ -60,7 +61,7 @@ const UserProfile = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if(_.isEmpty(formData))
+        if(isEmpty(formData))
             return;
 
 
@@ -69,7 +70,7 @@ const UserProfile = () => {
             if(formData.password !== undefined ){
 
                 if(String(formData.new_password) !== String(formData.repeat_new_password)){
-                   
+
                     mySwal.fire({
                       icon: 'error',
                       title: 'Oops..',
@@ -95,7 +96,7 @@ const UserProfile = () => {
 
                 }
             }else {
-             
+
                 mySwal.fire({
                   icon: 'error',
                   title: 'Oops..',
@@ -118,14 +119,14 @@ const UserProfile = () => {
                      console.log('cancel button clicked')
                  }
               });
-              
+
             }
         }
         console.log(formData);
     }
 
   return (<>
-    <div className="allWrapper">        
+    <div className="allWrapper">
       <HeaderComponent/>
       <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">

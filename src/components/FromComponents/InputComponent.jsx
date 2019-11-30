@@ -54,8 +54,8 @@ function SelectFrom({ LabelTitle, category, callback }) {
             <Form.Control as="select" id="category" onChange = {handleOnchange}>
                 <option defaultValue="" >Select Category</option>
                 {
-                    (category === undefined ) ? [] : category.map((element) =>
-                        <option key = {element.id} value = {element.id}>{ element.category }</option>
+                    (category === undefined ) ? [] : category.map((element, index) =>
+                        <option key = {index} value = {element.id}>{ element.category }</option>
                     )
                 }
             </Form.Control>

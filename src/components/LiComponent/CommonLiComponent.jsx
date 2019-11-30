@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 
 
@@ -35,10 +35,11 @@ function LiIs({ListClass,Title,IconName}){
 function LiAi({ListClass,Title,Url,IconName,AnchorClass}){
   return (
     <li className={ListClass}>
-        <Link className={AnchorClass} to={Url}><i className={IconName}></i>{Title}</Link>
+        <NavLink exact activeClassName="current" className={AnchorClass} to={Url}><i className={IconName}></i>{Title}</NavLink>
     </li>
   )
 }
+
 
 //List Icon
  function Lii({ListClass, Url, SocialIcon }) {
@@ -72,5 +73,5 @@ export {
     Lii,
     LiIs,
     LiAi,
-    LiSpan
+    LiSpan,
 } ;
