@@ -14,7 +14,7 @@ import { removeFromCart, deleteAllFromCart } from '../redux/actions/shopActions'
 const CartPage = (props) => {
 
   const [ cartItems , setCartItems]  = useState( props.cart )
-  console.log(cartItems)
+ 
 
   let totalItemQuantity=[];
   let totalPrice = [];
