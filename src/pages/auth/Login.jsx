@@ -23,8 +23,6 @@ const mySwal = withReactContent(Swal);
 
 const Login = (props) => {
 
-    console.log(props);
-
   const [formData] = useState({});
 
   const { auth } = props;

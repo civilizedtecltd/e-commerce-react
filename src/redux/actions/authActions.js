@@ -2,6 +2,7 @@ import * as Types from '../actions/actionTypes';
 import axios from 'axios';
 import decode from 'jwt-decode';
 import { URL } from '../../constants/config';
+import setAuthToken from '../../helpers/setAuthToken';
 
 
 const login = (authData) => dispatch => {
@@ -13,6 +14,7 @@ const login = (authData) => dispatch => {
                 const { data } = decode(jwt.token);
 
                 localStorage.setItem('authData', JSON.stringify(jwt));
+                setAuthToken(jwt.token);
 
                 return dispatch({
                     type: Types.USER_LOGIN,
@@ -53,8 +55,8 @@ const login = (authData) => dispatch => {
 }
 
 const logout = () => dispatch => {
-
-    axios.post(URL._LOGOUT)
+    setAuthToken();
+    axios.post(URL._LOGOUT, {})
         .then(res => {
             localStorage.removeItem('authData');
             return dispatch({

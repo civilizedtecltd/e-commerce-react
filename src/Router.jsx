@@ -1,9 +1,9 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-
+import { Route, Switch } from 'react-router-dom';
 
 // User Area
 import Login from './pages/auth/Login';
+import Logout from './pages/auth/Logout'
 import SignUp from './pages/auth/SignUp';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ChangePassword from './pages/auth/changePassword';
@@ -28,6 +28,7 @@ import PrivateRoute from './components/authComponents/PrivateRoute';
 import ErrorPage from './pages/Error404';
 
 
+
 const Router = (props) => (
 
     <Switch location={props.location}>
@@ -48,14 +49,18 @@ const Router = (props) => (
               <Route path="/shop/category/:id?/:title?" component={ShopPage} />
               <Route path="/product/:id" component={ProductPage} />
 
-              <Route path="/logout" render={ (props)=> {
+              {/* <Route path="/logout" render={ (props)=> {
 
                         localStorage.removeItem('authData');
                         return <Redirect to={{ pathname: "/", state: {from: props.location} }} />
                     }
-               } />
+               } /> */}
+
+               <Route path='/logout' component={Logout} />
+
               <Route path='*'  component={ErrorPage} />
     </Switch>
 )
+
 
 export default Router;
