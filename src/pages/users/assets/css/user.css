@@ -21,10 +21,16 @@
     font-weight: 600;
 }
 .userNavBar .nav-link i{padding-right: 10px;}
-.userNavBar .active .nav-link, .userNavBar .nav-link:hover{
+.userNavBar .current .nav-link, .userNavBar .nav-link:hover{
     color: #3897cf;
     background-color: #f9f9f9;
     border-left: 3px solid #3897cf;
+}
+
+.userNavBar a.current{
+    color: #3897cf !important;
+    background-color: #f9f9f9 !important;
+    border-left: 3px solid #3897cf !important;
 }
 
 /*User Main Content*/
@@ -53,7 +59,7 @@
 .btnSm{
     font-size: 12px!important;
     color: #ffffff!important;
-    
+
 }
 .cardBtBorder{
     border-bottom-left-radius: 0px;

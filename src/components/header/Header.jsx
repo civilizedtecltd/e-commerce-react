@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import React ,{useState} from 'react';
 import {Container, Row, Col, Form, Badge, Collapse, Modal} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import { useMediaQuery } from 'react-responsive';
 
@@ -24,7 +24,7 @@ const Default = ({ children }) => {
 function HeaderComponent(props) {
 
   const [open, setOpen] = useState(false);
-  
+
     return(
     <>
       <Default>
@@ -67,20 +67,20 @@ function HeaderComponent(props) {
                   </button>
                   <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
-                      <li className="nav-item active">
-                        <Link className="nav-link" to="/shop/category/1/Kindergarten school">Kindergarten <span className="sr-only">(current)</span></Link>
+                      <li className="nav-item">
+                        <NavLink exact activeClassName="curent" className="nav-link " to="/shop/category/1/Kindergarten school">Kindergarten <span className="sr-only">(current)</span></NavLink>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/shop/category/2/Primary school">Primary school</Link>
+                        <NavLink exact activeClassName="curent" className="nav-link "  to="/shop/category/2/Primary school">Primary school</NavLink>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/shop/category/3/Secondary school">Secondary school</Link>
+                        <NavLink exact activeClassName="curent" className="nav-link " to="/shop/category/3/Secondary school">Secondary school</NavLink>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/stationery">Stationery</Link>
+                        <NavLink exact activeClassName="curent" className="nav-link " to="/stationery">Stationery</NavLink>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/bibles">Bibles</Link>
+                        <NavLink exact activeClassName="curent" className="nav-link " to="/bibles">Bibles</NavLink>
                       </li>
                     </ul>
                   </div>

@@ -18,8 +18,8 @@ const OrderPage = () => {
               <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
                 <nav className="userNav">
                   <ul className="userNavBar">
-                    {asideData.map((aside)=><LiAi
-                      key={Math.floor(Math.random() * 10)}
+                    {asideData.map((aside, index)=><LiAi
+                      key={index}
                       ListClass={aside.LIST_CLASS}
                       Title={aside.TITLE}
                       Url={aside.URL}
@@ -57,8 +57,8 @@ const OrderPage = () => {
                                   <Col sm="3">
                                     <h3 className="cardWidgetTitle mb-3">Kindergarten</h3>
                                     <ul className="cardWidgetList text-center">
-                                    {categoryClass.kindergartenSchool.map(priClass=><Lia
-                                       key={Math.floor(Math.random() * 10)}
+                                    {categoryClass.kindergartenSchool.map((priClass, index)=><Lia
+                                       key={index}
                                        Title={priClass}
                                        Url={'/'}
                                      />)}
@@ -68,8 +68,8 @@ const OrderPage = () => {
                                   <Col sm="3">
                                     <h3 className="cardWidgetTitle mb-3">Primary school</h3>
                                     <ul className="cardWidgetList cardWidgetList2 text-center">
-                                     {categoryClass.primarySchool.map(priClass=><Lia
-                                       key={Math.floor(Math.random() * 10)}
+                                     {categoryClass.primarySchool.map((priClass, index)=><Lia
+                                       key={index}
                                        Title={priClass}
                                        Url={'/'}
                                      />)}
@@ -79,8 +79,8 @@ const OrderPage = () => {
                                   <Col sm="3">
                                     <h3 className="cardWidgetTitle mb-3">Secondary school</h3>
                                     <ul className="cardWidgetList text-center">
-                                    {categoryClass.secondarySchool.map(priClass=><Lia
-                                       key={Math.floor(Math.random() * 10)}
+                                    {categoryClass.secondarySchool.map((priClass, index)=><Lia
+                                       key={index}
                                        Title={priClass}
                                        Url={'/'}
                                      />)}
@@ -90,8 +90,8 @@ const OrderPage = () => {
                                   <Col sm="3">
                                     <h3 className="cardWidgetTitle mb-3">Stationery</h3>
                                     <ul className="cardWidgetList text-center">
-                                     {categoryClass.stationery.map(priClass=><Lia
-                                       key={Math.floor(Math.random() * 10)}
+                                     {categoryClass.stationery.map((priClass, index)=><Lia
+                                       key={index}
                                        Title={priClass}
                                        Url={'/'}
                                      />)}
