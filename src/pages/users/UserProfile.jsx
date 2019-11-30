@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import decode from 'jwt-decode';
 import axios from 'axios';
 import isEmpty from 'lodash/isEmpty';
 
@@ -21,7 +22,6 @@ const mySwal = withReactContent(Swal);
 const UserProfile = () => {
 
     const [category, setCategory] = useState([]);
-    const [jwt, setJWT] = useState({});
     const [user, setUser] = useState({});
     const [formData] = useState({});
 
@@ -33,10 +33,10 @@ const UserProfile = () => {
         };
 
         const getUserData = () => {
-          const userData = JSON.parse(localStorage.getItem('authData'));
-          if(userData !== undefined || !isEmpty(userData)){
-            setJWT(userData.token);
-            setUser(userData.info);
+          const jwt = JSON.parse(localStorage.getItem('authData'));
+          if(jwt !== null){
+            const { data } = decode(jwt.token);
+            setUser(data);
           }
         }
 
