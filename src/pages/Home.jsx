@@ -1,6 +1,5 @@
 
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card,} from 'react-bootstrap';
 import { connect } from 'react-redux'
 import '../pages/assets/home.css'
