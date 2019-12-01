@@ -6,7 +6,8 @@ import { NewBookDB } from "../inc/offerPage/NewBook";
 import { NewBookComponent } from "../components/offerPageComponents/NewBookComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
-import { HeaderComponent, MobileHeader } from "../components/header/Header";
+import  HeaderComponent from "../components/header/Header";
+import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { showFevItems } from '../redux/actions/favoriteActions'
 import { URL } from '../constants/config'
@@ -14,11 +15,11 @@ import { URL } from '../constants/config'
 
 const FavoritesPage = (props) => {
 
-  const totalItem = props.cart.length 
+  const totalItem = props.cart.length
   const favoriteItem = props.favorite;
   console.log(favoriteItem)
   return (
- 
+
       <div className="allWrapper">
         <HeaderComponent
           favorite_item={favoriteItem.length}
@@ -84,7 +85,7 @@ const FavoritesPage = (props) => {
                         </td>
                       </tr>
                       ))}
-                      
+
                     </tbody>
                   </Table>
                 </Col>
@@ -234,7 +235,7 @@ const FavoritesPage = (props) => {
         {/* end of mainContent */}
         <FooterComponent />
       </div>
-  
+
 
   );
 };

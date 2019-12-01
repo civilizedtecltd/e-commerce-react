@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { Container, Row, Col, Card, Form, Button,Table } from "react-bootstrap";
 import {Lia} from '../components/LiComponent/CommonLiComponent';
 import FooterComponent from "../components/FooterComponent/FooterComponent";
-import { HeaderComponent, MobileHeader} from "../components/header/Header";
+import  HeaderComponent from "../components/header/Header";
+import  MobileHeader from "../components/header/MobileHeader";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 import { categoryClass } from "../inc/users/users";

@@ -5,7 +5,8 @@ import {CheckboxComponent} from '../../components/FromComponents/CheckboxCompone
 import{ButtonComponents}from '../../components/ButtonComponents/ButtonComponents'
 import {LiAi} from '../../components/LiComponent/CommonLiComponent';
 import {asideData} from '../../inc/users/users'
-import {HeaderComponent, MobileHeader} from '../../components/header/Header';
+import  HeaderComponent from "../../components/header/Header";
+import  MobileHeader from "../../components/header/MobileHeader";
 
 const Subscription = () => {
   return (<>

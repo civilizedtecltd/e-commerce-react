@@ -1,0 +1,38 @@
+[
+  {
+    "nav_item": "nav-item",
+    "class": "nav-link",
+    "title": "Kindergarten",
+    "Url": "/shop/category/1/Kindergarten school",
+    "active_link": "active"
+  },
+  {
+    "nav_item": "nav-item",
+    "class": "nav-link",
+    "title": "Primary school",
+    "Url": "/shop/category/2/Primary school",
+    "active_link": "active"
+  },
+  {
+    "nav_item": "nav-item",
+    "class": "nav-link",
+    "title": "Secondary school",
+    "Url": "/shop/category/3/Secondary school",
+    "active_link": "active"
+  },
+  {
+    "nav_item": "nav-item",
+    "class": "nav-link",
+    "title": "Stationery",
+    "Url": "/stationary",
+    "active_link": "active"
+  },
+  {
+    "nav_item": "nav-item",
+    "class": "nav-link",
+    "title": "Bibles",
+    "Url": "/bibles",
+    "active_link": "active"
+  }
+
+]
