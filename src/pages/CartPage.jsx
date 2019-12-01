@@ -14,7 +14,7 @@ import { removeFromCart, deleteAllFromCart } from '../redux/actions/shopActions'
 const CartPage = (props) => {
   const favoriteItem = props.favorite
   const [ cartItems , setCartItems]  = useState( props.cart )
- 
+
   let totalItemQuantity=[];
   let totalPrice = [];
   let delivery_cost = 0
@@ -52,7 +52,7 @@ const CartPage = (props) => {
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent 
+        <HeaderComponent
         favorite_item={favoriteItem.length}
         cartItem={ cartItems.length } />
         <MobileHeader />
@@ -104,8 +104,8 @@ const CartPage = (props) => {
 
 
                         <tbody>
-                          { cartItems.map( (item, index) =>(<tr>
-                            <td key={index}>
+                          { cartItems.map( (item, index) =>(<tr key={index}>
+                            <td>
                               <div className="cartProductDetails d-flex flex-fill align-items-center">
                                 <div className="cartProductMedia bgGray ">
                                   <img src={URL.BASE +"/"+ JSON.parse( item.cover_images).img_1 } alt="" />
@@ -172,7 +172,7 @@ const CartPage = (props) => {
                           <span className="pPrice">${ totalPrice + delivery_cost}</span>
                       </li>
                     </ul>
-                    <Link className="btn btn-primary mt-3">Checkout</Link>
+                    <Link to="/checkout" className="btn btn-primary mt-3">Checkout</Link>
                   </div>
                 </Col>
               </Row>
