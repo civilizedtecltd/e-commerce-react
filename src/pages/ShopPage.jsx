@@ -26,7 +26,7 @@ import './assets/shop.css';
 
 
 const ShopPage = (props) => {
-
+    
     const { id, title } =  useParams();
     const totalItem = props.cart.length
     const favoriteItem = props.favorite;
@@ -57,10 +57,8 @@ const ShopPage = (props) => {
                 </Col>
               </Row>
             </Container>
-            {/* end of Container */}
           </section>
-          {/* end of Breadcrumb */}
-
+          
           <section
             className="productsBodyAsidebar clearfix"
             id="productsBodyAsidebar"
@@ -88,10 +86,8 @@ const ShopPage = (props) => {
                           />)
                           )}
                         </ul>
-                        {/* end of filterList */}
                       </div>
-                      {/* end of singleFilterCard */}
-
+      
                       <div className="singleFilterCard">
                         <h5>Discipline</h5>
                         <ul className="filterList">
@@ -105,9 +101,8 @@ const ShopPage = (props) => {
                                 />)
                             )}
                         </ul>
-                        {/* end of filterList */}
                       </div>
-                      {/* end of singleFilterCard */}
+
 
                       <div className="singleFilterCard">
                         <h5>Price Range</h5>

@@ -6,6 +6,14 @@ const addToFavorite = (id) => {
     }
 }
 
+
+const removeFavItem = (id) => {
+    return{
+        type:Types.REMOVE_FAVORITE_ITEM,
+        payload:id
+    }
+}
+
 const showFevItems = (book) => {
     return {
         type: Types.SHOW_ALL_FAVORITE ,
@@ -15,5 +23,6 @@ const showFevItems = (book) => {
 
 export{
     addToFavorite,
-    showFevItems
+    showFevItems,
+    removeFavItem
 }

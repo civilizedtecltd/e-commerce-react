@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col, Card, Table } from "react-bootstrap";
+import { createUseStyles } from 'react-jss'
+import { Container, Row, Col, Card, Table} from "react-bootstrap";
 import { connect } from 'react-redux'
 import { NewBookDB } from "../inc/offerPage/NewBook";
 import { NewBookComponent } from "../components/offerPageComponents/NewBookComponent";
@@ -9,20 +10,37 @@ import FooterComponent from "../components/FooterComponent/FooterComponent";
 import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
-import { showFevItems } from '../redux/actions/favoriteActions'
+import { showFevItems, removeFavItem } from '../redux/actions/favoriteActions'
 import { URL } from '../constants/config'
 
-
+const useStyle = createUseStyles({
+  addFavImage:{
+    height:100,
+    width:100
+  },
+  textLarge:{
+    fontSize:30,
+  }
+})
 const FavoritesPage = (props) => {
+  const classes = useStyle()
+  const totalItem = props.cart.length 
+  const [favorite,setFavorite ] = useState( props.favorite )
 
-  const totalItem = props.cart.length
-  const favoriteItem = props.favorite;
-  console.log(favoriteItem)
+  const handleClick = (event) => {
+    favorite.find((item, index) => {
+      if (Number(item.id) === Number(event.target.id)) {
+        props.removeFavItem(item.id)
+        favorite.splice(index, 1)
+      }
+    })
+
+  }
+
   return (
-
       <div className="allWrapper">
         <HeaderComponent
-          favorite_item={favoriteItem.length}
+          favorite_item={favorite.length}
           cartItem={totalItem}
         />
         <MobileHeader />
@@ -44,7 +62,7 @@ const FavoritesPage = (props) => {
             <Container>
 
               <Row>
-               { favoriteItem.length ===0 ?  <Col xs={12}>
+               { favorite.length ===0 ? <Col xs={12}>
                   <div className="contentArea text-center mt-5 mb-5">
                     <h2 className="sectionTitle mb-3">
                       You don’t have any <span>Favorites</span>
@@ -56,41 +74,37 @@ const FavoritesPage = (props) => {
                     </p>
 
                   </div>
-                </Col> : <Col xs={12}>
-                  <Table bordered>
-                    <thead>
-                      <tr>
-                        <th className="text-center">Product Name</th>
-                        <th className="text-center">Price</th>
-                        <th className="text-center">Discount</th>
-                        <th className="text-center">Image</th>
-                        <th className="text-center">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {favoriteItem.map((item,index)=>(
-                        <tr key={index}>
-                        <td className="text-center item-center" >{item.name}</td>
-                        <td className="text-center" >{item.price}</td>
-                        <td className="text-center" >{0}</td>
-                        <td className="text-center">
-                          <img style={{height:100, width:100}} src={`${URL.BASE}/${JSON.parse(item.cover_images).img_1}`} alt="product"/>
-                          </td>
-                        <td className="text-center" >
-                          <button style={{backgroundColor:'red'}} className="btn btn-danger">&times;</button>
-                          &nbsp;
-                          &nbsp;
-                          &nbsp;
-                          <button style={{backgroundColor:'white' , color:"black"}} className="btn">Checkout</button>
-                        </td>
-                      </tr>
-                      ))}
-
-                    </tbody>
-                  </Table>
+                </Col> :
+                <Col xs={12}>
+                   <Card className="table-responsive border-0 cartTableBody">
+                    <Card.Body className="p-0">
+                      <Table>
+                        <tbody>
+                         {favorite.map((item,index)=>
+                            <tr key={index}>
+                            <td>
+                              <div className="image">
+                                <img className={classes.addFavImage} src={`${URL.BASE}/${JSON.parse(item.cover_images).img_1}`} />
+                                <p>{item.name}</p>
+                              </div>
+                            </td>
+                            <td>
+                              <div className={classes.textLarge}>${item.price}</div>
+                            </td>
+                            <td>
+                              <div className="text-center">
+                                <button className="btn btn-danger" id={item.id} onClick={ handleClick }>Remove</button>
+                              </div>
+                            </td>
+                            </tr>
+                         )}
+                        </tbody> 
+                      </Table>
+                    </Card.Body>
+                  </Card>
                 </Col>
                  }
-                </Row>
+                 </Row>
 
 
               <Row>
@@ -215,11 +229,8 @@ const FavoritesPage = (props) => {
                   />
                 ))}
               </Row>
-              {/* end of Row */}
             </Container>
-            {/* end of Container */}
           </section>
-          {/* end of favoritesItems */}
 
           <section
             className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap"
@@ -228,14 +239,11 @@ const FavoritesPage = (props) => {
             <Container className="container">
               <NewsLetterComponent />
             </Container>
-            {/* end of Container */}
           </section>
-          {/* end of mailSubscribe */}
         </main>
-        {/* end of mainContent */}
         <FooterComponent />
       </div>
-
+  
 
   );
 };
@@ -249,7 +257,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps =(dispatch) => {
     return {
-       showFav: (state) => dispatch(showFevItems(state))
+       showFav: (state) => dispatch(showFevItems(state)),
+       removeFavItem: (id) => dispatch(removeFavItem(id))
     }
 }
 
