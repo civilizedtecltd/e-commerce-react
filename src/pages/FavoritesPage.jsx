@@ -28,10 +28,9 @@ const FavoritesPage = (props) => {
   const [favorite,setFavorite ] = useState( props.favorite )
 
   const handleClick = (event) => {
-    event.preventDefault()
-    favorite.find((book, index) => {
-      if (Number(book.id) === Number(event.target.id)) {
-        props.removeFavItem(book.id)
+    favorite.find((item, index) => {
+      if (Number(item.id) === Number(event.target.id)) {
+        props.removeFavItem(item.id)
         favorite.splice(index, 1)
       }
     })
@@ -86,6 +85,7 @@ const FavoritesPage = (props) => {
                             <td>
                               <div className="image">
                                 <img className={classes.addFavImage} src={`${URL.BASE}/${JSON.parse(item.cover_images).img_1}`} />
+                                <p>{item.name}</p>
                               </div>
                             </td>
                             <td>
@@ -93,7 +93,7 @@ const FavoritesPage = (props) => {
                             </td>
                             <td>
                               <div className="text-center">
-                                <button className="btn btn-danger" id={item.id} onClick={handleClick}>Remove</button>
+                                <button className="btn btn-danger" id={item.id} onClick={ handleClick }>Remove</button>
                               </div>
                             </td>
                             </tr>
