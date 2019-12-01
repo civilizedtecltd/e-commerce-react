@@ -126,8 +126,7 @@ const offerPage = (props) => {
                 )
               }
 
-
-            </Row>{/* end of Row */}
+            </Row>
           </Container>{/* end of Container */}
         </section>{/* end of newProduct */}
 
