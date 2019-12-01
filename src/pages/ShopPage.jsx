@@ -28,7 +28,7 @@ const ShopPage = (props) => {
     
     const { id, title } =  useParams();
     const totalItem = props.cart.length
-    const favoriteItem = props.favorite; 
+    const favoriteItem = props.favorite;
     const books = (props.book !== undefined ) ? props.book : [];
 
     useEffect(() => {

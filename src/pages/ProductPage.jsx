@@ -27,8 +27,6 @@ const useStyles = createUseStyles({
 
 function ProductPage(props) {
 
-  console.log(props)
-
   const classes = useStyles()
   const { id } = useParams();
   const [show, setShow] = useState(false);
@@ -45,7 +43,7 @@ function ProductPage(props) {
     book.quantity = Number(e.target.value)
   }
 
- 
+
 
   const addToCart = (e) => {
     e.preventDefault();
@@ -57,9 +55,9 @@ function ProductPage(props) {
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent 
+        <HeaderComponent
         favorite_item={favoriteItem.length}
-        cartItem = { props.totalItems } 
+        cartItem = { props.totalItems }
         />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">

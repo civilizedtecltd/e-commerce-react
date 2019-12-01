@@ -15,22 +15,20 @@ import { URL } from '../constants/config'
 const FavoritesPage = (props) => {
 
   const totalItem = props.cart.length 
-  const [favoriteItem, setFavorite ] = useState(props.favorite);
+  const [ favoriteItem ] = useState( props.favorite );
+
 
   const handleClick = (event) => {
     event.preventDefault()
-    favoriteItem.find((book,index)=>{
-      if(Number(book.id) === Number(event.target.id) ){
-         props.removeItem(book.id)
-         favoriteItem.splice(index,1)
+    props.favorite.find((book,index)=>{
+      if(Number(book.id) === Number(event.target.id)){
+        props.removeItem(book.id)
+        favoriteItem.splice(index,1)
       }
     })
-
   }
 
-
   return (
- 
       <div className="allWrapper">
         <HeaderComponent
           favorite_item={favoriteItem.length}
@@ -68,35 +66,14 @@ const FavoritesPage = (props) => {
 
                   </div>
                 </Col> : <Col xs={12}>
-                  <Table bordered>
-                    <thead>
-                      <tr>
-                        <th className="text-center">Product Name</th>
-                        <th className="text-center">Price</th>
-                        <th className="text-center">Discount</th>
-                        <th className="text-center">Image</th>
-                        <th className="text-center">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {  <Col>
-                  <Card className="table-responsive border-0 cartTableBody">
+                  
+                  { <Card className="table-responsive border-0 cartTableBody">
                     <Card.Body className="p-0">
-                      <Table responsive className="cardTable">
-                        <thead>
-                          <tr>
-                            <th>Goods</th>
-                            <th>Price</th>
-                            <th>Amount</th>
-                            <th>Total</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-
-
+                      <Table>
                         <tbody>
-                          {favoriteItem.map( (item, index) =>(<tr key={index}>
-                            <td >
+                          { props.favorite.map( (item, index) =>(
+                          <tr key={index}>
+                            <td>
                               <div className="cartProductDetails d-flex flex-fill align-items-center">
                                 <div className="cartProductMedia bgGray ">
                                   <img src={ URL.BASE +"/"+ JSON.parse( item.cover_images).img_1 } alt="" />
@@ -109,12 +86,8 @@ const FavoritesPage = (props) => {
                               </div>
                             </td>
                           <td>${ item.price }</td>
-                            <td className="cartQntN">
-                              <Form.Control type="number" placeholder="1" defaultValue={ item.quantity } />
-                            </td>
-                          <td>${ item.price * item.quantity }</td>
                             <td>
-                              <Button className="btn btn-danger" id={item.id} onClick={handleClick}>
+                              <Button className="btn btn-danger" id={item.id} onClick={ handleClick }>
                                 Delete <i className="fas fa-times"></i>
                               </Button>
                             </td>
@@ -122,16 +95,12 @@ const FavoritesPage = (props) => {
                           ))}
 
                         </tbody>
-                      </Table>
+                        </Table>
                     </Card.Body>
-                  </Card>
-                </Col>}
-                      
-                    </tbody>
-                  </Table>
+                  </Card>}
                 </Col>
                  }
-                </Row>
+                 </Row>
 
 
               <Row>
