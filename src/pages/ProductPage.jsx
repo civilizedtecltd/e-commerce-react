@@ -27,6 +27,8 @@ const useStyles = createUseStyles({
 
 function ProductPage(props) {
 
+  console.log(props)
+
   const classes = useStyles()
   const { id } = useParams();
   const [show, setShow] = useState(false);
@@ -44,8 +46,6 @@ function ProductPage(props) {
   }
 
  
-
-
 
   const addToCart = (e) => {
     e.preventDefault();
@@ -234,8 +234,8 @@ const mapStateToProps = (state)=> {
 const mapDispatchToProps = (dispatch) => {
     return{
       showSingleBook : (id) => dispatch(showSingleBook(id)),
-      addToCart:       (book) => dispatch(addToCart(book)),
-      addToFav: (book)=> dispatch(addToFavorite(book))
+      addToCart      :       (book) => dispatch(addToCart(book)),
+      addToFav       : (book)=> dispatch(addToFavorite(book))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

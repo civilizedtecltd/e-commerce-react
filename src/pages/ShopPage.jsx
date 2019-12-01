@@ -25,7 +25,7 @@ import './assets/shop.css';
 
 
 const ShopPage = (props) => {
-
+    console.log(props)
     const { id, title } =  useParams();
     const totalItem = props.cart.length
     const favoriteItem = props.favorite; 
@@ -424,12 +424,13 @@ const ShopPage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => (
-  {
-  cart: state.shop.cart,
-  favorite:state.favorite
+const mapStateToProps = (state) =>{
+  return {
+    ...state,
+   cart: state.shop.cart,
+   favorite: state.favorite
   }
-)
+}
 
 const mapDispatchToProps =(dispatch) => {
   return {
