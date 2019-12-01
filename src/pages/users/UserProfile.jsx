@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import decode from 'jwt-decode';
+import { connect  } from 'react-redux';
 import axios from 'axios';
 import isEmpty from 'lodash/isEmpty';
 
@@ -19,10 +19,10 @@ import './assets/css/user.css';
 
 const mySwal = withReactContent(Swal);
 
-const UserProfile = () => {
+const UserProfile = (props) => {
 
     const [category, setCategory] = useState([]);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({...props.auth.user });
     const [formData] = useState({});
 
     useEffect(() => {
@@ -31,18 +31,7 @@ const UserProfile = () => {
           const result = await axios(URL._CATEGORY);
           setCategory(result.data);
         };
-
-        const getUserData = () => {
-          const jwt = JSON.parse(localStorage.getItem('authData'));
-          if(jwt !== null){
-            const { data } = decode(jwt.token);
-            setUser(data);
-          }
-        }
-
         fetchData();
-        getUserData();
-
       }, []);
 
 
@@ -286,4 +275,8 @@ const UserProfile = () => {
   </>);
 }
 
-export default UserProfile;
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, null)(UserProfile);
