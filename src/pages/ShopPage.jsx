@@ -21,25 +21,27 @@ import PriceRanger from "../components/PriceRangeSlider/PriceRangeSlider";
 import {HeaderComponent, MobileHeader} from "../components/header/Header";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
 import { URL } from '../constants/config';
-
 import './assets/shop.css';
-import store from '../redux/store'
+
 
 const ShopPage = (props) => {
 
     const { id, title } =  useParams();
-
-    const totalItem = store.getState().shop.cart.length
+    const totalItem = props.cart.length
+    const favoriteItem = props.favorite; 
     const books = (props.book !== undefined ) ? props.book : [];
 
     useEffect(() => {
       return ( id === 'all') ? props.fetchAllBook() : props.fetchBooksByCategory(id) ;
-    },[id,props]);
+    },[]);
 
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent cartItem={totalItem} />
+        <HeaderComponent
+         favorite_item={favoriteItem.length}
+         cartItem={totalItem}
+          />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
@@ -422,11 +424,12 @@ const ShopPage = (props) => {
   );
 };
 
-const mapStateToProps = (state) =>{
-        return {
-          ...state
-        }
-}
+const mapStateToProps = (state) => (
+  {
+  cart: state.shop.cart,
+  favorite:state.favorite
+  }
+)
 
 const mapDispatchToProps =(dispatch) => {
   return {

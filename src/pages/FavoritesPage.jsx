@@ -8,17 +8,20 @@ import { NewsLetterComponent } from "../components/offerPageComponents/NewsLette
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { HeaderComponent, MobileHeader } from "../components/header/Header";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
-import {showFevItems} from '../redux/actions/favoriteActions'
-
+import { showFevItems } from '../redux/actions/favoriteActions'
+import { URL } from '../constants/config'
 
 
 const FavoritesPage = (props) => {
 
   const totalItem = props.cart.length 
+  const favoriteItem = props.favorite;
+  console.log(favoriteItem)
   return (
  
       <div className="allWrapper">
         <HeaderComponent
+          favorite_item={favoriteItem.length}
           cartItem={totalItem}
         />
         <MobileHeader />
@@ -34,15 +37,13 @@ const FavoritesPage = (props) => {
                 </Col>
               </Row>
             </Container>
-            {/* end of Container */}
           </section>
-          {/* end of Breadcrumb */}
 
           <section className="chooseCategory clearfix" id="chooseCategory">
             <Container>
 
               <Row>
-                <Col xs={12}>
+               { favoriteItem.length ===0 ?  <Col xs={12}>
                   <div className="contentArea text-center mt-5 mb-5">
                     <h2 className="sectionTitle mb-3">
                       You don’t have any <span>Favorites</span>
@@ -54,9 +55,7 @@ const FavoritesPage = (props) => {
                     </p>
 
                   </div>
-                </Col>
-
-                <Col xs={12}>
+                </Col> : <Col xs={12}>
                   <Table bordered>
                     <thead>
                       <tr>
@@ -68,12 +67,13 @@ const FavoritesPage = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td className="text-center item-center" >Table cell</td>
-                        <td className="text-center" >Table cell</td>
-                        <td className="text-center" >Table cell</td>
+                      {favoriteItem.map((item,index)=>(
+                        <tr key={index}>
+                        <td className="text-center item-center" >{item.name}</td>
+                        <td className="text-center" >{item.price}</td>
+                        <td className="text-center" >{0}</td>
                         <td className="text-center">
-                          <img style={{height:100, width:100}} src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTRgjbFE_om3PsFCVPztEJWLEKiaAqWMq4-liWLu46JS4N3fNSH" alt="product"/>
+                          <img style={{height:100, width:100}} src={`${URL.BASE}/${JSON.parse(item.cover_images).img_1}`} alt="product"/>
                           </td>
                         <td className="text-center" >
                           <button style={{backgroundColor:'red'}} className="btn btn-danger">&times;</button>
@@ -83,11 +83,13 @@ const FavoritesPage = (props) => {
                           <button style={{backgroundColor:'white' , color:"black"}} className="btn">Checkout</button>
                         </td>
                       </tr>
+                      ))}
+                      
                     </tbody>
                   </Table>
                 </Col>
-
-              </Row>
+                 }
+                </Row>
 
 
               <Row>
@@ -143,9 +145,7 @@ const FavoritesPage = (props) => {
                                 <Link to="#">Class 8</Link>
                               </li>
                             </ul>
-                            {/* end of cardWidgetList */}
                           </Col>
-                          {/* end of Col */}
 
                           <Col sm="3">
                             <h3 className="cardWidgetTitle mb-3">
@@ -165,9 +165,7 @@ const FavoritesPage = (props) => {
                                 <Link to="#">Form 4</Link>
                               </li>
                             </ul>
-                            {/* end of cardWidgetList */}
                           </Col>
-                          {/* end of Col */}
 
                           <Col sm="3">
                             <h3 className="cardWidgetTitle mb-3">Stationery</h3>
@@ -187,25 +185,16 @@ const FavoritesPage = (props) => {
                                 <Link to="#">Bibles</Link>
                               </li>
                             </ul>
-                            {/* end of cardWidgetList */}
                           </Col>
-                          {/* end of Col */}
                         </Row>
-                        {/* end of Row */}
                       </div>
-                      {/* end of cardContentDetails */}
                     </Card.Body>
-                    {/* end of Card.Body */}
                   </Card>
-                  {/* end of Card */}
                 </Col>
-                {/* end of Col */}
               </Row>
-              {/* end of Row */}
             </Container>
-            {/* end of Container */}
           </section>
-          {/* end of chooseCategory */}
+
 
           <section
             className="favoritesItems secGap productView clearfix"
@@ -259,7 +248,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps =(dispatch) => {
     return {
-       addToFav: (state) => dispatch(showFevItems(state))
+       showFav: (state) => dispatch(showFevItems(state))
     }
 }
 

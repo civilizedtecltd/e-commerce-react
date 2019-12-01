@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
+import {connect} from 'react-redux'
 import  './assets/offerPage.css';
 import '../assets/css/theme.css';
 // Product Images
@@ -14,14 +15,16 @@ import {HeaderComponent, MobileHeader} from '../components/header/Header';
 
 import store from '../redux/store'
 
-const offerPage = () => {
+const offerPage = (props) => {
 
-  const totalItem = store.getState().shop.cart.length
-
-  return (<>
-
+  const totalItem = props.cart.length
+  const favoriteItem = props.favorite; 
+  return (
     <div className="allWrapper">
-      <HeaderComponent cartItem={totalItem}/>
+      <HeaderComponent 
+      favorite_item={favoriteItem.length}
+      cartItem={totalItem}
+      />
       <MobileHeader />
       <main className="mainContent clearfix" id="mainContent">
         <section className="offerBanner clearfix sectionBgImage sectionBgImg02" id="offerBanner">
@@ -33,11 +36,11 @@ const offerPage = () => {
                   <h2 className="discountTxt mb-3">50%</h2>
                   <h3 className="offerBannerPara mb-3">On all biology books</h3>
                   <Link to="/shop" className="btn offerBannerBtn shadow">Shop now <i className="fas fa-arrow-right"></i></Link>
-                </div>{/* end of bannerCard */}
+                </div>
               </Col>
-            </Row>{/* end of Row */}
-          </Container>{/* end of Container */}
-        </section>{/* end of banner */}
+            </Row>
+          </Container>
+        </section>
 
         <section className="newProduct productView secGap bgGray clearfix" id="newProduct">
           <Container>
@@ -45,12 +48,12 @@ const offerPage = () => {
               <Col className="text-center">
                 <h2 className="sectionTitle mb-5"><span>New</span> Book</h2>
               </Col>
-            </Row>{/* end of Row */}
+            </Row>
             <div className="ImageSlickOfferPage">
               <ImgSlick/>
             </div>
-          </Container>{/* end of Container */}
-        </section>{/* end of newProduct */}
+          </Container>
+        </section>
 
         <section className="blogArea secGap clearfix" id="blogArea">
           <Container>
@@ -59,7 +62,7 @@ const offerPage = () => {
                 <article className="singleArticle articleArea">
                   <div className="articleMedia">
                     <img src={blogPostImage1} alt="" />
-                  </div>{/* end of articleMedia */}
+                  </div>
 
                   <div className="articleBody p-5">
                     <h2 className="postTitle mb-2"><Link to="#">New books on math</Link></h2>
@@ -72,7 +75,7 @@ const offerPage = () => {
                 <article className="singleArticle articleArea">
                   <div className="articleMedia">
                     <img src={blogPostImage1} alt="" />
-                  </div>{/* end of articleMedia */}
+                  </div>
 
                   <div className="articleBody p-3">
                     <h2 className="postTitle mb-1"><Link to="#">Environment programme</Link></h2>
@@ -83,7 +86,7 @@ const offerPage = () => {
                 <article className="singleArticle articleArea mt-3">
                   <div className="articleMedia">
                     <img src={blogPostImage1} alt="" />
-                  </div>{/* end of articleMedia */}
+                  </div>
 
                   <div className="articleBody p-3">
                     <h2 className="postTitle mb-1"><Link to="#">Environment programme</Link></h2>
@@ -138,10 +141,14 @@ const offerPage = () => {
 
       </main>{/* end of mainContent */}
      <FooterComponent/>
-    </div>{/* end of allWrapper */}
-
-
-  </>);
+    </div>);
 }
 
-export default offerPage;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.shop.cart,
+    favorite: state.favorite
+  }
+}
+
+export default connect(mapStateToProps,null) (offerPage);

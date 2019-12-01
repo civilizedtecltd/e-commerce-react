@@ -2,11 +2,9 @@
 import { connect } from 'react-redux'
 import { Container, Modal, Button, Row, Col } from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
-
+import {createUseStyles} from 'react-jss'
 import { showSingleBook } from '../redux/actions/bookActions'
 import { addToCart } from '../redux/actions/shopActions'
-
-
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
@@ -16,22 +14,28 @@ import TabComponent from "../components/TabComponent/TabComponent";
 import RatingComponent from "../components/ratingComponent/Rating";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { URL } from '../constants/config';
-
 import "../pages/assets/product.css";
 import { addToFavorite } from "../redux/actions/favoriteActions";
 
+const useStyles = createUseStyles({
+  addFevButton: {
+    color: 'skyblue',
+    backgroundColor: 'white'
+  },
+})
+
+
 function ProductPage(props) {
 
+  const classes = useStyles()
   const { id } = useParams();
-
   const [show, setShow] = useState(false);
-
   const book = (props.book !== undefined ) ? props.book : false;
-
+  const favoriteItem = props.favorite;
 
   useEffect(() => {
     return props.showSingleBook(id);
-  }, [id,props]);
+  }, []);
 
   const handleClose = () => setShow(false);
 
@@ -53,7 +57,10 @@ function ProductPage(props) {
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent cartItem = { props.totalItems } />
+        <HeaderComponent 
+        favorite_item={favoriteItem.length}
+        cartItem = { props.totalItems } 
+        />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
@@ -138,9 +145,9 @@ function ProductPage(props) {
                           </div>
 
                           <div className="col text-center">
-                            <Link to="/add-to-fev" className="btn linkBtnBorder">
+                            <Button className={`btn linkBtnBorder ${classes.addFevButton}`} onClick={()=>props.addToFav(book)}>
                               <i className="far fa-star"></i>Add to favorites
-                            </Link>
+                            </Button>
                           </div>
                         </div>
                         <hr className="hrBorder mt-4" />
@@ -218,7 +225,8 @@ const mapStateToProps = (state)=> {
   return {
     book: state.book[0],
     cart: state.shop.cart,
-    totalItems: state.shop.cart.length
+    totalItems: state.shop.cart.length,
+    favorite: state.favorite
   }
 }
 

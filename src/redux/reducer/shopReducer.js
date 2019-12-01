@@ -13,6 +13,7 @@ const shopReducer = (state = initSate, { type, payload }) => {
             case Types.ADD_TO_CART:
 
                     const localState = JSON.parse(localStorage.getItem('state'));
+                
                     updatedCart = ((localState.shop.cart !== undefined ) ? localState.shop.cart : [] )
 
                     updatedItemIndex = updatedCart.findIndex(item => item.id === payload.id )
