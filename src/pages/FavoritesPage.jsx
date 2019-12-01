@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col, Card, Table } from "react-bootstrap";
+import { Container, Row, Col, Card, Table,Form , Button } from "react-bootstrap";
 import { connect } from 'react-redux'
 import { NewBookDB } from "../inc/offerPage/NewBook";
 import { NewBookComponent } from "../components/offerPageComponents/NewBookComponent";
@@ -8,15 +8,27 @@ import { NewsLetterComponent } from "../components/offerPageComponents/NewsLette
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { HeaderComponent, MobileHeader } from "../components/header/Header";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
-import { showFevItems } from '../redux/actions/favoriteActions'
+import { showFevItems, removeFavItem } from '../redux/actions/favoriteActions'
 import { URL } from '../constants/config'
 
 
 const FavoritesPage = (props) => {
 
   const totalItem = props.cart.length 
-  const favoriteItem = props.favorite;
-  console.log(favoriteItem)
+  const [favoriteItem, setFavorite ] = useState(props.favorite);
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    favoriteItem.find((book,index)=>{
+      if(Number(book.id) === Number(event.target.id) ){
+         props.removeItem(book.id)
+         favoriteItem.splice(index,1)
+      }
+    })
+
+  }
+
+
   return (
  
       <div className="allWrapper">
@@ -43,7 +55,7 @@ const FavoritesPage = (props) => {
             <Container>
 
               <Row>
-               { favoriteItem.length ===0 ?  <Col xs={12}>
+               { favoriteItem.length ===0 ? <Col xs={12}>
                   <div className="contentArea text-center mt-5 mb-5">
                     <h2 className="sectionTitle mb-3">
                       You don’t have any <span>Favorites</span>
@@ -67,23 +79,53 @@ const FavoritesPage = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {favoriteItem.map((item,index)=>(
-                        <tr key={index}>
-                        <td className="text-center item-center" >{item.name}</td>
-                        <td className="text-center" >{item.price}</td>
-                        <td className="text-center" >{0}</td>
-                        <td className="text-center">
-                          <img style={{height:100, width:100}} src={`${URL.BASE}/${JSON.parse(item.cover_images).img_1}`} alt="product"/>
-                          </td>
-                        <td className="text-center" >
-                          <button style={{backgroundColor:'red'}} className="btn btn-danger">&times;</button>
-                          &nbsp;
-                          &nbsp;
-                          &nbsp;
-                          <button style={{backgroundColor:'white' , color:"black"}} className="btn">Checkout</button>
-                        </td>
-                      </tr>
-                      ))}
+                      {  <Col>
+                  <Card className="table-responsive border-0 cartTableBody">
+                    <Card.Body className="p-0">
+                      <Table responsive className="cardTable">
+                        <thead>
+                          <tr>
+                            <th>Goods</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                            <th>Total</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+
+
+                        <tbody>
+                          {favoriteItem.map( (item, index) =>(<tr key={index}>
+                            <td >
+                              <div className="cartProductDetails d-flex flex-fill align-items-center">
+                                <div className="cartProductMedia bgGray ">
+                                  <img src={ URL.BASE +"/"+ JSON.parse( item.cover_images).img_1 } alt="" />
+                                </div>
+                                <div className="cartProductTitle">
+                                  <h3>
+                                    { item.name }
+                                  </h3>
+                                </div>
+                              </div>
+                            </td>
+                          <td>${ item.price }</td>
+                            <td className="cartQntN">
+                              <Form.Control type="number" placeholder="1" defaultValue={ item.quantity } />
+                            </td>
+                          <td>${ item.price * item.quantity }</td>
+                            <td>
+                              <Button className="btn btn-danger" id={item.id} onClick={handleClick}>
+                                Delete <i className="fas fa-times"></i>
+                              </Button>
+                            </td>
+                          </tr>
+                          ))}
+
+                        </tbody>
+                      </Table>
+                    </Card.Body>
+                  </Card>
+                </Col>}
                       
                     </tbody>
                   </Table>
@@ -214,11 +256,8 @@ const FavoritesPage = (props) => {
                   />
                 ))}
               </Row>
-              {/* end of Row */}
             </Container>
-            {/* end of Container */}
           </section>
-          {/* end of favoritesItems */}
 
           <section
             className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap"
@@ -227,11 +266,8 @@ const FavoritesPage = (props) => {
             <Container className="container">
               <NewsLetterComponent />
             </Container>
-            {/* end of Container */}
           </section>
-          {/* end of mailSubscribe */}
         </main>
-        {/* end of mainContent */}
         <FooterComponent />
       </div>
   
@@ -248,7 +284,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps =(dispatch) => {
     return {
-       showFav: (state) => dispatch(showFevItems(state))
+       showFav: (state) => dispatch(showFevItems(state)),
+       removeItem: (id) => dispatch(removeFavItem(id))
     }
 }
 

@@ -19,10 +19,10 @@ const CartPage = (props) => {
   let totalPrice = [];
   let delivery_cost = 0
 
- /*  let totalItem = (cartItems.length !== 0) ?  cartItems.map(item=> {
-    totalItemQuantity.push( item.quantity );
-    totalPrice.push( item.price * item.quantity)
-  }) : totalItemQuantity && totalPrice; */
+  // let totalItem = (cartItems.length !== 0) ?  cartItems.map(item=> {
+  //   totalItemQuantity.push( item.quantity );
+  //   totalPrice.push( item.price * item.quantity)
+  // }) : totalItemQuantity && totalPrice;
 
   if(totalItemQuantity.length !==0){
   totalItemQuantity = totalItemQuantity.reduce((quantities, quantity) => quantities + quantity)
@@ -33,7 +33,6 @@ const CartPage = (props) => {
 
   const handleClick = (event) => {
     event.preventDefault()
-     /* eslint-disable-next-line */
     cartItems.find((book,index)=>{
       if(Number(book.id) === Number(event.target.id)){
         props.removeItem(book.id)
@@ -108,7 +107,7 @@ const CartPage = (props) => {
                             <td key={index}>
                               <div className="cartProductDetails d-flex flex-fill align-items-center">
                                 <div className="cartProductMedia bgGray ">
-                                  <img src={URL.BASE +"/"+ JSON.parse( item.cover_images).img_1 } alt="" />
+                                  <img src={ URL.BASE +"/"+ JSON.parse( item.cover_images).img_1 } alt="" />
                                 </div>
                                 <div className="cartProductTitle">
                                   <h3>

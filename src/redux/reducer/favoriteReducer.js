@@ -19,7 +19,10 @@ const favoriteReducer = ( state = initialState , action ) => {
         case Types.SHOW_ALL_FAVORITE:
             return state
         
-
+        case Types.REMOVE_FAVORITE_ITEM:
+            const remoteItem = state.findIndex((item)=>item.id === action.payload.id)
+            state.splice(remoteItem,1)
+            return state
         default :
          return state  
                 
