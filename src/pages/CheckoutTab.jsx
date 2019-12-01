@@ -11,17 +11,16 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
 
 function CheckoutTab() {
 
-
     const [step, setStep] = useState({
         prev:0,
         next:1,
         show:false
     })
 
-    //  const [isCheck , setCheck] = useState(false)
-
-
-    // const handleCheck = () => {setCheck(!isCheck)}
+    const [formData, setFormData] = useState({
+        terms: false,
+        policy: false
+    });
 
     const handleNext = () => {
 
@@ -31,8 +30,6 @@ function CheckoutTab() {
         const step_1_tab = document.getElementById('step-1')
         const step_2_tab = document.getElementById('step-2')
         const step_3_tab = document.getElementById('step-3')
-
-
 
         if(step.next === 1){
             address_section.classList.remove('tab-active-content')
@@ -80,7 +77,28 @@ function CheckoutTab() {
 
     }
 
+    const handleOnChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name] : e.target.value
+        })
+    }
 
+    const handleTermsCheck = () => {
+        setFormData({
+            ...formData,
+            terms: !formData.terms
+        })
+    }
+
+    const handlePrivacyCheck = () => {
+        setFormData({
+            ...formData,
+            policy: !formData.policy
+        })
+    }
+
+    console.log(formData)
 
     return(
         <Container>
@@ -106,52 +124,52 @@ function CheckoutTab() {
 
                                             <Col sm={6} className="form-group">
                                                 <label htmlFor="first-name">First Name</label>
-                                                <input type="text" name='first_name' id="first-name" className="form-control"/>
+                                                <input type="text" name='first_name' id="first-name" className="form-control" onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={6} className="form-group">
                                                 <label htmlFor="last-name">Last Name</label>
-                                                <input type="text" name='last_name' id="last-name" className="form-control"/>
+                                                <input type="text" name='last_name' id="last-name" className="form-control" onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={12} className="form-group">
                                                 <label htmlFor="estate">Estate</label>
-                                                <input type="text" name="estate" id="estate" className="form-control"/>
+                                                <input type="text" name="estate" id="estate" className="form-control" onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col col={12} className="form-group">
                                                 <label htmlFor="country">Country</label>
-                                                <input type="text" name="country"  id="country" className="form-control"/>
+                                                <input type="text" name="country"  id="country" className="form-control" onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={12} className="form-group">
                                                 <label htmlFor="address">Address</label>
-                                                <input type="text" name="address" id="address" className="form-control"/>
+                                                <input type="text" name="address" id="address" className="form-control" onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={12} className="form-group">
                                                 <label htmlFor="zip-code">Zip Code</label>
-                                                <input type="text" name="zipcode" id="zipcode" className="form-control"/>
+                                                <input type="text" name="zip" id="zipcode" className="form-control" onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={6} className="form-group">
                                                 <label htmlFor="house">House/apartment number</label>
-                                                <input type="text" name="house" id="house" className="form-control"/>
+                                                <input type="text" name="house_num" id="house" className="form-control" onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={6} className="form-group">
                                                 <label htmlFor="email">Email</label>
-                                                <input type="text" name="email" id="email" className="form-control"/>
+                                                <input type="text" name="email" id="email" className="form-control" onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={6} className="form-group">
                                                 <label htmlFor="phone-number">Phone Number</label>
-                                                <input type="text" name="phone_number" id="phone-number" className="form-control"/>
+                                                <input type="text" name="phone" id="phone-number" className="form-control" onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={12} className="form-group">
                                                 <label htmlFor="comment">Comments</label>
-                                                <textarea name="comment" id="comment" cols="30" rows="4" className="form-control"></textarea>
+                                                <textarea name="comments" id="comment" cols="30" rows="4" className="form-control" onChange={handleOnChange}></textarea>
                                             </Col>
 
                                             <Col className="form-group fromCheckbox mt-1">
@@ -160,6 +178,7 @@ function CheckoutTab() {
                                                     type={"checkbox"}
                                                     label={`I agree with `}
                                                     id={`checkboxTerms`}
+                                                    onChange={handleTermsCheck}
                                                 />
                                                 <Link to="#" className="termsTxt">Terms and Conditions</Link>
                                             </Col>
@@ -170,17 +189,13 @@ function CheckoutTab() {
                                                     type={"checkbox"}
                                                     label={`I agree with `}
                                                     id={`checkboxPrivacy`}
+                                                    onChange={handlePrivacyCheck}
                                                 />
                                                 <Link to="#" className="termsTxt">Privacy Policy</Link>
                                             </Col>
-
-                                            {/*<Col className="text-right">*/}
-                                            {/*    <Button className="btn btn-primary" onClick={handleNext} >Next</Button>*/}
-                                            {/*</Col>*/}
-
                                         </Row>
                                         <Col className="text-right p-0">
-                                            <Button className="btn btn-primary cart-btn-next" onClick={handleNext} >Next</Button>
+                                            <Button className="btn btn-primary cart-btn-next" disabled={(!formData.terms || !formData.policy) ? true : false} onClick={handleNext}> Next</Button>
                                         </Col>
                                     </Form>
                                 </Col>

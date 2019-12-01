@@ -27,8 +27,6 @@ import ProductPage from "./pages/ProductPage";
 import PrivateRoute from './components/authComponents/PrivateRoute';
 import ErrorPage from './pages/Error404';
 
-
-
 const Router = (props) => (
 
     <Switch location={props.location}>
