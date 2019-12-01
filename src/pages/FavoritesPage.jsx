@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { createUseStyles } from 'react-jss'
 import { Container, Row, Col, Card, Table,Form , Button } from "react-bootstrap";
 import { connect } from 'react-redux'
 import { NewBookDB } from "../inc/offerPage/NewBook";
@@ -11,27 +12,26 @@ import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { showFevItems, removeFavItem } from '../redux/actions/favoriteActions'
 import { URL } from '../constants/config'
 
-
-const FavoritesPage = (props) => {
-
-  const totalItem = props.cart.length 
-  const [ favoriteItem ] = useState( props.favorite );
-
-
-  const handleClick = (event) => {
-    event.preventDefault()
-    props.favorite.find((book,index)=>{
-      if(Number(book.id) === Number(event.target.id)){
-        props.removeItem(book.id)
-        favoriteItem.splice(index,1)
-      }
-    })
+const useStyle = createUseStyles({
+  addFavImage:{
+    height:100,
+    width:100
+  },
+  textLarge:{
+    fontSize:30,
   }
+})
+const FavoritesPage = (props) => {
+  const classes = useStyle()
+  const totalItem = props.cart.length 
+  const [ favs, setFavs] = useState( props.favorite );
+
+
 
   return (
       <div className="allWrapper">
         <HeaderComponent
-          favorite_item={favoriteItem.length}
+          favorite_item={favs.length}
           cartItem={totalItem}
         />
         <MobileHeader />
@@ -53,7 +53,7 @@ const FavoritesPage = (props) => {
             <Container>
 
               <Row>
-               { favoriteItem.length ===0 ? <Col xs={12}>
+               { favs.length ===0 ? <Col xs={12}>
                   <div className="contentArea text-center mt-5 mb-5">
                     <h2 className="sectionTitle mb-3">
                       You don’t have any <span>Favorites</span>
@@ -65,39 +65,38 @@ const FavoritesPage = (props) => {
                     </p>
 
                   </div>
-                </Col> : <Col xs={12}>
-                  
-                  { <Card className="table-responsive border-0 cartTableBody">
+                </Col> :
+                <Col xs={12}>
+                   <Card className="table-responsive border-0 cartTableBody">
                     <Card.Body className="p-0">
                       <Table>
                         <tbody>
-                          { props.favorite.map( (item, index) =>(
-                          <tr key={index}>
+                         {favs.map((item,index)=>
+                            <tr key={index}>
                             <td>
-                              <div className="cartProductDetails d-flex flex-fill align-items-center">
-                                <div className="cartProductMedia bgGray ">
-                                  <img src={ URL.BASE +"/"+ JSON.parse( item.cover_images).img_1 } alt="" />
-                                </div>
-                                <div className="cartProductTitle">
-                                  <h3>
-                                    { item.name }
-                                  </h3>
-                                </div>
+                              <div className="image">
+                                <img className={classes.addFavImage} src={`${URL.BASE}/${JSON.parse(item.cover_images).img_1}`} />
                               </div>
                             </td>
-                          <td>${ item.price }</td>
                             <td>
-                              <Button className="btn btn-danger" id={item.id} onClick={ handleClick }>
-                                Delete <i className="fas fa-times"></i>
-                              </Button>
+                              <div className={classes.textLarge}>{item.price}</div>
                             </td>
-                          </tr>
-                          ))}
-
-                        </tbody>
-                        </Table>
+                            <td>
+                              <div className="text-center">
+                                <button className="btn btn-danger" onClick={(e)=>{
+                                  e.preventDefault()
+                                  props.removeItem(item.id)
+                                  favs.splice(item.id,1)
+                                  alert("Ok")
+                                  }}>Remove</button>
+                              </div>
+                            </td>
+                            </tr>
+                         )}
+                        </tbody> 
+                      </Table>
                     </Card.Body>
-                  </Card>}
+                  </Card>
                 </Col>
                  }
                  </Row>
