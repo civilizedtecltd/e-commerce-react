@@ -1,0 +1,42 @@
+[
+  {
+    "nav_item":"nav-item",
+    "url":"my-order",
+    "icon_name":"fas fa-clipboard-list",
+    "title":"My orders",
+    "class":"nav-link",
+    "active_link": "active"
+  },
+  {
+    "nav_item":"nav-item",
+    "url":"payment-methods",
+    "icon_name":"fas fa-wallet",
+    "title":"Payment methods",
+    "class":"nav-link",
+    "active_link": "active"
+  },
+  {
+    "nav_item":"nav-item",
+    "url":"profile-settings",
+    "icon_name":"fas fa-cog",
+    "title":"Profile settings",
+    "class":"nav-link",
+    "active_link": "active"
+  },
+  {
+    "nav_item":"nav-item",
+    "url":"email-subscription",
+    "icon_name":"far fa-envelope",
+    "title":"Email subscription",
+    "class":"nav-link",
+    "active_link": "active"
+  },
+  {
+    "nav_item":"nav-item",
+    "url":"logout",
+    "icon_name":"fas fa-sign-out-alt",
+    "title":"Log out",
+    "class":"nav-link",
+    "active_link": "active"
+  }
+]

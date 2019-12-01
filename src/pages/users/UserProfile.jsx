@@ -13,7 +13,8 @@ import { URL } from '../../constants/config';
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
 import {LiAi} from '../../components/LiComponent/CommonLiComponent';
 import {asideData} from '../../inc/users/users';
-import {HeaderComponent, MobileHeader} from '../../components/header/Header';
+import  HeaderComponent from "../../components/header/Header";
+import  MobileHeader from "../../components/header/MobileHeader";
 
 import './assets/css/user.css';
 

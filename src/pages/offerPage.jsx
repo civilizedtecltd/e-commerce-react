@@ -11,7 +11,8 @@ import {NewBookDB}from '../inc/offerPage/NewBook'
 import {ImgSlick, NewBookComponent} from '../components/offerPageComponents/NewBookComponent'
 import{NewsLetterComponent} from '../components/offerPageComponents/NewsLetterComponent'
 import FooterComponent from '../components/FooterComponent/FooterComponent';
-import {HeaderComponent, MobileHeader} from '../components/header/Header';
+import  HeaderComponent from "../components/header/Header";
+import  MobileHeader from "../components/header/MobileHeader";
 
 import store from '../redux/store'
 
