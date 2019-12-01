@@ -9,7 +9,8 @@ import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
 import { ImageCarousel } from "../components/ProductImgCarosellComponents/ProductImgCarosell";
-import {HeaderComponent, MobileHeader} from "../components/header/Header";
+ import  HeaderComponent from "../components/header/Header";
+ import  MobileHeader from "../components/header/MobileHeader";
 import TabComponent from "../components/TabComponent/TabComponent";
 import RatingComponent from "../components/ratingComponent/Rating";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
@@ -42,6 +43,7 @@ function ProductPage(props) {
   const updateItemQty = (e) => {
     book.quantity = Number(e.target.value)
   }
+
 
 
 

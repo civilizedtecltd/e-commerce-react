@@ -12,7 +12,8 @@ import featureIcon4 from '../assets/images/feature_icon_img_04.png';
 import FooterComponent from '../components/FooterComponent/FooterComponent';
 import { HomeCarouselFooter } from "../components/HomePage/HomeCarouselFooter";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
-import { HeaderComponent, MobileHeader } from "../components/header/Header";
+import  HeaderComponent from "../components/header/Header";
+import  MobileHeader from "../components/header/MobileHeader";
 import {CategoryHome} from "../components/HomePage/Category";
 
 const Home = (props) => {

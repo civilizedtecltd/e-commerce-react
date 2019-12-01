@@ -9,7 +9,8 @@ import {
   Button
 } from "react-bootstrap";
 import "./assets/css/user.css";
-import { HeaderComponent, MobileHeader } from "../../components/header/Header";
+import  HeaderComponent from "../../components/header/Header";
+import  MobileHeader from "../../components/header/MobileHeader";
 import UserNav from "../../components/UserNav/UserNav";
 import AddPaymentMethod from "../../components/paymentMethodComponent/AddPaymentMethod";
 

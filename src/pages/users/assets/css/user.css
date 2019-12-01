@@ -21,13 +21,13 @@
     font-weight: 600;
 }
 .userNavBar .nav-link i{padding-right: 10px;}
-.userNavBar .current .nav-link, .userNavBar .nav-link:hover{
+.userNavBar .active .nav-link, .userNavBar .nav-link:hover{
     color: #3897cf;
     background-color: #f9f9f9;
     border-left: 3px solid #3897cf;
 }
 
-.userNavBar a.current{
+.userNavBar a.active{
     color: #3897cf !important;
     background-color: #f9f9f9 !important;
     border-left: 3px solid #3897cf !important;

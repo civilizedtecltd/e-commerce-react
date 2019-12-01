@@ -2,9 +2,12 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Table} from 'react-bootstrap';
 import './assets/css/user.css';
-import {LiAi, Lia} from '../../components/LiComponent/CommonLiComponent';
-import { asideData, categoryClass } from '../../inc/users/users';
-import {HeaderComponent, MobileHeader} from '../../components/header/Header';
+import {Lia} from '../../components/LiComponent/CommonLiComponent';
+import {categoryClass } from '../../inc/users/users';
+import  HeaderComponent from "../../components/header/Header";
+import  MobileHeader from "../../components/header/MobileHeader";
+import UserNav from "../../components/UserNav/UserNav";
+
 
 const OrderPage = () => {
   return (<>
@@ -14,23 +17,7 @@ const OrderPage = () => {
       <div className="userBodyArea clearfix" id="userBodyArea">
         <Container fluid="{true}" className="pl-0 pr-0">
           <Row noGutters>
-            <Col sm="2">
-              <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
-                <nav className="userNav">
-                  <ul className="userNavBar">
-                    {asideData.map((aside, index)=><LiAi
-                      key={index}
-                      ListClass={aside.LIST_CLASS}
-                      Title={aside.TITLE}
-                      Url={aside.URL}
-                      IconName={aside.ICON_NAME}
-                      AnchorClass={aside.ANCHOR_CLASS}
-                    />)}
-
-                  </ul>{/* end of userNavBar */}
-                </nav>{/* end of userNav */}
-              </aside>{/* end of aside */}
-            </Col>{/* end of Col */}
+            <UserNav />
 
              <Col>
               <main className="userMainContent clearfix bgImage bgImg03" id="userMainContent">

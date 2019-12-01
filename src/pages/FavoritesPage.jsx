@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createUseStyles } from 'react-jss'
-import { Container, Row, Col, Card, Table,Form , Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Table} from "react-bootstrap";
 import { connect } from 'react-redux'
 import { NewBookDB } from "../inc/offerPage/NewBook";
 import { NewBookComponent } from "../components/offerPageComponents/NewBookComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
-import { HeaderComponent, MobileHeader } from "../components/header/Header";
+import  HeaderComponent from "../components/header/Header";
+import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { showFevItems, removeFavItem } from '../redux/actions/favoriteActions'
 import { URL } from '../constants/config'
@@ -24,14 +25,23 @@ const useStyle = createUseStyles({
 const FavoritesPage = (props) => {
   const classes = useStyle()
   const totalItem = props.cart.length 
-  const [ favs, setFavs] = useState( props.favorite );
+  const [favorite,setFavorite ] = useState( props.favorite )
 
+  const handleClick = (event) => {
+    event.preventDefault()
+    favorite.find((book, index) => {
+      if (Number(book.id) === Number(event.target.id)) {
+        props.removeFavItem(book.id)
+        favorite.splice(index, 1)
+      }
+    })
 
+  }
 
   return (
       <div className="allWrapper">
         <HeaderComponent
-          favorite_item={favs.length}
+          favorite_item={favorite.length}
           cartItem={totalItem}
         />
         <MobileHeader />
@@ -53,7 +63,7 @@ const FavoritesPage = (props) => {
             <Container>
 
               <Row>
-               { favs.length ===0 ? <Col xs={12}>
+               { favorite.length ===0 ? <Col xs={12}>
                   <div className="contentArea text-center mt-5 mb-5">
                     <h2 className="sectionTitle mb-3">
                       You don’t have any <span>Favorites</span>
@@ -71,7 +81,7 @@ const FavoritesPage = (props) => {
                     <Card.Body className="p-0">
                       <Table>
                         <tbody>
-                         {favs.map((item,index)=>
+                         {favorite.map((item,index)=>
                             <tr key={index}>
                             <td>
                               <div className="image">
@@ -79,16 +89,11 @@ const FavoritesPage = (props) => {
                               </div>
                             </td>
                             <td>
-                              <div className={classes.textLarge}>{item.price}</div>
+                              <div className={classes.textLarge}>${item.price}</div>
                             </td>
                             <td>
                               <div className="text-center">
-                                <button className="btn btn-danger" onClick={(e)=>{
-                                  e.preventDefault()
-                                  props.removeItem(item.id)
-                                  favs.splice(item.id,1)
-                                  alert("Ok")
-                                  }}>Remove</button>
+                                <button className="btn btn-danger" id={item.id} onClick={handleClick}>Remove</button>
                               </div>
                             </td>
                             </tr>
@@ -253,7 +258,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps =(dispatch) => {
     return {
        showFav: (state) => dispatch(showFevItems(state)),
-       removeItem: (id) => dispatch(removeFavItem(id))
+       removeFavItem: (id) => dispatch(removeFavItem(id))
     }
 }
 
