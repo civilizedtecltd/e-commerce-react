@@ -1,20 +1,24 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-
-import { connect  } from 'react-redux';
+import { Redirect, withRouter } from 'react-router-dom';
+import isEmpty from 'lodash/isEmpty';
+import {connect} from 'react-redux';
 import {logout} from '../../redux/actions/authActions';
+
 
 const Logout = (props) => {
 
     const { auth } = props;
 
-    if(auth.status.success){
-        console.log('user logged in...')
-        props.userLogout();
+    if(!isEmpty(auth)){
+        if(auth.status.success){
+            props.userLogout();
+        }
     }
 
     return (
-        <Redirect to={{ pathname: "/", state: {from: props.location} }}/>
+        <>
+            <Redirect to={{ pathname: "/", state: {from: props.location} }}/>
+        </>
     );
 }
 
@@ -25,4 +29,4 @@ const mapDispatchToProps = dispatch => ({
     userLogout: ()=> dispatch(logout())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Logout);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Logout));

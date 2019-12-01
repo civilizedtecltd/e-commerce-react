@@ -23,12 +23,12 @@ const mySwal = withReactContent(Swal);
 
 const Login = (props) => {
 
+  const [state, setState] = useState(true);
   const [formData] = useState({});
 
   const { auth } = props;
 
   const loginData = (data) => {
-     /* eslint-disable-next-line */
     Object.keys(data).map( key => {
       formData[key] = data[key];
     });
@@ -41,7 +41,8 @@ const Login = (props) => {
   }
 
     if(!isEmpty(auth)){
-        if(auth.status.success){
+        if(auth.status.success && state){
+            setState(false);
             props.history.goBack();
         }
 

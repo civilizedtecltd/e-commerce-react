@@ -1,6 +1,7 @@
 import * as Types from '../actions/actionTypes';
 import axios from 'axios';
 import decode from 'jwt-decode';
+import store from '../store';
 import { URL } from '../../constants/config';
 import setAuthToken from '../../helpers/setAuthToken';
 
@@ -55,8 +56,9 @@ const login = (authData) => dispatch => {
 }
 
 const logout = () => dispatch => {
+    const { jwt } = store.getState().auth;
     setAuthToken();
-    axios.post(URL._LOGOUT, {})
+    axios.post(URL._LOGOUT, { refreshToken: jwt.refreshToken })
         .then(res => {
             localStorage.removeItem('authData');
             return dispatch({

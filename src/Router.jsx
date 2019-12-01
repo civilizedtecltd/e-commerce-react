@@ -48,15 +48,7 @@ const Router = (props) => (
               <Route path="/favorites" component={FavoritesPage} />
               <Route path="/shop/category/:id?/:title?" component={ShopPage} />
               <Route path="/product/:id" component={ProductPage} />
-
-              {/* <Route path="/logout" render={ (props)=> {
-
-                        localStorage.removeItem('authData');
-                        return <Redirect to={{ pathname: "/", state: {from: props.location} }} />
-                    }
-               } /> */}
-
-               <Route path='/logout' component={Logout} />
+              <Route path='/logout' component={Logout} />
 
               <Route path='*'  component={ErrorPage} />
     </Switch>
