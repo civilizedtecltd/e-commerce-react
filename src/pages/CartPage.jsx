@@ -12,10 +12,9 @@ import { URL } from '../constants/config';
 import { removeFromCart, deleteAllFromCart } from '../redux/actions/shopActions'
 
 const CartPage = (props) => {
-
+  const favoriteItem = props.favorite
   const [ cartItems , setCartItems]  = useState( props.cart )
  
-
   let totalItemQuantity=[];
   let totalPrice = [];
   let delivery_cost = 0
@@ -53,7 +52,9 @@ const CartPage = (props) => {
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent cartItem={ cartItems.length } />
+        <HeaderComponent 
+        favorite_item={favoriteItem.length}
+        cartItem={ cartItems.length } />
         <MobileHeader />
         <main className="mainContent clearfix" id="mainContent">
           <section
@@ -284,7 +285,8 @@ const CartPage = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    cart: state.shop.cart
+    cart: state.shop.cart,
+    favorite:state.favorite
 })
 
 const mapDispatchToProps = (dispatch) => {

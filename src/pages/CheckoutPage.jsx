@@ -42,7 +42,7 @@ const CheckoutPage = (props) => {
         </header>
 
         <main className="mainContent clearfix" id="mainContent">
-          {cartItems.length ===0 ? <h2 className="text-center text-primary mb-5">You haven't any product</h2> 
+          {cartItems.length ===0 ? <h2 className="text-center text-primary mb-5"> You haven't any product </h2> 
 
           :<section className="checkoutProductDetails clearfix pt-5 pb-5" id="checkoutProductDetails" >
             <Container>

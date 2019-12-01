@@ -18,7 +18,7 @@ import {CategoryHome} from "../components/HomePage/Category";
 const Home = (props) => {
 
  const totalItem = props.cart
-
+ const favoriteItem = props.favorite
   return (<>
 
     <div className="allWrapper">
@@ -128,7 +128,8 @@ const Home = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.shop.cart
+    cart: state.shop.cart,
+    favorite: state.favorite
   }
 }
 

@@ -14,5 +14,6 @@ const showFevItems = (book) => {
 }
 
 export{
-    addToFavorite,showFevItems
+    addToFavorite,
+    showFevItems
 }
