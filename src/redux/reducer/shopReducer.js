@@ -1,7 +1,9 @@
 import * as Types from '../actions/actionTypes';
 
 const initSate = {
-    cart: []
+    cart: [],
+    address: {},
+    payment: {}
 };
 
 const shopReducer = (state = initSate, { type, payload }) => {
@@ -13,7 +15,7 @@ const shopReducer = (state = initSate, { type, payload }) => {
             case Types.ADD_TO_CART:
 
                     const localState = JSON.parse(localStorage.getItem('state'));
-                
+
                     updatedCart = ((localState.shop.cart !== undefined ) ? localState.shop.cart : [] )
 
                     updatedItemIndex = updatedCart.findIndex(item => item.id === payload.id )
@@ -81,7 +83,23 @@ const shopReducer = (state = initSate, { type, payload }) => {
                 }
             case Types.DELETE_ALL_FORM_CART:
                 return{
+                    ...state,
                     cart:[]
+                }
+            case Types.SET_ADDRESS_DETAILS:
+                return {
+                    ...state,
+                    address: payload
+                }
+            case Types.SET_PAYMENT_DETAILS:
+                return {
+                    ...state,
+                    payment: payload
+                }
+            case Types.CONFIRM_ORDER:
+                return {
+                    ...state,
+                    cart: []
                 }
 
             default:

@@ -20,6 +20,9 @@ const Home = (props) => {
 
  const totalItem = props.cart
  const favoriteItem = props.favorite
+
+
+
   return (<>
 
     <div className="allWrapper">

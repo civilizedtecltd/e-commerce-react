@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
-import {Container, Card ,Form, Col, Row, Button, Accordion , useAccordionToggle} from 'react-bootstrap';
-//import CheckboxComponent from '../components/checkboxComponent/CheckboxComponent'
+import {Container, Card ,Form, Col, Row, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
+
+import isEmpty from 'lodash/isEmpty';
+
+import {connect} from 'react-redux';
+import {setDeliveryAddress, setPaymentDetails} from '../redux/actions/shopActions';
+
+import PaymentsMethods from './PaymentMethods';
+
+import {futureDate} from '../helpers/utils';
+
 import './checkout.css';
 import '../assets/css/theme.css'
 import card_icon_img from '../assets/images/user/card_icon_img.png'
@@ -9,7 +18,7 @@ import card_icon_img from '../assets/images/user/card_icon_img.png'
 
 
 
-function CheckoutTab() {
+const CheckoutTab = (props) => {
 
     const [step, setStep] = useState({
         prev:0,
@@ -18,9 +27,14 @@ function CheckoutTab() {
     })
 
     const [formData, setFormData] = useState({
+        first_name: props.user.first_name,
+        last_name: props.user.last_name,
+        email: props.user.email,
         terms: false,
         policy: false
     });
+
+    const [payment, setPayment] = useState({});
 
     const handleNext = () => {
 
@@ -45,9 +59,7 @@ function CheckoutTab() {
             step_3_tab.classList.add('active-tab')
             setStep({prev:2, next:3})
         }
-
     }
-
 
     const handlePrev = () => {
 
@@ -98,7 +110,17 @@ function CheckoutTab() {
         })
     }
 
-    console.log(formData)
+    const getPaymentDetails = (data) => {
+        setPayment({
+            ...data
+        })
+    }
+
+    const confirmOrder = (e) => {
+        e.preventDefault();
+        console.log("User: ", formData);
+        console.log("Payment", payment);
+    }
 
     return(
         <Container>
@@ -124,12 +146,12 @@ function CheckoutTab() {
 
                                             <Col sm={6} className="form-group">
                                                 <label htmlFor="first-name">First Name</label>
-                                                <input type="text" name='first_name' id="first-name" className="form-control" onChange={handleOnChange}/>
+                                                <input type="text" name='first_name' id="first-name" className="form-control" value={formData.first_name} onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={6} className="form-group">
                                                 <label htmlFor="last-name">Last Name</label>
-                                                <input type="text" name='last_name' id="last-name" className="form-control" onChange={handleOnChange}/>
+                                                <input type="text" name='last_name' id="last-name" className="form-control" value={formData.last_name} onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={12} className="form-group">
@@ -140,6 +162,11 @@ function CheckoutTab() {
                                             <Col col={12} className="form-group">
                                                 <label htmlFor="country">Country</label>
                                                 <input type="text" name="country"  id="country" className="form-control" onChange={handleOnChange}/>
+                                            </Col>
+
+                                            <Col col={12} className="form-group">
+                                                <label htmlFor="city">City</label>
+                                                <input type="text" name="city"  id="city" className="form-control" onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={12} className="form-group">
@@ -159,7 +186,7 @@ function CheckoutTab() {
 
                                             <Col sm={6} className="form-group">
                                                 <label htmlFor="email">Email</label>
-                                                <input type="text" name="email" id="email" className="form-control" onChange={handleOnChange}/>
+                                                <input type="text" name="email" id="email" className="form-control" value={formData.email} onChange={handleOnChange}/>
                                             </Col>
 
                                             <Col sm={6} className="form-group">
@@ -208,7 +235,7 @@ function CheckoutTab() {
                                 <div className="col col-12">
                                     <button disabled className="btn btn-primary btn-block d-md-none d-lg-none d-xl-none mb-3">Payment and delivery</button>
                                     <h3 className="mt-2 mb-2">Choose a delivery method</h3>
-                                    <PaymentsMethod/>
+                                    <PaymentsMethods {...formData} callback={getPaymentDetails}/>
 
                                     <Form className="mt-5">
                                         <Row>
@@ -218,7 +245,7 @@ function CheckoutTab() {
                                                 </Col>
 
                                                 <Col sm="6" className="col-6 text-right">
-                                                    <button type="button" className="btn btn-primary" onClick={handleNext}>Next</button>
+                                                    <button type="button" className="btn btn-primary" disabled={(isEmpty(payment) ? true : false)} onClick={handleNext}>Next</button>
                                                 </Col>
                                             </div>
                                         </Row>
@@ -231,33 +258,33 @@ function CheckoutTab() {
                         <div id='order-confirmation-section' className="tab order-confirmation-section">
                             <Form className="userInfoForm mt-3">
                                 <button disabled className="btn btn-primary btn-block d-md-none d-lg-none d-xl-none mb-3">Payment and delivery</button>
-                                <h3 className="mt-2 mb-2">Choose a delivery method</h3>
+                                <h3 className="mt-2 mb-2">Confirm Order</h3>
 
                                 <Row className="row mt-4">
                                     <Col sm="6">
                                         <ul className="orderConfrimationList text-large">
-                                            <li><strong>First name:</strong> Sam</li>
-                                            <li><strong>Last name:</strong> Smith</li>
-                                            <li><strong>Phone:</strong> +123 456 7890</li>
-                                            <li><strong>Email:</strong> you@example.com</li>
+                                            <li><strong>First name:</strong>{ formData.first_name }</li>
+                                            <li><strong>Last name:</strong>{ formData.last_name }</li>
+                                            <li><strong>Phone:</strong> { formData.phone}</li>
+                                            <li><strong>Email:</strong>{ props.user.email }</li>
                                         </ul>
                                     </Col>
 
 
                                     <Col sm="6">
                                         <ul className="orderConfrimationList">
-                                            <li><strong>City:</strong> Lorem ipsum</li>
-                                            <li><strong>Estate:</strong> Lorem ipsum</li>
-                                            <li><strong>Address:</strong> set amet adipiscing</li>
-                                            <li><strong>Zip code:</strong> 56437</li>
+                                            <li><strong>City:</strong>{ formData.city}</li>
+                                            <li><strong>Estate:</strong> { formData.estate}</li>
+                                            <li><strong>Address:</strong> { formData.address}</li>
+                                            <li><strong>Zip code:</strong> { formData.zip}</li>
                                         </ul>
                                     </Col>
 
                                     <Col sm="6" className="mt-4">
                                         <ul className="orderConfrimationList text-large">
                                             <li><strong>Total Price:</strong> 50.00</li>
-                                            <li><strong>Delivery method:</strong> Standard</li>
-                                            <li><strong>Expected arrival:</strong>  Monday, 27.05.2019</li>
+                                            <li><strong>Delivery method:</strong> { (!isEmpty(payment)? (payment.type).toUpperCase(): '')}</li>
+                                            <li><strong>Expected arrival:</strong>  {futureDate(7)}</li>
                                         </ul>
                                     </Col>
                                 </Row>
@@ -265,7 +292,7 @@ function CheckoutTab() {
                                 <Row className="form-group mt-5">
                                     <div className="col-12 d-flex justify-content-between">
                                         <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
-                                        <button type="submit" className="btn btn-primary" data-target="#confirmOrder" data-toggle="modal">Confirm order</button>
+                                        <button type="submit" className="btn btn-primary" data-target="#confirmOrder" data-toggle="modal" onClick={confirmOrder}>Confirm order</button>
                                     </div>
                                 </Row>
 
@@ -284,159 +311,14 @@ function CheckoutTab() {
 }
 
 
+const mapStateToProps = state =>({
+    ...state.auth,
+    ...state.shop
+})
 
+const mapDispatchToProps = dispatch => ({
+    setAddress: (address) => dispatch(setDeliveryAddress(address)),
+    setPayment: (payment) => dispatch(setPaymentDetails(payment))
+})
 
-
-function CheckToggle({ children, eventKey, title }) {
-    const decoratedOnClick = useAccordionToggle(eventKey, () =>{
-        if(eventKey === 0){
-
-            console.log( document.getElementById('ch-1').checked=false)
-        }
-        if(eventKey === 1){
-
-            document.getElementById('ch-0').checked=false
-        }
-    })
-
-    return (
-        <Form.Check
-            custom
-            className="ml-2"
-            type="radio"
-            label={title}
-            name="formHorizontalRadios"
-            id={`ch-${eventKey}`}
-            onClick={decoratedOnClick}
-        >
-            {children}
-
-        </Form.Check>
-    );
-}
-
-
-function PaymentsMethod(props){
-    return(<>
-        <Accordion defaultActiveKey="0">
-
-            <div className="payment-header-card">
-                <CheckToggle eventKey="0" title="Mpesa" />
-            </div>
-            <Accordion.Collapse eventKey="0">
-
-                <div className="clearfix">
-                    <hr style={{borderColor:"#e2e2e2"}}/>
-                    <div className="p-3">
-                        <div className="row align-items-center">
-                            <div className="col-sm-10 form-group">
-                                <label htmlFor="card-number">Card number</label>
-                                <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp"/>
-                            </div>
-                            <div className="col">
-                                <img src={card_icon_img} alt=""/>
-                            </div>
-                        </div>
-
-                        <div className="row align-items-center justify-content-between">
-                            <div className="col-sm-3 form-group">
-                                <label htmlFor="card-number">Expiry date</label>
-                                <ul className="cardPayFiled d-flex align-items-center justify-content-end">
-                                    <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM"/></li>
-                                    <li className="cardBl">/</li>
-                                    <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY"/></li>
-                                </ul>
-                            </div>
-
-                            <div className="col offset-sm-4 form-group">
-                                <label htmlFor="card-number">CVV</label>
-                                <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder=""/>
-                            </div>
-                            <div className="col-sm-2">
-                                <img src={card_icon_img} alt=""/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col">
-                                <button type="button" className="btn btn-primary">Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </Accordion.Collapse>
-
-            <div className="payment-header-card mt-3">
-                <CheckToggle eventKey="1" title="Visa"/>
-            </div>
-            <Accordion.Collapse eventKey="1">
-                <div className="clearfix">
-                    <hr style={{borderColor:"#e2e2e2"}}/>
-                    <div className="p-3">
-                        <div className="row align-items-center">
-                            <div className="col-sm-10 form-group">
-                                <label htmlFor="card-number">Card number</label>
-                                <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp"/>
-                            </div>
-                            <div className="col">
-                                <img src={card_icon_img} alt=""/>
-                            </div>
-                        </div>
-
-                        <div className="row align-items-center justify-content-between">
-                            <div className="col-sm-3 form-group">
-                                <label htmlFor="card-number">Expiry date</label>
-                                <ul className="cardPayFiled d-flex align-items-center justify-content-end">
-                                    <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM"/></li>
-                                    <li className="cardBl">/</li>
-                                    <li><input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY"/></li>
-                                </ul>
-                            </div>
-
-                            <div className="col offset-sm-4 form-group">
-                                <label htmlFor="card-number">CVV</label>
-                                <input type="text" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder=""/>
-                            </div>
-                            <div className="col-sm-2">
-                                <img src={card_icon_img} alt=""/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col">
-                                <button type="button" className="btn btn-primary">Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Accordion.Collapse>
-
-            <div className="payment-header-card mt-3 d-flex justify-content-between">
-                <div>
-                    <CheckToggle eventKey="3" title="Standard" />
-                </div>
-                <div>
-                    <div className="col text-right shippingCostPrice">
-                        <span className="shippingCost"><strong>Time:</strong> 170 hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="payment-header-card mt-3 d-flex justify-content-between">
-                <div>
-                    <CheckToggle eventKey="4" title="Express" />
-                </div>
-                <div>
-                    <div className="col text-right shippingCostPrice">
-                        <span className="shippingCost"><strong>Time:</strong> 170 hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
-                    </div>
-                </div>
-            </div>
-
-        </Accordion>
-    </>)
-}
-
-
-export default CheckoutTab;
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutTab);
