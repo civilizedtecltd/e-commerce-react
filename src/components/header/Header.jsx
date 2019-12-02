@@ -18,7 +18,7 @@ const Default = ({ children }) => {
 
 
 // eslint-disable-next-line
-function HeaderComponent(props) {
+const HeaderComponent = (props) => {
 
   const [open, setOpen] = useState(false);
 

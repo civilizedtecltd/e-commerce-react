@@ -4,9 +4,12 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { connect } from 'react-redux'
 import CheckoutTab from './CheckoutTab';
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
-import { URL} from '../constants/config'
-import './checkout.css'
+import { URL} from '../constants/config';
+import './checkout.css';
+
+
 const CheckoutPage = (props) => {
+
   const cartItems = props.cart;
 
   let totalItemQuantity = [];

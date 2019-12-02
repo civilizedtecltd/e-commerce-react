@@ -12,9 +12,7 @@ const Mobile = ({ children }) => {
     return isMobile ? children : null
 }
 
-
-
-function MobileHeader (props) {
+const MobileHeader = (props) => {
     const [open, setOpen] = useState(false);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);

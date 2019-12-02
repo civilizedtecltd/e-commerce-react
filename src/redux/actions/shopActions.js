@@ -1,4 +1,6 @@
 import * as Types from './actionTypes';
+import axios from 'axios';
+import { URL } from '../../constants/config';
 
 const addToCart = (book) => {
     return {
@@ -36,7 +38,31 @@ const deleteAllFromCart = () => {
     }
 }
 
+const setDeliveryAddress = (data) => ({
+    type: Types.SET_ADDRESS_DETAILS,
+    payload: {
+        ...data
+    }
+})
 
+const setPaymentDetails = (data) => ({
+    type: Types.SET_PAYMENT_DETAILS,
+    payload: {
+        ...data
+    }
+})
+
+const confirmOrder = (data) => dispatch => {
+    axios.post(URL, { ...data })
+         .then(res => {
+            return dispatch({
+                type: Types.CONFIRM_ORDER
+            })
+         })
+         .catch(error => {
+             console.log(error)
+         })
+}
 
 
 
@@ -47,5 +73,8 @@ export {
     increaseQuantity,
     decreaseQuantity,
     deleteAllFromCart,
-  
+    setDeliveryAddress,
+    setPaymentDetails,
+    confirmOrder
+
 }
