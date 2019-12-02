@@ -8,19 +8,9 @@ import { URL} from '../constants/config'
 import './checkout.css'
 const CheckoutPage = (props) => {
   const cartItems = props.cart;
-  
+
   let totalItemQuantity = [];
   let totalPrice = [];
-
-  /* let totalItem = (cartItems.length !== 0) ?  cartItems.map(item=> {
-    totalItemQuantity.push( item.quantity );
-    totalPrice.push( item.price * item.quantity)
-  }) : totalItemQuantity && totalPrice; 
-
-  const totalItem = (cartItems.length === 0) ? totalItemQuantity && totalPrice : cartItems.map( item => {
-    totalItemQuantity.push(item.quantity);
-    totalPrice.push(item.price * item.quantity)
-  }); */
 
   if(totalItemQuantity.length !==0){
     totalItemQuantity = totalItemQuantity.reduce((quantities, quantity) => quantities + quantity)
@@ -42,7 +32,7 @@ const CheckoutPage = (props) => {
         </header>
 
         <main className="mainContent clearfix" id="mainContent">
-          {cartItems.length ===0 ? <h2 className="text-center text-primary mb-5"> You haven't any product </h2> 
+          {cartItems.length ===0 ? <h2 className="text-center text-primary mb-5"> You haven't any product </h2>
 
           :<section className="checkoutProductDetails clearfix pt-5 pb-5" id="checkoutProductDetails" >
             <Container>
@@ -52,7 +42,7 @@ const CheckoutPage = (props) => {
                   <Col sm="8">
                     <div className="productCartList webScrollbar">
                     { cartItems.map((item,index)=>(
-                  
+
                       <div key={index} className="productCartSingle d-flex align-items-center mb-2">
                           <div className="cartProductMedia bgGray">
                             <img src={ URL.BASE +"/"+ JSON.parse( item.cover_images).img_1 } alt="" />
