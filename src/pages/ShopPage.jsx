@@ -118,7 +118,6 @@ const ShopPage = (props) => {
                         <ul className="filterList">
                           {author.map((data, index) => (
                               <LiSpan
-
                                   key={index}
                                   Url={data.url}
                                   itemName={data.name}

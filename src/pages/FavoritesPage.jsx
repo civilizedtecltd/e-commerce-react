@@ -24,14 +24,14 @@ const useStyle = createUseStyles({
 })
 const FavoritesPage = (props) => {
   const classes = useStyle()
-  const totalItem = props.cart.length 
-  const [favorite,setFavorite ] = useState( props.favorite )
-
+  const totalItem = props.cart.length;
+  const [favorite , setFavorite ] = useState( props.favorite )
   const handleClick = (event) => {
-    favorite.find((item, index) => {
+    favorite.map((item, index) => {
       if (Number(item.id) === Number(event.target.id)) {
         props.removeFavItem(item.id)
         favorite.splice(index, 1)
+        setFavorite([...favorite])
       }
     })
 
@@ -40,7 +40,7 @@ const FavoritesPage = (props) => {
   return (
       <div className="allWrapper">
         <HeaderComponent
-          favorite_item={favorite.length}
+          favorite_item={props.favorite.length}
           cartItem={totalItem}
         />
         <MobileHeader />
@@ -49,6 +49,7 @@ const FavoritesPage = (props) => {
             className="sectionBreadcrumb secGap clearfix pb-0"
             id="sectionBreadcrumb"
           >
+          
             <Container>
               <Row>
                 <Col>
@@ -62,7 +63,7 @@ const FavoritesPage = (props) => {
             <Container>
 
               <Row>
-               { favorite.length ===0 ? <Col xs={12}>
+               { favorite.length === 0 ? <Col xs={12}>
                   <div className="contentArea text-center mt-5 mb-5">
                     <h2 className="sectionTitle mb-3">
                       You don’t have any <span>Favorites</span>
@@ -74,8 +75,8 @@ const FavoritesPage = (props) => {
                     </p>
 
                   </div>
-                </Col> :
-                <Col xs={12}>
+              </Col> :
+                <Col xs={12}> 
                    <Card className="table-responsive border-0 cartTableBody">
                     <Card.Body className="p-0">
                       <Table>
