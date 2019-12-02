@@ -24,11 +24,11 @@ const useStyle = createUseStyles({
 })
 const FavoritesPage = (props) => {
   const classes = useStyle()
-  const totalItem = props.cart.length 
-  const [favorite,setFavorite ] = useState( props.favorite )
+  const totalItem = props.cart.length;
+  const [favorite,setFavorite ] = useState(props.favorite);
 
   const handleClick = (event) => {
-    favorite.find((item, index) => {
+    favorite.map((item, index) => {
       if (Number(item.id) === Number(event.target.id)) {
         props.removeFavItem(item.id)
         favorite.splice(index, 1)
@@ -98,7 +98,7 @@ const FavoritesPage = (props) => {
                             </td>
                             </tr>
                          )}
-                        </tbody> 
+                        </tbody>
                       </Table>
                     </Card.Body>
                   </Card>
@@ -243,7 +243,7 @@ const FavoritesPage = (props) => {
         </main>
         <FooterComponent />
       </div>
-  
+
 
   );
 };
