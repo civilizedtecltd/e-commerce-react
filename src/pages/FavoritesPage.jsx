@@ -25,22 +25,23 @@ const useStyle = createUseStyles({
 const FavoritesPage = (props) => {
   const classes = useStyle()
   const totalItem = props.cart.length;
-  const [favorite , setFavorite ] = useState( props.favorite )
+  const [favorite , setFavorite ] = useState( [...props.favorite] )
   const handleClick = (event) => {
-    favorite.map((item, index) => {
-      if (Number(item.id) === Number(event.target.id)) {
-        props.removeFavItem(item.id)
-        favorite.splice(index, 1)
-        setFavorite([...favorite])
-      }
-    })
+    event.preventDefault()
+    favorite.find((item, index)=> {
 
+        if(item.id === Number(event.target.id)){
+          props.removeFavItem(item.id)
+          favorite.splice(index, 1)
+        } 
+        return setFavorite([...favorite])
+    })
   }
 
   return (
       <div className="allWrapper">
         <HeaderComponent
-          favorite_item={props.favorite.length}
+          favorite_item={favorite.length}
           cartItem={totalItem}
         />
         <MobileHeader />
@@ -99,7 +100,7 @@ const FavoritesPage = (props) => {
                             </td>
                             </tr>
                          )}
-                        </tbody> 
+                        </tbody>
                       </Table>
                     </Card.Body>
                   </Card>
@@ -244,7 +245,7 @@ const FavoritesPage = (props) => {
         </main>
         <FooterComponent />
       </div>
-  
+
 
   );
 };

@@ -36,7 +36,7 @@ function ProductPage(props) {
 
   useEffect(() => {
     return props.showSingleBook(id);
-  }, []);
+  }, [id]);
 
   const handleClose = () => setShow(false);
 
