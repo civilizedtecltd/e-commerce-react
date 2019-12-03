@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
@@ -32,9 +32,16 @@ const ShopPage = (props) => {
     const favoriteItem = props.favorite;
     const books = (props.book !== undefined ) ? props.book : [];
 
+
+    const [show , setShowBook ] = useState(5);
+    const [page , setPage ] = useState(1);
+    const [totalPage , setTotalPage] = useState(1)
+
+
     useEffect(() => {
-      return ( id === 'all') ? props.fetchAllBook() : props.fetchBooksByCategory(id) ;
+      return ( id === 'all') ? props.fetchAllBook(page,show) : props.fetchBooksByCategory(id,page,show) ;
     },[]);
+
 
   return (
     <>
@@ -240,7 +247,7 @@ const ShopPage = (props) => {
                           </li>
 
                           <li>
-                            <select className="filterSelect form-control">
+                            <select className="filterSelect form-control" onChange={(e)=>setShowBook(e.target.value)}>
                               <option>16</option>
                               <option>10</option>
                               <option>5</option>
@@ -253,26 +260,29 @@ const ShopPage = (props) => {
                         <nav aria-label="Page navigation">
                           <ul className="pagination align-items-center justify-content-between">
                             <li className="page-item">
-                              <Link className="page-link" to="#">
+                              <p className="page-link">
                                 <i className="fas fa-chevron-left"></i>
-                              </Link>
+                              </p>
                             </li>
                             <li className="page-item">Page</li>
                             <li className="page-item">
-                              <Link className="page-link" to="#">
-                                1
-                              </Link>
+                              <p id="next-page" className="page-link">
+                                {page}
+                              </p>
                             </li>
                             <li className="page-item">of</li>
                             <li className="page-item">
-                              <Link className="page-link" to="#">
-                                7
-                              </Link>
+                              <p id="total-page" className="page-link">
+                                {totalPage}
+                              </p>
                             </li>
                             <li className="page-item">
-                              <Link className="page-link" to="#">
+                              <p className="page-link" to="#" onClick={(e)=>{
+                                setPage(document.getElementById('next-page').value)
+                              }
+                            }>
                                 <i className="fas fa-chevron-right"></i>
-                              </Link>
+                              </p>
                             </li>
                           </ul>
                         </nav>
@@ -429,8 +439,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps =(dispatch) => {
   return {
-    fetchAllBook        : () => dispatch(fetchAllBook()),
-    fetchBooksByCategory: (id) => dispatch(fetchBooksByCategory(id))
+    fetchAllBook        : (page,show) => dispatch(fetchAllBook(page,show)),
+    fetchBooksByCategory: (id,page,show) => dispatch(fetchBooksByCategory(id,page,show))
   }
 }
 

@@ -29,15 +29,15 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
          return `${this.API}/user/${id}`;
      }
 
-     get _ALL_BOOKS(){
-         return `${this.API}/product/all-books`;
+      _ALL_BOOKS(page, show){
+         return `${this.API}/product/all-books/${page}/${show}`;
      }
      _SINGLE_BOOK(id){
          return `${this.API}/product/book/${id}`
      }
 
-     _CATEGORY_BOOKS(id){
-        return `${this.API}/product/category/${id}`
+     _CATEGORY_BOOKS(id, page , show){
+        return `${this.API}/product/category/${id}/${page}/${show}`
      }
  }
 
