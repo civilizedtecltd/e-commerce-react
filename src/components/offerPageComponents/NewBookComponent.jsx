@@ -25,16 +25,19 @@ function NewBookComponent({ BookImage, ProductTitle, AuthorName, ProductPrice, I
                     <div className={`productMedia mb-3 ${ImageBg}`}>
                         <Image src={BookImage} alt="Book Image" style={imgStyle} />
                     </div>
-
                     <div className="productContent">
-                        <Link to="#"><h4 className="productTitle mb-1" style={titleStyle} >{ProductTitle} {(isFev===true) ?<span className="favoritIcon"><i className="fas fa-star"></i></span> :''}</h4></Link>
+                        <Link to="#"><h4 className="productTitle mb-1" style={titleStyle} >{ProductTitle} {(isFev === true) ?<span className="favoritIcon"><i className="fas fa-star"></i></span> :''}</h4></Link>
                         <h5 className="authorName mb-1">{AuthorName}</h5>
                         <p className="productPrice">$ {ProductPrice}</p>
+                        <button  className="btn btn-danger">Remove</button>
                     </div>
                 </Card>
             </LazyLoad>
         </Col>)
 }
+
+
+
 
 function ImgSlick() {
 

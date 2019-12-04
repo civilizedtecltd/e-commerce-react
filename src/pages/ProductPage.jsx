@@ -234,7 +234,7 @@ const mapStateToProps = (state)=> {
 const mapDispatchToProps = (dispatch) => {
     return{
       showSingleBook : (id) => dispatch(showSingleBook(id)),
-      addToCart      :       (book) => dispatch(addToCart(book)),
+      addToCart      : (book) => dispatch(addToCart(book)),
       addToFav       : (book)=> dispatch(addToFavorite(book))
     }
 }
