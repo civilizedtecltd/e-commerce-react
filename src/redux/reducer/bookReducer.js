@@ -1,7 +1,7 @@
 import * as Types from '../actions/actionTypes';
 
 
-const bookReducer = ( state =[], actions) => {
+const bookReducer = ( state ={}, actions) => {
 
     const { payload } = actions;
 

@@ -25,23 +25,64 @@ import { URL } from '../constants/config';
 import './assets/shop.css';
 
 
+
 const ShopPage = (props) => {
-    
+    console.log(props)  
     const { id, title } =  useParams();
+    
     const totalItem = props.cart.length
     const favoriteItem = props.favorite;
-    const books = (props.book !== undefined ) ? props.book : [];
-
-
+    const books = (props.book.data !== undefined ) ? props.book.data : [];
+      
     const [show , setShowBook ] = useState(5);
-    const [page , setPage ] = useState(1);
+    let [page , setPage ] = useState(1);
     const [totalPage , setTotalPage] = useState(1)
 
 
-    useEffect(() => {
-      return ( id === 'all') ? props.fetchAllBook(page,show) : props.fetchBooksByCategory(id,page,show) ;
+    const total_pages = (Number(show) !== 0 && Number(show) <= Number(props.totalItem)) ? Math.ceil(Number(props.totalItem)/Number(show)) : 1 ;
+
+    if(totalPage !== total_pages){
+      setTotalPage(total_pages);
+    }
+
+    if(Number(show) !== Number(props.showItem)){          
+      setShowBook(Number(props.showItem));
+    }
+   
+     
+    useEffect(() => {      
+      return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page,show) ;
     },[]);
 
+  const handleShowBook = (e)=> { 
+    e.preventDefault()
+    console.log(e.target.value)
+    setShowBook(Number(e.target.value));
+
+    const t_pages = (Number(e.target.value) !== 0 && Number(e.target.value) <= Number(props.totalItem)) ? Math.ceil(Number(props.totalItem)/Number(e.target.value)) : 1 ;       
+    setTotalPage(t_pages); 
+    return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page, Number(e.target.value));
+  }  
+
+
+  const handleNext = (e) => {
+      e.preventDefault();
+   
+      if(page!==totalPage){
+        setPage(++page)
+        props.fetchBooksByCategory(id, page, show);  
+      }
+     
+  }
+
+  const handlePreviews = (e)=>{
+    e.preventDefault();
+    if(page!==1){
+      setPage(--page)
+      props.fetchBooksByCategory(id, page, show);
+    }
+    if(page==0) return setPage(1)
+  }
 
   return (
     <>
@@ -116,9 +157,8 @@ const ShopPage = (props) => {
                         <Form>
                           <PriceRanger />
                         </Form>
-                        {/* end of Form */}
                       </div>
-                      {/* end of singleFilterCard */}
+                     
 
                       <div className="singleFilterCard">
                         <h5>Author</h5>
@@ -134,7 +174,7 @@ const ShopPage = (props) => {
                         </ul>
                         {/* end of filterList */}
                       </div>
-                      {/* end of singleFilterCard */}
+                     
 
                       <div className="singleFilterCard">
                         <h5>Publishing house</h5>
@@ -151,7 +191,7 @@ const ShopPage = (props) => {
                         </ul>
                         {/* end of filterList */}
                       </div>
-                      {/* end of singleFilterCard */}
+                     
 
                       <div className="singleFilterCard">
                         <h5>Publishing Year</h5>
@@ -168,7 +208,7 @@ const ShopPage = (props) => {
                         </ul>
                         {/* end of filterList */}
                       </div>
-                      {/* end of singleFilterCard */}
+                     
 
                       <div className="singleFilterCard">
                         <h5>Book Cover</h5>
@@ -185,7 +225,7 @@ const ShopPage = (props) => {
                         </ul>
                         {/* end of filterList */}
                       </div>
-                      {/* end of singleFilterCard */}
+                     
 
                       <div className="singleFilterCard p-0 border-0 m-0">
                         <h5>Language</h5>
@@ -201,13 +241,10 @@ const ShopPage = (props) => {
                         </ul>
                         {/* end of filterList */}
                       </div>
-                      {/* end of singleFilterCard */}
+                     
                     </div>
-                    {/* end of asideBody */}
                   </aside>
-                  {/* end of asideFilterBar */}
                 </Col>
-                {/* end of Col */}
 
                 <Col>
                   <div
@@ -220,9 +257,9 @@ const ShopPage = (props) => {
                           <span>{title}</span>  Books
                         </h2>
                       </Col>
-                      {/* end of Col */}
+    
                     </Row>
-                    {/* end of Row */}
+
                     <div className="row mb-4">
                       <div className="col">
                         <ul className="singleFilter d-flex align-items-center">
@@ -247,10 +284,10 @@ const ShopPage = (props) => {
                           </li>
 
                           <li>
-                            <select className="filterSelect form-control" onChange={(e)=>setShowBook(e.target.value)}>
-                              <option>16</option>
-                              <option>10</option>
-                              <option>5</option>
+                            <select name="up-filter-select" className="filterSelect form-control" value={show} onChange={handleShowBook}>
+                              <option value="16">16</option>
+                              <option value="10">10</option>
+                              <option value="5">5</option>
                             </select>
                           </li>
                         </ul>
@@ -259,30 +296,25 @@ const ShopPage = (props) => {
                       <div className="col">
                         <nav aria-label="Page navigation">
                           <ul className="pagination align-items-center justify-content-between">
-                            <li className="page-item">
-                              <p className="page-link">
+                            <li className="page-item" onClick={handlePreviews}>
+                              <button className="page-link">
                                 <i className="fas fa-chevron-left"></i>
-                              </p>
+                              </button>
                             </li>
                             <li className="page-item">Page</li>
                             <li className="page-item">
-                              <p id="next-page" className="page-link">
-                                {page}
-                              </p>
+                              <input id="page" type="text" className="page-link" value={ page } readOnly/>
+                               
+                             
                             </li>
                             <li className="page-item">of</li>
                             <li className="page-item">
-                              <p id="total-page" className="page-link">
-                                {totalPage}
-                              </p>
+                              <input type="text" id="total-page" value= {totalPage} className="page-link" readOnly/>
                             </li>
-                            <li className="page-item">
-                              <p className="page-link" to="#" onClick={(e)=>{
-                                setPage(document.getElementById('next-page').value)
-                              }
-                            }>
+                            <li className="page-item" onClick={handleNext} >
+                              <button className="page-link">
                                 <i className="fas fa-chevron-right"></i>
-                              </p>
+                              </button>
                             </li>
                           </ul>
                         </nav>
@@ -323,7 +355,7 @@ const ShopPage = (props) => {
                                     </h4>
                                   </Link>
                                   <h5 className="authorName mb-1">{book.book_author.name}</h5>
-                                  <p className="productPrice">$ {book.price}</p>
+                                  <p className="productPrice">$ {book.price} </p>
                                 </div>
                                 {/* end of productContent */}
                               </Card>
@@ -335,8 +367,7 @@ const ShopPage = (props) => {
                       }
                     </Row>
 
-                    <div className="row mt-4">
-
+                    <div className="row mb-4">
                       <div className="col">
                         <ul className="singleFilter d-flex align-items-center">
                           <li>
@@ -360,10 +391,10 @@ const ShopPage = (props) => {
                           </li>
 
                           <li>
-                            <select className="filterSelect form-control">
-                              <option>16</option>
-                              <option>10</option>
-                              <option>5</option>
+                            <select name="up-filter-select" className="filterSelect form-control" value={show} onChange={handleShowBook}>
+                              <option value="16">16</option>
+                              <option value="10">10</option>
+                              <option value="5">5</option>
                             </select>
                           </li>
                         </ul>
@@ -372,44 +403,38 @@ const ShopPage = (props) => {
                       <div className="col">
                         <nav aria-label="Page navigation">
                           <ul className="pagination align-items-center justify-content-between">
-                            <li className="page-item">
-                              <Link className="page-link" to="#">
+                            <li className="page-item" onClick={handlePreviews}>
+                              <button className="page-link">
                                 <i className="fas fa-chevron-left"></i>
-                              </Link>
+                              </button>
                             </li>
                             <li className="page-item">Page</li>
                             <li className="page-item">
-                              <Link className="page-link" to="#">
-                                1
-                              </Link>
+                              <input id="next-page" type="text" className="page-link" value={ page } readOnly/>
+                               
+                             
                             </li>
                             <li className="page-item">of</li>
                             <li className="page-item">
-                              <Link className="page-link" to="#">
-                                7
-                              </Link>
+                              <input type="text" id="total-page" value= {totalPage} className="page-link" readOnly/>
                             </li>
-                            <li className="page-item">
-                              <Link className="page-link" to="#">
+                            <li className="page-item" onClick={handleNext} >
+                              <button className="page-link">
                                 <i className="fas fa-chevron-right"></i>
-                              </Link>
+                              </button>
                             </li>
                           </ul>
                         </nav>
                       </div>
 
                     </div>
-                    {/* end of Container */}
+
+
                   </div>
-                  {/* end of allProductContent */}
                 </Col>
-                {/* end of Col */}
               </Row>
-              {/* end of Row */}
             </Container>
-            {/* end of Container */}
           </section>
-          {/* end of productsBodyAsidebar */}
           <section
             className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap"
             id="mailSubscribe"
@@ -417,30 +442,30 @@ const ShopPage = (props) => {
             <Container className="container">
               <NewsLetterComponent />
             </Container>
-            {/* end of Container */}
           </section>
-          {/* end of mailSubscribe */}
         </main>
-        {/* end of mainContent */}
         <FooterComponent />
       </div>
-      {/* end of allWrapper */}
     </>
   );
 };
 
 const mapStateToProps = (state) =>{
+  const initItem = (state.book.total !== undefined) ? state.book.total : 1;
+  const initShowItem = (state.book.show !== undefined) ? state.book.show: 5;    
   return {
-    ...state,
+   book: state.book,
    cart: state.shop.cart,
+   totalItem: initItem,
+   showItem: initShowItem,
    favorite: state.favorite
   }
 }
 
 const mapDispatchToProps =(dispatch) => {
   return {
-    fetchAllBook        : (page,show) => dispatch(fetchAllBook(page,show)),
-    fetchBooksByCategory: (id,page,show) => dispatch(fetchBooksByCategory(id,page,show))
+    fetchAllBook        : (page, show) => dispatch(fetchAllBook(page, show)),
+    fetchBooksByCategory: (id, page, show) => dispatch(fetchBooksByCategory(id, page, show))
   }
 }
 
