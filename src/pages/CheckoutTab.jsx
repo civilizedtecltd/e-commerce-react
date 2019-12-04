@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
 import {Container, Card ,Form, Col, Row, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
-
 import isEmpty from 'lodash/isEmpty';
-
 import {connect} from 'react-redux';
 import {setDeliveryAddress, setPaymentDetails} from '../redux/actions/shopActions';
-
 import PaymentsMethods from './PaymentMethods';
-
 import {futureDate} from '../helpers/utils';
-
 import './checkout.css';
 import '../assets/css/theme.css'
-import card_icon_img from '../assets/images/user/card_icon_img.png'
-
-
 
 
 const CheckoutTab = (props) => {
@@ -124,6 +116,7 @@ const CheckoutTab = (props) => {
 
     return(
         <Container>
+           
             <Card>
                 <Card.Body>
 
@@ -252,7 +245,7 @@ const CheckoutTab = (props) => {
                                     </Form>
                                 </div>
                             </div>
-                        </div>{/* tab-section -2 */}
+                        </div>
 
 
                         <div id='order-confirmation-section' className="tab order-confirmation-section">
@@ -295,16 +288,11 @@ const CheckoutTab = (props) => {
                                         <button type="submit" className="btn btn-primary" data-target="#confirmOrder" data-toggle="modal" onClick={confirmOrder}>Confirm order</button>
                                     </div>
                                 </Row>
-
                             </Form>
-                        </div>{/* tab section -3 */}
-
-
-                    </div>{/* checkout tab */}
+                        </div>
+                    </div>
                 </Card.Body>
-                {/* end of Card.Body */}
             </Card>
-            {/* end of Card */}
         </Container>
 
     )
