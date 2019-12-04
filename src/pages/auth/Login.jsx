@@ -5,11 +5,8 @@ import { login } from '../../redux/actions/authActions';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import {Container, Row, Col, Form, Alert} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom } from '../../components/FromComponents/InputComponent';
@@ -18,14 +15,15 @@ import { InputFrom } from '../../components/FromComponents/InputComponent';
 import './assets/css/auth.css';
 import '../../assets/css/animate.css';
 
- /* eslint-disable-next-line */
-const mySwal = withReactContent(Swal);
+
 
 const Login = (props) => {
 
+  console.log(props)
+
   const [state, setState] = useState(true);
   const [formData] = useState({});
-
+  const [showAlert, setShowAlert] = useState(false);
   const { auth } = props;
 
   const loginData = (data) => {
@@ -36,42 +34,28 @@ const Login = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     props.login(formData)
+    setState(true);
   }
 
-    if(!isEmpty(auth)){
-        if(auth.status.success && state){
-            setState(false);
-            props.history.goBack();
-        }
 
-        if(!auth.status.success){
-            mySwal.fire({
-                    icon: 'error',
-                    title: 'Oops..',
-                    text: 'Provide valid username and password.',
-                    footer: 'Copyright@2019',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Try Again',
-                    showClass: {
-                    popup: 'animated fadeInDown fast'
-                    },
-                    hideClass: {
-                    popup: 'animated fadeOutUp fast'
-                    }
-            }).then(() => {
-                console.log('ok clicked')
-            }, (dismiss) => {
-                if(dismiss == 'cancel'){
-                    console.log('cancel button clicked')
-                }
-            })
+    if(!isEmpty(auth.status)){
+      if(auth.status.success && state){
+        setState(false);
+        props.history.goBack();
+      }
 
-        }
+      if(!auth.status.success && state){
+        setState(false);
+        setShowAlert(true);
+        const clearAlert = setTimeout(() => {
+          setShowAlert(false);
+        }, 5000);
+
+       return () =>  clearTimeout(clearAlert);
+      }
     }
+
 
   return (<>
     <div className="AllWrapper fullHeight">
@@ -111,6 +95,10 @@ const Login = (props) => {
                   />{/* end of Form.Group */}
 
                   <Link className="linkText mb-3" to="/forgot-password">Forgot password?</Link>
+
+                    <Alert show={showAlert} variant="danger" onClose={() => setShowAlert(false)} dismissible>
+                        <p>Provided Email & Password combination miss matched.</p>
+                    </Alert>
 
                   <input type="submit" className="btn submitBtn mb-3 " onClick = { handleSubmit } value="LOGIN"/>
 
