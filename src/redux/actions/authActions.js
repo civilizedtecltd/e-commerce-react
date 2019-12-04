@@ -3,10 +3,11 @@ import axios from 'axios';
 import decode from 'jwt-decode';
 import store from '../store';
 import { URL } from '../../constants/config';
-import setAuthToken from '../../helpers/setAuthToken';
+import {setAuthToken, removeAuthToken } from '../../helpers/setAuthToken';
 
 
 const login = (authData) => dispatch => {
+    removeAuthToken();
     axios.post(URL._LOGIN, authData)
         .then(res => {
 

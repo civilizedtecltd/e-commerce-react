@@ -1,6 +1,8 @@
 import * as Types from '../actions/actionTypes';
 const initState = {
-
+    jwt: {},
+    user: {},
+    status: {}
 }
 const authReducer = (state = initState, {type, payload}) => {
     switch(type){
@@ -9,6 +11,7 @@ const authReducer = (state = initState, {type, payload}) => {
         case Types.USER_LOGIN_ERROR:
         case Types.AUTH_NOT_IN_STATE:
             return {
+                ...state,
                 ...payload
             }
         default:
