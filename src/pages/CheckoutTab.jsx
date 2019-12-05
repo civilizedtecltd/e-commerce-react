@@ -234,7 +234,7 @@ const CheckoutTab = (props) => {
                             <div className="row">
                                 <div className="col col-12">
                                     <button disabled className="btn btn-primary btn-block d-md-none d-lg-none d-xl-none mb-3">Payment and delivery</button>
-                                    <h3 className="mt-2 mb-2">Choose a delivery method</h3>
+                                    <h3 className="mt-2 mb-2">Choose a Delivery Method</h3>
                                     <PaymentsMethods {...formData} callback={getPaymentDetails}/>
 
                                     <Form className="mt-5">
