@@ -29,11 +29,9 @@ function ImageCarousel(props) {
 
     if(props.image){
 
-        const cover = JSON.parse(props.image);
-
-        images.push(`${URL.BASE}/${cover.img_1}`);
-        images.push(`${URL.BASE}/${cover.img_2}`);
-        images.push(`${URL.BASE}/${cover.img_3}`);
+        images.push(`${URL.BASE}/${props.image.img_1}`);
+        images.push(`${URL.BASE}/${props.image.img_2}`);
+        images.push(`${URL.BASE}/${props.image.img_3}`);
 
         if(coverImages === ''){
             setCoverImage(images[0]);
