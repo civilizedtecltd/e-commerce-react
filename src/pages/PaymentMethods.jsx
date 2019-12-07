@@ -111,6 +111,8 @@ const PaymentMethods = (props) => {
                 return props.callback({ type: 'standard'});
             case 3:
                 return props.callback({ type: 'express'});
+            default:
+                return props.callback({type: 'standard'});
         }
     }
 
@@ -309,7 +311,7 @@ const PaymentMethods = (props) => {
             </div>
         </div>
 
-        
+
     </>);
 }
 

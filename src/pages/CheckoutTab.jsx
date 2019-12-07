@@ -12,8 +12,8 @@ import PaymentsMethods from './PaymentMethods';
 import {futureDate} from '../helpers/utils';
 
 import './checkout.css';
-import '../assets/css/theme.css'
-import card_icon_img from '../assets/images/user/card_icon_img.png'
+import '../assets/css/theme.css';
+
 
 
 
