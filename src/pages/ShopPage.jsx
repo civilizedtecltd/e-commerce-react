@@ -27,13 +27,13 @@ import './assets/shop.css';
 
 
 const ShopPage = (props) => {
-    console.log(props)  
+    console.log(props)
     const { id, title } =  useParams();
-    
+
     const totalItem = props.cart.length
     const favoriteItem = props.favorite;
     const books = (props.book.data !== undefined ) ? props.book.data : [];
-      
+
     const [show , setShowBook ] = useState(5);
     let [page , setPage ] = useState(1);
     const [totalPage , setTotalPage] = useState(1)
@@ -45,34 +45,34 @@ const ShopPage = (props) => {
       setTotalPage(total_pages);
     }
 
-    if(Number(show) !== Number(props.showItem)){          
+    if(Number(show) !== Number(props.showItem)){
       setShowBook(Number(props.showItem));
     }
-   
-     
-    useEffect(() => {      
+
+
+    useEffect(() => {
       return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page,show) ;
     },[]);
 
-  const handleShowBook = (e)=> { 
+  const handleShowBook = (e)=> {
     e.preventDefault()
     console.log(e.target.value)
     setShowBook(Number(e.target.value));
 
-    const t_pages = (Number(e.target.value) !== 0 && Number(e.target.value) <= Number(props.totalItem)) ? Math.ceil(Number(props.totalItem)/Number(e.target.value)) : 1 ;       
-    setTotalPage(t_pages); 
+    const t_pages = (Number(e.target.value) !== 0 && Number(e.target.value) <= Number(props.totalItem)) ? Math.ceil(Number(props.totalItem)/Number(e.target.value)) : 1 ;
+    setTotalPage(t_pages);
     return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page, Number(e.target.value));
-  }  
+  }
 
 
   const handleNext = (e) => {
       e.preventDefault();
-   
+
       if(page!==totalPage){
         setPage(++page)
-        props.fetchBooksByCategory(id, page, show);  
+        props.fetchBooksByCategory(id, page, show);
       }
-     
+
   }
 
   const handlePreviews = (e)=>{
@@ -106,7 +106,7 @@ const ShopPage = (props) => {
               </Row>
             </Container>
           </section>
-          
+
           <section
             className="productsBodyAsidebar clearfix"
             id="productsBodyAsidebar"
@@ -135,7 +135,7 @@ const ShopPage = (props) => {
                           )}
                         </ul>
                       </div>
-      
+
                       <div className="singleFilterCard">
                         <h5>Discipline</h5>
                         <ul className="filterList">
@@ -158,7 +158,7 @@ const ShopPage = (props) => {
                           <PriceRanger />
                         </Form>
                       </div>
-                     
+
 
                       <div className="singleFilterCard">
                         <h5>Author</h5>
@@ -174,7 +174,7 @@ const ShopPage = (props) => {
                         </ul>
                         {/* end of filterList */}
                       </div>
-                     
+
 
                       <div className="singleFilterCard">
                         <h5>Publishing house</h5>
@@ -191,7 +191,7 @@ const ShopPage = (props) => {
                         </ul>
                         {/* end of filterList */}
                       </div>
-                     
+
 
                       <div className="singleFilterCard">
                         <h5>Publishing Year</h5>
@@ -208,7 +208,7 @@ const ShopPage = (props) => {
                         </ul>
                         {/* end of filterList */}
                       </div>
-                     
+
 
                       <div className="singleFilterCard">
                         <h5>Book Cover</h5>
@@ -225,7 +225,7 @@ const ShopPage = (props) => {
                         </ul>
                         {/* end of filterList */}
                       </div>
-                     
+
 
                       <div className="singleFilterCard p-0 border-0 m-0">
                         <h5>Language</h5>
@@ -241,7 +241,7 @@ const ShopPage = (props) => {
                         </ul>
                         {/* end of filterList */}
                       </div>
-                     
+
                     </div>
                   </aside>
                 </Col>
@@ -257,7 +257,7 @@ const ShopPage = (props) => {
                           <span>{title}</span>  Books
                         </h2>
                       </Col>
-    
+
                     </Row>
 
                     <div className="row mb-4">
@@ -304,8 +304,8 @@ const ShopPage = (props) => {
                             <li className="page-item">Page</li>
                             <li className="page-item">
                               <input id="page" type="text" className="page-link" value={ page } readOnly/>
-                               
-                             
+
+
                             </li>
                             <li className="page-item">of</li>
                             <li className="page-item">
@@ -326,25 +326,13 @@ const ShopPage = (props) => {
                       {
                         (books.length === 0) ?  <></> : books.map((book, index) => {
 
-                            let bookCover = {
-                                  img1: `${URL.BASE}/images/books/default.png`,
-                                  img2: `${URL.BASE}/images/books/default.png`,
-                                  img3: `${URL.BASE}/images/books/default.png`
-                              }
-
-                            if(book.cover_images !== null){
-
-                              const cover = JSON.parse(book.cover_images)
-                              bookCover = `${URL.BASE}/${cover.img_1}`;
-                            }
-
                             return (
 
                               <Col key = {index} sm="3">
                                 <LazyLoad once={true} height={200}>
                                    <Card className="productCard border-0 bg-transparent">
                                 <div className="productMedia mb-3 bgGray">
-                                  <img src={bookCover} alt="" />
+                                  <img src={(book.cover_images !== null) ? `${URL.BASE}/${book.cover_images.img_1}` : '' } alt="" />
                                 </div>
                                 {/* end of productMedia */}
 
@@ -411,8 +399,8 @@ const ShopPage = (props) => {
                             <li className="page-item">Page</li>
                             <li className="page-item">
                               <input id="next-page" type="text" className="page-link" value={ page } readOnly/>
-                               
-                             
+
+
                             </li>
                             <li className="page-item">of</li>
                             <li className="page-item">
@@ -452,7 +440,7 @@ const ShopPage = (props) => {
 
 const mapStateToProps = (state) =>{
   const initItem = (state.book.total !== undefined) ? state.book.total : 1;
-  const initShowItem = (state.book.show !== undefined) ? state.book.show: 5;    
+  const initShowItem = (state.book.show !== undefined) ? state.book.show: 5;
   return {
    book: state.book,
    cart: state.shop.cart,
