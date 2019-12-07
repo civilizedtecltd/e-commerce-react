@@ -2,10 +2,7 @@ import React, {useState, useEffect}from 'react';
 import axios from 'axios';
 
 
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content'
-
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import {Container, Row, Col, Form, Button, Alert} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
@@ -13,15 +10,15 @@ import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComp
 import { URL } from '../../constants/config'
 import './assets/css/auth.css';
 
-const mySwal = withReactContent(Swal);
-
 const SignUp = (props) => {
 
 
   const [data, setData] = useState([]);
   const [formData] = useState({});
+  const [showAlert, setShowAlert] = useState(false);
+  const [passwordAlert, setPasswordAlert] = useState(false);
 
-  useEffect(() => {
+    useEffect(() => {
     const fetchData = async () => {
       const result = await axios(URL._CATEGORY);
       return setData(result.data);
@@ -41,7 +38,7 @@ const categoryData = (data) => {
     if(data.category_id !== undefined || data.category_id !== 'Select Category')
         formData.category_id = Number(data.category_id);
 }
- 
+
 const fromFileData = (data) => {
   /*eslint-disable-next-line*/
     Object.keys(data).map( key => {
@@ -59,75 +56,40 @@ const handleSubmit = (event) => {
         formData.password === undefined      ||
         formData.repeatPassword === undefined
         ){
-            mySwal.fire({
-              icon: 'error',
-              title: 'Oops..',
-              text: 'Field Data missing',
-              footer: 'Copyright@2019',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Try Again',
-              showClass: {
-                popup: 'animated fadeInDown fast'
-              },
-              hideClass: {
-                popup: 'animated fadeOutUp fast'
-              }
-          }).then(() => {
-                console.log('ok clicked')
-          }, (dismiss) => {
-             if(dismiss === 'cancel'){
-                 console.log('cancel button clicked')
-             }
-          })
+        setShowAlert(true);
+        const clearAlert = setTimeout(() => {
+            setShowAlert(false);
+        }, 5000);
 
-        }
-    else{
-
+        return () =>  clearTimeout(clearAlert);
+    }else{
         if(String(formData.password) !== String(formData.repeatPassword)){
+            setPasswordAlert(true);
+            const clearAlert = setTimeout(() => {
+                setPasswordAlert(false);
+            }, 5000);
 
-            mySwal.fire({
-              icon: 'error',
-              title: 'Oops..',
-              text: 'Password did not match.',
-              footer: 'Copyright@2019',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Try Again',
-              showClass: {
-                popup: 'animated fadeInDown fast'
-              },
-              hideClass: {
-                popup: 'animated fadeOutUp fast'
-              }
-          }).then(() => {
-                console.log('ok clicked')
-          }, (dismiss) => {
-             if(dismiss === 'cancel'){
-                 console.log('cancel button clicked')
-             }
-          })
-
-        }else{
+            return () =>  clearTimeout(clearAlert);
+        }else {
             axios.post(
-                        URL._REGISTER,
-                        formData
-                    ).then( response => {
-                        if(response.status === 201)
-                            goToLoginPage();
+                URL._REGISTER,
+                formData
+            ).then( response => {
+                if(response.status === 201)
+                    goToLoginPage();
 
-                    }).catch( error => {
-                        console.log(error);
-                    });
+            }).catch( error => {
+                console.log(error);
+            });
         }
     }
-
 }
 
 
-    return (<>      
+
+
+
+    return (<>
       <div className="allWrapper fullHeight">
         <main className="loginMainArea clearfix fullHeight bgImage signUpBodyBg pb-3" id="signUpBody">
           <Container fluid={true}>
@@ -198,7 +160,12 @@ const handleSubmit = (event) => {
                     />
 
                     <Link className="linkText mb-3" to="/forgot-password">Forgot password?</Link>
-
+                      <Alert show={showAlert} variant="danger" onClose={() => setShowAlert(false)} dismissible>
+                          <p>Field Data missing</p>
+                      </Alert>
+                      <Alert show={passwordAlert} variant="danger" onClose={() => setPasswordAlert(false)} dismissible>
+                          <p>Password did not match.</p>
+                      </Alert>
 
                     <Button type="submit" className="btn submitBtn mb-3 " onClick={handleSubmit} >Sign Up</Button>
                     <p>I already have an account! <Link className="linkText mb-3" to="/login">Sign In</Link></p>

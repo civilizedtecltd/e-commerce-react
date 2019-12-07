@@ -55,7 +55,7 @@ const Home = (props) => {
 
                   <Card.Body className="text-center">
                     <h4>Fast delivery</h4>
-                    <p>Lorem ipsum dolor sit ament, consent etui advising elite, sed do elusion</p>
+                    <p>Lorem ipsum dolor sit ament, consect etur  adipiscing elit, sed do eiusmod</p>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of Card */}
               </Col>{/* end of Col */}
@@ -68,7 +68,7 @@ const Home = (props) => {
 
                   <Card.Body className="text-center">
                     <h4>LOREM IPSUM</h4>
-                    <p>Lorem ipsum dolor sit ament, consent etui advising elite, sed do elusion</p>
+                    <p>Lorem ipsum dolor sit amet, consect etur  adipiscing elit, sed do eiusmod</p>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of Card */}
               </Col>{/* end of Col */}
@@ -81,7 +81,7 @@ const Home = (props) => {
 
                   <Card.Body className="text-center">
                     <h4>Dolor set ament</h4>
-                    <p>Lorem ipsum dolor sit ament, consent etui advising elite, sed do elusion</p>
+                    <p>Lorem ipsum dolor sit amet, consect etur  adipiscing elit, sed do eiusmod</p>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of Card */}
               </Col>{/* end of Col */}
@@ -93,8 +93,8 @@ const Home = (props) => {
                   </div>{/* end of featureMedia */}
 
                   <Card.Body className="text-center">
-                    <h4>Advising vera</h4>
-                    <p>Lorem ipsum dolor sit ament, consent etui advising elite, sed do elusion</p>
+                    <h4>Adipiscing vero</h4>
+                    <p>Lorem ipsum dolor sit amet, consent etui advising elite, sed do elusion</p>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of Card */}
               </Col>{/* end of Col */}
