@@ -7,6 +7,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../assets/css/theme.css'
+
+import {URL} from '../../constants/config';
+
 import {NewBookDB} from "../../inc/offerPage/NewBook";
 
 
@@ -39,13 +42,13 @@ function NewBookComponent({ BookImage, ProductTitle, AuthorName, ProductPrice, I
 
 
 
-function ImgSlick() {
+function ImgSlick(props) {
 
     const settings = {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 5,
+        slidesToShow: (props.images.length < 5)? props.images.length : 5,
         slidesToScroll: 1,
         responsive: [
             {
@@ -108,28 +111,29 @@ function ImgSlick() {
     const titleStyle ={
         width:"190px"
     }
+
     return (
         <div>
             <Slider {...settings}>
-                {NewBookDB.map((value, index) =>
-                    <div key={index}>
-                        <Col className="col-auto">
-                            <LazyLoad once={true} height={200}>
-                                <Card className="productCard border-0 bg-transparent">
-                                    <div className= "productMedia mb-3 bgGray">
-                                        <Image src={value.Img} alt="Book Image" style={imgStyle} />
-                                    </div>
+                { ( props.images.length === 0 ) ? <></> : props.images.map((item, index) =>
+                        <div key={index}>
+                            <Col className="col-auto">
+                                <LazyLoad once={true} height={200}>
+                                    <Card className="productCard border-0 bg-transparent">
+                                        <div className= "productMedia mb-3 bgGray">
+                                            <Image src={(item.cover_images !== null) ? `${URL.BASE}/${item.cover_images.img_1}`: ''} alt="Book Image" style={imgStyle} />
+                                        </div>
 
-                                    <div className="productContent">
-                                        <Link to="#"><h4 className="productTitle mb-1" style={titleStyle} >{value.Title} </h4></Link>
-                                        <h5 className="authorName mb-1">{value.Author}</h5>
-                                        <p className="productPrice">$ {value.Price}</p>
-                                    </div>
-                                </Card>
-                            </LazyLoad>
-                        </Col>
-                    </div>
-                )
+                                        <div className="productContent">
+                                            <Link to={`/product/${item.id}`}><h4 className="productTitle mb-1" style={titleStyle} >{item.name} </h4></Link>
+                                            <h5 className="authorName mb-1">{item.book_author.name}</h5>
+                                            <p className="productPrice">$ {item.price}</p>
+                                        </div>
+                                    </Card>
+                                </LazyLoad>
+                            </Col>
+                        </div>
+                    )
                 }
             </Slider>
         </div>

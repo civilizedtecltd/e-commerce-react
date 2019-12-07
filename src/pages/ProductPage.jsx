@@ -35,6 +35,7 @@ function ProductPage(props) {
   const favoriteItem = props.favorite;
 
   useEffect(() => {
+      window.scrollTo(0, 0);
     return props.showSingleBook(id);
   }, [id]);
 
@@ -43,9 +44,6 @@ function ProductPage(props) {
   const updateItemQty = (e) => {
     book.quantity = Number(e.target.value)
   }
-
-
-
 
   const addToCart = (e) => {
     e.preventDefault();
@@ -84,7 +82,7 @@ function ProductPage(props) {
               <div className="row">
                 <div className="col-sm-6">
                   <ImageCarousel
-                    image = {(book ? book.cover_images : false )}
+                    images = {(book ? book.cover_images : false )}
                    />
                 </div>
 
@@ -187,7 +185,7 @@ function ProductPage(props) {
                   </h2>
                 </div>
               </div>
-              <ImgSlick />
+              <ImgSlick images={( props.similar !== undefined ) ? props.similar : [] } />
             </div>
           </section>
         </main>
@@ -223,7 +221,8 @@ function ProductPage(props) {
 
 const mapStateToProps = (state)=> {
   return {
-    book: state.book[0],
+    book: state.book.info,
+    similar: state.book.similar,
     cart: state.shop.cart,
     totalItems: state.shop.cart.length,
     favorite: state.favorite
