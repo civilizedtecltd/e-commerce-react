@@ -9,7 +9,7 @@ const Logout = (props) => {
 
     const { auth } = props;
 
-    if(!isEmpty(auth)){
+    if(!isEmpty(auth.jwt)){
         if(auth.status.success){
             props.userLogout();
         }
