@@ -26,7 +26,7 @@ import './assets/shop.css';
 
 
 const ShopPage = (props) => {
-    console.log(props)
+
     const { id, title } =  useParams();
 
     const totalItem = props.cart.length
