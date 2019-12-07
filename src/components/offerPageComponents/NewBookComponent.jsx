@@ -10,8 +10,6 @@ import '../../assets/css/theme.css'
 
 import {URL} from '../../constants/config';
 
-import {NewBookDB} from "../../inc/offerPage/NewBook";
-
 
 function NewBookComponent({ BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg ,isFev = false }){
     const imgStyle = {
@@ -38,8 +36,6 @@ function NewBookComponent({ BookImage, ProductTitle, AuthorName, ProductPrice, I
             </LazyLoad>
         </Col>)
 }
-
-
 
 
 function ImgSlick(props) {
