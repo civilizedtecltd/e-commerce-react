@@ -64,7 +64,11 @@ const logout = () => dispatch => {
             localStorage.removeItem('authData');
             return dispatch({
                 type: Types.USER_LOGOUT,
-                payload: {}
+                payload: {
+                    jwt: {},
+                    user: {},
+                    status: {}
+                }
             })
         }).catch(error => {
             console.log(error);
