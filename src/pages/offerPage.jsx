@@ -14,15 +14,15 @@ import FooterComponent from '../components/FooterComponent/FooterComponent';
 import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 
-import store from '../redux/store'
+//import store from '../redux/store'
 
 const offerPage = (props) => {
 
   const totalItem = props.cart.length
-  const favoriteItem = props.favorite; 
+  const favoriteItem = props.favorite;
   return (
     <div className="allWrapper">
-      <HeaderComponent 
+      <HeaderComponent
       favorite_item={favoriteItem.length}
       cartItem={totalItem}
       />

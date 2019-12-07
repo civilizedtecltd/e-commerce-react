@@ -76,11 +76,11 @@ const ShopPage = (props) => {
 
   const handlePreviews = (e)=>{
     e.preventDefault();
-    if(page!==1){
+    if(page !== 1){
       setPage(--page)
       props.fetchBooksByCategory(id, page, show);
     }
-    if(page==0) return setPage(1)
+    if(page === 0) return setPage(1)
   }
 
   return (

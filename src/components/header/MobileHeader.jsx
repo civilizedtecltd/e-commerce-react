@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import React ,{useState} from 'react';
+import React ,{useState, useEffect} from 'react';
 import {Container, Row, Col, Form, Badge, Collapse, Modal} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
@@ -15,8 +15,15 @@ const Mobile = ({ children }) => {
 const MobileHeader = (props) => {
     const [open, setOpen] = useState(false);
     const [show, setShow] = useState(false);
+    const [isAuth, setAuth] = useState(false);
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    useEffect(()=>{
+        return (checkAuth()) ? setAuth(true) : setAuth(false);
+    },[]);
+
 
     return(<>
         <Mobile>
@@ -100,14 +107,15 @@ const MobileHeader = (props) => {
 
                     <ul className="mobileNav userMbNav">
                         <li className="active"><Link to="/order"><i className="fas fa-clipboard-list"></i> My orders </Link></li>
-                        <li><Link to="/payment-method"><i class="fas fa-wallet"></i> Payment methods </Link></li>
-                        <li><Link to="/profile-settings"><i class="fas fa-cog"></i> Profile settings </Link></li>
-                        <li><Link to="/email-subscription"><i class="far fa-envelope"></i> Email subscription </Link></li>
+                        <li><Link to="/payment-method"><i className="fas fa-wallet"></i> Payment methods </Link></li>
+                        <li><Link to="/profile-settings"><i className="fas fa-cog"></i> Profile settings </Link></li>
+                        <li><Link to="/email-subscription"><i className="far fa-envelope"></i> Email subscription </Link></li>
                     </ul>
                 </Modal.Body>
                 <Modal.Footer className="modal-footer-btn-group pt-4 pb-4 pl-1 pr-1">
                     <Col>
-                        <Link to="/login" className="btn btn-border">Login</Link>
+                        {(!isAuth)? <Link to="/login" className="btn btn-border">Login</Link> : <Link to="/profile-settings" className="btn btn-border">My Profile</Link> }
+
                     </Col>
                     <Col>
                         <Link to="/favorites">

@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import React ,{useState, useEffect} from 'react';
 
-import {Container, Row, Col, Form, Badge, Collapse, Modal} from 'react-bootstrap';
+import {Container, Row, Col, Form, Badge, Collapse} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Menu from '../LiComponent/MenuComponents'
