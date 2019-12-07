@@ -42,12 +42,11 @@ const Router = (props) => (
               <PrivateRoute path="/payment-methods" component={PaymentPage} />
               <Route path="/book-offer" component={OfferPage} />
               <PrivateRoute path="/cart" component={CartPage} />
-              <Route path="/checkout" component={CheckoutPage} />
+              <PrivateRoute path="/checkout" component={CheckoutPage} />
               <Route path="/favorites" component={FavoritesPage} />
               <Route path="/shop/category/:id?/:title?" component={ShopPage} />
               <Route path="/product/:id" component={ProductPage} />
               <Route path='/logout' component={Logout} />
-
               <Route path='*'  component={ErrorPage} />
     </Switch>
 )
