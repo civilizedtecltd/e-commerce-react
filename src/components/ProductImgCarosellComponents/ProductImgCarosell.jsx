@@ -1,4 +1,4 @@
-import React, {useState, useRef } from "react";
+import React, {useState, useRef, useEffect } from "react";
 import {Image} from 'react-bootstrap';
 import LazyLoad from 'react-lazyload';
 import { URL } from '../../constants/config';
@@ -9,11 +9,11 @@ import '../../pages/assets/product.css';
 
 function ImageCarousel(props) {
 
+    let   [count] = useState(0);
     const [hidden, setHidden] = useState(false);
-    const [photoIndex,setPhotoIndex] = useState(0);
-
+    const [photoIndex, setPhotoIndex] = useState(0);
+    const [images, setImages] = useState([]);
     const [coverImages, setCoverImage] = useState('');
-    let [count] = useState(0);
 
     let ImgHandler = e => { setCoverImage(e.target.src) };
 
@@ -21,23 +21,22 @@ function ImageCarousel(props) {
         if(count === 3){
             count = 3
         }
-    })
+    });
 
+    useEffect(()=>{
+        if(props.images){
+            const images = [];
 
-    const image = { index:0 }
-    const images = [];
+            images.push(`${URL.BASE}/${props.images.img_1}`);
+            images.push(`${URL.BASE}/${props.images.img_2}`);
+            images.push(`${URL.BASE}/${props.images.img_3}`);
 
-    if(props.image){
-
-        images.push(`${URL.BASE}/${props.image.img_1}`);
-        images.push(`${URL.BASE}/${props.image.img_2}`);
-        images.push(`${URL.BASE}/${props.image.img_3}`);
-
-        if(coverImages === ''){
+            setImages([...images]);
             setCoverImage(images[0]);
         }
-    }
+    }, [props.images]);
 
+    const image = { index:0 }
 
     const NextPhoto = ()=>{
         const SingleImage = document.getElementById('photo');
