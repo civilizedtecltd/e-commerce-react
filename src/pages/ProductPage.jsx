@@ -7,7 +7,7 @@ import { showSingleBook } from '../redux/actions/bookActions'
 import { addToCart } from '../redux/actions/shopActions'
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
-import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
+import ImgSlick  from "../components/offerPageComponents/ImgSlickComponent";
 import { ImageCarousel } from "../components/ProductImgCarosellComponents/ProductImgCarosell";
  import  HeaderComponent from "../components/header/Header";
  import  MobileHeader from "../components/header/MobileHeader";

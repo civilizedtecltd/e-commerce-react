@@ -121,7 +121,7 @@ const Home = (props) => {
           </Container>{/* end of Container */}
         </section>{/* end of mailSubscribe */}
 
-      </main>{/* end of mainContent */}
+      </main>
       <FooterComponent/>
     </div>
   </>);
