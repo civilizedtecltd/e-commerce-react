@@ -47,7 +47,6 @@ const Router = (props) => (
               <Route path="/shop/category/:id?/:title?" component={ShopPage} />
               <Route path="/product/:id" component={ProductPage} />
               <Route path='/logout' component={Logout} />
-
               <Route path='*'  component={ErrorPage} />
     </Switch>
 )

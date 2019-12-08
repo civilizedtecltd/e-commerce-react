@@ -33,7 +33,7 @@ const FavoritesPage = (props) => {
         if(item.id === Number(event.target.id)){
           props.removeFavItem(item.id)
           favorite.splice(index, 1)
-        } 
+        }
         return setFavorite([...favorite])
     })
   }
@@ -50,7 +50,7 @@ const FavoritesPage = (props) => {
             className="sectionBreadcrumb secGap clearfix pb-0"
             id="sectionBreadcrumb"
           >
-          
+
             <Container>
               <Row>
                 <Col>
@@ -77,7 +77,7 @@ const FavoritesPage = (props) => {
 
                   </div>
               </Col> :
-                <Col xs={12}> 
+                <Col xs={12}>
                    <Card className="table-responsive border-0 cartTableBody">
                     <Card.Body className="p-0">
                       <Table>
@@ -86,7 +86,7 @@ const FavoritesPage = (props) => {
                             <tr key={index}>
                             <td>
                               <div className="image">
-                                <img className={classes.addFavImage} src={`${URL.BASE}/${JSON.parse(item.cover_images).img_1}`} />
+                                <img className={classes.addFavImage} src={`${URL.BASE}/${item.cover_images.img_1}`} alt='' />
                                 <p>{item.name}</p>
                               </div>
                             </td>
@@ -219,14 +219,14 @@ const FavoritesPage = (props) => {
           >
             <Container>
               <Row className="mt-5 mb-5 justify-content-between">
-                {NewBookDB.map((newBook, index) => (
+                {favorite.map((item, index) => (
                   <NewBookComponent
                     key={index}
                     ImageBg="bgGray"
-                    BookImage={newBook.Img}
-                    ProductTitle={newBook.Title}
-                    AuthorName={newBook.Author}
-                    ProductPrice={newBook.Price}
+                    BookImage={`${URL.BASE}/${item.cover_images.img_1}`}
+                    ProductTitle={item.name}
+                    AuthorName={item.book_author.name}
+                    ProductPrice={item.price}
                     isFev={true}
                   />
                 ))}

@@ -19,8 +19,6 @@ import '../../assets/css/animate.css';
 
 const Login = (props) => {
 
-  console.log(props)
-
   const [state, setState] = useState(true);
   const [formData] = useState({});
   const [showAlert, setShowAlert] = useState(false);
@@ -52,7 +50,7 @@ const Login = (props) => {
           setShowAlert(false);
         }, 5000);
 
-       return () =>  clearTimeout(clearAlert);
+        return () =>  clearTimeout(clearAlert);
       }
     }
 

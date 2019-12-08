@@ -23,7 +23,7 @@ const mySwal = withReactContent(Swal);
 const UserProfile = (props) => {
 
     const [category, setCategory] = useState([]);
-    const [user, setUser] = useState({...props.auth.user });
+    const [user] = useState({...props.auth.user });
     const [formData] = useState({});
 
     useEffect(() => {

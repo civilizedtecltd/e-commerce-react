@@ -31,7 +31,10 @@ const fetchBooksByCategory = (id,page,show) => dispatch => {
         .then(res=>{
             dispatch({
                 type:Types.SHOW_SINGLE_BOOK,
-                payload: [ res.data.data ]
+                payload: {
+                    info:  res.data.data,
+                    similar: res.data.similar
+                }
             })
         })
           .catch(err=>{

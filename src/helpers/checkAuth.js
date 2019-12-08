@@ -19,7 +19,7 @@ const checkAuth = () => {
         const {data, exp} = decode(token);
 
         const auth = store.getState().auth;
-        if(isEmpty(auth)){
+        if(isEmpty(auth.jwt)){
             const authData = {
                 jwt: jwt,
                 user: data,
