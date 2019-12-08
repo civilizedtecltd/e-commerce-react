@@ -24,20 +24,20 @@ const CheckoutPage = (props) => {
   return (
     <>
       <div className="allWrapper bgGray">
-        <header className="header clearfix border-0 pt-5 pb-5" id="header">
-        <Container>
-              <Row>
-                <Col>
-                <BreadCrumb />
-                </Col>
-              </Row>
-            </Container>
-        </header>
+
+        <Container >
+          <Row>
+            <Col className="text-center">
+              <div className="logoWrapper">
+                <h1 className="logoText"><a href="#">LOGO</a></h1>
+              </div>
+            </Col>
+          </Row>
+        </Container>
 
         <main className="mainContent clearfix" id="mainContent">
-          {cartItems.length ===0 ? <h2 className="text-center text-primary mb-5"> You haven't any product </h2>
-
-          :<section className="checkoutProductDetails clearfix pt-5 pb-5" id="checkoutProductDetails" >
+          {cartItems.length ===0 ?'' :
+          <section className="checkoutProductDetails clearfix pt-5 pb-5" id="checkoutProductDetails" >
             <Container>
               <Card className="border-0">
                 <Card.Body>
@@ -57,13 +57,13 @@ const CheckoutPage = (props) => {
                               </Link>
                             </h3>
                             <p>
-                            Price:<span className="price"> { item.price } </span>
+                            Price:<span className="price"> ${ item.price } </span>
                             </p>
                             <p>
                             Quantity:<span className="qut"> { item.quantity } </span>
                             </p>
                             <p>
-                            Total:<span className="totalPrice"> { item.price * item.quantity } </span>
+                            Total:<span className="totalPrice"> ${ item.price * item.quantity } </span>
                             </p>
                         </div>
                   </div>))}
@@ -73,7 +73,7 @@ const CheckoutPage = (props) => {
                         <div className="cartProductValue clearfix" id="cartProductValue">
                           <ul className="productValue text-right">
                             <li>
-                              <strong>Total Product Price: </strong> { totalItemQuantity * totalPrice }
+                              <strong>Total Product Price: </strong> ${ totalItemQuantity * totalPrice }
                             </li>
                             <li>
                               <strong>Delivery:</strong> $00.00
