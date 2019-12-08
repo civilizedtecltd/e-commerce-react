@@ -39,6 +39,7 @@ const FavoritesPage = (props) => {
   }
 
   return (
+    <>
       <div className="allWrapper">
         <HeaderComponent
           favorite_item={favorite.length}
@@ -59,12 +60,11 @@ const FavoritesPage = (props) => {
               </Row>
             </Container>
           </section>
-
+          { favorite.length === 0 ? 
           <section className="chooseCategory clearfix" id="chooseCategory">
             <Container>
-
               <Row>
-               { favorite.length === 0 ? <Col xs={12}>
+               <Col xs={12}>
                   <div className="contentArea text-center mt-5 mb-5">
                     <h2 className="sectionTitle mb-3">
                       You don’t have any <span>Favorites</span>
@@ -76,37 +76,8 @@ const FavoritesPage = (props) => {
                     </p>
 
                   </div>
-              </Col> :
-                <Col xs={12}>
-                   <Card className="table-responsive border-0 cartTableBody">
-                    <Card.Body className="p-0">
-                      <Table>
-                        <tbody>
-                         {favorite.map((item,index)=>
-                            <tr key={index}>
-                            <td>
-                              <div className="image">
-                                <img className={classes.addFavImage} src={`${URL.BASE}/${item.cover_images.img_1}`} alt='' />
-                                <p>{item.name}</p>
-                              </div>
-                            </td>
-                            <td>
-                              <div className={classes.textLarge}>${item.price}</div>
-                            </td>
-                            <td>
-                              <div className="text-center">
-                                <button className="btn btn-danger" id={item.id} onClick={ handleClick }>Remove</button>
-                              </div>
-                            </td>
-                            </tr>
-                         )}
-                        </tbody>
-                      </Table>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                 }
-                 </Row>
+              </Col> 
+              </Row>
 
 
               <Row>
@@ -211,14 +182,14 @@ const FavoritesPage = (props) => {
               </Row>
             </Container>
           </section>
+            :
 
-
-          <section
+        <> <section
             className="favoritesItems secGap productView clearfix"
             id="favoritesItems"
           >
             <Container>
-              <Row className="mt-5 mb-5 justify-content-between">
+              <Row className="mt-5 mb-5 ">
                 {favorite.map((item, index) => (
                   <NewBookComponent
                     key={index}
@@ -233,6 +204,7 @@ const FavoritesPage = (props) => {
               </Row>
             </Container>
           </section>
+      
 
           <section
             className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap"
@@ -242,11 +214,14 @@ const FavoritesPage = (props) => {
               <NewsLetterComponent />
             </Container>
           </section>
+          </>
+}
         </main>
+        
         <FooterComponent />
       </div>
 
-
+</>
   );
 };
 

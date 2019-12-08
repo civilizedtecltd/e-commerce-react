@@ -4,7 +4,6 @@ import { Container, Row, Col, Form, Card } from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
 import { connect  } from 'react-redux';
 import { createUseStyles } from 'react-jss'
-
 import {fetchAllBook, fetchBooksByCategory} from '../redux/actions/bookActions';
 import { LiSpan } from '../components/LiComponent/CommonLiComponent';
 
@@ -36,7 +35,7 @@ const useStyle = createUseStyles({
 const ShopPage = (props) => {
 
     const classes = useStyle() 
-    
+
     const { id, title } =  useParams();
 
     const totalItem = props.cart.length
