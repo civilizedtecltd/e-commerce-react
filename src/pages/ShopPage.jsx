@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
 import { connect  } from 'react-redux';
+import { createUseStyles } from 'react-jss'
+
 import {fetchAllBook, fetchBooksByCategory} from '../redux/actions/bookActions';
 import { LiSpan } from '../components/LiComponent/CommonLiComponent';
 
@@ -23,10 +25,18 @@ import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
 import { URL } from '../constants/config';
 import './assets/shop.css';
-
+const useStyle = createUseStyles({
+  page_field:{
+    width: "50px",
+    marginRight: "5px",
+    marginLeft:'5px'
+  }
+})
 
 const ShopPage = (props) => {
 
+    const classes = useStyle() 
+    
     const { id, title } =  useParams();
 
     const totalItem = props.cart.length
@@ -34,7 +44,7 @@ const ShopPage = (props) => {
     const books = (props.book.data !== undefined ) ? props.book.data : [];
 
     const [show , setShowBook ] = useState(5);
-    let [page , setPage ] = useState(1);
+    let   [page , setPage ] = useState(1);
     const [totalPage , setTotalPage] = useState(1)
 
 
@@ -295,19 +305,19 @@ const ShopPage = (props) => {
                       <div className="col">
                         <nav aria-label="Page navigation">
                           <ul className="pagination align-items-center justify-content-between">
-                            <li className="page-item" onClick={handlePreviews}>
+                            <li className={`page-item ${classes.page_field}`} onClick={handlePreviews}>
                               <button className="page-link">
                                 <i className="fas fa-chevron-left"></i>
                               </button>
                             </li>
-                            <li className="page-item">Page</li>
-                            <li className="page-item">
+                            <li className={`page-item ${classes.page_field}`}>Page</li>
+                            <li className={`page-item ${classes.page_field}`}>
                               <input id="page" type="text" className="page-link" value={ page } readOnly/>
 
 
                             </li>
                             <li className="page-item">of</li>
-                            <li className="page-item">
+                            <li className={`page-item ${classes.page_field}`}>
                               <input type="text" id="total-page" value= {totalPage} className="page-link" readOnly/>
                             </li>
                             <li className="page-item" onClick={handleNext} >
@@ -395,14 +405,14 @@ const ShopPage = (props) => {
                                 <i className="fas fa-chevron-left"></i>
                               </button>
                             </li>
-                            <li className="page-item">Page</li>
-                            <li className="page-item">
+                            <li className={`page-item ${classes.page_field}`}>Page</li>
+                            <li className={`page-item ${classes.page_field}`}>
                               <input id="next-page" type="text" className="page-link" value={ page } readOnly/>
 
 
                             </li>
                             <li className="page-item">of</li>
-                            <li className="page-item">
+                            <li className={`page-item ${classes.page_field}`}>
                               <input type="text" id="total-page" value= {totalPage} className="page-link" readOnly/>
                             </li>
                             <li className="page-item" onClick={handleNext} >
