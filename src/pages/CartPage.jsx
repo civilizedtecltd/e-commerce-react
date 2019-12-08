@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Card, Form, Button, Table } from "react-bootstrap";
@@ -13,25 +13,38 @@ import { URL } from '../constants/config';
 import { removeFromCart, deleteAllFromCart } from '../redux/actions/shopActions'
 
 const CartPage = (props) => {
+
   const favoriteItem = props.favorite
+
   const [cartItems, setCartItems] = useState(props.cart)
-
-  let totalItemQuantity=0;
-  let totalBookPrice =0;
-  let delivery_cost = 0
-
   let [totalQty , setQty] = useState([]);
   let [totalPrice , setTotalPrice]= useState([]);
- 
- 
-  
-  if(cartItems.length !== 0) {
-    cartItems.map(item=> {
+
+  let totalItemQuantity = 0;
+  let totalBookPrice = 0;
+  let delivery_cost = 0;
+
+
+  useEffect(() => {
+    if(cartItems.length !== 0){
+        cartItems.map(item => {
+            item.totalPrice = item.quantity * item.price;
+            setCartItems([...cartItems, { ...item }]);
+        })
+    }
+
+    console.log("type of cartItems: ", typeof cartItems);
+    console.log("cartItems: ", cartItems);
+  },[]);
+
+
+  /* if(cartItems.length !== 0) {
+    cartItems.map(item => {
       totalQty.push( item.quantity );
       totalPrice.push( item.price * item.quantity)
     })
-  } 
-  
+  } */
+
 
   if (totalQty.length !== 0) {
     totalItemQuantity = totalQty.reduce((quantities, quantity) => quantities + quantity)
