@@ -6,20 +6,11 @@ import { connect  } from 'react-redux';
 import { createUseStyles } from 'react-jss'
 
 import {fetchAllBook, fetchBooksByCategory} from '../redux/actions/bookActions';
-import { LiSpan } from '../components/LiComponent/CommonLiComponent';
-
-import filter from '../inc/shop/stage';
-import discipline from '../inc/shop/discipline';
-import author from '../inc/shop/author';
-import publish_house from '../inc/shop/publish_house';
-import publish_year from '../inc/shop/publish_year';
-import book_cover from '../inc/shop/book_cover';
-import language from '../inc/shop/language';
+import Filters from '../components/shop/FiltersComponents'
 
 // Product Images
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
-import PriceRanger from "../components/PriceRangeSlider/PriceRangeSlider";
 import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
@@ -35,8 +26,8 @@ const useStyle = createUseStyles({
 
 const ShopPage = (props) => {
 
-    const classes = useStyle() 
-    
+    const classes = useStyle()
+
     const { id, title } =  useParams();
 
     const totalItem = props.cart.length
@@ -123,136 +114,7 @@ const ShopPage = (props) => {
             <Container>
               <Row>
                 <Col sm="3">
-                  <aside
-                    className="asideFilterBar secGap clearfix"
-                    id="asideFilterBar"
-                  >
-                    <h2 className="asideTitle">Filters</h2>
-
-                    <div className="asideBody bgGray" id="asideBody">
-                      <div className="singleFilterCard">
-                        <h5>Stage</h5>
-                        <ul className="filterList">
-                          {filter.map((data, index) => (
-                              <LiSpan
-
-                            key={index}
-                            Url={data.url}
-                            itemName={data.name}
-                            Value={data.value}
-                          />)
-                          )}
-                        </ul>
-                      </div>
-
-                      <div className="singleFilterCard">
-                        <h5>Discipline</h5>
-                        <ul className="filterList">
-                            {discipline.map((data, index) => (
-                                <LiSpan
-
-                                    key={index}
-                                    Url={data.url}
-                                    itemName={data.name}
-                                    Value={data.value}
-                                />)
-                            )}
-                        </ul>
-                      </div>
-
-
-                      <div className="singleFilterCard">
-                        <h5>Price Range</h5>
-                        <Form>
-                          <PriceRanger />
-                        </Form>
-                      </div>
-
-
-                      <div className="singleFilterCard">
-                        <h5>Author</h5>
-                        <ul className="filterList">
-                          {author.map((data, index) => (
-                              <LiSpan
-                                  key={index}
-                                  Url={data.url}
-                                  itemName={data.name}
-                                  Value={data.value}
-                              />)
-                          )}
-                        </ul>
-                        {/* end of filterList */}
-                      </div>
-
-
-                      <div className="singleFilterCard">
-                        <h5>Publishing house</h5>
-                        <ul className="filterList">
-                          {publish_house.map((data, index) => (
-                              <LiSpan
-
-                                  key={index}
-                                  Url={data.url}
-                                  itemName={data.name}
-                                  Value={data.value}
-                              />)
-                          )}
-                        </ul>
-                        {/* end of filterList */}
-                      </div>
-
-
-                      <div className="singleFilterCard">
-                        <h5>Publishing Year</h5>
-                        <ul className="filterList">
-                          {publish_year.map((data, index) => (
-                              <LiSpan
-
-                                  key={index}
-                                  Url={data.url}
-                                  itemName={data.name}
-                                  Value={data.value}
-                              />)
-                          )}
-                        </ul>
-                        {/* end of filterList */}
-                      </div>
-
-
-                      <div className="singleFilterCard">
-                        <h5>Book Cover</h5>
-                        <ul className="filterList">
-                          {book_cover.map((data, index) => (
-                              <LiSpan
-
-                                  key={index}
-                                  Url={data.url}
-                                  itemName={data.name}
-                                  Value={data.value}
-                              />)
-                          )}
-                        </ul>
-                        {/* end of filterList */}
-                      </div>
-
-
-                      <div className="singleFilterCard p-0 border-0 m-0">
-                        <h5>Language</h5>
-                        <ul className="filterList">
-                          {language.map((data, index) => (
-                              <LiSpan
-                                  key={index}
-                                  Url={data.url}
-                                  itemName={data.name}
-                                  Value={data.value}
-                              />)
-                          )}
-                        </ul>
-                        {/* end of filterList */}
-                      </div>
-
-                    </div>
-                  </aside>
+                  <Filters />
                 </Col>
 
                 <Col>
