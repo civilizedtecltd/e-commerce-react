@@ -1,21 +1,17 @@
 import * as Types from '../actions/actionTypes'
 const initialState = []
 const favoriteReducer = ( state = initialState , action ) => {
-    // const { payload } = action.payload
+    const { payload } = action
     switch(action.type){
         case Types.ADD_FAVORITE: 
-            if(action.payload !== undefined){
-                const isExist = state.find((items) => items.id === action.payload.id)
-                if (isExist === undefined){
-                    return [
-                    ...state,
-                    action.payload
-                 ]
-               }
-               return state
-            }   
-        
-         break;
+         const isExist = state.find((items) => items.id === payload.id)
+         if (isExist === undefined){
+                return [
+                ...payload
+                ]
+            }  
+            return state 
+
         case Types.SHOW_ALL_FAVORITE:
             return state
         
