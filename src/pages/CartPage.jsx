@@ -13,11 +13,12 @@ import { URL } from '../constants/config';
 import { removeFromCart, deleteAllFromCart } from '../redux/actions/shopActions'
 
 const CartPage = (props) => {
+ 
   const favoriteItem = props.favorite
   const [cartItems, setCartItems] = useState(props.cart)
 
-  let totalItemQuantity=0;
-  let totalBookPrice =0;
+  let totalItemQuantity = 0;
+  let totalBookPrice = 0;
   let delivery_cost = 0
 
   let [totalQty , setQty] = useState([]);
@@ -188,7 +189,7 @@ const CartPage = (props) => {
                           <span className="pPrice" id="grand-total">${parseFloat(totalPrice) + parseFloat(delivery_cost)}</span>
                             </li>
                           </ul>
-                          <Link to="/checkout" className="btn btn-primary mt-3">Checkout</Link>
+                          <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}>Checkout</Link>
                         </div>
                       </Col>
                     </Row>

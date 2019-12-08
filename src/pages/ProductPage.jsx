@@ -17,6 +17,7 @@ import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { URL } from '../constants/config';
 import "../pages/assets/product.css";
 import { addToFavorite } from "../redux/actions/favoriteActions";
+import checkAuth from "../helpers/checkAuth";
 
 const useStyles = createUseStyles({
   addFevButton: {
@@ -50,6 +51,10 @@ function ProductPage(props) {
     props.addToCart(book);
     setShow(true);
   };
+  const handleAddFavorite = (e) =>{
+      e.preventDefault();
+      return checkAuth() !==true ? props.history.push('/login') : props.addToFav(book)
+  }
 
 
   return (
@@ -143,7 +148,7 @@ function ProductPage(props) {
                           </div>
 
                           <div className="col text-center">
-                            <Button className={`btn linkBtnBorder ${classes.addFevButton}`} onClick={()=>props.addToFav(book)}>
+                            <Button className={`btn linkBtnBorder ${classes.addFevButton}`} onClick={handleAddFavorite}>
                               <i className="far fa-star"></i>Add to favorites
                             </Button>
                           </div>

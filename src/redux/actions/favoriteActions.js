@@ -1,9 +1,12 @@
 import * as Types from '../actions/actionTypes'
-const addToFavorite = (id) => {
-    return {
-        type:Types.ADD_FAVORITE,
-        payload: id
-    }
+import axios from 'axios';
+import checkAuth from '../../helpers/checkAuth'
+const addToFavorite = (id) => dispatch =>{
+    axios.post(URL, {id:id})
+    .then(res=>dispatch({
+           type:Types.ADD_FAVORITE,
+           payload: [...res]
+   })) 
 }
 
 
