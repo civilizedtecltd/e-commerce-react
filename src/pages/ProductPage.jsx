@@ -53,7 +53,7 @@ function ProductPage(props) {
   };
   const handleAddFavorite = (e) =>{
       e.preventDefault();
-      return checkAuth() !==true ? props.history.push('/login') : props.addToFav(book)
+      return checkAuth() !==true ? props.history.push('/login') : props.addToFavorite(id)
   }
 
 
@@ -239,7 +239,7 @@ const mapDispatchToProps = (dispatch) => {
     return{
       showSingleBook : (id) => dispatch(showSingleBook(id)),
       addToCart      : (book) => dispatch(addToCart(book)),
-      addToFav       : (book)=> dispatch(addToFavorite(book))
+      addToFavorite  : (id)=> dispatch(addToFavorite(id))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

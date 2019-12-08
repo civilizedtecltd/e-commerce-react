@@ -1,13 +1,18 @@
-import * as Types from '../actions/actionTypes'
+import * as Types from '../actions/actionTypes';
 import axios from 'axios';
-import checkAuth from '../../helpers/checkAuth'
+import { setAuthToken } from '../../helpers/setAuthToken';
+import { URL } from '../../constants/config';
+
 const addToFavorite = (id) => dispatch =>{
-    axios.post(URL, {id:id})
+    setAuthToken();
+    axios.post(URL._FAVORITE_ITEMS, {book_id:id})
     .then(res=>dispatch({
            type:Types.ADD_FAVORITE,
-           payload: [...res]
-   })) 
+           payload: [...res.data.data]
+   }))
+   .catch(err=>console.log(err)) 
 }
+
 
 
 const removeFavItem = (id) => {
