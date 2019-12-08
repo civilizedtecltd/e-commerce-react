@@ -26,6 +26,11 @@ import ProductPage from "./pages/ProductPage";
 
 import PrivateRoute from './components/authComponents/PrivateRoute';
 import ErrorPage from './pages/Error404';
+import TermConditions from "./pages/terms/TermConditions";
+import Privacy from "./pages/terms/Privacy";
+import Refunds from "./pages/terms/Refunds";
+import DeliveryDetails from "./pages/terms/DeliveryDetails";
+import PlaceOrder from "./pages/terms/PlaceOrder";
 
 const Router = (props) => (
 
@@ -46,6 +51,12 @@ const Router = (props) => (
               <Route path="/favorites" component={FavoritesPage} />
               <Route path="/shop/category/:id?/:title?" component={ShopPage} />
               <Route path="/product/:id" component={ProductPage} />
+              <Route path="/term/conditions" component={TermConditions} />
+              <Route path="/privacy" component={Privacy} />
+              <Route path="/refunds" component={Refunds} />
+              <Route path="/delivery/details" component={DeliveryDetails} />
+              <Route path="/place/order" component={PlaceOrder} />
+
               <Route path='/logout' component={Logout} />
               <Route path='*'  component={ErrorPage} />
     </Switch>

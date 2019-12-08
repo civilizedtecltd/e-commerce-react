@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { connect } from 'react-redux'
 import CheckoutTab from './CheckoutTab';
-import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
 import { URL} from '../constants/config';
 import './checkout.css';
 

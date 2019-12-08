@@ -4,17 +4,19 @@ import {Container, Row, Col} from 'react-bootstrap';
 import {connect} from 'react-redux'
 import  './assets/offerPage.css';
 import '../assets/css/theme.css';
+
+//Components
+import NewBookComponent from '../components/offerPageComponents/NewBookComponent';
+import ImgSlick from '../components/offerPageComponents/ImgSlickComponent';
+import {NewsLetterComponent} from '../components/offerPageComponents/NewsLetterComponent';
+import FooterComponent from '../components/FooterComponent/FooterComponent';
+import HeaderComponent from "../components/header/Header";
+import MobileHeader from "../components/header/MobileHeader";
+import {NewBookDB}from '../inc/offerPage/NewBook';
+
 // Product Images
 import blogPostImage1 from '../assets/images/post_img_01.jpg';
 
-import {NewBookDB}from '../inc/offerPage/NewBook'
-import {ImgSlick, NewBookComponent} from '../components/offerPageComponents/NewBookComponent'
-import{NewsLetterComponent} from '../components/offerPageComponents/NewsLetterComponent'
-import FooterComponent from '../components/FooterComponent/FooterComponent';
-import  HeaderComponent from "../components/header/Header";
-import  MobileHeader from "../components/header/MobileHeader";
-
-//import store from '../redux/store'
 
 const offerPage = (props) => {
 
