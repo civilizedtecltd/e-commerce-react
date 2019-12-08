@@ -10,15 +10,8 @@ import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { showFevItems, removeFavItem } from '../redux/actions/favoriteActions'
-<<<<<<< HEAD
-import { URL } from '../constants/config';
-
-//import { NewBookDB } from "../inc/offerPage/NewBook";
-
-=======
 import { URL } from '../constants/config'
 import './assets/favorite.css'
->>>>>>> master
 const useStyle = createUseStyles({
   addFavImage:{
     height:100,
@@ -66,7 +59,7 @@ const FavoritesPage = (props) => {
               </Row>
             </Container>
           </section>
-          { favorite.length === 0 ? 
+          { favorite.length === 0 ?
           <section className="chooseCategory clearfix" id="chooseCategory">
             <Container>
               <Row>
@@ -82,7 +75,7 @@ const FavoritesPage = (props) => {
                     </p>
 
                   </div>
-              </Col> 
+              </Col>
               </Row>
 
 
@@ -211,7 +204,7 @@ const FavoritesPage = (props) => {
               </Row>
             </Container>
           </section>
-      
+
 
           <section
             className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap"
@@ -224,7 +217,7 @@ const FavoritesPage = (props) => {
           </>
 }
         </main>
-        
+
         <FooterComponent />
       </div>
 
