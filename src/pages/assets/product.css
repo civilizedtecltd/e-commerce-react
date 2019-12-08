@@ -125,6 +125,15 @@
 }
 .postReviewsForm textarea{width: 100%;}
 
+
+.limit-character{
+    display: block;
+    width: 172px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;  
+}
+
 button.slick-arrow.slick-next {
     margin-top: -4rem;
 }
