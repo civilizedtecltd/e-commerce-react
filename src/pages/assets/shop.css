@@ -8,4 +8,12 @@
     border-radius: 5px;
     padding: 10px 14px 6px 14px;
 }
+.limit-character{
+    display: block;
+    width: 172px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;  
+}
+
 

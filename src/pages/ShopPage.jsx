@@ -204,18 +204,16 @@ const ShopPage = (props) => {
                                 <div className="productMedia mb-3 bgGray">
                                   <img src={(book.cover_images !== null) ? `${URL.BASE}/${book.cover_images.img_1}` : '' } alt="" />
                                 </div>
-                                {/* end of productMedia */}
 
                                 <div className="productContent">
                                   <Link to={`/product/${book.id}`}>
-                                    <h4 className="productTitle mb-1">
+                                    <h4 className="productTitle limit-character mb-1">
                                       {book.name}
                                     </h4>
                                   </Link>
                                   <h5 className="authorName mb-1">{book.book_author.name}</h5>
                                   <p className="productPrice">$ {book.price} </p>
                                 </div>
-                                {/* end of productContent */}
                               </Card>
                                 </LazyLoad>
                             </Col>
