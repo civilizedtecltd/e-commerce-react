@@ -1,0 +1,37 @@
+[
+  {
+    "li_class": "nav-item",
+    "a_class": "nav-link",
+    "name": "Terms & conditions",
+    "url": "/term/conditions",
+    "active_link": "active"
+  },
+  {
+    "li_class": "nav-item",
+    "a_class": "nav-link",
+    "name": "Privacy Policy",
+    "url": "/privacy",
+    "active_link": "active"
+  },
+  {
+    "li_class": "nav-item",
+    "a_class": "nav-link",
+    "name": "Refunds",
+    "url": "/refunds",
+    "active_link": "active"
+  },
+  {
+    "li_class": "nav-item",
+    "a_class": "nav-link",
+    "name": "Delivery details",
+    "url": "/delivery/details",
+    "active_link": "active"
+  },
+  {
+    "li_class": "nav-item",
+    "a_class": "nav-link",
+    "name": "How to place an order",
+    "url": "/place/order",
+    "active_link": "active"
+  }
+]

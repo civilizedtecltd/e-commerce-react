@@ -269,7 +269,7 @@ const PaymentMethods = (props) => {
 
         </Accordion>
 
-        <h3 className="mt-4 mb-2">Choose a Shipping Method</h3>
+        <h3 className="mt-4 mb-2">Choose a delivery method</h3>
 
         <div className="payment-header-card mt-3 d-flex justify-content-between">
             <div>
