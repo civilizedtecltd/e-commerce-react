@@ -11,7 +11,7 @@ import '../../assets/css/theme.css'
 import {URL} from '../../constants/config';
 
 
-function NewBookComponent({ BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg ,isFev = false }){
+function NewBookComponent({bookid, BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg ,isFev = false }){
     const imgStyle = {
         width:"163px",
         height:"224px"
@@ -27,7 +27,7 @@ function NewBookComponent({ BookImage, ProductTitle, AuthorName, ProductPrice, I
                         <Image src={BookImage} alt="Book Image" style={imgStyle} />
                     </div>
                     <div className="productContent">
-                        <Link to="#"><h4 className="productTitle mb-1" style={titleStyle} >{ProductTitle} {(isFev === true) ?<span className="favoritIcon"><i className="fas fa-star"></i></span> :''}</h4></Link>
+                        <Link to={`/product/${bookid}`}><h4 className="productTitle limit-character mb-1" >{ProductTitle} {(isFev === true) ?<span className="favoritIcon"><i className="fas fa-star"></i></span> :''}</h4></Link>
                         <h5 className="authorName mb-1">{AuthorName}</h5>
                         <p className="productPrice">$ {ProductPrice}</p>
                         <button  className="btn btn-danger">Remove</button>

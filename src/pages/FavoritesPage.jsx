@@ -12,7 +12,7 @@ import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { showFevItems, removeFavItem } from '../redux/actions/favoriteActions'
 import { URL } from '../constants/config'
-
+import './assets/favorite.css'
 const useStyle = createUseStyles({
   addFavImage:{
     height:100,
@@ -193,6 +193,7 @@ const FavoritesPage = (props) => {
                 {favorite.map((item, index) => (
                   <NewBookComponent
                     key={index}
+                    bookid={item.id}
                     ImageBg="bgGray"
                     BookImage={`${URL.BASE}/${item.cover_images.img_1}`}
                     ProductTitle={item.name}
