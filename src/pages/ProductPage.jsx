@@ -7,7 +7,7 @@ import { showSingleBook } from '../redux/actions/bookActions'
 import { addToCart } from '../redux/actions/shopActions'
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
-import { ImgSlick } from "../components/offerPageComponents/NewBookComponent";
+import ImgSlick  from "../components/offerPageComponents/ImgSlickComponent";
 import { ImageCarousel } from "../components/ProductImgCarosellComponents/ProductImgCarosell";
  import  HeaderComponent from "../components/header/Header";
  import  MobileHeader from "../components/header/MobileHeader";
@@ -17,6 +17,7 @@ import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { URL } from '../constants/config';
 import "../pages/assets/product.css";
 import { addToFavorite } from "../redux/actions/favoriteActions";
+import checkAuth from "../helpers/checkAuth";
 
 const useStyles = createUseStyles({
   addFevButton: {
@@ -50,6 +51,10 @@ function ProductPage(props) {
     props.addToCart(book);
     setShow(true);
   };
+  const handleAddFavorite = (e) =>{
+      e.preventDefault();
+      return checkAuth() !==true ? props.history.push('/login') : props.addToFavorite(id)
+  }
 
 
   return (
@@ -143,7 +148,7 @@ function ProductPage(props) {
                           </div>
 
                           <div className="col text-center">
-                            <Button className={`btn linkBtnBorder ${classes.addFevButton}`} onClick={()=>props.addToFav(book)}>
+                            <Button className={`btn linkBtnBorder ${classes.addFevButton}`} onClick={handleAddFavorite}>
                               <i className="far fa-star"></i>Add to favorites
                             </Button>
                           </div>
@@ -234,7 +239,7 @@ const mapDispatchToProps = (dispatch) => {
     return{
       showSingleBook : (id) => dispatch(showSingleBook(id)),
       addToCart      : (book) => dispatch(addToCart(book)),
-      addToFav       : (book)=> dispatch(addToFavorite(book))
+      addToFavorite  : (id)=> dispatch(addToFavorite(id))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

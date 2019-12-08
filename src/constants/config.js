@@ -39,6 +39,10 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
      _CATEGORY_BOOKS(id, page , show){
         return `${this.API}/product/category/${id}/${page}/${show}`
      }
+
+    get _FAVORITE_ITEMS(){
+         return `${this.API}/user/favorite`;
+     }     
  }
 
  const URL = new APP_URL();

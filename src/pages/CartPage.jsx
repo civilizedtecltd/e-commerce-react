@@ -201,7 +201,7 @@ const CartPage = (props) => {
                           <span className="pPrice" id="grand-total">${parseFloat(totalPrice) + parseFloat(delivery_cost)}</span>
                             </li>
                           </ul>
-                          <Link to="/checkout" className="btn btn-primary mt-3">Checkout</Link>
+                          <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}>Checkout</Link>
                         </div>
                       </Col>
                     </Row>
