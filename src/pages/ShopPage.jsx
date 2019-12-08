@@ -4,7 +4,6 @@ import { Container, Row, Col, Form, Card } from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
 import { connect  } from 'react-redux';
 import { createUseStyles } from 'react-jss'
-
 import {fetchAllBook, fetchBooksByCategory} from '../redux/actions/bookActions';
 import Filters from '../components/shop/FiltersComponents'
 
