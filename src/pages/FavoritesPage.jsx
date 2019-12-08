@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { createUseStyles } from 'react-jss'
 import { Container, Row, Col, Card, Table} from "react-bootstrap";
 import { connect } from 'react-redux'
-import { NewBookDB } from "../inc/offerPage/NewBook";
 import { NewBookComponent } from "../components/offerPageComponents/NewBookComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
@@ -11,7 +10,9 @@ import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { showFevItems, removeFavItem } from '../redux/actions/favoriteActions'
-import { URL } from '../constants/config'
+import { URL } from '../constants/config';
+
+//import { NewBookDB } from "../inc/offerPage/NewBook";
 
 const useStyle = createUseStyles({
   addFavImage:{
