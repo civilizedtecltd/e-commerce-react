@@ -16,18 +16,26 @@ const CartPage = (props) => {
   const favoriteItem = props.favorite
   const [cartItems, setCartItems] = useState(props.cart)
 
-  let totalItemQuantity = [];
-  let totalPrice = [];
+  let totalItemQuantity=0;
+  let totalBookPrice =0;
   let delivery_cost = 0
 
-  // let totalItem = (cartItems.length !== 0) ?  cartItems.map(item=> {
-  //   totalItemQuantity.push( item.quantity );
-  //   totalPrice.push( item.price * item.quantity)
-  // }) : totalItemQuantity && totalPrice;
+  let [totalQty , setQty] = useState([]);
+  let [totalPrice , setTotalPrice]= useState([]);
+ 
+ 
+  
+  if(cartItems.length !== 0) {
+    cartItems.map(item=> {
+      totalQty.push( item.quantity );
+      totalPrice.push( item.price * item.quantity)
+    })
+  } 
+  
 
-  if (totalItemQuantity.length !== 0) {
-    totalItemQuantity = totalItemQuantity.reduce((quantities, quantity) => quantities + quantity)
-    totalPrice = totalPrice.reduce((prices, price) => prices + price);
+  if (totalQty.length !== 0) {
+    totalItemQuantity = totalQty.reduce((quantities, quantity) => quantities + quantity)
+    totalBookPrice = totalPrice.reduce((prices, price) => prices + price);
   }
 
 
@@ -47,6 +55,18 @@ const CartPage = (props) => {
     event.preventDefault();
     props.deleteAll()
     setCartItems([])
+  }
+
+  const handleQuantity = (e)=> {
+    e.preventDefault();
+    if(e.target.value <= 0) e.target.value=1
+    const price = document.getElementById(`price-${e.target.id}`).innerHTML;
+    const TP = document.getElementById(`tp-${e.target.id}`);
+    TP.innerHTML="$"+ parseFloat(e.target.value) * parseFloat(price.substr(1))
+
+    //const grand_total = document.getElementById('grand-total')
+    //  grand_total.innerHTML = `$ ${parseFloat(TP) + parseFloat(delivery_cost)}`
+
   }
 
   return (
@@ -114,11 +134,11 @@ const CartPage = (props) => {
                                       </div>
                                     </div>
                                   </td>
-                                  <td>${item.price}</td>
+                                  <td id={`price-${item.id}`}>${item.price}</td>
                                   <td className="cartQntN">
-                                    <Form.Control type="number" placeholder="1" defaultValue={item.quantity} />
+                                    <Form.Control type="number" placeholder="1" id={item.id} defaultValue={item.quantity} onChange={handleQuantity} />
                                   </td>
-                                  <td>${item.price * item.quantity}</td>
+                                  <td id={`tp-${item.id}`}>${item.price * item.quantity}</td>
                                   <td>
                                     <Button className="btn btn-danger" id={item.id} onClick={handleClick}>
                                       Delete <i className="fas fa-times"></i>
@@ -165,7 +185,7 @@ const CartPage = (props) => {
                             </li>
                             <li>
                               Total.....................................................
-                          <span className="pPrice">${totalPrice + delivery_cost}</span>
+                          <span className="pPrice" id="grand-total">${parseFloat(totalPrice) + parseFloat(delivery_cost)}</span>
                             </li>
                           </ul>
                           <Link to="/checkout" className="btn btn-primary mt-3">Checkout</Link>
