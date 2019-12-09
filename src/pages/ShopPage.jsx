@@ -24,7 +24,6 @@ const useStyle = createUseStyles({
 })
 
 const ShopPage = (props) => {
-
     const classes = useStyle()
 
     const { id, title } =  useParams();
@@ -60,16 +59,16 @@ const ShopPage = (props) => {
 
     const t_pages = (Number(e.target.value) !== 0 && Number(e.target.value) <= Number(props.totalItem)) ? Math.ceil(Number(props.totalItem)/Number(e.target.value)) : 1 ;
     setTotalPage(t_pages);
-    return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page, Number(e.target.value));
-  }
 
+    return ( id === 'all') ? props.fetchAllBook(page, Number(e.target.value)) : props.fetchBooksByCategory(id, page, Number(e.target.value));
+  }
 
   const handleNext = (e) => {
       e.preventDefault();
 
       if(page!==totalPage){
         setPage(++page)
-        props.fetchBooksByCategory(id, page, show);
+        return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page, show);
       }
 
   }
@@ -78,7 +77,7 @@ const ShopPage = (props) => {
     e.preventDefault();
     if(page !== 1){
       setPage(--page)
-      props.fetchBooksByCategory(id, page, show);
+      return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page, show);
     }
     if(page === 0) return setPage(1)
   }
@@ -100,7 +99,7 @@ const ShopPage = (props) => {
             <Container>
               <Row>
                 <Col>
-                <BreadCrumb />
+                    <BreadCrumb />
                 </Col>
               </Row>
             </Container>
