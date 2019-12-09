@@ -1,7 +1,7 @@
 import * as Types from '../actions/actionTypes';
 import axios from 'axios';
 import { URL } from '../../constants/config';
-
+import { setAuthToken } from '../../helpers/setAuthToken'
 
  const fetchAllBook = (page,show) => dispatch => {
     axios.get(URL._ALL_BOOKS(page,show))
@@ -56,10 +56,11 @@ const fetchBooksByCategory = (id,page,show) => dispatch => {
 
 
  const searchBook = (page, show, keyword)=> dispatch => {
-    axios.post(URL._SEARCH_BOOK(page,show,keyword))
+
+    axios.get(URL._SEARCH_BOOK(page,show,keyword))
     .then(res=>dispatch({
         type:Types.SEARCH_BOOK,
-        payload:[...res.data.data]
+        payload:res.data.data
     }))
      .catch(err=>console.log(err))
 }
