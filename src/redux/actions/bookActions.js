@@ -65,12 +65,24 @@ const fetchBooksByCategory = (id,page,show) => dispatch => {
      .catch(err=>console.log(err))
 }
 
+const postReview = (review) => dispatch => {
+    setAuthToken();
+    axios.post(URL._POST_REVIEW, review)
+         .then(res => dispatch({
+            type: Types.POST_REVIEW,
+             payload: {
+                info:  res.data.data
+            }
+         }))
+         .catch(error => console.log(error))
+}
+
 export {
     fetchAllBook,
     showSingleBook,
     fetchCategoryList,
     fetchBooksByCategory,
-    searchBook
-
+    searchBook,
+    postReview
 }
 

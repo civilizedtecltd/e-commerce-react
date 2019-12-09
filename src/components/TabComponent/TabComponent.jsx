@@ -1,17 +1,19 @@
 import React,{useState} from 'react';
-
+import {connect} from 'react-redux';
 import {Tabs,Tab}  from 'react-bootstrap';
 import RatingComponent from '../ratingComponent/Rating';
 import ReviewComponent from './ReviewComponent';
+import checkAuth from '../../helpers/checkAuth';
 
 import '../../assets/css/productTab.css'
 
 
-function TabComponent({description, reviews, specification }) {
+function TabComponent(props) {
+
     const [key, setKey] = useState('description');
     const [newReview, setNewReview] = useState({});
 
-    const spec = specification[0];
+    const spec = props.specification[0];
 
     const getReview = (e) => {
         setNewReview({
@@ -29,18 +31,27 @@ function TabComponent({description, reviews, specification }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        const reviewInfo = {
+            ...newReview,
+            id: spec.id
+        }
 
-        console.log(newReview);
+        if(!checkAuth()){
+            props.routeHistory.push("/login")
+        }else{
+
+        }
+
     }
 
 
     return (
-            ( description === undefined || reviews === undefined || spec === undefined) ? <></> : (
+            ( props.description === undefined || props.reviews === undefined || spec === undefined) ? <></> : (
 
              <div className="productDetailsTabs">
                 <Tabs defaultActiveKey="description" id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
                 <Tab className="productDes" eventKey="description" title="Description">
-                    <p>{description}</p>
+                    <p>{props.description}</p>
                 </Tab>
 
                 <Tab eventKey="specifications" title="Specifications">
@@ -56,11 +67,11 @@ function TabComponent({description, reviews, specification }) {
                     </ul>
                 </Tab>
 
-                <Tab eventKey="Reviews" title={`Reviews(${reviews.length})`}>
+                <Tab eventKey="Reviews" title={`Reviews(${props.reviews.length})`}>
 
                     <div className="productReviews clearfix">
                             {
-                                reviews.map((item, index) => {
+                                props.reviews.map((item, index) => {
                                     return <ReviewComponent
                                              key={index}
                                              name={item.reviewer_name}
@@ -90,4 +101,8 @@ function TabComponent({description, reviews, specification }) {
     );
 }
 
-export default TabComponent;
+const mapDispatchToProps = dispatch =>({
+
+})
+
+export default connect(null, mapDispatchToProps)(TabComponent);

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
-import isEmpty from 'lodash/isEmpty';
 import {connect} from 'react-redux';
 import {logout} from '../../redux/actions/authActions';
 import {emptyFavItems} from '../../redux/actions/favoriteActions';
