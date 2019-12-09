@@ -22,9 +22,13 @@ const mySwal = withReactContent(Swal);
 
 const UserProfile = (props) => {
 
+
     const [category, setCategory] = useState([]);
     const [user] = useState({...props.auth.user });
     const [formData] = useState({});
+
+    const [favorite , setFavorite] = useState([...props.favorite]);
+    const totalItem = props.cart.length;
 
     useEffect(() => {
 
@@ -117,7 +121,10 @@ const UserProfile = (props) => {
 
   return (<>
     <div className="allWrapper">
-      <HeaderComponent/>
+     <HeaderComponent
+          favorite_item={favorite.length}
+          cartItem={totalItem}
+        />
       <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
         <Container fluid="{true}" className="pl-0 pr-0">
@@ -277,7 +284,9 @@ const UserProfile = (props) => {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    cart: state.shop.cart,
+    favorite: state.favorite
 })
 
 export default connect(mapStateToProps, null)(UserProfile);

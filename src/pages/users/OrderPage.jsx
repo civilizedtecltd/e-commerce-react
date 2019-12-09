@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState}from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col, Card, Table} from 'react-bootstrap';
 import './assets/css/user.css';
@@ -7,12 +7,18 @@ import {categoryClass } from '../../inc/users/users';
 import  HeaderComponent from "../../components/header/Header";
 import  MobileHeader from "../../components/header/MobileHeader";
 import UserNav from "../../components/UserNav/UserNav";
+import { connect } from 'react-redux';
 
 
-const OrderPage = () => {
+const OrderPage = (props) => {
+  const totalItem = props.cart.length;
+  const [favorite, setFavorite] = useState([...props.favorite])
   return (<>
     <div className="allWrapper">
-      <HeaderComponent/>
+    <HeaderComponent
+          favorite_item={favorite.length}
+          cartItem={totalItem}
+        />
       <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
         <Container fluid="{true}" className="pl-0 pr-0">
@@ -49,7 +55,7 @@ const OrderPage = () => {
                                        Title={priClass}
                                        Url={'/'}
                                      />)}
-                                    </ul>{/* end of cardWidgetList */}
+                                    </ul>
                                   </Col>{/* end of Col */}
 
                                   <Col sm="3">
@@ -60,7 +66,7 @@ const OrderPage = () => {
                                        Title={priClass}
                                        Url={'/'}
                                      />)}
-                                    </ul>{/* end of cardWidgetList */}
+                                    </ul>
                                   </Col>{/* end of Col */}
 
                                   <Col sm="3">
@@ -71,7 +77,7 @@ const OrderPage = () => {
                                        Title={priClass}
                                        Url={'/'}
                                      />)}
-                                    </ul>{/* end of cardWidgetList */}
+                                    </ul>
                                   </Col>{/* end of Col */}
 
                                   <Col sm="3">
@@ -82,7 +88,7 @@ const OrderPage = () => {
                                        Title={priClass}
                                        Url={'/'}
                                      />)}
-                                    </ul>{/* end of cardWidgetList */}
+                                    </ul>
                                   </Col>{/* end of Col */}
                                 </Row>{/* end of Row */}
                               </div>{/* end of cardContentDetails */}
@@ -138,4 +144,9 @@ const OrderPage = () => {
   </>);
 }
 
-export default OrderPage;
+const mapStateToProps = state => ({
+  cart: state.shop.cart,
+  favorite: state.favorite
+})
+
+export default connect(mapStateToProps , null)(OrderPage);

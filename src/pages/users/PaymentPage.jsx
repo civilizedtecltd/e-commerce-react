@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -8,15 +8,19 @@ import {
   Table,
   Button
 } from "react-bootstrap";
-import "./assets/css/user.css";
-import  HeaderComponent from "../../components/header/Header";
-import  MobileHeader from "../../components/header/MobileHeader";
+import HeaderComponent from "../../components/header/Header";
+import MobileHeader from "../../components/header/MobileHeader";
 import UserNav from "../../components/UserNav/UserNav";
 import AddPaymentMethod from "../../components/paymentMethodComponent/AddPaymentMethod";
+import "./assets/css/user.css";
+import { connect } from "react-redux";
 
-const PaymentPage = () => {
-  const [visible , setVisible ] = useState(false)
-  const handleVisibility = (e) =>{
+  const PaymentPage = (props) => {
+  const totalItem = props.cart.length;
+  const [favorite, setFavorite] = useState([...props.favorite])
+  const [visible, setVisible] = useState(false)
+  
+  const handleVisibility = (e) => {
     e.preventDefault();
     setVisible(!visible)
   }
@@ -25,7 +29,10 @@ const PaymentPage = () => {
   return (
     <>
       <div className="allWrapper">
-        <HeaderComponent />
+        <HeaderComponent
+          favorite_item={favorite.length}
+          cartItem={totalItem}
+        />
         <MobileHeader />
         <div className="userBodyArea clearfix" id="userBodyArea">
           <Container fluid={true} className="pl-0 pr-0">
@@ -41,7 +48,7 @@ const PaymentPage = () => {
                     className="myOrderArea secGap clearfix"
                     id="myOrderArea"
                   >
-                    <Container fluid={ true }>
+                    <Container fluid={true}>
                       <Row>
                         <Col>
                           <Card className="fade-in">
@@ -93,7 +100,7 @@ const PaymentPage = () => {
                               </Button>
 
 
-                            { visible ? <AddPaymentMethod/> : ''}
+                              {visible ? <AddPaymentMethod /> : ''}
                             </Card.Body>
                           </Card>
                         </Col>
@@ -110,4 +117,10 @@ const PaymentPage = () => {
   );
 };
 
-export default PaymentPage;
+
+const mapStateToProps = state => ({
+  cart: state.shop.cart,
+  favorite: state.favorite
+})
+
+export default connect(mapStateToProps, null)(PaymentPage);

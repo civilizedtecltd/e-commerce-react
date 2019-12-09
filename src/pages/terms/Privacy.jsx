@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import HeaderComponent from "../../components/header/Header";
 import MobileHeader from "../../components/header/MobileHeader";
-import {NewsLetterComponent} from "../../components/offerPageComponents/NewsLetterComponent";
+import { NewsLetterComponent } from "../../components/offerPageComponents/NewsLetterComponent";
 import TermConditionsComponent from '../../components/terms/TermConditionsComponent'
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
+import { connect } from "react-redux";
 
 const Privacy = (props) => {
-
+    const totalItem = props.cart.length;
+    const [favorite, setFavorite] = useState([...props.favorite])
     return (
         <div className="allWrapper">
-
-            <HeaderComponent/>
+            <HeaderComponent
+                favorite_item={favorite.length}
+                cartItem={totalItem}
+            />
             <MobileHeader />
             <main className="mainContent clearfix" id="mainContent">
 
@@ -27,7 +31,6 @@ const Privacy = (props) => {
                                     </div>
                                 </div>
                             </div>
-
                             <div className="col">
                                 <div className="helpContentArea">
                                     <h2>Privacy Policy</h2>
@@ -47,28 +50,30 @@ const Privacy = (props) => {
                                             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                             consequat.</p>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
                 </section>
 
 
                 <section className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap" id="mailSubscribe">
                     <div className="container">
-                        <NewsLetterComponent/>
+                        <NewsLetterComponent />
                     </div>
 
                 </section>
 
 
             </main>
-            <FooterComponent/>
+            <FooterComponent />
         </div>
     )
 }
-export default Privacy;
+const mapStateToProps = state => {
+    return {
+        cart: state.shop.cart,
+        favorite: state.favorite
+    }
+}
+export default connect(mapStateToProps, null)(Privacy);

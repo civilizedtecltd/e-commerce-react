@@ -4,13 +4,16 @@ import MobileHeader from "../../components/header/MobileHeader";
 import {NewsLetterComponent} from "../../components/offerPageComponents/NewsLetterComponent";
 import TermConditionsComponent from '../../components/terms/TermConditionsComponent'
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
-
+import { connect } from "react-redux";
 const TermConditions = (props) => {
-
+    const totalItem = props.cart.length;
+    const [favorite, setFavorite] = useState([...props.favorite])
     return (
         <div className="allWrapper">
-
-            <HeaderComponent/>
+            <HeaderComponent
+                favorite_item={favorite.length}
+                cartItem={totalItem}
+            />
             <MobileHeader />
             <main className="mainContent clearfix" id="mainContent">
 
@@ -71,4 +74,10 @@ const TermConditions = (props) => {
         </div>
     )
 }
-export default TermConditions;
+const mapStateToProps = () =>  {
+        return {
+            cart: state.shop.cart,
+            favorite: state.favorite
+        }
+}
+export default connect(mapStateToProps, null)(TermConditions);

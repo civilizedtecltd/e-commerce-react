@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createUseStyles } from 'react-jss'
-import { Container, Row, Col, Card, Table} from "react-bootstrap";
+import { Container, Row, Col, Card} from "react-bootstrap";
 import { connect } from 'react-redux'
 import NewBookComponent from "../components/offerPageComponents/NewBookComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
