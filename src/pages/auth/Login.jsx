@@ -2,6 +2,7 @@ import React, {useState}  from 'react';
 
 import { connect  } from 'react-redux';
 import { login } from '../../redux/actions/authActions';
+import { showFavItems } from '../../redux/actions/favoriteActions';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -40,6 +41,7 @@ const Login = (props) => {
     if(!isEmpty(auth.status)){
       if(auth.status.success && state){
         setState(false);
+        props.showAllFavItem();
         props.history.goBack();
       }
 
@@ -120,7 +122,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>  ({
-    login: (formData) => dispatch(login(formData))
+    login: (formData) => dispatch(login(formData)),
+    showAllFavItem: () => dispatch(showFavItems())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

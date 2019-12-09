@@ -19,7 +19,7 @@ import { connect } from "react-redux";
   const totalItem = props.cart.length;
   const [favorite, setFavorite] = useState([...props.favorite])
   const [visible, setVisible] = useState(false)
-  
+
   const handleVisibility = (e) => {
     e.preventDefault();
     setVisible(!visible)
@@ -32,6 +32,7 @@ import { connect } from "react-redux";
         <HeaderComponent
           favorite_item={favorite.length}
           cartItem={totalItem}
+          menuActive={true}
         />
         <MobileHeader />
         <div className="userBodyArea clearfix" id="userBodyArea">
@@ -94,13 +95,19 @@ import { connect } from "react-redux";
                                   </tr>
                                 </tbody>
                               </Table>
-
+                              { !visible ?
                               <Button className="btn btn-primary btnSm" onClick={handleVisibility} >
                                 Add payment method
                               </Button>
+                                  : ''}
 
+                              { visible ?
+                              <div className="add-payment d-flex align-items-center mt-4">
+                                <h3>Add payment method</h3>
+                                <Button className="btn btn-danger ml-3 btn-cancel" onClick={handleVisibility} >Cancel</Button>
+                              </div>: ''}
 
-                              {visible ? <AddPaymentMethod /> : ''}
+                            { visible ? <AddPaymentMethod/> : ''}
                             </Card.Body>
                           </Card>
                         </Col>

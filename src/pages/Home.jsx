@@ -18,14 +18,15 @@ import {CategoryHome} from "../components/HomePage/Category";
 
 const Home = (props) => {
 
- const totalItem = props.cart
- const favorite = props.favorite
+ const totalCartItem = props.cart.length
+ const totalFavoriteItem = props.favorite.length
+
   return (<>
 
     <div className="allWrapper">
           <HeaderComponent
-            favorite_item={favorite.length}
-            cartItem={totalItem}
+            favorite_item = {totalFavoriteItem}
+            cartItem = {totalCartItem}
           />
           <MobileHeader />
       <main className="mainContent clearfix" id="mainContent">

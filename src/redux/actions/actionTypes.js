@@ -5,13 +5,14 @@ export const SHOW_SINGLE_BOOK       =   'SHOW_SINGLE_BOOK';
 export const FETCH_BOOK_BY_CATEGORY =   'FETCH_BOOK_BY_CATEGORY';
 export const FETCH_ALL_CATEGORY     =   'FETCH_ALL_CATEGORY';
 
+
 //Cart action types
 export const ADD_TO_CART            =   'ADD_TO_CART';
 export const REMOVE_FROM_CART       =   'REMOVE_FROM_CART';
 export const INCREASE_QUANTITY      =   'INCREASE_QUANTITY';
 export const DECREASE_QUANTITY      =   'DECREASE_QUANTITY';
-
 export const DELETE_ALL_FORM_CART   =   'DELETE_ALL_FORM_CART';
+export const CART_NOT_IN_STATE      =   'CART_NOT_IN_STATE';
 
 //Auth action types
 export const USER_LOGIN             =   'USER_LOGIN';
@@ -24,6 +25,8 @@ export const ADD_FAVORITE           =   'ADD_FAVORITE';
 export const REMOVE_FAVORITE_ITEM   =   'REMOVE_FAVORITE_ITEM';
 export const GO_TO_CHECKOUT         =   'GO_TO_CHECKOUT';
 export const SHOW_ALL_FAVORITE      =   'SHOW_ALL_FAVORITE';
+export const FAVORITE_NOT_IN_STATE  =   'FAVORITE_NOT_IN_STATE';
+
 
 //Checkout Actions types
 export const SET_ADDRESS_DETAILS    = 'SET_ADDRESS_DETAILS';
