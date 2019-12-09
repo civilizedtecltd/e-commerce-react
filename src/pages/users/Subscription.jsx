@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 import {Container, Row, Col, Card, Form} from 'react-bootstrap';
 import {CheckboxComponent} from '../../components/FromComponents/CheckboxComponents';
@@ -7,11 +7,17 @@ import {LiAi} from '../../components/LiComponent/CommonLiComponent';
 import {asideData} from '../../inc/users/users'
 import  HeaderComponent from "../../components/header/Header";
 import  MobileHeader from "../../components/header/MobileHeader";
+import { connect } from 'react-redux';
 
-const Subscription = () => {
+const Subscription = (props) => {
+  const totalItem = props.cart.length;
+  const [favorite, setFavorite] = useState([...props.favorite])
   return (<>
   <div className="allWrapper">
-      <HeaderComponent/>
+  <HeaderComponent
+          favorite_item={favorite.length}
+          cartItem={totalItem}
+        />
     <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
         <Container fluid="{true}" className="pl-0 pr-0">
@@ -28,10 +34,10 @@ const Subscription = () => {
                       IconName={aside.ICON_NAME}
                       AnchorClass={aside.ANCHOR_CLASS}
                     />)}
-                  </ul>{/* end of userNavBar */}
-                </nav>{/* end of userNav */}
-              </aside>{/* end of aside */}
-            </Col>{/* end of Col */}
+                  </ul>
+                </nav>
+              </aside>
+            </Col>
             <Col>
               <main className="userMainContent clearfix bgImage bgImg03" id="userMainContent">
                 <section className="myOrderArea secGap clearfix" id="myOrderArea">
@@ -109,4 +115,10 @@ const Subscription = () => {
     </>);
 }
 
-export default Subscription;
+
+const mapStateToProps = state => ({
+  cart: state.shop.cart,
+  favorite: state.favorite
+})
+
+export default connect(mapStateToProps, null)(Subscription);
