@@ -73,7 +73,6 @@ const cartNotInState = (cart) =>({
 
 
 export {
-
     addToCart,
     removeFromCart,
     increaseQuantity,
@@ -82,9 +81,5 @@ export {
     setDeliveryAddress,
     setPaymentDetails,
     confirmOrder,
-<<<<<<< HEAD
-=======
     cartNotInState
-
->>>>>>> 6c3da1458c1a1bde3607247d7fe03fd3c88a2298
 }

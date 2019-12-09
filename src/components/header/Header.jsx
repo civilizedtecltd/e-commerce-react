@@ -9,11 +9,14 @@ import checkAuth from '../../helpers/checkAuth';
 import '../../assets/css/heder.css';
 import menu from "../../inc/menu/menu";
 import { useMediaQuery } from 'react-responsive';
+import Search from '../Search';
 
 const Default = ({ children }) => {
   const isNotMobile = useMediaQuery({ minWidth: 992 })
   return isNotMobile ? children : null
 }
+
+
 
 const useStyle = createUseStyles({
   cursor_type:{
@@ -30,9 +33,12 @@ const HeaderComponent = (props) => {
   const [open, setOpen] = useState(false);
   const [isAuth, setAuth] = useState(false);
 
+
   useEffect(()=>{
     return (checkAuth()) ? setAuth(true) : setAuth(false);
   },[]);
+
+  const handleOpen = () => setOpen(!open)
 
     return(
     <>
@@ -109,19 +115,11 @@ const HeaderComponent = (props) => {
             </Col>
           </Row>
 
-          <Row>
-            <Col>
-              <Collapse in={open} >
-                <div  className="searchBarNew">
-                  <div id="SearchBarMenu">
-                    <Form.Control type="text" className="shadow-none" placeholder="Search" />
-                    <span onClick={() => setOpen(false)}><i className="fas fa-times"></i></span>
-                  </div>
-                </div>
-              </Collapse>
+          <Search
+           open={open}
+           handleOpen={handleOpen}
+          />
 
-            </Col>
-          </Row>
         </Container>
       </header>
       </Default>
