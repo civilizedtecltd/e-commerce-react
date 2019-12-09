@@ -32,7 +32,8 @@ const HeaderComponent = (props) => {
 
   const [open, setOpen] = useState(false);
   const [isAuth, setAuth] = useState(false);
-
+ let page = 1;
+ let show =5
 
   useEffect(()=>{
     return (checkAuth()) ? setAuth(true) : setAuth(false);
@@ -118,6 +119,8 @@ const HeaderComponent = (props) => {
           <Search
            open={open}
            handleOpen={handleOpen}
+           page={page}
+           show={show}
           />
 
         </Container>
