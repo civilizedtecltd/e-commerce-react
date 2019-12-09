@@ -21,6 +21,10 @@ const favoriteReducer = ( state = initialState , action ) => {
             return [
                 ...payload
             ]
+        case Types.FAVORITE_NOT_IN_STATE:
+            return [
+                ...payload
+            ]
         default :
          return state
 

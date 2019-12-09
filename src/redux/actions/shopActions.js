@@ -64,6 +64,11 @@ const confirmOrder = (data) => dispatch => {
          })
 }
 
+const cartNotInState = (cart) =>({
+    type: Types.CART_NOT_IN_STATE,
+    payload: [...cart]
+})
+
 
 
 export {
@@ -75,6 +80,7 @@ export {
     deleteAllFromCart,
     setDeliveryAddress,
     setPaymentDetails,
-    confirmOrder
+    confirmOrder,
+    cartNotInState
 
 }

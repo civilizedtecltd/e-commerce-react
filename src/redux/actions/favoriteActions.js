@@ -35,10 +35,16 @@ const showFavItems = () => dispatch => {
          .catch(error => console.log(error))
 }
 
+const favoriteNotInState = (favorite) => ({
+    type: Types.FAVORITE_NOT_IN_STATE,
+    payload: [...favorite]
+})
+
 
 
 export{
     addToFavorite,
     showFavItems,
-    removeFavItem
+    removeFavItem,
+    favoriteNotInState
 }
