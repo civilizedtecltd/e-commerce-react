@@ -25,6 +25,7 @@ export const ADD_FAVORITE           =   'ADD_FAVORITE';
 export const REMOVE_FAVORITE_ITEM   =   'REMOVE_FAVORITE_ITEM';
 export const GO_TO_CHECKOUT         =   'GO_TO_CHECKOUT';
 export const SHOW_ALL_FAVORITE      =   'SHOW_ALL_FAVORITE';
+export const EMPTY_FAVORITE_ITEMS   =   'EMPTY_FAVORITE_ITEMS';
 export const FAVORITE_NOT_IN_STATE  =   'FAVORITE_NOT_IN_STATE';
 
 

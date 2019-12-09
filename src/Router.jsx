@@ -45,7 +45,7 @@ const Router = (props) => {
     const presentState = store.getState();
 
     if(localState !== null){
-        if(!isEqual(presentState.favorite, localState.favorite.length)){
+        if(!isEqual(presentState.favorite, localState.favorite)){
             store.dispatch(favoriteNotInState(localState.favorite))
         }
 
