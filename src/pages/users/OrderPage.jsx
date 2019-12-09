@@ -9,6 +9,9 @@ import  MobileHeader from "../../components/header/MobileHeader";
 import UserNav from "../../components/UserNav/UserNav";
 import { connect } from 'react-redux';
 
+//Custom icon picture
+
+import orderIcon from '../assets/images/order_icon.png'
 
 const OrderPage = (props) => {
   const totalItem = props.cart.length;
@@ -18,6 +21,7 @@ const OrderPage = (props) => {
     <HeaderComponent
           favorite_item={favorite.length}
           cartItem={totalItem}
+          menuActive={true}
         />
       <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
@@ -35,11 +39,11 @@ const OrderPage = (props) => {
                         <Card.Body>
                             <div className="cardHeadDetails clearfix pt-5 text-center">
                               <div className="orderMedia">
-                                <img src="assets/images/order_page_icon_img.png" alt="" />
+                                <img src={orderIcon} alt="" />
                               </div>{/* end of orderMedia */}
 
                               <div className="orderSortDes">
-                                <h2 className="headTitle mb-3">You don’t have any <span>Orders</span></h2>
+                                <h2 className="headTitle mb-3 mt-3">You don’t have any <span>Orders</span></h2>
                                 <p>It’s not a problem. Just choose a category you’re interested in and<br/> add goods to your cart
                                 </p>
                               </div>{/* end of orderSortDes */}

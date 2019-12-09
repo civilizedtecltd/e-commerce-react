@@ -131,13 +131,13 @@
     width: 172px;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;  
+    text-overflow: ellipsis;
 }
 
-button.slick-arrow.slick-next {
+.similer-book-slider .slick-arrow.slick-next {
     margin-top: -4rem;
 }
 
-button.slick-arrow.slick-prev {
+.similer-book-slider .slick-arrow.slick-prev {
     margin-top: -4rem;
 }

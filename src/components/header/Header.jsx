@@ -31,7 +31,7 @@ const HeaderComponent = (props) => {
     <>
       <Default>
       <div className="headerTopBar clearfix bgBlack" id="headerTopBar">
-        <Container>
+        <Container fluid={props.menuActive}>
           <Row className="justify-content-between">
             <Col className="col-auto">
               <div className="headFeature">
@@ -52,8 +52,8 @@ const HeaderComponent = (props) => {
         </Container>
       </div>
 
-      <header className="header clearfix" id="header">
-        <Container>
+      <header className="header clearfix " id="header">
+        <Container fluid={props.menuActive}>
           <Row className="align-items-center">
             <Col sm="2">
               <div className="logoWrapper">
@@ -61,7 +61,7 @@ const HeaderComponent = (props) => {
               </div>
             </Col>
 
-            <Col sm="6">
+            <Col sm={props.menuActive ? 7 : 6}>
               <div className="headerNav clearfix" id="headerNav">
                 <nav className="navbar navbar-expand-lg  bg-white">
                   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,20 +85,19 @@ const HeaderComponent = (props) => {
               </div>
             </Col>
 
-            <Col sm="4">
+            <Col sm={props.menuActive ? 3 : 4}>
               <div className="headPopBar clearfix" id="headPopBar">
                 <ul className="headPopBarList d-flex justify-content-between">
                   <li>
                    {/* eslint-disable-next-line */}
                     <div className="input-group">
                        {/* eslint-disable-next-line */}
-                      <a to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</a>
+                      <p to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</p>
                     </div>
                   </li>
                    <li><Link to="/favorites"><span className="cartBadge"><i className="far fa-star"></i>{props.favorite_item !== 0 ? <Badge variant="danger"> {props.favorite_item} </Badge> : ''}</span> Favorites</Link></li>
                   <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i>{props.cartItem !==0 ?<Badge variant="primary">{ props.cartItem }</Badge> :'' }</span> Cart</Link></li>
                   <li>{ (!isAuth) ? <Link to="/login"><i className="far fa-user"></i>Login</Link> : <Link to="/profile-settings"><i className="far fa-user"></i>My Profile</Link> }</li>
-                  {/* <li><Link to="#"><span className="loginUserAvater">SS</span> Sam Smith</Link></li> */}
                 </ul>
               </div>
             </Col>

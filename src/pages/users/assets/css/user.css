@@ -78,3 +78,16 @@
     color: #363636;
     font-weight: 600;
 }
+
+.add-payment h3 {
+    text-transform: uppercase;
+}
+.add-payment .btn-cancel{
+    color: #000000;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 0px 15px;
+    line-height: 30px;
+    min-height: 25px;
+    background-color: #f7f7f7;
+}
