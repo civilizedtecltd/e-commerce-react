@@ -14,9 +14,6 @@ import './assets/favorite.css'
 
 const FavoritesPage = (props) => {
 
-
-  console.log("props.favorite: ", props.favorite, "props.favorite.length: ", props.favorite.length)
-
   const totalItem = props.cart.length;
   const [favorite , setFavorite ] = useState([])
 
@@ -231,7 +228,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps =(dispatch) => {
     return {
-       showAllFavItem: (state) => dispatch(showFavItems(state)),
+       showAllFavItem: () => dispatch(showFavItems()),
        removeFavItem: (id) => dispatch(removeFavItem(id))
     }
 }

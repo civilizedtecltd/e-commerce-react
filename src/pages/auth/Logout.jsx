@@ -23,7 +23,7 @@ const Logout = (props) => {
 }
 
 const mapStateToProps = state => ({
-    ...state
+    auth: state.auth
 });
 const mapDispatchToProps = dispatch => ({
     userLogout: ()=> dispatch(logout())

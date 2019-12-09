@@ -25,6 +25,7 @@ export const REMOVE_FAVORITE_ITEM   =   'REMOVE_FAVORITE_ITEM';
 export const GO_TO_CHECKOUT         =   'GO_TO_CHECKOUT';
 export const SHOW_ALL_FAVORITE      =   'SHOW_ALL_FAVORITE';
 
+
 //Checkout Actions types
 export const SET_ADDRESS_DETAILS    = 'SET_ADDRESS_DETAILS';
 export const SET_PAYMENT_DETAILS    = 'SET_PAYMENT_DETAILS';
