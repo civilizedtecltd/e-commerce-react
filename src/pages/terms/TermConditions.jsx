@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState}from "react";
 import HeaderComponent from "../../components/header/Header";
 import MobileHeader from "../../components/header/MobileHeader";
 import {NewsLetterComponent} from "../../components/offerPageComponents/NewsLetterComponent";
@@ -74,7 +74,7 @@ const TermConditions = (props) => {
         </div>
     )
 }
-const mapStateToProps = () =>  {
+const mapStateToProps = (state) =>  {
         return {
             cart: state.shop.cart,
             favorite: state.favorite
