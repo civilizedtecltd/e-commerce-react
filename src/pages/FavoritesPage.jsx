@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card} from "react-bootstrap";
 import { connect } from 'react-redux'
@@ -8,13 +8,29 @@ import FooterComponent from "../components/FooterComponent/FooterComponent";
 import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
-import { showFevItems, removeFavItem } from '../redux/actions/favoriteActions'
+import { showFavItems, removeFavItem } from '../redux/actions/favoriteActions';
 import { URL } from '../constants/config'
 import './assets/favorite.css'
 
 const FavoritesPage = (props) => {
+
+
+  console.log("props.favorite: ", props.favorite, "props.favorite.length: ", props.favorite.length)
+
   const totalItem = props.cart.length;
-  const [favorite , setFavorite ] = useState( [...props.favorite] )
+  const [favorite , setFavorite ] = useState([])
+
+  useEffect(() => {
+    props.showAllFavItem()
+    setFavorite(props.favorite)
+  },[props.favorite.length]);
+
+
+  const removeFavoriteItem = (id) => {
+    props.removeFavItem(id);
+  }
+
+
 
   return (
     <>
@@ -171,14 +187,14 @@ const FavoritesPage = (props) => {
                 {favorite.map((item, index) => (
                   <NewBookComponent
                     key={index}
-                    bookid={item.id}
+                    bookId={item.id}
                     ImageBg="bgGray"
                     BookImage={`${URL.BASE}/${item.cover_images.img_1}`}
                     ProductTitle={item.name}
                     AuthorName={item.book_author.name}
                     ProductPrice={item.price}
                     isFev={true}
-                    removeFavItem={props.removeFavItem}
+                    removeFavItem = { removeFavoriteItem }
                     stateFav= { setFavorite }
                   />
                 ))}
@@ -215,7 +231,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps =(dispatch) => {
     return {
-       showFav: (state) => dispatch(showFevItems(state)),
+       showAllFavItem: (state) => dispatch(showFavItems(state)),
        removeFavItem: (id) => dispatch(removeFavItem(id))
     }
 }
