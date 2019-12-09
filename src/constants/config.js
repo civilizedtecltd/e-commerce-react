@@ -48,7 +48,11 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     }
     _SEARCH_BOOK(value){
         return `${this.API}/filter/${value}`
-    }     
+    }
+
+    get _POST_REVIEW(){
+        return `${this.API}/book/review`;
+    }
  }
 
  const URL = new APP_URL();
