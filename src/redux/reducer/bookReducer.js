@@ -13,6 +13,8 @@ const bookReducer = ( state ={}, actions) => {
             return payload;
         case Types.SHOW_SINGLE_BOOK:
             return payload;
+        case Types.SEARCH_BOOK:
+            return payload
         default :
             return state
     }

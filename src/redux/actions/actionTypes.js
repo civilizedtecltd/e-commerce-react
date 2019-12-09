@@ -30,6 +30,10 @@ export const SET_ADDRESS_DETAILS    = 'SET_ADDRESS_DETAILS';
 export const SET_PAYMENT_DETAILS    = 'SET_PAYMENT_DETAILS';
 export const CONFIRM_ORDER          = 'CONFIRM_ORDER';
 
+//Search action types
+
+export const SEARCH_BOOK            = 'SEARCH_BOOK'
+
 
 
 

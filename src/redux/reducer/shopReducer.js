@@ -3,7 +3,7 @@ import * as Types from '../actions/actionTypes';
 const initSate = {
     cart: [],
     address: {},
-    payment: {}
+    payment: {},
 };
 
 const shopReducer = (state = initSate, { type, payload }) => {
@@ -101,6 +101,7 @@ const shopReducer = (state = initSate, { type, payload }) => {
                     ...state,
                     cart: []
                 }
+        
 
             default:
                 return state;

@@ -66,6 +66,7 @@ const confirmOrder = (data) => dispatch => {
 
 
 
+
 export {
 
     addToCart,
@@ -75,6 +76,5 @@ export {
     deleteAllFromCart,
     setDeliveryAddress,
     setPaymentDetails,
-    confirmOrder
-
+    confirmOrder,
 }

@@ -13,7 +13,7 @@
 outline-offset: 0px;
 -webkit-appearance: none;
 }
-.headPopBarList li a {
+.cursor-type {
     cursor: pointer;
 }
 .navbar-expand-lg .navbar-nav .nav-link{

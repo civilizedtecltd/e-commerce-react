@@ -54,10 +54,21 @@ const fetchBooksByCategory = (id,page,show) => dispatch => {
         })
  };
 
+
+ const searchBook = (page, show, keyword)=> dispatch => {
+    axios.post(URL._SEARCH_BOOK(page,show,keyword))
+    .then(res=>dispatch({
+        type:Types.SEARCH_BOOK,
+        payload:[...res.data.data]
+    }))
+     .catch(err=>console.log(err))
+}
+
 export {
     fetchAllBook,
     showSingleBook,
     fetchCategoryList,
-    fetchBooksByCategory
+    fetchBooksByCategory,
+    searchBook
 }
 

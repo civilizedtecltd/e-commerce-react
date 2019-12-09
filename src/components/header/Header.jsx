@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import React ,{useState, useEffect} from 'react';
-
+import { createUseStyles } from 'react-jss'
 import {Container, Row, Col, Form, Badge, Collapse} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import AnchorLink from 'react-anchor-link-smooth-scroll'
@@ -15,10 +15,17 @@ const Default = ({ children }) => {
   return isNotMobile ? children : null
 }
 
+const useStyle = createUseStyles({
+  cursor_type:{
+    cursor: "pointer"
+  }
+})
+
 
 
 // eslint-disable-next-line
 const HeaderComponent = (props) => {
+  const classes = useStyle()
 
   const [open, setOpen] = useState(false);
   const [isAuth, setAuth] = useState(false);
@@ -89,10 +96,9 @@ const HeaderComponent = (props) => {
               <div className="headPopBar clearfix" id="headPopBar">
                 <ul className="headPopBarList d-flex justify-content-between">
                   <li>
-                   {/* eslint-disable-next-line */}
-                    <div className="input-group">
-                       {/* eslint-disable-next-line */}
-                      <a to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className="fa fa-search"></i> Search</a>
+                 
+                    <div className={`input-group`}>
+                      <div className="cursor-type" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className={`fa fa-search`}></i> Search</div>
                     </div>
                   </li>
                    <li><Link to="/favorites"><span className="cartBadge"><i className="far fa-star"></i>{props.favorite_item !== 0 ? <Badge variant="danger"> {props.favorite_item} </Badge> : ''}</span> Favorites</Link></li>
