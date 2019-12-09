@@ -25,6 +25,10 @@ const favoriteReducer = ( state = initialState , action ) => {
             return [
                 ...payload
             ]
+        case Types.EMPTY_FAVORITE_ITEMS:
+            return [
+                ...payload
+            ]
         default :
          return state
 
