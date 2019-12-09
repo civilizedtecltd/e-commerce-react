@@ -20,7 +20,7 @@ function Search(props) {
               <div id="SearchBarMenu">
                 <input type="text" className="form-control shadow-none" placeholder="Search" onChange={(event)=>setKeyWord(event.target.value)} />
                 <span onClick={props.handleOpen}><i className="fas fa-times"></i></span>
-                <button type="submit" >submit</button>
+                <button type="submit" hidden >submit</button>
               </div>
             </div>
             </form>
