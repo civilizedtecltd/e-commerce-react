@@ -4,14 +4,15 @@ import { URL } from '../../constants/config';
 
 
  const fetchAllBook = (page,show) => dispatch => {
-    axios.get(URL._ALL_BOOKS(page,show)).then( res =>{
-        dispatch({
-            type:Types.FETCH_ALL_BOOKS,
-            payload: res.data
+    axios.get(URL._ALL_BOOKS(page,show))
+        .then( res =>{
+            dispatch({
+                type:Types.FETCH_ALL_BOOKS,
+                payload: res.data
+            })
         }).catch( error =>{
             console.log(error)
         })
-    })
 };
 
 const fetchBooksByCategory = (id,page,show) => dispatch => {

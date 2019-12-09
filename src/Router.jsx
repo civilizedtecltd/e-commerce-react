@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // User Area
 import Login from './pages/auth/Login';
@@ -50,6 +50,7 @@ const Router = (props) => (
               <PrivateRoute path="/checkout" component={CheckoutPage} />
               <Route path="/favorites" component={FavoritesPage} />
               <Route path="/shop/category/:id?/:title?" component={ShopPage} />
+              <Route exact path="/shop" component={ () => <Redirect to={{ pathname: "/shop/category/all", state: {from: props.location} }}/> } />
               <Route path="/product/:id" component={ProductPage} />
               <Route path="/term/conditions" component={TermConditions} />
               <Route path="/privacy" component={Privacy} />
