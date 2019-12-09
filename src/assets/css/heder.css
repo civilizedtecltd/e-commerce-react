@@ -13,7 +13,7 @@
 outline-offset: 0px;
 -webkit-appearance: none;
 }
-.headPopBarList li a {
+.headPopBarList li p {
     cursor: pointer;
 }
 .navbar-expand-lg .navbar-nav .nav-link{
@@ -106,3 +106,4 @@ width: 50%;
 .customer-support i:hover{
     color: #3897CF;
 }
+

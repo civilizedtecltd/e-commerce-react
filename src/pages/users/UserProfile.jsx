@@ -11,12 +11,11 @@ import {Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { URL } from '../../constants/config';
 
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
-import {LiAi} from '../../components/LiComponent/CommonLiComponent';
-import {asideData} from '../../inc/users/users';
 import  HeaderComponent from "../../components/header/Header";
 import  MobileHeader from "../../components/header/MobileHeader";
 
 import './assets/css/user.css';
+import UserNav from "../../components/UserNav/UserNav";
 
 const mySwal = withReactContent(Swal);
 
@@ -124,31 +123,13 @@ const UserProfile = (props) => {
      <HeaderComponent
           favorite_item={favorite.length}
           cartItem={totalItem}
+          menuActive={true}
         />
       <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
         <Container fluid="{true}" className="pl-0 pr-0">
           <Row noGutters>
-            <Col sm="2">
-            <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
-                <nav className="userNav">
-                  <ul className="userNavBar">
-                    {
-                        asideData.map((aside, index) =>
-                        <LiAi
-                            key         =   { index }
-                            ListClass   =   { aside.LIST_CLASS }
-                            Title       =   { aside.TITLE }
-                            Url         =   { aside.URL }
-                            IconName    =   { aside.ICON_NAME }
-                            AnchorClass =   { aside.ANCHOR_CLASS }
-                        />)
-                    }
-
-                  </ul>{/* end of userNavBar */}
-                </nav>{/* end of userNav */}
-              </aside>{/* end of aside */}
-            </Col>{/* end of Col */}
+              <UserNav />
 
             <Col>
               <main className="userMainContent clearfix bgImage bgImg03" id="userMainContent">

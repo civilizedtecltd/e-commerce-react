@@ -3,11 +3,10 @@ import React,{useState} from 'react';
 import {Container, Row, Col, Card, Form} from 'react-bootstrap';
 import {CheckboxComponent} from '../../components/FromComponents/CheckboxComponents';
 import{ButtonComponents}from '../../components/ButtonComponents/ButtonComponents'
-import {LiAi} from '../../components/LiComponent/CommonLiComponent';
-import {asideData} from '../../inc/users/users'
 import  HeaderComponent from "../../components/header/Header";
 import  MobileHeader from "../../components/header/MobileHeader";
 import { connect } from 'react-redux';
+import UserNav from "../../components/UserNav/UserNav";
 
 const Subscription = (props) => {
   const totalItem = props.cart.length;
@@ -17,27 +16,13 @@ const Subscription = (props) => {
   <HeaderComponent
           favorite_item={favorite.length}
           cartItem={totalItem}
+          menuActive={true}
         />
     <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
         <Container fluid="{true}" className="pl-0 pr-0">
           <Row noGutters>
-            <Col sm="2">
-            <aside className="userAsideBar pt-3 clearfix shadow" id="userAsideBar">
-                <nav className="userNav">
-                  <ul className="userNavBar">
-                    {asideData.map((aside,index)=><LiAi
-                      key={index}
-                      ListClass={aside.LIST_CLASS}
-                      Title={aside.TITLE}
-                      Url={aside.URL}
-                      IconName={aside.ICON_NAME}
-                      AnchorClass={aside.ANCHOR_CLASS}
-                    />)}
-                  </ul>
-                </nav>
-              </aside>
-            </Col>
+            <UserNav />
             <Col>
               <main className="userMainContent clearfix bgImage bgImg03" id="userMainContent">
                 <section className="myOrderArea secGap clearfix" id="myOrderArea">
