@@ -1,19 +1,21 @@
-import React from 'react';
+import React,{useCallback} from 'react';
 import{Link} from 'react-router-dom'
 import {Col, Card, Image} from 'react-bootstrap';
 import LazyLoad from 'react-lazyload';
 import '../../assets/css/theme.css'
-
-
-const NewBookComponent = ({bookid, BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg ,isFev = false }) => {
-
+import { connect } from 'react-redux';
+const NewBookComponent = ({bookid, BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg ,isFev = false , removeFavItem ,stateFav,favorite}) => {
+  const updateState = useCallback(stateFav)
   const imgStyle = {
         width:"163px",
         height:"224px"
     }
-    const titleStyle ={
-        width:"190px"
-    }
+  const handleRemove = (e, bookid)=> {
+    removeFavItem(e,bookid)
+    updateState(favorite)
+  }
+  
+ 
     return(
         <Col className="col-auto">
             <LazyLoad once={true} height={200}>
@@ -25,10 +27,22 @@ const NewBookComponent = ({bookid, BookImage, ProductTitle, AuthorName, ProductP
                         <Link to={`/product/${bookid}`}><h4 className="productTitle limit-character mb-1" >{ProductTitle} {(isFev === true) ?<span className="favoritIcon"><i className="fas fa-star"></i></span> :''}</h4></Link>
                         <h5 className="authorName mb-1">{AuthorName}</h5>
                         <p className="productPrice">$ {ProductPrice}</p>
-                        <button  className="btn btn-danger">Remove</button>
+                        <button  className="btn btn-danger" onClick={handleRemove.bind(this,bookid)}>Remove</button>
                     </div>
                 </Card>
             </LazyLoad>
         </Col>)
 }
-export default NewBookComponent;
+const mapStateToProps = (state) => {
+    return{
+        favorite: state.favorite 
+    }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//     return{
+//         removeFavorite : (id)=>dispatch(removeFavItem(id))
+//     }
+// }
+export default connect(mapStateToProps, null)(NewBookComponent);
+// export default NewBookComponent;

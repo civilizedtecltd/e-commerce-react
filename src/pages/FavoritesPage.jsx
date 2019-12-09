@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { createUseStyles } from 'react-jss'
 import { Container, Row, Col, Card} from "react-bootstrap";
 import { connect } from 'react-redux'
 import NewBookComponent from "../components/offerPageComponents/NewBookComponent";
@@ -12,30 +11,10 @@ import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { showFevItems, removeFavItem } from '../redux/actions/favoriteActions'
 import { URL } from '../constants/config'
 import './assets/favorite.css'
-const useStyle = createUseStyles({
-  addFavImage:{
-    height:100,
-    width:100
-  },
-  textLarge:{
-    fontSize:30,
-  }
-})
+
 const FavoritesPage = (props) => {
-  const classes = useStyle()
   const totalItem = props.cart.length;
   const [favorite , setFavorite ] = useState( [...props.favorite] )
-  const handleClick = (event) => {
-    event.preventDefault()
-    favorite.find((item, index)=> {
-
-        if(item.id === Number(event.target.id)){
-          props.removeFavItem(item.id)
-          favorite.splice(index, 1)
-        }
-        return setFavorite([...favorite])
-    })
-  }
 
   return (
     <>
@@ -199,6 +178,8 @@ const FavoritesPage = (props) => {
                     AuthorName={item.book_author.name}
                     ProductPrice={item.price}
                     isFev={true}
+                    removeFavItem={props.removeFavItem}
+                    stateFav= { setFavorite }
                   />
                 ))}
               </Row>

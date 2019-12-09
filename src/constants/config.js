@@ -42,7 +42,10 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
 
     get _FAVORITE_ITEMS(){
          return `${this.API}/user/favorite`;
-     }     
+     }
+    _DELETE_FAVORITE(id){
+        return `${this.API}/user/favorite/${id}/delete`
+    }     
  }
 
  const URL = new APP_URL();

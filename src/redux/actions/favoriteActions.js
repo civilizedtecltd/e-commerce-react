@@ -15,11 +15,14 @@ const addToFavorite = (id) => dispatch =>{
 
 
 
-const removeFavItem = (id) => {
-    return{
+const removeFavItem = (id) => dispatch =>{
+    setAuthToken();
+    axios.post(URL._DELETE_FAVORITE(id)).then(res=> dispatch({
         type:Types.REMOVE_FAVORITE_ITEM,
-        payload:id
-    }
+        payload:[...res.data.data]
+    }))
+    .catch(err=>console.log(err))
+   
 }
 
 const showFevItems = (book) => {

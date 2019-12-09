@@ -5,6 +5,7 @@ import {NewsLetterComponent} from "../../components/offerPageComponents/NewsLett
 import TermConditionsComponent from '../../components/terms/TermConditionsComponent'
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import { connect } from "react-redux";
+
 const TermConditions = (props) => {
     const totalItem = props.cart.length;
     const [favorite, setFavorite] = useState([...props.favorite])
