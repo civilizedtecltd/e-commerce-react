@@ -3,26 +3,28 @@ const initialState = []
 const favoriteReducer = ( state = initialState , action ) => {
     const { payload } = action
     switch(action.type){
-        case Types.ADD_FAVORITE: 
+        case Types.ADD_FAVORITE:
          const isExist = state.find((items) => items.id === payload.id)
          if (isExist === undefined){
                 return [
                 ...payload
                 ]
-            }  
-            return state 
+            }
+            return state
 
         case Types.SHOW_ALL_FAVORITE:
-            return state
-        
+            return [
+                ...payload
+            ]
+
         case Types.REMOVE_FAVORITE_ITEM:
-            const remoteItem = state.findIndex((item)=>item.id === action.payload.id)
-            state.splice(remoteItem,1)
-            return state
+            return [
+                ...payload
+            ]
         default :
-         return state  
-                
-            
+         return state
+
+
     }
 }
 

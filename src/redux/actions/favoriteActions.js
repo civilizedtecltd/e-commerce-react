@@ -10,7 +10,7 @@ const addToFavorite = (id) => dispatch =>{
            type:Types.ADD_FAVORITE,
            payload: [...res.data.data]
    }))
-   .catch(err=>console.log(err)) 
+   .catch(error =>console.log(error))
 }
 
 
@@ -19,21 +19,24 @@ const removeFavItem = (id) => dispatch =>{
     setAuthToken();
     axios.post(URL._DELETE_FAVORITE(id)).then(res=> dispatch({
         type:Types.REMOVE_FAVORITE_ITEM,
-        payload:[...res.data.data]
+        payload:[...res.data.data ]
     }))
-    .catch(err=>console.log(err))
-   
+    .catch(error =>console.log(error))
+
 }
 
-const showFevItems = (book) => {
-    return {
-        type: Types.SHOW_ALL_FAVORITE ,
-        payload: book
-    }
+const showFavItems = () => dispatch => {
+    setAuthToken();
+    axios.get(URL._FAVORITE_ITEMS)
+         .then(res => dispatch({
+                type: Types.SHOW_ALL_FAVORITE,
+                payload: [ ...res.data.data ]
+             }))
+         .catch(error => console.log(error))
 }
 
 export{
     addToFavorite,
-    showFevItems,
+    showFavItems,
     removeFavItem
 }

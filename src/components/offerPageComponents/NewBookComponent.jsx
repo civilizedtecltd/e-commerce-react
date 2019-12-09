@@ -4,18 +4,21 @@ import {Col, Card, Image} from 'react-bootstrap';
 import LazyLoad from 'react-lazyload';
 import '../../assets/css/theme.css'
 import { connect } from 'react-redux';
-const NewBookComponent = ({bookid, BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg ,isFev = false , removeFavItem ,stateFav,favorite}) => {
+const NewBookComponent = ({bookId, BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg ,isFev = false , removeFavItem , stateFav, favorite }) => {
+
   const updateState = useCallback(stateFav)
+
   const imgStyle = {
         width:"163px",
         height:"224px"
     }
-  const handleRemove = (e, bookid)=> {
-    removeFavItem(e,bookid)
-    updateState(favorite)
+  const handleRemove = (bookId) => {
+    /* removeFavItem(e,bookid)
+    updateState(favorite) */
+    removeFavItem(bookId)
   }
-  
- 
+
+
     return(
         <Col className="col-auto">
             <LazyLoad once={true} height={200}>
@@ -24,10 +27,10 @@ const NewBookComponent = ({bookid, BookImage, ProductTitle, AuthorName, ProductP
                         <Image src={BookImage} alt="Book Image" style={imgStyle} />
                     </div>
                     <div className="productContent">
-                        <Link to={`/product/${bookid}`}><h4 className="productTitle limit-character mb-1" >{ProductTitle} {(isFev === true) ?<span className="favoritIcon"><i className="fas fa-star"></i></span> :''}</h4></Link>
+                        <Link to={`/product/${bookId}`}><h4 className="productTitle limit-character mb-1" >{ProductTitle} {(isFev === true) ?<span className="favoritIcon"><i className="fas fa-star"></i></span> :''}</h4></Link>
                         <h5 className="authorName mb-1">{AuthorName}</h5>
                         <p className="productPrice">$ {ProductPrice}</p>
-                        <button  className="btn btn-danger" onClick={handleRemove.bind(this,bookid)}>Remove</button>
+                        <button  className="btn btn-danger" onClick = { handleRemove.bind(this, bookId) }>Remove</button>
                     </div>
                 </Card>
             </LazyLoad>
@@ -35,7 +38,7 @@ const NewBookComponent = ({bookid, BookImage, ProductTitle, AuthorName, ProductP
 }
 const mapStateToProps = (state) => {
     return{
-        favorite: state.favorite 
+        favorite: state.favorite
     }
 }
 
