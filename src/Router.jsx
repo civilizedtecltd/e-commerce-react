@@ -32,9 +32,30 @@ import Refunds from "./pages/terms/Refunds";
 import DeliveryDetails from "./pages/terms/DeliveryDetails";
 import PlaceOrder from "./pages/terms/PlaceOrder";
 
-const Router = (props) => (
+import store from './redux/store';
+import { favoriteNotInState } from './redux/actions/favoriteActions';
+import { cartNotInState } from './redux/actions/shopActions';
+import isEqual from 'lodash/isEqual';
 
-    <Switch location={props.location}>
+const Router = (props) => {
+
+    const localState = JSON.parse(localStorage.getItem('state'));
+
+
+    const presentState = store.getState();
+
+    if(localState !== null){
+        if(!isEqual(presentState.favorite, localState.favorite.length)){
+            store.dispatch(favoriteNotInState(localState.favorite))
+        }
+
+        if(!isEqual(presentState.shop.cart, localState.shop.cart)){
+            store.dispatch(cartNotInState(localState.shop.cart))
+        }
+    }
+
+    return(
+        <Switch location={props.location}>
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={SignUp} />
@@ -60,8 +81,9 @@ const Router = (props) => (
 
               <Route path='/logout' component={Logout} />
               <Route path='*'  component={ErrorPage} />
-    </Switch>
-)
+        </Switch>
+    )
+}
 
 
 export default Router;

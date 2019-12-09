@@ -32,9 +32,6 @@ const CartPage = (props) => {
             setCartItems([...cartItems, { ...item }]);
         })
     }
-
-    console.log("type of cartItems: ", typeof cartItems);
-    console.log("cartItems: ", cartItems);
   },[]);
 
 
