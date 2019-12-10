@@ -4,6 +4,7 @@ export const FETCH_ALL_BOOKS        =   'FETCH_ALL_BOOKS';
 export const SHOW_SINGLE_BOOK       =   'SHOW_SINGLE_BOOK';
 export const FETCH_BOOK_BY_CATEGORY =   'FETCH_BOOK_BY_CATEGORY';
 export const FETCH_ALL_CATEGORY     =   'FETCH_ALL_CATEGORY';
+export const POST_REVIEW            =   'POST_REVIEW';
 
 
 //Cart action types

@@ -156,8 +156,10 @@ function ProductPage(props) {
                         <hr className="hrBorder mt-4" />
                       </div>
                       <TabComponent
+                        routeHistory = {props.history}
                         description = {book ? book.long_description : `` }
                         specification = {book ? [{
+                            id              : book.id,
                             author          : book.book_author.name,
                             discipline      : book.book_discipline.name,
                             stage           : book.book_stage.name,
