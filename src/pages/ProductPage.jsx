@@ -18,6 +18,7 @@ import { URL } from '../constants/config';
 import "../pages/assets/product.css";
 import { addToFavorite } from "../redux/actions/favoriteActions";
 import checkAuth from "../helpers/checkAuth";
+import TotalRating from "../components/ratingComponent/TatalRating";
 
 const useStyles = createUseStyles({
   addFevButton: {
@@ -28,6 +29,7 @@ const useStyles = createUseStyles({
 
 
 function ProductPage(props) {
+  const rating = props.book ? props.book.rating : 0
 
   const classes = useStyles()
   const { id } = useParams();
@@ -102,7 +104,7 @@ function ProductPage(props) {
                           </p>
                         </div>
                         <div className="d-flex">
-                          <RatingComponent  value= { book ? book.rating : 0 }/>
+                          <TotalRating  value= { rating }/>
                           <div style={{marginTop:"-3px"}}><p>{'\u00A0'} {'\u00A0'} (7 reviews) </p></div>
                         </div>
                       </div>
@@ -232,7 +234,8 @@ const mapStateToProps = (state)=> {
     similar: state.book.similar,
     cart: state.shop.cart,
     totalItems: state.shop.cart.length,
-    favorite: state.favorite
+    favorite: state.favorite,
+    rating: state.book.info
   }
 }
 
