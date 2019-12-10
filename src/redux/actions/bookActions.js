@@ -71,7 +71,7 @@ const postReview = (review) => dispatch => {
          .then(res => dispatch({
             type: Types.POST_REVIEW,
              payload: {
-                info:  res.data.data
+                book_review:  [...res.data.data]
             }
          }))
          .catch(error => console.log(error))
