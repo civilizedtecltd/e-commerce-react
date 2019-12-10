@@ -25,7 +25,9 @@ const useStyle = createUseStyles({
 
 const ShopPage = (props) => {
     const classes = useStyle()
+
     const { id, title , pageNumber , showItem, keyword } =  useParams();
+
     const totalItem = props.cart.length
     const favoriteItem = props.favorite;
     const books = (props.book.data !== undefined ) ? props.book.data : [];
@@ -49,7 +51,7 @@ const ShopPage = (props) => {
     useEffect(() => {
       if(pageNumber !==undefined && showItem == ! undefined && keyword !==undefined ) return  books
       return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page,show) ;
-      
+
     },[]);
 
   const handleShowBook = (e)=> {

@@ -5,6 +5,8 @@ import RatingComponent from '../ratingComponent/Rating';
 import ReviewComponent from './ReviewComponent';
 import checkAuth from '../../helpers/checkAuth';
 
+import { postReview } from '../../redux/actions/bookActions';
+
 import '../../assets/css/productTab.css'
 
 
@@ -25,7 +27,7 @@ function TabComponent(props) {
     const getRating = (rating) => {
         setNewReview({
             ...newReview,
-            rating: rating
+            reviewer_rating: rating
         })
     }
 
@@ -33,13 +35,14 @@ function TabComponent(props) {
         e.preventDefault();
         const reviewInfo = {
             ...newReview,
-            id: spec.id
+            book_id: spec.id
         }
 
         if(!checkAuth()){
             props.routeHistory.push("/login")
         }else{
-
+            console.log(reviewInfo);
+            props.postReview(reviewInfo)
         }
 
     }
@@ -102,7 +105,7 @@ function TabComponent(props) {
 }
 
 const mapDispatchToProps = dispatch =>({
-
+    postReview: (review) => dispatch(postReview(review))
 })
 
 export default connect(null, mapDispatchToProps)(TabComponent);
