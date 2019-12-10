@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import {Row , Col, Collapse, Form} from 'react-bootstrap';
+import {Row , Col, Collapse} from 'react-bootstrap';
+import {  useHistory } from 'react-router-dom'
 import { connect } from 'react-redux';
 import {searchBook} from '../../redux/actions/bookActions'
 function Search(props) {
+    const history = useHistory()
     const { page, show } = props
     const [keyword , setKeyWord] = useState('')
     const handleSubmit = (e) => {
         e.preventDefault()
-
-       return props.searchBook(page, show, keyword)
+        props.searchBook(page, show, keyword)
+        history.push(`/shop/category/all/${page}/${show}/${keyword}`)
     }
     return(
+
         <Row>
         <Col>
 
@@ -32,11 +35,15 @@ function Search(props) {
 }
 
 
-
+const mapStateToProps = (state) => {
+  return{
+    book: state.book
+  }
+}
 const mapDispatchToProps = dispatch => {
     return{
         searchBook:(page,show,keyword)=>dispatch(searchBook(page,show,keyword))
     } 
 }
 
-export default connect(null,mapDispatchToProps)(Search);
+export default connect(mapStateToProps,mapDispatchToProps)(Search);

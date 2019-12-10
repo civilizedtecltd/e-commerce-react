@@ -70,8 +70,9 @@ const Router = (props) => {
               <PrivateRoute path="/cart" component={CartPage} />
               <PrivateRoute path="/checkout" component={CheckoutPage} />
               <Route path="/favorites" component={FavoritesPage} />
-              <Route path="/shop/category/:id?/:title?" component={ShopPage} />
+              <Route exact path="/shop/category/:id?/:title?" component={ShopPage} />
               <Route exact path="/shop" component={ () => <Redirect to={{ pathname: "/shop/category/all", state: {from: props.location} }}/> } />
+              <Route exact path="/shop/category/all/:pageNumber/:showItem/:search" component={ShopPage}/>
               <Route path="/product/:id" component={ProductPage} />
               <Route path="/term/conditions" component={TermConditions} />
               <Route path="/privacy" component={Privacy} />
