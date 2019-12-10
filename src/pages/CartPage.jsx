@@ -2,60 +2,52 @@ import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Card, Form, Button, Table } from "react-bootstrap";
+
 import { Lia } from '../components/LiComponent/CommonLiComponent';
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
-import BreadCrumb from '../components/BreadCrumb/BreadCrumb'
+import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
+import CartTable from '../components/CartComponents/CartsTableComponent';
+
 import { categoryClass } from "../inc/users/users";
-import { URL } from '../constants/config';
+
+
 import { removeFromCart, deleteAllFromCart } from '../redux/actions/shopActions'
 
 const CartPage = (props) => {
 
-  const favoriteItem = props.favorite
-
+  const favoriteItem = props.favorite;
   const [cartItems, setCartItems] = useState(props.cart)
-  let [totalQty , setQty] = useState([]);
-  let [totalPrice , setTotalPrice]= useState([]);
 
-  let totalItemQuantity = 0;
   let totalBookPrice = 0;
   let delivery_cost = 0;
 
 
   useEffect(() => {
-    if(cartItems.length !== 0){
-        cartItems.map(item => {
-            item.totalPrice = item.quantity * item.price;
-            setCartItems([...cartItems, { ...item }]);
-        })
-    }
-  },[]);
+    const items = props.cart;
 
-
-  /* if(cartItems.length !== 0) {
-    cartItems.map(item => {
-      totalQty.push( item.quantity );
-      totalPrice.push( item.price * item.quantity)
+    items.map((item, index) => {
+        item.amountPrice = item.quantity * item.price;
+        items[index] = item;
+     setCartItems([...items]);
     })
-  } */
+
+  },[props.cart.length]);
 
 
-  if (totalQty.length !== 0) {
-    totalItemQuantity = totalQty.reduce((quantities, quantity) => quantities + quantity)
-    totalBookPrice = totalPrice.reduce((prices, price) => prices + price);
+  if(cartItems.length !== 0){
+      cartItems.map((item) => {
+        totalBookPrice += item.amountPrice;
+      })
   }
 
 
-
-  const handleClick = (event) => {
-    event.preventDefault()
-    cartItems.find((book, index) => {
-      if (Number(book.id) === Number(event.target.id)) {
+  const handleDeleteClick = (id) => {
+    cartItems.find((book) => {
+      if (Number(book.id) === Number(id)) {
         props.removeItem(book.id)
-        cartItems.splice(index, 1)
       }
     })
 
@@ -67,16 +59,19 @@ const CartPage = (props) => {
     setCartItems([])
   }
 
-  const handleQuantity = (e)=> {
-    e.preventDefault();
-    if(e.target.value <= 0) e.target.value=1
-    const price = document.getElementById(`price-${e.target.id}`).innerHTML;
-    const TP = document.getElementById(`tp-${e.target.id}`);
-    TP.innerHTML="$"+ parseFloat(e.target.value) * parseFloat(price.substr(1))
+  const handleQuantity = (itemQty)=> {
 
-    //const grand_total = document.getElementById('grand-total')
-    //  grand_total.innerHTML = `$ ${parseFloat(TP) + parseFloat(delivery_cost)}`
+    const { id, qty } = itemQty;
+    const items = props.cart;
 
+    items.find(item => {
+        if(Number(item.id) === Number(id)){
+          item.quantity = qty;
+          item.amountPrice = item.quantity * item.price;
+        }
+    })
+
+    setCartItems([...items]);
   }
 
   return (
@@ -118,47 +113,11 @@ const CartPage = (props) => {
                       <Col>
                         <Card className="table-responsive border-0 cartTableBody">
                           <Card.Body className="p-0">
-                            <Table responsive className="cardTable">
-                              <thead>
-                                <tr>
-                                  <th>Goods</th>
-                                  <th>Price</th>
-                                  <th>Amount</th>
-                                  <th>Total</th>
-                                  <th></th>
-                                </tr>
-                              </thead>
-
-
-                              <tbody>
-                                {cartItems.map((item, index) => (<tr key={index}>
-                                  <td>
-                                    <div className="cartProductDetails d-flex flex-fill align-items-center">
-                                      <div className="cartProductMedia bgGray ">
-                                        <img src={URL.BASE + "/" + item.cover_images.img_1} alt="" />
-                                      </div>
-                                      <div className="cartProductTitle">
-                                        <h3>
-                                          {item.name}
-                                        </h3>
-                                      </div>
-                                    </div>
-                                  </td>
-                                  <td id={`price-${item.id}`}>${item.price}</td>
-                                  <td className="cartQntN">
-                                    <Form.Control type="number" placeholder="1" id={item.id} defaultValue={item.quantity} onChange={handleQuantity} />
-                                  </td>
-                                  <td id={`tp-${item.id}`}>${item.price * item.quantity}</td>
-                                  <td>
-                                    <Button className="btn btn-danger" id={item.id} onClick={handleClick}>
-                                      Delete <i className="fas fa-times"></i>
-                                    </Button>
-                                  </td>
-                                </tr>
-                                ))}
-
-                              </tbody>
-                            </Table>
+                             <CartTable
+                                items={cartItems}
+                                updateQty={handleQuantity}
+                                onDelete={handleDeleteClick}
+                             />
                           </Card.Body>
                         </Card>
                       </Col>
@@ -177,7 +136,7 @@ const CartPage = (props) => {
                           </Form.Group>
                           <Button type="submit" className="ml-2">
                             Apply
-                    </Button>
+                          </Button>
                         </Form>
                       </Col>
                     </Row>
@@ -187,7 +146,7 @@ const CartPage = (props) => {
                           <ul className="cartPriceList">
                             <li>
                               Price.....................................................
-                          <span className="pPrice">${totalPrice}</span>
+                          <span className="pPrice">${totalBookPrice}</span>
                             </li>
                             <li>
                               Delivery.............................................
@@ -195,7 +154,7 @@ const CartPage = (props) => {
                             </li>
                             <li>
                               Total.....................................................
-                          <span className="pPrice" id="grand-total">${parseFloat(totalPrice) + parseFloat(delivery_cost)}</span>
+                          <span className="pPrice" id="grand-total">${parseFloat(totalBookPrice) + parseFloat(delivery_cost)}</span>
                             </li>
                           </ul>
                           <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}>Checkout</Link>

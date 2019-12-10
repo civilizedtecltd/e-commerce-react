@@ -5,7 +5,6 @@ import * as Types from '../actions/actionTypes';
 const bookReducer = ( state ={}, actions) => {
 
     const { payload } = actions;
-    console.log(payload)
 
     switch (actions.type) {
         case Types.FETCH_ALL_BOOKS:
