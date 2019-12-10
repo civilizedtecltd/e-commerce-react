@@ -56,9 +56,7 @@ const ShopPage = (props) => {
 
   const handleShowBook = (e)=> {
     e.preventDefault()
-    console.log(e.target.value)
     setShowBook(Number(e.target.value));
-
     const t_pages = (Number(e.target.value) !== 0 && Number(e.target.value) <= Number(props.totalItem)) ? Math.ceil(Number(props.totalItem)/Number(e.target.value)) : 1 ;
     setTotalPage(t_pages);
 
