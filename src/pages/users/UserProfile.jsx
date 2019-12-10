@@ -40,7 +40,7 @@ const UserProfile = (props) => {
 
       }, []);
 
-      console.log("state user.phone: ", props.auth.user.phone)
+      console.log("state user.phone: ", props.auth.user.phone )
 
     const categoryData = (data) => {
         if(data.category_id !== undefined || data.category_id !== 'Select Category')
