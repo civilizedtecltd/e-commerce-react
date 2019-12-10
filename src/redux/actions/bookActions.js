@@ -55,15 +55,20 @@ const fetchBooksByCategory = (id,page,show) => dispatch => {
  };
 
 
- const searchBook = (page, show, keyword)=> dispatch => {
 
+
+const searchBook = (page, show, keyword) => dispatch => {
     axios.get(URL._SEARCH_BOOK(page,show,keyword))
-    .then(res=>dispatch({
-        type:Types.SEARCH_BOOK,
-        payload:res.data.data
-    }))
-     .catch(err=>console.log(err))
-}
+        .then( res =>{
+            dispatch({
+                type:Types.SEARCH_BOOK,
+                payload: res.data
+            })
+        }).catch( error =>{
+            console.log(error)
+        })
+};
+
 
 const postReview = (review) => dispatch => {
     setAuthToken();

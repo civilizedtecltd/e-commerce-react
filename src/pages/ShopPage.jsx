@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Container, Row, Col, Form, Card } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
 import { connect  } from 'react-redux';
 import { createUseStyles } from 'react-jss'
@@ -26,7 +26,11 @@ const useStyle = createUseStyles({
 const ShopPage = (props) => {
     const classes = useStyle()
 
-    const { id, title } =  useParams();
+   
+
+    const { id, title , pageNumber , showItem, keyword } =  useParams();
+
+    console.log(useParams())
 
     const totalItem = props.cart.length
     const favoriteItem = props.favorite;
@@ -49,7 +53,9 @@ const ShopPage = (props) => {
 
 
     useEffect(() => {
+      if(pageNumber !==undefined && showItem == ! undefined && keyword !==undefined ) return  books
       return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page,show) ;
+      
     },[]);
 
   const handleShowBook = (e)=> {
