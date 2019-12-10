@@ -75,6 +75,26 @@ const logout = () => dispatch => {
         })
 };
 
+const getUser = () => dispatch => {
+    setAuthToken();
+    axios.get(URL._GET_USER)
+         .then(res => dispatch({
+            type: Types.USER_INFO,
+            payload: { ...res.data.data }
+         }))
+         .catch(error => console.log(error))
+}
+
+const update = (info) => dispatch => {
+    setAuthToken();
+    axios.post(URL._USER_UPDATE, info)
+         .then(res => dispatch({
+             type: Types.USER_UPDATE,
+             payload: { ...res.data.data }
+         }))
+         .catch(error => console.log(error))
+}
+
 const authNotInState = (authData) => ({
     type: Types.AUTH_NOT_IN_STATE,
     payload: authData
@@ -84,5 +104,7 @@ const authNotInState = (authData) => ({
 export {
     login,
     logout,
-    authNotInState
+    authNotInState,
+    update,
+    getUser
 }
