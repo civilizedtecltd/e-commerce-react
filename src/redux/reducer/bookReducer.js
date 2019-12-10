@@ -18,8 +18,11 @@ const bookReducer = ( state ={}, actions) => {
             return payload
         case Types.POST_REVIEW:
             return {
-                ...state,
-                ...payload
+                similar: state.similar,
+                info: {
+                    ...state.info,
+                    ...payload
+                }
             }
         default :
             return state
