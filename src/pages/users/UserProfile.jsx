@@ -3,6 +3,7 @@ import { connect  } from 'react-redux';
 import axios from 'axios';
 import isEmpty from 'lodash/isEmpty';
 
+import {getUser, update} from '../../redux/actions/authActions';
 
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -20,8 +21,7 @@ import UserNav from "../../components/UserNav/UserNav";
 const mySwal = withReactContent(Swal);
 
 const UserProfile = (props) => {
-
-
+    console.log("props.auth.user :", props.auth.user);
     const [category, setCategory] = useState([]);
     const [user] = useState({...props.auth.user });
     const [formData] = useState({});
@@ -36,8 +36,11 @@ const UserProfile = (props) => {
           setCategory(result.data);
         };
         fetchData();
+        props.getUser();
+
       }, []);
 
+      console.log("state user.phone: ", props.auth.user.phone )
 
     const categoryData = (data) => {
         if(data.category_id !== undefined || data.category_id !== 'Select Category')
@@ -45,7 +48,6 @@ const UserProfile = (props) => {
     }
 
     const fromFileData = (data) => {
-       /* eslint-disable-next-line */
         Object.keys(data).map( key => {
             formData[key] = data[key];
         });
@@ -115,6 +117,7 @@ const UserProfile = (props) => {
 
             }
         }
+
         console.log(formData);
     }
 
@@ -270,4 +273,9 @@ const mapStateToProps = state => ({
     favorite: state.favorite
 })
 
-export default connect(mapStateToProps, null)(UserProfile);
+const mapDispatchToProps = dispatch => ({
+    getUser: () => dispatch(getUser()),
+    updateUser: () => dispatch(update())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
