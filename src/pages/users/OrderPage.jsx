@@ -1,25 +1,26 @@
-import React ,{useState}from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
 import {Container, Row, Col, Card, Table} from 'react-bootstrap';
-import './assets/css/user.css';
+
 import {Lia} from '../../components/LiComponent/CommonLiComponent';
 import {categoryClass } from '../../inc/users/users';
 import  HeaderComponent from "../../components/header/Header";
 import  MobileHeader from "../../components/header/MobileHeader";
 import UserNav from "../../components/UserNav/UserNav";
-import { connect } from 'react-redux';
 
-//Custom icon picture
-
+import './assets/css/user.css';
 import orderIcon from '../assets/images/order_icon.png'
 
 const OrderPage = (props) => {
+
   const totalItem = props.cart.length;
-  const [favorite, setFavorite] = useState([...props.favorite])
+  const totalFavorite = props.favorite.length;
+
   return (<>
     <div className="allWrapper">
     <HeaderComponent
-          favorite_item={favorite.length}
+          favorite_item={totalFavorite}
           cartItem={totalItem}
           menuActive={true}
         />

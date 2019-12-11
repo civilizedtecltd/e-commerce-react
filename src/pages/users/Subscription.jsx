@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 
 import {Container, Row, Col, Card, Form} from 'react-bootstrap';
 import {CheckboxComponent} from '../../components/FromComponents/CheckboxComponents';
@@ -9,12 +9,14 @@ import { connect } from 'react-redux';
 import UserNav from "../../components/UserNav/UserNav";
 
 const Subscription = (props) => {
+
   const totalItem = props.cart.length;
-  const [favorite, setFavorite] = useState([...props.favorite])
+  const totalFavorite = props.favorite.length;
+
   return (<>
   <div className="allWrapper">
   <HeaderComponent
-          favorite_item={favorite.length}
+          favorite_item={totalFavorite}
           cartItem={totalItem}
           menuActive={true}
         />

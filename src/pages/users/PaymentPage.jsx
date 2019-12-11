@@ -17,20 +17,20 @@ import { connect } from "react-redux";
 
   const PaymentPage = (props) => {
   const totalItem = props.cart.length;
-  const [favorite, setFavorite] = useState([...props.favorite])
   const [visible, setVisible] = useState(false)
 
   const handleVisibility = (e) => {
-    e.preventDefault();
-    setVisible(!visible)
-  }
+      e.preventDefault();
+      setVisible(!visible)
+    }
 
+    const totalFavorite = props.favorite.length;
 
   return (
     <>
       <div className="allWrapper">
         <HeaderComponent
-          favorite_item={favorite.length}
+          favorite_item={totalFavorite}
           cartItem={totalItem}
           menuActive={true}
         />

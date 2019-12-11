@@ -7,12 +7,14 @@ import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import { connect } from "react-redux";
 
 const TermConditions = (props) => {
+
     const totalItem = props.cart.length;
-    const [favorite, setFavorite] = useState([...props.favorite])
+    const totalFavorite = props.favorite.length;
+
     return (
         <div className="allWrapper">
             <HeaderComponent
-                favorite_item={favorite.length}
+                favorite_item={totalFavorite}
                 cartItem={totalItem}
             />
             <MobileHeader />

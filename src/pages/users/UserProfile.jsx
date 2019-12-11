@@ -20,27 +20,26 @@ import UserNav from "../../components/UserNav/UserNav";
 
 const mySwal = withReactContent(Swal);
 
+
 const UserProfile = (props) => {
-    console.log("props.auth.user :", props.auth.user);
+
     const [category, setCategory] = useState([]);
-    const [user] = useState({...props.auth.user });
     const [formData] = useState({});
 
-    const [favorite , setFavorite] = useState([...props.favorite]);
+    const user = { ...props.auth.user}
+    const totalFavorite = props.favorite.length;
     const totalItem = props.cart.length;
 
     useEffect(() => {
-
         const fetchData = async () => {
           const result = await axios(URL._CATEGORY);
           setCategory(result.data);
         };
+
         fetchData();
         props.getUser();
+      },[user.id]);
 
-      }, []);
-
-      console.log("state user.phone: ", props.auth.user.phone )
 
     const categoryData = (data) => {
         if(data.category_id !== undefined || data.category_id !== 'Select Category')
@@ -124,7 +123,7 @@ const UserProfile = (props) => {
   return (<>
     <div className="allWrapper">
      <HeaderComponent
-          favorite_item={favorite.length}
+          favorite_item={totalFavorite}
           cartItem={totalItem}
           menuActive={true}
         />
@@ -194,7 +193,7 @@ const UserProfile = (props) => {
                                       LabelTitle    =   "Phone Number"
                                       TypeName      =   "text"
                                       Name          =   "phone"
-                                      Value         =   { user.phone }
+                                      Value         =   {user.phone}
                                       Placeholder   =   "Phone Number"
                                       callback      =  { fromFileData }
                                     />
