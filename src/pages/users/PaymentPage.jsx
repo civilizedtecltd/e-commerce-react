@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
 import {
   Container,
   Row,
@@ -13,18 +15,30 @@ import MobileHeader from "../../components/header/MobileHeader";
 import UserNav from "../../components/UserNav/UserNav";
 import AddPaymentMethod from "../../components/paymentMethodComponent/AddPaymentMethod";
 import "./assets/css/user.css";
-import { connect } from "react-redux";
+
 
   const PaymentPage = (props) => {
-  const totalItem = props.cart.length;
-  const [visible, setVisible] = useState(false)
+
+  const [visible, setVisible] = useState(false);
+  const [paymentInfo, setPaymentInfo] = useState({ ...props.payment});
 
   const handleVisibility = (e) => {
       e.preventDefault();
-      setVisible(!visible)
+      setVisible(!visible);
     }
 
-    const totalFavorite = props.favorite.length;
+  const updatePaymentInfo = (value) => {
+      const cardName = (value.card_type).toUpperCase();
+      const last4num = (value.card_number).slice(-4);
+    setPaymentInfo({
+        ...value,
+        card_name: cardName,
+        last_num: last4num
+    });
+  }
+
+  const totalItem = props.cart.length;
+  const totalFavorite = props.favorite.length;
 
   return (
     <>
@@ -39,7 +53,6 @@ import { connect } from "react-redux";
           <Container fluid={true} className="pl-0 pr-0">
             <Row noGutters>
               <UserNav />
-
               <Col>
                 <main
                   className="userMainContent clearfix bgImage bgImg03"
@@ -67,13 +80,13 @@ import { connect } from "react-redux";
                                     <td className="cardInfotd">
                                       <div className="cardPaymentDetails">
                                         <h3 className="payTitle">
-                                          Visa
+                                          {paymentInfo.card_name}
                                           <span className="cardNumber">
-                                            **** **** **** 5365
+                                            **** **** **** {paymentInfo.last_num}
                                           </span>
                                         </h3>
                                         <p className="payExp">
-                                          Expires in 09/21
+                                          Expires in {paymentInfo.mm}/{paymentInfo.yy}
                                         </p>
                                       </div>
                                     </td>
@@ -107,7 +120,7 @@ import { connect } from "react-redux";
                                 <Button className="btn btn-danger ml-3 btn-cancel" onClick={handleVisibility} >Cancel</Button>
                               </div>: ''}
 
-                            { visible ? <AddPaymentMethod/> : ''}
+                            { visible ? <AddPaymentMethod callback={updatePaymentInfo}/> : ''}
                             </Card.Body>
                           </Card>
                         </Col>
