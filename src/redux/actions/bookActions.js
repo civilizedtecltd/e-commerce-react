@@ -3,8 +3,8 @@ import axios from 'axios';
 import { URL } from '../../constants/config';
 import { setAuthToken } from '../../helpers/setAuthToken'
 
- const fetchAllBook = (page,show) => dispatch => {
-    axios.get(URL._ALL_BOOKS(page,show))
+ const fetchAllBook = (page,show,keyword) => dispatch => {
+    axios.get(URL._ALL_BOOKS(page,show,keyword))
         .then( res =>{
             dispatch({
                 type:Types.FETCH_ALL_BOOKS,

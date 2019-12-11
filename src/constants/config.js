@@ -29,8 +29,8 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
          return `${this.API}/user/${id}`;
      }
 
-      _ALL_BOOKS(page, show){
-         return `${this.API}/product/all-books/${page}/${show}`;
+      _ALL_BOOKS(page, show,keyword){
+         return `${this.API}/product/all-books/${page}/${show}/${keyword}`;
      }
      _SINGLE_BOOK(id){
          return `${this.API}/product/book/${id}`
