@@ -1,7 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, Form, Row, Col, Button } from "react-bootstrap";
 
-function PaymentMethodComponent() {
+function PaymentMethodComponent(props) {
+
+    const [card, setCard] = useState({})
+
+    const handleOnChange = (e) => {
+        setCard({
+            ...card,
+            [e.target.name]:e.target.value
+        })
+    }
+
+    const handleOnClick = (e) => {
+        e.preventDefault();
+        props.callback(card);
+    }
+
   return(
       <Card.Body className="addPaymentCard m-0 p-0">
         <Row>
@@ -20,6 +35,9 @@ function PaymentMethodComponent() {
                           <Form.Control
                               type="text"
                               id="card-number"
+                              name="card_number"
+                              defaultValue={''}
+                              onChange={handleOnChange}
                           />
                         </Form.Group>
                       </Col>
@@ -44,6 +62,9 @@ function PaymentMethodComponent() {
                                   type="text"
                                   id="card-mm"
                                   placeholder="MM"
+                                  name="mm"
+                                  defaultValue={''}
+                                  onChange={handleOnChange}
                               />
                             </li>
                             <li className="cardBl">/</li>
@@ -52,6 +73,9 @@ function PaymentMethodComponent() {
                                   type="text"
                                   id="card-yy"
                                   placeholder="YY"
+                                  name="yy"
+                                  defaultValue={''}
+                                  onChange={handleOnChange}
                               />
                             </li>
                           </ul>
@@ -65,6 +89,9 @@ function PaymentMethodComponent() {
                           <Form.Control
                               type="text"
                               id="card-cvv"
+                              name="ccv"
+                              defaultValue={''}
+                              onChange={handleOnChange}
                           />
                         </Form.Group>
                       </Col>
@@ -79,6 +106,7 @@ function PaymentMethodComponent() {
                         <Button
                             variant="primary"
                             type="submit"
+                            onClick={handleOnClick}
                         >
                           Add
                         </Button>

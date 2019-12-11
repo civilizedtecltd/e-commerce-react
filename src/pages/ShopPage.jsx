@@ -49,7 +49,7 @@ const ShopPage = (props) => {
 
 
     useEffect(() => {
-      if(pageNumber !==undefined && showItem == ! undefined && keyword !==undefined ) return  books
+      if(pageNumber !== undefined && showItem !==  undefined && keyword !== undefined ) return  books;
       return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page,show) ;
 
     },[]);
