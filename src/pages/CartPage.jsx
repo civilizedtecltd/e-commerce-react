@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { Container, Row, Col, Card, Form, Button, Table } from "react-bootstrap";
+import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 
 import { Lia } from '../components/LiComponent/CommonLiComponent';
 import FooterComponent from "../components/FooterComponent/FooterComponent";
@@ -38,16 +38,15 @@ const CartPage = (props) => {
 
 
   if(cartItems.length !== 0){
-      cartItems.map((item) => {
-        totalBookPrice += item.amountPrice;
-      })
+     cartItems.map((item) =>totalBookPrice += item.amountPrice
+     )
   }
 
 
   const handleDeleteClick = (id) => {
     cartItems.find((book) => {
       if (Number(book.id) === Number(id)) {
-        props.removeItem(book.id)
+         props.removeItem(book.id)
       }
     })
 
