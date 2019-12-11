@@ -46,8 +46,8 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     _DELETE_FAVORITE(id){
         return `${this.API}/user/favorite/${id}/delete`
     }
-    _SEARCH_BOOK(value){
-        return `${this.API}/filter/${value}`
+    _SEARCH_BOOK(page, show, keyword){
+        return `${this.API}/filter/${page}/${show}/${keyword}`
     }
 
     get _POST_REVIEW(){

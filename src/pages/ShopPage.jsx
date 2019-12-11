@@ -65,7 +65,6 @@ const ShopPage = (props) => {
 
   const handleNext = (e) => {
       e.preventDefault();
-
       if(page!==totalPage){
         setPage(++page)
         return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page, show);
@@ -133,7 +132,7 @@ const ShopPage = (props) => {
                       <div className="col">
                         <ul className="singleFilter d-flex align-items-center">
                           <li>
-                            <label htmlFor="">Sort By</label>
+                            <label htmlFor=""> Sort By</label>
                           </li>
                           <li>
                             <select className="filterSelect form-control">
