@@ -12,13 +12,12 @@ import { ImageCarousel } from "../components/ProductImgCarosellComponents/Produc
  import  HeaderComponent from "../components/header/Header";
  import  MobileHeader from "../components/header/MobileHeader";
 import TabComponent from "../components/TabComponent/TabComponent";
-import RatingComponent from "../components/ratingComponent/Rating";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { URL } from '../constants/config';
 import "../pages/assets/product.css";
 import { addToFavorite } from "../redux/actions/favoriteActions";
 import checkAuth from "../helpers/checkAuth";
-import TotalRating from "../components/ratingComponent/TatalRating";
+import TotalRating from "../components/ratingComponent/TotalRating";
 
 const useStyles = createUseStyles({
   addFevButton: {

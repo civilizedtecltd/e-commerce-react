@@ -8,13 +8,11 @@ import {deleteAllFromCart} from '../../redux/actions/shopActions';
 
 const Logout = (props) => {
 
-    const { auth } = props;
-
     useEffect(()=>{
         props.emptyFavorites();
         props.emptyCart();
         props.userLogout();
-    }, [auth.user.id]);
+    }, []);
 
     return (
         <>
