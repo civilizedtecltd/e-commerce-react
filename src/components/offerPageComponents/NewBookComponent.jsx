@@ -1,4 +1,4 @@
-import React,{useCallback} from 'react';
+import React from 'react';
 import{Link} from 'react-router-dom'
 import {Col, Card, Image} from 'react-bootstrap';
 import LazyLoad from 'react-lazyload';
@@ -6,7 +6,6 @@ import '../../assets/css/theme.css'
 import { connect } from 'react-redux';
 const NewBookComponent = ({bookId, BookImage, ProductTitle, AuthorName, ProductPrice, ImageBg ,isFev = false , removeFavItem , stateFav, favorite }) => {
 
-  const updateState = useCallback(stateFav)
 
   const imgStyle = {
         width:"163px",
