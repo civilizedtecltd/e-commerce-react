@@ -36,8 +36,9 @@ const UserProfile = (props) => {
           setCategory(result.data);
         };
 
-        fetchData();
+       fetchData();
         props.getUser();
+
       },[user.id]);
 
 

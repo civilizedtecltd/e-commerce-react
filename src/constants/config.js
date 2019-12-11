@@ -5,7 +5,7 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
   class APP_URL {
      constructor(){
 
-        this.BASE = `http://localhost:3333`;
+        this.BASE = `http://63.33.69.86:4040`;
         this.API  = `${this.BASE}/api`;
      }
 
@@ -51,8 +51,8 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     _DELETE_FAVORITE(id){
         return `${this.API}/user/favorite/${id}/delete`
     }
-    _SEARCH_BOOK(value){
-        return `${this.API}/filter/${value}`
+    _SEARCH_BOOK(page, show, keyword){
+        return `${this.API}/filter/${page}/${show}/${keyword}`
     }
 
     get _POST_REVIEW(){

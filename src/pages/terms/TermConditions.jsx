@@ -1,4 +1,4 @@
-import React ,{useState}from "react";
+import React from "react";
 import HeaderComponent from "../../components/header/Header";
 import MobileHeader from "../../components/header/MobileHeader";
 import {NewsLetterComponent} from "../../components/offerPageComponents/NewsLetterComponent";
