@@ -49,14 +49,8 @@ const ShopPage = (props) => {
 
 
     useEffect(() => {
-<<<<<<< HEAD
       if(id==='all' && pageNumber  && showItem  && keyword) return props.fetchAllBook(page, show, keyword)
       if(id !== "all" && id) props.fetchBooksByCategory(id, page,show);
-=======
-      if(pageNumber !== undefined && showItem !==  undefined && keyword !== undefined ) return  books;
-      return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page,show) ;
-
->>>>>>> master
     },[]);
 
   const handleShowBook = (e)=> {
