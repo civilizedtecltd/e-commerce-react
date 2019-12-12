@@ -34,6 +34,10 @@
     font-size: 18px;
     color: #404041;
 }
+.authName span{
+    font-size: 18px;
+    color: #3897cf;
+}
 .authName a{text-decoration: underline!important;}
 .product-single-Price{
     font-size: 30px;
