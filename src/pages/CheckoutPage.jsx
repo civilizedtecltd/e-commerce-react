@@ -28,7 +28,7 @@ const CheckoutPage = (props) => {
           <Row>
             <Col className="text-center">
               <div className="logoWrapper">
-                <h1 className="logoText"><a href="#">LOGO</a></h1>
+                <h1 className="logoText"><Link to="/">LOGO</Link></h1>
               </div>
             </Col>
           </Row>

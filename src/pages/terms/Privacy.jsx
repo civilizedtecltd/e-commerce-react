@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import HeaderComponent from "../../components/header/Header";
 import MobileHeader from "../../components/header/MobileHeader";
 import { NewsLetterComponent } from "../../components/offerPageComponents/NewsLetterComponent";
@@ -7,12 +7,14 @@ import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import { connect } from "react-redux";
 
 const Privacy = (props) => {
+
     const totalItem = props.cart.length;
-    const [favorite, setFavorite] = useState([...props.favorite])
+    const totalFavorite = props.favorite.length;
+
     return (
         <div className="allWrapper">
             <HeaderComponent
-                favorite_item={favorite.length}
+                favorite_item={totalFavorite}
                 cartItem={totalItem}
             />
             <MobileHeader />

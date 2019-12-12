@@ -3,6 +3,7 @@ import { connect  } from 'react-redux';
 import axios from 'axios';
 import isEmpty from 'lodash/isEmpty';
 
+import {getUser, update} from '../../redux/actions/authActions';
 
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -19,24 +20,26 @@ import UserNav from "../../components/UserNav/UserNav";
 
 const mySwal = withReactContent(Swal);
 
+
 const UserProfile = (props) => {
 
-
     const [category, setCategory] = useState([]);
-    const [user] = useState({...props.auth.user });
     const [formData] = useState({});
 
-    const [favorite , setFavorite] = useState([...props.favorite]);
+    const user = { ...props.auth.user}
+    const totalFavorite = props.favorite.length;
     const totalItem = props.cart.length;
 
     useEffect(() => {
-
         const fetchData = async () => {
           const result = await axios(URL._CATEGORY);
           setCategory(result.data);
         };
-        fetchData();
-      }, []);
+
+       fetchData();
+        props.getUser();
+
+      },[user.id]);
 
 
     const categoryData = (data) => {
@@ -45,7 +48,6 @@ const UserProfile = (props) => {
     }
 
     const fromFileData = (data) => {
-       /* eslint-disable-next-line */
         Object.keys(data).map( key => {
             formData[key] = data[key];
         });
@@ -115,13 +117,14 @@ const UserProfile = (props) => {
 
             }
         }
+
         console.log(formData);
     }
 
   return (<>
     <div className="allWrapper">
      <HeaderComponent
-          favorite_item={favorite.length}
+          favorite_item={totalFavorite}
           cartItem={totalItem}
           menuActive={true}
         />
@@ -191,7 +194,7 @@ const UserProfile = (props) => {
                                       LabelTitle    =   "Phone Number"
                                       TypeName      =   "text"
                                       Name          =   "phone"
-                                      Value         =   { user.phone }
+                                      Value         =   {user.phone}
                                       Placeholder   =   "Phone Number"
                                       callback      =  { fromFileData }
                                     />
@@ -270,4 +273,9 @@ const mapStateToProps = state => ({
     favorite: state.favorite
 })
 
-export default connect(mapStateToProps, null)(UserProfile);
+const mapDispatchToProps = dispatch => ({
+    getUser: () => dispatch(getUser()),
+    updateUser: () => dispatch(update())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

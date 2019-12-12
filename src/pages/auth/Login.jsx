@@ -26,10 +26,7 @@ const Login = (props) => {
   const { auth } = props;
 
   const loginData = (data) => {
-    Object.keys(data).map( key => {
-      formData[key] = data[key];
-    });
-  }
+    Object.keys(data).map( key =>formData[key] = data[key])}
 
   const handleSubmit = (event) => {
     event.preventDefault();

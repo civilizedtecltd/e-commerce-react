@@ -25,14 +25,28 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
         return `${this.API}/auth/logout`;
      }
 
-     _GET_USER(id){
-         return `${this.API}/user/${id}`;
+    get _GET_USER(){
+        return `${this.API}/user/info`;
+    }
+
+     get _USER_UPDATE(){
+         return `${this.API}/user/info`;
+     }
+
+     get _USER_PAYMENT(){
+         return `${this.API}/user/payment`;
      }
 
       _ALL_BOOKS(page, show, keyword){
          return `${this.API}/product/all-books/${page}/${show}${keyword ? "/"+keyword : ''}`;
+      }
+
+     _DELETE_PAYMENT(id){
+         return `${this.API}/user/payment/${id}`;
      }
-     _SINGLE_BOOK(id){
+
+
+    _SINGLE_BOOK(id){
          return `${this.API}/product/book/${id}`
      }
 

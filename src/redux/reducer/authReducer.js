@@ -1,7 +1,9 @@
 import * as Types from '../actions/actionTypes';
 const initState = {
     jwt: {},
-    user: {},
+    user: {
+        payment:[]
+    },
     status: {}
 }
 const authReducer = (state = initState, {type, payload}) => {
@@ -13,6 +15,21 @@ const authReducer = (state = initState, {type, payload}) => {
             return {
                 ...state,
                 ...payload
+            }
+        case Types.USER_INFO:
+        case Types.USER_UPDATE:
+            return {
+                ...state,
+                user: {...payload}
+            }
+        case Types.SET_PAYMENT:
+        case Types.DELETE_PAYMENT:
+            return {
+                ...state,
+                user:{
+                    ...state.user,
+                    payment: payload
+                }
             }
         default:
             return {
