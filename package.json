@@ -79,8 +79,6 @@
     "slick-carousel": "^1.8.1",
     "style-loader": "1.0.0",
     "styled-components": "^4.4.1",
-    "sweetalert2": "^9.3.14",
-    "sweetalert2-react-content": "^2.0.2",
     "terser-webpack-plugin": "1.4.1",
     "ts-pnp": "1.1.4",
     "url-loader": "2.1.0",
@@ -165,5 +163,5 @@
       "react-app"
     ]
   },
-   "proxy": "http://localhost:3333"
+  "proxy": "http://localhost:3333"
 }

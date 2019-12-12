@@ -160,6 +160,7 @@ const handleSubmit = (event) => {
                     />
 
                     <Link className="linkText mb-3" to="/forgot-password">Forgot password?</Link>
+
                       <Alert show={showAlert} variant="danger" onClose={() => setShowAlert(false)} dismissible>
                           <p>Field Data missing</p>
                       </Alert>
