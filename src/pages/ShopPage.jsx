@@ -49,9 +49,8 @@ const ShopPage = (props) => {
 
 
     useEffect(() => {
-      if(pageNumber !== undefined && showItem !==  undefined && keyword !== undefined ) return  books;
-      return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page,show) ;
-
+      if(id==='all' && pageNumber  && showItem  && keyword) return props.fetchAllBook(page, show, keyword)
+      if(id !== "all" && id) props.fetchBooksByCategory(id, page,show);
     },[]);
 
   const handleShowBook = (e)=> {
@@ -67,7 +66,7 @@ const ShopPage = (props) => {
       e.preventDefault();
       if(page!==totalPage){
         setPage(++page)
-        return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page, show);
+        return ( id === 'all') ? props.fetchAllBook(page, show, keyword) : props.fetchBooksByCategory(id, page, show);
       }
 
   }
@@ -76,7 +75,7 @@ const ShopPage = (props) => {
     e.preventDefault();
     if(page !== 1){
       setPage(--page)
-      return ( id === 'all') ? props.fetchAllBook(page, show) : props.fetchBooksByCategory(id, page, show);
+      return ( id === 'all') ? props.fetchAllBook(page, show,keyword) : props.fetchBooksByCategory(id, page, show);
     }
     if(page === 0) return setPage(1)
   }
@@ -132,7 +131,7 @@ const ShopPage = (props) => {
                       <div className="col">
                         <ul className="singleFilter d-flex align-items-center">
                           <li>
-                            <label htmlFor=""> Sort By</label>
+                            <label htmlFor="">Sort By</label>
                           </li>
                           <li>
                             <select className="filterSelect form-control">

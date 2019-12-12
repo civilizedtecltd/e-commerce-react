@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import { connect } from 'react-redux';
+import { setPayment } from '../../redux/actions/authActions';
 import {Form, Accordion, useAccordionToggle} from "react-bootstrap";
 import PaymentMethodComponent from './PaymentMethodComponent';
 
@@ -46,17 +48,17 @@ function AddPaymentMethod(props) {
         switch(Number(selectedKey)){
             case 1:
                 setCardInfo({
-                   card_type: 'mpesa'
+                   payment_type: 'MPESA'
                 });
                 break;
             case 2:
                 setCardInfo({
-                    card_type: 'visa'
+                    payment_type: 'VISA'
                 });
                 break;
             case 3:
                 setCardInfo({
-                    card_type: 'paypal'
+                    payment_type: 'PAYPAL'
                 });
                 break;
             default:
@@ -67,11 +69,14 @@ function AddPaymentMethod(props) {
     }
 
     const paymentInfo = (value) => {
-
-        props.callback({
+        const info = {
             ...cardInfo,
             ...value
+        }
+        props.callback({
+            ...info
         });
+        props.setPayment(info);
     }
 
 
@@ -105,4 +110,8 @@ function AddPaymentMethod(props) {
   </>);
 }
 
-export default AddPaymentMethod;
+const mapDispatchToProps = (dispatch) =>({
+    setPayment: (info) => dispatch(setPayment(info))
+})
+
+export default connect(null, mapDispatchToProps)(AddPaymentMethod);

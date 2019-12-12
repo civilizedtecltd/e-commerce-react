@@ -5,9 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import {getUser, update} from '../../redux/actions/authActions';
 
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-import {Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import {Container, Row, Col, Card, Form, Button, Alert} from 'react-bootstrap';
 
 import { URL } from '../../constants/config';
 
@@ -18,13 +16,15 @@ import  MobileHeader from "../../components/header/MobileHeader";
 import './assets/css/user.css';
 import UserNav from "../../components/UserNav/UserNav";
 
-const mySwal = withReactContent(Swal);
-
 
 const UserProfile = (props) => {
 
     const [category, setCategory] = useState([]);
-    const [formData] = useState({});
+    const [alert, setAlert] = useState({
+        status: false,
+        message: ''
+    });
+    const [formData, setFormData] = useState({});
 
     const user = { ...props.auth.user}
     const totalFavorite = props.favorite.length;
@@ -48,8 +48,9 @@ const UserProfile = (props) => {
     }
 
     const fromFileData = (data) => {
-        Object.keys(data).map( key => {
-            formData[key] = data[key];
+        setFormData({
+            ...formData,
+            ...data
         });
     }
 
@@ -59,66 +60,32 @@ const UserProfile = (props) => {
         if(isEmpty(formData))
             return;
 
-
         if( formData.new_password !== undefined ){
+
+            const clearAlert = setTimeout(() => {
+                setAlert({status: false, message:''});
+            }, 5000);
 
             if(formData.password !== undefined ){
 
                 if(String(formData.new_password) !== String(formData.repeat_new_password)){
-
-                    mySwal.fire({
-                      icon: 'error',
-                      title: 'Oops..',
-                      text: 'Password did not match.',
-                      footer: 'Copyright@2019',
-                      showCancelButton: true,
-                      confirmButtonColor: '#3085d6',
-                      cancelButtonColor: '#d33',
-                      confirmButtonText: 'Try Again',
-                      showClass: {
-                        popup: 'animated fadeInDown fast'
-                      },
-                      hideClass: {
-                        popup: 'animated fadeOutUp fast'
-                      }
-                  }).then(() => {
-                        console.log('ok clicked')
-                  }, (dismiss) => {
-                     if(dismiss === 'cancel'){
-                         console.log('cancel button clicked')
-                     }
-                  });
-
+                   setAlert({
+                       status: true,
+                       message: 'Password did not match.'
+                   });
+                   return () =>  clearTimeout(clearAlert);
                 }
             }else {
-
-                mySwal.fire({
-                  icon: 'error',
-                  title: 'Oops..',
-                  text: 'Enter current password to set new password',
-                  footer: 'Copyright@2019',
-                  showCancelButton: true,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'Try Again',
-                  showClass: {
-                    popup: 'animated fadeInDown fast'
-                  },
-                  hideClass: {
-                    popup: 'animated fadeOutUp fast'
-                  }
-              }).then(() => {
-                    console.log('ok clicked')
-              }, (dismiss) => {
-                 if(dismiss === 'cancel'){
-                     console.log('cancel button clicked')
-                 }
-              });
-
+                setAlert({
+                    status: true,
+                    message: 'Enter Current Password to set new Password.'
+                });
+                return () =>  clearTimeout(clearAlert);
             }
         }
 
         console.log(formData);
+        props.updateUser(formData);
     }
 
   return (<>
@@ -238,7 +205,11 @@ const UserProfile = (props) => {
                                     />
                                   </Col>{/* end of Col */}
 
+
                                   <Col sm="12">
+                                    <Alert show={alert.status} variant="danger" onClose={() => setAlert({...alert, status: false})} dismissible>
+                                        <p>{alert.message}</p>
+                                    </Alert>
                                     <Button
                                         type="submit"
                                         className="primary"
@@ -275,7 +246,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getUser: () => dispatch(getUser()),
-    updateUser: () => dispatch(update())
+    updateUser: (info) => dispatch(update(info))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
