@@ -696,7 +696,9 @@
   align-items: center;
 }
 
-
+.desktop-view-icon-none{
+    display: none;
+}
 
 /*------------------------------------------------------------------------------*/
 /*                    Width : 1199px
@@ -711,6 +713,9 @@
     .ImageSlickOfferPage .slick-list {margin: 2rem ;}
     .ImageSlickOfferPage .slick-prev {margin-top: -3rem; margin-left:1rem;}
     .ImageSlickOfferPage .slick-next {margin-top: -3rem;  margin-right:1rem;}
+    .desktop-view-icon-none{
+        display: block;
+    }
 
 }
 

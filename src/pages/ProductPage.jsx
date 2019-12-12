@@ -109,7 +109,7 @@ function ProductPage(props) {
                       </div>
 
                       <h6 className="authName">
-                        by <Link to = {`${URL.BASE}/api/author/${book ? book.book_author.id : '/'}`} > {book ? book.book_author.name : `` } </Link>
+                        by <span>{book ? book.book_author.name : `` } </span>
                       </h6>
 
                     </div>

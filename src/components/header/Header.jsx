@@ -91,7 +91,6 @@ const HeaderComponent = (props) => {
                   <div className="headPopBar clearfix" id="headPopBar">
                     <ul className="headPopBarList d-flex justify-content-between">
                       <li>
-
                         <div className={`input-group`}>
                           <div className="cursor-type" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className={`fa fa-search`}></i> Search</div>
                         </div>
