@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
+import isEmpty from 'lodash/isEmpty';
 import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Table,
-  Button
+    Container,
+    Row,
+    Col,
+    Card,
+    Table,
+    Button
 } from "react-bootstrap";
+
+import { deletePayment } from "../../redux/actions/authActions";
+
 import HeaderComponent from "../../components/header/Header";
 import MobileHeader from "../../components/header/MobileHeader";
 import UserNav from "../../components/UserNav/UserNav";
@@ -17,28 +19,24 @@ import AddPaymentMethod from "../../components/paymentMethodComponent/AddPayment
 import "./assets/css/user.css";
 
 
-  const PaymentPage = (props) => {
+const PaymentPage = (props) => {
 
   const [visible, setVisible] = useState(false);
-  const [paymentInfo, setPaymentInfo] = useState({ ...props.payment});
+
+  const totalItem = props.cart.length;
+  const totalFavorite = props.favorite.length;
+
+  const cards = (!isEmpty(props.payment)) ? [ ...props.payment] : [];
 
   const handleVisibility = (e) => {
       e.preventDefault();
       setVisible(!visible);
     }
 
-  const updatePaymentInfo = (value) => {
-      const cardName = (value.card_type).toUpperCase();
-      const last4num = (value.card_number).slice(-4);
-    setPaymentInfo({
-        ...value,
-        card_name: cardName,
-        last_num: last4num
-    });
+  const onDeletePayment = (e) =>{
+    e.preventDefault();
+    props.deleteCard(e.target.id);
   }
-
-  const totalItem = props.cart.length;
-  const totalFavorite = props.favorite.length;
 
   return (
     <>
@@ -76,36 +74,40 @@ import "./assets/css/user.css";
                                 </thead>
 
                                 <tbody>
-                                  <tr>
+                                { (cards.length === 0)? <></> : cards.map(card => {
+                                   const last_num =  (card.payment_info.card_number).slice(-4);
+                                    return(
+                                  <tr key={card.id}>
                                     <td className="cardInfotd">
-                                      <div className="cardPaymentDetails">
-                                        <h3 className="payTitle">
-                                          {paymentInfo.card_name}
-                                          <span className="cardNumber">
-                                            **** **** **** {paymentInfo.last_num}
-                                          </span>
-                                        </h3>
-                                        <p className="payExp">
-                                          Expires in {paymentInfo.mm}/{paymentInfo.yy}
-                                        </p>
-                                      </div>
+                                        <div className="cardPaymentDetails">
+                                            <h3 className="payTitle">
+                                            {card.payment_type}
+                                            <span className="cardNumber">
+                                                **** **** **** {last_num}
+                                            </span>
+                                            </h3>
+                                            <p className="payExp">
+                                            Expires in {card.payment_info.mm}/{card.payment_info.yy}
+                                            </p>
+                                        </div>
                                     </td>
-
                                     <td className="actionBtntd">
-                                      <Link
-                                        to="#"
+                                    <Button
                                         className="btn btnActionUpdate"
-                                      >
+                                    >
                                         Update
-                                      </Link>
-                                      <Link
-                                        to="#"
+                                    </Button>
+                                    <Button
+                                        id={card.id}
                                         className="btn btnActionDelete"
-                                      >
+                                        onClick={onDeletePayment}
+                                    >
                                         Delete
-                                      </Link>
+                                    </Button>
                                     </td>
                                   </tr>
+                                  )
+                                })}
                                 </tbody>
                               </Table>
                               { !visible ?
@@ -120,7 +122,7 @@ import "./assets/css/user.css";
                                 <Button className="btn btn-danger ml-3 btn-cancel" onClick={handleVisibility} >Cancel</Button>
                               </div>: ''}
 
-                            { visible ? <AddPaymentMethod callback={updatePaymentInfo}/> : ''}
+                            { visible ? <AddPaymentMethod /> : ''}
                             </Card.Body>
                           </Card>
                         </Col>
@@ -140,7 +142,12 @@ import "./assets/css/user.css";
 
 const mapStateToProps = state => ({
   cart: state.shop.cart,
-  favorite: state.favorite
+  favorite: state.favorite,
+  payment: state.auth.user.payment
 })
 
-export default connect(mapStateToProps, null)(PaymentPage);
+const mapDispatchToProps = dispatch => ({
+    deleteCard: (id) => dispatch(deletePayment(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentPage);

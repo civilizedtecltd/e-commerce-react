@@ -21,6 +21,8 @@ export const USER_LOGIN_ERROR       =   'USER_LOGIN_ERROR';
 export const USER_LOGOUT            =   'USER_LOGOUT';
 export const USER_INFO              =   'USER_INFO';
 export const USER_UPDATE            =   'USER_UPDATE';
+export const SET_PAYMENT            =   'SET_PAYMENT';
+export const DELETE_PAYMENT         =   'DELETE_PAYMENT';
 export const AUTH_NOT_IN_STATE      =   'AUTH_NOT_IN_STATE';
 
 //add to favorite  types
