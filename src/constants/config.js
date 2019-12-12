@@ -37,13 +37,14 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
          return `${this.API}/user/payment`;
      }
 
+      _ALL_BOOKS(page, show, keyword){
+         return `${this.API}/product/all-books/${page}/${show}${keyword ? "/"+keyword : ''}`;
+      }
+
      _DELETE_PAYMENT(id){
          return `${this.API}/user/payment/${id}`;
      }
 
-    _ALL_BOOKS(page, show){
-         return `${this.API}/product/all-books/${page}/${show}`;
-     }
 
     _SINGLE_BOOK(id){
          return `${this.API}/product/book/${id}`
