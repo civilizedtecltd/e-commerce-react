@@ -72,7 +72,7 @@ const Router = (props) => {
               <Route path="/favorites" component={FavoritesPage} />
               <Route exact path="/shop/category/:id?/:title?" component={ShopPage} />
               <Route exact path="/shop" component={ () => <Redirect to={{ pathname: "/shop/category/all", state: {from: props.location} }}/> } />
-              <Route exact path="/shop/category/all/:pageNumber/:showItem/:keyword" component={ShopPage}/>
+              <Route exact path="/shop/category/all/:pageNumber/:showItem/:keyword?" component={ShopPage}/>
               <Route path="/product/:id" component={ProductPage} />
               <Route path="/term/conditions" component={TermConditions} />
               <Route path="/privacy" component={Privacy} />
