@@ -4,6 +4,7 @@ import {Form, Accordion , useAccordionToggle} from 'react-bootstrap';
 import './checkout.css';
 import '../assets/css/theme.css'
 import card_icon_img from '../assets/images/user/card_icon_img.png'
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const CheckToggle = ({ children, eventKey, title }) => {
 
@@ -129,6 +130,7 @@ const PaymentMethods = (props) => {
     }
 
     return (<>
+        <PageLoader loading={false} />
         <Accordion  onSelect={handleAccordionOnSelect}>
 
             <div className="payment-header-card">

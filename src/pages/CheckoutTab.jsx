@@ -8,6 +8,7 @@ import PaymentsMethods from './PaymentMethods';
 import {futureDate} from '../helpers/utils';
 import './checkout.css';
 import '../assets/css/theme.css';
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 
 
@@ -117,7 +118,8 @@ const CheckoutTab = (props) => {
         console.log("Payment", payment);
     }
 
-    return(
+    return(<>
+            <PageLoader loading={false}/>
         <Container>
 
             <Card>
@@ -297,7 +299,7 @@ const CheckoutTab = (props) => {
                 </Card.Body>
             </Card>
         </Container>
-
+</>
     )
 }
 

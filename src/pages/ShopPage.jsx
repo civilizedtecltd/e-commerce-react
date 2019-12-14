@@ -15,6 +15,7 @@ import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
 import { URL } from '../constants/config';
 import './assets/shop.css';
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
 const useStyle = createUseStyles({
   page_field:{
     width: "50px",
@@ -82,6 +83,7 @@ const ShopPage = (props) => {
 
   return (
     <>
+      <PageLoader loading={false}/>
       <div className="allWrapper">
         <HeaderComponent
          favorite_item={favoriteItem.length}

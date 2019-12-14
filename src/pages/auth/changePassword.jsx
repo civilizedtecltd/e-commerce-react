@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import "./assets/css/auth.css";
 import { InputFrom } from "../../components/FromComponents/InputComponent";
 import { ButtonComponents } from "../../components/ButtonComponents/ButtonComponents";
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const ChangePassword = () => {
   return (
     <>
+      <PageLoader loading={false}/>
       <div className="allWrapper fullHeight">
         <header className="header authHeader clearfix" id="header">
           <Container fluid={true}>

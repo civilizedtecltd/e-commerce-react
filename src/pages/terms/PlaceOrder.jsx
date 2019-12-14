@@ -5,13 +5,15 @@ import {NewsLetterComponent} from "../../components/offerPageComponents/NewsLett
 import TermConditionsComponent from '../../components/terms/TermConditionsComponent'
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import { connect } from "react-redux";
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const PlaceOrder = (props) => {
 
     const totalItem = props.cart.length;
     const totalFavorite = props.favorite.length;
 
-    return (
+    return (<>
+        <PageLoader loading={false}/>
         <div className="allWrapper">
         <HeaderComponent
           favorite_item={totalFavorite}
@@ -75,6 +77,7 @@ const PlaceOrder = (props) => {
             </main>
             <FooterComponent/>
         </div>
+        </>
     )
 }
 

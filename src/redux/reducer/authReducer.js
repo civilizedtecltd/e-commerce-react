@@ -22,6 +22,11 @@ const authReducer = (state = initState, {type, payload}) => {
                 ...state,
                 user: {...payload}
             }
+        case Types.USER_UPDATE_ERROR:
+            return {
+                ...state,
+                status:{ ...payload}
+            }
         case Types.SET_PAYMENT:
         case Types.DELETE_PAYMENT:
             return {
