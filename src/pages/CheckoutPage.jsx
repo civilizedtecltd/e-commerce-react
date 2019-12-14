@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import CheckoutTab from './CheckoutTab';
 import { URL} from '../constants/config';
 import './checkout.css';
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 
 const CheckoutPage = (props) => {
@@ -22,6 +23,7 @@ const CheckoutPage = (props) => {
 
   return (
     <>
+      <PageLoader loading={false}/>
       <div className="allWrapper bgGray">
 
         <Container >

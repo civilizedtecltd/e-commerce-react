@@ -5,6 +5,7 @@ import {NewsLetterComponent} from "../../components/offerPageComponents/NewsLett
 import TermConditionsComponent from '../../components/terms/TermConditionsComponent'
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import { connect } from "react-redux";
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const Refunds = (props) => {
 
@@ -12,7 +13,9 @@ const Refunds = (props) => {
     const totalFavorite = props.favorite.length;
 
     return (
-        <div className="allWrapper">
+        <>
+            <PageLoader loading={false}/>
+             <div className="allWrapper">
 
         <HeaderComponent
           favorite_item={totalFavorite}
@@ -76,6 +79,7 @@ const Refunds = (props) => {
             </main>
             <FooterComponent/>
         </div>
+        </>
     )
 }
 

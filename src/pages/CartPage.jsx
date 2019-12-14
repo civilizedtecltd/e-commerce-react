@@ -15,6 +15,7 @@ import { categoryClass } from "../inc/users/users";
 
 
 import { removeFromCart, deleteAllFromCart } from '../redux/actions/shopActions'
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const CartPage = (props) => {
 
@@ -75,6 +76,7 @@ const CartPage = (props) => {
 
   return (
     <>
+      <PageLoader loading={false}/>
       <div className="allWrapper">
         <HeaderComponent
           favorite_item={favoriteItem.length}

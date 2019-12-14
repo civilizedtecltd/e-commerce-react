@@ -18,6 +18,7 @@ import "../pages/assets/product.css";
 import { addToFavorite } from "../redux/actions/favoriteActions";
 import checkAuth from "../helpers/checkAuth";
 import TotalRating from "../components/ratingComponent/TotalRating";
+ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const useStyles = createUseStyles({
   addFevButton: {
@@ -60,6 +61,7 @@ function ProductPage(props) {
 
   return (
     <>
+      <PageLoader loading={false}/>
       <div className="allWrapper">
         <HeaderComponent
         favorite_item={favoriteItem.length}
