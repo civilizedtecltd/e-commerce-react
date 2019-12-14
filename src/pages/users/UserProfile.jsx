@@ -22,6 +22,7 @@ const UserProfile = (props) => {
     const [category, setCategory] = useState([]);
     const [alert, setAlert] = useState({
         status: false,
+        type: 'danger',
         message: ''
     });
     const [formData, setFormData] = useState({});
@@ -41,6 +42,22 @@ const UserProfile = (props) => {
 
       },[user.id]);
 
+    useEffect(()=>{
+        const clearAlert = setTimeout(() => {
+            setAlert({status: false, message:''});
+        }, 5000);
+
+        if(!props.status.success){
+            setAlert({
+                status: true,
+                type: 'danger',
+                message: props.status.message
+            });
+            return () =>  clearTimeout(clearAlert);
+        }
+
+    }, [props.status.success]);
+
 
     const categoryData = (data) => {
         if(data.category_id !== undefined || data.category_id !== 'Select Category')
@@ -57,34 +74,42 @@ const UserProfile = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if(isEmpty(formData))
-            return;
+        const clearAlert = setTimeout(() => {
+            setAlert({status: false, message:''});
+        }, 5000);
+
+        if(isEmpty(formData)){
+            setAlert({
+                status: true,
+                type: 'info',
+                message: 'Nothing changed and updated.'
+            });
+
+            return () =>  clearTimeout(clearAlert);
+        }
 
         if( formData.new_password !== undefined ){
-
-            const clearAlert = setTimeout(() => {
-                setAlert({status: false, message:''});
-            }, 5000);
 
             if(formData.password !== undefined ){
 
                 if(String(formData.new_password) !== String(formData.repeat_new_password)){
                    setAlert({
                        status: true,
-                       message: 'Password did not match.'
+                       type: 'danger',
+                       message: 'New and Repeat Passwords did not match.'
                    });
                    return () =>  clearTimeout(clearAlert);
                 }
             }else {
                 setAlert({
                     status: true,
+                    type: 'danger',
                     message: 'Enter Current Password to set new Password.'
                 });
                 return () =>  clearTimeout(clearAlert);
             }
         }
 
-        console.log(formData);
         props.updateUser(formData);
     }
 
@@ -207,7 +232,7 @@ const UserProfile = (props) => {
 
 
                                   <Col sm="12">
-                                    <Alert show={alert.status} variant="danger" onClose={() => setAlert({...alert, status: false})} dismissible>
+                                    <Alert show={alert.status} variant={alert.type} onClose={() => setAlert({...alert, status: false})} dismissible>
                                         <p>{alert.message}</p>
                                     </Alert>
                                     <Button
@@ -240,6 +265,7 @@ const UserProfile = (props) => {
 
 const mapStateToProps = state => ({
     auth: state.auth,
+    status: state.auth.status,
     cart: state.shop.cart,
     favorite: state.favorite
 })
