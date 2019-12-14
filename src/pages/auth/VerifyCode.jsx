@@ -4,9 +4,10 @@ import {Link} from 'react-router-dom';
 import './assets/css/auth.css';
 import { InputFrom } from '../../components/FromComponents/InputComponent';
 import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 const VerifyCode = () => {
   return (<>
-    
+    <PageLoader loading={false}/>
     <div class="allWrapper fullHeight">
       <header className="header authHeader clearfix" id="header">
         <Container fluid={true}>
@@ -32,9 +33,9 @@ const VerifyCode = () => {
 
               <div class="formWrapper clearfix" id="formWrapper">
                 <Form>
-                 
 
-                  <InputFrom 
+
+                  <InputFrom
                    LabelId="codeVerify"
                    TypeName="text"
                    LabelTitle="Verify Code"
@@ -42,13 +43,13 @@ const VerifyCode = () => {
                    Value=""
                    Placeholder="Verify Code"
                   />
-                  
+
                   <ButtonComponents
                     Type="submit"
                     ClassName="btn mt-2 mb-3 submitBtn"
                     Name="Verify"
                   />
-                
+
                 </Form>{/* end of Form */}
               </div>{/* end of formWrapper */}
 

@@ -11,6 +11,7 @@ import UserNav from "../../components/UserNav/UserNav";
 
 import './assets/css/user.css';
 import orderIcon from '../assets/images/order_icon.png'
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const OrderPage = (props) => {
 
@@ -18,6 +19,7 @@ const OrderPage = (props) => {
   const totalFavorite = props.favorite.length;
 
   return (<>
+    <PageLoader loading={false}/>
     <div className="allWrapper">
     <HeaderComponent
           favorite_item={totalFavorite}

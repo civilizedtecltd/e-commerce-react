@@ -15,6 +15,7 @@ import  MobileHeader from "../../components/header/MobileHeader";
 
 import './assets/css/user.css';
 import UserNav from "../../components/UserNav/UserNav";
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 
 const UserProfile = (props) => {
@@ -89,6 +90,7 @@ const UserProfile = (props) => {
     }
 
   return (<>
+      <PageLoader loading={false}/>
     <div className="allWrapper">
      <HeaderComponent
           favorite_item={totalFavorite}

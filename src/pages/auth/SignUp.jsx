@@ -9,6 +9,7 @@ import SocialListComponent from '../../components/authComponents/SocialListCompo
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
 import { URL } from '../../constants/config'
 import './assets/css/auth.css';
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const SignUp = (props) => {
 
@@ -90,6 +91,7 @@ const handleSubmit = (event) => {
 
 
     return (<>
+        <PageLoader loading={false}/>
       <div className="allWrapper fullHeight">
         <main className="loginMainArea clearfix fullHeight bgImage signUpBodyBg pb-3" id="signUpBody">
           <Container fluid={true}>

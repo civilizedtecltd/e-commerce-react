@@ -17,6 +17,7 @@ import MobileHeader from "../../components/header/MobileHeader";
 import UserNav from "../../components/UserNav/UserNav";
 import AddPaymentMethod from "../../components/paymentMethodComponent/AddPaymentMethod";
 import "./assets/css/user.css";
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 
 const PaymentPage = (props) => {
@@ -40,6 +41,7 @@ const PaymentPage = (props) => {
 
   return (
     <>
+      <PageLoader loading={false}/>
       <div className="allWrapper">
         <HeaderComponent
           favorite_item={totalFavorite}

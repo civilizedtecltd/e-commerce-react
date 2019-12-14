@@ -4,10 +4,12 @@ import { Container, Row, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { InputFrom } from "../../components/FromComponents/InputComponent";
 import { ButtonComponents } from "../../components/ButtonComponents/ButtonComponents";
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const ForgotPassword = () => {
   return (
     <>
+      <PageLoader loading={false}/>
       <div className="AllWrapper fullHeight">
         <header className="header authHeader clearfix" id="header">
           <Container fluid={true}>

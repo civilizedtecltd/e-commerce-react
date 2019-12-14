@@ -15,6 +15,7 @@ import { NewsLetterComponent } from "../components/offerPageComponents/NewsLette
 import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import {CategoryHome} from "../components/HomePage/Category";
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const Home = (props) => {
 
@@ -22,7 +23,7 @@ const Home = (props) => {
  const totalFavoriteItem = props.favorite.length
 
   return (<>
-
+    <PageLoader loading = {false} />
     <div className="allWrapper">
           <HeaderComponent
             favorite_item = {totalFavoriteItem}
