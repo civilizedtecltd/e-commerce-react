@@ -90,9 +90,18 @@ const update = (info) => dispatch => {
     axios.post(URL._USER_UPDATE, info)
          .then(res => dispatch({
              type: Types.USER_UPDATE,
-             payload: { ...res.data.data }
+             payload: { ...res.data.data}
          }))
-         .catch(error => console.log(error))
+         .catch(error => {
+            const response = (error.response.data) ? error.response.data :  '';
+            return dispatch({
+                type: Types.USER_UPDATE_ERROR,
+                payload: {
+                           success: false,
+                           message: response.messages
+                         }
+            });
+         })
 }
 
 const setPayment = (info) => dispatch => {

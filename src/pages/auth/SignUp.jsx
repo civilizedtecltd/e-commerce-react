@@ -16,8 +16,10 @@ const SignUp = (props) => {
 
   const [data, setData] = useState([]);
   const [formData] = useState({});
-  const [showAlert, setShowAlert] = useState(false);
-  const [passwordAlert, setPasswordAlert] = useState(false);
+  const [alert, setAlert] = useState({
+      show: false,
+      message: ''
+  });
 
     useEffect(() => {
     const fetchData = async () => {
@@ -57,17 +59,28 @@ const handleSubmit = (event) => {
         formData.password === undefined      ||
         formData.repeatPassword === undefined
         ){
-        setShowAlert(true);
+
+        setAlert({
+            ...alert,
+            show: true,
+            message: 'Field Data missing'
+        });
+
         const clearAlert = setTimeout(() => {
-            setShowAlert(false);
+            setAlert({...alert, show: false});
         }, 5000);
 
         return () =>  clearTimeout(clearAlert);
     }else{
         if(String(formData.password) !== String(formData.repeatPassword)){
-            setPasswordAlert(true);
+            setAlert({
+                ...alert,
+                show: true,
+                message: 'Password did not match.'
+             });
+
             const clearAlert = setTimeout(() => {
-                setPasswordAlert(false);
+                setAlert({...alert, show: false});
             }, 5000);
 
             return () =>  clearTimeout(clearAlert);
@@ -163,13 +176,9 @@ const handleSubmit = (event) => {
 
                     <Link className="linkText mb-3" to="/forgot-password">Forgot password?</Link>
 
-                      <Alert show={showAlert} variant="danger" onClose={() => setShowAlert(false)} dismissible>
-                          <p>Field Data missing</p>
+                      <Alert show={alert.show} variant="danger" onClose={() => setAlert({...alert, show:false})} dismissible>
+                          <p>{alert.message}</p>
                       </Alert>
-                      <Alert show={passwordAlert} variant="danger" onClose={() => setPasswordAlert(false)} dismissible>
-                          <p>Password did not match.</p>
-                      </Alert>
-
                     <Button type="submit" className="btn submitBtn mb-3 " onClick={handleSubmit} >Sign Up</Button>
                     <p>I already have an account! <Link className="linkText mb-3" to="/login">Sign In</Link></p>
 
