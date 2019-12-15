@@ -5,14 +5,16 @@ import { NewsLetterComponent } from "../../components/offerPageComponents/NewsLe
 import TermConditionsComponent from '../../components/terms/TermConditionsComponent'
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import { connect } from "react-redux";
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const Privacy = (props) => {
 
     const totalItem = props.cart.length;
     const totalFavorite = props.favorite.length;
 
-    return (
-        <div className="allWrapper">
+    return (<>
+                <PageLoader loading={false}/>
+                <div className="allWrapper">
             <HeaderComponent
                 favorite_item={totalFavorite}
                 cartItem={totalItem}
@@ -70,6 +72,7 @@ const Privacy = (props) => {
             </main>
             <FooterComponent />
         </div>
+            </>
     )
 }
 const mapStateToProps = state => {

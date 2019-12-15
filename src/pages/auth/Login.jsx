@@ -15,6 +15,7 @@ import { InputFrom } from '../../components/FromComponents/InputComponent';
 
 import './assets/css/auth.css';
 import '../../assets/css/animate.css';
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 
 
@@ -55,6 +56,7 @@ const Login = (props) => {
 
 
   return (<>
+        <PageLoader loading={false}/>
     <div className="AllWrapper fullHeight">
       <main className="loginMainArea clearfix fullHeight bgImage loginBodyBg pb-4" id="loginBody">
         <Container fluid={true}>

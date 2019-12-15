@@ -16,13 +16,15 @@ import {NewBookDB}from '../inc/offerPage/NewBook';
 
 // Product Images
 import blogPostImage1 from '../assets/images/post_img_01.jpg';
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 
 const offerPage = (props) => {
 
   const totalItem = props.cart.length
   const favoriteItem = props.favorite;
-  return (
+  return (<>
+  <PageLoader loading={false}/>
     <div className="allWrapper">
       <HeaderComponent
       favorite_item={favoriteItem.length}
@@ -143,7 +145,8 @@ const offerPage = (props) => {
 
       </main>{/* end of mainContent */}
      <FooterComponent/>
-    </div>);
+    </div>
+    </>);
 }
 
 const mapStateToProps = (state) => {

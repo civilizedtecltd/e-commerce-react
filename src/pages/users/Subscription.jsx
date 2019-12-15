@@ -7,6 +7,7 @@ import  HeaderComponent from "../../components/header/Header";
 import  MobileHeader from "../../components/header/MobileHeader";
 import { connect } from 'react-redux';
 import UserNav from "../../components/UserNav/UserNav";
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const Subscription = (props) => {
 
@@ -14,6 +15,7 @@ const Subscription = (props) => {
   const totalFavorite = props.favorite.length;
 
   return (<>
+    <PageLoader loading={false}/>
   <div className="allWrapper">
   <HeaderComponent
           favorite_item={totalFavorite}

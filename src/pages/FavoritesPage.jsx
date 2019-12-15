@@ -11,6 +11,7 @@ import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { showFavItems, removeFavItem } from '../redux/actions/favoriteActions';
 import { URL } from '../constants/config'
 import './assets/favorite.css'
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const FavoritesPage = (props) => {
 
@@ -31,6 +32,7 @@ const FavoritesPage = (props) => {
 
   return (
     <>
+      <PageLoader loading={false}/>
       <div className="allWrapper">
         <HeaderComponent
           favorite_item={favorite.length}
