@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
 import {Form, Accordion , useAccordionToggle} from 'react-bootstrap';
+import {connect} from 'react-redux';
 
 import './checkout.css';
 import '../assets/css/theme.css'
 import card_icon_img from '../assets/images/user/card_icon_img.png'
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
+import { setDeliveryAddress } from '../redux/actions/shopActions';
 
 const CheckToggle = ({ children, eventKey, title }) => {
 
     const decoratedOnClick = useAccordionToggle(eventKey, () => {
 
-        if(eventKey === 0){
+        /* if(eventKey === 0){
 
             document.getElementById('ch-1').checked=false;
             document.getElementById('ch-2').checked=false;
@@ -28,7 +30,7 @@ const CheckToggle = ({ children, eventKey, title }) => {
             document.getElementById('ch-0').checked=false;
             document.getElementById('ch-1').checked=false;
 
-        }
+        } */
     })
 
 
@@ -52,223 +54,110 @@ const CheckToggle = ({ children, eventKey, title }) => {
 
 const PaymentMethods = (props) => {
 
-    const [mpesa, setMpesa] = useState({inactive: true});
-    const [visa, setVisa] = useState({inactive: true});
+    const [card, setCard] = useState({});
+    console.log("card: ", card);
 
-    const [stander, setStander] = useState(false)
-    const [express, setExpress] = useState(false)
+    const [deliveryMethod, setDeliveryMethod] = useState({
+        standard: false,
+        express: false
+    });
 
+    const paymentMethods = (props.user.payment)? props.user.payment : [];
 
-    const handleMpesaOnChange = e => {
-        setMpesa({
-            ...mpesa,
-            inactive: false,
-            [e.target.name]: e.target.value
-        });
-    }
-
-    const handleMpesaOnClick = () => {
-        setMpesa({
-            ...mpesa,
-            inactive: true
-        });
-
-        const mpesaData = mpesa;
-        delete mpesaData.inactive;
-
-        props.callback({
-            type: 'mpesa',
-            data: mpesaData
-        });
-    }
-
-    const handleVisaOnChange = e => {
-        setVisa({
-            ...visa,
-            inactive: false,
-            [e.target.name]: e.target.value
-        });
-    }
-
-    const handleVisaOnClick = () => {
-        setVisa({
-            ...visa,
-            inactive: true
-        })
-        const visaData = visa;
-        delete visaData.inactive;
-
-        props.callback({
-            type: 'visa',
-            data: visaData
+    const handleCardOnChange = (e) => {
+        setCard({
+            ...card,
+            payment_info: {
+                ...card.payment_info,
+                [e.target.name]: e.target.value
+            }
         });
     }
 
 
     const handleAccordionOnSelect = (selectedKey) => {
 
-        switch(Number(selectedKey)){
-            case 2:
-                return props.callback({ type: 'standard'});
-            case 3:
-                return props.callback({ type: 'express'});
-            default:
-                return props.callback({type: 'standard'});
+      if(selectedKey !== null){
+        setCard({
+            ...paymentMethods[selectedKey]
+        });
+      }
+    }
+
+    const checkDelivery = (e) => {
+        if(e.target.name === 'standard'){
+          setDeliveryMethod({
+              standard: true,
+              express: false
+          })
+        }
+        if(e.target.name==='express') {
+            setDeliveryMethod({
+                standard: false,
+                express: true
+            })
         }
     }
 
-    const standerCheckBox = (e) => {
-
-        if(e.target.name==='stander'){
-          setExpress(false)
-          setStander(true)
-        }
-        if(e.target.name==='express') {
-            setExpress(true)
-            setStander(false)
+    const handleCardOnClick = (e) => {
+        e.preventDefault();
+        if(!deliveryMethod.express && !deliveryMethod.standard){
+            console.log("express: ", deliveryMethod.express, "standard: ", deliveryMethod.standard);
+        }else{
+            props.callback(card);
         }
     }
 
     return (<>
         <PageLoader loading={false} />
         <Accordion  onSelect={handleAccordionOnSelect}>
-
-            <div className="payment-header-card">
-                <CheckToggle eventKey="0" title="Mpesa"/>
-            </div>
-            <Accordion.Collapse eventKey="0">
-                <div className="clearfix">
-                    <hr style={{borderColor:"#e2e2e2"}}/>
-                    <div className="p-3">
-                        <div className="row align-items-center">
-                            <div className="col-sm-10 form-group">
-                                <label htmlFor="card-number">Card number</label>
-                                <input type="text" name="card_number" className="form-control" id="card-number" aria-describedby="emailHelp" onChange={handleMpesaOnChange}/>
-                            </div>
-                            <div className="col">
-                                <img src={card_icon_img} alt=""/>
-                            </div>
-                        </div>
-
-                        <div className="row align-items-center justify-content-between">
-                            <div className="col-sm-3 form-group">
-                                <label htmlFor="card-number">Expiry date</label>
-                                <ul className="cardPayFiled d-flex align-items-center justify-content-end">
-                                    <li><input type="text" name="mm" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM" onChange={handleMpesaOnChange} /></li>
-                                    <li className="cardBl">/</li>
-                                    <li><input type="text" name="yy" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY" onChange={handleMpesaOnChange} /></li>
-                                </ul>
-                            </div>
-
-                            <div className="col offset-sm-4 form-group">
-                                <label htmlFor="card-number">CVV</label>
-                                <input type="text" name="ccv" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="" onChange={handleMpesaOnChange} />
-                            </div>
-                            <div className="col-sm-2">
-                                <img src={card_icon_img} alt=""/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col">
-                                <button type="button" className="btn btn-primary" disabled={mpesa.inactive} onClick={handleMpesaOnClick}>Add</button>
-                            </div>
-                        </div>
+            {(paymentMethods.length === 0) ? <></> : paymentMethods.map((item, index) => (<div key={index}>
+                    <div className="payment-header-card mt-4">
+                        <CheckToggle eventKey={index} title={item.payment_type}/>
                     </div>
-                </div>
+                    <Accordion.Collapse eventKey={index}>
+                        <div className="clearfix">
+                            <hr style={{borderColor:"#e2e2e2"}}/>
+                            <div className="p-3">
+                                <div className="row align-items-center">
+                                    <div className="col-sm-10 form-group">
+                                        <label htmlFor="card-number">Card number</label>
+                                        <input type="text" name="card_number" className="form-control" id="card-number" aria-describedby="emailHelp" defaultValue={item.payment_info.card_number} onChange={handleCardOnChange}/>
+                                    </div>
+                                    <div className="col">
+                                        <img src={card_icon_img} alt=""/>
+                                    </div>
+                                </div>
 
-            </Accordion.Collapse>
+                                <div className="row align-items-center justify-content-between">
+                                    <div className="col-sm-3 form-group">
+                                        <label htmlFor="card-number">Expiry date</label>
+                                        <ul className="cardPayFiled d-flex align-items-center justify-content-end">
+                                            <li><input type="text" name="mm" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM" defaultValue={item.payment_info.mm} onChange={handleCardOnChange} /></li>
+                                            <li className="cardBl">/</li>
+                                            <li><input type="text" name="yy" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY" defaultValue={item.payment_info.yy} onChange={handleCardOnChange} /></li>
+                                        </ul>
+                                    </div>
 
-            <div className="payment-header-card mt-3">
-                <CheckToggle eventKey="1" title="Visa"/>
-            </div>
-            <Accordion.Collapse eventKey="1">
-                <div className="clearfix">
-                    <hr style={{borderColor:"#e2e2e2"}}/>
-                    <div className="p-3">
-                        <div className="row align-items-center">
-                            <div className="col-sm-10 form-group">
-                                <label htmlFor="card-number">Card number</label>
-                                <input type="text" name="card_number" className="form-control" id="card-number" aria-describedby="emailHelp" onChange={handleVisaOnChange}/>
-                            </div>
-                            <div className="col">
-                                <img src={card_icon_img} alt=""/>
+                                    <div className="col offset-sm-4 form-group">
+                                        <label htmlFor="card-number">CVV</label>
+                                        <input type="text" name="ccv" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="CCV" onChange={handleCardOnChange} />
+                                    </div>
+                                    <div className="col-sm-2">
+                                        <img src={card_icon_img} alt=""/>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col">
+                                        <button type="button" className="btn btn-primary" disabled={false} onClick={handleCardOnClick}>Add</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div className="row align-items-center justify-content-between">
-                            <div className="col-sm-3 form-group">
-                                <label htmlFor="card-number">Expiry date</label>
-                                <ul className="cardPayFiled d-flex align-items-center justify-content-end">
-                                    <li><input type="text" name="mm" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM" onChange={handleVisaOnChange}/></li>
-                                    <li className="cardBl">/</li>
-                                    <li><input type="text" name="yy" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY" onChange={handleVisaOnChange}/></li>
-                                </ul>
-                            </div>
-
-                            <div className="col offset-sm-4 form-group">
-                                <label htmlFor="card-number">CVV</label>
-                                <input type="text" name="ccv" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="" onChange={handleVisaOnChange}/>
-                            </div>
-                            <div className="col-sm-2">
-                                <img src={card_icon_img} alt=""/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col">
-                                <button type="button" className="btn btn-primary" disabled={visa.inactive} onClick={handleVisaOnClick}>Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Accordion.Collapse>
-
-            <div className="payment-header-card mt-3">
-                <CheckToggle eventKey="2" title="Paypal"/>
-            </div>
-            <Accordion.Collapse eventKey="2">
-                <div className="clearfix">
-                    <hr style={{borderColor:"#e2e2e2"}}/>
-                    <div className="p-3">
-                        <div className="row align-items-center">
-                            <div className="col-sm-10 form-group">
-                                <label htmlFor="card-number">Card number</label>
-                                <input type="text" name="card_number" className="form-control" id="card-number" aria-describedby="emailHelp" onChange={handleVisaOnChange}/>
-                            </div>
-                            <div className="col">
-                                <img src={card_icon_img} alt=""/>
-                            </div>
-                        </div>
-
-                        <div className="row align-items-center justify-content-between">
-                            <div className="col-sm-3 form-group">
-                                <label htmlFor="card-number">Expiry date</label>
-                                <ul className="cardPayFiled d-flex align-items-center justify-content-end">
-                                    <li><input type="text" name="mm" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM" onChange={handleVisaOnChange}/></li>
-                                    <li className="cardBl">/</li>
-                                    <li><input type="text" name="yy" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY" onChange={handleVisaOnChange}/></li>
-                                </ul>
-                            </div>
-
-                            <div className="col offset-sm-4 form-group">
-                                <label htmlFor="card-number">CVV</label>
-                                <input type="text" name="ccv" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="" onChange={handleVisaOnChange}/>
-                            </div>
-                            <div className="col-sm-2">
-                                <img src={card_icon_img} alt=""/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col">
-                                <button type="button" className="btn btn-primary" disabled={visa.inactive} onClick={handleVisaOnClick}>Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Accordion.Collapse>
-
+                    </Accordion.Collapse>
+            </div>)
+            )}
         </Accordion>
 
         <h3 className="mt-4 mb-2">Choose a delivery method</h3>
@@ -279,11 +168,11 @@ const PaymentMethods = (props) => {
                 custom
                 type="radio"
                 className="ml-2"
-                label="Stander"
-                checked={stander}
-                name="stander"
-                id="stander009"
-                onChange={standerCheckBox}
+                label="Standard"
+                checked={deliveryMethod.standard}
+                name="standard"
+                id="standard009"
+                onChange={checkDelivery}
             />
             </div>
             <div>
@@ -300,10 +189,10 @@ const PaymentMethods = (props) => {
                 type="radio"
                 className="ml-2"
                 label="Express"
-                checked={express}
+                checked={deliveryMethod.express}
                 name="express"
                 id="express22"
-                onChange={standerCheckBox}
+                onChange={checkDelivery}
             />
             </div>
             <div>
@@ -316,5 +205,7 @@ const PaymentMethods = (props) => {
 
     </>);
 }
-
-export default PaymentMethods;
+const mapStateToProps = state =>({
+    ...state.auth
+})
+export default connect(mapStateToProps, null)(PaymentMethods);

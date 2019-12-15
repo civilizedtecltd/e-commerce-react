@@ -2,23 +2,25 @@
 import { connect } from 'react-redux'
 import { Container, Modal, Button, Row, Col } from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
-import {createUseStyles} from 'react-jss'
-import { showSingleBook } from '../redux/actions/bookActions'
-import { addToCart } from '../redux/actions/shopActions'
+import {createUseStyles} from 'react-jss';
+import { showSingleBook } from '../redux/actions/bookActions';
+import { addToCart, updateQuantity } from '../redux/actions/shopActions';
+import { addToFavorite } from "../redux/actions/favoriteActions";
+
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import ImgSlick  from "../components/offerPageComponents/ImgSlickComponent";
 import { ImageCarousel } from "../components/ProductImgCarosellComponents/ProductImgCarosell";
- import  HeaderComponent from "../components/header/Header";
- import  MobileHeader from "../components/header/MobileHeader";
+import  HeaderComponent from "../components/header/Header";
+import  MobileHeader from "../components/header/MobileHeader";
 import TabComponent from "../components/TabComponent/TabComponent";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import { URL } from '../constants/config';
+
 import "../pages/assets/product.css";
-import { addToFavorite } from "../redux/actions/favoriteActions";
 import checkAuth from "../helpers/checkAuth";
 import TotalRating from "../components/ratingComponent/TotalRating";
- import PageLoader from "../components/pageLoader/PageLoaderComponent";
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const useStyles = createUseStyles({
   addFevButton: {
@@ -29,23 +31,34 @@ const useStyles = createUseStyles({
 
 
 function ProductPage(props) {
-  const rating = props.book ? props.book.rating : 0
-  const classes = useStyles()
-  const { id } = useParams();
-  const [show, setShow] = useState(false);
-  const book = (props.book !== undefined ) ? props.book : false;
-  const favoriteItem = props.favorite;
+
+    const classes = useStyles()
+    const { id } = useParams();
+    const [show, setShow] = useState(false);
+
+    let itemQty  = 0;
+    props.cart.map(item => {
+        if(item.id === Number(id)){
+           return itemQty = Number(item.quantity)
+        }
+    })
+    const rating = props.book ? props.book.rating : 0
+    const book = (props.book !== undefined ) ? props.book : false;
+    const favoriteItem = props.favorite;
 
 
   useEffect(() => {
-      window.scrollTo(0, 0);
-    return props.showSingleBook(id);
+     window.scrollTo(0, 0);
+     props.showSingleBook(id);
   }, [id]);
 
   const handleClose = () => setShow(false);
 
   const updateItemQty = (e) => {
-    book.quantity = Number(e.target.value)
+    props.updateItem({
+                        id: Number(book.id),
+                        qty: Number(e.target.value)
+                    });
   }
 
   const addToCart = (e) => {
@@ -53,11 +66,11 @@ function ProductPage(props) {
     props.addToCart(book);
     setShow(true);
   };
+
   const handleAddFavorite = (e) =>{
       e.preventDefault();
       return checkAuth() !==true ? props.history.push('/login') : props.addToFavorite(id)
   }
-
 
   return (
     <>
@@ -134,8 +147,8 @@ function ProductPage(props) {
                               className="form-control inputValue"
                               type="number"
                               placeholder="0"
-                              defaultValue = { props.cart.map( item => (item.id === Number(id)) ? item.quantity : 0 )}
-                              onChange = { updateItemQty }
+                              defaultValue = {itemQty}
+                              onChange = {updateItemQty}
                             />
                           </div>
 
@@ -245,6 +258,7 @@ const mapDispatchToProps = (dispatch) => {
     return{
       showSingleBook : (id) => dispatch(showSingleBook(id)),
       addToCart      : (book) => dispatch(addToCart(book)),
+      updateItem     : ({id, qty}) => dispatch(updateQuantity({id, qty})),
       addToFavorite  : (id)=> dispatch(addToFavorite(id))
     }
 }
