@@ -201,7 +201,9 @@ const ShopPage = (props) => {
                                 <LazyLoad once={true} height={200}>
                                    <Card className="productCard border-0 bg-transparent">
                                 <div className="productMedia mb-3 bgGray">
+                                <Link to={`/product/${book.id}`}>
                                   <img src={(book.cover_images !== null) ? `${URL.BASE}/${book.cover_images.img_1}` : '' } alt="" />
+                                  </Link>
                                 </div>
 
                                 <div className="productContent">

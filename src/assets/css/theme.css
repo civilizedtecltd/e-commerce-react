@@ -157,7 +157,7 @@
 .cardInfotd{width: 70%;}
 .headPopBarList li a i{font-size: 12px;padding-right: 5px;}
 .headPopBarList li{margin-right: 1rem;}
-.headPopBarList li:nth-child(3){margin-right: 0.5rem;}
+/* .headPopBarList li:nth-child(3){margin-right: 0.5rem;} */
 .headPopBarList li:last-child{margin-right: 0rem;}
 
 /*Head Pop Bar Style End*/
