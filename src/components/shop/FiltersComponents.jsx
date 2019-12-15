@@ -12,8 +12,8 @@ import publish_year from "../../inc/shop/publish_year";
 import book_cover from "../../inc/shop/book_cover";
 import language from "../../inc/shop/language";
 
-const Fliters = () => {
-
+const Filters = (props) => {
+    
     const [filter, setFilter] = useState({
         stage: true,
         discipline: true,
@@ -89,7 +89,6 @@ const Fliters = () => {
                             <ul className="filterList">
                                 {filterData.map((data, index) => (
                                     <LiSpan
-
                                         key={index}
                                         Url={data.url}
                                         itemName={data.name}
@@ -147,7 +146,7 @@ const Fliters = () => {
                     <Collapse in={filter.price}>
                         <div id="collapse-price">
                             <Form>
-                                <PriceRanger />
+                                <PriceRanger callback={props.callback} />
                             </Form>
                         </div>
                     </Collapse>
@@ -190,7 +189,7 @@ const Fliters = () => {
                             onClick={()=>setFilter({ ...filter, publishingHouse: !filter.publishingHouse})}
                             aria-controls="collapse-publishingHouse"
                             aria-expanded={filter.publishingHouse}
-                            className=" text-black-50 desktop-view-icon-none"
+                            className="text-black-50 desktop-view-icon-none"
                         >
                             {!filter.publishingHouse ? <i className="fa fa-plus"></i> : <i className="fas fa-minus"></i>}
                         </p>
@@ -200,7 +199,6 @@ const Fliters = () => {
                             <ul className="filterList">
                                 {publish_house.map((data, index) => (
                                     <LiSpan
-
                                         key={index}
                                         Url={data.url}
                                         itemName={data.name}
@@ -309,4 +307,4 @@ const Fliters = () => {
     )
 }
 
-export default Fliters;
+export default Filters;

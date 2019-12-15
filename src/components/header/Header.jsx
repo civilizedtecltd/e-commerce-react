@@ -1,6 +1,7 @@
 import React ,{useState, useEffect} from 'react';
-import {Container, Row, Col, Badge} from 'react-bootstrap';
+import {Container, Row, Col, Badge, Image} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux'
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Menu from '../LiComponent/MenuComponents'
 import checkAuth from '../../helpers/checkAuth';
@@ -8,6 +9,7 @@ import '../../assets/css/heder.css';
 import menu from "../../inc/menu/menu";
 import { useMediaQuery } from 'react-responsive';
 import Search from '../Search';
+import ProfileAvatar from '../../assets/images/user/avatar.png';
 
 const Default = ({ children }) => {
   const isNotMobile = useMediaQuery({ minWidth: 992 })
@@ -22,7 +24,7 @@ const HeaderComponent = (props) => {
   const [isAuth, setAuth] = useState(false);
   let page = 1;
   let show =5
-
+  const user = { ...props.auth.user}
   useEffect(()=>{
     return (checkAuth()) ? setAuth(true) : setAuth(false);
   },[]);
@@ -57,13 +59,13 @@ const HeaderComponent = (props) => {
           <header className="header clearfix " id="header">
             <Container fluid={props.menuActive}>
               <Row className="align-items-center">
-                <Col sm="2">
+                <Col sm={props.menuActive ? 2 : 1}>
                   <div className="logoWrapper">
                     <h1 className="logoText"><Link to="/">LOGO</Link></h1>
                   </div>
                 </Col>
 
-                <Col sm={props.menuActive ? 7 : 6}>
+                <Col sm={props.menuActive ? 6 : 6}>
                   <div className="headerNav clearfix" id="headerNav">
                     <nav className="navbar navbar-expand-lg  bg-white">
                       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,9 +89,9 @@ const HeaderComponent = (props) => {
                   </div>
                 </Col>
 
-                <Col sm={props.menuActive ? 3 : 4}>
+                <Col sm={props.menuActive ? 4 : 5}>
                   <div className="headPopBar clearfix" id="headPopBar">
-                    <ul className="headPopBarList d-flex justify-content-between">
+                    <ul className="headPopBarList d-flex justify-content-end">
                       <li>
                         <div className={`input-group`}>
                           <div className="cursor-type" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open} ><i className={`fa fa-search`}></i> Search</div>
@@ -97,7 +99,7 @@ const HeaderComponent = (props) => {
                       </li>
                       <li><Link to="/favorites"><span className="cartBadge"><i className="far fa-star"></i>{props.favorite_item !== 0 ? <Badge variant="danger"> {props.favorite_item} </Badge> : ''}</span> Favorites</Link></li>
                       <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i>{props.cartItem !==0 ?<Badge variant="primary">{ props.cartItem }</Badge> :'' }</span> Cart</Link></li>
-                      <li>{ (!isAuth) ? <Link to="/login"><i className="far fa-user"></i>Login</Link> : <Link to="/profile-settings"><i className="far fa-user"></i>My Profile</Link> }</li>
+                      <li>{ (!isAuth) ? <Link to="/login"><i className="far fa-user"></i>Login</Link> : <Link to="/profile-settings"><div className="Profile-avatar"><Image src={ProfileAvatar} /><p>{ user.first_name } { user.last_name }</p></div></Link> }</li>
                     </ul>
                   </div>
                 </Col>
@@ -117,5 +119,9 @@ const HeaderComponent = (props) => {
   )
 }
 
+const mapStateToProps = state => ({
+  auth: state.auth,
+  status: state.auth.status,
+})
 
-export default HeaderComponent;
+export default connect(mapStateToProps)( HeaderComponent);

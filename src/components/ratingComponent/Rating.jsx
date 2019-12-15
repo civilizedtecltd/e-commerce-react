@@ -7,6 +7,7 @@ const range = (min, max) =>
 const RatingItem  = ({ checked, colored, onChange, value }) => (
   <label className={`rating__item ${colored ? 'rating__item--selected' : ''}`}>
     <input
+      id={"rating"}
       checked={checked}
       className='rating__input'
       onChange={(e) => onChange(value)}
@@ -37,7 +38,10 @@ const Rating = ({ min, max, onChange, value }) => {
 class RatingComponent extends Component {
   constructor (props) {
     super(props)
-    this.state = { rating: this.props.rating }
+    this.state = { 
+      rating: this.props.rating,
+      resetRating : this.props.resetRating
+     }
   }
 
   render () {
@@ -49,7 +53,7 @@ class RatingComponent extends Component {
             this.setState({ rating })
             this.props.callback(rating)
         }}
-        value={this.state.rating}
+        value={ this.state.rating ? this.state.rating  : this.state.resetRating }
       />
     )
   }

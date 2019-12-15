@@ -2,26 +2,21 @@
   line-height: 1;
   display: inline-block;
 }
-.rating__item {
+.rating_item {
   display: inline;
   font-size: 0;
 }
-.rating__item::before {
+.rating_item::before {
   font-size: 18px;
   content: "★";
   color: lightgray;
 }
 
-.rating__input {
+.rating_input {
   position: absolute;
   visibility: hidden;
 }
-.rating:hover .rating__item::before {
-  color: orange;
-}
-.rating__item:hover ~ .rating__item::before {
-  color: lightgray;
-}
-.rating__item--selected::before {
+
+.rating_item--selected::before {
   color: orange;
 }

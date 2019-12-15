@@ -46,6 +46,7 @@ function ProductPage(props) {
     const book = (props.book !== undefined ) ? props.book : false;
     const favoriteItem = props.favorite;
 
+
   useEffect(() => {
      window.scrollTo(0, 0);
      props.showSingleBook(id);
@@ -118,7 +119,7 @@ function ProductPage(props) {
                         </div>
                         <div className="d-flex">
                           <TotalRating  value= { rating }/>
-                          <div style={{marginTop:"-3px"}}><p>{'\u00A0'} {'\u00A0'} (7 reviews) </p></div>
+                          <div style={{marginTop:"-3px"}}><p>{'\u00A0'} {'\u00A0'} {`(${book.total_review} reviews) `} </p></div>
                         </div>
                       </div>
 

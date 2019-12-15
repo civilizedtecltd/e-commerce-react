@@ -1,6 +1,6 @@
 import React from 'react';
-import RatingComponent from '../ratingComponent/Rating'
 import reviewAvatar from "../../assets/images/reviews_avater.jpg"
+import TotalRating from '../ratingComponent/TotalRating';
 
 
 const ReviewComponent = ({name, date, comment, rating}) => {
@@ -21,7 +21,7 @@ const ReviewComponent = ({name, date, comment, rating}) => {
                                 <h6 className="reviewUserName">{name}<span className="reviewDate">{date}</span></h6>
                             </div>
                             <div className="col">
-                            <RatingComponent rating={rating} />
+                            <TotalRating value={rating} />
                             </div>
                         </div>
                         <p>{comment}</p>
