@@ -73,9 +73,6 @@ function AddPaymentMethod(props) {
             ...cardInfo,
             ...value
         }
-        props.callback({
-            ...info
-        });
         props.setPayment(info);
     }
 

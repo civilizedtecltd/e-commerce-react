@@ -1,11 +1,13 @@
-import React  from "react";
+import React, {useEffect}  from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import {getUser} from '../redux/actions/authActions';
+
 import CheckoutTab from './CheckoutTab';
 import { URL} from '../constants/config';
-import './checkout.css';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
+import './checkout.css';
 
 
 const CheckoutPage = (props) => {
@@ -19,6 +21,9 @@ const CheckoutPage = (props) => {
      cartItems.map((item) =>totalBookPrice += item.amountPrice)
   }
 
+  useEffect(()=>{
+    props.getUser();
+  },[]);
 
   return (
     <>
@@ -100,6 +105,10 @@ const CheckoutPage = (props) => {
 
 const mapStateToProps = (state) => ({
   cart:state.shop.cart
+});
+
+const mapDispatchToProps = dispatch => ({
+    getUser : () => dispatch(getUser())
 })
 
-export default connect(mapStateToProps, null)(CheckoutPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage);

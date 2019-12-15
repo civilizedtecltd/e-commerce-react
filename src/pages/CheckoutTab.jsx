@@ -11,9 +11,6 @@ import '../assets/css/theme.css';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 
-
-
-
 const CheckoutTab = (props) => {
 
     const [step, setStep] = useState({
@@ -233,7 +230,7 @@ const CheckoutTab = (props) => {
                                 <div className="col col-12">
                                     <button disabled className="btn btn-primary btn-block d-md-none d-lg-none d-xl-none mb-3">Payment and delivery</button>
                                     <h3 className="mt-2 mb-2">Choose a payment method</h3>
-                                    <PaymentsMethods {...formData} callback={getPaymentDetails}/>
+                                    <PaymentsMethods  callback={getPaymentDetails}/>
 
                                     <Form className="mt-5">
                                         <Row>

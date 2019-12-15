@@ -21,7 +21,7 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 
 const PaymentPage = (props) => {
-
+    console.log("PaymentPage :", props)
   const [visible, setVisible] = useState(false);
 
   const totalItem = props.cart.length;
