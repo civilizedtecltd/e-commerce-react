@@ -8,7 +8,7 @@ import masterCardIcon from '../../assets/images/master_card_icon_img.png';
 import visaIcon from '../../assets/images/visa_icon_img.png';
 import footer from "../../inc/footer/footer";
 
-function FooterComponent() {
+function FooterComponent(props) {
     return(<>
       <footer className="footer clearfix bg-white pt-5 pb-5" id="footer">
         <Container>
@@ -63,7 +63,7 @@ function FooterComponent() {
                     ].map((list,index)=><LiAi
                       key={index}
                       ListClass={list.ListClass}
-                      Url={list.IconName}
+                      Url={list.Url}
                       IconName={list.IconName}
                   />)}
                 </ul>{/*  end of footerSocial */}
