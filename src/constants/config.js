@@ -60,12 +60,14 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     _DELETE_FAVORITE(id){
         return `${this.API}/user/favorite/${id}/delete`
     }
-    _SEARCH_BOOK(page, show, keyword){
-        return `${this.API}/filter/${page}/${show}/${keyword}`
-    }
+   
 
     get _POST_REVIEW(){
         return `${this.API}/book/review`;
+    }
+
+    _FILTER_BY_PRICE_RANGE(page,show,lowPrice,highestPrice){
+        return  `${this.API}/product/range/${page}/${show}/${lowPrice}/${highestPrice}`
     }
  }
 

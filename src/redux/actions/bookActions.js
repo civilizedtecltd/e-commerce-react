@@ -4,6 +4,7 @@ import { URL } from '../../constants/config';
 import { setAuthToken } from '../../helpers/setAuthToken'
 
  const fetchAllBook = (page,show,keyword) => dispatch => {
+     
     axios.get(URL._ALL_BOOKS(page,show,keyword))
         .then( res =>{
             dispatch({
@@ -82,12 +83,23 @@ const postReview = (review) => dispatch => {
          .catch(error => console.log(error))
 }
 
+
+const filterByPriceRange = (page,show,lowPrice,highestPrice) =>dispatch=>{
+        setAuthToken();
+        axios.get(URL._FILTER_BY_PRICE_RANGE(page,show,lowPrice,highestPrice))
+        .then(res=>dispatch({
+            type:Types.FILTER_BY_PRICE_RANGE,
+            payload:res.data
+        })).catch(error=>console.log(error))
+}
+
 export {
     fetchAllBook,
     showSingleBook,
     fetchCategoryList,
     fetchBooksByCategory,
     searchBook,
-    postReview
+    postReview,
+    filterByPriceRange
 }
 
