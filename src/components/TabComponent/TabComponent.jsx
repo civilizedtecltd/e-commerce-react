@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {connect} from 'react-redux';
-import {Tabs,Tab}  from 'react-bootstrap';
+import {Tabs,Tab,Form,Button}  from 'react-bootstrap';
 import RatingComponent from '../ratingComponent/Rating';
 import ReviewComponent from './ReviewComponent';
 import checkAuth from '../../helpers/checkAuth';
@@ -14,10 +14,12 @@ function TabComponent(props) {
 
     const [key, setKey] = useState('description');
     const [newReview, setNewReview] = useState({});
-
+    const [ResetValue , setResetValue] = useState(false)
     const spec = props.specification[0];
+   
 
     const getReview = (e) => {
+        e.preventDefault()
         setNewReview({
             ...newReview,
             comment: e.target.value
@@ -41,7 +43,6 @@ function TabComponent(props) {
         if(!checkAuth()){
             props.routeHistory.push("/login")
         }else{
-            console.log(reviewInfo);
             props.postReview(reviewInfo)
         }
 
@@ -88,12 +89,12 @@ function TabComponent(props) {
 
                     <div className="postReviews clearfix">
                         <h3>Post a review</h3>
-                        <RatingComponent callback = {getRating}/>
+                        <RatingComponent callback = {getRating} resetRating ={ResetValue}/>
 
-                        <form className="postReviewsForm">
-                            <textarea cols="30" rows="5" placeholder="Share your experience" onChange={getReview}></textarea>
-                            <button className="btn btn-primary mt-3" onClick={onSubmit}>Post a review</button>
-                        </form>
+                        <Form className="postReviewsForm" onSubmit={onSubmit}>
+                            <textarea id="post-text-area" cols="30" rows="5" placeholder="Share your experience" onChange = {getReview} ></textarea>
+                            <Button type="submit" className="mt-3" >Post a review</Button>
+                        </Form>
                     </div>
 
                 </Tab>

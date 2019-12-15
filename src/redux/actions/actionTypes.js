@@ -42,7 +42,9 @@ export const CONFIRM_ORDER          = 'CONFIRM_ORDER';
 
 //Search action types
 
-export const SEARCH_BOOK            = 'SEARCH_BOOK'
+export const SEARCH_BOOK            = 'SEARCH_BOOK';
+
+export const FILTER_BY_PRICE_RANGE  = 'FILTER_BY_PRICE_RANGE';
 
 
 

@@ -4,7 +4,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
 import { connect  } from 'react-redux';
 import { createUseStyles } from 'react-jss'
-import {fetchAllBook, fetchBooksByCategory} from '../redux/actions/bookActions';
+import {fetchAllBook, fetchBooksByCategory,filterByPriceRange} from '../redux/actions/bookActions';
 import Filters from '../components/shop/FiltersComponents'
 
 // Product Images
@@ -29,6 +29,11 @@ const ShopPage = (props) => {
 
     const { id, title , pageNumber , showItem, keyword } =  useParams();
 
+    const [lowerPrice , setLowerPrice] = useState(0);
+    const [higherPrice , setHigherPrice] = useState(100000);
+
+  
+
     const totalItem = props.cart.length
     const favoriteItem = props.favorite;
     const books = (props.book.data !== undefined ) ? props.book.data : [];
@@ -48,11 +53,17 @@ const ShopPage = (props) => {
       setShowBook(Number(props.showItem));
     }
 
+    const PriceRange = (minPrice, maxPrice) => {
+      setLowerPrice(minPrice)
+      setHigherPrice(maxPrice) 
+      if(page && show && lowerPrice && higherPrice) return props.filterByPrice(page,show,lowerPrice,higherPrice)
+    }
 
     useEffect(() => {
+      // if(page && show && lowerPrice && higherPrice) return props.filterByPrice(page,show,lowerPrice,higherPrice)
       if(id==='all' && pageNumber  && showItem  && keyword) return props.fetchAllBook(page, show, keyword)
       if(id !== "all" && id) props.fetchBooksByCategory(id, page,show);
-    },[]);
+    },[page,show,lowerPrice,higherPrice]);
 
   const handleShowBook = (e)=> {
     e.preventDefault()
@@ -80,6 +91,9 @@ const ShopPage = (props) => {
     }
     if(page === 0) return setPage(1)
   }
+
+
+ 
 
   return (
     <>
@@ -112,7 +126,7 @@ const ShopPage = (props) => {
             <Container>
               <Row>
                 <Col sm="3">
-                  <Filters />
+                  <Filters callback={PriceRange} />
                 </Col>
 
                 <Col>
@@ -128,8 +142,8 @@ const ShopPage = (props) => {
                       </Col>
 
                     </Row>
-
-                    <div className="row mb-4">
+                  {books.length === 0? <h1 className="text-center">Sorry, No Result Found :(</h1> :<>
+                  <div className="row mb-4">
                       <div className="col">
                         <ul className="singleFilter d-flex align-items-center">
                           <li>
@@ -218,7 +232,6 @@ const ShopPage = (props) => {
                             </Col>
                             );
                         })
-
                       }
                     </Row>
 
@@ -284,7 +297,8 @@ const ShopPage = (props) => {
 
                     </div>
 
-
+                  </>
+} 
                   </div>
                 </Col>
               </Row>
@@ -320,7 +334,8 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps =(dispatch) => {
   return {
     fetchAllBook        : (page, show) => dispatch(fetchAllBook(page, show)),
-    fetchBooksByCategory: (id, page, show) => dispatch(fetchBooksByCategory(id, page, show))
+    fetchBooksByCategory: (id, page, show) => dispatch(fetchBooksByCategory(id, page, show)),
+    filterByPrice       : (page,show,lowPrice,highestPrice)=>dispatch(filterByPriceRange(page,show,lowPrice,highestPrice))
   }
 }
 
