@@ -35,7 +35,7 @@ function LiIs({ListClass,Title,IconName}){
 function LiAi({ListClass,Title,Url,IconName,AnchorClass}){
   return (
     <li className={ListClass}>
-        <Link className={AnchorClass} to={Url}><i className={IconName}></i>{Title}</Link>
+        <Link className={AnchorClass} to={Url} > <i className={IconName}></i>{Title}</Link>
     </li>
   )
 }

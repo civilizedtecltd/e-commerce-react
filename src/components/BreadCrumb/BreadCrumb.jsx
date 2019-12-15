@@ -6,7 +6,6 @@ const routes = [
     { path: '/shop/category/:id',  breadcrumb: null },
     { path: '/shop/category' , breadcrumb: null},
     { path: '/product/:id',  breadcrumb: null },
-    { path: '/shop/category/all/${page}/${show}/${keyword}',  breadcrumb: null },
 
 ];
 const PureBreadcrumbs = ({ breadcrumbs }) => (
