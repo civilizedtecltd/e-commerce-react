@@ -12,12 +12,11 @@ const CheckoutPage = (props) => {
 
   const cartItems = props.cart;
 
-  let totalItemQuantity = [];
-  let totalPrice = [];
+  let totalBookPrice = 0;
+  let delivery_cost = 0;
 
-  if(totalItemQuantity.length !==0){
-    totalItemQuantity = totalItemQuantity.reduce((quantities, quantity) => quantities + quantity)
-    totalPrice = totalPrice.reduce((prices,price)=>prices+price);
+  if(cartItems.length !== 0){
+     cartItems.map((item) =>totalBookPrice += item.amountPrice)
   }
 
 
@@ -64,7 +63,7 @@ const CheckoutPage = (props) => {
                             Quantity:<span className="qut"> { item.quantity } </span>
                             </p>
                             <p>
-                            Total:<span className="totalPrice"> ${ item.price * item.quantity } </span>
+                            Total:<span className="totalPrice"> ${ item.amountPrice } </span>
                             </p>
                         </div>
                   </div>))}
@@ -74,13 +73,13 @@ const CheckoutPage = (props) => {
                         <div className="cartProductValue clearfix" id="cartProductValue">
                           <ul className="productValue text-right">
                             <li>
-                              <strong>Total Product Price: </strong> ${ totalItemQuantity * totalPrice }
+                              <strong>Total Product Price: </strong> ${totalBookPrice}
                             </li>
                             <li>
-                              <strong>Delivery:</strong> $00.00
+                              <strong>Delivery:</strong> ${delivery_cost}
                             </li>
                             <li>
-                              <strong>In Total Total:</strong> $50.00
+                              <strong>In Total Total:</strong> ${parseFloat(totalBookPrice) + parseFloat(delivery_cost)}
                             </li>
                           </ul>
                         </div>
@@ -90,7 +89,7 @@ const CheckoutPage = (props) => {
               </Card>
             </Container>
           </section> }
-          <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails" >
+          <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
            <CheckoutTab/>
           </section>
         </main>

@@ -30,6 +30,12 @@ const decreaseQuantity = (id) => {
     }
 }
 
+const updateQuantity = ({id, qty}) => {
+    return {
+        type: Types.UPDATE_QUANTITY,
+        payload: {id, qty}
+    }
+}
 
 const deleteAllFromCart = () => {
     return {
@@ -81,5 +87,6 @@ export {
     setDeliveryAddress,
     setPaymentDetails,
     confirmOrder,
-    cartNotInState
+    cartNotInState,
+    updateQuantity
 }

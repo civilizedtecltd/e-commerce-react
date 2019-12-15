@@ -11,6 +11,7 @@ const RatingItem  = ({ checked, colored, onChange, value }) => (
       className='rating__input'
       type="radio"
       value={value}
+      readOnly
     />
   </label>
 )
@@ -37,7 +38,6 @@ class TotalRating extends Component {
   constructor (props) {
     super(props)
     this.state = { rating: this.props.value }
-    console.log(this.props.value)
   }
 
   render () {
