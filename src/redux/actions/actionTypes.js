@@ -47,6 +47,8 @@ export const SEARCH_BOOK            = 'SEARCH_BOOK';
 
 export const FILTER_BY_PRICE_RANGE  = 'FILTER_BY_PRICE_RANGE';
 
+export const DATA_FETCHING_BEGAN    = 'DATA_FETCHING_BEGAN'
+
 
 
 

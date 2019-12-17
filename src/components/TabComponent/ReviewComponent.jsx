@@ -1,5 +1,5 @@
 import React from 'react';
-import reviewAvatar from "../../assets/images/reviews_avater.jpg"
+import reviewAvatar from "./user.svg"
 import TotalRating from '../ratingComponent/TotalRating';
 
 
