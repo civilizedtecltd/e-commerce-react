@@ -25,7 +25,7 @@ const shopReducer = (state = initSate, { type, payload }) => {
                         if(payload.quantity !== undefined)
                             updatedCart.push(payload)
                         else
-                            updatedCart.push({...payload, quantity: 1 })
+                            updatedCart.push({...payload, quantity: 1, amountPrice: payload.price })
 
                     }else{
                         const updatedItem = {
@@ -33,6 +33,7 @@ const shopReducer = (state = initSate, { type, payload }) => {
                         }
 
                         updatedItem.quantity++;
+                        updatedItem.amountPrice = updatedItem.quantity * updatedItem.price;
                         updatedCart[updatedItemIndex] = updatedItem;
                     }
 
@@ -81,6 +82,23 @@ const shopReducer = (state = initSate, { type, payload }) => {
                     ...state,
                     cart: updatedCart
                 }
+            case Types.UPDATE_QUANTITY:
+                updatedCart = [...state.cart];
+                updatedItemIndex = updatedCart.findIndex(item => item.id === Number(payload.id))
+
+                const updatedItem = {
+                    ...updatedCart[updatedItemIndex]
+                }
+
+                updatedItem.quantity = Number(payload.qty);
+                updatedItem.amountPrice = updatedItem.quantity * updatedItem.price;
+
+                updatedCart[updatedItemIndex] = updatedItem;
+
+                return {
+                    ...state,
+                    cart: updatedCart
+                }
             case Types.DELETE_ALL_FORM_CART:
                 return{
                     ...state,
@@ -101,7 +119,7 @@ const shopReducer = (state = initSate, { type, payload }) => {
                     ...state,
                     cart: []
                 }
-        
+
             case Types.CART_NOT_IN_STATE:
                 return {
                     ...state,

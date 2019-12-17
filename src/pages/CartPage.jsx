@@ -14,35 +14,20 @@ import CartTable from '../components/CartComponents/CartsTableComponent';
 import { categoryClass } from "../inc/users/users";
 
 
-import { removeFromCart, deleteAllFromCart } from '../redux/actions/shopActions'
+import {removeFromCart, deleteAllFromCart, updateQuantity} from '../redux/actions/shopActions'
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const CartPage = (props) => {
 
   const favoriteItem = props.favorite;
-  const [cartItems, setCartItems] = useState(props.cart)
+  const cartItems    = props.cart;
 
   let totalBookPrice = 0;
   let delivery_cost = 0;
 
-
-  useEffect(() => {
-    const items = props.cart;
-
-    items.map((item, index) => {
-        item.amountPrice = item.quantity * item.price;
-        items[index] = item;
-     setCartItems([...items]);
-    })
-
-  },[props.cart.length]);
-
-
   if(cartItems.length !== 0){
-     cartItems.map((item) =>totalBookPrice += item.amountPrice
-     )
+     cartItems.map((item) =>totalBookPrice += item.amountPrice)
   }
-
 
   const handleDeleteClick = (id) => {
     cartItems.find((book) => {
@@ -50,28 +35,15 @@ const CartPage = (props) => {
          props.removeItem(book.id)
       }
     })
-
   }
 
   const handleDeleteAll = (event) => {
     event.preventDefault();
     props.deleteAll()
-    setCartItems([])
   }
 
-  const handleQuantity = (itemQty)=> {
-
-    const { id, qty } = itemQty;
-    const items = props.cart;
-
-    items.find(item => {
-        if(Number(item.id) === Number(id)){
-          item.quantity = qty;
-          item.amountPrice = item.quantity * item.price;
-        }
-    })
-
-    setCartItems([...items]);
+  const handleQuantity = ({id, qty})=> {
+    props.updateItem({id, qty});
   }
 
   return (
@@ -269,7 +241,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     removeItem: (id) => dispatch(removeFromCart(id)),
-    deleteAll: () => dispatch(deleteAllFromCart())
+    updateItem: ({id, qty}) => dispatch(updateQuantity({id, qty})),
+    deleteAll: () => dispatch(deleteAllFromCart()),
+
   }
 }
 

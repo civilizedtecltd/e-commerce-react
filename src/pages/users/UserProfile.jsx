@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { connect  } from 'react-redux';
 import axios from 'axios';
-import isEmpty from 'lodash/isEmpty';
-
 import {getUser, update} from '../../redux/actions/authActions';
-
+import isEmpty from 'lodash/isEmpty';
 import {Container, Row, Col, Card, Form, Button, Alert} from 'react-bootstrap';
-
 import { URL } from '../../constants/config';
-
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
 import  HeaderComponent from "../../components/header/Header";
 import  MobileHeader from "../../components/header/MobileHeader";

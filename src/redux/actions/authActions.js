@@ -107,10 +107,12 @@ const update = (info) => dispatch => {
 const setPayment = (info) => dispatch => {
     setAuthToken();
     axios.post(URL._USER_PAYMENT, info)
-         .then(res => dispatch({
-             type: Types.SET_PAYMENT,
-             payload: { ...res.data.data }
-         }))
+         .then(res => {
+             return dispatch({
+                type: Types.SET_PAYMENT,
+                payload: [ ...res.data.data ]
+            })
+         })
          .catch(error=> console.log(error));
 }
 

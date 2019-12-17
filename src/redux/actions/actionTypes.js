@@ -12,6 +12,7 @@ export const ADD_TO_CART            =   'ADD_TO_CART';
 export const REMOVE_FROM_CART       =   'REMOVE_FROM_CART';
 export const INCREASE_QUANTITY      =   'INCREASE_QUANTITY';
 export const DECREASE_QUANTITY      =   'DECREASE_QUANTITY';
+export const UPDATE_QUANTITY        =   'UPDATE_QUANTITY';
 export const DELETE_ALL_FORM_CART   =   'DELETE_ALL_FORM_CART';
 export const CART_NOT_IN_STATE      =   'CART_NOT_IN_STATE';
 
