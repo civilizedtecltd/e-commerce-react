@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {Form, Accordion , useAccordionToggle} from 'react-bootstrap';
 import {connect} from 'react-redux';
+import { setDeliveryAddress } from '../redux/actions/shopActions';
 
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
+import card_icon_img from '../assets/images/user/card_icon_img.png'
 import './checkout.css';
 import '../assets/css/theme.css'
-import card_icon_img from '../assets/images/user/card_icon_img.png'
-import PageLoader from "../components/pageLoader/PageLoaderComponent";
-import { setDeliveryAddress } from '../redux/actions/shopActions';
+
+import defaultMethods from '../inc/PaymentMethods/defaultPaymentMethods.json';
 
 const CheckToggle = ({ children, eventKey, title }) => {
 
@@ -55,22 +57,27 @@ const CheckToggle = ({ children, eventKey, title }) => {
 const PaymentMethods = (props) => {
 
     const [card, setCard] = useState({});
-    console.log("card: ", card);
-
+    const [selectedMethod, setSelectedMethods]= useState(null);
     const [deliveryMethod, setDeliveryMethod] = useState({
         standard: false,
         express: false
     });
 
-    const paymentMethods = (props.user.payment)? props.user.payment : [];
+    const paymentMethods = (props.user.payment)? props.user.payment : defaultMethods;
 
     const handleCardOnChange = (e) => {
-        setCard({
-            ...card,
+        const currentMethod = {
+            ...paymentMethods[selectedMethod],
             payment_info: {
-                ...card.payment_info,
+                ...paymentMethods[selectedMethod].payment_info,
                 [e.target.name]: e.target.value
             }
+        }
+
+        paymentMethods[selectedMethod] = currentMethod;
+
+        setCard({
+            ...currentMethod
         });
     }
 
@@ -78,6 +85,7 @@ const PaymentMethods = (props) => {
     const handleAccordionOnSelect = (selectedKey) => {
 
       if(selectedKey !== null){
+        setSelectedMethods(selectedKey);
         setCard({
             ...paymentMethods[selectedKey]
         });
@@ -121,8 +129,8 @@ const PaymentMethods = (props) => {
                             <div className="p-3">
                                 <div className="row align-items-center">
                                     <div className="col-sm-10 form-group">
-                                        <label htmlFor="card-number">Card number</label>
-                                        <input type="text" name="card_number" className="form-control" id="card-number" aria-describedby="emailHelp" defaultValue={item.payment_info.card_number} onChange={handleCardOnChange}/>
+                                        <label htmlFor={`card-number${index+1}`}>Card number</label>
+                                        <input type="text" name="card_number" className="form-control" id={`card-number${index+1}`} aria-describedby="cardNumber"  defaultValue={item.payment_info.card_number} onChange={handleCardOnChange}/>
                                     </div>
                                     <div className="col">
                                         <img src={card_icon_img} alt=""/>
@@ -131,17 +139,17 @@ const PaymentMethods = (props) => {
 
                                 <div className="row align-items-center justify-content-between">
                                     <div className="col-sm-3 form-group">
-                                        <label htmlFor="card-number">Expiry date</label>
+                                        <label htmlFor="card-exp-mm">Expiry date</label>
                                         <ul className="cardPayFiled d-flex align-items-center justify-content-end">
-                                            <li><input type="text" name="mm" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM" defaultValue={item.payment_info.mm} onChange={handleCardOnChange} /></li>
+                                            <li><input type="text" name="mm" className="form-control" id={`card-exp-mm${index+1}`} aria-describedby="cardMM" placeholder="MM" defaultValue={item.payment_info.mm} onChange={handleCardOnChange} /></li>
                                             <li className="cardBl">/</li>
-                                            <li><input type="text" name="yy" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY" defaultValue={item.payment_info.yy} onChange={handleCardOnChange} /></li>
+                                            <li><input type="text" name="yy" className="form-control" id={`card-exp-yy${index+1}`} aria-describedby="cardYY" placeholder="YY" defaultValue={item.payment_info.yy} onChange={handleCardOnChange} /></li>
                                         </ul>
                                     </div>
 
                                     <div className="col offset-sm-4 form-group">
-                                        <label htmlFor="card-number">CVV</label>
-                                        <input type="text" name="ccv" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="CCV" onChange={handleCardOnChange} />
+                                        <label htmlFor="card-ccv">CVV</label>
+                                        <input type="text" name="ccv" className="form-control" id={`card-ccv${index+1}`} aria-describedby="emailHelp" placeholder="CCV" onChange={handleCardOnChange} />
                                     </div>
                                     <div className="col-sm-2">
                                         <img src={card_icon_img} alt=""/>
