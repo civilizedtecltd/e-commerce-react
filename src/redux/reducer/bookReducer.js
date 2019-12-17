@@ -24,6 +24,8 @@ const bookReducer = ( state ={}, actions) => {
             }
         case Types.FILTER_BY_PRICE_RANGE:
             return payload;
+        case Types.FILTER_SHORT_BY:
+            return payload;
         default :
             return state
     }
