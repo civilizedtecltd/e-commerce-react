@@ -138,10 +138,11 @@
     text-overflow: ellipsis;
 }
 
-.similer-book-slider .slick-arrow.slick-next {
+.SimilarBookSlider .slick-arrow.slick-next {
     margin-top: -4rem;
 }
 
-.similer-book-slider .slick-arrow.slick-prev {
+
+.SimilarBookSlider .slick-arrow.slick-prev {
     margin-top: -4rem;
 }
