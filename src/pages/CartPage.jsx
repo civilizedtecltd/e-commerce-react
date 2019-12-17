@@ -96,7 +96,8 @@ const CartPage = (props) => {
 
           <section className="chooseCategory clearfix" id="chooseCategory">
             <Container>
-              {(cartItems.length === 0) ? <Row>
+              {(cartItems.length === 0) ? <>
+                <Row>
                 <Col>
                   <div className="contentArea text-center mt-5 mb-5">
                     <h2 className="sectionTitle mb-3">
@@ -108,7 +109,73 @@ const CartPage = (props) => {
                     </p>
                   </div>
                 </Col>
-              </Row> : <section className="cartSection clearfix" id="cartSection">
+              </Row> 
+              <Row>
+              <Col>
+                <Card className="border-0">
+                  <Card.Body className="p-0">
+                    <div className="cardContentDetails pt-5 pb-5 mb-5 bgGray clearfix">
+                      <Row>
+                        <Col sm="3">
+                          <h3 className="cardWidgetTitle mb-3">
+                            Kindergarten
+                          </h3>
+                          <ul className="cardWidgetList text-center">
+
+                            {categoryClass.kindergartenSchool.map((pre, index) => <Lia
+                              key={`kindergarten-${index}`}
+                              Title={pre}
+                              Url={'/'}
+                            />)}
+
+                          </ul>
+                        </Col>
+
+
+                        <Col sm="3">
+                          <h3 className="cardWidgetTitle mb-3">
+                            Primary school
+                          </h3>
+                          <ul className="cardWidgetList cardWidgetList2 text-center">
+                            {categoryClass.primarySchool.map((item, index) => <Lia
+                              key={`primary-${index}`}
+                              Title={item}
+                              Url={'/'}
+                            />)}
+                          </ul>
+                        </Col>
+
+                        <Col sm="3">
+                          <h3 className="cardWidgetTitle mb-3">
+                            Secondary school
+                          </h3>
+                          <ul className="cardWidgetList text-center">
+                            {categoryClass.secondarySchool.map((item, index) => <Lia
+                              key={`secondary-${index}`}
+                              Title={item}
+                              Url={'/'}
+                            />)}
+                          </ul>
+                        </Col>
+                        <Col sm="3">
+                          <h3 className="cardWidgetTitle mb-3">Stationery</h3>
+                          <ul className="cardWidgetList text-center">
+                            {categoryClass.stationery.map((item, index) => <Lia
+                              key={`stationary-${index}`}
+                              Title={item}
+                              Url={'/'}
+                            />)}
+                          </ul>
+                        </Col>
+                      </Row>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+              </>
+              
+              :<section className="cartSection clearfix" id="cartSection">
                   <Container>
                     <Row>
                       <Col>
@@ -169,69 +236,7 @@ const CartPage = (props) => {
 
 
 
-              <Row>
-                <Col>
-                  <Card className="border-0">
-                    <Card.Body className="p-0">
-                      <div className="cardContentDetails pt-5 pb-5 mb-5 bgGray clearfix">
-                        <Row>
-                          <Col sm="3">
-                            <h3 className="cardWidgetTitle mb-3">
-                              Kindergarten
-                            </h3>
-                            <ul className="cardWidgetList text-center">
-
-                              {categoryClass.kindergartenSchool.map((pre, index) => <Lia
-                                key={`kindergarten-${index}`}
-                                Title={pre}
-                                Url={'/'}
-                              />)}
-
-                            </ul>
-                          </Col>
-
-
-                          <Col sm="3">
-                            <h3 className="cardWidgetTitle mb-3">
-                              Primary school
-                            </h3>
-                            <ul className="cardWidgetList cardWidgetList2 text-center">
-                              {categoryClass.primarySchool.map((item, index) => <Lia
-                                key={`primary-${index}`}
-                                Title={item}
-                                Url={'/'}
-                              />)}
-                            </ul>
-                          </Col>
-
-                          <Col sm="3">
-                            <h3 className="cardWidgetTitle mb-3">
-                              Secondary school
-                            </h3>
-                            <ul className="cardWidgetList text-center">
-                              {categoryClass.secondarySchool.map((item, index) => <Lia
-                                key={`secondary-${index}`}
-                                Title={item}
-                                Url={'/'}
-                              />)}
-                            </ul>
-                          </Col>
-                          <Col sm="3">
-                            <h3 className="cardWidgetTitle mb-3">Stationery</h3>
-                            <ul className="cardWidgetList text-center">
-                              {categoryClass.stationery.map((item, index) => <Lia
-                                key={`stationary-${index}`}
-                                Title={item}
-                                Url={'/'}
-                              />)}
-                            </ul>
-                          </Col>
-                        </Row>
-                      </div>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              </Row>
+              
 
             </Container>
 

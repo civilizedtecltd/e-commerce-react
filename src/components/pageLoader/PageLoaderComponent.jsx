@@ -6,7 +6,7 @@ const PageLoader = (props) => {
 
     return (
         (!props.loading) ? <></> :  <div className="Page-loader">
-            <Image src={LoadingPage} alt="No Image"/>
+            <Image src={LoadingPage} alt="loading....."/>
         </div>
     )
 }

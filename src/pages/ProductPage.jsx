@@ -211,7 +211,7 @@ function ProductPage(props) {
         <FooterComponent />
       </div>
 
-      <Modal show = {show} onHide = {handleClose}>
+      <Modal show = {show} onHide = { handleClose }>
         <Modal.Header className={"border-0"} closeButton>
         </Modal.Header>
         <Modal.Body>

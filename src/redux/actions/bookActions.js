@@ -85,6 +85,7 @@ const postReview = (review) => dispatch => {
 
 
 const filterByPriceRange = (page,show,lowPrice,highestPrice) =>dispatch=>{
+        
         setAuthToken();
         axios.get(URL._FILTER_BY_PRICE_RANGE(page,show,lowPrice,highestPrice))
         .then(res=>dispatch({
@@ -92,6 +93,9 @@ const filterByPriceRange = (page,show,lowPrice,highestPrice) =>dispatch=>{
             payload:res.data
         })).catch(error=>console.log(error))
 }
+
+
+
 
 export {
     fetchAllBook,
