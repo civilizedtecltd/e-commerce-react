@@ -15,7 +15,6 @@ import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import TabComponent from "../components/TabComponent/TabComponent";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
-import { URL } from '../constants/config';
 
 import "../pages/assets/product.css";
 import checkAuth from "../helpers/checkAuth";
@@ -208,7 +207,9 @@ function ProductPage(props) {
                   </h2>
                 </div>
               </div>
-              <ImgSlick images={( props.similar !== undefined ) ? props.similar : [] } />
+                <div className="SimilarBookSlider">
+                    <ImgSlick images={( props.similar !== undefined ) ? props.similar : [] } />
+                </div>
             </div>
           </section>
         </main>

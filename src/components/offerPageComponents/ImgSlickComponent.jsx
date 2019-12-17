@@ -3,6 +3,7 @@ import{Link} from 'react-router-dom'
 import {Card, Col, Image} from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
 import Slider from "react-slick";
+import '../../assets/css/theme.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {URL} from "../../constants/config";
@@ -70,14 +71,6 @@ const ImgSlick = (props) => {
             }
         ]
     };
-    const imgStyle = {
-        width:"163px",
-        height:"224px"
-    }
-    const titleStyle ={
-        width:"190px"
-    }
-
     return (
         <div>
             <Slider {...settings}>
@@ -87,11 +80,11 @@ const ImgSlick = (props) => {
                             <LazyLoad once={true} height={200}>
                                 <Card className="productCard border-0 bg-transparent">
                                     <div className= "productMedia mb-3 bgGray">
-                                        <Image src={(item.cover_images !== null) ? `${URL.BASE}/${item.cover_images.img_1}`: ''} alt="Book Image" style={imgStyle} />
+                                        <Image src={(item.cover_images !== null) ? `${URL.BASE}/${item.cover_images.img_1}`: ''} alt="Book Image" />
                                     </div>
 
                                     <div className="productContent">
-                                        <Link to={`/product/${item.id}`}><h4 className="productTitle mb-1" style={titleStyle} >{item.name} </h4></Link>
+                                        <Link to={`/product/${item.id}`}><h4 className="productTitle mb-1 mr-4" >{item.name} </h4></Link>
                                         <h5 className="authorName mb-1">{item.book_author.name}</h5>
                                         <p className="productPrice">$ {item.price}</p>
                                     </div>

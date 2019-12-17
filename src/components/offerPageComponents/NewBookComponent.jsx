@@ -9,11 +9,8 @@ const NewBookComponent = ({bookId, BookImage, ProductTitle, AuthorName, ProductP
 
   const imgStyle = {
         width:"163px",
-        height:"224px"
     }
   const handleRemove = (bookId) => {
-    /* removeFavItem(e,bookid)
-    updateState(favorite) */
     removeFavItem(bookId)
   }
 

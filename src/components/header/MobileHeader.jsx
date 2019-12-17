@@ -106,8 +106,8 @@ const MobileHeader = (props) => {
                     <hr className="borderHr" />
 
                     <ul className="mobileNav userMbNav">
-                        <li className="active"><Link to="/order"><i className="fas fa-clipboard-list"></i> My orders </Link></li>
-                        <li><Link to="/payment-method"><i className="fas fa-wallet"></i> Payment methods </Link></li>
+                        <li className="active"><Link to="/my-order"><i className="fas fa-clipboard-list"></i> My orders </Link></li>
+                        <li><Link to="/payment-methods"><i className="fas fa-wallet"></i> Payment methods </Link></li>
                         <li><Link to="/profile-settings"><i className="fas fa-cog"></i> Profile settings </Link></li>
                         <li><Link to="/email-subscription"><i className="far fa-envelope"></i> Email subscription </Link></li>
                     </ul>
@@ -119,8 +119,8 @@ const MobileHeader = (props) => {
                     </Col>
                     <Col>
                         <Link to="/favorites">
-                 <span className="cartBadge">
-                 <i className="far fa-star"></i><span className="badge badge-danger">10</span></span> Favorites
+                             <span className="cartBadge">
+                             <i className="far fa-star"></i><span className="badge badge-danger">10</span></span> Favorites
                         </Link>
                     </Col>
                 </Modal.Footer>
