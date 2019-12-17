@@ -146,7 +146,7 @@ function ProductPage(props) {
                             <input
                               className="form-control inputValue"
                               type="number"
-                              placeholder="0"
+                              placeholder="1"
                               value = {itemQty}
                               onChange = {updateItemQty}
                             />
