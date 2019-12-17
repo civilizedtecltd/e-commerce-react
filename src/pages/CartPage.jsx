@@ -53,7 +53,10 @@ const CartPage = (props) => {
         <HeaderComponent
           favorite_item={favoriteItem.length}
           cartItem={cartItems.length} />
-        <MobileHeader />
+        <MobileHeader
+         favorite_item={favoriteItem.length}
+         cartItem={cartItems.length}
+         />
         <main className="mainContent clearfix" id="mainContent">
           <section className="sectionBreadcrumb secGap clearfix pb-0" id="sectionBreadcrumb">
             <Container>

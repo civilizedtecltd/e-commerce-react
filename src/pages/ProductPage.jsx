@@ -79,7 +79,10 @@ function ProductPage(props) {
         favorite_item={favoriteItem.length}
         cartItem = { props.totalItems }
         />
-        <MobileHeader />
+        <MobileHeader
+          favorite_item={favoriteItem.length}
+          cartItem = { props.totalItems }
+         />
         <main className="mainContent clearfix" id="mainContent">
           <section
             className="breadcrumbArea secGap pb-0 clearfix"

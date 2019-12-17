@@ -38,7 +38,10 @@ const FavoritesPage = (props) => {
           favorite_item={favorite.length}
           cartItem={totalItem}
         />
-        <MobileHeader />
+        <MobileHeader 
+         favorite_item={favorite.length}
+         cartItem={totalItem}
+        />
         <main className="mainContent clearfix" id="mainContent">
           <section
             className="sectionBreadcrumb secGap clearfix pb-0"
