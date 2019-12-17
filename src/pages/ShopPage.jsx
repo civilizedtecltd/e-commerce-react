@@ -4,7 +4,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
 import { connect  } from 'react-redux';
 import { createUseStyles } from 'react-jss'
-import {fetchAllBook, fetchBooksByCategory,filterByPriceRange} from '../redux/actions/bookActions';
+import {fetchAllBook, fetchBooksByCategory,filterByPriceRange, filterShortBy } from '../redux/actions/bookActions';
 import Filters from '../components/shop/FiltersComponents'
 
 // Product Images
@@ -41,6 +41,7 @@ const ShopPage = (props) => {
     const [show , setShowBook ] = useState(5);
     let   [page , setPage ] = useState(1);
     const [totalPage , setTotalPage] = useState(1)
+    const [sortBy , setSortBy] = useState(null)
 
 
     const total_pages = (Number(show) !== 0 && Number(show) <= Number(props.totalItem)) ? Math.ceil(Number(props.totalItem)/Number(show)) : 1 ;
@@ -64,6 +65,11 @@ const ShopPage = (props) => {
       if(id==='all' && pageNumber  && showItem  && keyword) return props.fetchAllBook(page, show, keyword)
       if(id !== "all" && id) props.fetchBooksByCategory(id, page,show);
     },[page,show,lowerPrice,higherPrice]);
+
+    useEffect(()=>{
+      console.log(page,show,sortBy)
+      props.filterShortBy(page,show,sortBy)
+    },[sortBy])
 
   const handleShowBook = (e)=> {
     e.preventDefault()
@@ -90,6 +96,10 @@ const ShopPage = (props) => {
       return ( id === 'all') ? props.fetchAllBook(page, show,keyword) : props.fetchBooksByCategory(id, page, show);
     }
     if(page === 0) return setPage(1)
+  }
+  const handleSortBy = (e) =>{
+      e.preventDefault();
+      return setSortBy(e.target.value)
   }
 
 
@@ -150,11 +160,12 @@ const ShopPage = (props) => {
                             <label htmlFor="">Sort By</label>
                           </li>
                           <li>
-                            <select className="filterSelect form-control">
-                              <option>Popular</option>
-                              <option>New</option>
-                              <option>Price: low to high</option>
-                              <option>Price: high to low</option>
+                            <select className="filterSelect form-control" onChange ={handleSortBy}>
+                              <option value="">select</option>
+                              <option value="Popular">Popular</option>
+                              <option value="New">New</option>
+                              <option value="Price: low to high">Price: low to high</option>
+                              <option value="Price: high to low">Price: high to low</option>
                             </select>
                           </li>
                         </ul>
@@ -337,7 +348,8 @@ const mapDispatchToProps =(dispatch) => {
   return {
     fetchAllBook        : (page, show) => dispatch(fetchAllBook(page, show)),
     fetchBooksByCategory: (id, page, show) => dispatch(fetchBooksByCategory(id, page, show)),
-    filterByPrice       : (page,show,lowPrice,highestPrice)=>dispatch(filterByPriceRange(page,show,lowPrice,highestPrice))
+    filterByPrice       : (page,show,lowPrice,highestPrice)=>dispatch(filterByPriceRange(page,show,lowPrice,highestPrice)),
+    filterShortBy      : (page,show,query)=>dispatch(filterShortBy(page,show,query))
   }
 }
 

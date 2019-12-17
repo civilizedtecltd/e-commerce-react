@@ -69,6 +69,10 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     _FILTER_BY_PRICE_RANGE(page,show,lowPrice,highestPrice){
         return  `${this.API}/product/range/${page}/${show}/${lowPrice}/${highestPrice}`
     }
+
+    _FILTER_SHORT_BY(page, show, query){
+        return `${this.API}/product/short-by/${page}/${show}/${query}`
+    }
  }
 
  const URL = new APP_URL();

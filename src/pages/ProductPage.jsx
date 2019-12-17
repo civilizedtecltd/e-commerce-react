@@ -36,7 +36,7 @@ function ProductPage(props) {
     const { id } = useParams();
     const [show, setShow] = useState(false);
 
-    let itemQty  = 0;
+    let itemQty  = 1;
     props.cart.map(item => {
         if(item.id === Number(id)){
            return itemQty = Number(item.quantity)
@@ -147,7 +147,7 @@ function ProductPage(props) {
                               className="form-control inputValue"
                               type="number"
                               placeholder="0"
-                              defaultValue = {itemQty}
+                              value = {itemQty}
                               onChange = {updateItemQty}
                             />
                           </div>

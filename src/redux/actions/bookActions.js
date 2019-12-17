@@ -89,10 +89,25 @@ const filterByPriceRange = (page,show,lowPrice,highestPrice) =>dispatch=>{
         setAuthToken();
         axios.get(URL._FILTER_BY_PRICE_RANGE(page,show,lowPrice,highestPrice))
         .then(res=>dispatch({
-            type:Types.FILTER_BY_PRICE_RANGE,
-            payload:res.data
+            type: Types.FILTER_BY_PRICE_RANGE,
+            payload: res.data
         })).catch(error=>console.log(error))
 }
+
+const filterShortBy = (page,show,query) => dispatch =>{
+    console.log(page,show,query)
+    setAuthToken();
+    axios.get(URL._FILTER_SHORT_BY(page,show,query))
+    .then(res=>{
+        return dispatch({
+                type: Types.FILTER_SHORT_BY,
+                payload: res.data
+        })
+    }).catch(error=>{
+        console.error(error)
+    })
+}
+
 
 
 
@@ -104,6 +119,7 @@ export {
     fetchBooksByCategory,
     searchBook,
     postReview,
-    filterByPriceRange
+    filterByPriceRange,
+    filterShortBy
 }
 

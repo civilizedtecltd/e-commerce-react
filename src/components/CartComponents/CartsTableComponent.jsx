@@ -51,7 +51,7 @@ const CartsTableComponent = (props) => {
             <td id={`price-${item.id}`}>${item.price}</td>
 
             <td className="cartQntN">
-              <Form.Control type="number" placeholder="1" id={item.id} defaultValue={item.quantity} onChange={handleQuantity} />
+              <Form.Control type="number" placeholder="1" id={item.id} value={item.quantity} onChange={handleQuantity} />
             </td>
 
             <td id={`tp-${item.id}`}>${item.amountPrice}</td>
