@@ -7,18 +7,18 @@ const bookReducer = ( state ={}, actions) => {
     const { payload , pending } = actions;
     switch (actions.type) {
         case Types.FETCH_BOOK_PENDING:
-            return actions.pending;
+            return {pending:pending};
         case Types.FETCH_BOOK_SUCCESS:
             return payload;
         case Types.FETCH_ALL_BOOKS:
             return {
                 ...payload,
-                pending
+                pending:pending
             };
         case Types.FETCH_BOOK_BY_CATEGORY:
             return  {
                 ...payload,
-                pending
+                pending:pending
             }
         case Types.SHOW_SINGLE_BOOK:
             return payload;

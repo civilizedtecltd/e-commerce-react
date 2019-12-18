@@ -25,6 +25,7 @@ const useStyle = createUseStyles({
 })
 
 const ShopPage = (props) => {
+  console.log(props)
     const classes = useStyle()
     const { id, title, showItem, keyword } =  useParams();
     const isNaN_id = Number(id)
