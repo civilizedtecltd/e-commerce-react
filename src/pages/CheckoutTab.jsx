@@ -126,6 +126,12 @@ const CheckoutTab = (props) => {
             ...payment,
             books
         });
+
+        props.confirmOrder({
+            address: formData,
+            ...payment,
+            books
+        });
     }
 
     return(<>
