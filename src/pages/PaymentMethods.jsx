@@ -37,7 +37,7 @@ const PaymentMethods = (props) => {
     const [card, setCard] = useState({});
     const [selectedMethod, setSelectedMethods]= useState(null);
     const [deliveryMethod, setDeliveryMethod] = useState({
-        standard: false,
+        standard: true,
         express: false
     });
     const [alert, setAlert] = useState({
@@ -89,6 +89,12 @@ const PaymentMethods = (props) => {
         setCard({
             ...paymentMethods[selectedKey]
         });
+
+        props.callback({
+            payment: { ...paymentMethods[selectedKey]},
+            delivery: (deliveryMethod.standard) ? 0 : 1
+        });
+
       }
     }
 
@@ -98,12 +104,23 @@ const PaymentMethods = (props) => {
               standard: true,
               express: false
           })
+
+          props.callback({
+                payment: { ...card},
+                delivery: 0
+          });
+
         }
         if(e.target.name === 'express') {
             setDeliveryMethod({
                 standard: false,
                 express: true
             })
+
+            props.callback({
+                payment: { ...card},
+                delivery: 1
+            });
         }
     }
 
@@ -126,16 +143,11 @@ const PaymentMethods = (props) => {
                 ...card,
                 ...card.payment_info
             });
-        }
 
-        if(!deliveryMethod.express && !deliveryMethod.standard){
-            console.log("express: ", deliveryMethod.express, "standard: ", deliveryMethod.standard);
-            console.log("card: ", card);
-        }else{
-            console.log("express: ", deliveryMethod.express, "standard: ", deliveryMethod.standard);
-            console.log("card: ", card);
-            //props.callback(card);
-
+            props.callback({
+                payment: {...card},
+                delivery: (deliveryMethod.standard) ? 0 : 1
+            });
         }
     }
 

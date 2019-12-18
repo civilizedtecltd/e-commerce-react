@@ -3,7 +3,7 @@ import {Container, Card ,Form, Col, Row, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty';
 import {connect} from 'react-redux';
-import {setDeliveryAddress, setPaymentDetails} from '../redux/actions/shopActions';
+import {setDeliveryAddress, setPaymentDetails, confirmOrder} from '../redux/actions/shopActions';
 import PaymentsMethods from './PaymentMethods';
 import {futureDate} from '../helpers/utils';
 import './checkout.css';
@@ -111,8 +111,21 @@ const CheckoutTab = (props) => {
 
     const confirmOrder = (e) => {
         e.preventDefault();
-        console.log("User: ", formData);
-        console.log("Payment", payment);
+
+        const books = [];
+
+        props.cart.map(item => {
+            books.push({
+                id: item.id,
+                quantity: item.quantity
+            });
+        });
+
+        console.log({
+            address: formData,
+            ...payment,
+            books
+        });
     }
 
     return(<>
@@ -240,7 +253,7 @@ const CheckoutTab = (props) => {
                                                 </Col>
 
                                                 <Col sm="6" className="col-6 text-right">
-                                                    <button type="button" className="btn btn-primary" disabled={(isEmpty(payment) ? true : false)} onClick={handleNext}>Next</button>
+                                                    <button type="button" className="btn btn-primary" disabled={(isEmpty(payment.payment) ? true : false)} onClick={handleNext}>Next</button>
                                                 </Col>
                                             </div>
                                         </Row>
@@ -277,8 +290,8 @@ const CheckoutTab = (props) => {
 
                                     <Col sm="6" className="mt-4">
                                         <ul className="orderConfrimationList text-large">
-                                            <li><strong>Total Price:</strong> 50.00</li>
-                                            <li><strong>Delivery method:</strong> { (!isEmpty(payment)? (payment.type).toUpperCase(): '')}</li>
+                                            <li><strong>Total Price:</strong>{props.totalPrice}</li>
+                                            <li><strong>Delivery method:</strong> {(!isEmpty(payment) && payment.delivery === 0) ? 'Standard' : 'Express'}</li>
                                             <li><strong>Expected arrival:</strong>  {futureDate(7)}</li>
                                         </ul>
                                     </Col>
@@ -308,7 +321,8 @@ const mapStateToProps = state =>({
 
 const mapDispatchToProps = dispatch => ({
     setAddress: (address) => dispatch(setDeliveryAddress(address)),
-    setPayment: (payment) => dispatch(setPaymentDetails(payment))
+    setPayment: (payment) => dispatch(setPaymentDetails(payment)),
+    confirmOrder: (info) => dispatch(confirmOrder(info))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutTab);

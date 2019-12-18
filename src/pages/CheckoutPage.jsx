@@ -95,7 +95,7 @@ const CheckoutPage = (props) => {
             </Container>
           </section> }
           <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
-           <CheckoutTab/>
+           <CheckoutTab totalPrice={totalBookPrice}/>
           </section>
         </main>
       </div>
