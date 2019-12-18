@@ -14,33 +14,29 @@ import './assets/favorite.css'
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const FavoritesPage = (props) => {
+  console.log(props)
+  const totalCartItems = props.cart.length;
+  const totalFavoriteItems = props.favorite.length;
 
-  const totalItem = props.cart.length;
-  const [favorite , setFavorite ] = useState([])
+  const favoriteItems = (totalFavoriteItems !== 0 )? props.favorite : [];
 
   useEffect(() => {
-    props.showAllFavItem()
-    setFavorite(props.favorite)
+    props.showAllFavItem()    
   },[props.favorite.length]);
 
-
-  const removeFavoriteItem = (id) => {
-    props.removeFavItem(id);
-  }
-
-
-
+  const removeFavoriteItem = (id) => props.removeFavItem(id);
+  
   return (
     <>
-      <PageLoader loading={false}/>
+      <PageLoader loading={props.favorite.pending}/>
       <div className="allWrapper">
         <HeaderComponent
-          favorite_item={favorite.length}
-          cartItem={totalItem}
+          favorite_item={totalFavoriteItems}
+          cartItem={totalCartItems}
         />
         <MobileHeader 
-         favorite_item={favorite.length}
-         cartItem={totalItem}
+         favorite_item={totalFavoriteItems}
+         cartItem={totalCartItems}
         />
         <main className="mainContent clearfix" id="mainContent">
           <section
@@ -56,7 +52,7 @@ const FavoritesPage = (props) => {
               </Row>
             </Container>
           </section>
-          { favorite.length === 0 ?
+          { totalFavoriteItems === 0 ?
           <section className="chooseCategory clearfix" id="chooseCategory">
             <Container>
               <Row>
@@ -186,7 +182,9 @@ const FavoritesPage = (props) => {
           >
             <Container>
               <Row className="mt-5 mb-5 ">
-                {favorite.map((item, index) => (
+                {favoriteItems.map((item, index) => { 
+                  console.log("cover_images.img_1 : ", item.cover_images.img_1);
+                  return(                  
                   <NewBookComponent
                     key={index}
                     bookId={item.id}
@@ -195,11 +193,10 @@ const FavoritesPage = (props) => {
                     ProductTitle={item.name}
                     AuthorName={item.book_author.name}
                     ProductPrice={item.price}
-                    isFev={true}
-                    removeFavItem = { removeFavoriteItem }
-                    stateFav= { setFavorite }
+                    isFev = {true}
+                    removeFavItem = { removeFavoriteItem }                    
                   />
-                ))}
+                )} )}
               </Row>
             </Container>
           </section>

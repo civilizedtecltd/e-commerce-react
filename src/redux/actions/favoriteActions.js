@@ -5,11 +5,15 @@ import { URL } from '../../constants/config';
 
 const addToFavorite = (id) => dispatch =>{
     setAuthToken();
+    fetchPendingFavorite();
     axios.post(URL._FAVORITE_ITEMS, {book_id:id})
-    .then(res=>dispatch({
+    .then(res=>{
+        dispatch({
            type:Types.ADD_FAVORITE,
-           payload: [...res.data.data]
-   }))
+           payload: [...res.data.data],
+           pending: false
+   })
+})
    .catch(error =>console.log(error))
 }
 
@@ -17,9 +21,13 @@ const addToFavorite = (id) => dispatch =>{
 
 const removeFavItem = (id) => dispatch =>{
     setAuthToken();
+    fetchPendingFavorite();
     axios.post(URL._DELETE_FAVORITE(id)).then(res=> dispatch({
         type:Types.REMOVE_FAVORITE_ITEM,
-        payload:[...res.data.data ]
+        payload:[
+            ...res.data.data
+        ],
+        pending:false
     }))
     .catch(error =>console.log(error))
 
@@ -27,11 +35,16 @@ const removeFavItem = (id) => dispatch =>{
 
 const showFavItems = () => dispatch => {
     setAuthToken();
+    fetchPendingFavorite();
     axios.get(URL._FAVORITE_ITEMS)
          .then(res => dispatch({
                 type: Types.SHOW_ALL_FAVORITE,
-                payload: [ ...res.data.data ]
-             }))
+                payload: {
+                    items: [ ...res.data.data ],
+                    pending: false
+                },
+                
+             })) //pending: false
          .catch(error => console.log(error))
 }
 
@@ -46,11 +59,21 @@ const favoriteNotInState = (favorite) => ({
 })
 
 
+const fetchPendingFavorite = () =>{
+    return {
+        type:Types.FETCH_FAVORITE_PENDING,
+        payload:[],
+        pending:true
+    }
+}
+
+
 
 export{
     addToFavorite,
     showFavItems,
     removeFavItem,
     favoriteNotInState,
-    emptyFavItems
+    emptyFavItems,
+    fetchPendingFavorite
 }

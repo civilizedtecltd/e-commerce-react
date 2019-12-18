@@ -3,13 +3,23 @@ import * as Types from '../actions/actionTypes';
 
 
 const bookReducer = ( state ={}, actions) => {
-
-    const { payload } = actions;
+ 
+    const { payload , pending } = actions;
     switch (actions.type) {
+        case Types.FETCH_BOOK_PENDING:
+            return actions.pending;
+        case Types.FETCH_BOOK_SUCCESS:
+            return payload;
         case Types.FETCH_ALL_BOOKS:
-            return payload;
+            return {
+                ...payload,
+                pending
+            };
         case Types.FETCH_BOOK_BY_CATEGORY:
-            return payload;
+            return  {
+                ...payload,
+                pending
+            }
         case Types.SHOW_SINGLE_BOOK:
             return payload;
         case Types.SEARCH_BOOK:

@@ -26,50 +26,42 @@ const useStyle = createUseStyles({
 
 const ShopPage = (props) => {
     const classes = useStyle()
-
-    const { id, title, pageNumber, showItem, keyword } =  useParams();
+    const { id, title, showItem, keyword } =  useParams();
     const isNaN_id = Number(id)
     const [lowerPrice , setLowerPrice] = useState(null);
     const [higherPrice , setHigherPrice] = useState(null);
     let [show , setShowBook ] = useState(5);
     let [page , setPage ] = useState(1);
     let [totalPage , setTotalPage] = useState(props.book.totalPage)
-    let [sortBy , setSortBy] = useState(null)
-  
+    let [sortBy , setSortBy] = useState('')
+    let [loading] = useState(()=>props.book.pending)
     const totalItem = props.cart.length
     const favoriteItem = props.favorite;
     const books = props.book.data ? props.book.data : [];
-
     const PriceRange = (minPrice, maxPrice) => {
       setLowerPrice(minPrice)
       return setHigherPrice(maxPrice)
     }
 
     useEffect(()=>{
-      setTotalPage(props.book.totalPage)
-      if(page && show && sortBy){ 
-        return props.filterShortBy(page,show,sortBy)
-      }
+      if(page && show && sortBy){   
+              
+         return props.filterShortBy(page,show,sortBy)
+      }else if(page && show && lowerPrice && higherPrice) {
 
-      else if(page && show && lowerPrice && higherPrice) {
         return props.filterByPrice(page,show,lowerPrice,higherPrice)
-      }
+      }else if(id === 'all' && page  && show  && keyword) {
 
-      else if(id === 'all' && page  && show  && keyword) {
         return props.fetchAllBook(page, show, keyword)
-      }
+      }else if(isNaN_id !== NaN && page && show) {
 
-      else if(isNaN_id !== NaN && page && show) {
         return props.fetchBooksByCategory(id, page,show);
       }
-
-    },[sortBy,higherPrice,lowerPrice,page,show,id,props])
-
+    },[sortBy,higherPrice,lowerPrice,page,show,id])
 
   const handleShowBook = (e)=> {
     e.preventDefault()
     setShowBook(e.target.value);
-    return setTotalPage(props.book.totalPage);
   }
 
   const handleNext = (e) => {
@@ -91,12 +83,9 @@ const ShopPage = (props) => {
       return setSortBy(e.target.value)  
   }
 
-
- 
-
   return (
     <>
-      <PageLoader loading={false}/>
+      <PageLoader loading={props.book.pending}/>
       <div className="allWrapper">
         <HeaderComponent
          favorite_item={favoriteItem.length}
@@ -152,7 +141,7 @@ const ShopPage = (props) => {
                             <label htmlFor="">Sort By</label>
                           </li>
                           <li>
-                            <select className="filterSelect form-control" onChange ={handleSortBy}>
+                            <select className="filterSelect form-control" value={sortBy} onChange ={handleSortBy}>
                               <option value="">select</option>
                               <option value="Popular">Popular</option>
                               <option value="New">New</option>
@@ -195,7 +184,7 @@ const ShopPage = (props) => {
                             </li>
                             <li className="page-item">of</li>
                             <li className={`page-item ${classes.page_field}`}>
-                              <input type="text" id="total-page" value= {totalPage} className="page-link" readOnly/>
+                              <input type="text" id="total-page" value= {props.book.totalPage} className="page-link" readOnly/>
                             </li>
                             <li className="page-item" onClick={handleNext} >
                               <button className="page-link">
@@ -247,7 +236,7 @@ const ShopPage = (props) => {
                             <label htmlFor="">Sort By</label>
                           </li>
                           <li>
-                            <select className="filterSelect form-control" onChange ={handleSortBy}>
+                            <select className="filterSelect form-control" value={sortBy} onChange ={handleSortBy}>
                               <option value="">select</option>
                               <option value="Popular">Popular</option>
                               <option value="New">New</option>
@@ -290,7 +279,7 @@ const ShopPage = (props) => {
                             </li>
                             <li className="page-item">of</li>
                             <li className={`page-item ${classes.page_field}`}>
-                              <input type="text" id="total-page" value= {totalPage} className="page-link" readOnly/>
+                              <input type="text" id="total-page" value= {props.book.totalPage} className="page-link" readOnly/>
                             </li>
                             <li className="page-item" onClick={handleNext} >
                               <button className="page-link">
