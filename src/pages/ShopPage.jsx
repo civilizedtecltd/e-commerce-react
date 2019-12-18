@@ -57,26 +57,29 @@ const ShopPage = (props) => {
     const PriceRange = (minPrice, maxPrice) => {
       setLowerPrice(minPrice)
       setHigherPrice(maxPrice) 
-      if(page && show && lowerPrice && higherPrice) return props.filterByPrice(page,show,lowerPrice,higherPrice)
     }
 
+    useEffect(()=>{
+      if(page && show && lowerPrice && higherPrice) props.filterByPrice(page,show,lowerPrice,higherPrice)
+    },[page,show,lowerPrice,higherPrice])
+
     useEffect(() => {
-      // if(page && show && lowerPrice && higherPrice) return props.filterByPrice(page,show,lowerPrice,higherPrice)
-      if(id==='all' && pageNumber  && showItem  && keyword) return props.fetchAllBook(page, show, keyword)
       if(id !== "all" && id) props.fetchBooksByCategory(id, page,show);
-    },[page,show,lowerPrice,higherPrice]);
+    },[id,page,show]);
 
     useEffect(()=>{
-      console.log(page,show,sortBy)
-      props.filterShortBy(page,show,sortBy)
-    },[sortBy])
+      if(id==='all' && page  && show  && keyword)  props.fetchAllBook(page, show, keyword)
+    },[pageNumber,showItem,keyword])
+
+    useEffect(()=>{
+      if(page && show && sortBy) props.filterShortBy(page,show,sortBy)
+    },[page,show,sortBy])
 
   const handleShowBook = (e)=> {
     e.preventDefault()
     setShowBook(Number(e.target.value));
     const t_pages = (Number(e.target.value) !== 0 && Number(e.target.value) <= Number(props.totalItem)) ? Math.ceil(Number(props.totalItem)/Number(e.target.value)) : 1 ;
     setTotalPage(t_pages);
-
     return ( id === 'all') ? props.fetchAllBook(page, Number(e.target.value)) : props.fetchBooksByCategory(id, page, Number(e.target.value));
   }
 
