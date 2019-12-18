@@ -1,6 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {Form, Accordion , useAccordionToggle} from 'react-bootstrap';
+import {Form, Accordion , useAccordionToggle, Alert} from 'react-bootstrap';
 import {connect} from 'react-redux';
+import { setPayment } from '../redux/actions/authActions';
 import { setDeliveryAddress } from '../redux/actions/shopActions';
 
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
@@ -12,30 +13,7 @@ import defaultMethods from '../inc/PaymentMethods/defaultPaymentMethods.json';
 
 const CheckToggle = ({ children, eventKey, title }) => {
 
-    const decoratedOnClick = useAccordionToggle(eventKey, () => {
-
-        /* if(eventKey === 0){
-
-            document.getElementById('ch-1').checked=false;
-            document.getElementById('ch-2').checked=false;
-
-        }
-        if(eventKey === 1){
-
-            document.getElementById('ch-0').checked=false;
-            document.getElementById('ch-2').checked=false;
-
-        }
-
-        if(eventKey === 2){
-
-            document.getElementById('ch-0').checked=false;
-            document.getElementById('ch-1').checked=false;
-
-        } */
-    })
-
-
+    const decoratedOnClick = useAccordionToggle(eventKey, () => {});
 
     return (
         <Form.Check
@@ -62,8 +40,30 @@ const PaymentMethods = (props) => {
         standard: false,
         express: false
     });
+    const [alert, setAlert] = useState({
+        status: false,
+        type: 'danger',
+        message: ''
+    });
 
-    const paymentMethods = (props.user.payment)? props.user.payment : defaultMethods;
+    const paymentMethods = (props.user.payment && props.user.payment.length === 3)? props.user.payment : defaultMethods;
+
+    if(props.user.payment && props.user.payment.length < 3){
+        const savedMethods = props.user.payment;
+        savedMethods.map(item => {
+            switch(item.payment_type){
+                case 'MPESA':
+                        paymentMethods[0].payment_info = { ...item.payment_info }
+                    break;
+                case 'VISA':
+                        paymentMethods[1].payment_info = { ...item.payment_info }
+                    break;
+                case 'PAYPAL':
+                        paymentMethods[2].payment_info = { ...item.payment_info }
+                    break;
+            }
+        });
+    }
 
     const handleCardOnChange = (e) => {
         const currentMethod = {
@@ -99,7 +99,7 @@ const PaymentMethods = (props) => {
               express: false
           })
         }
-        if(e.target.name==='express') {
+        if(e.target.name === 'express') {
             setDeliveryMethod({
                 standard: false,
                 express: true
@@ -109,10 +109,33 @@ const PaymentMethods = (props) => {
 
     const handleCardOnClick = (e) => {
         e.preventDefault();
+        const clearAlert = setTimeout(() => {
+            setAlert({status: false, message:''});
+        }, 5000);
+
+        if(!card.payment_info.ccv || !card.payment_info.card_number || !card.payment_info.mm || !card.payment_info.yy){
+            setAlert({
+                status: true,
+                type: 'danger',
+                message: `Please insert every field value to add ${card.payment_type} card.`
+            });
+            return () =>  clearTimeout(clearAlert);
+
+        }else{
+             props.addCard({
+                ...card,
+                ...card.payment_info
+            });
+        }
+
         if(!deliveryMethod.express && !deliveryMethod.standard){
             console.log("express: ", deliveryMethod.express, "standard: ", deliveryMethod.standard);
+            console.log("card: ", card);
         }else{
-            props.callback(card);
+            console.log("express: ", deliveryMethod.express, "standard: ", deliveryMethod.standard);
+            console.log("card: ", card);
+            //props.callback(card);
+
         }
     }
 
@@ -209,11 +232,18 @@ const PaymentMethods = (props) => {
                 </div>
             </div>
         </div>
-
-
+        <div className="mt-3">
+            <Alert show={alert.status} variant={alert.type} onClose={() => setAlert({...alert, status: false})} dismissible>
+                <p>{alert.message}</p>
+            </Alert>
+        </div>
     </>);
 }
 const mapStateToProps = state =>({
     ...state.auth
 })
-export default connect(mapStateToProps, null)(PaymentMethods);
+
+const mapDispatchToProps = dispatch => ({
+    addCard: (info) => dispatch(setPayment(info))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentMethods);
