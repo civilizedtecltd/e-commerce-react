@@ -113,7 +113,10 @@ const ShopPage = (props) => {
          favorite_item={favoriteItem.length}
          cartItem={totalItem}
           />
-        <MobileHeader />
+        <MobileHeader
+        favorite_item={favoriteItem.length}
+        cartItem={totalItem}
+         />
         <main className="mainContent clearfix" id="mainContent">
           <section
             className="sectionBreadcrumb secGap clearfix pb-0"

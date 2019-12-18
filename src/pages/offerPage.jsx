@@ -30,7 +30,10 @@ const offerPage = (props) => {
       favorite_item={favoriteItem.length}
       cartItem={totalItem}
       />
-      <MobileHeader />
+      <MobileHeader
+      favorite_item={favoriteItem.length}
+      cartItem={totalItem}
+      />
       <main className="mainContent clearfix" id="mainContent">
         <section className="offerBanner clearfix sectionBgImage sectionBgImg02" id="offerBanner">
           <Container className="container">

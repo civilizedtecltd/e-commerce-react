@@ -19,17 +19,20 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const Home = (props) => {
 
- const totalCartItem = props.cart.length
- const totalFavoriteItem = props.favorite.length
+  const totalItem = props.cart.length
+  const favoriteItem = props.favorite;
 
   return (<>
     <PageLoader loading = {false} />
     <div className="allWrapper">
           <HeaderComponent
-            favorite_item = {totalFavoriteItem}
-            cartItem = {totalCartItem}
+            favorite_item={favoriteItem.length}
+            cartItem={totalItem}
           />
-          <MobileHeader />
+          <MobileHeader
+            favorite_item={favoriteItem.length}
+            cartItem={totalItem}
+           />
       <main className="mainContent clearfix" id="mainContent">
         <section className="productCat secGap clearfix" id="productCat">
           <Container>

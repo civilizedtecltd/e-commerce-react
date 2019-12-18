@@ -120,7 +120,8 @@ const MobileHeader = (props) => {
                     <Col>
                         <Link to="/favorites">
                              <span className="cartBadge">
-                             <i className="far fa-star"></i><span className="badge badge-danger">10</span></span> Favorites
+                            <i className="far fa-star"></i>{props.favorite_item !== 0 ? <Badge variant="danger"> {props.favorite_item} </Badge> : ''}</span> Favorites
+                            {/* <li><Link to="/favorites"><span className="cartBadge"><i className="far fa-star"></i>{props.favorite_item !== 0 ? <Badge variant="danger"> {props.favorite_item} </Badge> : ''}</span> Favorites</Link></li> */}
                         </Link>
                     </Col>
                 </Modal.Footer>
