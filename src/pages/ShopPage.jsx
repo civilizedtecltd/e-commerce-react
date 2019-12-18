@@ -28,6 +28,7 @@ const ShopPage = (props) => {
     const classes = useStyle()
 
     const { id, title , pageNumber , showItem, keyword } =  useParams();
+    const isNaN_id = Number(id)
 
     const [lowerPrice , setLowerPrice] = useState(0);
     const [higherPrice , setHigherPrice] = useState(100000);
@@ -56,38 +57,46 @@ const ShopPage = (props) => {
 
     const PriceRange = (minPrice, maxPrice) => {
       setLowerPrice(minPrice)
-      setHigherPrice(maxPrice) 
+      setHigherPrice(maxPrice)
+      // if(page && show && lowerPrice && higherPrice)return props.filterByPrice(page,show,lowerPrice,higherPrice) 
     }
 
     useEffect(()=>{
-      if(page && show && lowerPrice && higherPrice) props.filterByPrice(page,show,lowerPrice,higherPrice)
-    },[page,show,lowerPrice,higherPrice])
+      if(page && show && sortBy){ return props.filterShortBy(page,show,sortBy)}
 
-    useEffect(() => {
-      if(id !== "all" && id) props.fetchBooksByCategory(id, page,show);
-    },[id,page,show]);
+      else if(page && show && lowerPrice && higherPrice) {return props.filterByPrice(page,show,lowerPrice,higherPrice)}
 
-    useEffect(()=>{
-      if(id==='all' && page  && show  && keyword)  props.fetchAllBook(page, show, keyword)
-    },[pageNumber,showItem,keyword])
+      else if(id === 'all' && page  && show  && keyword) {return props.fetchAllBook(page, show, keyword)}
 
-    useEffect(()=>{
-      if(page && show && sortBy) props.filterShortBy(page,show,sortBy)
-    },[page,show,sortBy])
+      else if(isNaN_id !== NaN && page && show) {return props.fetchBooksByCategory(id, page,show);}
+
+    },[sortBy,higherPrice,lowerPrice,page,show,id])
+
+    // useEffect(() => {
+    //   if(id !== "all" && id) props.fetchBooksByCategory(id, page,show);
+    // },[id]);
+
+    // useEffect(()=>{
+    //   if(id==='all' && page  && show  && keyword)  props.fetchAllBook(page, show, keyword)
+    // },[page,show,keyword])
+
+    // useEffect(()=>{
+    //   if(page && show && sortBy) props.filterShortBy(page,show,sortBy)
+    // },[page,show,sortBy])
 
   const handleShowBook = (e)=> {
     e.preventDefault()
     setShowBook(Number(e.target.value));
     const t_pages = (Number(e.target.value) !== 0 && Number(e.target.value) <= Number(props.totalItem)) ? Math.ceil(Number(props.totalItem)/Number(e.target.value)) : 1 ;
     setTotalPage(t_pages);
-    return ( id === 'all') ? props.fetchAllBook(page, Number(e.target.value)) : props.fetchBooksByCategory(id, page, Number(e.target.value));
+    // return ( id === 'all') ? props.fetchAllBook(page, Number(e.target.value)) : props.fetchBooksByCategory(id, page, Number(e.target.value));
   }
 
   const handleNext = (e) => {
       e.preventDefault();
       if(page!==totalPage){
         setPage(++page)
-        return ( id === 'all') ? props.fetchAllBook(page, show, keyword) : props.fetchBooksByCategory(id, page, show);
+        // return ( id === 'all') ? props.fetchAllBook(page, show, keyword) : props.fetchBooksByCategory(id, page, show);
       }
 
   }
@@ -96,13 +105,14 @@ const ShopPage = (props) => {
     e.preventDefault();
     if(page !== 1){
       setPage(--page)
-      return ( id === 'all') ? props.fetchAllBook(page, show,keyword) : props.fetchBooksByCategory(id, page, show);
+      // return ( id === 'all') ? props.fetchAllBook(page, show,keyword) : props.fetchBooksByCategory(id, page, show);
     }
     if(page === 0) return setPage(1)
   }
   const handleSortBy = (e) =>{
       e.preventDefault();
       return setSortBy(e.target.value)
+      // if(page && show && sortBy) props.filterShortBy(page,show,sortBy)
   }
 
 
@@ -261,11 +271,12 @@ const ShopPage = (props) => {
                             <label htmlFor="">Sort By</label>
                           </li>
                           <li>
-                            <select className="filterSelect form-control">
-                              <option>Popular</option>
-                              <option>New</option>
-                              <option>Price: low to high</option>
-                              <option>Price: high to low</option>
+                            <select className="filterSelect form-control" onChange ={handleSortBy}>
+                              <option value="">select</option>
+                              <option value="Popular">Popular</option>
+                              <option value="New">New</option>
+                              <option value="Price: low to high">Price: low to high</option>
+                              <option value="Price: high to low">Price: high to low</option>
                             </select>
                           </li>
                         </ul>
