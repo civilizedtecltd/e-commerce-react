@@ -19,7 +19,7 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const CartPage = (props) => {
 
-  const favoriteItem = props.favorite;
+  const favoriteItem = props.favorite.items;
   const cartItems    = props.cart;
 
   let totalBookPrice = 0;
