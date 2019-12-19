@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Container, Row, Col, Card} from "react-bootstrap";
 import { connect } from 'react-redux'
 import NewBookComponent from "../components/offerPageComponents/NewBookComponent";
@@ -12,6 +11,8 @@ import { showFavItems, removeFavItem } from '../redux/actions/favoriteActions';
 import { URL } from '../constants/config'
 import './assets/favorite.css'
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
+import {categoryClass} from "../inc/users/users";
+import {Lia} from "../components/LiComponent/CommonLiComponent";
 
 const FavoritesPage = (props) => {
 
@@ -38,7 +39,7 @@ const FavoritesPage = (props) => {
           favorite_item={favorite.length}
           cartItem={totalItem}
         />
-        <MobileHeader 
+        <MobileHeader
          favorite_item={favorite.length}
          cartItem={totalItem}
         />
@@ -83,93 +84,48 @@ const FavoritesPage = (props) => {
                       <div className="cardContentDetails pt-5 pb-5 mb-5 bgGray clearfix">
                         <Row>
                           <Col sm="3">
-                            <h3 className="cardWidgetTitle mb-3">
-                              Kindergarten
-                            </h3>
+                            <h3 className="cardWidgetTitle mb-3">Kindergarten</h3>
                             <ul className="cardWidgetList text-center">
-                              <li>
-                                <Link to="#">Pre 1</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Pre 2</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Pre 3</Link>
-                              </li>
+                              {categoryClass.kindergartenSchool.map((priClass, index)=><Lia
+                                  key={index}
+                                  Title={priClass}
+                                  Url={'/'}
+                              />)}
                             </ul>
-                          </Col>
+                          </Col>{/* end of Col */}
 
                           <Col sm="3">
-                            <h3 className="cardWidgetTitle mb-3">
-                              Primary school
-                            </h3>
+                            <h3 className="cardWidgetTitle mb-3">Primary school</h3>
                             <ul className="cardWidgetList cardWidgetList2 text-center">
-                              <li>
-                                <Link to="#">Class 1</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 2</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 3</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 4</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 5</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 6</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 7</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Class 8</Link>
-                              </li>
+                              {categoryClass.primarySchool.map((priClass, index)=><Lia
+                                  key={index}
+                                  Title={priClass}
+                                  Url={'/'}
+                              />)}
                             </ul>
-                          </Col>
+                          </Col>{/* end of Col */}
 
                           <Col sm="3">
-                            <h3 className="cardWidgetTitle mb-3">
-                              Secondary school
-                            </h3>
+                            <h3 className="cardWidgetTitle mb-3">Secondary school</h3>
                             <ul className="cardWidgetList text-center">
-                              <li>
-                                <Link to="#">Form 1</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Form 2</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Form 3</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Form 4</Link>
-                              </li>
+                              {categoryClass.secondarySchool.map((priClass, index)=><Lia
+                                  key={index}
+                                  Title={priClass}
+                                  Url={'/'}
+                              />)}
                             </ul>
-                          </Col>
+                          </Col>{/* end of Col */}
 
                           <Col sm="3">
                             <h3 className="cardWidgetTitle mb-3">Stationery</h3>
                             <ul className="cardWidgetList text-center">
-                              <li>
-                                <Link to="#">Stationery</Link>
-                              </li>
-                              <li>
-                                <Link to="#">Stationery</Link>
-                              </li>
-                              <li>
-                                <Link to="#">
-                                  <strong>Bibles</strong>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="#">Bibles</Link>
-                              </li>
+                              {categoryClass.stationery.map((priClass, index)=><Lia
+                                  key={index}
+                                  Title={priClass}
+                                  Url={'/'}
+                              />)}
                             </ul>
-                          </Col>
+                          </Col>{/* end of Col */}
                         </Row>
                       </div>
                     </Card.Body>
