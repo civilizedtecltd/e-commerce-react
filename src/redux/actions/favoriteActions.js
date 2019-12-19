@@ -44,7 +44,7 @@ const showFavItems = () => dispatch => {
                     pending: false
                 },
                 
-             })) //pending: false
+             })) 
          .catch(error => console.log(error))
 }
 
@@ -55,7 +55,7 @@ const emptyFavItems = () => ({
 
 const favoriteNotInState = (favorite) => ({
     type: Types.FAVORITE_NOT_IN_STATE,
-    payload: [...favorite]
+    payload: favorite
 })
 
 

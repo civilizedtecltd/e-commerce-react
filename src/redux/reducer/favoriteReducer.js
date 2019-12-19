@@ -6,31 +6,19 @@ const favoriteReducer = ( state = initialState , action ) => {
         case Types.ADD_FAVORITE:
          const isExist = state.find((items) => items.id === payload.id)
          if (isExist === undefined){
-                return [
-                ...payload,
-                 {pending:pending}
-                ]
+                return payload
             }
             return state
 
         case Types.SHOW_ALL_FAVORITE:
-            return [
-                ...payload,
-                {pending:pending}
-            ]
+            return payload
 
         case Types.REMOVE_FAVORITE_ITEM:
-            return [
-                ...payload
-            ]
+            return payload
         case Types.FAVORITE_NOT_IN_STATE:
-            return [
-                ...payload,
-            ]
+            return payload
         case Types.EMPTY_FAVORITE_ITEMS:
-            return [
-                ...payload,
-            ]
+            return payload
         default :
          return state
 
