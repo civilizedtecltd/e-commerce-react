@@ -4,7 +4,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
 import { connect  } from 'react-redux';
 import { createUseStyles } from 'react-jss'
-import {fetchAllBook, fetchBooksByCategory,filterByPriceRange, filterShortBy } from '../redux/actions/bookActions';
+import {fetchAllBook, fetchBooksByCategory,filterByPriceRange, filterShortBy} from '../redux/actions/bookActions';
 import Filters from '../components/shop/FiltersComponents'
 
 // Product Images
@@ -35,7 +35,7 @@ const ShopPage = (props) => {
     let [page , setPage ] = useState(1);
     let [totalPage , setTotalPage] = useState(props.book.totalPage)
     let [sortBy , setSortBy] = useState(null)
-  
+
     const totalItem = props.cart.length
     const favoriteItem = props.favorite;
     const books = props.book.data ? props.book.data : [];
@@ -47,7 +47,7 @@ const ShopPage = (props) => {
 
     useEffect(()=>{
       setTotalPage(props.book.totalPage)
-      if(page && show && sortBy){ 
+      if(page && show && sortBy){
         return props.filterShortBy(page,show,sortBy)
       }
 
@@ -63,7 +63,7 @@ const ShopPage = (props) => {
         return props.fetchBooksByCategory(id, page,show);
       }
 
-    },[sortBy,higherPrice,lowerPrice,page,show,id,props])
+    },[sortBy,higherPrice,lowerPrice,page,show,id])
 
 
   const handleShowBook = (e)=> {
@@ -88,11 +88,11 @@ const ShopPage = (props) => {
   }
   const handleSortBy = (e) =>{
       e.preventDefault();
-      return setSortBy(e.target.value)  
+      return setSortBy(e.target.value)
   }
 
 
- 
+
 
   return (
     <>
@@ -304,7 +304,7 @@ const ShopPage = (props) => {
                     </div>
 
                   </>
-} 
+}
                   </div>
                 </Col>
               </Row>

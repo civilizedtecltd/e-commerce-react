@@ -1,26 +1,21 @@
 [
     {
        "payment_type": "MPESA",
-       "payment_info": {
-          "mm": "",
-          "yy": "",
-          "card_number": ""
-       }
+        "mm": "",
+        "yy": "",
+        "card_number": ""
+
     },
     {
        "payment_type": "VISA",
-       "payment_info": {
-          "mm": "",
-          "yy": "",
-          "card_number": ""
-       }
+        "mm": "",
+        "yy": "",
+        "card_number": ""
     },
     {
        "payment_type": "PAYPAL",
-       "payment_info": {
-          "mm": "",
-          "yy": "",
-          "card_number": ""
-       }
+        "mm": "",
+        "yy": "",
+        "card_number": ""
     }
  ]

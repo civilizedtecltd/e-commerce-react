@@ -77,7 +77,7 @@ const PaymentPage = (props) => {
 
                                 <tbody>
                                 { (cards.length === 0)? <></> : cards.map(card => {
-                                   const last_num =  (card.payment_info.card_number).slice(-4);
+                                   const last_num =  (card.card_number).slice(-4);
                                     return(
                                   <tr key={card.id}>
                                     <td className="cardInfotd">
@@ -89,7 +89,7 @@ const PaymentPage = (props) => {
                                             </span>
                                             </h3>
                                             <p className="payExp">
-                                            Expires in {card.payment_info.mm}/{card.payment_info.yy}
+                                            Expires in {card.mm}/{card.yy}
                                             </p>
                                         </div>
                                     </td>
