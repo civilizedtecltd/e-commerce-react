@@ -5,12 +5,10 @@ import store from '../store';
 import { URL } from '../../constants/config';
 import {setAuthToken, removeAuthToken } from '../../helpers/setAuthToken';
 
-
 const login = (authData) => dispatch => {
     removeAuthToken();
     axios.post(URL._LOGIN, authData)
         .then(res => {
-
             try{
                 const jwt = res.data.data;
                 const { data } = decode(jwt.token);

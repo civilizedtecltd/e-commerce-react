@@ -20,10 +20,10 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 const Home = (props) => {
 
   const totalItem = props.cart.length
-  const favoriteItem = props.favorite;
+  const favoriteItem = props.favorite.items;
 
   return (<>
-    <PageLoader loading = {false} />
+    <PageLoader loading = {props.favorite.pending} />
     <div className="allWrapper">
           <HeaderComponent
             favorite_item={favoriteItem.length}
@@ -39,31 +39,30 @@ const Home = (props) => {
               <div className="categorySlider">
                 <CategoryHome/>
               </div>
-          </Container>{/* end of Container */}
-        </section>{/* end of productCat */}
+          </Container>
+        </section>
 
         <section className="ourBenefits clearfix secGap bgGray" id="ourBenefits">
           <Container>
             <Row>
               <Col>
                 <h2 className="sectionTitle mb-5 text-center">Our <span>benefits</span></h2>
-              </Col>{/* end of Col */}
-            </Row>{/* end of Row */}
+              </Col>
+            </Row>
 
             <Row>
-
               <Col sm="3">
                 <Card className="singleFeature pt-3 pb-3 border-0">
                   <div className="featureMedia text-center">
                     <img src={featureIcon1} alt="" />
-                  </div>{/* end of featureMedia */}
+                  </div>
 
                   <Card.Body className="text-center">
                     <h4>Fast delivery</h4>
                     <p>Lorem ipsum dolor sit ament, consect etur  adipiscing elit, sed do eiusmod</p>
-                  </Card.Body>{/* end of Card.Body */}
-                </Card>{/* end of Card */}
-              </Col>{/* end of Col */}
+                  </Card.Body>
+                </Card>
+              </Col>
 
               <Col sm="3">
                 <Card className="singleFeature pt-3 pb-3 border-0">
