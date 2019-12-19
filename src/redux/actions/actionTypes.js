@@ -46,7 +46,7 @@ export const CONFIRM_ORDER          = 'CONFIRM_ORDER';
 export const SEARCH_BOOK            = 'SEARCH_BOOK';
 
 export const FILTER_BY_PRICE_RANGE  = 'FILTER_BY_PRICE_RANGE';
-export const FILTER_SHORT_BY        = 'FILTER_SHORT_BY'
+export const FILTER_SHORT_BY        = 'FILTER_SHORT_BY';
 
 //fetching action
 export const FETCH_BOOK_PENDING = 'FETCH_BOOK_PENDING';
@@ -54,6 +54,7 @@ export const FETCH_BOOK_SUCCESS = 'FETCH_BOOK_SUCCESS';
 export const FETCH_BOOK_ERROR = 'FETCH_BOOK_ERROR';
 
 export const FETCH_FAVORITE_PENDING = 'FETCH_FAVORITE_PENDING';
+export const FETCH_SHOPPING_PENDING = 'FETCH_SHOPPING_PENDING';
 
 
 

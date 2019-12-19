@@ -33,13 +33,15 @@ const fetchBooksByCategory = (id,page,show) => dispatch => {
 }
 
  const showSingleBook = (id) => dispatch => {
+     dispatch(fetchPending())
     axios.get(URL._SINGLE_BOOK(id))
         .then(res=>{
             dispatch({
                 type:Types.SHOW_SINGLE_BOOK,
                 payload: {
                     info:  res.data.data,
-                    similar: res.data.similar
+                    similar: res.data.similar,
+                    pending:false
                 }
             })
         })

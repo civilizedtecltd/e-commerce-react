@@ -76,6 +76,14 @@ const cartNotInState = (cart) =>({
 })
 
 
+// const fetchShopping = () => {
+//     return {
+//         type: Types.FETCH_SHOPPING_PENDING,
+//         payload: false
+//     }
+// }
+
+
 
 
 export {
@@ -88,5 +96,6 @@ export {
     setPaymentDetails,
     confirmOrder,
     cartNotInState,
-    updateQuantity
+    updateQuantity,
+    // fetchShopping
 }
