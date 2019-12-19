@@ -43,7 +43,7 @@ function ProductPage(props) {
     })
     const rating = props.book ? props.book.rating : 0
     const book = (props.book !== undefined ) ? props.book : false;
-    const favoriteItem = props.favorite;
+    const favoriteItem = props.favorite.items;
 
 
   useEffect(() => {
@@ -73,7 +73,7 @@ function ProductPage(props) {
 
   return (
     <>
-      <PageLoader loading={false}/>
+      <PageLoader loading={props.favorite.pending}/>
       <div className="allWrapper">
         <HeaderComponent
         favorite_item={favoriteItem.length}

@@ -22,9 +22,9 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 const offerPage = (props) => {
 
   const totalItem = props.cart.length
-  const favoriteItem = props.favorite;
+  const favoriteItem = props.favorite.items;
   return (<>
-  <PageLoader loading={false}/>
+  <PageLoader loading={props.favorite.pending}/>
     <div className="allWrapper">
       <HeaderComponent
       favorite_item={favoriteItem.length}

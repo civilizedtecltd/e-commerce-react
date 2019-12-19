@@ -25,7 +25,7 @@ const UserProfile = (props) => {
     const [formData, setFormData] = useState({});
 
     const user = { ...props.auth.user}
-    const totalFavorite = props.favorite.length;
+    const totalFavorite = props.favorite.items.length;
     const totalItem = props.cart.length;
 
     useEffect(() => {
@@ -36,7 +36,6 @@ const UserProfile = (props) => {
 
        fetchData();
         props.getUser();
-
       },[user.id]);
 
     useEffect(()=>{
@@ -111,7 +110,7 @@ const UserProfile = (props) => {
     }
 
   return (<>
-      <PageLoader loading={false}/>
+      <PageLoader loading={props.favorite.pending}/>
     <div className="allWrapper">
      <HeaderComponent
           favorite_item={totalFavorite}

@@ -15,33 +15,28 @@ import {categoryClass} from "../inc/users/users";
 import {Lia} from "../components/LiComponent/CommonLiComponent";
 
 const FavoritesPage = (props) => {
-
-  const totalItem = props.cart.length;
-  const [favorite , setFavorite ] = useState([])
+  const totalCartItems = props.cart.length;
+  const totalFavoriteItems = props.favorite.items.length;
+  const favoriteItems = (totalFavoriteItems !== 0 )? props.favorite.items : [];
+  console.log(favoriteItems)
 
   useEffect(() => {
-    props.showAllFavItem()
-    setFavorite(props.favorite)
-  },[props.favorite.length]);
+    props.showAllFavItem()    
+  },[props.favorite.items.length]);
 
-
-  const removeFavoriteItem = (id) => {
-    props.removeFavItem(id);
-  }
-
-
-
+  const removeFavoriteItem = (id) => props.removeFavItem(id);
+  
   return (
     <>
-      <PageLoader loading={false}/>
+      <PageLoader loading={ props.favorite.pending}/>
       <div className="allWrapper">
         <HeaderComponent
-          favorite_item={favorite.length}
-          cartItem={totalItem}
+          favorite_item={totalFavoriteItems}
+          cartItem={totalCartItems}
         />
-        <MobileHeader
-         favorite_item={favorite.length}
-         cartItem={totalItem}
+        <MobileHeader 
+         favorite_item={totalFavoriteItems}
+         cartItem={totalCartItems}
         />
         <main className="mainContent clearfix" id="mainContent">
           <section
@@ -57,7 +52,7 @@ const FavoritesPage = (props) => {
               </Row>
             </Container>
           </section>
-          { favorite.length === 0 ?
+          { totalFavoriteItems === 0 ?
           <section className="chooseCategory clearfix" id="chooseCategory">
             <Container>
               <Row>
@@ -142,7 +137,9 @@ const FavoritesPage = (props) => {
           >
             <Container>
               <Row className="mt-5 mb-5 ">
-                {favorite.map((item, index) => (
+                {favoriteItems.map((item, index) => {
+                  console.log("kjdjsdjs",item)
+                  return(                  
                   <NewBookComponent
                     key={index}
                     bookId={item.id}
@@ -151,11 +148,10 @@ const FavoritesPage = (props) => {
                     ProductTitle={item.name}
                     AuthorName={item.book_author.name}
                     ProductPrice={item.price}
-                    isFev={true}
-                    removeFavItem = { removeFavoriteItem }
-                    stateFav= { setFavorite }
+                    isFev = {true}
+                    removeFavItem = { removeFavoriteItem }                    
                   />
-                ))}
+                )} )}
               </Row>
             </Container>
           </section>

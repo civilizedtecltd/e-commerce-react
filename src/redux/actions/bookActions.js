@@ -2,14 +2,15 @@ import * as Types from '../actions/actionTypes';
 import axios from 'axios';
 import { URL } from '../../constants/config';
 import { setAuthToken } from '../../helpers/setAuthToken'
-
+ 
  const fetchAllBook = (page,show,keyword) => dispatch => {
-     
+    dispatch(fetchPending())
     axios.get(URL._ALL_BOOKS(page,show,keyword))
         .then( res =>{
-            dispatch({
+           return dispatch({
                 type:Types.FETCH_ALL_BOOKS,
-                payload: res.data
+                payload: res.data,
+                pending:false
             })
         }).catch( error =>{
             console.log(error)
@@ -17,25 +18,30 @@ import { setAuthToken } from '../../helpers/setAuthToken'
 };
 
 const fetchBooksByCategory = (id,page,show) => dispatch => {
+     dispatch(fetchPending())
       axios.get(URL._CATEGORY_BOOKS(id,page,show))
           .then(res => {
-              dispatch({
+             return dispatch({
                   type: Types.FETCH_BOOK_BY_CATEGORY,
-                  payload: res.data
+                  payload: res.data,
+                  pending:false
               })
+              
           })
           .catch( ex => console.log(ex))
 
 }
 
  const showSingleBook = (id) => dispatch => {
+     dispatch(fetchPending())
     axios.get(URL._SINGLE_BOOK(id))
         .then(res=>{
             dispatch({
                 type:Types.SHOW_SINGLE_BOOK,
                 payload: {
                     info:  res.data.data,
-                    similar: res.data.similar
+                    similar: res.data.similar,
+                    pending:false
                 }
             })
         })
@@ -101,7 +107,8 @@ const filterShortBy = (page,show,query) => dispatch =>{
     .then(res=>{
         return dispatch({
                 type: Types.FILTER_SHORT_BY,
-                payload: res.data
+                payload: res.data,
+                pending: false
         })
     }).catch(error=>{
         console.error(error)
@@ -109,10 +116,32 @@ const filterShortBy = (page,show,query) => dispatch =>{
 }
 
 
+const fetchPending = () => {
+    return {
+        type:Types.FETCH_BOOK_PENDING,
+        payload:null,
+        pending:true
+    }
+}
+
+const fetchPendingSuccess = (data) => {
+    return {
+        type:Types.FETCH_BOOK_SUCCESS,
+        payload: data,
+        pending: false,
+    }
+}
+
+
+
+
+
 
 
 
 export {
+    fetchPending,
+    fetchPendingSuccess,
     fetchAllBook,
     showSingleBook,
     fetchCategoryList,
