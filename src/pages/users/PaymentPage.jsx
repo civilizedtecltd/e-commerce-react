@@ -21,11 +21,9 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 
 const PaymentPage = (props) => {
-    console.log("PaymentPage :", props)
   const [visible, setVisible] = useState(false);
-
   const totalItem = props.cart.length;
-  const totalFavorite = props.favorite.length;
+  const totalFavorite = props.favorite.items.length;
 
   const cards = (!isEmpty(props.payment)) ? [ ...props.payment] : [];
 
@@ -41,7 +39,7 @@ const PaymentPage = (props) => {
 
   return (
     <>
-      <PageLoader loading={false}/>
+      <PageLoader loading={props.favorite.pending}/>
       <div className="allWrapper">
         <HeaderComponent
           favorite_item={totalFavorite}

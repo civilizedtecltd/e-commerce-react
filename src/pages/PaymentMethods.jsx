@@ -1,39 +1,19 @@
-import React, {useState} from 'react';
-import {Form, Accordion , useAccordionToggle} from 'react-bootstrap';
+import React, {useState, useRef, useEffect} from 'react';
+import {Form, Accordion , useAccordionToggle, Alert} from 'react-bootstrap';
 import {connect} from 'react-redux';
+import { setPayment } from '../redux/actions/authActions';
+import { setDeliveryAddress } from '../redux/actions/shopActions';
 
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
+import card_icon_img from '../assets/images/user/card_icon_img.png'
 import './checkout.css';
 import '../assets/css/theme.css'
-import card_icon_img from '../assets/images/user/card_icon_img.png'
-import PageLoader from "../components/pageLoader/PageLoaderComponent";
-import { setDeliveryAddress } from '../redux/actions/shopActions';
+
+import defaultMethods from '../inc/PaymentMethods/defaultPaymentMethods.json';
 
 const CheckToggle = ({ children, eventKey, title }) => {
 
-    const decoratedOnClick = useAccordionToggle(eventKey, () => {
-
-        /* if(eventKey === 0){
-
-            document.getElementById('ch-1').checked=false;
-            document.getElementById('ch-2').checked=false;
-
-        }
-        if(eventKey === 1){
-
-            document.getElementById('ch-0').checked=false;
-            document.getElementById('ch-2').checked=false;
-
-        }
-
-        if(eventKey === 2){
-
-            document.getElementById('ch-0').checked=false;
-            document.getElementById('ch-1').checked=false;
-
-        } */
-    })
-
-
+    const decoratedOnClick = useAccordionToggle(eventKey, () => {});
 
     return (
         <Form.Check
@@ -55,22 +35,49 @@ const CheckToggle = ({ children, eventKey, title }) => {
 const PaymentMethods = (props) => {
 
     const [card, setCard] = useState({});
-    console.log("card: ", card);
-
+    const [selectedMethod, setSelectedMethods]= useState(null);
     const [deliveryMethod, setDeliveryMethod] = useState({
-        standard: false,
+        standard: true,
         express: false
     });
+    const [alert, setAlert] = useState({
+        status: false,
+        type: 'danger',
+        message: ''
+    });
 
-    const paymentMethods = (props.user.payment)? props.user.payment : [];
+    const paymentMethods = (props.user.payment && props.user.payment.length === 3)? props.user.payment : defaultMethods;
+
+    if(props.user.payment && props.user.payment.length < 3){
+        const savedMethods = props.user.payment;
+        savedMethods.map(item => {
+            switch(item.payment_type){
+                case 'MPESA':
+                        paymentMethods[0].payment_info = { ...item.payment_info }
+                    break;
+                case 'VISA':
+                        paymentMethods[1].payment_info = { ...item.payment_info }
+                    break;
+                case 'PAYPAL':
+                        paymentMethods[2].payment_info = { ...item.payment_info }
+                    break;
+            }
+        });
+    }
 
     const handleCardOnChange = (e) => {
-        setCard({
-            ...card,
+        const currentMethod = {
+            ...paymentMethods[selectedMethod],
             payment_info: {
-                ...card.payment_info,
+                ...paymentMethods[selectedMethod].payment_info,
                 [e.target.name]: e.target.value
             }
+        }
+
+        paymentMethods[selectedMethod] = currentMethod;
+
+        setCard({
+            ...currentMethod
         });
     }
 
@@ -78,9 +85,16 @@ const PaymentMethods = (props) => {
     const handleAccordionOnSelect = (selectedKey) => {
 
       if(selectedKey !== null){
+        setSelectedMethods(selectedKey);
         setCard({
             ...paymentMethods[selectedKey]
         });
+
+        props.callback({
+            payment: { ...paymentMethods[selectedKey]},
+            delivery: (deliveryMethod.standard) ? 0 : 1
+        });
+
       }
     }
 
@@ -90,21 +104,50 @@ const PaymentMethods = (props) => {
               standard: true,
               express: false
           })
+
+          props.callback({
+                payment: { ...card},
+                delivery: 0
+          });
+
         }
-        if(e.target.name==='express') {
+        if(e.target.name === 'express') {
             setDeliveryMethod({
                 standard: false,
                 express: true
             })
+
+            props.callback({
+                payment: { ...card},
+                delivery: 1
+            });
         }
     }
 
     const handleCardOnClick = (e) => {
         e.preventDefault();
-        if(!deliveryMethod.express && !deliveryMethod.standard){
-            console.log("express: ", deliveryMethod.express, "standard: ", deliveryMethod.standard);
+        const clearAlert = setTimeout(() => {
+            setAlert({status: false, message:''});
+        }, 5000);
+
+        if(!card.payment_info.ccv || !card.payment_info.card_number || !card.payment_info.mm || !card.payment_info.yy){
+            setAlert({
+                status: true,
+                type: 'danger',
+                message: `Please insert every field value to add ${card.payment_type} card.`
+            });
+            return () =>  clearTimeout(clearAlert);
+
         }else{
-            props.callback(card);
+             props.addCard({
+                ...card,
+                ...card.payment_info
+            });
+
+            props.callback({
+                payment: {...card},
+                delivery: (deliveryMethod.standard) ? 0 : 1
+            });
         }
     }
 
@@ -121,8 +164,8 @@ const PaymentMethods = (props) => {
                             <div className="p-3">
                                 <div className="row align-items-center">
                                     <div className="col-sm-10 form-group">
-                                        <label htmlFor="card-number">Card number</label>
-                                        <input type="text" name="card_number" className="form-control" id="card-number" aria-describedby="emailHelp" defaultValue={item.payment_info.card_number} onChange={handleCardOnChange}/>
+                                        <label htmlFor={`card-number${index+1}`}>Card number</label>
+                                        <input type="text" name="card_number" className="form-control" id={`card-number${index+1}`} aria-describedby="cardNumber"  defaultValue={item.payment_info.card_number} onChange={handleCardOnChange}/>
                                     </div>
                                     <div className="col">
                                         <img src={card_icon_img} alt=""/>
@@ -131,17 +174,17 @@ const PaymentMethods = (props) => {
 
                                 <div className="row align-items-center justify-content-between">
                                     <div className="col-sm-3 form-group">
-                                        <label htmlFor="card-number">Expiry date</label>
+                                        <label htmlFor="card-exp-mm">Expiry date</label>
                                         <ul className="cardPayFiled d-flex align-items-center justify-content-end">
-                                            <li><input type="text" name="mm" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="MM" defaultValue={item.payment_info.mm} onChange={handleCardOnChange} /></li>
+                                            <li><input type="text" name="mm" className="form-control" id={`card-exp-mm${index+1}`} aria-describedby="cardMM" placeholder="MM" defaultValue={item.payment_info.mm} onChange={handleCardOnChange} /></li>
                                             <li className="cardBl">/</li>
-                                            <li><input type="text" name="yy" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="YY" defaultValue={item.payment_info.yy} onChange={handleCardOnChange} /></li>
+                                            <li><input type="text" name="yy" className="form-control" id={`card-exp-yy${index+1}`} aria-describedby="cardYY" placeholder="YY" defaultValue={item.payment_info.yy} onChange={handleCardOnChange} /></li>
                                         </ul>
                                     </div>
 
                                     <div className="col offset-sm-4 form-group">
-                                        <label htmlFor="card-number">CVV</label>
-                                        <input type="text" name="ccv" className="form-control" id="card-number" aria-describedby="emailHelp" placeholder="CCV" onChange={handleCardOnChange} />
+                                        <label htmlFor="card-ccv">CVV</label>
+                                        <input type="text" name="ccv" className="form-control" id={`card-ccv${index+1}`} aria-describedby="emailHelp" placeholder="CCV" onChange={handleCardOnChange} />
                                     </div>
                                     <div className="col-sm-2">
                                         <img src={card_icon_img} alt=""/>
@@ -201,11 +244,18 @@ const PaymentMethods = (props) => {
                 </div>
             </div>
         </div>
-
-
+        <div className="mt-3">
+            <Alert show={alert.status} variant={alert.type} onClose={() => setAlert({...alert, status: false})} dismissible>
+                <p>{alert.message}</p>
+            </Alert>
+        </div>
     </>);
 }
 const mapStateToProps = state =>({
     ...state.auth
 })
-export default connect(mapStateToProps, null)(PaymentMethods);
+
+const mapDispatchToProps = dispatch => ({
+    addCard: (info) => dispatch(setPayment(info))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentMethods);

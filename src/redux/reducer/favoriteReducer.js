@@ -1,10 +1,16 @@
 import * as Types from '../actions/actionTypes'
-const initialState = []
+const initialState = {
+    items:[],
+    pending:false
+}
+   
+
 const favoriteReducer = ( state = initialState , action ) => {
-    const { payload, pending } = action
+    const { payload } = action
+    console.log(action)
     switch(action.type){
         case Types.ADD_FAVORITE:
-         const isExist = state.find((items) => items.id === payload.id)
+         const isExist = state.items.find((items) => items.id === payload.items.id)
          if (isExist === undefined){
                 return payload
             }
@@ -16,6 +22,7 @@ const favoriteReducer = ( state = initialState , action ) => {
         case Types.REMOVE_FAVORITE_ITEM:
             return payload
         case Types.FAVORITE_NOT_IN_STATE:
+            console.log(payload)
             return payload
         case Types.EMPTY_FAVORITE_ITEMS:
             return payload

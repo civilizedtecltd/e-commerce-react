@@ -59,7 +59,7 @@ const setPaymentDetails = (data) => ({
 })
 
 const confirmOrder = (data) => dispatch => {
-    axios.post(URL, { ...data })
+    axios.post(URL._CONFIRM_ORDER, { ...data })
          .then(res => {
             return dispatch({
                 type: Types.CONFIRM_ORDER
