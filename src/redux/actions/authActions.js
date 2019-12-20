@@ -124,6 +124,19 @@ const deletePayment = (id) => dispatch => {
          .catch(error => console.log(error));
 }
 
+const confirmOrder = (data) => dispatch => {
+    axios.post(URL._CONFIRM_ORDER, { ...data })
+         .then(res => {
+            return dispatch({
+                type: Types.CONFIRM_ORDER,
+                payload: [ ...res.data.data ]
+            })
+         })
+         .catch(error => {
+             console.log(error)
+         })
+}
+
 const authNotInState = (authData) => ({
     type: Types.AUTH_NOT_IN_STATE,
     payload: authData
@@ -137,5 +150,6 @@ export {
     update,
     getUser,
     setPayment,
-    deletePayment
+    deletePayment,
+    confirmOrder
 }

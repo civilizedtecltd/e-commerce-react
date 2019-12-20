@@ -3,7 +3,8 @@ import {Container, Card ,Form, Col, Row, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty';
 import {connect} from 'react-redux';
-import {setDeliveryAddress, setPaymentDetails, confirmOrder} from '../redux/actions/shopActions';
+import {setDeliveryAddress, setPaymentDetails} from '../redux/actions/shopActions';
+import { confirmOrder } from '../redux/actions/authActions';
 import PaymentsMethods from './PaymentMethods';
 import {futureDate} from '../helpers/utils';
 import './checkout.css';

@@ -4,7 +4,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
 import { connect  } from 'react-redux';
 import { createUseStyles } from 'react-jss'
-import {fetchAllBook, fetchBooksByCategory,filterByPriceRange, filterShortBy } from '../redux/actions/bookActions';
+import {fetchAllBook, fetchBooksByCategory,filterByPriceRange, filterShortBy} from '../redux/actions/bookActions';
 import Filters from '../components/shop/FiltersComponents'
 
 // Product Images
@@ -25,7 +25,7 @@ const useStyle = createUseStyles({
 })
 
 const ShopPage = (props) => {
-  console.log(props)
+
     const classes = useStyle()
     const { id, title, showItem,pageNumber, keyword } =  useParams();
     const isNaN_id = Number(id)
@@ -45,8 +45,8 @@ const ShopPage = (props) => {
     }
 
     useEffect(()=>{
-      if(page && show && sortBy){   
-              
+      if(page && show && sortBy){
+
          return props.filterShortBy(page,show,sortBy)
       }else if(page && show && lowerPrice && higherPrice) {
 
@@ -81,7 +81,7 @@ const ShopPage = (props) => {
   }
   const handleSortBy = (e) =>{
       e.preventDefault();
-      return setSortBy(e.target.value)  
+      return setSortBy(e.target.value)
   }
 
   return (
@@ -294,7 +294,7 @@ const ShopPage = (props) => {
                     </div>
 
                   </>
-} 
+}
                   </div>
                 </Col>
               </Row>

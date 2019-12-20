@@ -58,32 +58,11 @@ const setPaymentDetails = (data) => ({
     }
 })
 
-const confirmOrder = (data) => dispatch => {
-    axios.post(URL._CONFIRM_ORDER, { ...data })
-         .then(res => {
-            return dispatch({
-                type: Types.CONFIRM_ORDER
-            })
-         })
-         .catch(error => {
-             console.log(error)
-         })
-}
 
 const cartNotInState = (cart) =>({
     type: Types.CART_NOT_IN_STATE,
     payload: [...cart]
 })
-
-
-// const fetchShopping = () => {
-//     return {
-//         type: Types.FETCH_SHOPPING_PENDING,
-//         payload: false
-//     }
-// }
-
-
 
 
 export {
@@ -94,8 +73,6 @@ export {
     deleteAllFromCart,
     setDeliveryAddress,
     setPaymentDetails,
-    confirmOrder,
     cartNotInState,
-    updateQuantity,
-    // fetchShopping
+    updateQuantity
 }

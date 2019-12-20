@@ -1,9 +1,7 @@
 import * as Types from '../actions/actionTypes';
 
 const initSate = {
-    cart: [],
-    address: {},
-    payment: {},
+    cart: []
 };
 
 const shopReducer = (state = initSate, { type, payload }) => {

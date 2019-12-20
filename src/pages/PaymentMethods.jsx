@@ -53,13 +53,13 @@ const PaymentMethods = (props) => {
         savedMethods.map(item => {
             switch(item.payment_type){
                 case 'MPESA':
-                        paymentMethods[0].payment_info = { ...item.payment_info }
+                        paymentMethods[0] = { ...item}
                     break;
                 case 'VISA':
-                        paymentMethods[1].payment_info = { ...item.payment_info }
+                        paymentMethods[1] = { ...item}
                     break;
                 case 'PAYPAL':
-                        paymentMethods[2].payment_info = { ...item.payment_info }
+                        paymentMethods[2] = { ...item}
                     break;
             }
         });
@@ -68,10 +68,7 @@ const PaymentMethods = (props) => {
     const handleCardOnChange = (e) => {
         const currentMethod = {
             ...paymentMethods[selectedMethod],
-            payment_info: {
-                ...paymentMethods[selectedMethod].payment_info,
-                [e.target.name]: e.target.value
-            }
+            [e.target.name]: e.target.value
         }
 
         paymentMethods[selectedMethod] = currentMethod;
@@ -92,9 +89,8 @@ const PaymentMethods = (props) => {
 
         props.callback({
             payment: { ...paymentMethods[selectedKey]},
-            delivery: (deliveryMethod.standard) ? 0 : 1
+            delivery: (deliveryMethod.standard) ? 1 : 2
         });
-
       }
     }
 
@@ -107,7 +103,7 @@ const PaymentMethods = (props) => {
 
           props.callback({
                 payment: { ...card},
-                delivery: 0
+                delivery: 1
           });
 
         }
@@ -119,7 +115,7 @@ const PaymentMethods = (props) => {
 
             props.callback({
                 payment: { ...card},
-                delivery: 1
+                delivery: 2
             });
         }
     }
@@ -130,7 +126,7 @@ const PaymentMethods = (props) => {
             setAlert({status: false, message:''});
         }, 5000);
 
-        if(!card.payment_info.ccv || !card.payment_info.card_number || !card.payment_info.mm || !card.payment_info.yy){
+        if(!card.ccv || !card.card_number || !card.mm || !card.yy){
             setAlert({
                 status: true,
                 type: 'danger',
@@ -140,13 +136,12 @@ const PaymentMethods = (props) => {
 
         }else{
              props.addCard({
-                ...card,
-                ...card.payment_info
+                ...card
             });
 
             props.callback({
                 payment: {...card},
-                delivery: (deliveryMethod.standard) ? 0 : 1
+                delivery: (deliveryMethod.standard) ? 1 : 2
             });
         }
     }
@@ -165,7 +160,7 @@ const PaymentMethods = (props) => {
                                 <div className="row align-items-center">
                                     <div className="col-sm-10 form-group">
                                         <label htmlFor={`card-number${index+1}`}>Card number</label>
-                                        <input type="text" name="card_number" className="form-control" id={`card-number${index+1}`} aria-describedby="cardNumber"  defaultValue={item.payment_info.card_number} onChange={handleCardOnChange}/>
+                                        <input type="text" name="card_number" className="form-control" id={`card-number${index+1}`} aria-describedby="cardNumber"  defaultValue={item.card_number} onChange={handleCardOnChange}/>
                                     </div>
                                     <div className="col">
                                         <img src={card_icon_img} alt=""/>
@@ -176,9 +171,9 @@ const PaymentMethods = (props) => {
                                     <div className="col-sm-3 form-group">
                                         <label htmlFor="card-exp-mm">Expiry date</label>
                                         <ul className="cardPayFiled d-flex align-items-center justify-content-end">
-                                            <li><input type="text" name="mm" className="form-control" id={`card-exp-mm${index+1}`} aria-describedby="cardMM" placeholder="MM" defaultValue={item.payment_info.mm} onChange={handleCardOnChange} /></li>
+                                            <li><input type="text" name="mm" className="form-control" id={`card-exp-mm${index+1}`} aria-describedby="cardMM" placeholder="MM" defaultValue={item.mm} onChange={handleCardOnChange} /></li>
                                             <li className="cardBl">/</li>
-                                            <li><input type="text" name="yy" className="form-control" id={`card-exp-yy${index+1}`} aria-describedby="cardYY" placeholder="YY" defaultValue={item.payment_info.yy} onChange={handleCardOnChange} /></li>
+                                            <li><input type="text" name="yy" className="form-control" id={`card-exp-yy${index+1}`} aria-describedby="cardYY" placeholder="YY" defaultValue={item.yy} onChange={handleCardOnChange} /></li>
                                         </ul>
                                     </div>
 

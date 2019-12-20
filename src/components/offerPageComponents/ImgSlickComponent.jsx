@@ -71,6 +71,7 @@ const ImgSlick = (props) => {
             }
         ]
     };
+
     return (
         <div>
             <Slider {...settings}>

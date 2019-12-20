@@ -41,8 +41,8 @@ const CheckoutPage = (props) => {
         </Container>
 
         <main className="mainContent clearfix" id="mainContent">
-          {cartItems.length ===0 ?'' :
-          <section className="checkoutProductDetails clearfix pt-5 pb-5" id="checkoutProductDetails" >
+          {cartItems.length === 0 ?'' :
+          <section className="checkoutProductDetails clearfix pt-5 pb-5" id="checkoutProductDetails">
             <Container>
               <Card className="border-0">
                 <Card.Body>
