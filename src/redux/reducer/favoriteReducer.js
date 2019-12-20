@@ -3,11 +3,11 @@ const initialState = {
     items:[],
     pending:false
 }
-   
+
 
 const favoriteReducer = ( state = initialState , action ) => {
     const { payload } = action
-    console.log(action)
+
     switch(action.type){
         case Types.ADD_FAVORITE:
          const isExist = state.items.find((items) => items.id === payload.items.id)

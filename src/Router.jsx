@@ -55,7 +55,7 @@ const Router = (props) => {
     }
 
     return(
-        <Switch location={props.location}>
+        <Switch /* location={props.location} */>
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={SignUp} />

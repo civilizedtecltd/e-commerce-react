@@ -15,7 +15,7 @@ const ImgSlick = (props) => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 5,
+        slidesToShow: (props.images.length < 5)? props.images.length : 5,
         slidesToScroll: 1,
         responsive: [
             {
@@ -71,6 +71,7 @@ const ImgSlick = (props) => {
             }
         ]
     };
+
     return (
         <div>
             <Slider {...settings}>
