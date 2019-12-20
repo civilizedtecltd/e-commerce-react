@@ -77,6 +77,12 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     get _CONFIRM_ORDER(){
         return `${this.API}/order`;
     }
+    get _SUBSCRIBE(){
+        return `${this.API}/subscribe`
+    }
+    get _UPDATE_SUBSCRIBER(){
+        return `${this.API}/subscribe-update`
+    }
  }
 
  const URL = new APP_URL();
