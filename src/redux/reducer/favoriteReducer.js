@@ -22,7 +22,6 @@ const favoriteReducer = ( state = initialState , action ) => {
         case Types.REMOVE_FAVORITE_ITEM:
             return payload
         case Types.FAVORITE_NOT_IN_STATE:
-            console.log(payload)
             return payload
         case Types.EMPTY_FAVORITE_ITEMS:
             return payload
