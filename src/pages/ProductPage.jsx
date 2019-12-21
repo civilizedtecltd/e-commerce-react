@@ -73,7 +73,7 @@ function ProductPage(props) {
 
   return (
     <>
-      <PageLoader loading={props.favorite.pending}/>
+      <PageLoader loading={props.pending}/>
       <div className="allWrapper">
         <HeaderComponent
         favorite_item={favoriteItem.length}
@@ -250,6 +250,7 @@ const mapStateToProps = (state)=> {
   return {
     book: state.book.info,
     similar: state.book.similar,
+    pending: (state.book.pending) ? state.book.pending : false,
     cart: state.shop.cart,
     totalItems: state.shop.cart.length,
     favorite: state.favorite,

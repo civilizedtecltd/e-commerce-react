@@ -55,7 +55,6 @@ const ShopPage = (props) => {
 
         return props.fetchAllBook(page, show, keyword)
       }else if(isNaN_id !== NaN && page && show) {
-          console.log(id)
         return props.fetchBooksByCategory(id, page,show);
       }
     },[sortBy,higherPrice,lowerPrice,page,show,id])
