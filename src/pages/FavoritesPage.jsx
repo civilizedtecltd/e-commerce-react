@@ -18,14 +18,13 @@ const FavoritesPage = (props) => {
   const totalCartItems = props.cart.length;
   const totalFavoriteItems = props.favorite.items.length;
   const favoriteItems = (totalFavoriteItems !== 0 )? props.favorite.items : [];
-  console.log(favoriteItems)
 
   useEffect(() => {
-    props.showAllFavItem()    
+    props.showAllFavItem()
   },[props.favorite.items.length]);
 
   const removeFavoriteItem = (id) => props.removeFavItem(id);
-  
+
   return (
     <>
       <PageLoader loading={ props.favorite.pending}/>
@@ -34,7 +33,7 @@ const FavoritesPage = (props) => {
           favorite_item={totalFavoriteItems}
           cartItem={totalCartItems}
         />
-        <MobileHeader 
+        <MobileHeader
          favorite_item={totalFavoriteItems}
          cartItem={totalCartItems}
         />
@@ -43,13 +42,12 @@ const FavoritesPage = (props) => {
             className="sectionBreadcrumb secGap clearfix pb-0"
             id="sectionBreadcrumb"
           >
-
             <Container>
-              <Row>
+                <Row>
                 <Col>
-                  <BreadCrumb />
+                    <BreadCrumb />
                 </Col>
-              </Row>
+                </Row>
             </Container>
           </section>
           { totalFavoriteItems === 0 ?
@@ -138,8 +136,7 @@ const FavoritesPage = (props) => {
             <Container>
               <Row className="mt-5 mb-5 ">
                 {favoriteItems.map((item, index) => {
-                  console.log("kjdjsdjs",item)
-                  return(                  
+                  return(
                   <NewBookComponent
                     key={index}
                     bookId={item.id}
@@ -149,7 +146,7 @@ const FavoritesPage = (props) => {
                     AuthorName={item.book_author.name}
                     ProductPrice={item.price}
                     isFev = {true}
-                    removeFavItem = { removeFavoriteItem }                    
+                    removeFavItem = { removeFavoriteItem }
                   />
                 )} )}
               </Row>

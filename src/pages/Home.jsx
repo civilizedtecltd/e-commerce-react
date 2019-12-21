@@ -29,7 +29,7 @@ const Home = (props) => {
   }
 
   return (<>
-    <PageLoader loading = {loading} />
+    <PageLoader loading = {loading}/>
     <div className="allWrapper">
           <HeaderComponent
             favorite_item={favoriteItem.length}
