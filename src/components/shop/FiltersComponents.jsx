@@ -1,19 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {Button, Collapse} from 'react-bootstrap';
-import filterData from "../../inc/shop/stage";
+import {Collapse} from 'react-bootstrap';
 import '../../assets/css/theme.css'
-import {LiSpan} from "../LiComponent/CommonLiComponent";
-import discipline from "../../inc/shop/discipline";
 import {Form} from "react-bootstrap";
-import PriceRanger from "../PriceRangeSlider/PriceRangeSlider";
-import author from "../../inc/shop/author";
-import publish_house from "../../inc/shop/publish_house";
-import publish_year from "../../inc/shop/publish_year";
-import book_cover from "../../inc/shop/book_cover";
-import language from "../../inc/shop/language";
+import Language from "./LanguageComponent";
+import BookCover from "./BookCoverComponent";
+import PublishYear from "./PublishYearComponent";
+import StageComponent from "./StageComponent";
+import Discipline from "./DisciplineComponent";
+import Author from "./AuthorComponent";
+import PublishHouse from "./PublishHouseComponent";
+import PriceRanger from "./PriceRangeComponent";
 
 const Filters = (props) => {
-    
+
     const [filter, setFilter] = useState({
         stage: true,
         discipline: true,
@@ -87,14 +86,7 @@ const Filters = (props) => {
                     <Collapse in={filter.stage}>
                         <div id="example-collapse-text">
                             <ul className="filterList">
-                                {filterData.map((data, index) => (
-                                    <LiSpan
-                                        key={index}
-                                        Url={data.url}
-                                        itemName={data.name}
-                                        Value={data.value}
-                                    />)
-                                )}
+                                <StageComponent/>
                             </ul>
                         </div>
                     </Collapse>
@@ -115,14 +107,7 @@ const Filters = (props) => {
                     <Collapse in={filter.discipline}>
                         <div id="collapse-discipline">
                             <ul className="filterList">
-                                {discipline.map((data, index) => (
-                                    <LiSpan
-                                        key={index}
-                                        Url={data.url}
-                                        itemName={data.name}
-                                        Value={data.value}
-                                    />)
-                                )}
+                                <Discipline/>
                             </ul>
                         </div>
                     </Collapse>
@@ -168,14 +153,7 @@ const Filters = (props) => {
                     <Collapse in={filter.author}>
                         <div id="collapse-author">
                             <ul className="filterList">
-                                {author.map((data, index) => (
-                                    <LiSpan
-                                        key={index}
-                                        Url={data.url}
-                                        itemName={data.name}
-                                        Value={data.value}
-                                    />)
-                                )}
+                                <Author/>
                             </ul>
                         </div>
                     </Collapse>
@@ -197,14 +175,7 @@ const Filters = (props) => {
                     <Collapse in={filter.publishingHouse}>
                         <div id="collapse-publishingHouse">
                             <ul className="filterList">
-                                {publish_house.map((data, index) => (
-                                    <LiSpan
-                                        key={index}
-                                        Url={data.url}
-                                        itemName={data.name}
-                                        Value={data.value}
-                                    />)
-                                )}
+                                <PublishHouse/>
                             </ul>
                         </div>
                     </Collapse>
@@ -227,15 +198,7 @@ const Filters = (props) => {
                     <Collapse in={filter.publishingYear}>
                         <div id="collapse-publishingYear">
                             <ul className="filterList">
-                                {publish_year.map((data, index) => (
-                                    <LiSpan
-
-                                        key={index}
-                                        Url={data.url}
-                                        itemName={data.name}
-                                        Value={data.value}
-                                    />)
-                                )}
+                               <PublishYear/>
                             </ul>
                         </div>
                     </Collapse>
@@ -259,15 +222,7 @@ const Filters = (props) => {
                     <Collapse in={filter.bookCover}>
                         <div id="collapse-bookCover">
                             <ul className="filterList">
-                                {book_cover.map((data, index) => (
-                                    <LiSpan
-
-                                        key={index}
-                                        Url={data.url}
-                                        itemName={data.name}
-                                        Value={data.value}
-                                    />)
-                                )}
+                                <BookCover/>
                             </ul>
                         </div>
                     </Collapse>
@@ -289,14 +244,7 @@ const Filters = (props) => {
                     <Collapse in={filter.languages}>
                         <div id="collapse-languages">
                             <ul className="filterList">
-                                {language.map((data, index) => (
-                                    <LiSpan
-                                        key={index}
-                                        Url={data.url}
-                                        itemName={data.name}
-                                        Value={data.value}
-                                    />)
-                                )}
+                                <Language/>
                             </ul>
                         </div>
                     </Collapse>

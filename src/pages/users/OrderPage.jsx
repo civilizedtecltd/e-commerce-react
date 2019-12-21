@@ -2,9 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Container, Row, Col, Card, Table} from 'react-bootstrap';
-
-import {Lia} from '../../components/LiComponent/CommonLiComponent';
-import {categoryClass } from '../../inc/users/users';
 import  HeaderComponent from "../../components/header/Header";
 import  MobileHeader from "../../components/header/MobileHeader";
 import UserNav from "../../components/UserNav/UserNav";
@@ -12,6 +9,7 @@ import UserNav from "../../components/UserNav/UserNav";
 import './assets/css/user.css';
 import orderIcon from '../assets/images/order_icon.png'
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
+import MegaMenu from "../../components/MegaMenuComponents/MegaMenuComponent";
 
 const OrderPage = (props) => {
     console.log(props);
@@ -59,46 +57,7 @@ const OrderPage = (props) => {
                                     <hr className="hrBorder mt-4 mb-4" />
                                     <div className="cardContentDetails">
                                         <Row>
-                                        <Col sm="3">
-                                            <h3 className="cardWidgetTitle mb-3">Kindergarten</h3>
-                                            <ul className="cardWidgetList text-center">
-                                            {categoryClass.kindergartenSchool.map((priClass, index)=><Lia
-                                            key={index}
-                                            Title={priClass}
-                                            Url={'/'}
-                                            />)}
-                                            </ul>
-                                        </Col>
-                                        <Col sm="3">
-                                            <h3 className="cardWidgetTitle mb-3">Primary school</h3>
-                                            <ul className="cardWidgetList cardWidgetList2 text-center">
-                                            {categoryClass.primarySchool.map((priClass, index)=><Lia
-                                            key={index}
-                                            Title={priClass}
-                                            Url={'/'}
-                                            />)}
-                                            </ul>
-                                        </Col>
-                                        <Col sm="3">
-                                            <h3 className="cardWidgetTitle mb-3">Secondary school</h3>
-                                            <ul className="cardWidgetList text-center">
-                                            {categoryClass.secondarySchool.map((priClass, index)=><Lia
-                                            key={index}
-                                            Title={priClass}
-                                            Url={'/'}
-                                            />)}
-                                            </ul>
-                                        </Col>
-                                        <Col sm="3">
-                                            <h3 className="cardWidgetTitle mb-3">Stationery</h3>
-                                            <ul className="cardWidgetList text-center">
-                                            {categoryClass.stationery.map((priClass, index)=><Lia
-                                            key={index}
-                                            Title={priClass}
-                                            Url={'/'}
-                                            />)}
-                                            </ul>
-                                        </Col>
+                                          <MegaMenu/>
                                         </Row>
                                     </div>
                                 </div>
