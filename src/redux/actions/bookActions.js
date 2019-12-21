@@ -2,7 +2,7 @@ import * as Types from '../actions/actionTypes';
 import axios from 'axios';
 import { URL } from '../../constants/config';
 import { setAuthToken } from '../../helpers/setAuthToken'
- 
+
  const fetchAllBook = (page,show,keyword) => dispatch => {
     dispatch(fetchPending())
     axios.get(URL._ALL_BOOKS(page,show,keyword))
@@ -26,14 +26,14 @@ const fetchBooksByCategory = (id,page,show) => dispatch => {
                   payload: res.data,
                   pending:false
               })
-              
+
           })
           .catch( ex => console.log(ex))
 
 }
 
  const showSingleBook = (id) => dispatch => {
-     dispatch(fetchPending())
+     dispatch(fetchPending());
     axios.get(URL._SINGLE_BOOK(id))
         .then(res=>{
             dispatch({
@@ -91,7 +91,7 @@ const postReview = (review) => dispatch => {
 
 
 const filterByPriceRange = (page,show,lowPrice,highestPrice) =>dispatch=>{
-        
+
         setAuthToken();
         axios.get(URL._FILTER_BY_PRICE_RANGE(page,show,lowPrice,highestPrice))
         .then(res=>dispatch({
