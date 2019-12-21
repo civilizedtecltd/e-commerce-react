@@ -12,14 +12,11 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import MegaMenu from "../../components/MegaMenuComponents/MegaMenuComponent";
 
 const OrderPage = (props) => {
-    console.log(props);
 
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
 
   const orders = (props.orders)? props.orders : [];
-
-  console.log(orders);
 
   return (<>
     <PageLoader loading={props.favorite.pending}/>
