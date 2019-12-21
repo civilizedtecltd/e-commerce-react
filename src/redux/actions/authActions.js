@@ -125,6 +125,7 @@ const deletePayment = (id) => dispatch => {
 }
 
 const confirmOrder = (data) => dispatch => {
+    setAuthToken();
     axios.post(URL._CONFIRM_ORDER, { ...data })
          .then(res => {
             return dispatch({
