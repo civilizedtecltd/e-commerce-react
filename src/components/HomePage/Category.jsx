@@ -12,15 +12,16 @@ import LazyLoad from 'react-lazyload';
 import {URL} from '../../constants/config';
 
 
-function CategoryHome () {
+function CategoryHome (props) {
 
     const [category, setCategory] = useState([]);
 
     useEffect(() => {
-
+            props.callback(true);
             axios.get(URL._CATEGORY)
                 .then(res => {
                     setCategory(res.data.data)
+                    props.callback(false)
                 })
                 .catch(error => {
                     console.log(error);
