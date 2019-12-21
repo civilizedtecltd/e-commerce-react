@@ -19,7 +19,7 @@ const OrderPage = (props) => {
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
 
-  const orders = (props.orders.length !== 0)? props.orders : [];
+  const orders = (props.orders)? props.orders : [];
 
   console.log(orders);
 
