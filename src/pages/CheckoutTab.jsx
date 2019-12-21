@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Container, Card ,Form, Col, Row, Button} from 'react-bootstrap';
+import {Container, Card, Form, Col, Row, Button, Modal} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty';
 import {connect} from 'react-redux';
@@ -13,7 +13,8 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 
 const CheckoutTab = (props) => {
-
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
     const [step, setStep] = useState({
         prev:0,
         next:1,
@@ -133,6 +134,7 @@ const CheckoutTab = (props) => {
             ...payment,
             books
         });
+        setShow(true);
     }
 
     return(<>
@@ -316,8 +318,22 @@ const CheckoutTab = (props) => {
                 </Card.Body>
             </Card>
         </Container>
-</>
-    )
+
+{/* Modal*/}
+        <Modal show = {show} onHide = { handleClose }>
+            <Modal.Header className={"border-0"} closeButton>
+            </Modal.Header>
+            <Modal.Body>
+                <h2 className={"text-center"}>
+                    Order Completed successfully!
+                    <Link to="/" className="btn btn-primary mt-3" style={{color:'white'}}> Go to Shopping </Link>
+                </h2>
+            </Modal.Body>
+            <Modal.Footer className={"border-0"}>
+
+            </Modal.Footer>
+        </Modal>
+</>)
 }
 
 

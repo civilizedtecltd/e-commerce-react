@@ -146,3 +146,7 @@
 .SimilarBookSlider .slick-arrow.slick-prev {
     margin-top: -4rem;
 }
+.CursorPointerProduct{
+    cursor: pointer;
+}
+
