@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Container, Row, Col, Card,} from 'react-bootstrap';
 import { connect } from 'react-redux'
 import '../pages/assets/home.css'
@@ -19,11 +19,17 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const Home = (props) => {
 
+  const [loading, setLoading] = useState(false);
+
   const totalItem = props.cart.length
   const favoriteItem = props.favorite.items;
 
+  const handleCategoryLoading = (status) =>{
+      setLoading(status);
+  }
+
   return (<>
-    <PageLoader loading = {props.favorite.pending} />
+    <PageLoader loading = {loading} />
     <div className="allWrapper">
           <HeaderComponent
             favorite_item={favoriteItem.length}
@@ -37,7 +43,7 @@ const Home = (props) => {
         <section className="productCat secGap clearfix" id="productCat">
           <Container>
               <div className="categorySlider">
-                <CategoryHome/>
+                <CategoryHome callback={handleCategoryLoading}/>
               </div>
           </Container>
         </section>
