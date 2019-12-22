@@ -111,15 +111,15 @@ function ProductPage(props) {
 
                 <div className="col-sm-6">
                   <div className="card productCardDetails border-0">
-                    <div className="card-header border-0 bg-white">
+                    <div className="card-header border-0 pr-0 bg-white">
 
                       <div className="productCardHead">
-                        <div className="Product-title-product-page">
+                        <div className="Product-title-product-page mr-4">
                           <p className="productSingleTitle">
                             { book ? book.name : ``}
                           </p>
                         </div>
-                        <div className="d-flex">
+                        <div className="d-flex text-right">
                           <TotalRating  value= { rating }/>
                           <div style={{marginTop:"-3px"}}><p>{'\u00A0'} {'\u00A0'} {`(${book.total_review} reviews) `} </p></div>
                         </div>

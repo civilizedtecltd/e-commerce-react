@@ -1,8 +1,7 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Form, Accordion , useAccordionToggle, Alert} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import { setPayment } from '../redux/actions/authActions';
-import { setDeliveryAddress } from '../redux/actions/shopActions';
 
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import card_icon_img from '../assets/images/user/card_icon_img.png'

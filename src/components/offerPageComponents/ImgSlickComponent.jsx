@@ -85,8 +85,8 @@ const ImgSlick = (props) => {
                                     </div>
 
                                     <div className="productContent">
-                                        <Link to={`/product/${item.id}`}><h4 className="productTitle mb-1 mr-4" >{item.name} </h4></Link>
-                                        <h5 className="authorName mb-1">{item.book_author.name}</h5>
+                                        <Link to={`/product/${item.id}`}><h4 className="productTitle limit-character mr-4" >{item.name} </h4></Link>
+                                        <h5 className="authorName">{item.book_author.name}</h5>
                                         <p className="productPrice">$ {item.price}</p>
                                     </div>
                                 </Card>

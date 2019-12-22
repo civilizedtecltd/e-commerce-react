@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { Container, Row, Col, Card} from "react-bootstrap";
 import { connect } from 'react-redux'
 import NewBookComponent from "../components/offerPageComponents/NewBookComponent";

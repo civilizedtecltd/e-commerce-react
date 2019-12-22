@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
@@ -131,20 +131,21 @@ const CartPage = (props) => {
                         <Row className="justify-content-end text-right mt-4 mb-5">
                           <Col sm="4">
                             <div className="cartProductPrice">
-                              <ul className="cartPriceList">
-                                <li>
-                                  Price.....................................................
-                                  <span className="pPrice">${totalBookPrice}</span>
-                                </li>
-                                <li>
-                                  Delivery.............................................
-                                  <span className="pPrice">${delivery_cost}</span>
-                                </li>
-                                <li>
-                                  Total.....................................................
-                                  <span className="pPrice" id="grand-total">${parseFloat(totalBookPrice) + parseFloat(delivery_cost)}</span>
-                                </li>
-                              </ul>
+
+                                  <div className="priceCartPage">
+                                    Price.....................................................
+                                    <span className="pPrice">${totalBookPrice}</span>
+                                  </div>
+                                  <div>
+                                      Delivery..........................................................
+                                      <span className="pPrice">${delivery_cost}</span>
+                                  </div>
+
+                                  <div>
+                                    Total.....................................................
+                                    <span className="pPrice" id="grand-total">${parseFloat(totalBookPrice) + parseFloat(delivery_cost)}</span>
+                                  </div>
+
                               <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}>Checkout</Link>
                             </div>
                           </Col>
