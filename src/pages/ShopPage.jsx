@@ -134,7 +134,7 @@ const ShopPage = (props) => {
 
                     </Row>
                   {books.length === 0? <h1 className="text-center">Sorry, No Result Found :(</h1> :<>
-                  <div className="row mb-4">
+                  <div className="row mb-5">
                       <div className="col">
                         <ul className="singleFilter d-flex align-items-center">
                           <li>
@@ -203,7 +203,7 @@ const ShopPage = (props) => {
 
                             return (
 
-                              <Col key = {index} sm="3">
+                              <Col key = {index} sm="3 mb-5">
                                 <LazyLoad once={true} height={200}>
                                    <Card className="productCard border-0 bg-transparent">
                                 <div className="productMedia mb-3 bgGray">
@@ -214,11 +214,11 @@ const ShopPage = (props) => {
 
                                 <div className="productContent">
                                   <Link to={`/product/${book.id}`}>
-                                    <h4 className="productTitle limit-character mb-1">
+                                    <h4 className="productTitle limit-character">
                                       {book.name}
                                     </h4>
                                   </Link>
-                                  <h5 className="authorName mb-1">{book.book_author.name}</h5>
+                                  <h5 className="authorName">{book.book_author.name}</h5>
                                   <p className="productPrice">$ {book.price} </p>
                                 </div>
                               </Card>
@@ -229,7 +229,7 @@ const ShopPage = (props) => {
                       }
                     </Row>
 
-                    <div className="row mb-4">
+                    <div className="row mt-5">
                       <div className="col">
                         <ul className="singleFilter d-flex align-items-center">
                           <li>

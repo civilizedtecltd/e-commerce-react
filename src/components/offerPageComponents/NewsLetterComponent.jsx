@@ -1,4 +1,4 @@
-import React,{ useState, useEffect }from 'react';
+import React,{ useState }from 'react';
 import {Row, Col, Card,Form , Button} from 'react-bootstrap';
 import {URL} from '../../constants/config'
 import axios from 'axios'
@@ -22,7 +22,7 @@ function NewsLetterComponent(props) {
               <h1>Subscribe to our newsletter</h1>
               <p>
               Lorem ipsum dolor sit ament, consecrator advising elite, sed do elusion temper
-              <br /> 
+              <br />
               enif ipsum  quia volutes quia non nunquam emus</p>
               <Form className="d-flex subscribeForm justify-content-center mt-3" onSubmit={handleSubmit}>
                 <Form.Group controlId="mailSubscribe" className="mb-2">
