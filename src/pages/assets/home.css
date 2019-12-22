@@ -58,3 +58,10 @@
     width: 2.5rem;
     margin-right: -1rem
 }
+.home-ctg-limit-character{
+    display: block;
+    width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

@@ -66,6 +66,7 @@ const OrderPage = (props) => {
                                 <Table responsive className="cardTable">
                                     <thead>
                                         <tr>
+                                        <th>Order code</th>
                                         <th>Product name</th>
                                         <th>Price</th>
                                         <th>Amount</th>
@@ -79,7 +80,8 @@ const OrderPage = (props) => {
                                         {orders.map(order => {
                                                     return (
                                                         <tr>
-                                                            <td><Link to="#">{order.name}</Link></td>
+                                                            <td>{order.order_code}</td>
+                                                            <td><Link to={`/product/${order.book_id}`}>{order.name}</Link></td>
                                                             <td>${order.price}</td>
                                                             <td>{order.quantity}</td>
                                                             <td>${order.total}</td>

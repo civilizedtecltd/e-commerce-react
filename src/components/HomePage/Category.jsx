@@ -103,7 +103,7 @@ function CategoryHome (props) {
                                                         <img src={`${URL.BASE}/${item.image}`} alt="" style={imgStyle} />
                                                     </div>
                                                     <Card.Body className="text-center">
-                                                        <h3 className="productCatTitle">{item.category} </h3>
+                                                        <h3 className="productCatTitle home-ctg-limit-character">{item.category} </h3>
                                                     </Card.Body>
                                                 </Card>
                                             </Link>
