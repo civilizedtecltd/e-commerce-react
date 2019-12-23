@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import { Card, Form, Row, Col, Button } from "react-bootstrap";
+import {Card, Form, Row, Col, Button, Alert} from "react-bootstrap";
 import NumberFormat from 'react-number-format';
 function PaymentMethodComponent(props) {
-
+    const [showCardAlert, setShowCardAlert] = useState(true);
     const [card, setCard] = useState({})
 
     const handleOnChange = (e) => {
@@ -50,7 +50,11 @@ function PaymentMethodComponent(props) {
             <Form className="selectPaymentOption">
               <div className="formRadioGroup bgGray mb-2">
                 <div className="payInfoDetails clearfix">
-                  <hr className="hrBorder" />
+                    <div className="m-2">
+                        <Alert show={showCardAlert} variant="danger" onClose={() => setShowCardAlert(false)}  dismissible>
+                            <p>This information is not valid!.</p>
+                        </Alert>
+                    </div>
                   <div className="cardInfoForm p-3">
                     <Row className="align-items-center">
                       <Col sm="10">
@@ -63,7 +67,6 @@ function PaymentMethodComponent(props) {
                               format="#### #### #### ####"
                               placeholder="____ ____ ____ ____"
                               mask={['_', '_','_','_','_', '_','_','_','_', '_','_','_','_', '_','_','_']}
-                              id="card-number"
                               name="card_number"
                               className="form-control"
                               defaultValue={''}
@@ -90,7 +93,6 @@ function PaymentMethodComponent(props) {
                             <li>
 
                               <NumberFormat
-                                  type="text"
                                   id="card-mm"
                                   format={cardExpiryMonth}
                                   placeholder="MM"
@@ -103,7 +105,6 @@ function PaymentMethodComponent(props) {
                             <li className="cardBl">/</li>
                             <li>
                               <NumberFormat
-                                  type="text"
                                   id="card-yy"
                                   format={cardExpiryYear}
                                   placeholder="YY"

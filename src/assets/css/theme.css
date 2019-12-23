@@ -789,6 +789,8 @@
     .SimilarBookSlider .slick-arrow.slick-prev {margin-top: -5rem;}
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
+    /*    home page*/
+    .home-ctg-limit-character{display: block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 }
 
 /*------------------------------------------------------------------------------*/
@@ -836,6 +838,8 @@
     .SimilarBookSlider .slick-arrow.slick-prev {margin-left: .8rem;margin-top: -3rem;}
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
+    /*    home page*/
+    .home-ctg-limit-character{display: block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 
 }
 
@@ -874,6 +878,8 @@
     .SimilarBookSlider .slick-arrow.slick-prev {margin-left: .8rem; margin-top: -3rem;}
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
+    /*    home page*/
+    .home-ctg-limit-character{display: block;width: 290px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 }
 
 /*------------------------------------------------------------------------------*/
@@ -889,6 +895,8 @@
     .SimilarBookSlider .slick-arrow.slick-prev {margin-left: .8rem; margin-top: -3rem;}
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
+    /*    home page*/
+    .home-ctg-limit-character{display: block;width: 250px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 }
 
 /*------------------------------------------------------------------------------*/
@@ -921,6 +929,8 @@
     .SimilarBookSlider .slick-arrow.slick-prev {margin-left: .8rem;margin-top: -3rem;}
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
+    /*    home page*/
+    .home-ctg-limit-character{display: block;width: 230px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 }
 
 /*------------------------------------------------------------------------------*/
@@ -955,4 +965,6 @@
 
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
+    /*    home page*/
+    .home-ctg-limit-character{display: block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 }
