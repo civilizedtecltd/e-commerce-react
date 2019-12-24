@@ -21,7 +21,11 @@ const CartPage = (props) => {
   let delivery_cost = 0;
 
   if(cartItems.length !== 0){
-    cartItems.map((item) =>totalBookPrice += item.amountPrice)
+    
+    cartItems.map((item) =>{ 
+      console.log(item.amountPrice)
+      totalBookPrice += item.amountPrice;
+    })
   }
 
   const handleDeleteClick = (id) => {
@@ -143,7 +147,7 @@ const CartPage = (props) => {
 
                                   <div>
                                     Total.....................................................
-                                    <span className="pPrice" id="grand-total">${parseFloat(totalBookPrice) + parseFloat(delivery_cost)}</span>
+                                    <span className="pPrice" id="grand-total">${ parseFloat(totalBookPrice) + parseFloat(delivery_cost) }</span>
                                   </div>
 
                               <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}>Checkout</Link>

@@ -101,7 +101,6 @@ const filterByPriceRange = (page,show,lowPrice,highestPrice) =>dispatch=>{
 }
 
 const filterShortBy = (page,show,query) => dispatch =>{
-    console.log(page,show,query)
     setAuthToken();
     axios.get(URL._FILTER_SHORT_BY(page,show,query))
     .then(res=>{

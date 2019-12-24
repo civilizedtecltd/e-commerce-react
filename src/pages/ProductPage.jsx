@@ -34,8 +34,10 @@ function ProductPage(props) {
     const classes = useStyles()
     const { id } = useParams();
     const [show, setShow] = useState(false);
+    const [quantity, setQuantity] = useState(1);
+   
 
-    let itemQty  = 1;
+    let itemQty  = quantity;
     props.cart.map(item => {
         if(item.id === Number(id)){
            return itemQty = Number(item.quantity)
@@ -54,6 +56,8 @@ function ProductPage(props) {
   const handleClose = () => setShow(false);
 
   const updateItemQty = (e) => {
+   let countQty = quantity
+    setQuantity(++countQty);
     props.updateItem({
                         id: Number(book.id),
                         qty: Number(e.target.value)
@@ -62,6 +66,7 @@ function ProductPage(props) {
 
   const addToCart = (e) => {
     e.preventDefault();
+    book.quantity = quantity;
     props.addToCart(book);
     setShow(true);
   };
@@ -148,9 +153,9 @@ function ProductPage(props) {
                             <input
                               className="form-control inputValue"
                               type="number"
-                              placeholder="1"
                               value = {itemQty}
                               onChange = {updateItemQty}
+                              min={1}
                             />
                           </div>
 
