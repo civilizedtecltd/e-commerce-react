@@ -16,6 +16,7 @@ import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import {CategoryHome} from "../components/HomePage/Category";
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
+import {fetchMaxMinPrice} from '../redux/actions/filterAction';
 
 const Home = (props) => {
 
@@ -27,6 +28,9 @@ const Home = (props) => {
   const handleCategoryLoading = (status) =>{
       setLoading(status);
   }
+  useEffect(()=>{
+    props.maxMinPrice()
+ },[])
 
   return (<>
     <PageLoader loading = {loading}/>
@@ -145,5 +149,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps , null) (Home);
+const mapDispatchToProps = (dispatch)=> {
+  return {
+    maxMinPrice : ()=> dispatch(fetchMaxMinPrice())
+  }
+}
+
+export default connect(mapStateToProps , mapDispatchToProps) (Home);
 

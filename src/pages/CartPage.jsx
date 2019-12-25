@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
@@ -8,7 +8,7 @@ import  MobileHeader from "../components/header/MobileHeader";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
 import CartTable from '../components/CartComponents/CartsTableComponent';
-import {removeFromCart, deleteAllFromCart, updateQuantity} from '../redux/actions/shopActions'
+import {removeFromCart, deleteAllFromCart, updateQuantity, deliveryMethod} from '../redux/actions/shopActions'
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import MegaMenu from "../components/MegaMenuComponents/MegaMenuComponent";
 
@@ -18,15 +18,16 @@ const CartPage = (props) => {
   const cartItems    = props.cart;
 
   let totalBookPrice = 0;
-  let delivery_cost = 0;
+  let delivery_cost = (props.delivery) ? props.delivery[0].price : 0;
 
   if(cartItems.length !== 0){
-    
     cartItems.map((item) =>{ 
-      console.log(item.amountPrice)
       totalBookPrice += item.amountPrice;
     })
   }
+  useEffect(()=>{
+    return props.deliveryMethodFetch()
+  },[])
 
   const handleDeleteClick = (id) => {
     cartItems.find((book) => {
@@ -182,7 +183,8 @@ const CartPage = (props) => {
 
 const mapStateToProps = (state) => ({
   cart: state.shop.cart,
-  favorite: state.favorite
+  favorite: state.favorite,
+  delivery: state.shop.deliveryMethod
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -190,7 +192,7 @@ const mapDispatchToProps = (dispatch) => {
     removeItem: (id) => dispatch(removeFromCart(id)),
     updateItem: ({id, qty}) => dispatch(updateQuantity({id, qty})),
     deleteAll: () => dispatch(deleteAllFromCart()),
-
+    deliveryMethodFetch:()=> dispatch(deliveryMethod())
   }
 }
 

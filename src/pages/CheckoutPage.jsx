@@ -1,9 +1,9 @@
-import React, {useEffect}  from "react";
+import React, {useState,useEffect}  from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { connect } from 'react-redux';
 import {getUser} from '../redux/actions/authActions';
-
+import { deliveryMethod } from '../redux/actions/shopActions'
 import CheckoutTab from './CheckoutTab';
 import { URL} from '../constants/config';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
@@ -15,7 +15,10 @@ const CheckoutPage = (props) => {
   const cartItems = props.cart;
 
   let totalBookPrice = 0;
-  let delivery_cost = 0;
+  let delivery_costs = (props.delivery) ?  props.delivery[0].price : 0 ;
+  const [delivery_cost , setDeliveryCost] = useState(delivery_costs)
+
+
 
   if(cartItems.length !== 0){
      cartItems.map((item) =>totalBookPrice += item.amountPrice)
@@ -23,7 +26,13 @@ const CheckoutPage = (props) => {
 
   useEffect(()=>{
     props.getUser();
+    props.deliveryMethodFetch()
   },[]);
+
+
+  const getPaymentMethod = (paymentMethod) =>{
+    setDeliveryCost(paymentMethod.paymentdata.price)
+  }
 
   return (
     <>
@@ -57,7 +66,7 @@ const CheckoutPage = (props) => {
                           </div>
                           <div className="cartProductDes pl-3">
                             <h3>
-                              <Link to="#">
+                              <Link to="!#">
                                { item.name }
                               </Link>
                             </h3>
@@ -95,7 +104,7 @@ const CheckoutPage = (props) => {
             </Container>
           </section> }
           <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
-           <CheckoutTab totalPrice={totalBookPrice}/>
+           <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
           </section>
         </main>
       </div>
@@ -104,11 +113,13 @@ const CheckoutPage = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  cart:state.shop.cart
+  cart:state.shop.cart,
+  delivery: state.shop.deliveryMethod
 });
 
 const mapDispatchToProps = dispatch => ({
-    getUser : () => dispatch(getUser())
+    getUser : () => dispatch(getUser()),
+    deliveryMethodFetch:()=> dispatch(deliveryMethod())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage);

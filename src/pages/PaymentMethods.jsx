@@ -88,7 +88,8 @@ const PaymentMethods = (props) => {
 
         props.callback({
             payment: { ...paymentMethods[selectedKey]},
-            delivery: (deliveryMethod.standard) ? 1 : 2
+            delivery: (deliveryMethod.standard) ? 1 : 2,
+            paymentdata: (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
         });
       }
     }
@@ -102,7 +103,8 @@ const PaymentMethods = (props) => {
 
           props.callback({
                 payment: { ...card},
-                delivery: 1
+                delivery: 1,
+                paymentdata: props.delivery[0]
           });
 
         }
@@ -114,7 +116,8 @@ const PaymentMethods = (props) => {
 
             props.callback({
                 payment: { ...card},
-                delivery: 2
+                delivery: 2,
+                paymentdata: props.delivery[1]
             });
         }
     }
@@ -140,7 +143,8 @@ const PaymentMethods = (props) => {
 
             props.callback({
                 payment: {...card},
-                delivery: (deliveryMethod.standard) ? 1 : 2
+                delivery: (deliveryMethod.standard) ? 1 : 2,
+                paymentdata:  (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
             });
         }
     }
@@ -205,7 +209,7 @@ const PaymentMethods = (props) => {
                 custom
                 type="radio"
                 className="ml-2"
-                label="Standard"
+                label={props.delivery? props.delivery[0].delivery_name.charAt(0).toUpperCase() + props.delivery[0].delivery_name.substring(1) : ''}
                 checked={deliveryMethod.standard}
                 name="standard"
                 id="standard009"
@@ -214,7 +218,7 @@ const PaymentMethods = (props) => {
             </div>
             <div>
                 <div className="col text-right shippingCostPrice">
-                    <span className="shippingCost"><strong>Time:</strong> 170 hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
+            <span className="shippingCost"><strong>Time:</strong> {24*props.delivery[0].delivery_time } hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> ${props.delivery[0].price}</span>
                 </div>
             </div>
         </div>
@@ -225,7 +229,7 @@ const PaymentMethods = (props) => {
                 custom
                 type="radio"
                 className="ml-2"
-                label="Express"
+                label={props.delivery ? props.delivery[1].delivery_name.charAt(0).toUpperCase() + props.delivery[1].delivery_name.substring(1) : ''}
                 checked={deliveryMethod.express}
                 name="express"
                 id="express22"
@@ -234,7 +238,7 @@ const PaymentMethods = (props) => {
             </div>
             <div>
                 <div className="col text-right shippingCostPrice">
-                    <span className="shippingCost"><strong>Time:</strong> 170 hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> $0</span>
+            <span className="shippingCost"><strong>Time:</strong> { 24*props.delivery[1].delivery_time} hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> ${props.delivery[1].price}</span>
                 </div>
             </div>
         </div>
@@ -246,7 +250,8 @@ const PaymentMethods = (props) => {
     </>);
 }
 const mapStateToProps = state =>({
-    ...state.auth
+    ...state.auth,
+    delivery: state.shop.deliveryMethod
 })
 
 const mapDispatchToProps = dispatch => ({

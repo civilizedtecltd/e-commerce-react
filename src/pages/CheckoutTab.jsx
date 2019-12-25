@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Container, Card, Form, Col, Row, Button, Modal} from 'react-bootstrap';
+import {Container, Card, Form, Col, Row, Button, Modal } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty';
 import {connect} from 'react-redux';
@@ -106,6 +106,7 @@ const CheckoutTab = (props) => {
     }
 
     const getPaymentDetails = (data) => {
+        props.getPaymentMethod(data)
         setPayment({
             ...data
         })
@@ -278,6 +279,7 @@ const CheckoutTab = (props) => {
                                 <h3 className="mt-2 mb-2">Confirm order details</h3>
 
                                 <Row className="row mt-4">
+
                                     <Col sm="6">
                                         <ul className="orderConfrimationList text-large">
                                             <li><strong>First name:</strong>{ formData.first_name }</li>
@@ -312,6 +314,7 @@ const CheckoutTab = (props) => {
                                         <button type="submit" className="btn btn-primary" data-target="#confirmOrder" data-toggle="modal" onClick={confirmOrder}>Confirm order</button>
                                     </div>
                                 </Row>
+
                             </Form>
                         </div>
                     </div>
@@ -319,7 +322,6 @@ const CheckoutTab = (props) => {
             </Card>
         </Container>
 
-{/* Modal*/}
         <Modal show = {show} onHide = { handleClose }>
             <Modal.Header className={"border-0"} closeButton>
             </Modal.Header>
