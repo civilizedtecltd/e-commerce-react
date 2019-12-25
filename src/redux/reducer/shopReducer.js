@@ -119,10 +119,15 @@ const shopReducer = (state = initSate, { type, payload }) => {
                     cart: []
                 }
 
-            case Types.CART_NOT_IN_STATE:
+            case Types.SHOP_NOT_IN_STATE:
                 return {
                     ...state,
-                    cart: [...payload]
+                    ...payload
+                }
+            case Types.DELIVERY_METHOD_FETCH:
+                return {
+                    ...state,
+                    deliveryMethod: payload
                 }
 
             default:

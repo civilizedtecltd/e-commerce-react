@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
+import axios from 'axios'
+import {URL} from '../../constants/config'
 import './PriceRange.css';
+import {connect} from 'react-redux'
+
 class PriceRanger extends Component{
     constructor(props){
-        super(props);
-
+        super(props)
+      
         this.state = {
-            minValue: 10,
-            maxValue: 100000,
-            step: 10,
+            maxValue: props.filter.maxPrice,
+            minValue: props.filter.minPrice,
+            step: 1,
             minimumPrice: null,
-            maximumPrice: null
+            maximumPrice: null 
         };
 
         this.handleChange = this.handleChange.bind(this);
         props.callback.bind(this)
     }
 
-    componentWillMount(){
+
+     componentWillMount(){
         this.setState({
             minimumPrice: this.state.minValue,
             maximumPrice: this.state.maxValue
         });
 
-    }
+    } 
 
     handleChange(name, event){
         let value = event.target.value;
@@ -56,7 +61,7 @@ class PriceRanger extends Component{
 
 
                         <input type="range"
-                               value={this.state.secondValue}
+                               value={this.state.maximumPrice}
                                min={this.state.minValue}
                                max={this.state.maxValue}
                                step={this.state.step}
@@ -75,5 +80,10 @@ class PriceRanger extends Component{
         );
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        filter : state.filter.priceFilter
+    }
+}
 
-export default PriceRanger;
+export default connect(mapStateToProps,null)(PriceRanger);

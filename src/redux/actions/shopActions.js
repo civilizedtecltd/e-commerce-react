@@ -59,10 +59,18 @@ const setPaymentDetails = (data) => ({
 })
 
 
-const cartNotInState = (cart) =>({
-    type: Types.CART_NOT_IN_STATE,
-    payload: [...cart]
+const shopNotInState = (shop) =>({
+    type: Types.SHOP_NOT_IN_STATE,
+    payload: {...shop}
 })
+
+const deliveryMethod = () => dispatch=>{
+    axios.get(URL.PAYMENT_METHOD)
+          .then(res=>dispatch({
+              type:Types.DELIVERY_METHOD_FETCH,
+              payload: res.data.data
+          }))
+}
 
 
 export {
@@ -73,6 +81,7 @@ export {
     deleteAllFromCart,
     setDeliveryAddress,
     setPaymentDetails,
-    cartNotInState,
-    updateQuantity
+    shopNotInState,
+    updateQuantity,
+    deliveryMethod
 }

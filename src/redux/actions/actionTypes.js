@@ -14,7 +14,7 @@ export const INCREASE_QUANTITY      =   'INCREASE_QUANTITY';
 export const DECREASE_QUANTITY      =   'DECREASE_QUANTITY';
 export const UPDATE_QUANTITY        =   'UPDATE_QUANTITY';
 export const DELETE_ALL_FORM_CART   =   'DELETE_ALL_FORM_CART';
-export const CART_NOT_IN_STATE      =   'CART_NOT_IN_STATE';
+export const SHOP_NOT_IN_STATE      =   'SHOP_NOT_IN_STATE';
 
 //Auth action types
 export const USER_LOGIN             =   'USER_LOGIN';
@@ -54,6 +54,9 @@ export const FETCH_BOOK_SUCCESS = 'FETCH_BOOK_SUCCESS';
 export const FETCH_BOOK_ERROR = 'FETCH_BOOK_ERROR';
 export const FETCH_FAVORITE_PENDING = 'FETCH_FAVORITE_PENDING';
 export const FETCH_SHOPPING_PENDING = 'FETCH_SHOPPING_PENDING';
+
+export const DELIVERY_METHOD_FETCH   = 'DELIVERY_METHOD_FETCH';
+export const FETCH_MAX_MIN_PRICE = 'FETCH_MAX_MIN_PRICE';
 
 
 

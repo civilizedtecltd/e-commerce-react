@@ -83,6 +83,14 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     get _UPDATE_SUBSCRIBER(){
         return `${this.API}/subscribe-update`
     }
+
+    get PAYMENT_METHOD(){
+        return `${this.API}/delivery-method`
+    }
+
+    get MAX_MIN_PRICE(){
+    return `${this.API}/price-max-min`
+    }
  }
 
  const URL = new APP_URL();
