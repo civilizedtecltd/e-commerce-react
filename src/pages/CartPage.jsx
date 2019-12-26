@@ -21,7 +21,7 @@ const CartPage = (props) => {
   let delivery_cost = (props.delivery) ? props.delivery[0].price : 0;
 
   if(cartItems.length !== 0){
-    cartItems.map((item) =>{ 
+    cartItems.map((item) =>{
       totalBookPrice += item.amountPrice;
     })
   }
@@ -141,12 +141,12 @@ const CartPage = (props) => {
                                     Price.....................................................
                                     <span className="pPrice">${totalBookPrice}</span>
                                   </div>
-                                  <div>
-                                      Delivery..........................................................
+                                  <div className="priceCartPage">
+                                      Delivery................................................
                                       <span className="pPrice">${delivery_cost}</span>
                                   </div>
 
-                                  <div>
+                                  <div className="priceCartPage">
                                     Total.....................................................
                                     <span className="pPrice" id="grand-total">${ parseFloat(totalBookPrice) + parseFloat(delivery_cost) }</span>
                                   </div>
