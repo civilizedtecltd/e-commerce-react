@@ -21,13 +21,13 @@ import {fetchMaxMinPrice} from '../redux/actions/filterAction';
 const Home = (props) => {
 
   const [loading, setLoading] = useState(false);
-
   const totalItem = props.cart.length
   const favoriteItem = props.favorite.items;
 
   const handleCategoryLoading = (status) =>{
       setLoading(status);
   }
+  
   useEffect(()=>{
     props.maxMinPrice()
  },[])
@@ -123,7 +123,7 @@ const Home = (props) => {
               <Col>
                 <div className="partnersCarousel">
                   <HomeCarouselFooter/>
-                </div>{/* end of partnersCarousel */}
+                </div>
               </Col>{/* end of Col */}
             </Row>{/* end of Row */}
           </Container>{/* end of Container */}
