@@ -25,7 +25,6 @@ const useStyle = createUseStyles({
 })
 
 const ShopPage = (props) => {
-  
     const classes = useStyle()
     const { id, title, showItem,pageNumber, keyword } = useParams();
     const isNaN_id = Number(id)
@@ -39,7 +38,7 @@ const ShopPage = (props) => {
     const totalItem = props.cart.length
     const favoriteItem = props.favorite.items;
     const books = props.book.data ? props.book.data : [];
-
+    const shopUrl = window.location.pathname
 
     
     const PriceRange = (minPrice, maxPrice) => {
@@ -51,11 +50,16 @@ const ShopPage = (props) => {
 
 
     useEffect(()=>{
+
        
       if(page && show && sortBy){
 
          return props.filterShortBy(page,show,sortBy)
-      }else if(page && show && lowerPrice && higherPrice) {
+      } 
+      else if(shopUrl==='/shopping'){
+        return props.fetchAllBook(1, 5, null)
+      }
+      else if(page && show && lowerPrice && higherPrice) {
 
         return props.filterByPrice(page,show,lowerPrice,higherPrice)
       }else if(id === 'all' && pageNumber  && showItem  && keyword) {
@@ -64,6 +68,7 @@ const ShopPage = (props) => {
       }else if(isNaN_id !== NaN && page && show) {
         return props.fetchBooksByCategory(id, page,show);
       }
+     
      
     },[sortBy,higherPrice,lowerPrice,page,show,id])
 

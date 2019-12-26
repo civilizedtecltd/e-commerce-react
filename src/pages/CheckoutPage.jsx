@@ -14,9 +14,14 @@ const CheckoutPage = (props) => {
 
   const cartItems = props.cart;
 
+
   let totalBookPrice = 0;
   let delivery_costs = (props.delivery) ?  props.delivery[0].price : 0 ;
   const [delivery_cost , setDeliveryCost] = useState(delivery_costs)
+  const totalQuantity = cartItems.map(data=>data.quantity)
+  const sumTotalQty = totalQuantity.reduce((ac,crr)=>ac+crr)
+  console.log(sumTotalQty)
+
 
 
 
@@ -87,11 +92,17 @@ const CheckoutPage = (props) => {
                         <div className="cartProductValue clearfix" id="cartProductValue">
                           <ul className="productValue text-right">
                             <li>
+                              <strong>Total Quantity: </strong> {sumTotalQty}
+                            </li>
+
+                            <li>
                               <strong>Total Product Price: </strong> ${totalBookPrice}
                             </li>
+
                             <li>
                               <strong>Delivery:</strong> ${delivery_cost}
                             </li>
+
                             <li>
                               <strong>In Total Total:</strong> ${parseFloat(totalBookPrice) + parseFloat(delivery_cost)}
                             </li>

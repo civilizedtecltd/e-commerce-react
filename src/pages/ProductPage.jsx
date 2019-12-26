@@ -243,7 +243,7 @@ function ProductPage(props) {
         </Modal.Body>
         <Modal.Footer className={"border-0"}>
           <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}> Go to checkout </Link>
-          <Link to="/shop/all/1/5" className="btn btn-outline linkBtnBorder" style={{color:'white !important'}}> Continue shopping</Link>
+          <Link to='/shopping' className="btn btn-outline linkBtnBorder" style={{color:'white !important'}}> Continue shopping</Link>
         </Modal.Footer>
       </Modal>
     </>
