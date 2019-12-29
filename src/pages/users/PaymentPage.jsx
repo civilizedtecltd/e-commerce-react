@@ -7,7 +7,8 @@ import {
     Col,
     Card,
     Table,
-    Button
+    Button,
+    Modal
 } from "react-bootstrap";
 
 import { deletePayment } from "../../redux/actions/authActions";
@@ -22,6 +23,7 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const PaymentPage = (props) => {
   const [visible, setVisible] = useState(false);
+  const [cardAlert, setCardAlert] = useState(false);
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
 
@@ -36,6 +38,9 @@ const PaymentPage = (props) => {
     e.preventDefault();
     props.deleteCard(e.target.id);
   }
+
+  const handleClose = () => setCardAlert(false);
+  const handleShow = () => setCardAlert(true);
 
   return (
     <>
@@ -100,9 +105,10 @@ const PaymentPage = (props) => {
                                     <Button
                                         id={card.id}
                                         className="btn btnActionDelete"
-                                        onClick={onDeletePayment}
+                                        onClick={handleShow}
                                     >
                                         Delete
+
                                     </Button>
                                     </td>
                                   </tr>
@@ -135,6 +141,23 @@ const PaymentPage = (props) => {
           </Container>
         </div>
       </div>
+
+    {/*  Modal*/}
+      <Modal show={cardAlert} onHide={handleClose}>
+        <Modal.Header closeButton className="border-0"></Modal.Header>
+        <Modal.Body className="cardModalCss">Are you sure ? You want to delete it..!</Modal.Body>
+        <Modal.Footer className="border-0">
+
+          <Button variant="primary" onClick={handleClose}>
+            Yes
+          </Button>
+
+          <Button className="btn modalCancelBtn" onClick={handleClose}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </>
   );
 };

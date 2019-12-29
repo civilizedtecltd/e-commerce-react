@@ -125,3 +125,56 @@ width: 50%;
     font-weight: 500;
     padding-left:10px;
 }
+/*mega menu*/
+.megaMenuIcon{
+    font-size: 16px;
+    margin-top: 11px;
+    cursor: pointer;
+}
+.mega-menu {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    width: 650px;
+    height: auto;
+    background: #f1f2f3;
+    transition: all 0.4s ease;
+    padding: 1rem;
+    box-sizing: border-box;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 100;
+    border: 1px solid rgba(0, 0, 0, 0.13);
+}
+
+.inner-mega-menu ul {
+    float: left;
+    line-height: 10px;
+}
+.inner-mega-menu:last-child {
+    margin-right: 0%;
+}
+
+.inner-mega-menu ul li{
+    padding: 10px 0;
+    transition: all 0.1s ease;
+    text-align: left;
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: capitalize;
+    float: left;
+    padding: 0.8rem;
+}
+.inner-mega-menu ul li a{
+    color: #363636;
+    font-size: 16px;
+    font-family: 'Crimson Text', serif;
+    font-weight: 600;
+}.inner-mega-menu ul li a:hover{
+     color: #3897cf;
+}
+
+.nav-bar ul li:hover .mega-menu {
+    visibility: visible;
+    opacity: 1;
+}

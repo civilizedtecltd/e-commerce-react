@@ -1,6 +1,6 @@
-import React from 'react';
+import  React from 'react';
 import {Form, Button, Table } from "react-bootstrap";
-
+import '../../pages/checkout.css';
 import { URL } from '../../constants/config';
 
 const CartsTableComponent = (props) => {
@@ -48,15 +48,15 @@ const CartsTableComponent = (props) => {
               </div>
             </td>
 
-            <td id={`price-${item.id}`}>${item.price}</td>
+            <td className="aligneMiddle" id={`price-${item.id}`}>${item.price}</td>
 
-            <td className="cartQntN">
+            <td className="cartQntN aligneMiddle">
               <Form.Control type="number" placeholder="1" id={item.id} value={item.quantity} onChange={handleQuantity} />
             </td>
 
-            <td id={`tp-${item.id}`}>${item.amountPrice}</td>
+            <td className="aligneMiddle" id={`tp-${item.id}`}>${item.amountPrice}</td>
 
-            <td>
+            <td className="aligneMiddle">
               <Button className="btn btn-danger" id={item.id} onClick={handleDeleteClick} >
                 Delete <i className="fas fa-times"></i>
               </Button>
