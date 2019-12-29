@@ -14,7 +14,6 @@ function TabComponent(props) {
 
     const [key, setKey] = useState('description');
     const [newReview, setNewReview] = useState({});
-    const [ResetValue , setResetValue] = useState(false)
     const spec = props.specification[0];
    
 
@@ -44,9 +43,10 @@ function TabComponent(props) {
             props.routeHistory.push("/login")
         }else{
             props.postReview(reviewInfo)
-        }
-
+        }   
     }
+
+  
 
 
     return (
@@ -89,10 +89,11 @@ function TabComponent(props) {
 
                     <div className="postReviews clearfix">
                         <h3>Post a review</h3>
-                        <RatingComponent callback = {getRating} resetRating ={ResetValue}/>
+                   
 
                         <Form className="postReviewsForm" onSubmit={onSubmit}>
-                            <textarea id="post-text-area" cols="30" rows="5" placeholder="Share your experience" onChange = {getReview} ></textarea>
+                           <RatingComponent callback = {getRating}/>
+                            <textarea id="post-text-area" cols="30" rows="5" placeholder="Share your experience" value onChange = {getReview} ></textarea>
                             <Button type="submit" className="mt-3" >Post a review</Button>
                         </Form>
                     </div>

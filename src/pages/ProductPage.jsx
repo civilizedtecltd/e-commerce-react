@@ -5,7 +5,7 @@ import { Link , useParams } from "react-router-dom";
 import {createUseStyles} from 'react-jss';
 import { showSingleBook } from '../redux/actions/bookActions';
 import { addToCart, updateQuantity } from '../redux/actions/shopActions';
-import { addToFavorite } from "../redux/actions/favoriteActions";
+import { addToFavorite,removeFavItem } from "../redux/actions/favoriteActions";
 
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
@@ -46,7 +46,9 @@ function ProductPage(props) {
     const rating = props.book ? props.book.rating : 0
     const book = (props.book !== undefined ) ? props.book : false;
     const favoriteItem = props.favorite.items;
+    const isFavoriteItem = favoriteItem.find(fav=> fav.id === Number(id))
 
+  
 
   useEffect(() => {
      window.scrollTo(0, 0);
@@ -73,7 +75,14 @@ function ProductPage(props) {
 
   const handleAddFavorite = (e) =>{
       e.preventDefault();
-      return checkAuth() !==true ? props.history.push('/login') : props.addToFavorite(id)
+      if(checkAuth()!==true){
+        return props.history.push('/login')
+      }else if(isFavoriteItem !== undefined ){
+        return props.removeFavorite(id)
+      }
+      else if(isFavoriteItem === undefined){
+        props.addToFavorite(id)
+      }
   }
 
   return (
@@ -171,8 +180,8 @@ function ProductPage(props) {
                           </div>
 
                           <div className="col text-center">
-                            <Button className={`btn linkBtnBorder ${classes.addFevButton}`} onClick={handleAddFavorite}>
-                              <i className="far fa-star"></i>Add to favorites
+                            <Button  className={`btn ${classes.addFevButton} ${(isFavoriteItem !== undefined) ? 'favorite-btn' : 'linkBtnBorder'}`} onClick={handleAddFavorite}>
+                            <i className="fas fa-star"></i>{(isFavoriteItem !== undefined) ? "Remove favorite" : "Add to favorites"}
                             </Button>
                           </div>
                         </div>
@@ -269,7 +278,8 @@ const mapDispatchToProps = (dispatch) => {
       showSingleBook : (id) => dispatch(showSingleBook(id)),
       addToCart      : (book) => dispatch(addToCart(book)),
       updateItem     : ({id, qty}) => dispatch(updateQuantity({id, qty})),
-      addToFavorite  : (id)=> dispatch(addToFavorite(id))
+      addToFavorite  : (id)=> dispatch(addToFavorite(id)),
+      removeFavorite : (id)=>dispatch(removeFavItem(id))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);
