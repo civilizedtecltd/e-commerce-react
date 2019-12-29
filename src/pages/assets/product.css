@@ -65,6 +65,18 @@
 .linkBtnBorder:hover{
     color: #3897cf !important;
 }
+
+.favorite-btn{
+    background-color: white !important;
+    color: #ea4f4b !important;
+    border: 1px solid #ea4f4b !important;
+}
+.favorite-btn:hover{
+    color: #ea4f4b !important;
+}
+
+
+
 .productDes p{
     font-size: 18px;
     margin-bottom: 0.5rem;
