@@ -15,21 +15,21 @@ function Search(props) {
     return(
 
         <Row>
-        <Col>
-          <Collapse in={props.open} >
-            <form onSubmit={handleSubmit}>
-            <div  className="searchBarNew">
-              <div id="SearchBarMenu">
-                <input type="text" className="form-control shadow-none" placeholder="Search" onChange={(event)=>setKeyWord(event.target.value)}  />
-                <span onClick={props.handleOpen}><i className="fas fa-times"></i></span>
-                <button type="submit" hidden >submit</button>
-              </div>
-            </div>
-            </form>
-          </Collapse>
+            <Col>
+                <Collapse in={props.open} >
+                    <form onSubmit={handleSubmit}>
+                        <div  className="searchBarNew">
+                            <div id="SearchBarMenu">
+                                <input type="text" className="form-control shadow-none" placeholder="Search" onChange={(event)=>setKeyWord(event.target.value)}  />
+                                <span onClick={props.handleOpen}><i className="fas fa-times"></i></span>
+                                <button type="submit" hidden >submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </Collapse>
 
-        </Col>
-      </Row>
+            </Col>
+        </Row>
     )
 }
 
