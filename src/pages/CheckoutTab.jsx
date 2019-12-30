@@ -282,28 +282,28 @@ const CheckoutTab = (props) => {
 
                                     <Col sm="6">
                                         <ul className="orderConfrimationList text-large">
-                                            <li><strong>First name:</strong>{ formData.first_name }</li>
-                                            <li><strong>Last name:</strong>{ formData.last_name }</li>
-                                            <li><strong>Phone:</strong> { formData.phone}</li>
-                                            <li><strong>Email:</strong>{ props.user.email }</li>
+                                            <li><strong>First name : </strong>{ formData.first_name }</li>
+                                            <li><strong>Last name : </strong>{ formData.last_name }</li>
+                                            <li><strong>Phone : </strong> { formData.phone}</li>
+                                            <li><strong>Email : </strong>{ props.user.email }</li>
                                         </ul>
                                     </Col>
 
 
                                     <Col sm="6">
                                         <ul className="orderConfrimationList">
-                                            <li><strong>City:</strong>{ formData.city}</li>
-                                            <li><strong>Estate:</strong> { formData.estate}</li>
-                                            <li><strong>Address:</strong> { formData.address}</li>
-                                            <li><strong>Zip code:</strong> { formData.zip}</li>
+                                            <li><strong>City : </strong>{ formData.city}</li>
+                                            <li><strong>Estate : </strong> { formData.estate}</li>
+                                            <li><strong>Address : </strong> { formData.address}</li>
+                                            <li><strong>Zip code : </strong> { formData.zip}</li>
                                         </ul>
                                     </Col>
 
                                     <Col sm="6" className="mt-4">
                                         <ul className="orderConfrimationList text-large">
-                                            <li><strong>Total Price:</strong>{props.totalPrice}</li>
-                                            <li><strong>Delivery method:</strong> {(!isEmpty(payment) && payment.delivery === 0) ? 'Standard' : 'Express'}</li>
-                                            <li><strong>Expected arrival:</strong>  {futureDate(7)}</li>
+                                            <li><strong>Total Price : </strong>{props.totalPrice}</li>
+                                            <li><strong>Delivery method : </strong> {(!isEmpty(payment) && payment.delivery === 0) ? 'Standard' : 'Express'}</li>
+                                            <li><strong>Expected arrival : </strong>  {futureDate(7)}</li>
                                         </ul>
                                     </Col>
                                 </Row>

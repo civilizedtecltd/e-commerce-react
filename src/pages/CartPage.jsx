@@ -1,7 +1,8 @@
 import React,{useEffect} from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Form, Button, Table } from "react-bootstrap";
+import '../pages/checkout.css';
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
@@ -117,7 +118,7 @@ const CartPage = (props) => {
                         </Row>
                         <Row>
                           <Col>
-                            <Button className="btnGraySm" onClick={handleDeleteAll}>
+                            <Button className="btnGraySm btnDeleteall" onClick={handleDeleteAll}>
                               Delete all <i className="fas fa-times"></i>
                             </Button>
                           </Col>
@@ -136,21 +137,25 @@ const CartPage = (props) => {
                         <Row className="justify-content-end text-right mt-4 mb-5">
                           <Col sm="4">
                             <div className="cartProductPrice">
-
-                                  <div className="priceCartPage">
-                                    Price.....................................................
-                                    <span className="pPrice">${totalBookPrice}</span>
-                                  </div>
-                                  <div className="priceCartPage">
-                                      Delivery................................................
-                                      <span className="pPrice">${delivery_cost}</span>
-                                  </div>
-
-                                  <div className="priceCartPage">
-                                    Total.....................................................
-                                    <span className="pPrice" id="grand-total">${ parseFloat(totalBookPrice) + parseFloat(delivery_cost) }</span>
-                                  </div>
-
+                              <Table>
+                                <tbody>
+                                <tr>
+                                  <td className="priceCartPage">Price</td>
+                                  <td className="priceCartPage">.........................................</td>
+                                  <td className="text-right priceCartPage"><span className="priceCartPage">$ {totalBookPrice}</span></td>
+                                </tr>
+                                <tr>
+                                  <td className="priceCartPage">Delivery</td>
+                                  <td className="priceCartPage">.........................................</td>
+                                  <td className="text-right priceCartPage"><span className="priceCartPage">$ {delivery_cost}</span></td>
+                                </tr>
+                                <tr>
+                                  <td className="priceCartPage">Total</td>
+                                  <td className="priceCartPage">.........................................</td>
+                                  <td className="text-right priceCartPage"> <span className="priceCartPage" id="grand-total">$ { parseFloat(totalBookPrice) + parseFloat(delivery_cost) }</span></td>
+                                </tr>
+                                </tbody>
+                              </Table>
                               <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}>Checkout</Link>
                             </div>
                           </Col>

@@ -84,7 +84,7 @@ const HeaderComponent = (props) => {
                               />
                           )}
                           <li className="nav-item">
-                            <i className="fas fa-angle-down megaMenuIcon"></i>
+                               <i className="fas fa-ellipsis-h megaMenuIcon"></i>
                             <div className="mega-menu">
                               <div className="inner-mega-menu">
                                 <ul>
