@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Form, Accordion , useAccordionToggle, Alert} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import { setPayment } from '../redux/actions/authActions';
-
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import card_icon_img from '../assets/images/user/card_icon_img.png'
 import './checkout.css';
@@ -127,9 +126,9 @@ const PaymentMethods = (props) => {
         e.preventDefault();
         const clearAlert = setTimeout(() => {
             setAlert({status: false, message:''});
-        }, 5000);
+        }, 2000);
 
-        if(!card.ccv || !card.card_number || !card.mm || !card.yy){
+        if(!card.ccv && !card.card_number && !card.mm && !card.yy){
             setAlert({
                 status: true,
                 type: 'danger',
@@ -137,7 +136,7 @@ const PaymentMethods = (props) => {
             });
             return () =>  clearTimeout(clearAlert);
 
-        }else{
+        }if(card.ccv && card.card_number && card.mm && card.yy){
              props.addCard({
                 ...card
             });
@@ -188,9 +187,10 @@ const PaymentMethods = (props) => {
                         <div className="clearfix">
                             {/*<hr style={{borderColor:"#e2e2e2"}}/>*/}
                             <div className="m-2">
-                                <Alert show={showCardAlert} variant="danger" onClose={() => setShowCardAlert(false)}  dismissible>
+                            { !item.card_number ? <Alert show={showCardAlert} variant="danger" onClose={() => setShowCardAlert(false)}  dismissible>
                                     <p>This information is not valid!.</p>
-                                </Alert>
+                             </Alert> : ''
+                            }
                             </div>
                             <div className="p-3">
                                 <div className="row align-items-center">
@@ -203,8 +203,9 @@ const PaymentMethods = (props) => {
                                                       name="card_number"
                                                       className="form-control"
                                                       id={`card-number${index+1}`}
-                                                      aria-describedby="cardNumber"  defaultValue={item.card_number} o
-                                                      nChange={handleCardOnChange}
+                                                      aria-describedby="cardNumber" 
+                                                      value={item.card_number} 
+                                                      onChange={handleCardOnChange}
                                         />
 
                                     </div>
@@ -226,7 +227,7 @@ const PaymentMethods = (props) => {
                                                 className="form-control"
                                                 id={`card-exp-mm${index+1}`}
                                                 aria-describedby="cardMM"
-                                                defaultValue={item.mm}
+                                                value={item.mm}
                                                 onChange={handleCardOnChange}
                                             /></li>
                                             <li className="cardBl">/</li>
@@ -239,14 +240,14 @@ const PaymentMethods = (props) => {
                                                 className="form-control"
                                                 id={`card-exp-yy${index+1}`}
                                                 aria-describedby="cardYY"
-                                                defaultValue={item.yy}
+                                                value={item.yy}
                                                 onChange={handleCardOnChange}
                                             /></li>
                                         </ul>
                                     </div>
 
                                     <div className="col offset-sm-4 form-group">
-                                        <label htmlFor="card-ccv">CVV</label>
+                                        <label htmlFor="card-ccv"> CVV </label>
                                         <NumberFormat
                                             type="text"
                                             name="ccv"
@@ -255,6 +256,7 @@ const PaymentMethods = (props) => {
                                             id={`card-ccv${index+1}`}
                                             aria-describedby="emailHelp"
                                             placeholder="CCV"
+                                            value={item.ccv}
                                             onChange={handleCardOnChange}
                                         />
                                     </div>
@@ -312,7 +314,12 @@ const PaymentMethods = (props) => {
             </div>
             <div>
                 <div className="col text-right shippingCostPrice">
-            <span className="shippingCost"><strong>Time:</strong> { 24*props.delivery[1].delivery_time} hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> ${props.delivery[1].price}</span>
+                    <span className="shippingCost"><strong>Time:</strong>
+                        {24 * props.delivery[1].delivery_time} hours
+                    </span>
+                    <span className="shippingPrice pl-3 pr-3">
+                        <strong>Price:</strong> ${props.delivery[1].price}
+                    </span>
                 </div>
             </div>
         </div>

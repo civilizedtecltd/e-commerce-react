@@ -20,10 +20,7 @@ const CheckoutPage = (props) => {
   const [delivery_cost , setDeliveryCost] = useState(delivery_costs)
   const totalQuantity = cartItems.map(data=>data.quantity)
   const sumTotalQty = totalQuantity.reduce((ac,crr)=>ac+crr)
-  console.log(sumTotalQty)
-
-
-
+ 
 
   if(cartItems.length !== 0){
      cartItems.map((item) =>totalBookPrice += item.amountPrice)
@@ -64,7 +61,6 @@ const CheckoutPage = (props) => {
                   <Col sm="8">
                     <div className="productCartList webScrollbar">
                     { cartItems.map((item,index)=>(
-
                       <div key={index} className="productCartSingle d-flex align-items-center mb-2">
                           <div className="cartProductMedia bgGray">
                             <img src={ URL.BASE +"/"+ item.cover_images.img_1 } alt="" />
