@@ -7,7 +7,7 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import card_icon_img from '../assets/images/user/card_icon_img.png'
 import './checkout.css';
 import '../assets/css/theme.css'
-
+import NumberFormat from 'react-number-format';
 import defaultMethods from '../inc/PaymentMethods/defaultPaymentMethods.json';
 
 const CheckToggle = ({ children, eventKey, title }) => {
@@ -33,6 +33,7 @@ const CheckToggle = ({ children, eventKey, title }) => {
 
 const PaymentMethods = (props) => {
 
+    const [showCardAlert, setShowCardAlert] = useState(true);
     const [card, setCard] = useState({});
     const [selectedMethod, setSelectedMethods]= useState(null);
     const [deliveryMethod, setDeliveryMethod] = useState({
@@ -44,6 +45,7 @@ const PaymentMethods = (props) => {
         type: 'danger',
         message: ''
     });
+
 
     const paymentMethods = (props.user.payment && props.user.payment.length === 3)? props.user.payment : defaultMethods;
 
@@ -148,6 +150,33 @@ const PaymentMethods = (props) => {
         }
     }
 
+    //Card Input Format
+    const limit = (val, max) => {
+        if (val.length === 1 && val[0] > max[0]) {
+            val = '0' + val;
+        }
+
+        if (val.length === 2) {
+            if (Number(val) === 0) {
+                val = '01';
+
+                //this can happen when user paste number
+            } else if (val > max) {
+                val = max;
+            }
+        }
+
+        return val;
+    }
+
+    const cardExpiryMonth = (val) => {
+        return limit(val.substring(0, 2), '12');
+    }
+
+    const cardExpiryYear = (val) => {
+        return val.substring(0,2);
+    }
+
     return (<>
         <PageLoader loading={false} />
         <Accordion  onSelect={handleAccordionOnSelect}>
@@ -157,12 +186,27 @@ const PaymentMethods = (props) => {
                     </div>
                     <Accordion.Collapse eventKey={index}>
                         <div className="clearfix">
-                            <hr style={{borderColor:"#e2e2e2"}}/>
+                            {/*<hr style={{borderColor:"#e2e2e2"}}/>*/}
+                            <div className="m-2">
+                                <Alert show={showCardAlert} variant="danger" onClose={() => setShowCardAlert(false)}  dismissible>
+                                    <p>This information is not valid!.</p>
+                                </Alert>
+                            </div>
                             <div className="p-3">
                                 <div className="row align-items-center">
                                     <div className="col-sm-10 form-group">
                                         <label htmlFor={`card-number${index+1}`}>Card number</label>
-                                        <input type="text" name="card_number" className="form-control" id={`card-number${index+1}`} aria-describedby="cardNumber"  defaultValue={item.card_number} onChange={handleCardOnChange}/>
+                                        <NumberFormat format="#### #### #### ####"
+                                                      placeholder="____ ____ ____ ____"
+                                                      mask={['_', '_','_','_','_', '_','_','_','_', '_','_','_','_', '_','_','_']}
+                                                      type="text"
+                                                      name="card_number"
+                                                      className="form-control"
+                                                      id={`card-number${index+1}`}
+                                                      aria-describedby="cardNumber"  defaultValue={item.card_number} o
+                                                      nChange={handleCardOnChange}
+                                        />
+
                                     </div>
                                     <div className="col">
                                         <img src={card_icon_img} alt=""/>
@@ -173,15 +217,46 @@ const PaymentMethods = (props) => {
                                     <div className="col-sm-3 form-group">
                                         <label htmlFor="card-exp-mm">Expiry date</label>
                                         <ul className="cardPayFiled d-flex align-items-center justify-content-end">
-                                            <li><input type="text" name="mm" className="form-control" id={`card-exp-mm${index+1}`} aria-describedby="cardMM" placeholder="MM" defaultValue={item.mm} onChange={handleCardOnChange} /></li>
+                                            <li><NumberFormat
+                                                type="text"
+                                                format={cardExpiryMonth}
+                                                placeholder="MM"
+                                                mask={['M', 'M']}
+                                                name="mm"
+                                                className="form-control"
+                                                id={`card-exp-mm${index+1}`}
+                                                aria-describedby="cardMM"
+                                                defaultValue={item.mm}
+                                                onChange={handleCardOnChange}
+                                            /></li>
                                             <li className="cardBl">/</li>
-                                            <li><input type="text" name="yy" className="form-control" id={`card-exp-yy${index+1}`} aria-describedby="cardYY" placeholder="YY" defaultValue={item.yy} onChange={handleCardOnChange} /></li>
+                                            <li><NumberFormat
+                                                type="text"
+                                                format={cardExpiryYear}
+                                                placeholder="YY"
+                                                mask={['Y', 'Y']}
+                                                name="yy"
+                                                className="form-control"
+                                                id={`card-exp-yy${index+1}`}
+                                                aria-describedby="cardYY"
+                                                defaultValue={item.yy}
+                                                onChange={handleCardOnChange}
+                                            /></li>
                                         </ul>
                                     </div>
 
                                     <div className="col offset-sm-4 form-group">
                                         <label htmlFor="card-ccv">CVV</label>
-                                        <input type="text" name="ccv" className="form-control" id={`card-ccv${index+1}`} aria-describedby="emailHelp" placeholder="CCV" onChange={handleCardOnChange} />
+                                        <NumberFormat
+                                            type="text"
+                                            name="ccv"
+                                            format="###"
+                                            className="form-control"
+                                            id={`card-ccv${index+1}`}
+                                            aria-describedby="emailHelp"
+                                            placeholder="CCV"
+                                            onChange={handleCardOnChange}
+                                        />
                                     </div>
                                     <div className="col-sm-2">
                                         <img src={card_icon_img} alt=""/>

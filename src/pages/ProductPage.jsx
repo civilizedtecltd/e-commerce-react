@@ -35,7 +35,7 @@ function ProductPage(props) {
     const { id } = useParams();
     const [show, setShow] = useState(false);
     const [quantity, setQuantity] = useState(1);
-   
+
 
     let itemQty  = quantity;
     props.cart.map(item => {
@@ -88,7 +88,7 @@ function ProductPage(props) {
   return (
     <>
       <PageLoader loading={props.pending}/>
-      <div className="allWrapper">
+      <Container className="allWrapper">
         <HeaderComponent
         favorite_item={favoriteItem.length}
         cartItem = { props.totalItems }
@@ -216,18 +216,18 @@ function ProductPage(props) {
             className="similarBooks productView secGap clearfix secBorder"
             id="similarBooks"
           >
-            <div className="container">
-              <div className="row">
-                <div className="col text-center">
-                  <h2 className="sectionTitle mb-5">
-                    <span>Similar</span> Book
-                  </h2>
+            <Container>
+                <div className="row">
+                    <div className="col text-center">
+                        <h2 className="sectionTitle mb-5">
+                            <span>Similar</span> Book
+                        </h2>
+                    </div>
                 </div>
-              </div>
-                <div className="SimilarBookSlider">
-                    <ImgSlick images={( props.similar !== undefined ) ? props.similar : [] } />
-                </div>
-            </div>
+
+                <ImgSlick images={( props.similar !== undefined ) ? props.similar : [] } />
+
+            </Container>
           </section>
         </main>
 
@@ -240,7 +240,7 @@ function ProductPage(props) {
           </Container>
         </section>
         <FooterComponent />
-      </div>
+      </Container>
 
       <Modal show = {show} onHide = { handleClose }>
         <Modal.Header className={"border-0"} closeButton>
