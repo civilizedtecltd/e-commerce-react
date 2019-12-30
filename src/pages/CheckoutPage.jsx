@@ -14,15 +14,12 @@ const CheckoutPage = (props) => {
 
   const cartItems = props.cart;
 
-
   let totalBookPrice = 0;
   let delivery_costs = (props.delivery) ?  props.delivery[0].price : 0 ;
   const [delivery_cost , setDeliveryCost] = useState(delivery_costs)
   const totalQuantity = cartItems.map(data=>data.quantity)
   const sumTotalQty = totalQuantity.reduce((ac,crr)=>ac+crr)
   console.log(sumTotalQty)
-
-
 
 
   if(cartItems.length !== 0){
