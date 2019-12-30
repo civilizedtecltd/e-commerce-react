@@ -52,14 +52,13 @@ const PaymentMethods = (props) => {
         savedMethods.map(item => {
             switch(item.payment_type){
                 case 'MPESA':
-                        paymentMethods[0] = { ...item}
-                    break;
+                     return paymentMethods[0] = { ...item}
                 case 'VISA':
-                        paymentMethods[1] = { ...item}
-                    break;
+                       return paymentMethods[1] = { ...item}
                 case 'PAYPAL':
-                        paymentMethods[2] = { ...item}
-                    break;
+                      return paymentMethods[2] = { ...item}
+                default :
+                  return paymentMethods
             }
         });
     }
