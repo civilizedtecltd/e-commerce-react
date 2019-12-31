@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { connect } from "react-redux";
 import isEmpty from "lodash/isEmpty";
 import {
@@ -11,7 +11,7 @@ import {
   Modal,
   Form
 } from "react-bootstrap";
-import NumberFormat from 'react-number-format';
+import NumberFormat from "react-number-format";
 import {
   deletePayment,
   updatePaymentMethod
@@ -30,13 +30,22 @@ const PaymentPage = props => {
   const totalFavorite = props.favorite.items.length;
   const [card_id, setCardId] = useState(null);
 
-  const [cardNumber, setCardNumber] = useState("");
-  const [month, setMonth] = useState("");
+  const [visibleUpdateModal, setVisibleUpdateModal] = useState(false);
+  const cards = !isEmpty(props.payment) ? [...props.payment] : [];
+  const [data, setData] = useState([...cards]);
+  const [singleData, setSingleData] = useState('')
+  const [cardNumber, setCardNumber] = useState('');
+  const [month, setMonth] = useState('');
   const [year, setYear] = useState("");
   const [cvv, setCvv] = useState("");
-  const [visibleUpdateModal, setVisibleUpdateModal] = useState(false);
-
-  const cards = !isEmpty(props.payment) ? [...props.payment] : [];
+  useEffect(() => {
+    setSingleData({
+      card_number: cardNumber,
+      mm: month,
+      yy: year,
+      ccv: cvv
+    });
+  }, [cardNumber, month, year,cvv]);
 
   const handleVisibility = e => {
     e.preventDefault();
@@ -59,29 +68,26 @@ const PaymentPage = props => {
 
   const updatePaymentMethod = e => {
     e.preventDefault();
-
-    const data = {
+    singleData({
       id: card_id,
       card_number: cardNumber,
       mm: month,
       yy: year,
-      ccv: cvv,
-    };
-
-    props.update(data)
-
+      ccv: cvv
+    });
+    props.update(data);
     return setVisibleUpdateModal(false);
   };
 
   //Card Input Format
   const limit = (val, max) => {
     if (val.length === 1 && val[0] > max[0]) {
-      val = '0' + val;
+      val = "0" + val;
     }
 
     if (val.length === 2) {
       if (Number(val) === 0) {
-        val = '01';
+        val = "01";
 
         //this can happen when user paste number
       } else if (val > max) {
@@ -92,12 +98,12 @@ const PaymentPage = props => {
     return val;
   };
 
-  const cardExpiryMonth = (val) => {
-    return limit(val.substring(0, 2), '12');
+  const cardExpiryMonth = val => {
+    return limit(val.substring(0, 2), "12");
   };
 
-  const cardExpiryYear = (val) => {
-    return val.substring(0,2);
+  const cardExpiryYear = val => {
+    return val.substring(0, 2);
   };
 
   return (
@@ -145,9 +151,9 @@ const PaymentPage = props => {
                                     <></>
                                   ) : (
                                     cards.map(card => {
-                                      const last_num = card.card_number.slice(
-                                        -4
-                                      );
+                                      const last_num = card.card_number
+                                        ? card.card_number.slice(-4)
+                                        : "";
                                       return (
                                         <tr key={card.id}>
                                           <td className="cardInfotd">
@@ -169,6 +175,13 @@ const PaymentPage = props => {
                                               value={card.id}
                                               onClick={e => {
                                                 e.preventDefault();
+                                                setSingleData(
+                                                  data.find(
+                                                    payment =>
+                                                      payment.id ===
+                                                      Number(e.target.value)
+                                                  )
+                                                );
                                                 setCardId(e.target.value);
                                                 return setVisibleUpdateModal(
                                                   true
@@ -252,7 +265,7 @@ const PaymentPage = props => {
         </Modal.Footer>
       </Modal>
 
-      <Modal.Header closeButton className="border-0"></Modal.Header>
+      {/* <Modal.Header closeButton className="border-0"></Modal.Header> */}
       <Modal
         show={visibleUpdateModal} //visibleUpdateModal
         onHide={e => setVisibleUpdateModal(false)}
@@ -263,60 +276,72 @@ const PaymentPage = props => {
             <div className="cardInfoForm p-3">
               <Row className="align-items-center">
                 <Col sm="12">
-
                   <Form.Group>
-                    <Form.Label>
-                      Card number
-                    </Form.Label>
+                    <Form.Label>Card number</Form.Label>
                     <NumberFormat
-                        format="#### #### #### ####"
-                        placeholder="____ ____ ____ ____"
-                        mask={['_', '_','_','_','_', '_','_','_','_', '_','_','_','_', '_','_','_']}
-                        name="card_number"
-                        className="form-control"
-                        value={cardNumber}
-                        onChange={e => {
-                          e.preventDefault();
-                          return setCardNumber(e.target.value);
-                        }}
+                      format="#### #### #### ####"
+                      placeholder="____ ____ ____ ____"
+                      mask={[
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_",
+                        "_"
+                      ]}
+                      name="card_number"
+                      className="form-control"
+                      value={singleData.card_number}
+                      onChange={e => {
+                        e.preventDefault();
+                        return setCardNumber(e.target.value);
+                      }}
                     />
                   </Form.Group>
                 </Col>
               </Row>
-              <Row >
+              <Row>
                 <Col sm="8">
                   <Form.Group>
-                    <Form.Label>
-                      Expiry date
-                    </Form.Label>
+                    <Form.Label>Expiry date</Form.Label>
                     <ul className="justify-content-start d-flex">
                       <li className="ModalFromInput">
                         <NumberFormat
-                            id="card-mm"
-                            format={cardExpiryMonth}
-                            placeholder="MM"
-                            mask={['M', 'M']}
-                            name="mm"
-                            value={month}
-                            onChange={e => {
-                              e.preventDefault();
-                              return setMonth(e.target.value);
-                            }}
+                          id="card-mm"
+                          format={cardExpiryMonth}
+                          placeholder="MM"
+                          mask={["M", "M"]}
+                          name="mm"
+                          value={singleData.mm}
+                          onChange={e => {
+                            e.preventDefault();
+                            return setMonth(e.target.value);
+                          }}
                         />
                       </li>
                       <li className="cardBl">/</li>
                       <li className="ModalFromInput">
                         <NumberFormat
-                            id="card-yy"
-                            format={cardExpiryYear}
-                            placeholder="YY"
-                            mask={['Y', 'Y']}
-                            name="yy"
-                            value={year}
-                            onChange={e => {
-                              e.preventDefault();
-                              return setYear(e.target.value);
-                            }}
+                          id="card-yy"
+                          format={cardExpiryYear}
+                          placeholder="YY"
+                          mask={["Y", "Y"]}
+                          name="yy"
+                          value={singleData.yy}
+                          onChange={e => {
+                            e.preventDefault();
+                            return setYear(e.target.value);
+                          }}
                         />
                       </li>
                     </ul>
@@ -327,72 +352,22 @@ const PaymentPage = props => {
                   <Form.Group>
                     <Form.Label> CVV </Form.Label>
                     <NumberFormat
-                        type="text"
-                        id="card-cvv"
-                        name="ccv"
-                        format="###"
-                        placeholder="CVV"
-                        value={cvv}
-                        onChange={e => {
-                          e.preventDefault();
-                          return setCvv(e.target.value);
-                        }}
+                      type="text"
+                      id="card-cvv"
+                      name="ccv"
+                      format="###"
+                      placeholder="CVV"
+                      value={singleData.ccv}
+                      onChange={e => {
+                        e.preventDefault();
+                        return setCvv(e.target.value);
+                      }}
                     />
                   </Form.Group>
                 </Col>
               </Row>
-
             </div>
           </Form>
-          {/*<Form>*/}
-          {/*  <Form.Group controlId="card-number">*/}
-          {/*    <Form.Label>Card number</Form.Label>*/}
-          {/*    <Form.Control*/}
-          {/*      type="number"*/}
-          {/*      placeholder="Card Number"*/}
-          {/*      max="16"*/}
-          {/*      min="0"*/}
-          {/*      value={cardNumber}*/}
-          {/*      onChange={e => {*/}
-          {/*        e.preventDefault();*/}
-          {/*        return setCardNumber(e.target.value);*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*  </Form.Group>*/}
-
-          {/*  <Form.Group controlId="exp-date">*/}
-          {/*    <Form.Label>Expiry date</Form.Label>*/}
-          {/*    <Form.Control*/}
-          {/*      type="text"*/}
-          {/*      placeholder="mm"*/}
-          {/*      value={month}*/}
-          {/*      onChange={e => {*/}
-          {/*        e.preventDefault();*/}
-          {/*        return setMonth(e.target.value);*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*    <Form.Control*/}
-          {/*      type="text"*/}
-          {/*      placeholder="yy"*/}
-          {/*      value={year}*/}
-          {/*      onChange={e => {*/}
-          {/*        e.preventDefault();*/}
-          {/*        return setYear(e.target.value);*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*  </Form.Group>*/}
-          {/*  <Form.Group controlId="formBasicCheckbox">*/}
-          {/*    <Form.Control*/}
-          {/*      type="text"*/}
-          {/*      placeholder="ccv"*/}
-          {/*      value={ccv}*/}
-          {/*      onChange={e => {*/}
-          {/*        e.preventDefault();*/}
-          {/*        return setCcv(e.target.value);*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*  </Form.Group>*/}
-          {/*</Form>*/}
         </Modal.Body>
         <Modal.Footer className="border-0">
           <Button

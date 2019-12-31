@@ -147,21 +147,29 @@ const authNotInState = (authData) => ({
 const updatePaymentMethod = (data) => dispatch => {
     axios.post(URL.UPDATE_PAYMENT_METHOD, data).then(res => {
         return dispatch({
-            type: Types.UPDATE_PAYMENT_METHOD,
-            payload: res.data
-        })
+          type: Types.UPDATE_PAYMENT_METHOD,
+          payload: [res.data.data]
+        });
     }).catch(error=>console.log(error))
+}
+
+const authDataNotInState = (auth) => { 
+    return {
+        type: Types.AUTH_NOT_IN_STATE,
+        payload: auth
+    }
 }
 
 
 export {
-    login,
-    logout,
-    authNotInState,
-    update,
-    getUser,
-    setPayment,
-    deletePayment,
-    confirmOrder,
-    updatePaymentMethod
-}
+  login,
+  logout,
+  authNotInState,
+  update,
+  getUser,
+  setPayment,
+  deletePayment,
+  confirmOrder,
+  updatePaymentMethod,
+  authDataNotInState
+};

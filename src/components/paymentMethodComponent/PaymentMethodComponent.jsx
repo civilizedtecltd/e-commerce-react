@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {Card, Form, Row, Col, Button, Alert} from "react-bootstrap";
 import NumberFormat from 'react-number-format';
 function PaymentMethodComponent(props) {
-    const [showCardAlert, setShowCardAlert] = useState(true);
+  const [showCardAlert, setShowCardAlert] = useState(false);
+  const [message, setMessage] = useState("This information is not valid!");
     const [card, setCard] = useState({})
 
     const handleOnChange = (e) => {
@@ -13,9 +14,44 @@ function PaymentMethodComponent(props) {
     }
 
     const handleOnClick = (e) => {
-        e.preventDefault();
-        props.callback(card);
-    }
+      e.preventDefault();
+       if (!card.card_number && !card.mm && !card.yy && !card.ccv) {
+         setMessage("Field should not be empty");
+         setShowCardAlert(true);
+         return setTimeout(() => setShowCardAlert(false), 2000);
+       }
+      if (card.card_number && isNaN(Number(card.card_number[18]))) {
+         setMessage("Card Number should be 16 digit");
+         setShowCardAlert(true)
+        return setTimeout(() => setShowCardAlert(false), 2000);
+      }
+      if (!card.card_number) {
+        setMessage("Card Number should not empty");
+        setShowCardAlert(true);
+        return setTimeout(() => setShowCardAlert(false), 2000);
+      }
+      if (!card.mm) {
+        setMessage("MM should not be empty");
+        setShowCardAlert(true)
+        return setTimeout(() => setShowCardAlert(false), 2000);
+      }
+      if (!card.yy) {
+        setMessage("YY should not be empty");
+        setShowCardAlert(true)
+        return setTimeout(() => setShowCardAlert(false), 2000);
+      }
+      if (!card.ccv) {
+        setMessage("CVV should not be empty");
+        setShowCardAlert(true);
+        return setTimeout(() => setShowCardAlert(false), 2000); 
+      }
+      
+     
+      else if (card.card_number && card.mm && card.yy && card.ccv) {
+             props.callback(card);
+           }              
+  }
+  
     //Card Input Format
     const limit = (val, max) => {
       if (val.length === 1 && val[0] > max[0]) {
@@ -52,7 +88,7 @@ function PaymentMethodComponent(props) {
                 <div className="payInfoDetails clearfix">
                     <div className="m-2">
                         <Alert show={showCardAlert} variant="danger" onClose={() => setShowCardAlert(false)}  dismissible>
-                            <p>This information is not valid!.</p>
+  <p>{message}</p>
                         </Alert>
                     </div>
                   <div className="cardInfoForm p-3">

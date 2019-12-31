@@ -41,7 +41,7 @@ const authReducer = (state = initState, {type, payload}) => {
             return  {...state,
                 user: {
                     ...state.user,
-                    payment: [payload]
+                    payment: payload
                 }
             }
         case Types.CONFIRM_ORDER:
@@ -52,6 +52,8 @@ const authReducer = (state = initState, {type, payload}) => {
                     order: payload
                 }
             }
+        case Types.AUTH_DATA_NOT_IN_STATE:
+            return {auth:payload}
         default:
             return {
                 ...state
