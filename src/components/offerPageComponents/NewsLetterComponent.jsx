@@ -5,7 +5,7 @@ import axios from 'axios'
 
 function NewsLetterComponent(props) {
   const [email , setEmail ] = useState('');
-  const [message , setMessage] = useState('') //if any body want he can use this response message for frontend
+  const [setMessage] = useState('') //if any body want he can use this response message for frontend
 
   const handleSubmit = async (e) => {
     e.preventDefault()

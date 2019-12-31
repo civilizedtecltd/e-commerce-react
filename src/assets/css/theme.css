@@ -720,7 +720,8 @@
     .SimilarBookSlider .slick-arrow.slick-prev {margin-top: -5rem;}
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
-
+    .cardTable .btnItemDelete{padding-left: 10px;padding-right: 10px;margin-right: 0px;line-height: 1rem;}
+    .home-ctg-limit-character{display: block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 }
 
 /*------------------------------------------------------------------------------*/
@@ -756,6 +757,21 @@
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
 
+    /* Shop */
+    .Product_Row .col-sm-3 { max-width: 50%;flex: 0 0 50%;}
+    .singleFilterCard h5 {font-size: 16px;}
+    .asideTitle {margin-bottom: 1rem;margin-top: 0;}
+    .singleFilterCard {padding-bottom: 0.5rem;margin-bottom: 0.8rem;}
+    .singleFilterCard h5 {font-size: 16px;margin-bottom: 0px;}
+    #asideFilterBar{padding-top: 1rem !important;padding-bottom: 1rem !important;}
+    .pageTitle, .pageTitle span{font-size: 20px;}
+    .singleFilterCard i{font-size: 14px;}
+    .modal-footer-btn-group .btn{padding: 0 10px;}
+    .Pagination-Row .col{max-width: 100%; flex: 0 0 100%;margin-bottom: 1rem;}
+    .Pagination-Row .singleFilter {justify-content: space-between;}
+    .Pagination-Row .singleFilter li:nth-child(2){width: 80%;}
+    .Pagination-Row .singleFilter li select{width: 100%;}
+    .home-ctg-limit-character{display: block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 }
 
 /*------------------------------------------------------------------------------*/
@@ -839,7 +855,8 @@
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
     /*    home page*/
-    .home-ctg-limit-character{display: block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+    .home-ctg-limit-character{display: block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;font-size: 16px}
+    .cartPromo .form-control{margin-bottom: 0px;}
 
 }
 
@@ -879,7 +896,7 @@
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
     /*    home page*/
-    .home-ctg-limit-character{display: block;width: 290px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+    .home-ctg-limit-character{display: block;width: 290px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;font-size: 16px}
 }
 
 /*------------------------------------------------------------------------------*/
@@ -896,7 +913,8 @@
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
     /*    home page*/
-    .home-ctg-limit-character{display: block;width: 250px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+    .home-ctg-limit-character{display: block;width: 250px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;font-size: 16px}
+    .cartSection .btnDeleteall{padding-left: 2px;padding-right: 2px;}
 }
 
 /*------------------------------------------------------------------------------*/
@@ -910,7 +928,6 @@
   .sectionTitle {font-size: 18px;}
   .productBtnGroup .col{flex: 0 0 100%;max-width: 100%;margin-bottom: 20px;}
   .productBtnGroup .btn{padding: 0 10px;width: 100%;}
-  .mobileNav li a {font-size: 0.8rem;line-height: 2rem;}
     .secGap {padding-top: 3rem !important; padding-bottom: 3rem !important;}
     .partnersCarousel .slick-list{ margin:1rem;}
     .partnersCarousel .slick-prev{ margin-left: 1.4rem;}
@@ -930,8 +947,8 @@
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
     /*    home page*/
-    .home-ctg-limit-character{display: block;width: 230px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
-}
+    .home-ctg-limit-character{display: block;width: 230px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;font-size: 16px}
+ }
 
 /*------------------------------------------------------------------------------*/
 /*                    Width : 336px
@@ -949,6 +966,7 @@
     .ImageSlickOfferPage .slick-next {margin-top: -3rem;}
     .ImageSlickOfferPage .productContent {margin-left: 1rem;}
 
+    .mobileNav li a {font-size: 0.9rem;line-height: 2rem;}
     .categorySlider {margin: 2rem;}
     .categorySlider .slick-prev {margin-top: -3rem; margin-left: 5px;}
     .categorySlider .slick-next {margin-top: -3rem;}
@@ -966,5 +984,11 @@
     /*    favourite*/
     .productContent .productTitle {width: 100% !important;}
     /*    home page*/
-    .home-ctg-limit-character{display: block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+    .home-ctg-limit-character{display: block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-size: 16px}
+    .slick-slider .productMedia {
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+        margin: auto;
+    }
 }

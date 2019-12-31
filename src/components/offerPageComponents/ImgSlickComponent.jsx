@@ -1,6 +1,6 @@
 import React from 'react';
 import{Link} from 'react-router-dom'
-import {Card, Col, Image, Row} from "react-bootstrap";
+import {Card, Col, Image} from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
 import Slider from "react-slick";
 import '../../assets/css/theme.css'
@@ -85,7 +85,7 @@ const ImgSlick = (props) => {
                 {
                     breakpoint: 380,
                     settings: {
-                        slidesToShow: 1,
+                        slidesToShow: 2,
                         slidesToScroll: 1
                     }
                 },
