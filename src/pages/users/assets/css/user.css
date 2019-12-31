@@ -100,3 +100,6 @@
 .modalCancelBtn.btn.btn-primary {
     background-color: #DC3545 !important;
 }
+.ModalFromInput{
+    width: 35%;
+}
