@@ -37,6 +37,13 @@ const authReducer = (state = initState, {type, payload}) => {
                     payment: payload
                 }
             }
+        case Types.UPDATE_PAYMENT_METHOD:
+            return  {...state,
+                user: {
+                    ...state.user,
+                    payment: [payload]
+                }
+            }
         case Types.CONFIRM_ORDER:
             return {
                 ...state,

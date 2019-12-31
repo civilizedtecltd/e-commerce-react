@@ -4,12 +4,9 @@ import './rating.css';
 class RatingComponent extends Component {
   constructor (props) {
     super(props)
-    console.log(props)
     this.state = { 
       rating: this.props.rating,
      }
-
-     
   }
 
 

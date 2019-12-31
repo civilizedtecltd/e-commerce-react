@@ -5,7 +5,8 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
   class APP_URL {
      constructor(){
 
-        this.BASE = `http://63.33.69.86:4040`;
+        // this.BASE = `http://63.33.69.86:4040`;
+        this.BASE = `http://localhost:3333`;
         this.API  = `${this.BASE}/api`;
      }
 
@@ -90,6 +91,9 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
 
     get MAX_MIN_PRICE(){
     return `${this.API}/price-max-min`
+    }
+    get UPDATE_PAYMENT_METHOD() {
+        return `${this.API}/update-payment-method`
     }
  }
 
