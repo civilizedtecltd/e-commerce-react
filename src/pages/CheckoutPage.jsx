@@ -53,7 +53,7 @@ const CheckoutPage = (props) => {
 
                       <div key={index} className="productCartSingle d-flex align-items-center mb-2">
                           <div className="cartProductMedia bgGray">
-                            <img src={ URL.BASE +"/"+ item.cover_images.img_1 } alt="" />
+                            <img src={item.cover_images.img_1} alt="" />
                           </div>
                           <div className="cartProductDes pl-3">
                             <h3>

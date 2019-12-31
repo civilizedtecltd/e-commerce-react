@@ -17,7 +17,7 @@ const FavoritesPage = (props) => {
     const totalCartItems = props.cart.length;
     const totalFavoriteItems = props.favorite.items.length;
     const favoriteItems = (totalFavoriteItems !== 0 )? props.favorite.items : [];
-    console.log(favoriteItems)
+
 
     useEffect(() => {
         props.showAllFavItem()
@@ -94,13 +94,12 @@ const FavoritesPage = (props) => {
                             <Container>
                                 <Row className="mt-5 mb-5 ">
                                     {favoriteItems.map((item, index) => {
-                                        console.log("kjdjsdjs",item)
                                         return(
                                             <NewBookComponent
                                                 key={index}
                                                 bookId={item.id}
                                                 ImageBg="bgGray"
-                                                BookImage={`${URL.BASE}/${item.cover_images.img_1}`}
+                                                BookImage={`${item.cover_images.img_1}`}
                                                 ProductTitle={item.name}
                                                 AuthorName={item.book_author.name}
                                                 ProductPrice={item.price}
