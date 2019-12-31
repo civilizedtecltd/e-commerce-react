@@ -140,7 +140,6 @@ width: 50%;
     height: auto;
     background: #f1f2f3;
     transition: all 0.4s ease;
-    padding: 1rem;
     box-sizing: border-box;
     visibility: hidden;
     opacity: 0;

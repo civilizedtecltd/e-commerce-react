@@ -11,7 +11,7 @@ import {
   Modal,
   Form
 } from "react-bootstrap";
-
+import NumberFormat from 'react-number-format';
 import {
   deletePayment,
   updatePaymentMethod
@@ -33,7 +33,7 @@ const PaymentPage = props => {
   const [cardNumber, setCardNumber] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
-  const [ccv, setCcv] = useState("");
+  const [cvv, setCvv] = useState("");
   const [visibleUpdateModal, setVisibleUpdateModal] = useState(false);
 
   const cards = !isEmpty(props.payment) ? [...props.payment] : [];
@@ -50,7 +50,7 @@ const PaymentPage = props => {
   };
 
   const handleClose = () => setCardAlert(false);
-  
+
   const handleShow = e => {
     e.preventDefault();
     setCardId(e.target.id);
@@ -59,18 +59,45 @@ const PaymentPage = props => {
 
   const updatePaymentMethod = e => {
     e.preventDefault();
-   
+
     const data = {
       id: card_id,
       card_number: cardNumber,
       mm: month,
       yy: year,
-      ccv: ccv, 
+      ccv: cvv,
     };
 
     props.update(data)
 
     return setVisibleUpdateModal(false);
+  };
+
+  //Card Input Format
+  const limit = (val, max) => {
+    if (val.length === 1 && val[0] > max[0]) {
+      val = '0' + val;
+    }
+
+    if (val.length === 2) {
+      if (Number(val) === 0) {
+        val = '01';
+
+        //this can happen when user paste number
+      } else if (val > max) {
+        val = max;
+      }
+    }
+
+    return val;
+  };
+
+  const cardExpiryMonth = (val) => {
+    return limit(val.substring(0, 2), '12');
+  };
+
+  const cardExpiryYear = (val) => {
+    return val.substring(0,2);
   };
 
   return (
@@ -227,60 +254,145 @@ const PaymentPage = props => {
 
       <Modal.Header closeButton className="border-0"></Modal.Header>
       <Modal
-        show={visibleUpdateModal}
+        show={visibleUpdateModal} //visibleUpdateModal
         onHide={e => setVisibleUpdateModal(false)}
       >
         <Modal.Header closeButton className="border-0"></Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="card-number">
-              <Form.Label>Card number</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Card Number"
-                max="16"
-                min="0"
-                value={cardNumber}
-                onChange={e => {
-                  e.preventDefault();
-                  return setCardNumber(e.target.value);
-                }}
-              />
-            </Form.Group>
+            <div className="cardInfoForm p-3">
+              <Row className="align-items-center">
+                <Col sm="12">
 
-            <Form.Group controlId="exp-date">
-              <Form.Label>Expiry date</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="mm"
-                value={month}
-                onChange={e => {
-                  e.preventDefault();
-                  return setMonth(e.target.value);
-                }}
-              />
-              <Form.Control
-                type="text"
-                placeholder="yy"
-                value={year}
-                onChange={e => {
-                  e.preventDefault();
-                  return setYear(e.target.value);
-                }}
-              />
-            </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Control
-                type="text"
-                placeholder="ccv"
-                value={ccv}
-                onChange={e => {
-                  e.preventDefault();
-                  return setCcv(e.target.value);
-                }}
-              />
-            </Form.Group>
+                  <Form.Group>
+                    <Form.Label>
+                      Card number
+                    </Form.Label>
+                    <NumberFormat
+                        format="#### #### #### ####"
+                        placeholder="____ ____ ____ ____"
+                        mask={['_', '_','_','_','_', '_','_','_','_', '_','_','_','_', '_','_','_']}
+                        name="card_number"
+                        className="form-control"
+                        value={cardNumber}
+                        onChange={e => {
+                          e.preventDefault();
+                          return setCardNumber(e.target.value);
+                        }}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row >
+                <Col sm="8">
+                  <Form.Group>
+                    <Form.Label>
+                      Expiry date
+                    </Form.Label>
+                    <ul className="justify-content-start d-flex">
+                      <li className="ModalFromInput">
+                        <NumberFormat
+                            id="card-mm"
+                            format={cardExpiryMonth}
+                            placeholder="MM"
+                            mask={['M', 'M']}
+                            name="mm"
+                            value={month}
+                            onChange={e => {
+                              e.preventDefault();
+                              return setMonth(e.target.value);
+                            }}
+                        />
+                      </li>
+                      <li className="cardBl">/</li>
+                      <li className="ModalFromInput">
+                        <NumberFormat
+                            id="card-yy"
+                            format={cardExpiryYear}
+                            placeholder="YY"
+                            mask={['Y', 'Y']}
+                            name="yy"
+                            value={year}
+                            onChange={e => {
+                              e.preventDefault();
+                              return setYear(e.target.value);
+                            }}
+                        />
+                      </li>
+                    </ul>
+                  </Form.Group>
+                </Col>
+
+                <Col sm="4">
+                  <Form.Group>
+                    <Form.Label> CVV </Form.Label>
+                    <NumberFormat
+                        type="text"
+                        id="card-cvv"
+                        name="ccv"
+                        format="###"
+                        placeholder="CVV"
+                        value={cvv}
+                        onChange={e => {
+                          e.preventDefault();
+                          return setCvv(e.target.value);
+                        }}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+            </div>
           </Form>
+          {/*<Form>*/}
+          {/*  <Form.Group controlId="card-number">*/}
+          {/*    <Form.Label>Card number</Form.Label>*/}
+          {/*    <Form.Control*/}
+          {/*      type="number"*/}
+          {/*      placeholder="Card Number"*/}
+          {/*      max="16"*/}
+          {/*      min="0"*/}
+          {/*      value={cardNumber}*/}
+          {/*      onChange={e => {*/}
+          {/*        e.preventDefault();*/}
+          {/*        return setCardNumber(e.target.value);*/}
+          {/*      }}*/}
+          {/*    />*/}
+          {/*  </Form.Group>*/}
+
+          {/*  <Form.Group controlId="exp-date">*/}
+          {/*    <Form.Label>Expiry date</Form.Label>*/}
+          {/*    <Form.Control*/}
+          {/*      type="text"*/}
+          {/*      placeholder="mm"*/}
+          {/*      value={month}*/}
+          {/*      onChange={e => {*/}
+          {/*        e.preventDefault();*/}
+          {/*        return setMonth(e.target.value);*/}
+          {/*      }}*/}
+          {/*    />*/}
+          {/*    <Form.Control*/}
+          {/*      type="text"*/}
+          {/*      placeholder="yy"*/}
+          {/*      value={year}*/}
+          {/*      onChange={e => {*/}
+          {/*        e.preventDefault();*/}
+          {/*        return setYear(e.target.value);*/}
+          {/*      }}*/}
+          {/*    />*/}
+          {/*  </Form.Group>*/}
+          {/*  <Form.Group controlId="formBasicCheckbox">*/}
+          {/*    <Form.Control*/}
+          {/*      type="text"*/}
+          {/*      placeholder="ccv"*/}
+          {/*      value={ccv}*/}
+          {/*      onChange={e => {*/}
+          {/*        e.preventDefault();*/}
+          {/*        return setCcv(e.target.value);*/}
+          {/*      }}*/}
+          {/*    />*/}
+          {/*  </Form.Group>*/}
+          {/*</Form>*/}
         </Modal.Body>
         <Modal.Footer className="border-0">
           <Button
