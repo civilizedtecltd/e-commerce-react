@@ -1,6 +1,6 @@
 import React ,{useState, useEffect} from 'react';
 import {Container, Row, Col, Badge, Image} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import { connect } from 'react-redux'
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Menu from '../LiComponent/MenuComponents'
@@ -67,11 +67,11 @@ const HeaderComponent = (props) => {
 
                 <Col sm={props.menuActive ? 6 : 6}>
                   <div className="headerNav clearfix" id="headerNav">
-                    <nav className="navbar navbar-expand-lg  bg-white">
+                    <nav className="navbar navbar-expand-lg  bg-white p-0 nav-bar">
                       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                       </button>
-                      <div className="collapse navbar-collapse" id="navbarNav">
+                      <div className="collapse navbar-collapse " id="navbarNav">
                         <ul className="navbar-nav">
                           {menu.map((data, index) =>
                               <Menu
@@ -83,6 +83,21 @@ const HeaderComponent = (props) => {
                                   ActiveClassName={data.active_link}
                               />
                           )}
+                          <li className="nav-item">
+                               <i className="fas fa-ellipsis-h megaMenuIcon"></i>
+                            <div className="mega-menu">
+                              <div className="inner-mega-menu">
+                                <ul>
+                                  <li className="nav-item"><NavLink to="/ghsd" className="nav-link">Computer</NavLink></li>
+                                  <li className="nav-item"><NavLink to="/sf" className="nav-link">Mobile</NavLink></li>
+                                  <li className="nav-item"><NavLink to="/dsfds" className="nav-link">Laptop</NavLink></li>
+                                  <li className="nav-item"><NavLink to="/dfsf" className="nav-link">Laptop</NavLink></li>
+                                  <li className="nav-item"><NavLink to="/ewrw" className="nav-link">Laptop</NavLink></li>
+
+                                </ul>
+                              </div>
+                            </div>
+                          </li>
                         </ul>
                       </div>
                     </nav>

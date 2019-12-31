@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React,{useEffect} from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Form, Button, Table } from "react-bootstrap";
+import '../pages/checkout.css';
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
 import CartTable from '../components/CartComponents/CartsTableComponent';
-import {removeFromCart, deleteAllFromCart, updateQuantity} from '../redux/actions/shopActions'
+import {removeFromCart, deleteAllFromCart, updateQuantity, deliveryMethod} from '../redux/actions/shopActions'
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import MegaMenu from "../components/MegaMenuComponents/MegaMenuComponent";
 
@@ -18,11 +19,16 @@ const CartPage = (props) => {
   const cartItems    = props.cart;
 
   let totalBookPrice = 0;
-  let delivery_cost = 0;
+  let delivery_cost = (props.delivery) ? props.delivery[0].price : 0;
 
   if(cartItems.length !== 0){
-    cartItems.map((item) =>totalBookPrice += item.amountPrice)
+    cartItems.map((item) =>{
+      totalBookPrice += item.amountPrice;
+    })
   }
+  useEffect(()=>{
+    return props.deliveryMethodFetch()
+  },[])
 
   const handleDeleteClick = (id) => {
     cartItems.find((book) => {
@@ -112,7 +118,7 @@ const CartPage = (props) => {
                         </Row>
                         <Row>
                           <Col>
-                            <Button className="btnGraySm" onClick={handleDeleteAll}>
+                            <Button className="btnGraySm btnDeleteall" onClick={handleDeleteAll}>
                               Delete all <i className="fas fa-times"></i>
                             </Button>
                           </Col>
@@ -131,20 +137,25 @@ const CartPage = (props) => {
                         <Row className="justify-content-end text-right mt-4 mb-5">
                           <Col sm="4">
                             <div className="cartProductPrice">
-                              <ul className="cartPriceList">
-                                <li>
-                                  Price.....................................................
-                                  <span className="pPrice">${totalBookPrice}</span>
-                                </li>
-                                <li>
-                                  Delivery.............................................
-                                  <span className="pPrice">${delivery_cost}</span>
-                                </li>
-                                <li>
-                                  Total.....................................................
-                                  <span className="pPrice" id="grand-total">${parseFloat(totalBookPrice) + parseFloat(delivery_cost)}</span>
-                                </li>
-                              </ul>
+                              <Table>
+                                <tbody>
+                                <tr>
+                                  <td className="priceCartPage">Price</td>
+                                  <td className="priceCartPage">.........................................</td>
+                                  <td className="text-right priceCartPage"><span className="priceCartPage">$ {totalBookPrice}</span></td>
+                                </tr>
+                                <tr>
+                                  <td className="priceCartPage">Delivery</td>
+                                  <td className="priceCartPage">.........................................</td>
+                                  <td className="text-right priceCartPage"><span className="priceCartPage">$ {delivery_cost}</span></td>
+                                </tr>
+                                <tr>
+                                  <td className="priceCartPage">Total</td>
+                                  <td className="priceCartPage">.........................................</td>
+                                  <td className="text-right priceCartPage"> <span className="priceCartPage" id="grand-total">$ { parseFloat(totalBookPrice) + parseFloat(delivery_cost) }</span></td>
+                                </tr>
+                                </tbody>
+                              </Table>
                               <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}>Checkout</Link>
                             </div>
                           </Col>
@@ -177,7 +188,8 @@ const CartPage = (props) => {
 
 const mapStateToProps = (state) => ({
   cart: state.shop.cart,
-  favorite: state.favorite
+  favorite: state.favorite,
+  delivery: state.shop.deliveryMethod
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -185,7 +197,7 @@ const mapDispatchToProps = (dispatch) => {
     removeItem: (id) => dispatch(removeFromCart(id)),
     updateItem: ({id, qty}) => dispatch(updateQuantity({id, qty})),
     deleteAll: () => dispatch(deleteAllFromCart()),
-
+    deliveryMethodFetch:()=> dispatch(deliveryMethod())
   }
 }
 

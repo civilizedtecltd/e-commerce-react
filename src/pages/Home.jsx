@@ -16,17 +16,21 @@ import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import {CategoryHome} from "../components/HomePage/Category";
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
+import {fetchMaxMinPrice} from '../redux/actions/filterAction';
 
 const Home = (props) => {
 
   const [loading, setLoading] = useState(false);
-
   const totalItem = props.cart.length
   const favoriteItem = props.favorite.items;
 
   const handleCategoryLoading = (status) =>{
       setLoading(status);
   }
+  
+  useEffect(()=>{
+    props.maxMinPrice()
+ },[])
 
   return (<>
     <PageLoader loading = {loading}/>
@@ -119,7 +123,7 @@ const Home = (props) => {
               <Col>
                 <div className="partnersCarousel">
                   <HomeCarouselFooter/>
-                </div>{/* end of partnersCarousel */}
+                </div>
               </Col>{/* end of Col */}
             </Row>{/* end of Row */}
           </Container>{/* end of Container */}
@@ -145,5 +149,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps , null) (Home);
+const mapDispatchToProps = (dispatch)=> {
+  return {
+    maxMinPrice : ()=> dispatch(fetchMaxMinPrice())
+  }
+}
+
+export default connect(mapStateToProps , mapDispatchToProps) (Home);
 

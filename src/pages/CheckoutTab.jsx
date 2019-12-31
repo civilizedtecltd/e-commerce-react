@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Container, Card, Form, Col, Row, Button, Modal} from 'react-bootstrap';
+import {Container, Card, Form, Col, Row, Button, Modal } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty';
 import {connect} from 'react-redux';
@@ -106,6 +106,7 @@ const CheckoutTab = (props) => {
     }
 
     const getPaymentDetails = (data) => {
+        props.getPaymentMethod(data)
         setPayment({
             ...data
         })
@@ -253,7 +254,6 @@ const CheckoutTab = (props) => {
                                     <button disabled className="btn btn-primary btn-block d-md-none d-lg-none d-xl-none mb-3">Payment and delivery</button>
                                     <h3 className="mt-2 mb-2">Choose a payment method</h3>
                                     <PaymentsMethods  callback={getPaymentDetails}/>
-
                                     <Form className="mt-5">
                                         <Row>
                                             <div className="col-12 d-flex justify-content-between p-0">
@@ -278,30 +278,31 @@ const CheckoutTab = (props) => {
                                 <h3 className="mt-2 mb-2">Confirm order details</h3>
 
                                 <Row className="row mt-4">
+
                                     <Col sm="6">
                                         <ul className="orderConfrimationList text-large">
-                                            <li><strong>First name:</strong>{ formData.first_name }</li>
-                                            <li><strong>Last name:</strong>{ formData.last_name }</li>
-                                            <li><strong>Phone:</strong> { formData.phone}</li>
-                                            <li><strong>Email:</strong>{ props.user.email }</li>
+                                            <li><strong>First name : </strong>{ formData.first_name }</li>
+                                            <li><strong>Last name : </strong>{ formData.last_name }</li>
+                                            <li><strong>Phone : </strong> { formData.phone}</li>
+                                            <li><strong>Email : </strong>{ props.user.email }</li>
                                         </ul>
                                     </Col>
 
 
                                     <Col sm="6">
                                         <ul className="orderConfrimationList">
-                                            <li><strong>City:</strong>{ formData.city}</li>
-                                            <li><strong>Estate:</strong> { formData.estate}</li>
-                                            <li><strong>Address:</strong> { formData.address}</li>
-                                            <li><strong>Zip code:</strong> { formData.zip}</li>
+                                            <li><strong>City : </strong>{ formData.city}</li>
+                                            <li><strong>Estate : </strong> { formData.estate}</li>
+                                            <li><strong>Address : </strong> { formData.address}</li>
+                                            <li><strong>Zip code : </strong> { formData.zip}</li>
                                         </ul>
                                     </Col>
 
                                     <Col sm="6" className="mt-4">
                                         <ul className="orderConfrimationList text-large">
-                                            <li><strong>Total Price:</strong>{props.totalPrice}</li>
-                                            <li><strong>Delivery method:</strong> {(!isEmpty(payment) && payment.delivery === 0) ? 'Standard' : 'Express'}</li>
-                                            <li><strong>Expected arrival:</strong>  {futureDate(7)}</li>
+                                            <li><strong>Total Price : </strong>{props.totalPrice}</li>
+                                            <li><strong>Delivery method : </strong> {(!isEmpty(payment) && payment.delivery === 0) ? 'Standard' : 'Express'}</li>
+                                            <li><strong>Expected arrival : </strong>  {futureDate(7)}</li>
                                         </ul>
                                     </Col>
                                 </Row>
@@ -312,6 +313,7 @@ const CheckoutTab = (props) => {
                                         <button type="submit" className="btn btn-primary" data-target="#confirmOrder" data-toggle="modal" onClick={confirmOrder}>Confirm order</button>
                                     </div>
                                 </Row>
+
                             </Form>
                         </div>
                     </div>
@@ -319,7 +321,6 @@ const CheckoutTab = (props) => {
             </Card>
         </Container>
 
-{/* Modal*/}
         <Modal show = {show} onHide = { handleClose }>
             <Modal.Header className={"border-0"} closeButton>
             </Modal.Header>

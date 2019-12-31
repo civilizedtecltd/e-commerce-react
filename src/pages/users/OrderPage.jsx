@@ -12,7 +12,6 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import MegaMenu from "../../components/MegaMenuComponents/MegaMenuComponent";
 
 const OrderPage = (props) => {
-
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
 

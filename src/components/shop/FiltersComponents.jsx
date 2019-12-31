@@ -12,7 +12,6 @@ import PublishHouse from "./PublishHouseComponent";
 import PriceRanger from "./PriceRangeComponent";
 
 const Filters = (props) => {
-
     const [filter, setFilter] = useState({
         stage: true,
         discipline: true,
@@ -26,6 +25,7 @@ const Filters = (props) => {
     });
 
     useEffect(()=> {
+        
         const handleResize = () => {
             const { innerWidth: width, innerHeight: height } = window;
             if(width <= 1199){
@@ -57,8 +57,10 @@ const Filters = (props) => {
 
         window.onload = handleResize();
         window.addEventListener('resize', handleResize);
+       
         return () => window.removeEventListener('resize', handleResize)
     },[]);
+
 
 
     return (
@@ -131,7 +133,9 @@ const Filters = (props) => {
                     <Collapse in={filter.price}>
                         <div id="collapse-price">
                             <Form>
-                                <PriceRanger callback={props.callback} />
+                                <PriceRanger
+                                 callback={props.callback}
+                                  />
                             </Form>
                         </div>
                     </Collapse>

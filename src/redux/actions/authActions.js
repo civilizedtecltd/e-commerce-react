@@ -144,6 +144,16 @@ const authNotInState = (authData) => ({
 });
 
 
+const updatePaymentMethod = (data) => dispatch => {
+    axios.post(URL.UPDATE_PAYMENT_METHOD, data).then(res => {
+        return dispatch({
+            type: Types.UPDATE_PAYMENT_METHOD,
+            payload: res.data
+        })
+    }).catch(error=>console.log(error))
+}
+
+
 export {
     login,
     logout,
@@ -152,5 +162,6 @@ export {
     getUser,
     setPayment,
     deletePayment,
-    confirmOrder
+    confirmOrder,
+    updatePaymentMethod
 }

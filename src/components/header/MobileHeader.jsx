@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import checkAuth from '../../helpers/checkAuth';
 import '../../assets/css/heder.css';
+import Search from "../Search";
 
 
 const Mobile = ({ children }) => {
@@ -16,14 +17,14 @@ const MobileHeader = (props) => {
     const [open, setOpen] = useState(false);
     const [show, setShow] = useState(false);
     const [isAuth, setAuth] = useState(false);
-
+    let page = 1;
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     useEffect(()=>{
         return (checkAuth()) ? setAuth(true) : setAuth(false);
     },[]);
-
+    const handleOpen = () => setOpen(!open)
 
     return(<>
         <Mobile>
@@ -62,7 +63,7 @@ const MobileHeader = (props) => {
                                 <ul className="headPopBarList d-flex align-items-center">
                                     <li>
                                         <div className="input-group searchbar">
-                                            <Link to="#" onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i className="fa fa-search"></i> Search</Link>
+                                            <div onClick={() => setOpen(!open)} aria-controls="SearchBarMenu" aria-expanded={open}><i className="fa fa-search"></i> Search</div>
                                         </div>
                                     </li>
                                     <li><Link to="/cart"><span className="cartBadge"><i className="fas fa-shopping-cart"></i>{props.cartItem !==0 ?<Badge variant="primary">{props.cartItem}</Badge> :'' }</span> Cart</Link></li>
@@ -77,18 +78,12 @@ const MobileHeader = (props) => {
                         </Col>
                     </Row>
 
-                    <Row>
-                        <Col>
-                            <Collapse in={open}>
-                                <div className="searchBarNew">
-                                    <div id="SearchBarMenu">
-                                        <Form.Control type="text" className="shadow-none" placeholder="Search"/>
-                                        <span onClick={() => setOpen(false)}><i className="fas fa-times"></i></span>
-                                    </div>
-                                </div>
-                            </Collapse>
-                        </Col>
-                    </Row>
+                    <Search
+                        open={open}
+                        handleOpen={handleOpen}
+                        page={page}
+                        show={show}
+                    />
                 </Container>
             </header>
 

@@ -34,7 +34,7 @@ import PlaceOrder from "./pages/terms/PlaceOrder";
 
 import store from './redux/store';
 import { favoriteNotInState } from './redux/actions/favoriteActions';
-import { cartNotInState } from './redux/actions/shopActions';
+import { shopNotInState } from './redux/actions/shopActions';
 import isEqual from 'lodash/isEqual';
 
 const Router = (props) => {
@@ -49,8 +49,8 @@ const Router = (props) => {
             store.dispatch(favoriteNotInState(localState.favorite))
         }
 
-        if(!isEqual(presentState.shop.cart, localState.shop.cart)){
-            store.dispatch(cartNotInState(localState.shop.cart))
+        if(!isEqual(presentState.shop.cart, localState.shop.cart) || !isEqual(presentState.shop.deliveryMethod, localState.shop.deliveryMethod) ){
+            store.dispatch(shopNotInState(localState.shop))
         }
     }
 
@@ -71,7 +71,7 @@ const Router = (props) => {
               <PrivateRoute path="/checkout" component={CheckoutPage} />
               <Route path="/favorites" component={FavoritesPage} />
               <Route exact path="/shop/category/:id?/:title?" component={ShopPage} />
-              <Route exact path="/shop" component={ () => <Redirect to={{ pathname: "/shop/category/all/:pageNumber/:showItem/:keyword?", state: {from: props.location} }}/> } />
+              <Route exact path="/shopping" component = {ShopPage} />
               <Route exact path="/shop/category/all/:pageNumber/:showItem/:keyword?" component={ShopPage}/>
               <Route path="/product/:id" component={ProductPage} />
               <Route path="/term/conditions" component={TermConditions} />

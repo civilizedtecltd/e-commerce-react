@@ -91,3 +91,15 @@
     min-height: 25px;
     background-color: #f7f7f7;
 }
+.cardModalCss {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bolder;
+    line-height: 5rem;
+}
+.modalCancelBtn.btn.btn-primary {
+    background-color: #DC3545 !important;
+}
+.ModalFromInput{
+    width: 35%;
+}

@@ -5,7 +5,7 @@ import { Link , useParams } from "react-router-dom";
 import {createUseStyles} from 'react-jss';
 import { showSingleBook } from '../redux/actions/bookActions';
 import { addToCart, updateQuantity } from '../redux/actions/shopActions';
-import { addToFavorite } from "../redux/actions/favoriteActions";
+import { addToFavorite,removeFavItem } from "../redux/actions/favoriteActions";
 
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
@@ -34,8 +34,10 @@ function ProductPage(props) {
     const classes = useStyles()
     const { id } = useParams();
     const [show, setShow] = useState(false);
+    const [quantity, setQuantity] = useState(1);
 
-    let itemQty  = 1;
+
+    let itemQty  = quantity;
     props.cart.map(item => {
         if(item.id === Number(id)){
            return itemQty = Number(item.quantity)
@@ -44,7 +46,9 @@ function ProductPage(props) {
     const rating = props.book ? props.book.rating : 0
     const book = (props.book !== undefined ) ? props.book : false;
     const favoriteItem = props.favorite.items;
+    const isFavoriteItem = favoriteItem.find(fav=> fav.id === Number(id))
 
+  
 
   useEffect(() => {
      window.scrollTo(0, 0);
@@ -54,6 +58,8 @@ function ProductPage(props) {
   const handleClose = () => setShow(false);
 
   const updateItemQty = (e) => {
+   let countQty = quantity
+    setQuantity(++countQty);
     props.updateItem({
                         id: Number(book.id),
                         qty: Number(e.target.value)
@@ -62,19 +68,27 @@ function ProductPage(props) {
 
   const addToCart = (e) => {
     e.preventDefault();
+    book.quantity = quantity;
     props.addToCart(book);
     setShow(true);
   };
 
   const handleAddFavorite = (e) =>{
       e.preventDefault();
-      return checkAuth() !==true ? props.history.push('/login') : props.addToFavorite(id)
+      if(checkAuth()!==true){
+        return props.history.push('/login')
+      }else if(isFavoriteItem !== undefined ){
+        return props.removeFavorite(id)
+      }
+      else if(isFavoriteItem === undefined){
+        props.addToFavorite(id)
+      }
   }
 
   return (
     <>
       <PageLoader loading={props.pending}/>
-      <div className="allWrapper">
+      <Container className="allWrapper">
         <HeaderComponent
         favorite_item={favoriteItem.length}
         cartItem = { props.totalItems }
@@ -111,15 +125,15 @@ function ProductPage(props) {
 
                 <div className="col-sm-6">
                   <div className="card productCardDetails border-0">
-                    <div className="card-header border-0 bg-white">
+                    <div className="card-header border-0 pr-0 bg-white">
 
                       <div className="productCardHead">
-                        <div className="Product-title-product-page">
+                        <div className="Product-title-product-page mr-4">
                           <p className="productSingleTitle">
                             { book ? book.name : ``}
                           </p>
                         </div>
-                        <div className="d-flex">
+                        <div className="d-flex text-right">
                           <TotalRating  value= { rating }/>
                           <div style={{marginTop:"-3px"}}><p>{'\u00A0'} {'\u00A0'} {`(${book.total_review} reviews) `} </p></div>
                         </div>
@@ -148,9 +162,9 @@ function ProductPage(props) {
                             <input
                               className="form-control inputValue"
                               type="number"
-                              placeholder="1"
                               value = {itemQty}
                               onChange = {updateItemQty}
+                              min={1}
                             />
                           </div>
 
@@ -166,8 +180,8 @@ function ProductPage(props) {
                           </div>
 
                           <div className="col text-center">
-                            <Button className={`btn linkBtnBorder ${classes.addFevButton}`} onClick={handleAddFavorite}>
-                              <i className="far fa-star"></i>Add to favorites
+                            <Button  className={`btn ${classes.addFevButton} ${(isFavoriteItem !== undefined) ? 'favorite-btn' : 'linkBtnBorder'}`} onClick={handleAddFavorite}>
+                            <i className="fas fa-star"></i>{(isFavoriteItem !== undefined) ? "Remove favorite" : "Add to favorites"}
                             </Button>
                           </div>
                         </div>
@@ -202,18 +216,18 @@ function ProductPage(props) {
             className="similarBooks productView secGap clearfix secBorder"
             id="similarBooks"
           >
-            <div className="container">
-              <div className="row">
-                <div className="col text-center">
-                  <h2 className="sectionTitle mb-5">
-                    <span>Similar</span> Book
-                  </h2>
+            <Container>
+                <div className="row">
+                    <div className="col text-center">
+                        <h2 className="sectionTitle mb-5">
+                            <span>Similar</span> Book
+                        </h2>
+                    </div>
                 </div>
-              </div>
-                <div className="SimilarBookSlider">
-                    <ImgSlick images={( props.similar !== undefined ) ? props.similar : [] } />
-                </div>
-            </div>
+
+                <ImgSlick images={( props.similar !== undefined ) ? props.similar : [] } />
+
+            </Container>
           </section>
         </main>
 
@@ -226,7 +240,7 @@ function ProductPage(props) {
           </Container>
         </section>
         <FooterComponent />
-      </div>
+      </Container>
 
       <Modal show = {show} onHide = { handleClose }>
         <Modal.Header className={"border-0"} closeButton>
@@ -238,7 +252,7 @@ function ProductPage(props) {
         </Modal.Body>
         <Modal.Footer className={"border-0"}>
           <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}> Go to checkout </Link>
-          <Link to="/shop" className="btn btn-outline linkBtnBorder" style={{color:'white !important'}}> Continue shopping</Link>
+          <Link to='/shopping' className="btn btn-outline linkBtnBorder" style={{color:'white !important'}}> Continue shopping</Link>
         </Modal.Footer>
       </Modal>
     </>
@@ -264,7 +278,8 @@ const mapDispatchToProps = (dispatch) => {
       showSingleBook : (id) => dispatch(showSingleBook(id)),
       addToCart      : (book) => dispatch(addToCart(book)),
       updateItem     : ({id, qty}) => dispatch(updateQuantity({id, qty})),
-      addToFavorite  : (id)=> dispatch(addToFavorite(id))
+      addToFavorite  : (id)=> dispatch(addToFavorite(id)),
+      removeFavorite : (id)=>dispatch(removeFavItem(id))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

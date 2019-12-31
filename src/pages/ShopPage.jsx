@@ -25,9 +25,8 @@ const useStyle = createUseStyles({
 })
 
 const ShopPage = (props) => {
-
     const classes = useStyle()
-    const { id, title, showItem,pageNumber, keyword } =  useParams();
+    const { id, title, showItem,pageNumber, keyword } = useParams();
     const isNaN_id = Number(id)
     const [lowerPrice , setLowerPrice] = useState(null);
     const [higherPrice , setHigherPrice] = useState(null);
@@ -35,20 +34,32 @@ const ShopPage = (props) => {
     let [page , setPage ] = useState(1);
     let [totalPage , setTotalPage] = useState(props.book.totalPage)
     let [sortBy , setSortBy] = useState('')
-    let [loading] = useState(()=>props.book.pending)
+
     const totalItem = props.cart.length
     const favoriteItem = props.favorite.items;
     const books = props.book.data ? props.book.data : [];
+    const shopUrl = window.location.pathname
+
+
     const PriceRange = (minPrice, maxPrice) => {
       setLowerPrice(minPrice)
       return setHigherPrice(maxPrice)
     }
 
+
+
+
     useEffect(()=>{
+
+
       if(page && show && sortBy){
 
          return props.filterShortBy(page,show,sortBy)
-      }else if(page && show && lowerPrice && higherPrice) {
+      }
+      else if(shopUrl==='/shopping'){
+        return props.fetchAllBook(1, 5, null)
+      }
+      else if(page && show && lowerPrice && higherPrice) {
 
         return props.filterByPrice(page,show,lowerPrice,higherPrice)
       }else if(id === 'all' && pageNumber  && showItem  && keyword) {
@@ -57,6 +68,8 @@ const ShopPage = (props) => {
       }else if(isNaN_id !== NaN && page && show) {
         return props.fetchBooksByCategory(id, page,show);
       }
+
+
     },[sortBy,higherPrice,lowerPrice,page,show,id])
 
   const handleShowBook = (e)=> {
@@ -117,7 +130,8 @@ const ShopPage = (props) => {
             <Container>
               <Row>
                 <Col sm="3">
-                  <Filters callback={PriceRange} />
+                  <Filters
+                   callback={PriceRange} />
                 </Col>
 
                 <Col>
@@ -134,7 +148,8 @@ const ShopPage = (props) => {
 
                     </Row>
                   {books.length === 0? <h1 className="text-center">Sorry, No Result Found :(</h1> :<>
-                  <div className="row mb-4">
+
+                  <Row className="Pagination-Row mb-5">
                       <div className="col">
                         <ul className="singleFilter d-flex align-items-center">
                           <li>
@@ -195,15 +210,15 @@ const ShopPage = (props) => {
                         </nav>
                       </div>
 
-                    </div>
+                    </Row>
 
-                    <Row>
+                    <Row className="Product_Row">
                       {
                         (books.length === 0) ?  <></> : books.map((book, index) => {
 
                             return (
 
-                              <Col key = {index} sm="3">
+                              <Col key = {index} sm="3 mb-5">
                                 <LazyLoad once={true} height={200}>
                                    <Card className="productCard border-0 bg-transparent">
                                 <div className="productMedia mb-3 bgGray">
@@ -214,11 +229,11 @@ const ShopPage = (props) => {
 
                                 <div className="productContent">
                                   <Link to={`/product/${book.id}`}>
-                                    <h4 className="productTitle limit-character mb-1">
+                                    <h4 className="productTitle limit-character">
                                       {book.name}
                                     </h4>
                                   </Link>
-                                  <h5 className="authorName mb-1">{book.book_author.name}</h5>
+                                  <h5 className="authorName">{book.book_author.name}</h5>
                                   <p className="productPrice">$ {book.price} </p>
                                 </div>
                               </Card>
@@ -229,7 +244,7 @@ const ShopPage = (props) => {
                       }
                     </Row>
 
-                    <div className="row mb-4">
+                    <Row className="Pagination-Row mt-5">
                       <div className="col">
                         <ul className="singleFilter d-flex align-items-center">
                           <li>
@@ -290,7 +305,7 @@ const ShopPage = (props) => {
                         </nav>
                       </div>
 
-                    </div>
+                    </Row>
 
                   </>
 }
@@ -322,7 +337,8 @@ const mapStateToProps = (state) =>{
    cart: state.shop.cart,
    totalItem: initItem,
    showItem: initShowItem,
-   favorite: state.favorite
+   favorite: state.favorite,
+   filter: state.filter,
   }
 }
 
@@ -331,7 +347,8 @@ const mapDispatchToProps =(dispatch) => {
     fetchAllBook        : (page, show) => dispatch(fetchAllBook(page, show)),
     fetchBooksByCategory: (id, page, show) => dispatch(fetchBooksByCategory(id, page, show)),
     filterByPrice       : (page,show,lowPrice,highestPrice)=>dispatch(filterByPriceRange(page,show,lowPrice,highestPrice)),
-    filterShortBy      : (page,show,query)=>dispatch(filterShortBy(page,show,query))
+    filterShortBy      : (page,show,query)=>dispatch(filterShortBy(page,show,query)),
+
   }
 }
 

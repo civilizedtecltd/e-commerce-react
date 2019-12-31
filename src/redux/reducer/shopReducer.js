@@ -20,10 +20,11 @@ const shopReducer = (state = initSate, { type, payload }) => {
 
                     if(updatedItemIndex < 0 ){
 
-                        if(payload.quantity !== undefined)
-                            updatedCart.push(payload)
-                        else
-                            updatedCart.push({...payload, quantity: 1, amountPrice: payload.price })
+                        if(payload.quantity !== undefined){                             
+                            updatedCart.push({...payload, amountPrice: payload.price*payload.quantity})                           
+                        }else{                            
+                                updatedCart.push({...payload, quantity: 1, amountPrice: payload.price })
+                            }
 
                     }else{
                         const updatedItem = {
@@ -118,10 +119,15 @@ const shopReducer = (state = initSate, { type, payload }) => {
                     cart: []
                 }
 
-            case Types.CART_NOT_IN_STATE:
+            case Types.SHOP_NOT_IN_STATE:
                 return {
                     ...state,
-                    cart: [...payload]
+                    ...payload
+                }
+            case Types.DELIVERY_METHOD_FETCH:
+                return {
+                    ...state,
+                    deliveryMethod: payload
                 }
 
             default:

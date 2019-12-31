@@ -38,7 +38,7 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
      }
 
       _ALL_BOOKS(page, show, keyword){
-         return `${this.API}/product/all-books/${page}/${show}${keyword ? "/"+keyword : ''}`;
+         return `${this.API}/product/all-books/${page}/${show} ${keyword ? "/"+keyword : ''}`;
       }
 
      _DELETE_PAYMENT(id){
@@ -82,6 +82,17 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     }
     get _UPDATE_SUBSCRIBER(){
         return `${this.API}/subscribe-update`
+    }
+
+    get PAYMENT_METHOD(){
+        return `${this.API}/delivery-method`
+    }
+
+    get MAX_MIN_PRICE(){
+    return `${this.API}/price-max-min`
+    }
+    get UPDATE_PAYMENT_METHOD() {
+        return `${this.API}/update-payment-method`
     }
  }
 

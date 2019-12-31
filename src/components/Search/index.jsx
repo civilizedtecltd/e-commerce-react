@@ -15,22 +15,21 @@ function Search(props) {
     return(
 
         <Row>
-        <Col>
+            <Col>
+                <Collapse in={props.open} >
+                    <form onSubmit={handleSubmit}>
+                        <div  className="searchBarNew">
+                            <div id="SearchBarMenu">
+                                <input type="text" className="form-control shadow-none" placeholder="Search" onChange={(event)=>setKeyWord(event.target.value)}  />
+                                <span onClick={props.handleOpen}><i className="fas fa-times"></i></span>
+                                <button type="submit" hidden >submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </Collapse>
 
-          <Collapse in={props.open} >
-            <form onSubmit={handleSubmit}>
-            <div  className="searchBarNew">
-              <div id="SearchBarMenu">
-                <input type="text" className="form-control shadow-none" placeholder="Search" onChange={(event)=>setKeyWord(event.target.value)} />
-                <span onClick={props.handleOpen}><i className="fas fa-times"></i></span>
-                <button type="submit" hidden >submit</button>
-              </div>
-            </div>
-            </form>
-          </Collapse>
-
-        </Col>
-      </Row>
+            </Col>
+        </Row>
     )
 }
 
@@ -43,7 +42,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return{
       fetchAllBook:(page,show,keyword)=>dispatch(fetchAllBook(page,show,keyword))
-    } 
+    }
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Search);

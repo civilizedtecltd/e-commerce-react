@@ -1,21 +1,35 @@
 import React, { Component } from 'react';
 import './rating.css';
 
-const range = (min, max) =>
-  Array(max - min + 1).fill().map((_, i) => min + i)
+class RatingComponent extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { 
+      rating: this.props.rating,
+     }
+  }
 
-const RatingItem  = ({ checked, colored, onChange, value }) => (
-  <label className={`rating__item ${colored ? 'rating__item--selected' : ''}`}>
-    <input
-      id={"rating"}
-      checked={checked}
-      className='rating__input'
-      onChange={(e) => onChange(value)}
-      type="radio"
-      value={value}
-    />
-  </label>
-)
+
+
+  render () {
+    return (
+      <Rating
+        min={1}
+        max={5}
+        onChange={(rating) => {
+            this.setState({ rating })
+            this.props.callback(rating)
+          
+        }}
+        value={ (this.state.rating === true) ? 0 : this.state.rating }
+      />
+    )
+  }
+}
+
+
+const range = (min, max) =>Array(max - min + 1).fill().map((_, i) => min + i)
+
 
 const Rating = ({ min, max, onChange, value }) => {
   return (
@@ -35,28 +49,25 @@ const Rating = ({ min, max, onChange, value }) => {
   )
 }
 
-class RatingComponent extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { 
-      rating: this.props.rating,
-      resetRating : this.props.resetRating
-     }
-  }
 
-  render () {
-    return (
-      <Rating
-        min={1}
-        max={5}
-        onChange={(rating) => {
-            this.setState({ rating })
-            this.props.callback(rating)
-        }}
-        value={ this.state.rating ? this.state.rating  : this.state.resetRating }
-      />
-    )
-  }
+
+const RatingItem  = ({ checked, colored, onChange, value }) => {
+  return(
+  <label className={`rating__item ${colored ? 'rating__item--selected' : ''}`}>
+    <input
+      id={"rating"}
+      checked={checked}
+      className='rating__input'
+      onChange={(e) => onChange(value)}
+      type="radio"
+      value={value}
+    />
+  </label>
+)
 }
+
+
+
+
 
 export default RatingComponent;
