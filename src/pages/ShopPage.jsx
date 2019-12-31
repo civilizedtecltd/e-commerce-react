@@ -4,10 +4,10 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import LazyLoad from 'react-lazyload';
 import { connect  } from 'react-redux';
 import { createUseStyles } from 'react-jss'
-import {fetchAllBook, fetchBooksByCategory,filterByPriceRange, filterShortBy} from '../redux/actions/bookActions';
-import Filters from '../components/shop/FiltersComponents'
+import {fetchAllBook, fetchBooksByCategory,filterByPriceRange, filterShortBy, fetchBooksByFilter} from '../redux/actions/bookActions';
+import { fetchStages } from '../redux/actions/filterAction';
 
-// Product Images
+import Filters from '../components/shop/FiltersComponents'
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import  HeaderComponent from "../components/header/Header";
@@ -25,9 +25,12 @@ const useStyle = createUseStyles({
 })
 
 const ShopPage = (props) => {
+
     const classes = useStyle()
-    const { id, title, showItem,pageNumber, keyword } = useParams();
+
+    const { id, title, showItem, pageNumber, keyword, filter_type, filter_id } = useParams();
     const isNaN_id = Number(id)
+
     const [lowerPrice , setLowerPrice] = useState(null);
     const [higherPrice , setHigherPrice] = useState(null);
     let [show , setShowBook ] = useState(5);
@@ -51,26 +54,37 @@ const ShopPage = (props) => {
 
     useEffect(()=>{
 
+        props.stageList(isNaN_id);
 
       if(page && show && sortBy){
 
          return props.filterShortBy(page,show,sortBy)
       }
       else if(shopUrl==='/shopping'){
+
         return props.fetchAllBook(1, 5, null)
+      }
+      else if(page && show && filter_type && filter_id ){
+
+       console.log(page, show, filter_type, filter_id)
+        props.getBooksByFilter(page, show, filter_type, filter_id);
+
       }
       else if(page && show && lowerPrice && higherPrice) {
 
-        return props.filterByPrice(page,show,lowerPrice,higherPrice)
+        return props.filterByPrice(page, show, lowerPrice, higherPrice)
+
       }else if(id === 'all' && pageNumber  && showItem  && keyword) {
 
         return props.fetchAllBook(page, show, keyword)
+
       }else if(isNaN_id !== NaN && page && show) {
-        return props.fetchBooksByCategory(id, page,show);
+
+        return props.fetchBooksByCategory(id, page, show);
+
       }
 
-
-    },[sortBy,higherPrice,lowerPrice,page,show,id])
+    },[sortBy, higherPrice, lowerPrice, page, show, id, filter_type, filter_id])
 
   const handleShowBook = (e)=> {
     e.preventDefault()
@@ -344,11 +358,12 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps =(dispatch) => {
   return {
-    fetchAllBook        : (page, show) => dispatch(fetchAllBook(page, show)),
-    fetchBooksByCategory: (id, page, show) => dispatch(fetchBooksByCategory(id, page, show)),
-    filterByPrice       : (page,show,lowPrice,highestPrice)=>dispatch(filterByPriceRange(page,show,lowPrice,highestPrice)),
-    filterShortBy      : (page,show,query)=>dispatch(filterShortBy(page,show,query)),
-
+    fetchAllBook         : (page, show) => dispatch(fetchAllBook(page, show)),
+    fetchBooksByCategory : (id, page, show) => dispatch(fetchBooksByCategory(id, page, show)),
+    filterByPrice        : (page,show,lowPrice,highestPrice)=>dispatch(filterByPriceRange(page,show,lowPrice,highestPrice)),
+    filterShortBy        : (page,show,query)=>dispatch(filterShortBy(page,show,query)),
+    stageList            : (category_id) => dispatch(fetchStages(category_id)),
+    getBooksByFilter     : (page, show, filterType, filterId) => dispatch(fetchBooksByFilter(page, show, filterType, filterId))
   }
 }
 

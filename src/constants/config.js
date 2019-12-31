@@ -91,8 +91,19 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     get MAX_MIN_PRICE(){
     return `${this.API}/price-max-min`
     }
+
     get UPDATE_PAYMENT_METHOD() {
         return `${this.API}/update-payment-method`
+    }
+
+    _GET_STAGES(id){
+        return `${this.API}/filter/stage/category/${id}`
+    }
+
+    _GET_FILTERED_BOOKS(filter_type, filter_id, page, show){
+        const url = `${this.API}/filter/${filter_type}/${filter_id}/${page}/${show}`
+        console.log("get filter books url: ", url);
+        return url;
     }
  }
 
