@@ -5,9 +5,12 @@ import * as Types from '../actions/actionTypes';
 const bookReducer = ( state ={}, actions) => {
 
     const { payload , pending } = actions;
-    switch (actions.type) {
+    switch (actions.type){
         case Types.FETCH_BOOK_PENDING:
-            return {pending:pending};
+            return {
+                pending: pending
+            };
+      
         case Types.FETCH_BOOK_SUCCESS:
             return payload;
         case Types.FETCH_ALL_BOOKS:

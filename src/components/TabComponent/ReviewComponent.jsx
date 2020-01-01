@@ -3,7 +3,7 @@ import reviewAvatar from "./user.svg"
 import TotalRating from '../ratingComponent/TotalRating';
 
 
-const ReviewComponent = ({name, date, comment, rating}) => {
+const ReviewComponent = ({name, date, comment, rating,value}) => {
      date = new Date(date).toString();
     return (
         <div className="card singleReview border-0">
@@ -21,7 +21,7 @@ const ReviewComponent = ({name, date, comment, rating}) => {
                                 <h6 className="reviewUserName">{name}<span className="reviewDate">{date}</span></h6>
                             </div>
                             <div className="col">
-                            <TotalRating value={rating} />
+                            <TotalRating value={ rating} />
                             </div>
                         </div>
                         <p>{comment}</p>
