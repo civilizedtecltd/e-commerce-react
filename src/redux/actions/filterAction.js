@@ -27,3 +27,10 @@ export const fetchStages = (category_id) => dispatch => {
          }))
          .catch(error => console.log(error))
 }
+
+export const filterNotInState = filter => {
+    return {
+      type: Types.FILTER_NOT_IN_STATE,
+      payload: filter
+    };
+  };
