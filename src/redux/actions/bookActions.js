@@ -3,7 +3,7 @@ import axios from 'axios';
 import { URL } from '../../constants/config';
 import { setAuthToken } from '../../helpers/setAuthToken'
 
- const fetchAllBook = (page,show,keyword) => dispatch => {
+ const fetchAllBook = (page, show, keyword) => dispatch => {
     dispatch(fetchPending())
     axios.get(URL._ALL_BOOKS(page,show,keyword))
         .then( res =>{
@@ -17,7 +17,7 @@ import { setAuthToken } from '../../helpers/setAuthToken'
         })
 };
 
-const fetchBooksByCategory = (id,page,show) => dispatch => {
+const fetchBooksByCategory = (id, page, show) => dispatch => {
      dispatch(fetchPending())
       axios.get(URL._CATEGORY_BOOKS(id,page,show))
           .then(res => {
@@ -90,19 +90,19 @@ const postReview = (review) => dispatch => {
 }
 
 
-const filterByPriceRange = (page,show,lowPrice,highestPrice) =>dispatch=>{
+const filterByPriceRange = (page, show, lowPrice, highestPrice) => dispatch=>{
 
         setAuthToken();
-        axios.get(URL._FILTER_BY_PRICE_RANGE(page,show,lowPrice,highestPrice))
+        axios.get(URL._FILTER_BY_PRICE_RANGE(page, show, lowPrice, highestPrice))
         .then(res=>dispatch({
             type: Types.FILTER_BY_PRICE_RANGE,
             payload: res.data
         })).catch(error=>console.log(error))
 }
 
-const filterShortBy = (page,show,query) => dispatch =>{
+const filterShortBy = (page, show, query) => dispatch =>{
     setAuthToken();
-    axios.get(URL._FILTER_SHORT_BY(page,show,query))
+    axios.get(URL._FILTER_SHORT_BY(page, show, query))
     .then(res=>{
         return dispatch({
                 type: Types.FILTER_SHORT_BY,
@@ -112,6 +112,17 @@ const filterShortBy = (page,show,query) => dispatch =>{
     }).catch(error=>{
         console.error(error)
     })
+}
+
+const fetchBooksByFilter = (page, show, filterType, filterId) => dispatch => {
+    dispatch(fetchPending());
+    axios.get(URL._GET_FILTERED_BOOKS(filterType, filterId, page, show))
+         .then(res => ({
+            type: Types.FETCH_BOOK_BY_FILTER,
+            payload: res.data,
+            pending: false
+         }))
+         .catch(error => console.log(error));
 }
 
 
@@ -148,6 +159,7 @@ export {
     searchBook,
     postReview,
     filterByPriceRange,
-    filterShortBy
+    filterShortBy,
+    fetchBooksByFilter
 }
 

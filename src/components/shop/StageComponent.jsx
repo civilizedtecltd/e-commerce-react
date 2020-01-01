@@ -1,20 +1,26 @@
 import React from 'react';
-import filterData from "../../inc/shop/stage";
+import {connect} from 'react-redux';
 import {LiSpan} from "../LiComponent/CommonLiComponent";
 
-const StageComponent = () => {
+const StageComponent = (props) => {
+
+    const stages = (props.stages) ? props.stages : [];
     return (
         <div>
-            {filterData.map((data, index) => (
+            {stages.map((data, index) => (
                 <LiSpan
                     key={index}
-                    Url={data.url}
-                    itemName={data.name}
-                    Value={data.value}
+                    Url={`/shop/filter/stage/${data.id}`}
+                    itemName={data.stage}
+                    Value={data.total_books}
                 />)
             )}
         </div>
     );
 };
 
-export default StageComponent;
+const mapStateToProps = state => ({
+    stages: state.filter.stages
+})
+
+export default connect(mapStateToProps, null)(StageComponent);
