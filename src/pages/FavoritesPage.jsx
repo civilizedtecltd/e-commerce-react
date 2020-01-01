@@ -17,8 +17,6 @@ const FavoritesPage = (props) => {
     const totalCartItems = props.cart.length;
     const totalFavoriteItems = props.favorite.items.length;
     const favoriteItems = (totalFavoriteItems !== 0 )? props.favorite.items : [];
-    console.log(favoriteItems)
-
     useEffect(() => {
         props.showAllFavItem()
     },[props.favorite.items.length]);

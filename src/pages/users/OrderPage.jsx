@@ -97,17 +97,17 @@ const OrderPage = (props) => {
                                 </Table>
                             </Card.Body>
                             }
-                        </Card>{/* end of Card */}
-                      </Col>{/* end of Col */}
-                    </Row>{/* end of Row */}
-                  </Container>{/* end of Container */}
-                </section>{/* end of myOrderArea */}
-              </main>{/* end of mainContent */}
-            </Col>{/* end of Col */}
-          </Row>{/* end of Row */}
-        </Container>{/* end of Container */}
-      </div>{/* end of userBodyArea */}
-    </div> {/* end of allWrapper */}
+                        </Card>
+                      </Col>
+                    </Row>
+                  </Container>
+                </section>
+              </main>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </div>
   </>);
 }
 

@@ -34,7 +34,9 @@ import PlaceOrder from "./pages/terms/PlaceOrder";
 
 import store from './redux/store';
 import { favoriteNotInState } from './redux/actions/favoriteActions';
+import { filterNotInState } from "./redux/actions/filterAction";
 import { shopNotInState } from './redux/actions/shopActions';
+import { authDataNotInState } from "./redux/actions/authActions";
 import isEqual from 'lodash/isEqual';
 
 const Router = (props) => {
@@ -52,6 +54,13 @@ const Router = (props) => {
         if(!isEqual(presentState.shop.cart, localState.shop.cart) || !isEqual(presentState.shop.deliveryMethod, localState.shop.deliveryMethod) ){
             store.dispatch(shopNotInState(localState.shop))
         }
+        if (!isEqual(presentState.filter.priceFilter, localState.filter.priceFilter)) {
+            store.dispatch(filterNotInState(localState.filter));
+        }
+         if (!isEqual(presentState.auth, localState.auth)) {
+            store.dispatch(authDataNotInState(localState.auth));
+        }
+
     }
 
     return(
