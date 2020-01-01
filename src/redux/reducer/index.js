@@ -4,6 +4,7 @@ import shopReducer      from './shopReducer';
 import authReducer      from './authReducer';
 import favoriteReducer  from './favoriteReducer';
 import filterReducer  from './filterReducer';
+import siteReducers from './siteReducers';
 
 
 const rootReducers = combineReducers(
@@ -13,6 +14,7 @@ const rootReducers = combineReducers(
         auth        :   authReducer,
         favorite    :   favoriteReducer,
         filter      :   filterReducer,
+        site: siteReducers,
       
     }
 );

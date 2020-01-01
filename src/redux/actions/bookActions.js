@@ -51,15 +51,7 @@ const fetchBooksByCategory = (id, page, show) => dispatch => {
 };
 
 
- const fetchCategoryList = () => dispatch => {
-     axios.get(URL._CATEGORY)
-         .then(res=>{
-             dispatch({
-                 type: Types.FETCH_ALL_CATEGORY,
-                 payload: res.data.data
-             })
-        })
- };
+
 
 
 
@@ -154,7 +146,6 @@ export {
     fetchPendingSuccess,
     fetchAllBook,
     showSingleBook,
-    fetchCategoryList,
     fetchBooksByCategory,
     searchBook,
     postReview,
