@@ -33,19 +33,10 @@ const PaymentPage = props => {
   const [visibleUpdateModal, setVisibleUpdateModal] = useState(false);
   const cards = !isEmpty(props.payment) ? [...props.payment] : [];
   const [data, setData] = useState([...cards]);
-  const [singleData, setSingleData] = useState('')
   const [cardNumber, setCardNumber] = useState('');
   const [month, setMonth] = useState('');
   const [year, setYear] = useState("");
   const [cvv, setCvv] = useState("");
-  useEffect(() => {
-    setSingleData({
-      card_number: cardNumber,
-      mm: month,
-      yy: year,
-      ccv: cvv
-    });
-  }, [cardNumber, month, year,cvv]);
 
   const handleVisibility = e => {
     e.preventDefault();
@@ -66,15 +57,19 @@ const PaymentPage = props => {
     setCardAlert(true);
   };
 
+  useEffect(() => {
+    setData({
+      id: card_id,
+      card_number:cardNumber,
+      mm: month,
+      yy:year,
+      ccv: cvv,
+    });
+  }, [cardNumber,card_id, year, month, cvv]);
+
   const updatePaymentMethod = e => {
     e.preventDefault();
-    singleData({
-      id: card_id,
-      card_number: cardNumber,
-      mm: month,
-      yy: year,
-      ccv: cvv
-    });
+
     props.update(data);
     return setVisibleUpdateModal(false);
   };
@@ -175,14 +170,19 @@ const PaymentPage = props => {
                                               value={card.id}
                                               onClick={e => {
                                                 e.preventDefault();
-                                                setSingleData(
-                                                  data.find(
-                                                    payment =>
-                                                      payment.id ===
-                                                      Number(e.target.value)
-                                                  )
+                                                const existData = cards.find(
+                                                  payment =>
+                                                    payment.id ===
+                                                    Number(e.target.value)
                                                 );
+                                                setCardNumber(
+                                                  existData.card_number
+                                                );
+                                                setMonth(existData.mm);
+                                                setYear(existData.yy);
+                                                setCvv(existData.ccv);
                                                 setCardId(e.target.value);
+
                                                 return setVisibleUpdateModal(
                                                   true
                                                 );
@@ -301,7 +301,7 @@ const PaymentPage = props => {
                       ]}
                       name="card_number"
                       className="form-control"
-                      value={singleData.card_number}
+                      value={cardNumber}
                       onChange={e => {
                         e.preventDefault();
                         return setCardNumber(e.target.value);
@@ -322,7 +322,7 @@ const PaymentPage = props => {
                           placeholder="MM"
                           mask={["M", "M"]}
                           name="mm"
-                          value={singleData.mm}
+                          value={month}
                           onChange={e => {
                             e.preventDefault();
                             return setMonth(e.target.value);
@@ -337,7 +337,7 @@ const PaymentPage = props => {
                           placeholder="YY"
                           mask={["Y", "Y"]}
                           name="yy"
-                          value={singleData.yy}
+                          value={year}
                           onChange={e => {
                             e.preventDefault();
                             return setYear(e.target.value);
@@ -357,7 +357,7 @@ const PaymentPage = props => {
                       name="ccv"
                       format="###"
                       placeholder="CVV"
-                      value={singleData.ccv}
+                      value={cvv}
                       onChange={e => {
                         e.preventDefault();
                         return setCvv(e.target.value);
