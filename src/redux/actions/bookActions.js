@@ -117,11 +117,13 @@ const filterShortBy = (page, show, query) => dispatch =>{
 const fetchBooksByFilter = (page, show, filterType, filterId) => dispatch => {
     dispatch(fetchPending());
     axios.get(URL._GET_FILTERED_BOOKS(filterType, filterId, page, show))
-         .then(res => ({
-            type: Types.FETCH_BOOK_BY_FILTER,
-            payload: res.data,
-            pending: false
-         }))
+         .then(res => {
+             return dispatch( {
+                type: Types.FETCH_BOOK_BY_FILTER,
+                payload: res.data,
+                pending: false
+            });
+         })
          .catch(error => console.log(error));
 }
 

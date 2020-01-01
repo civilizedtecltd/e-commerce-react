@@ -10,7 +10,7 @@ const StageComponent = (props) => {
             {stages.map((data, index) => (
                 <LiSpan
                     key={index}
-                    Url={`/shop/filter/stage/${data.id}`}
+                    Url={`/shop/filter/category/${data.category_id}/stage/${data.id}`}
                     itemName={data.stage}
                     Value={data.total_books}
                 />)
