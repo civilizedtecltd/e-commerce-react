@@ -26,7 +26,7 @@ function CategoryHome (props) {
                 .catch(error => {
                     console.log(error);
                 });
-    }, []);
+    });
 
     const settings = {
         dots: false,
@@ -87,10 +87,7 @@ function CategoryHome (props) {
             }
         ]
     };
-    const imgStyle = {
-        width:"100%",
-        height:"420px"
-    }
+
         return (
                 <Slider {...settings} >
 

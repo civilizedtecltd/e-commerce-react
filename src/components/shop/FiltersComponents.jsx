@@ -25,9 +25,9 @@ const Filters = (props) => {
     });
 
     useEffect(()=> {
-        
+
         const handleResize = () => {
-            const { innerWidth: width, innerHeight: height } = window;
+            const { innerWidth: width, /*innerHeight: height*/ } = window;
             if(width <= 1199){
                 setFilter({
                     stage: false,
@@ -57,7 +57,7 @@ const Filters = (props) => {
 
         window.onload = handleResize();
         window.addEventListener('resize', handleResize);
-       
+
         return () => window.removeEventListener('resize', handleResize)
     },[]);
 

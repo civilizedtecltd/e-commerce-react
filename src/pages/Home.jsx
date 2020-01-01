@@ -27,10 +27,10 @@ const Home = (props) => {
   const handleCategoryLoading = (status) =>{
       setLoading(status);
   }
-  
+
   useEffect(()=>{
     props.maxMinPrice()
- },[])
+ })
 
   return (<>
     <PageLoader loading = {loading}/>
