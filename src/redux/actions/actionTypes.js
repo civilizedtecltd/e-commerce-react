@@ -48,6 +48,7 @@ export const FILTER_BY_PRICE_RANGE  = 'FILTER_BY_PRICE_RANGE';
 export const FILTER_SHORT_BY        = 'FILTER_SHORT_BY';
 export const GET_STAGE_LIST         = 'GET_STAGE_LIST';
 export const FETCH_BOOK_BY_FILTER   = 'FETCH_BOOK_BY_FILTER';
+export const GET_DISCIPLINE_LIST    = 'GET_DISCIPLINE_LIST';
 
 //fetching action
 export const FETCH_BOOK_PENDING     = 'FETCH_BOOK_PENDING';

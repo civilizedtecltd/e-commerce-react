@@ -29,8 +29,10 @@ const ShopPage = (props) => {
     const classes = useStyle()
 
     const { id, title, showItem, pageNumber, keyword, filter_type, filter_id } = useParams();
-    const isNaN_id = Number(id)
 
+    //const isNaN_id = Number(id)
+
+    const [isNaN_id] = useState(Number(id));
     const [lowerPrice , setLowerPrice] = useState(null);
     const [higherPrice , setHigherPrice] = useState(null);
     let [show , setShowBook ] = useState(5);
@@ -66,7 +68,6 @@ const ShopPage = (props) => {
       }
       else if(page && show && filter_type && filter_id ){
 
-       console.log(page, show, filter_type, filter_id)
         props.getBooksByFilter(page, show, filter_type, filter_id);
 
       }
