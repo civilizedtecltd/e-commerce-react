@@ -1,19 +1,23 @@
 import React from 'react';
-import author from "../../inc/shop/author";
+import {connect} from 'react-redux';
 import {LiSpan} from "../LiComponent/CommonLiComponent";
 
-const Author = () => {
+const Author = (props) => {
     return (<>
-            {author.map((data, index) => (
+            {props.authors.map((data, index) => (
                 <LiSpan
                     key={index}
-                    Url={data.url}
+                    Url={`/shop/filter/category/author/${data.id}`}
                     itemName={data.name}
-                    Value={data.value}
+                    Value={data.total_books}
                 />)
             )}
 
         </>)
 };
 
-export default Author;
+const mapStateToProps = state => ({
+    authors: state.filter.authors
+})
+
+export default connect(mapStateToProps, null)(Author);

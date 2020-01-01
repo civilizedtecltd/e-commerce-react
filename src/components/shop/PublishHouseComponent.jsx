@@ -1,20 +1,24 @@
 import React from 'react';
-import publish_house from "../../inc/shop/publish_house";
+import {connect} from 'react-redux';
 import {LiSpan} from "../LiComponent/CommonLiComponent";
 
-const PublishHouse = () => {
+const PublishHouse = (props) => {
     return (
         <div>
-            {publish_house.map((data, index) => (
+            {props.publishers.map((data, index) => (
                 <LiSpan
                     key={index}
-                    Url={data.url}
+                    Url={`/shop/filter/category/publisher/${data.id}`}
                     itemName={data.name}
-                    Value={data.value}
+                    Value={data.total_books}
                 />)
             )}
         </div>
     );
 };
 
-export default PublishHouse;
+const mapStateToProps = state => ({
+    publishers: state.filter.publishers
+})
+
+export default connect(mapStateToProps)(PublishHouse);
