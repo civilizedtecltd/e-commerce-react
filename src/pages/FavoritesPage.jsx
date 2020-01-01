@@ -18,7 +18,6 @@ const FavoritesPage = (props) => {
     const totalFavoriteItems = props.favorite.items.length;
     const favoriteItems = (totalFavoriteItems !== 0 )? props.favorite.items : [];
 
-
     useEffect(() => {
         props.showAllFavItem()
     },[props.favorite.items.length]);
