@@ -32,7 +32,7 @@ const CheckToggle = ({ children, eventKey, title }) => {
 
 const PaymentMethods = (props) => {
 
-    const [showCardAlert, setShowCardAlert] = useState(true);
+    const [showCardAlert, setShowCardAlert] = useState(false);
     const [card, setCard] = useState({});
     const [selectedMethod, setSelectedMethods]= useState(null);
     const [deliveryMethod, setDeliveryMethod] = useState({
@@ -124,19 +124,12 @@ const PaymentMethods = (props) => {
 
     const handleCardOnClick = (e) => {
         e.preventDefault();
-        const clearAlert = setTimeout(() => {
-            setAlert({status: false, message:''});
-        }, 2000);
-
-        if(!card.ccv && !card.card_number && !card.mm && !card.yy){
-            setAlert({
-                status: true,
-                type: 'danger',
-                message: `Please insert every field value to add ${card.payment_type} card.`
-            });
-            return () =>  clearTimeout(clearAlert);
-
-        }if(card.ccv && card.card_number && card.mm && card.yy){
+        if (!card.payment_type) return setShowCardAlert(true)
+        if (!card.ccv) return setShowCardAlert(true)
+        if (!card.card_number) return setShowCardAlert(true)
+        if (!card.yy) return setShowCardAlert(true)
+        
+        if(card.ccv && card.card_number && card.mm && card.yy){
              props.addCard({
                 ...card
             });
@@ -147,6 +140,14 @@ const PaymentMethods = (props) => {
                 paymentdata:  (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
             });
         }
+        console.log(
+           card.payment_type ,
+            card.ccv ,
+            card.card_number,
+            card.mm ,
+            card.yy
+        );
+      
     }
 
     //Card Input Format
@@ -185,12 +186,10 @@ const PaymentMethods = (props) => {
                     </div>
                     <Accordion.Collapse eventKey={index}>
                         <div className="clearfix">
-                            {/*<hr style={{borderColor:"#e2e2e2"}}/>*/}
                             <div className="m-2">
-                            { !item.card_number ? <Alert show={showCardAlert} variant="danger" onClose={() => setShowCardAlert(false)}  dismissible>
+                            <Alert show={showCardAlert} variant="danger" onClose={() => setShowCardAlert(false)}  dismissible>
                                     <p>This information is not valid!.</p>
-                             </Alert> : ''
-                            }
+                             </Alert> 
                             </div>
                             <div className="p-3">
                                 <div className="row align-items-center">
