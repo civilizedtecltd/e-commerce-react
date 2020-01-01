@@ -82,6 +82,7 @@ const Router = (props) => {
               <Route exact path="/shop/category/:id?/:title?" component={ShopPage} />
               <Route exact path="/shopping" component = {ShopPage} />
               <Route exact path="/shop/category/all/:pageNumber/:showItem/:keyword?" component={ShopPage}/>
+              <Route exact path="/shop/filter/:filter_type/:filter_id" component={ShopPage} />
               <Route path="/product/:id" component={ProductPage} />
               <Route path="/term/conditions" component={TermConditions} />
               <Route path="/privacy" component={Privacy} />

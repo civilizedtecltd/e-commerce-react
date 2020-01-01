@@ -1,11 +1,19 @@
 import * as Types from '../actions/actionTypes'
 
-const filterReducer = (state = [] , action) => {
-        switch(action.type){
+const filterReducer = (state = [] , {type, payload}) => {
+        switch(type){
             case Types.FETCH_MAX_MIN_PRICE:
-                return action.payload
+                return {
+                    ...state,
+                    ...payload
+                };
+            case Types.GET_STAGE_LIST:
+                return {
+                    ...state,
+                    ...payload
+                }
             case Types.FILTER_NOT_IN_STATE:
-                return action.payload
+                return payload
             default :
                 return state;
         }

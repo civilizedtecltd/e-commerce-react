@@ -119,7 +119,7 @@ function ProductPage(props) {
               <div className="row">
                 <div className="col-sm-6">
                   <ImageCarousel
-                    images = {(book ? book.cover_images : false )}
+                        images = {(book ? book.cover_images : false )}
                    />
                 </div>
 
@@ -171,7 +171,7 @@ function ProductPage(props) {
                           <div className="col text-center">
                             <Button
                               className="btn linkBtn"
-                              onClick = { addToCart }
+                              onClick = {addToCart}
                             >
                               <i className="fas fa-shopping-cart"></i> Add to
                               cart
@@ -194,7 +194,7 @@ function ProductPage(props) {
                             id              : book.id,
                             author          : book.book_author.name,
                             discipline      : book.book_discipline.name,
-                            stage           : book.book_stage.name,
+                            stage           : book.book_stage.stage,
                             publisher       : book.book_publisher.name,
                             publishing_year : book.book_publishing_year.name,
                             book_cover      : book.book_cover,

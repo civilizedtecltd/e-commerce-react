@@ -3,7 +3,7 @@ import * as Types from '../actions/actionTypes';
 
 
 const bookReducer = ( state ={}, actions) => {
- 
+
     const { payload , pending } = actions;
     switch (actions.type) {
         case Types.FETCH_BOOK_PENDING:
@@ -35,6 +35,8 @@ const bookReducer = ( state ={}, actions) => {
         case Types.FILTER_BY_PRICE_RANGE:
             return payload;
         case Types.FILTER_SHORT_BY:
+            return payload;
+        case Types.FETCH_BOOK_BY_FILTER:
             return payload;
         default :
             return state

@@ -5,7 +5,6 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
   class APP_URL {
      constructor(){
 
-        // this.BASE = `http://63.33.69.86:4040`;
         this.BASE = `http://localhost:3333`;
         this.API  = `${this.BASE}/api`;
      }
@@ -92,8 +91,19 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     get MAX_MIN_PRICE(){
     return `${this.API}/price-max-min`
     }
+
     get UPDATE_PAYMENT_METHOD() {
         return `${this.API}/update-payment-method`
+    }
+
+    _GET_STAGES(id){
+        return `${this.API}/filter/stage/category/${id}`
+    }
+
+    _GET_FILTERED_BOOKS(filter_type, filter_id, page, show){
+        const url = `${this.API}/filter/${filter_type}/${filter_id}/${page}/${show}`
+        console.log("get filter books url: ", url);
+        return url;
     }
  }
 

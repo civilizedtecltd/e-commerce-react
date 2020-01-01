@@ -17,8 +17,6 @@ const OrderPage = (props) => {
 
   const orders = (props.orders)? props.orders : [];
 
-  console.log(orders);
-
   return (<>
     <PageLoader loading={props.favorite.pending}/>
     <div className="allWrapper">
