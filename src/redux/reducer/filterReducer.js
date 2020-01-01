@@ -12,6 +12,8 @@ const filterReducer = (state = [] , {type, payload}) => {
                     ...state,
                     ...payload
                 }
+            case Types.FILTER_NOT_IN_STATE:
+                return payload
             default :
                 return state;
         }
