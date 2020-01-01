@@ -12,6 +12,11 @@ const filterReducer = (state = [] , {type, payload}) => {
                     ...state,
                     ...payload
                 }
+            case Types.GET_DISCIPLINE_LIST:
+                return {
+                    ...state,
+                    ...payload
+                }
             case Types.FILTER_NOT_IN_STATE:
                 return payload
             default :

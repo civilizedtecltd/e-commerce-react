@@ -17,6 +17,7 @@ import  MobileHeader from "../components/header/MobileHeader";
 import {CategoryHome} from "../components/HomePage/Category";
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import {fetchMaxMinPrice} from '../redux/actions/filterAction';
+import {fetchDiscipline} from '../redux/actions/filterAction';
 
 const Home = (props) => {
 
@@ -27,9 +28,10 @@ const Home = (props) => {
   const handleCategoryLoading = (status) =>{
       setLoading(status);
   }
-  
+
   useEffect(()=>{
-    props.maxMinPrice()
+    props.maxMinPrice();
+    props.getDisciplineList();
  },[])
 
   return (<>
@@ -151,7 +153,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch)=> {
   return {
-    maxMinPrice : ()=> dispatch(fetchMaxMinPrice())
+    maxMinPrice       : () => dispatch(fetchMaxMinPrice()),
+    getDisciplineList : () => dispatch(fetchDiscipline())
   }
 }
 
