@@ -183,9 +183,7 @@ const PaymentPage = props => {
                                                 setCvv(existData.ccv);
                                                 setCardId(e.target.value);
 
-                                                return setVisibleUpdateModal(
-                                                  true
-                                                );
+                                                return setVisibleUpdateModal(true);
                                               }}
                                             >
                                               Update

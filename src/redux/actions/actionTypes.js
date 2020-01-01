@@ -67,7 +67,11 @@ export const FETCH_MAX_MIN_PRICE        = 'FETCH_MAX_MIN_PRICE';
 
 export const UPDATE_PAYMENT_METHOD      = 'UPDATE_PAYMENT_METHOD';
 export const FILTER_NOT_IN_STATE        = "FILTER_NOT_IN_STATE";
-export const AUTH_DATA_NOT_IN_STATE     = "FILTER_NOT_IN_STATE";
+export const AUTH_DATA_NOT_IN_STATE     = "AUTH_DATA_NOT_IN_STATE";
+
+
+
+
 
 
 
