@@ -29,15 +29,60 @@ export const fetchStages = (category_id) => dispatch => {
 }
 
 export const fetchDiscipline = () => dispatch => {
-    axios.get(URL._GET_DISCIPLINE)
+    axios.get(URL._GET_DISCIPLINES)
          .then(res => dispatch({
             type: Types.GET_DISCIPLINE_LIST,
             payload: {
-                discipline: [ ...res.data.data ]
+                disciplines: [ ...res.data.data ]
             }
          }))
          .catch(error => console.log(error))
 }
+
+export const fetchAuthors = () => dispatch => {
+    axios.get(URL._GET_AUTHORS)
+         .then(res => dispatch({
+            type: Types.GET_AUTHOR_LIST,
+            payload: {
+                authors: [ ...res.data.data ]
+            }
+         }))
+         .catch(error => console.log(error))
+}
+
+export const fetchPublishers = () => dispatch => {
+    axios.get(URL._GET_PUBLISHERS)
+         .then(res => dispatch({
+            type: Types.GET_PUBLISHER_LIST,
+            payload: {
+                publishers: [ ...res.data.data ]
+            }
+         }))
+         .catch(error => console.log(error))
+}
+
+export const fetchPublishingYears = () => dispatch => {
+    axios.get(URL._GET_PUBLISHING_YEARS)
+         .then(res => dispatch({
+            type: Types.GET_PUBLISHING_YEAR_LIST,
+            payload: {
+                publishing_years: [ ...res.data.data ]
+            }
+         }))
+         .catch(error => console.log(error))
+}
+
+export const fetchLanguages = () => dispatch => {
+    axios.get(URL._GET_LANGUAGES)
+         .then(res => dispatch({
+            type: Types.GET_LANGUAGE_LIST,
+            payload: {
+                languages: [ ...res.data.data ]
+            }
+         }))
+         .catch(error => console.log(error))
+}
+
 
 export const filterNotInState = filter => {
     return {

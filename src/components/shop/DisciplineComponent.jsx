@@ -1,15 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-//import discipline from "../../inc/shop/discipline";
 import {LiSpan} from "../LiComponent/CommonLiComponent";
 
 const Discipline = (props) => {
     return (
         <div>
-            {props.discipline.map((data, index) => (
+            {props.disciplines.map((data, index) => (
                 <LiSpan
                     key={index}
-                    Url={''}
+                    Url={`/shop/filter/category/discipline/${data.id}`}
                     itemName={data.name}
                     Value={data.total_books}
                 />)
@@ -19,7 +18,7 @@ const Discipline = (props) => {
 };
 
 const mapStateToProps = state => ({
-    discipline: state.filter.discipline
+    disciplines: state.filter.disciplines
 })
 
 export default connect(mapStateToProps, null)(Discipline);

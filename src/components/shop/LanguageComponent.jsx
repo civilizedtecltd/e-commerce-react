@@ -1,20 +1,24 @@
 import React from 'react';
-import language from "../../inc/shop/language";
+import {connect} from 'react-redux';
 import {LiSpan} from "../LiComponent/CommonLiComponent";
 
-const Language = () => {
+const Language = (props) => {
     return (
         <>
-            {language.map((data, index) => (
+            {props.languages.map((data, index) => (
                 <LiSpan
                     key={index}
-                    Url={data.url}
+                    Url={`/shop/filter/category/language/${data.id}`}
                     itemName={data.name}
-                    Value={data.value}
+                    Value={data.total_books}
                 />)
             )}
         </>
     );
 };
 
-export default Language;
+const mapStateToProps = state => ({
+    languages: state.filter.languages
+})
+
+export default connect(mapStateToProps, null)(Language);

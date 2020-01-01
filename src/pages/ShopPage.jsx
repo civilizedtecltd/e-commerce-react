@@ -67,7 +67,7 @@ const ShopPage = (props) => {
         return props.fetchAllBook(1, 5, null)
       }
       else if(page && show && filter_type && filter_id ){
-
+        console.log(page, show, filter_type, filter_id);
         props.getBooksByFilter(page, show, filter_type, filter_id);
 
       }

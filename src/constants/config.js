@@ -100,8 +100,24 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
         return `${this.API}/filter/stage/category/${id}`
     }
 
-    get _GET_DISCIPLINE(){
-        return `${this.API}/filter/discipline`
+    get _GET_DISCIPLINES(){
+        return `${this.API}/filter/disciplines`
+    }
+
+    get _GET_AUTHORS(){
+        return `${this.API}/filter/authors`
+    }
+
+    get _GET_PUBLISHERS(){
+        return `${this.API}/filter/publishers`
+    }
+
+    get _GET_PUBLISHING_YEARS(){
+        return `${this.API}/filter/publishing-years`
+    }
+
+    get _GET_LANGUAGES(){
+        return `${this.API}/filter/languages`
     }
 
     _GET_FILTERED_BOOKS(filter_type, filter_id, page, show){
