@@ -1,20 +1,25 @@
 import React from 'react';
-import discipline from "../../inc/shop/discipline";
+import {connect} from 'react-redux';
+//import discipline from "../../inc/shop/discipline";
 import {LiSpan} from "../LiComponent/CommonLiComponent";
 
-const Discipline = () => {
+const Discipline = (props) => {
     return (
         <div>
-            {discipline.map((data, index) => (
+            {props.discipline.map((data, index) => (
                 <LiSpan
                     key={index}
-                    Url={data.url}
+                    Url={''}
                     itemName={data.name}
-                    Value={data.value}
+                    Value={data.total_books}
                 />)
             )}
         </div>
     );
 };
 
-export default Discipline;
+const mapStateToProps = state => ({
+    discipline: state.filter.discipline
+})
+
+export default connect(mapStateToProps, null)(Discipline);
