@@ -87,6 +87,7 @@ function CategoryHome (props) {
             }
         ]
     };
+
         return (
                 <Slider {...settings} >
 

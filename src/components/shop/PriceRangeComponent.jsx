@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import {URL} from '../../constants/config'
 import './PriceRange.css';
 import {connect} from 'react-redux'
 
 class PriceRanger extends Component{
     constructor(props){
         super(props)
-      
+
         this.state = {
             maxValue: props.filter.maxPrice,
             minValue: props.filter.minPrice,
             step: 1,
             minimumPrice: null,
-            maximumPrice: null 
+            maximumPrice: null
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,7 +25,7 @@ class PriceRanger extends Component{
             maximumPrice: this.state.maxValue
         });
 
-    } 
+    }
 
     handleChange(name, event){
         let value = event.target.value;
