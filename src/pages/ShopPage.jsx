@@ -13,7 +13,6 @@ import FooterComponent from "../components/FooterComponent/FooterComponent";
 import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
-import { URL } from '../constants/config';
 import './assets/shop.css';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 const useStyle = createUseStyles({
@@ -37,7 +36,8 @@ const ShopPage = (props) => {
     const [higherPrice , setHigherPrice] = useState(null);
     let [show , setShowBook ] = useState(5);
     let [page , setPage ] = useState(1);
-    let [totalPage , setTotalPage] = useState(props.book.totalPage)
+    // let [totalPage , setTotalPage] = useState(()=>props.book.totalPage)
+    let [totalPage ] = useState(()=>props.book.totalPage)
     let [sortBy , setSortBy] = useState('')
 
     const totalItem = props.cart.length
@@ -84,7 +84,7 @@ const ShopPage = (props) => {
         return props.fetchBooksByCategory(id, page, show);
 
       }
-
+      //eslint-disable-next-line
     },[sortBy, higherPrice, lowerPrice, page, show, id, filter_type, filter_id])
 
   const handleShowBook = (e)=> {

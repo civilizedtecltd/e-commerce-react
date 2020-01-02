@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 
 
@@ -62,7 +62,7 @@ function LiSpan({itemName, Url, Value }) {
     return (
         <>
             <li>
-                <Link to={Url}>{itemName}<span>{Value}</span></Link>
+                <NavLink exact activeClassName="active" to={Url}>{itemName}<span>{Value}</span></NavLink>
             </li>
         </>
     )
