@@ -48,7 +48,7 @@ function ProductPage(props) {
     const favoriteItem = props.favorite.items;
     const isFavoriteItem = favoriteItem.find(fav=> fav.id === Number(id))
 
-  
+
 
   useEffect(() => {
      window.scrollTo(0, 0);
@@ -88,7 +88,7 @@ function ProductPage(props) {
   return (
     <>
       <PageLoader loading={props.pending}/>
-      <Container className="allWrapper">
+      <div className="allWrapper">
         <HeaderComponent
         favorite_item={favoriteItem.length}
         cartItem = { props.totalItems }
@@ -240,7 +240,7 @@ function ProductPage(props) {
           </Container>
         </section>
         <FooterComponent />
-      </Container>
+      </div>
 
       <Modal show = {show} onHide = { handleClose }>
         <Modal.Header className={"border-0"} closeButton>

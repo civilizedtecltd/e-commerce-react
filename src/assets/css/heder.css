@@ -135,8 +135,7 @@ width: 50%;
 .mega-menu {
     position: absolute;
     top: 55px;
-    left: 0;
-    width: 650px;
+    width: 11rem;
     height: auto;
     background: #f1f2f3;
     transition: all 0.4s ease;
@@ -163,7 +162,9 @@ width: 50%;
     letter-spacing: 0;
     text-transform: capitalize;
     float: left;
-    padding: 0.8rem;
+    padding-left: 0.8rem;
+    width: 100%;
+    border-bottom: 1px solid #27272714;
 }
 .inner-mega-menu ul li a{
     color: #363636;

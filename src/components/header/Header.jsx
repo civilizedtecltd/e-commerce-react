@@ -6,7 +6,6 @@ import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Menu from '../LiComponent/MenuComponents'
 import checkAuth from '../../helpers/checkAuth';
 import '../../assets/css/heder.css';
-import menu from "../../inc/menu/menu";
 import { useMediaQuery } from 'react-responsive';
 import { fetchCategoryList } from "../../redux/actions/siteActions";
 import Search from '../Search';
@@ -29,7 +28,7 @@ const HeaderComponent = (props) => {
   useEffect(()=>{
     return (checkAuth()) ? setAuth(true) : setAuth(false);
   }, []);
-  
+
   useEffect(() => {
     props.fetchCategoryList();
   }, []);
