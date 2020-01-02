@@ -13,7 +13,6 @@ import FooterComponent from "../components/FooterComponent/FooterComponent";
 import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
-import { URL } from '../constants/config';
 import './assets/shop.css';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 const useStyle = createUseStyles({
