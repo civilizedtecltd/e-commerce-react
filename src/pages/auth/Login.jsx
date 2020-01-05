@@ -71,6 +71,7 @@ const Login = (props) => {
           <Row>
             <Col sm={6}>
               <SocialListComponent/>
+
               <div className="formWrapper clearfix" id="formWrapper">
                 <Form>
                   <InputFrom

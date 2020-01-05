@@ -6,7 +6,6 @@ import Slider from "react-slick";
 import '../../assets/css/theme.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {URL} from "../../constants/config";
 
 
 const ImgSlick = (props) => {
@@ -14,10 +13,9 @@ const ImgSlick = (props) => {
     if(props.images.length < 5 ){
         return(<>
 
-            {props.images.map((item, index) =>
-                <div key={index}>
                     <div className="row">
-                        <Col className="col-sm-3">
+            {props.images.map((item, index) =>
+                <div key={index} className="col-sm-3">
                             <LazyLoad once={true} height={200}>
                                 <Card className="productCard border-0 bg-transparent">
                                     <div className= "productMedia mb-3 bgGray">
@@ -31,10 +29,9 @@ const ImgSlick = (props) => {
                                     </div>
                                 </Card>
                             </LazyLoad>
-                        </Col>
                     </div>
-                </div>
             )}
+                </div>
         </>)
     }else{
         const settings = {

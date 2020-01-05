@@ -38,6 +38,7 @@ import { filterNotInState } from "./redux/actions/filterAction";
 import { shopNotInState } from './redux/actions/shopActions';
 import { authDataNotInState } from "./redux/actions/authActions";
 import isEqual from 'lodash/isEqual';
+import {Col} from "react-bootstrap";
 
 const Router = (props) => {
 
@@ -89,7 +90,11 @@ const Router = (props) => {
               <Route path="/refunds" component={Refunds} />
               <Route path="/delivery/details" component={DeliveryDetails} />
               <Route path="/place/order" component={PlaceOrder} />
-
+              {/*social link */}
+              <Route path='/facebook' component={() => {window.location = 'https://facebook.com'; return null;}}/>
+              <Route path='/googlePlus' component={() => {window.location = 'https://google.com'; return null;}}/>
+              <Route path='/instagram' component={() => {window.location = 'https://instagram.com'; return null;}}/>
+              <Route path='/twitter' component={() => {window.location = 'https://twitter.com'; return null;}}/>
               <Route path='/logout' component={Logout} />
               <Route path='*'  component={ErrorPage} />
         </Switch>

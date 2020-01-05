@@ -19,7 +19,7 @@ const CartPage = (props) => {
   const cartItems = props.cart;
 
   let totalBookPrice = 0;
-  let delivery_cost = (props.delivery) ? props.delivery[0].price : 0;
+  let delivery_cost = (props.delivery[0]) ? props.delivery[0].price : 0;
 
   if (cartItems.length !== 0) {
     cartItems.map((item) => {
