@@ -57,9 +57,9 @@ function FooterComponent(props) {
               <div className="footerWidget">
                 <ul className="footerSocial">
                   {[
-                      {ListClass:"facebook", Url:"//facebook.com",IconName:"fab fa-facebook-f"},
-                      {ListClass:"facebook" ,Url:"//instagram.com",IconName:"fab fa-instagram"},
-                      {ListClass:"facebook",Url:"//twitter.com",IconName:"fab fa-twitter"},
+                      {ListClass:"facebook", Url:"facebook",IconName:"fab fa-facebook-f"},
+                      {ListClass:"facebook" ,Url:"instagram",IconName:"fab fa-instagram"},
+                      {ListClass:"facebook",Url:"twitter",IconName:"fab fa-twitter"},
                     ].map((list,index)=><LiAi
                       key={index}
                       ListClass={list.ListClass}

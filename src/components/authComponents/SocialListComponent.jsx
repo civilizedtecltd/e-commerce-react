@@ -12,6 +12,7 @@ export default function SocialListComponent({icon}) {
             key={index}
             ListClass={icon.ListClass}
             Url={icon.Url}
+
             SocialIcon={icon.Icon_name}
         />)}
 
