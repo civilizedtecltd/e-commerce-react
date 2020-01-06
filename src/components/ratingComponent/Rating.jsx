@@ -55,7 +55,6 @@ const RatingItem  = ({ checked, colored, onChange, value }) => {
   return(
   <label className={`rating__item ${colored ? 'rating__item--selected' : ''}`}>
     <input
-      id={"rating"}
       checked={checked}
       className='rating__input'
       onChange={(e) => onChange(value)}

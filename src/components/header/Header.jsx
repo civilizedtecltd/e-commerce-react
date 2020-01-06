@@ -115,27 +115,27 @@ const HeaderComponent = (props) => {
                             <div className="inner-mega-menu">
                               <ul>
                                 <li className="nav-item">
-                                  <NavLink to="/ghsd" className="nav-link">
+                                  <NavLink to="#!" className="nav-link">
                                     Computer
                                   </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                  <NavLink to="/sf" className="nav-link">
+                                  <NavLink to="#!" className="nav-link">
                                     Mobile
                                   </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                  <NavLink to="/dsfds" className="nav-link">
+                                  <NavLink to="#!" className="nav-link">
                                     Laptop
                                   </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                  <NavLink to="/dfsf" className="nav-link">
+                                  <NavLink to="#!" className="nav-link">
                                     Laptop
                                   </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                  <NavLink to="/ewrw" className="nav-link">
+                                  <NavLink to="#!" className="nav-link">
                                     Laptop
                                   </NavLink>
                                 </li>

@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import React ,{useState, useEffect} from 'react';
-import { Container, Row, Col, Form, Badge, Collapse, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Badge, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
@@ -89,12 +89,12 @@ const MobileHeader = (props) => {
             </header>
 
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header className="ModaCloseBtn" closeButton></Modal.Header>
+                <Modal.Header className="ModalCloseBtn" closeButton></Modal.Header>
                 <Modal.Body>
                     <ul className="mobileNav">
                         {props.categories ?
                             props.categories.map((data, index) => (
-                                <li>
+                                <li key={index}>
                                     <Link to={`/shop/category/${data.id}/${data.category}`}> {data.category} </Link>
                                 </li>)
                             )
