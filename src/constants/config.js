@@ -121,9 +121,11 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     }
 
     _GET_FILTERED_BOOKS(filter_type, filter_id, page, show){
-        const url = `${this.API}/filter/${filter_type}/${filter_id}/${page}/${show}`
-        console.log("get filter books url: ", url);
-        return url;
+        return `${this.API}/filter/${filter_type}/${filter_id}/${page}/${show}`
+    }
+
+    _GET_PROMO_INFO(code){
+        return `${this.API}/promo-code/info/${code}`
     }
  }
 

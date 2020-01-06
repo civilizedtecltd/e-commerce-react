@@ -72,6 +72,47 @@ const deliveryMethod = () => dispatch=>{
           }))
 }
 
+const promoCodeInfo = (code) => dispatch => {
+
+    axios.get(URL._GET_PROMO_INFO(code))
+         .then(res => {
+
+            switch(res.status){
+                case 200:
+                    return dispatch({
+                        type: Types.PROMO_CODE_FETCH,
+                        payload: {
+                            status: true,
+                            ...res.data.data
+                        }
+                    });
+                case 203:
+                    return dispatch({
+                        type: Types.PROMO_CODE_FETCH,
+                        payload: {
+                            status: false,
+                            message: res.data.messages
+                        }
+                    });
+                default:
+                    return dispatch({
+                        type: Types.PROMO_CODE_FETCH,
+                        payload: {
+                            status: false,
+                            message: 'Unexpected error.'
+                        }
+                    });
+            }
+         })
+         .catch(error => console.log(error))
+}
+
+const clearPromo = () => ({
+    type: Types.PROMO_CLEAR,
+    payload: {
+        status: false
+    }
+})
 
 export {
     addToCart,
@@ -83,5 +124,7 @@ export {
     setPaymentDetails,
     shopNotInState,
     updateQuantity,
-    deliveryMethod
+    deliveryMethod,
+    promoCodeInfo,
+    clearPromo
 }

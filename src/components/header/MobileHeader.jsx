@@ -94,7 +94,7 @@ const MobileHeader = (props) => {
                     <ul className="mobileNav">
                         {props.categories ?
                             props.categories.map((data, index) => (
-                                <li>
+                                <li key={index}>
                                     <Link to={`/shop/category/${data.id}/${data.category}`}> {data.category} </Link>
                                 </li>)
                             )

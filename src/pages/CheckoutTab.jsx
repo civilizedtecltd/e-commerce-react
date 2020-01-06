@@ -5,6 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import {connect} from 'react-redux';
 import {setDeliveryAddress, setPaymentDetails} from '../redux/actions/shopActions';
 import { confirmOrder } from '../redux/actions/authActions';
+import { clearPromo } from '../redux/actions/shopActions';
 import PaymentsMethods from './PaymentMethods';
 import {futureDate} from '../helpers/utils';
 import './checkout.css';
@@ -13,6 +14,7 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 
 const CheckoutTab = (props) => {
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const [step, setStep] = useState({
@@ -124,17 +126,24 @@ const CheckoutTab = (props) => {
             });
         });
 
+        const promoId = (props.promo) ? props.promo.id : null ;
+
         console.log({
             address: formData,
             ...payment,
-            books
+            books,
+            promo: promoId
         });
 
         props.confirmOrder({
             address: formData,
             ...payment,
-            books
+            books,
+            promo: promoId
         });
+
+        props.clearPromo();
+
         setShow(true);
     }
 
@@ -344,9 +353,10 @@ const mapStateToProps = state =>({
 })
 
 const mapDispatchToProps = dispatch => ({
-    setAddress: (address) => dispatch(setDeliveryAddress(address)),
-    setPayment: (payment) => dispatch(setPaymentDetails(payment)),
-    confirmOrder: (info) => dispatch(confirmOrder(info))
+    setAddress      : (address) => dispatch(setDeliveryAddress(address)),
+    setPayment      : (payment) => dispatch(setPaymentDetails(payment)),
+    confirmOrder    : (info) => dispatch(confirmOrder(info)),
+    clearPromo      : () => dispatch(clearPromo())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutTab);
