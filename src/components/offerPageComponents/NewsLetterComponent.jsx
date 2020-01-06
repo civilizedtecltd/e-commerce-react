@@ -15,26 +15,37 @@ function NewsLetterComponent(props) {
   }
 
     return (
-        <Row className="justify-content-center">
+      <Row className="justify-content-center">
         <Col sm="10">
           <Card className="subscribeCard border-0 rounded-0">
             <Card.Body className="text-center pt-5 pb-5">
               <h1>Subscribe to our newsletter</h1>
               <p>
-              Lorem ipsum dolor sit ament, consecrator advising elite, sed do elusion temper
-              <br />
-              enif ipsum  quia volutes quia non nunquam emus</p>
-              <Form className="d-flex subscribeForm justify-content-center mt-3" onSubmit={handleSubmit}>
-                <Form.Group controlId="mailSubscribe" className="mb-2">
-                  <Form.Control type="email" placeholder="Enter email" onChange={(e)=>setEmail(e.target.value)} />
+                Lorem ipsum dolor sit ament, consecrator advising elite, sed do
+                elusion temper
+                <br />
+                enif ipsum quia volutes quia non nunquam emus
+              </p>
+              <Form
+                className="d-flex subscribeForm justify-content-center mt-3"
+                onSubmit={handleSubmit}
+              >
+                <Form.Group controlId="subscribeEmail" className="mb-2">
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    onChange={e => setEmail(e.target.value)}
+                  />
                 </Form.Group>
-                <Button type="submit" className="mb-2 ml-3">Subscribe</Button>
+                <Button type="submit" className="mb-2 ml-3">
+                  Subscribe
+                </Button>
               </Form>
             </Card.Body>
           </Card>
         </Col>
       </Row>
-    )
+    );
 }
 
 export{
