@@ -115,7 +115,7 @@ const CheckoutPage = (props) => {
                             { (!promoInfo.status) ?<></> :
                                 (
                                 <li>
-                                    <strong>Discount Price: </strong> ${promoPrice}
+                                    <strong>Price after Discount: </strong> ${promoPrice}
                                 </li>
                                 )
                             }

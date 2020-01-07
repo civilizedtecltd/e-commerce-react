@@ -188,7 +188,7 @@ const CartPage = (props) => {
                               {
                                 (!promoInfo.status) ? <></> : (
                                     <tr>
-                                        <td className="priceCartPage">Discount Price</td>
+                                        <td className="priceCartPage">Price after Discount</td>
                                         <td className="priceCartPage">.........................................</td>
                                         <td className="text-right priceCartPage"><span className="priceCartPage">$ {promoPrice}</span></td>
                                   </tr>)
