@@ -128,7 +128,7 @@ const PaymentMethods = (props) => {
         if (!card.ccv) return setShowCardAlert(true)
         if (!card.card_number) return setShowCardAlert(true)
         if (!card.yy) return setShowCardAlert(true)
-        
+
         if(card.ccv && card.card_number && card.mm && card.yy){
              props.addCard({
                 ...card
@@ -147,7 +147,7 @@ const PaymentMethods = (props) => {
             card.mm ,
             card.yy
         );
-      
+
     }
 
     //Card Input Format
@@ -189,7 +189,7 @@ const PaymentMethods = (props) => {
                             <div className="m-2">
                             <Alert show={showCardAlert} variant="danger" onClose={() => setShowCardAlert(false)}  dismissible>
                                     <p>This information is not valid!.</p>
-                             </Alert> 
+                             </Alert>
                             </div>
                             <div className="p-3">
                                 <div className="row align-items-center">
@@ -202,8 +202,8 @@ const PaymentMethods = (props) => {
                                                       name="card_number"
                                                       className="form-control"
                                                       id={`card-number${index+1}`}
-                                                      aria-describedby="cardNumber" 
-                                                      value={item.card_number} 
+                                                      aria-describedby="cardNumber"
+                                                      value={item.card_number}
                                                       onChange={handleCardOnChange}
                                         />
 
@@ -293,7 +293,7 @@ const PaymentMethods = (props) => {
             </div>
             <div>
                 <div className="col text-right shippingCostPrice">
-            <span className="shippingCost"><strong>Time:</strong> {24*props.delivery[0].delivery_time } hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> ${props.delivery[0].price}</span>
+            <span className="shippingCost"><strong>Time:</strong> {24*props.delivery[0].delivery_time } hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> Ksh {props.delivery[0].price}</span>
                 </div>
             </div>
         </div>
@@ -317,7 +317,7 @@ const PaymentMethods = (props) => {
                         {24 * props.delivery[1].delivery_time} hours
                     </span>
                     <span className="shippingPrice pl-3 pr-3">
-                        <strong>Price:</strong> ${props.delivery[1].price}
+                        <strong>Price:</strong> Ksh {props.delivery[1].price}
                     </span>
                 </div>
             </div>

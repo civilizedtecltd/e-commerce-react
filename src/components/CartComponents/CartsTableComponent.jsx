@@ -48,13 +48,13 @@ const CartsTableComponent = (props) => {
               </div>
             </td>
 
-            <td className="aligneMiddle" id={`price-${item.id}`}>${item.price}</td>
+            <td className="aligneMiddle" id={`price-${item.id}`}>Ksh {item.price}</td>
 
             <td className="cartQntN aligneMiddle">
               <Form.Control type="number" placeholder="1" id={item.id} value={item.quantity} onChange={handleQuantity} />
             </td>
 
-            <td className="aligneMiddle" id={`tp-${item.id}`}>${item.amountPrice}</td>
+            <td className="aligneMiddle" id={`tp-${item.id}`}>Ksh {item.amountPrice}</td>
 
             <td className="aligneMiddle">
               <Button className="btn btn-danger btnItemDelete" id={item.id} onClick={handleDeleteClick} >

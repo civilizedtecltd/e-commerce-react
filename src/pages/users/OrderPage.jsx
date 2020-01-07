@@ -81,9 +81,9 @@ const OrderPage = (props) => {
                                                         <tr>
                                                             <td>{order.order_code}</td>
                                                             <td><Link to={`/product/${order.book_id}`}>{order.name}</Link></td>
-                                                            <td>${order.price}</td>
+                                                            <td>Ksh {order.price}</td>
                                                             <td>{order.quantity}</td>
-                                                            <td>${order.total}</td>
+                                                            <td>Ksh {order.total}</td>
                                                             <td><span className="tableDate">{order.created_at}</span> <span className="tableTime">14:53</span> </td>
                                                             <td><span className="stockInfo">{order.status}</span></td>
                                                         </tr>
