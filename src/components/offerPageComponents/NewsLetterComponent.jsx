@@ -34,10 +34,11 @@ function NewsLetterComponent(props) {
                   <Form.Control
                     type="email"
                     placeholder="Enter email"
+                    className="mr-2"
                     onChange={e => setEmail(e.target.value)}
                   />
                 </Form.Group>
-                <Button type="submit" className="mb-2 ml-3">
+                <Button type="submit" className="mb-2">
                   Subscribe
                 </Button>
               </Form>
