@@ -1,31 +1,59 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
+
 import { Container, Row, Col, Card, Form, Button, Table } from "react-bootstrap";
-import '../pages/checkout.css';
+
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import HeaderComponent from "../components/header/Header";
 import MobileHeader from "../components/header/MobileHeader";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
 import CartTable from '../components/CartComponents/CartsTableComponent';
-import { removeFromCart, deleteAllFromCart, updateQuantity, deliveryMethod } from '../redux/actions/shopActions'
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import MegaMenu from "../components/MegaMenuComponents/MegaMenuComponent";
 
+import '../pages/checkout.css';
+
+import { removeFromCart, deleteAllFromCart, updateQuantity, deliveryMethod, promoCodeInfo } from '../redux/actions/shopActions';
+
 const CartPage = (props) => {
+
+  const [state, setState ] = useState({
+      promo: '',
+  });
 
   const favoriteItem = props.favorite.items;
   const cartItems = props.cart;
 
-  let totalBookPrice = 0;
-  let delivery_cost = (props.delivery[0]) ? props.delivery[0].price : 0;
+  let totalBookPrice        = 0;
+  let delivery_cost         = (props.delivery) ? props.delivery[0].price : 0;
 
   if (cartItems.length !== 0) {
     cartItems.map((item) => {
       totalBookPrice += item.amountPrice;
     })
   }
+
+  const promoInfo   = (props.promoInfo) ? props.promoInfo : { status: false };
+  let promoPrice    = totalBookPrice;
+
+  if(promoInfo.status){
+    const { discount, upto } = promoInfo;
+
+    if(Number(totalBookPrice) <= Number(upto)){
+
+        promoPrice = totalBookPrice - (totalBookPrice*(discount/100));
+
+    }else if(Number(totalBookPrice) > Number(upto)){
+
+        promoPrice = totalBookPrice - upto;
+    }
+
+  }
+
+  let costWithDelivery  = parseFloat(promoPrice) + parseFloat(delivery_cost);
+
   useEffect(() => {
     return props.deliveryMethodFetch();
   }, [])
@@ -45,6 +73,19 @@ const CartPage = (props) => {
 
   const handleQuantity = ({ id, qty }) => {
     props.updateItem({ id, qty });
+  }
+
+
+  const handlePromoOnChange = (e) => {
+      setState({
+          ...state,
+          promo: e.target.value
+      });
+  }
+
+  const handleApplyPromoOnClick = (e) => {
+    e.preventDefault();
+    props.getPromoCodeInfo(state.promo);
   }
 
   return (
@@ -126,11 +167,11 @@ const CartPage = (props) => {
                       <Col>
                         <Form className="form-inline cartPromo justify-content-end">
                           <Form.Group controlId="formBasicPassword">
-                            <Form.Control type="text" placeholder="Promo Code" />
+                            <Form.Control type="text" name="promo-code" placeholder="Promo Code" value={promoInfo.code} onChange = {handlePromoOnChange} />
                           </Form.Group>
-                          <Button type="submit" className="ml-2">
+                          <Button type="submit" className="ml-2" onClick = {handleApplyPromoOnClick}>
                             Apply
-                              </Button>
+                          </Button>
                         </Form>
                       </Col>
                     </Row>
@@ -144,6 +185,14 @@ const CartPage = (props) => {
                                 <td className="priceCartPage">.........................................</td>
                                 <td className="text-right priceCartPage"><span className="priceCartPage">Ksh {totalBookPrice}</span></td>
                               </tr>
+                              {
+                                (!promoInfo.status) ? <></> : (
+                                    <tr>
+                                        <td className="priceCartPage">Discount Price</td>
+                                        <td className="priceCartPage">.........................................</td>
+                                        <td className="text-right priceCartPage"><span className="priceCartPage">$ {promoPrice}</span></td>
+                                  </tr>)
+                              }
                               <tr>
                                 <td className="priceCartPage">Delivery</td>
                                 <td className="priceCartPage">.........................................</td>
@@ -152,7 +201,7 @@ const CartPage = (props) => {
                               <tr>
                                 <td className="priceCartPage">Total</td>
                                 <td className="priceCartPage">.........................................</td>
-                                <td className="text-right priceCartPage"> <span className="priceCartPage" id="grand-total">Ksh {parseFloat(totalBookPrice) + parseFloat(delivery_cost)}</span></td>
+                                <td className="text-right priceCartPage"> <span className="priceCartPage" id="grand-total">Ksh {costWithDelivery}</span></td>
                               </tr>
                             </tbody>
                           </Table>
@@ -189,15 +238,17 @@ const CartPage = (props) => {
 const mapStateToProps = (state) => ({
   cart: state.shop.cart,
   favorite: state.favorite,
-  delivery: state.shop.deliveryMethod
+  delivery: state.shop.deliveryMethod,
+  promoInfo: state.shop.promo
 })
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeItem: (id) => dispatch(removeFromCart(id)),
-    updateItem: ({ id, qty }) => dispatch(updateQuantity({ id, qty })),
-    deleteAll: () => dispatch(deleteAllFromCart()),
-    deliveryMethodFetch: () => dispatch(deliveryMethod())
+    removeItem          : (id) => dispatch(removeFromCart(id)),
+    updateItem          : ({ id, qty }) => dispatch(updateQuantity({ id, qty })),
+    deleteAll           : () => dispatch(deleteAllFromCart()),
+    deliveryMethodFetch : () => dispatch(deliveryMethod()),
+    getPromoCodeInfo    : (code) => dispatch(promoCodeInfo(code))
   }
 }
 

@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import React ,{useState, useEffect} from 'react';
-import {Container, Row, Col, Form, Badge, Collapse, Modal} from 'react-bootstrap';
+import { Container, Row, Col, Badge, Modal } from 'react-bootstrap';
+import { connect } from 'react-redux'
 import {Link} from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import checkAuth from '../../helpers/checkAuth';
@@ -88,14 +89,17 @@ const MobileHeader = (props) => {
             </header>
 
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header className="ModaCloseBtn" closeButton></Modal.Header>
+                <Modal.Header className="ModalCloseBtn" closeButton></Modal.Header>
                 <Modal.Body>
                     <ul className="mobileNav">
-                        <li><Link to="/shop/category/1/Kindergarten school">Kindergarten </Link></li>
-                        <li><Link to="/shop/category/2/Primary school">Primary school </Link></li>
-                        <li><Link to="/shop/category/3/Secondary school">Secondary school </Link></li>
-                        <li><Link to="/stationary">Stationery </Link></li>
-                        <li><Link to="/bibles">Bibles </Link></li>
+                        {props.categories ?
+                            props.categories.map((data, index) => (
+                                <li key={index}>
+                                    <Link to={`/shop/category/${data.id}/${data.category}`}> {data.category} </Link>
+                                </li>)
+                            )
+                            : ''
+                        }
                     </ul>
 
                     <hr className="borderHr" />
@@ -124,5 +128,9 @@ const MobileHeader = (props) => {
         </Mobile>
     </>)
 }
-
-export default MobileHeader;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  status: state.auth.status,
+  categories: state.site.categories
+});
+export default connect(mapStateToProps)(MobileHeader);

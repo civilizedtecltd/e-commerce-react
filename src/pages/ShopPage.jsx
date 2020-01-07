@@ -79,11 +79,9 @@ const ShopPage = (props) => {
 
         return props.fetchAllBook(page, show, keyword)
 
-      }else if(isNaN_id !== NaN && page && show) {
-
-        return props.fetchBooksByCategory(id, page, show);
-
-      }
+      }else if (!isNaN(!isNaN_id) && page && show) {
+              return props.fetchBooksByCategory(id, page, show);
+            }
       //eslint-disable-next-line
     },[sortBy, higherPrice, lowerPrice, page, show, id, filter_type, filter_id])
 
@@ -185,7 +183,7 @@ const ShopPage = (props) => {
                       <div className="col">
                         <ul className="singleFilter d-flex align-items-center">
                           <li>
-                            <label htmlFor="">Show</label>
+                            <label>Show</label>
                           </li>
 
                           <li>
@@ -208,13 +206,13 @@ const ShopPage = (props) => {
                             </li>
                             <li className={`page-item ${classes.page_field}`}>Page</li>
                             <li className={`page-item ${classes.page_field}`}>
-                              <input id="page" type="text" className="page-link" value={ page } readOnly/>
+                              <input type="text" className="page-link" value={ page } readOnly/>
 
 
                             </li>
                             <li className="page-item">of</li>
                             <li className={`page-item ${classes.page_field}`}>
-                              <input type="text" id="total-page" value= {props.book.totalPage} className="page-link" readOnly/>
+                              <input type="text" value= {props.book.totalPage} className="page-link" readOnly/>
                             </li>
                             <li className="page-item" onClick={handleNext} >
                               <button className="page-link">
@@ -238,7 +236,7 @@ const ShopPage = (props) => {
                                    <Card className="productCard border-0 bg-transparent">
                                 <div className="productMedia mb-3 bgGray">
                                 <Link to={`/product/${book.id}`}>
-                                  <img src={(book.cover_images !== null) ? `${book.cover_images.img_1}` : '' } alt="" />
+                                  <img src={(book.cover_images !== null) ? `${book.cover_images.img_1}` : ''} alt="" />
                                   </Link>
                                 </div>
 
@@ -303,13 +301,13 @@ const ShopPage = (props) => {
                             </li>
                             <li className={`page-item ${classes.page_field}`}>Page</li>
                             <li className={`page-item ${classes.page_field}`}>
-                              <input id="next-page" type="text" className="page-link" value={ page } readOnly/>
+                              <input type="text" className="page-link" value={ page } readOnly/>
 
 
                             </li>
                             <li className="page-item">of</li>
                             <li className={`page-item ${classes.page_field}`}>
-                              <input type="text" id="total-page" value= {props.book.totalPage} className="page-link" readOnly/>
+                              <input type="text" value= {props.book.totalPage} className="page-link" readOnly/>
                             </li>
                             <li className="page-item" onClick={handleNext} >
                               <button className="page-link">

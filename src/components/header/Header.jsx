@@ -99,50 +99,38 @@ const HeaderComponent = (props) => {
                     </button>
                     <div className="collapse navbar-collapse " id="navbarNav">
                       <ul className="navbar-nav">
-                        {props.categories ? props.categories.map((data, index) => (
-                          <Menu
-                            key={index}
-                            NavItem={"nav-item"}
-                            ClassName={"nav-link"}
-                            Title={data.category}
-                            Url={`/shop/category/${data.id}/${data.category}`}
-                            ActiveClassName={'active'}
-                          />
-                        )) : ""}
-                        <li className="nav-item">
-                          <i className="fas fa-ellipsis-h megaMenuIcon"></i>
-                          <div className="mega-menu">
-                            <div className="inner-mega-menu">
-                              <ul>
-                                <li className="nav-item">
-                                  <NavLink to="/ghsd" className="nav-link">
-                                    Computer
-                                  </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                  <NavLink to="/sf" className="nav-link">
-                                    Mobile
-                                  </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                  <NavLink to="/dsfds" className="nav-link">
-                                    Laptop
-                                  </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                  <NavLink to="/dfsf" className="nav-link">
-                                    Laptop
-                                  </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                  <NavLink to="/ewrw" className="nav-link">
-                                    Laptop
-                                  </NavLink>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </li>
+                        {props.categories
+                          ? props.categories.map((data, index) => {
+                              if (index < 5)
+                                return (
+                                  <Menu
+                                    key={index}
+                                    NavItem={"nav-item"}
+                                    ClassName={"nav-link"}
+                                    Title={data.category}
+                                    Url={`/shop/category/${data.id}/${data.category}`}
+                                    ActiveClassName={"active"}
+                                  />
+                                );
+                            })
+                          : ""}
+                        {(props.categories && props.categories.length>5)
+                          ? <li className="nav-item">
+                                <i className="fas fa-ellipsis-h megaMenuIcon"></i>
+                                <div className="mega-menu">
+                                  <div className="inner-mega-menu">
+                                    <ul>
+                                    {props.categories.map((data, index) => {
+                                       if (index >= 5)
+                                        return ( <li className="nav-item">
+                                          <NavLink to={`/shop/category/${data.id}/${data.category}`} className="nav-link">{data.category}</NavLink>
+                                        </li>)
+                                       })}
+                                    </ul>
+                                  </div>
+                                </div>
+                              </li>
+                         : ""}
                       </ul>
                     </div>
                   </nav>

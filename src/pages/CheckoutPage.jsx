@@ -22,8 +22,27 @@ const CheckoutPage = (props) => {
 
 
   if(cartItems.length !== 0){
-     cartItems.map((item) =>totalBookPrice += item.amountPrice)
+     cartItems.map((item) => totalBookPrice += item.amountPrice)
   }
+
+  const promoInfo   = (props.promoInfo) ? props.promoInfo : { status: false };
+  let promoPrice    = totalBookPrice;
+
+  if(promoInfo.status){
+    const { discount, upto } = promoInfo;
+
+    if(Number(totalBookPrice) <= Number(upto)){
+
+        promoPrice = totalBookPrice - (totalBookPrice*(discount/100));
+
+    }else if(Number(totalBookPrice) > Number(upto)){
+
+        promoPrice = totalBookPrice - upto;
+    }
+
+  }
+
+  let costWithDelivery  = parseFloat(promoPrice) + parseFloat(delivery_cost);
 
   useEffect(()=>{
     props.getUser();
@@ -93,13 +112,19 @@ const CheckoutPage = (props) => {
                             <li>
                               <strong>Total Product Price: </strong> Ksh {totalBookPrice}
                             </li>
-
+                            { (!promoInfo.status) ?<></> :
+                                (
+                                <li>
+                                    <strong>Discount Price: </strong> ${promoPrice}
+                                </li>
+                                )
+                            }
                             <li>
                               <strong>Delivery:</strong> Ksh {delivery_cost}
                             </li>
 
                             <li>
-                              <strong>In Total Total:</strong> Ksh {parseFloat(totalBookPrice) + parseFloat(delivery_cost)}
+                              <strong>In Total Total:</strong> Ksh {costWithDelivery}
                             </li>
                           </ul>
                         </div>
@@ -120,7 +145,8 @@ const CheckoutPage = (props) => {
 
 const mapStateToProps = (state) => ({
   cart:state.shop.cart,
-  delivery: state.shop.deliveryMethod
+  delivery: state.shop.deliveryMethod,
+  promoInfo: state.shop.promo
 });
 
 const mapDispatchToProps = dispatch => ({
