@@ -26,9 +26,9 @@ function NewsLetterComponent(props) {
               enif ipsum  quia volutes quia non nunquam emus</p>
               <Form className="d-flex subscribeForm justify-content-center mt-3" onSubmit={handleSubmit}>
                 <Form.Group controlId="mailSubscribe" className="mb-2">
-                  <Form.Control type="email" placeholder="Enter email" onChange={(e)=>setEmail(e.target.value)} />
+                  <Form.Control type="email" placeholder="Enter email" className="mr-2" onChange={(e)=>setEmail(e.target.value)} />
                 </Form.Group>
-                <Button type="submit" className="mb-2 ml-3">Subscribe</Button>
+                <Button type="submit" className="mb-2 ">Subscribe</Button>
               </Form>
             </Card.Body>
           </Card>

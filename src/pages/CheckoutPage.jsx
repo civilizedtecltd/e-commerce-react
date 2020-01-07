@@ -71,13 +71,13 @@ const CheckoutPage = (props) => {
                               </Link>
                             </h3>
                             <p>
-                            Price:<span className="price"> ${ item.price } </span>
+                            Price:<span className="price"> Ksh { item.price } </span>
                             </p>
                             <p>
                             Quantity:<span className="qut"> { item.quantity } </span>
                             </p>
                             <p>
-                            Total:<span className="totalPrice"> ${ item.amountPrice } </span>
+                            Total:<span className="totalPrice"> Ksh { item.amountPrice } </span>
                             </p>
                         </div>
                   </div>))}
@@ -91,15 +91,15 @@ const CheckoutPage = (props) => {
                             </li>
 
                             <li>
-                              <strong>Total Product Price: </strong> ${totalBookPrice}
+                              <strong>Total Product Price: </strong> Ksh {totalBookPrice}
                             </li>
 
                             <li>
-                              <strong>Delivery:</strong> ${delivery_cost}
+                              <strong>Delivery:</strong> Ksh {delivery_cost}
                             </li>
 
                             <li>
-                              <strong>In Total Total:</strong> ${parseFloat(totalBookPrice) + parseFloat(delivery_cost)}
+                              <strong>In Total Total:</strong> Ksh {parseFloat(totalBookPrice) + parseFloat(delivery_cost)}
                             </li>
                           </ul>
                         </div>

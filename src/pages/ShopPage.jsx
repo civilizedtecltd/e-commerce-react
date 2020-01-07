@@ -249,7 +249,7 @@ const ShopPage = (props) => {
                                     </h4>
                                   </Link>
                                   <h5 className="authorName">{book.book_author.name}</h5>
-                                  <p className="productPrice">$ {book.price} </p>
+                                  <p className="productPrice">Ksh {book.price} </p>
                                 </div>
                               </Card>
                                 </LazyLoad>

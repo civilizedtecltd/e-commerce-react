@@ -118,7 +118,7 @@ const CartPage = (props) => {
                     </Row>
                     <Row>
                       <Col>
-                        <Button className="btnGraySm btnDeleteall" onClick={handleDeleteAll}>
+                        <Button variant="danger" className="btnGraySm btnDeleteall" onClick={handleDeleteAll}>
                           Delete all <i className="fas fa-times"></i>
                         </Button>
                       </Col>
@@ -142,17 +142,17 @@ const CartPage = (props) => {
                               <tr>
                                 <td className="priceCartPage">Price</td>
                                 <td className="priceCartPage">.........................................</td>
-                                <td className="text-right priceCartPage"><span className="priceCartPage">$ {totalBookPrice}</span></td>
+                                <td className="text-right priceCartPage"><span className="priceCartPage">Ksh {totalBookPrice}</span></td>
                               </tr>
                               <tr>
                                 <td className="priceCartPage">Delivery</td>
                                 <td className="priceCartPage">.........................................</td>
-                                <td className="text-right priceCartPage"><span className="priceCartPage">$ {delivery_cost}</span></td>
+                                <td className="text-right priceCartPage"><span className="priceCartPage">Ksh {delivery_cost}</span></td>
                               </tr>
                               <tr>
                                 <td className="priceCartPage">Total</td>
                                 <td className="priceCartPage">.........................................</td>
-                                <td className="text-right priceCartPage"> <span className="priceCartPage" id="grand-total">$ {parseFloat(totalBookPrice) + parseFloat(delivery_cost)}</span></td>
+                                <td className="text-right priceCartPage"> <span className="priceCartPage" id="grand-total">Ksh {parseFloat(totalBookPrice) + parseFloat(delivery_cost)}</span></td>
                               </tr>
                             </tbody>
                           </Table>

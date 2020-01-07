@@ -25,7 +25,7 @@ const ImgSlick = (props) => {
                                     <div className="productContent">
                                         <Link to={`/product/${item.id}`}><h4 className="productTitle limit-character mr-4" >{item.name} </h4></Link>
                                         <h5 className="authorName">{item.book_author.name}</h5>
-                                        <p className="productPrice">$ {item.price}</p>
+                                        <p className="productPrice">Ksh {item.price}</p>
                                     </div>
                                 </Card>
                             </LazyLoad>
@@ -112,7 +112,7 @@ const ImgSlick = (props) => {
                                             <div className="productContent">
                                                 <Link to={`/product/${item.id}`}><h4 className="productTitle limit-character mr-4" >{item.name} </h4></Link>
                                                 <h5 className="authorName">{item.book_author.name}</h5>
-                                                <p className="productPrice">$ {item.price}</p>
+                                                <p className="productPrice">Ksh {item.price}</p>
                                             </div>
                                         </Card>
                                     </LazyLoad>
