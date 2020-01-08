@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch , Redirect, useLocation} from 'react-router-dom';
 
 // User Area
 import Login from './pages/auth/Login';
@@ -43,7 +43,7 @@ import {Col} from "react-bootstrap";
 const Router = (props) => {
 
     const localState = JSON.parse(localStorage.getItem('state'));
-
+    const location = useLocation();
 
     const presentState = store.getState();
 
@@ -81,6 +81,7 @@ const Router = (props) => {
               <PrivateRoute path="/checkout" component={CheckoutPage} />
               <Route path="/favorites" component={FavoritesPage} />
               <Route exact path="/shop/category/:id?/:title?" component={ShopPage} />
+              <Route exact path="/shop" render={() => <Redirect to={{ pathname: "/shopping", state: { from: location }}}/>} />
               <Route exact path="/shopping" component = {ShopPage} />
               <Route exact path="/shop/category/all/:pageNumber/:showItem/:keyword?" component={ShopPage}/>
               <Route exact path="/shop/filter/category/:id?/:filter_type/:filter_id" component={ShopPage} />
