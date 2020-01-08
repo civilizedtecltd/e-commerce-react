@@ -122,7 +122,7 @@ const HeaderComponent = (props) => {
                                     <ul>
                                     {props.categories.map((data, index) => {
                                        if (index >= 5)
-                                        return ( <li className="nav-item">
+                                        return ( <li key={index} className="nav-item">
                                           <NavLink to={`/shop/category/${data.id}/${data.category}`} className="nav-link">{data.category}</NavLink>
                                         </li>)
                                        })}

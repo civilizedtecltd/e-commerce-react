@@ -190,7 +190,7 @@ const CartPage = (props) => {
                                     <tr>
                                         <td className="priceCartPage">Price after Discount</td>
                                         <td className="priceCartPage">.........................................</td>
-                                        <td className="text-right priceCartPage"><span className="priceCartPage">$ {promoPrice}</span></td>
+                                        <td className="text-right priceCartPage"><span className="priceCartPage">Ksh {promoPrice}</span></td>
                                   </tr>)
                               }
                               <tr>

@@ -309,7 +309,7 @@ const CheckoutTab = (props) => {
 
                                     <Col sm="6" className="mt-4">
                                         <ul className="orderConfrimationList text-large">
-                                            <li><strong>Total Price : </strong>{props.totalPrice}</li>
+                                            <li><strong>Total Price : </strong>Ksh {props.totalPrice}</li>
                                             <li><strong>Delivery method : </strong> {(!isEmpty(payment) && payment.delivery === 0) ? 'Standard' : 'Express'}</li>
                                             <li><strong>Expected arrival : </strong>  {futureDate(7)}</li>
                                         </ul>
