@@ -177,12 +177,29 @@ const PaymentMethods = (props) => {
         return val.substring(0,2);
     }
 
-    return (<>
+    return (
+      <>
         <PageLoader loading={false} />
-        <Accordion  onSelect={handleAccordionOnSelect}>
-            {(paymentMethods.length === 0) ? <></> : paymentMethods.map((item, index) => (<div key={index}>
-                    <div className="payment-header-card mt-4">
-                        <CheckToggle eventKey={index} title={item.payment_type}/>
+        <Accordion onSelect={handleAccordionOnSelect}>
+          {paymentMethods.length === 0 ? (
+            <></>
+          ) : (
+            paymentMethods.map((item, index) => (
+              <div key={index}>
+                <div className="payment-header-card mt-4">
+                  <CheckToggle eventKey={index} title={item.payment_type} />
+                </div>
+                <Accordion.Collapse eventKey={index}>
+                  <div className="clearfix">
+                    <div className="m-2">
+                      <Alert
+                        show={showCardAlert}
+                        variant="danger"
+                        onClose={() => setShowCardAlert(false)}
+                        dismissible
+                      >
+                        <p>This information is not valid!.</p>
+                      </Alert>
                     </div>
                     <Accordion.Collapse eventKey={index}>
                         <div className="clearfix">
@@ -271,46 +288,103 @@ const PaymentMethods = (props) => {
                                 </div>
                             </div>
                         </div>
-                    </Accordion.Collapse>
-            </div>)
-            )}
+                      </div>
+
+                      <div className="row">
+                        <div className="col">
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            disabled={false}
+                            onClick={handleCardOnClick}
+                          >
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Accordion.Collapse>
+              </div>
+            ))
+          )}
         </Accordion>
 
         <h3 className="mt-4 mb-2">Choose a delivery method</h3>
 
         <div className="payment-header-card mt-3 d-flex justify-content-between">
-            <div>
+          <div>
             <Form.Check
-                custom
-                type="radio"
-                className="ml-2"
-                label={props.delivery? props.delivery[0].delivery_name.charAt(0).toUpperCase() + props.delivery[0].delivery_name.substring(1) : ''}
-                checked={deliveryMethod.standard}
-                name="standard"
-                id="standard009"
-                onChange={checkDelivery}
+              custom
+              type="radio"
+              className="ml-2"
+              label={
+                props.delivery
+                  ? props.delivery[0].delivery_name.charAt(0).toUpperCase() +
+                    props.delivery[0].delivery_name.substring(1)
+                  : ""
+              }
+              checked={deliveryMethod.standard}
+              name="standard"
+              id="standard009"
+              onChange={checkDelivery}
             />
+          </div>
+          <div>
+            <div className="col text-right shippingCostPrice">
+              <span className="shippingCost">
+                <strong>Time:</strong>{" "}
+                {props.delivery ? (24 * props.delivery[0].delivery_time) : 0}
+                hours
+              </span>
+              <span className="shippingPrice pl-3 pr-3">
+                <strong>Price:</strong> $
+                {props.delivery ? props.delivery[0].price : ""}
+              </span>
             </div>
+<<<<<<< HEAD
+          </div>
+=======
             <div>
                 <div className="col text-right shippingCostPrice">
             <span className="shippingCost"><strong>Time:</strong> {24*props.delivery[0].delivery_time } hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> Ksh {props.delivery[0].price}</span>
                 </div>
             </div>
+>>>>>>> master
         </div>
 
         <div className="payment-header-card mt-3 d-flex justify-content-between">
-            <div>
+          <div>
             <Form.Check
-                custom
-                type="radio"
-                className="ml-2"
-                label={props.delivery ? props.delivery[1].delivery_name.charAt(0).toUpperCase() + props.delivery[1].delivery_name.substring(1) : ''}
-                checked={deliveryMethod.express}
-                name="express"
-                id="express22"
-                onChange={checkDelivery}
+              custom
+              type="radio"
+              className="ml-2"
+              label={
+                props.delivery
+                  ? props.delivery[1].delivery_name.charAt(0).toUpperCase() +
+                    props.delivery[1].delivery_name.substring(1)
+                  : ""
+              }
+              checked={deliveryMethod.express}
+              name="express"
+              id="express22"
+              onChange={checkDelivery}
             />
+          </div>
+          <div>
+            <div className="col text-right shippingCostPrice">
+              <span className="shippingCost">
+                <strong>Time:</strong>
+                {props.delivery ? (24 * props.delivery[1].delivery_time) : 0}{" "}
+                hours
+              </span>
+              <span className="shippingPrice pl-3 pr-3">
+                <strong>Price:</strong> ${ props.delivery ? (props.delivery[1].price) : 0}
+              </span>
             </div>
+<<<<<<< HEAD
+          </div>
+=======
             <div>
                 <div className="col text-right shippingCostPrice">
                     <span className="shippingCost"><strong>Time:</strong>
@@ -321,13 +395,20 @@ const PaymentMethods = (props) => {
                     </span>
                 </div>
             </div>
+>>>>>>> master
         </div>
         <div className="mt-3">
-            <Alert show={alert.status} variant={alert.type} onClose={() => setAlert({...alert, status: false})} dismissible>
-                <p>{alert.message}</p>
-            </Alert>
+          <Alert
+            show={alert.status}
+            variant={alert.type}
+            onClose={() => setAlert({ ...alert, status: false })}
+            dismissible
+          >
+            <p>{alert.message}</p>
+          </Alert>
         </div>
-    </>);
+      </>
+    );
 }
 const mapStateToProps = state =>({
     ...state.auth,
