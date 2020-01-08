@@ -92,13 +92,13 @@ const CheckoutPage = (props) => {
                               </Link>
                             </h3>
                             <p>
-                            Price:<span className="price"> ${ item.price } </span>
+                            Price:<span className="price"> Ksh { item.price } </span>
                             </p>
                             <p>
                             Quantity:<span className="qut"> { item.quantity } </span>
                             </p>
                             <p>
-                            Total:<span className="totalPrice"> ${ item.amountPrice } </span>
+                            Total:<span className="totalPrice"> Ksh { item.amountPrice } </span>
                             </p>
                         </div>
                   </div>))}
@@ -112,21 +112,21 @@ const CheckoutPage = (props) => {
                             </li>
 
                             <li>
-                              <strong>Total Product Price: </strong> ${totalBookPrice}
+                              <strong>Total Product Price: </strong> Ksh {totalBookPrice}
                             </li>
                             { (!promoInfo.status) ?<></> :
                                 (
                                 <li>
-                                    <strong>Discount Price: </strong> ${promoPrice}
+                                    <strong>Price after Discount: </strong> ${promoPrice}
                                 </li>
                                 )
                             }
                             <li>
-                              <strong>Delivery:</strong> ${delivery_cost}
+                              <strong>Delivery:</strong> Ksh {delivery_cost}
                             </li>
 
                             <li>
-                              <strong>In Total Total:</strong> ${costWithDelivery}
+                              <strong>In Total Total:</strong> Ksh {costWithDelivery}
                             </li>
                           </ul>
                         </div>

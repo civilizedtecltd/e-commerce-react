@@ -159,7 +159,7 @@ const CartPage = (props) => {
                     </Row>
                     <Row>
                       <Col>
-                        <Button className="btnGraySm btnDeleteall" onClick={handleDeleteAll}>
+                        <Button variant="danger" className="btnGraySm btnDeleteall" onClick={handleDeleteAll}>
                           Delete all <i className="fas fa-times"></i>
                         </Button>
                       </Col>
@@ -183,12 +183,12 @@ const CartPage = (props) => {
                               <tr>
                                 <td className="priceCartPage">Price</td>
                                 <td className="priceCartPage">.........................................</td>
-                                <td className="text-right priceCartPage"><span className="priceCartPage">$ {totalBookPrice}</span></td>
+                                <td className="text-right priceCartPage"><span className="priceCartPage">Ksh {totalBookPrice}</span></td>
                               </tr>
                               {
                                 (!promoInfo.status) ? <></> : (
                                     <tr>
-                                        <td className="priceCartPage">Discount Price</td>
+                                        <td className="priceCartPage">Price after Discount</td>
                                         <td className="priceCartPage">.........................................</td>
                                         <td className="text-right priceCartPage"><span className="priceCartPage">$ {promoPrice}</span></td>
                                   </tr>)
@@ -196,12 +196,12 @@ const CartPage = (props) => {
                               <tr>
                                 <td className="priceCartPage">Delivery</td>
                                 <td className="priceCartPage">.........................................</td>
-                                <td className="text-right priceCartPage"><span className="priceCartPage">$ {delivery_cost}</span></td>
+                                <td className="text-right priceCartPage"><span className="priceCartPage">Ksh {delivery_cost}</span></td>
                               </tr>
                               <tr>
                                 <td className="priceCartPage">Total</td>
                                 <td className="priceCartPage">.........................................</td>
-                                <td className="text-right priceCartPage"> <span className="priceCartPage" id="grand-total">$ {costWithDelivery}</span></td>
+                                <td className="text-right priceCartPage"> <span className="priceCartPage" id="grand-total">Ksh {costWithDelivery}</span></td>
                               </tr>
                             </tbody>
                           </Table>

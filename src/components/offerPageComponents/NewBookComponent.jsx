@@ -25,7 +25,7 @@ const NewBookComponent = ({bookId, BookImage, ProductTitle, AuthorName, ProductP
                     <div className="productContent">
                         <Link to={`/product/${bookId}`}><h4 className="productTitle limit-character mb-1" >{ProductTitle} {(isFev === true) ?<span className="favoritIcon"><i className="fas fa-star"></i></span> :''}</h4></Link>
                         <h5 className="authorName mb-1">{AuthorName}</h5>
-                        <p className="productPrice">$ {ProductPrice}</p>
+                        <p className="productPrice">Ksh {ProductPrice}</p>
                         <button  className="btn btn-danger" onClick = { handleRemove.bind(this, bookId) }>Remove</button>
                     </div>
                 </Card>
@@ -44,4 +44,3 @@ const mapStateToProps = (state) => {
 //     }
 // }
 export default connect(mapStateToProps, null)(NewBookComponent);
-// export default NewBookComponent;
