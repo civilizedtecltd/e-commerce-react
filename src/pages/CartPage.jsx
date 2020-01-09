@@ -55,7 +55,7 @@ const CartPage = (props) => {
   let costWithDelivery  = parseFloat(promoPrice) + parseFloat(delivery_cost);
 
   useEffect(() => {
-    return props.deliveryMethodFetch();
+    //return props.deliveryMethodFetch();
   }, [])
 
   const handleDeleteClick = (id) => {
@@ -86,6 +86,10 @@ const CartPage = (props) => {
   const handleApplyPromoOnClick = (e) => {
     e.preventDefault();
     props.getPromoCodeInfo(state.promo);
+  }
+
+  const handleCheckoutOnClick = (e) => {
+      props.deliveryMethodFetch();
   }
 
   return (
@@ -205,7 +209,7 @@ const CartPage = (props) => {
                               </tr>
                             </tbody>
                           </Table>
-                          <Link to="/checkout" className="btn btn-primary" style={{ color: 'white' }}>Checkout</Link>
+                          <Link to="/checkout" className="btn btn-primary" style={{ color: 'white' }} onClick={handleCheckoutOnClick} >Checkout</Link>
                         </div>
                       </Col>
                     </Row>

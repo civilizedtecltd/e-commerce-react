@@ -84,7 +84,7 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
         return `${this.API}/subscribe-update`
     }
 
-    get PAYMENT_METHOD(){
+    get DELIVERY_METHOD(){
         return `${this.API}/delivery-method`
     }
 

@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import {Form, Accordion , useAccordionToggle, Alert} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import { setPayment } from '../redux/actions/authActions';
+import { deliveryMethod } from '../redux/actions/shopActions';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
-import card_icon_img from '../assets/images/user/card_icon_img.png'
+import card_icon_img from '../assets/images/user/card_icon_img.png';
 import './checkout.css';
 import '../assets/css/theme.css'
 import NumberFormat from 'react-number-format';
 import defaultMethods from '../inc/PaymentMethods/defaultPaymentMethods.json';
+import { useEffect } from 'react';
 
 const CheckToggle = ({ children, eventKey, title }) => {
 
@@ -32,7 +34,7 @@ const CheckToggle = ({ children, eventKey, title }) => {
 
 const PaymentMethods = (props) => {
 
-    const [showCardAlert, setShowCardAlert] = useState(false);
+    const [showCardAlert, setShowCardAlert] = useState({show: false, message: ''});
     const [card, setCard] = useState({});
     const [selectedMethod, setSelectedMethods]= useState(null);
     const [deliveryMethod, setDeliveryMethod] = useState({
@@ -46,23 +48,31 @@ const PaymentMethods = (props) => {
     });
 
 
-    const paymentMethods = (props.user.payment && props.user.payment.length === 3)? props.user.payment : defaultMethods;
+    const paymentMethods = (props.user.payment && props.user.payment.length === 3) ? props.user.payment : defaultMethods;
 
     if(props.user.payment && props.user.payment.length < 3){
+
         const savedMethods = props.user.payment;
         savedMethods.map(item => {
             switch(item.payment_type){
                 case 'MPESA':
-                     return paymentMethods[0] = { ...item}
+                        paymentMethods[0] = { ...item}
+                    break;
                 case 'VISA':
-                       return paymentMethods[1] = { ...item}
+                        paymentMethods[1] = { ...item}
+                    break;
                 case 'PAYPAL':
-                      return paymentMethods[2] = { ...item}
+                       paymentMethods[2] = { ...item}
+                    break;
                 default :
                   return paymentMethods
             }
         });
     }
+
+    useEffect(()=>{
+        props.getDeliveryMethod()
+    }, []);
 
     const handleCardOnChange = (e) => {
         const currentMethod = {
@@ -124,10 +134,12 @@ const PaymentMethods = (props) => {
 
     const handleCardOnClick = (e) => {
         e.preventDefault();
-        if (!card.payment_type) return setShowCardAlert(true)
-        if (!card.ccv) return setShowCardAlert(true)
-        if (!card.card_number) return setShowCardAlert(true)
-        if (!card.yy) return setShowCardAlert(true)
+
+        if (!card.payment_type) return setShowCardAlert({show: true, message: 'Please select payment type.'})
+        if (!card.ccv)          return setShowCardAlert({show: true, message: 'Please provide cvv number.'})
+        if (!card.card_number)  return setShowCardAlert({show: true, message: 'Please provide card number.'})
+        if (!card.yy)           return setShowCardAlert({show: true, message: 'Please provide YY.'})
+        if (!card.mm)           return setShowCardAlert({show: true, message: 'Please provide MM.'})
 
         if(card.ccv && card.card_number && card.mm && card.yy){
              props.addCard({
@@ -137,16 +149,10 @@ const PaymentMethods = (props) => {
             props.callback({
                 payment: {...card},
                 delivery: (deliveryMethod.standard) ? 1 : 2,
-                paymentdata:  (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
+                paymentData:  (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
             });
         }
-        console.log(
-           card.payment_type ,
-            card.ccv ,
-            card.card_number,
-            card.mm ,
-            card.yy
-        );
+        console.log("card: ", card);
 
     }
 
@@ -187,8 +193,8 @@ const PaymentMethods = (props) => {
                     <Accordion.Collapse eventKey={index}>
                         <div className="clearfix">
                             <div className="m-2">
-                            <Alert show={showCardAlert} variant="danger" onClose={() => setShowCardAlert(false)}  dismissible>
-                                    <p>This information is not valid!.</p>
+                            <Alert show={showCardAlert.show} variant="danger" onClose={() => setShowCardAlert({...showCardAlert, show: false})}  dismissible>
+                                    <p>{showCardAlert.message}</p>
                              </Alert>
                             </div>
                             <div className="p-3">
@@ -293,7 +299,7 @@ const PaymentMethods = (props) => {
             </div>
             <div>
                 <div className="col text-right shippingCostPrice">
-            <span className="shippingCost"><strong>Time:</strong> {24*props.delivery[0].delivery_time } hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> Ksh {props.delivery[0].price}</span>
+            <span className="shippingCost"><strong>Time:</strong> {props.delivery ? 24*props.delivery[0].delivery_time : 24*7 } hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> Ksh {props.delivery ? props.delivery[0].price : '0'}</span>
                 </div>
             </div>
         </div>
@@ -314,10 +320,10 @@ const PaymentMethods = (props) => {
             <div>
                 <div className="col text-right shippingCostPrice">
                     <span className="shippingCost"><strong>Time:</strong>
-                        {24 * props.delivery[1].delivery_time} hours
+                        {props.delivery ? 24 * props.delivery[1].delivery_time : 24*7} hours
                     </span>
                     <span className="shippingPrice pl-3 pr-3">
-                        <strong>Price:</strong> Ksh {props.delivery[1].price}
+                        <strong>Price:</strong> Ksh {props.delivery ? props.delivery[1].price : '0'}
                     </span>
                 </div>
             </div>
@@ -335,6 +341,7 @@ const mapStateToProps = state =>({
 })
 
 const mapDispatchToProps = dispatch => ({
-    addCard: (info) => dispatch(setPayment(info))
+    getDeliveryMethod   : () => dispatch(deliveryMethod),
+    addCard             : (info) => dispatch(setPayment(info))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentMethods);

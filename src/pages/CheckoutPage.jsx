@@ -51,7 +51,7 @@ const CheckoutPage = (props) => {
 
 
   const getPaymentMethod = (paymentMethod) =>{
-    setDeliveryCost(paymentMethod.paymentdata.price)
+    setDeliveryCost(paymentMethod.paymentData.price)
   }
 
   return (
