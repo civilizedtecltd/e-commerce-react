@@ -16,6 +16,8 @@ function CategoryHome (props) {
 
     const [category, setCategory] = useState([]);
 
+    console.log("category: ", category.length)
+
     useEffect(() => {
             props.callback(true);
             axios.get(URL._CATEGORY)
@@ -28,89 +30,118 @@ function CategoryHome (props) {
                 });
     }, []);
 
-    const settings = {
-        dots: false,
-        infinite: true,
-        slidesToShow:3,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 1199,
-                settings: {
-                    slidesToShow:3,
-                    slidesToScroll: 1,
-                    infinite: true,
+    if(category.length < 4){
+        return(<>
+            <div className="categorySlider">
+                <div className="row">
+                {category.map((item, index) =>
+                    <div className="col-sm-4" key={index}>
+                        <LazyLoad once={true} height={200}>
+                            <Link to={`/shop/category/${item.id}/${item.category}`}>
+                                <Card className="productCatCard">
+                                    <div className="productCatMedia">
+                                        <img src={`${item.image}`} alt="" />
+                                    </div>
+                                    <Card.Body className="text-center">
+                                        <h3 className="productCatTitle home-ctg-limit-character">{item.category} </h3>
+                                    </Card.Body>
+                                </Card>
+                            </Link>
+                        </LazyLoad>
+                    </div>
+                )}
+                </div>
+            </div>
+            </>)
+    }else{
+        const settings = {
+            dots: false,
+            infinite: true,
+            slidesToShow:3,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1199,
+                    settings: {
+                        slidesToShow:3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                    }
+                },  {
+                    breakpoint: 991,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 767,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        initialSlide: 3
+                    }
+                },
+                {
+                    breakpoint: 575,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        initialSlide: 2
+                    }
+                },
+                {
+                    breakpoint: 453,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 380,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 336,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
                 }
-            },  {
-                breakpoint: 991,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                }
-            },
-            {
-                breakpoint: 767,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    initialSlide: 3
-                }
-            },
-            {
-                breakpoint: 575,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    initialSlide: 2
-                }
-            },
-            {
-                breakpoint: 453,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 380,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 336,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    };
+            ]
+        };
 
         return (
-                <Slider {...settings} >
+            <div className="categorySlider">
+            <Slider {...settings} >
 
-                            {category.map((item, index) =>
-                                    <Col key={index}>
-                                        <LazyLoad once={true} height={200}>
-                                            <Link to={`/shop/category/${item.id}/${item.category}`}>
-                                                <Card className="productCatCard">
-                                                    <div className="productCatMedia">
-                                                        <img src={`${item.image}`} alt="" />
-                                                    </div>
-                                                    <Card.Body className="text-center">
-                                                        <h3 className="productCatTitle home-ctg-limit-character">{item.category} </h3>
-                                                    </Card.Body>
-                                                </Card>
-                                            </Link>
-                                        </LazyLoad>
-                                    </Col>
-                                )
-                            }
+                {category.map((item, index) =>
+                    <Col key={index}>
+                        <LazyLoad once={true} height={200}>
+                            <Link to={`/shop/category/${item.id}/${item.category}`}>
+                                <Card className="productCatCard">
+                                    <div className="productCatMedia">
+                                        <img src={`${item.image}`} alt="" />
+                                    </div>
+                                    <Card.Body className="text-center">
+                                        <h3 className="productCatTitle home-ctg-limit-character">{item.category} </h3>
+                                    </Card.Body>
+                                </Card>
+                            </Link>
+                        </LazyLoad>
+                    </Col>
+                )}
 
-                </Slider>
+            </Slider>
+            </div>
         );
+    }
+
+
+
 }
 
 export {CategoryHome } ;
