@@ -4,16 +4,19 @@ import NumberFormat from 'react-number-format';
 function PaymentMethodComponent(props) {
   const [showCardAlert, setShowCardAlert] = useState(false);
   const [message, setMessage] = useState("This information is not valid!");
-    const [card, setCard] = useState({})
+  const [card, setCard] = useState({})
+  const [reset,setReset] = useState(false)
 
-    const handleOnChange = (e) => {
+  const handleOnChange = (e) => {
+      setReset(false);
         setCard({
             ...card,
             [e.target.name]:e.target.value
         })
     }
 
-    const handleOnClick = (e) => {
+  const handleOnClick = (e) => {
+  
       e.preventDefault();
        if (!card.card_number && !card.mm && !card.yy && !card.ccv) {
          setMessage("Field should not be empty");
@@ -48,7 +51,8 @@ function PaymentMethodComponent(props) {
       
      
       else if (card.card_number && card.mm && card.yy && card.ccv) {
-             props.callback(card);
+        props.callback(card);
+        setReset(true);
            }              
   }
   
@@ -79,122 +83,134 @@ function PaymentMethodComponent(props) {
       return val.substring(0,2);
     }
 
-  return(
-      <Card.Body className="addPaymentCard m-0 p-0">
-        <Row>
-          <Col>
-            <Form className="selectPaymentOption">
-              <div className="formRadioGroup bgGray mb-2">
-                <div className="payInfoDetails clearfix">
-                    <div className="m-2">
-                        <Alert show={showCardAlert} variant="danger" onClose={() => setShowCardAlert(false)}  dismissible>
-  <p>{message}</p>
-                        </Alert>
-                    </div>
-                  <div className="cardInfoForm p-3">
-                    <Row className="align-items-center">
-                      <Col sm="10">
-
-                        <Form.Group>
-                          <Form.Label>
-                            Card number
-                          </Form.Label>
-                          <NumberFormat
-                              format="#### #### #### ####"
-                              placeholder="____ ____ ____ ____"
-                              mask={['_', '_','_','_','_', '_','_','_','_', '_','_','_','_', '_','_','_']}
-                              name="card_number"
-                              className="form-control"
-                              defaultValue={''}
-                              onChange={handleOnChange}
-                          />
-                        </Form.Group>
-                      </Col>
-
-                      <Col>
-                        <img
-                            src=""
-                            alt=""
+  return (
+    <Card.Body className="addPaymentCard m-0 p-0">
+      <Row>
+        <Col>
+          <Form className="selectPaymentOption">
+            <div className="formRadioGroup bgGray mb-2">
+              <div className="payInfoDetails clearfix">
+                <div className="m-2">
+                  <Alert
+                    show={showCardAlert}
+                    variant="danger"
+                    onClose={() => setShowCardAlert(false)}
+                    dismissible
+                  >
+                    <p>{message}</p>
+                  </Alert>
+                </div>
+                <div className="cardInfoForm p-3">
+                  <Row className="align-items-center">
+                    <Col sm="10">
+                      <Form.Group>
+                        <Form.Label>Card number</Form.Label>
+                        <NumberFormat
+                          format="#### #### #### ####"
+                          placeholder="____ ____ ____ ____"
+                          mask={[
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_",
+                            "_"
+                          ]}
+                          name="card_number"
+                          className="form-control"
+                          value={reset ? " " : card.card_number}
+                          onChange={handleOnChange}
                         />
-                      </Col>
-                    </Row>
+                      </Form.Group>
+                    </Col>
 
-                    <Row className="align-items-center justify-content-between">
-                      <Col sm="4">
-                        <Form.Group>
-                          <Form.Label>
-                            Expiry date
-                          </Form.Label>
-                          <ul className="cardPayFiled d-flex align-items-center justify-content-start">
-                            <li>
+                    <Col>
+                      <img src="" alt="" />
+                    </Col>
+                  </Row>
 
-                              <NumberFormat
-                                  id="card-mm"
-                                  format={cardExpiryMonth}
-                                  placeholder="MM"
-                                  mask={['M', 'M']}
-                                  name="mm"
-                                  defaultValue={''}
-                                  onChange={handleOnChange}
-                              />
-                            </li>
-                            <li className="cardBl">/</li>
-                            <li>
-                              <NumberFormat
-                                  id="card-yy"
-                                  format={cardExpiryYear}
-                                  placeholder="YY"
-                                  mask={['Y', 'Y']}
-                                  name="yy"
-                                  defaultValue={''}
-                                  onChange={handleOnChange}
-                              />
-                            </li>
-                          </ul>
-                          {/* end of cardPayFiled */}
-                        </Form.Group>
-                      </Col>
-
-                      <Col sm={{ offset: 4 }}>
-                        <Form.Group>
-                          <Form.Label> CVV </Form.Label>
-                          <NumberFormat
-                              type="text"
-                              id="card-cvv"
-                              name="ccv"
-                              format="###"
-                              placeholder="CVV"
-                              defaultValue={''}
+                  <Row className="align-items-center justify-content-between">
+                    <Col sm="4">
+                      <Form.Group>
+                        <Form.Label>Expiry date</Form.Label>
+                        <ul className="cardPayFiled d-flex align-items-center justify-content-start">
+                          <li>
+                            <NumberFormat
+                              id="card-mm"
+                              format={cardExpiryMonth}
+                              placeholder="MM"
+                              mask={["M", "M"]}
+                              name="mm"
+                              value={reset ? " " : card.mm}
                               onChange={handleOnChange}
-                          />
-                        </Form.Group>
-                      </Col>
+                            />
+                          </li>
+                          <li className="cardBl">/</li>
+                          <li>
+                            <NumberFormat
+                              id="card-yy"
+                              format={cardExpiryYear}
+                              placeholder="YY"
+                              mask={["Y", "Y"]}
+                              name="yy"
+                              value={reset ? " " : card.yy}
+                              onChange={handleOnChange}
+                            />
+                          </li>
+                        </ul>
+                        {/* end of cardPayFiled */}
+                      </Form.Group>
+                    </Col>
 
-                      <Col sm="2">
-                        <img src="" alt="" />
-                      </Col>
-                    </Row>
+                    <Col sm={{ offset: 4 }}>
+                      <Form.Group>
+                        <Form.Label> CVV </Form.Label>
+                        <NumberFormat
+                          type="text"
+                          id="card-cvv"
+                          name="ccv"
+                          format="###"
+                          placeholder="CVV"
+                          value={reset ? " " : card.ccv}
+                          onChange={handleOnChange}
+                        />
+                      </Form.Group>
+                    </Col>
 
-                    <Row>
-                      <Col>
-                        <Button
-                            variant="primary"
-                            type="submit"
-                            onClick={handleOnClick}
-                        >
-                          Add
-                        </Button>
-                      </Col>
-                    </Row>
-                  </div>
+                    <Col sm="2">
+                      <img src="" alt="" />
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col>
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        onClick={handleOnClick}
+                      >
+                        Add
+                      </Button>
+                    </Col>
+                  </Row>
                 </div>
               </div>
-            </Form>
-          </Col>
-        </Row>
-      </Card.Body>
-
-  )
+            </div>
+          </Form>
+        </Col>
+      </Row>
+    </Card.Body>
+  );
 }
 
 export default PaymentMethodComponent;
