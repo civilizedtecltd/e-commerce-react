@@ -12,26 +12,25 @@ const ImgSlick = (props) => {
 
     if(props.images.length < 5 ){
         return(<>
+            <div className="row">
+                {props.images.map((item, index) =>
+                    <div key={index} className="col-sm-3">
+                        <LazyLoad once={true} height={200}>
+                            <Card className="productCard border-0 bg-transparent">
+                                <div className= "productMedia mb-3 bgGray">
+                                    <Image src={(item.cover_images !== null) ? `${item.cover_images.img_1}`: ''} alt="Book Image" />
+                                </div>
 
-                    <div className="row">
-            {props.images.map((item, index) =>
-                <div key={index} className="col-sm-3">
-                            <LazyLoad once={true} height={200}>
-                                <Card className="productCard border-0 bg-transparent">
-                                    <div className= "productMedia mb-3 bgGray">
-                                        <Image src={(item.cover_images !== null) ? `${item.cover_images.img_1}`: ''} alt="Book Image" />
-                                    </div>
-
-                                    <div className="productContent">
-                                        <Link to={`/product/${item.id}`}><h4 className="productTitle limit-character mr-4" >{item.name} </h4></Link>
-                                        <h5 className="authorName">{item.book_author.name}</h5>
-                                        <p className="productPrice">Ksh {item.price}</p>
-                                    </div>
-                                </Card>
-                            </LazyLoad>
+                                <div className="productContent">
+                                    <Link to={`/product/${item.id}`}><h4 className="productTitle limit-character mr-4" >{item.name} </h4></Link>
+                                    <h5 className="authorName">{item.book_author.name}</h5>
+                                    <p className="productPrice">Ksh {item.price}</p>
+                                </div>
+                            </Card>
+                        </LazyLoad>
                     </div>
-            )}
-                </div>
+                )}
+            </div>
         </>)
     }else{
         const settings = {
@@ -102,7 +101,7 @@ const ImgSlick = (props) => {
                     { ( props.images.length === 0 ) ? <></> : props.images.map((item, index) =>
                         <div key={index}>
                             <div className="SimilarBookSlider">
-                                 <Col className="col-auto">
+                                <Col className="col-auto">
                                     <LazyLoad once={true} height={200}>
                                         <Card className="productCard border-0 bg-transparent">
                                             <div className= "productMedia mb-3 bgGray">
@@ -116,7 +115,7 @@ const ImgSlick = (props) => {
                                             </div>
                                         </Card>
                                     </LazyLoad>
-                                 </Col>
+                                </Col>
                             </div>
                         </div>
                     )}

@@ -18,12 +18,14 @@ const CheckoutPage = (props) => {
   let delivery_costs = (props.delivery) ?  props.delivery[0].price : 0 ;
   const [delivery_cost , setDeliveryCost] = useState(delivery_costs)
   const totalQuantity = cartItems.map(data=>data.quantity)
-  const sumTotalQty = totalQuantity.reduce((ac,crr)=>ac+crr)
-
-
-  if(cartItems.length !== 0){
-     cartItems.map((item) => totalBookPrice += item.amountPrice)
+  let sumTotalQty = totalQuantity.reduce((ac,crr)=>ac+crr,0)
+  window.localStorage.setItem("sumQty",sumTotalQty);
+  if (sumTotalQty) {
+    sumTotalQty = window.localStorage.getItem('sumQty');
   }
+    if (cartItems.length !== 0) {
+      cartItems.map(item => (totalBookPrice += item.amountPrice));
+    }
 
   const promoInfo   = (props.promoInfo) ? props.promoInfo : { status: false };
   let promoPrice    = totalBookPrice;
@@ -135,7 +137,7 @@ const CheckoutPage = (props) => {
             </Container>
           </section> }
           <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
-           <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
+              <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
           </section>
         </main>
       </div>

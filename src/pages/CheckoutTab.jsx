@@ -148,7 +148,8 @@ const CheckoutTab = (props) => {
     }
 
     return(<>
-            <PageLoader loading={false}/>
+    
+        <PageLoader loading={false}/>
         <Container>
 
             <Card>

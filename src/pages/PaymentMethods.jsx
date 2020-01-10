@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Form, Accordion , useAccordionToggle, Alert} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import { setPayment } from '../redux/actions/authActions';
@@ -9,7 +9,7 @@ import './checkout.css';
 import '../assets/css/theme.css'
 import NumberFormat from 'react-number-format';
 import defaultMethods from '../inc/PaymentMethods/defaultPaymentMethods.json';
-import { useEffect } from 'react';
+
 
 const CheckToggle = ({ children, eventKey, title }) => {
 
@@ -33,8 +33,7 @@ const CheckToggle = ({ children, eventKey, title }) => {
 
 
 const PaymentMethods = (props) => {
-
-    const [showCardAlert, setShowCardAlert] = useState({show: false, message: ''});
+    
     const [card, setCard] = useState({});
     const [selectedMethod, setSelectedMethods]= useState(null);
     const [deliveryMethod, setDeliveryMethod] = useState({
@@ -105,6 +104,7 @@ const PaymentMethods = (props) => {
     }
 
     const checkDelivery = (e) => {
+      
         if(e.target.name === 'standard'){
           setDeliveryMethod({
               standard: true,
@@ -118,6 +118,7 @@ const PaymentMethods = (props) => {
           });
 
         }
+
         if(e.target.name === 'express') {
             setDeliveryMethod({
                 standard: false,
@@ -135,11 +136,11 @@ const PaymentMethods = (props) => {
     const handleCardOnClick = (e) => {
         e.preventDefault();
 
-        if (!card.payment_type) return setShowCardAlert({show: true, message: 'Please select payment type.'})
-        if (!card.ccv)          return setShowCardAlert({show: true, message: 'Please provide cvv number.'})
-        if (!card.card_number)  return setShowCardAlert({show: true, message: 'Please provide card number.'})
-        if (!card.yy)           return setShowCardAlert({show: true, message: 'Please provide YY.'})
-        if (!card.mm)           return setShowCardAlert({show: true, message: 'Please provide MM.'})
+        if (!card.payment_type) return setAlert({status: true, type: 'danger',  message: 'Please select payment type.'})
+        if (!card.ccv)          return setAlert({status: true, type: 'danger', message: 'Please provide cvv number.'})
+        if (!card.card_number)  return setAlert({status: true, type: 'danger', message: 'Please provide card number.'})
+        if (!card.yy)           return setAlert({status: true, type: 'danger', message: 'Please provide YY.'})
+        if (!card.mm)           return setAlert({status: true, type: 'danger', message: 'Please provide MM.'})
 
         if(card.ccv && card.card_number && card.mm && card.yy){
              props.addCard({
@@ -193,9 +194,9 @@ const PaymentMethods = (props) => {
                     <Accordion.Collapse eventKey={index}>
                         <div className="clearfix">
                             <div className="m-2">
-                            <Alert show={showCardAlert.show} variant="danger" onClose={() => setShowCardAlert({...showCardAlert, show: false})}  dismissible>
-                                    <p>{showCardAlert.message}</p>
-                             </Alert>
+                              <Alert show={alert.status} variant={alert.type} onClose={() => setAlert({...alert, status: false})} dismissible>
+                                <p>{alert.message}</p>
+                              </Alert>
                             </div>
                             <div className="p-3">
                                 <div className="row align-items-center">
@@ -212,13 +213,11 @@ const PaymentMethods = (props) => {
                                                       value={item.card_number}
                                                       onChange={handleCardOnChange}
                                         />
-
                                     </div>
                                     <div className="col">
                                         <img src={card_icon_img} alt=""/>
                                     </div>
                                 </div>
-
                                 <div className="row align-items-center justify-content-between">
                                     <div className="col-sm-3 form-group">
                                         <label htmlFor="card-exp-mm">Expiry date</label>
@@ -250,7 +249,6 @@ const PaymentMethods = (props) => {
                                             /></li>
                                         </ul>
                                     </div>
-
                                     <div className="col offset-sm-4 form-group">
                                         <label htmlFor="card-ccv"> CVV </label>
                                         <NumberFormat
@@ -269,7 +267,6 @@ const PaymentMethods = (props) => {
                                         <img src={card_icon_img} alt=""/>
                                     </div>
                                 </div>
-
                                 <div className="row">
                                     <div className="col">
                                         <button type="button" className="btn btn-primary" disabled={false} onClick={handleCardOnClick}>Add</button>
@@ -339,7 +336,6 @@ const mapStateToProps = state =>({
     ...state.auth,
     delivery: state.shop.deliveryMethod
 })
-
 const mapDispatchToProps = dispatch => ({
     getDeliveryMethod   : () => dispatch(deliveryMethod),
     addCard             : (info) => dispatch(setPayment(info))
