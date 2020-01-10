@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import {getUser} from '../redux/actions/authActions';
 import { deliveryMethod } from '../redux/actions/shopActions'
 import CheckoutTab from './CheckoutTab';
-import { URL} from '../constants/config';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import './checkout.css';
 

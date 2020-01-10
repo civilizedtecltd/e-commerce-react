@@ -120,10 +120,10 @@ const CheckoutTab = (props) => {
         const books = [];
 
         props.cart.map(item => {
-            books.push({
-                id: item.id,
-                quantity: item.quantity
-            });
+            return books.push({
+                    id: item.id,
+                    quantity: item.quantity
+                });
         });
 
         const promoId = (props.promo) ? props.promo.id : null ;
