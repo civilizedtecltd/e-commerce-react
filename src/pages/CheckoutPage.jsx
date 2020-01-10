@@ -53,7 +53,7 @@ const CheckoutPage = (props) => {
 
 
   const getPaymentMethod = (paymentMethod) =>{
-    setDeliveryCost(paymentMethod.paymentdata.price)
+    setDeliveryCost(paymentMethod.paymentData.price)
   }
 
   return (
@@ -117,7 +117,7 @@ const CheckoutPage = (props) => {
                             { (!promoInfo.status) ?<></> :
                                 (
                                 <li>
-                                    <strong>Price after Discount: </strong> ${promoPrice}
+                                    <strong>Price after Discount: </strong> Ksh {promoPrice}
                                 </li>
                                 )
                             }
@@ -137,7 +137,7 @@ const CheckoutPage = (props) => {
             </Container>
           </section> }
           <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
-           <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
+              <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
           </section>
         </main>
       </div>

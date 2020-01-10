@@ -37,9 +37,9 @@ export const FAVORITE_NOT_IN_STATE      =   'FAVORITE_NOT_IN_STATE';
 
 
 //Checkout Actions types
-export const SET_ADDRESS_DETAILS        = 'SET_ADDRESS_DETAILS';
-export const SET_PAYMENT_DETAILS        = 'SET_PAYMENT_DETAILS';
-export const CONFIRM_ORDER              = 'CONFIRM_ORDER';
+export const SET_ADDRESS_DETAILS        =   'SET_ADDRESS_DETAILS';
+export const SET_PAYMENT_DETAILS        =   'SET_PAYMENT_DETAILS';
+export const CONFIRM_ORDER              =   'CONFIRM_ORDER';
 
 //Search action types
 

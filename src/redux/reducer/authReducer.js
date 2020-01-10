@@ -53,7 +53,10 @@ const authReducer = (state = initState, {type, payload}) => {
                 }
             }
         case Types.AUTH_DATA_NOT_IN_STATE:
-            return {auth:payload}
+            return {
+                ...state,
+                ...payload
+            }
         default:
             return {
                 ...state

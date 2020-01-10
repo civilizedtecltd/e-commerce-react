@@ -60,6 +60,7 @@ const logout = () => dispatch => {
     axios.post(URL._LOGOUT, { refreshToken: jwt.refreshToken })
         .then(res => {
             localStorage.removeItem('authData');
+            localStorage.removeItem('state');
             return dispatch({
                 type: Types.USER_LOGOUT,
                 payload: {
@@ -153,12 +154,12 @@ const updatePaymentMethod = (data) => dispatch => {
     }).catch(error=>console.log(error))
 }
 
-const authDataNotInState = (auth) => { 
+/* const authDataNotInState = (auth) => {
     return {
         type: Types.AUTH_NOT_IN_STATE,
         payload: auth
     }
-}
+} */
 
 
 export {
@@ -171,5 +172,5 @@ export {
   deletePayment,
   confirmOrder,
   updatePaymentMethod,
-  authDataNotInState
+ /*  authDataNotInState */
 };
