@@ -14,14 +14,14 @@ const Subscription = (props) => {
   const [weeklyNewsletter, setWeeklyNewsletter] = useState(false)
   const [unsubscribe,setUnsubscribe] = useState(true)
 
-  const [message , setMessage] = useState('')//this message you can use for show message in frontend 
+  const [message , setMessage] = useState('')//this message you can use for show message in frontend
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
   const handleUnsubscribe = (e)=> {
      setUnsubscribe(!unsubscribe)
      if(unsubscribe===true)
-        setAnnouncement(false) 
-        setSaleInvitations(false) 
+        setAnnouncement(false)
+        setSaleInvitations(false)
         setWeeklyNewsletter(false)
     }
 
@@ -30,14 +30,14 @@ const Subscription = (props) => {
     e.preventDefault();
      await axios.post(URL._UPDATE_SUBSCRIBER,{
       email:props.auth.email,
-      announcement: announcement, 
-      sale_invitation: saleInvitations,         			
-      weekly_newsletter:weeklyNewsletter , 
+      announcement: announcement,
+      sale_invitation: saleInvitations,
+      weekly_newsletter:weeklyNewsletter ,
       unsubscribe : unsubscribe
     }).then(res=>setMessage(res.data.message))
     .catch(error=>console.error(error))
   }
-  console.log(message)
+ /*  console.log(message) */
 
   return (<>
     <PageLoader loading={props.favorite.pending}/>
@@ -67,24 +67,24 @@ const Subscription = (props) => {
                             <h5 className="cardSubtitle mb-2">Please choose which types of emails you would like to receive from us</h5>
                             <Form className="profileSettingsForm" onSubmit={hangleSubmit}>
                               <Row>
-                                <Col sm="12"> 
-                                <Form.Group 
-                                      controlId={"formCheckbox1"} 
+                                <Col sm="12">
+                                <Form.Group
+                                      controlId={"formCheckbox1"}
                                       className={"formCheckbox mt-2"}>
-                                      <Form.Check 
-                                      type={"checkbox"} 
-                                      label={"Announcements"} 
-                                      name={"announcements"}   
+                                      <Form.Check
+                                      type={"checkbox"}
+                                      label={"Announcements"}
+                                      name={"announcements"}
                                       checked={announcement}
                                       onChange = {(e)=>setAnnouncement(!announcement)}
                                       />
                                     </Form.Group>
-                                    
+
                                 </Col>
 
                                 <Col sm="12">
                                 <Form.Group controlId="formCheckbox2" className="formCheckbox mt-2">
-                                    <Form.Check 
+                                    <Form.Check
                                      type="checkbox"
                                      label="Sale invitations"
                                      name="sale_invitations"
@@ -94,11 +94,11 @@ const Subscription = (props) => {
                                 </Form.Group>
                                 </Col>
 
-                              
+
 
                                 <Col sm="12">
                                 <Form.Group controlId="formCheckbox3" className="formCheckbox mt-2">
-                                    <Form.Check 
+                                    <Form.Check
                                      type="checkbox"
                                      label="Weekly Newsletter"
                                      name="weekly_newsletter"
@@ -110,7 +110,7 @@ const Subscription = (props) => {
 
                                 <Col sm="12">
                                    <Form.Group controlId="formCheckbox4" className="formCheckbox mt-2">
-                                    <Form.Check 
+                                    <Form.Check
                                      type="checkbox"
                                      label="Unsubscribe"
                                      name="unsubscribe"

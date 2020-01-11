@@ -128,12 +128,12 @@ const CheckoutTab = (props) => {
 
         const promoId = (props.promo) ? props.promo.id : null ;
 
-        console.log({
+        /* console.log({
             address: formData,
             ...payment,
             books,
             promo: promoId
-        });
+        }); */
 
         props.confirmOrder({
             address: formData,
@@ -148,7 +148,7 @@ const CheckoutTab = (props) => {
     }
 
     return(<>
-    
+
         <PageLoader loading={false}/>
         <Container>
 

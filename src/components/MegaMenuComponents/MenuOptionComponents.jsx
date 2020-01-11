@@ -16,14 +16,13 @@ const MenuOptionComponents = props => {
   return (
     <>
           {menu ? menu.map((m, i) => {
-              console.log(m.stage)
               return (
                 <Col sm="3" key={i}>
                   <h3 className="cardWidgetTitle mb-3">{m.category}</h3>
                   <ul className={`cardWidgetList ${i===1? "cardWidgetList2" : ""} text-center`}>
                     {m.stage
                       ? m.stage.map((item, index) => {
-                          
+
                           return (
                             <Lia
                               key={`primary-${index}`}

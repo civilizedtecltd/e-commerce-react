@@ -152,7 +152,7 @@ const PaymentMethods = (props) => {
                 paymentData:  (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
             });
         }
-        console.log("card: ", card);
+        /* console.log("card: ", card); */
 
     }
 
