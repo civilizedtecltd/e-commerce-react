@@ -17,6 +17,7 @@ function CategoryHome (props) {
     const [category, setCategory] = useState([]);
 
     useEffect(() => {
+ const abortController = new AbortController();
             props.callback(true);
             axios.get(URL._CATEGORY)
                 .then(res => {
@@ -26,6 +27,9 @@ function CategoryHome (props) {
                 .catch(error => {
                     console.log(error);
                 });
+         return () => {
+           abortController.abort();
+         }; 
     }, []);
 
     if(category.length < 4){
