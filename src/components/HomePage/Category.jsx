@@ -16,8 +16,6 @@ function CategoryHome (props) {
 
     const [category, setCategory] = useState([]);
 
-    console.log("category: ", category.length)
-
     useEffect(() => {
             props.callback(true);
             axios.get(URL._CATEGORY)

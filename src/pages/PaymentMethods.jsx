@@ -33,7 +33,7 @@ const CheckToggle = ({ children, eventKey, title }) => {
 
 
 const PaymentMethods = (props) => {
-    
+
     const [card, setCard] = useState({});
     const [selectedMethod, setSelectedMethods]= useState(null);
     const [deliveryMethod, setDeliveryMethod] = useState({
@@ -46,8 +46,7 @@ const PaymentMethods = (props) => {
         message: ''
     });
 
-
-    const paymentMethods = (props.user.payment && props.user.payment.length === 3) ? props.user.payment : defaultMethods;
+    const paymentMethods = (props.user.payment && props.user.payment.length >= 3) ? props.user.payment : defaultMethods;
 
     if(props.user.payment && props.user.payment.length < 3){
 
@@ -98,13 +97,13 @@ const PaymentMethods = (props) => {
         props.callback({
             payment: { ...paymentMethods[selectedKey]},
             delivery: (deliveryMethod.standard) ? 1 : 2,
-            paymentdata: (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
+            paymentData: (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
         });
       }
     }
 
     const checkDelivery = (e) => {
-      
+
         if(e.target.name === 'standard'){
           setDeliveryMethod({
               standard: true,
@@ -114,7 +113,7 @@ const PaymentMethods = (props) => {
           props.callback({
                 payment: { ...card},
                 delivery: 1,
-                paymentdata: props.delivery[0]
+                paymentData: props.delivery[0]
           });
 
         }
@@ -128,7 +127,7 @@ const PaymentMethods = (props) => {
             props.callback({
                 payment: { ...card},
                 delivery: 2,
-                paymentdata: props.delivery[1]
+                paymentData: props.delivery[1]
             });
         }
     }
@@ -136,7 +135,7 @@ const PaymentMethods = (props) => {
     const handleCardOnClick = (e) => {
         e.preventDefault();
 
-        if (!card.payment_type) return setAlert({status: true, type: 'danger',  message: 'Please select payment type.'})
+        if (!card.payment_type) return setAlert({status: true, type: 'danger', message: 'Please select payment type.'})
         if (!card.ccv)          return setAlert({status: true, type: 'danger', message: 'Please provide cvv number.'})
         if (!card.card_number)  return setAlert({status: true, type: 'danger', message: 'Please provide card number.'})
         if (!card.yy)           return setAlert({status: true, type: 'danger', message: 'Please provide YY.'})
