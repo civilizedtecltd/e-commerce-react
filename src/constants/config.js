@@ -126,7 +126,10 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
 
     _GET_PROMO_INFO(code){
         return `${this.API}/promo-code/info/${code}`
-    }
+      }
+      get _GET_STAGE_FILTER() {
+          return `${this.API}/filter-with-category`;
+      }
  }
 
  const URL = new APP_URL();

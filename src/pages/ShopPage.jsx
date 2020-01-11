@@ -79,7 +79,7 @@ const ShopPage = (props) => {
 
         return props.fetchAllBook(page, show, keyword)
 
-      }else if (!isNaN(!isNaN_id) && page && show) {
+      }else if (!isNaN(isNaN_id) && page && show) {
               return props.fetchBooksByCategory(id, page, show);
             }
       //eslint-disable-next-line
