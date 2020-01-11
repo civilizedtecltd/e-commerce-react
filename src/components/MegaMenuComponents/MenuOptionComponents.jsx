@@ -22,7 +22,7 @@ const MenuOptionComponents = props => {
                   <ul className={`cardWidgetList ${i===1? "cardWidgetList2" : ""} text-center`}>
                     {m.stage
                       ? m.stage.map((item, index) => {
-                          
+
                           return (
                             <Lia
                               key={`primary-${index}`}
