@@ -28,7 +28,7 @@ const MenuOptionComponents = props => {
                             <Lia
                               key={`primary-${index}`}
                               Title={item.stage}
-                              Url={`/shop/filter/category/${m.id}/stage/${item.category_id}`}
+                              Url={`/shop/filter/category/${m.id}/stage/${item.id}`}
                             />
                           );
                         })
