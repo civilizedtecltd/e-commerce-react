@@ -13,25 +13,15 @@ const Subscription = (props) => {
   const [saleInvitations, setSaleInvitations] = useState(false)
   const [weeklyNewsletter, setWeeklyNewsletter] = useState(false)
   const [unsubscribe,setUnsubscribe] = useState(true)
-<<<<<<< HEAD
-  const [message , setMessage] = useState('')//this message you can use for show message in frontend 
-=======
 
   const [message , setMessage] = useState('')//this message you can use for show message in frontend
->>>>>>> master
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
   const handleUnsubscribe = (e)=> {
      setUnsubscribe(!unsubscribe)
-<<<<<<< HEAD
-     if(unsubscribe === true)
-        setAnnouncement(false) 
-        setSaleInvitations(false) 
-=======
      if(unsubscribe===true)
         setAnnouncement(false)
         setSaleInvitations(false)
->>>>>>> master
         setWeeklyNewsletter(false)
     }
 
@@ -49,76 +39,97 @@ const Subscription = (props) => {
   }
  /*  console.log(message) */
 
-  return (<>
-    <PageLoader loading={props.favorite.pending}/>
-  <div className="allWrapper">
-  <HeaderComponent
+  return (
+    <>
+      <PageLoader loading={props.favorite.pending} />
+      <div className="allWrapper">
+        <HeaderComponent
           favorite_item={totalFavorite}
           cartItem={totalItem}
           menuActive={true}
         />
-    <MobileHeader
-     favorite_item={totalFavorite}
-     cartItem={totalItem}
-      />
-      <div className="userBodyArea clearfix" id="userBodyArea">
-        <Container fluid="{true}" className="pl-0 pr-0">
-          <Row noGutters>
-            <UserNav />
-            <Col>
-              <main className="userMainContent clearfix bgImage bgImg03" id="userMainContent">
-                <section className="myOrderArea secGap clearfix" id="myOrderArea">
-                  <Container fluid={true}>
-                    <Row>
-                      <Col sm="12">
-                        <Card>
-                          <Card.Body className="pt-5">
-                            <h2 className="cardSecTitle mb-3">Manage email subscription</h2>
-                            <h5 className="cardSubtitle mb-2">Please choose which types of emails you would like to receive from us</h5>
-                            <Form className="profileSettingsForm" onSubmit={hangleSubmit}>
-                              <Row>
-                                <Col sm="12">
-                                <Form.Group
+        <MobileHeader favorite_item={totalFavorite} cartItem={totalItem} />
+        <div className="userBodyArea clearfix" id="userBodyArea">
+          <Container fluid="{true}" className="pl-0 pr-0">
+            <Row noGutters>
+              <UserNav />
+              <Col>
+                <main
+                  className="userMainContent clearfix bgImage bgImg03"
+                  id="userMainContent"
+                >
+                  <section
+                    className="myOrderArea secGap clearfix"
+                    id="myOrderArea"
+                  >
+                    <Container fluid={true}>
+                      <Row>
+                        <Col sm="12">
+                          <Card>
+                            <Card.Body className="pt-5">
+                              <h2 className="cardSecTitle mb-3">
+                                Manage email subscription
+                              </h2>
+                              <h5 className="cardSubtitle mb-2">
+                                Please choose which types of emails you would
+                                like to receive from us
+                              </h5>
+                              <Form
+                                className="profileSettingsForm"
+                                onSubmit={handleSubmit}
+                              >
+                                <Row>
+                                  <Col sm="12">
+                                    <Form.Group
                                       controlId={"formCheckbox1"}
-                                      className={"formCheckbox mt-2"}>
+                                      className={"formCheckbox mt-2"}
+                                    >
                                       <Form.Check
-                                      type={"checkbox"}
-                                      label={"Announcements"}
-                                      name={"announcements"}
-                                      checked={announcement}
-                                      onChange = {(e)=>setAnnouncement(!announcement)}
-                                      />
-                                    </Form.Group>
-
-                                </Col>
-
-                                <Col sm="12">
-                                <Form.Group controlId="formCheckbox2" className="formCheckbox mt-2">
-                                    <Form.Check
-                                     type="checkbox"
-                                     label="Sale invitations"
-                                     name="sale_invitations"
-                                     checked={saleInvitations}
-                                     onChange = {(e)=>setSaleInvitations(!saleInvitations)}
-                                      />
-                                </Form.Group>
-                                </Col>
-
-
-
-                                <Col sm="12">
-                                <Form.Group controlId="formCheckbox3" className="formCheckbox mt-2">
-                                    <Form.Check
-                                     type="checkbox"
-                                     label="Weekly Newsletter"
-                                     name="weekly_newsletter"
-                                     checked={weeklyNewsletter}
-                                     onChange = {(e)=>setWeeklyNewsletter(!weeklyNewsletter)}
+                                        type={"checkbox"}
+                                        label={"Announcements"}
+                                        name={"announcements"}
+                                        checked={announcement}
+                                        onChange={e =>
+                                          setAnnouncement(!announcement)
+                                        }
                                       />
                                     </Form.Group>
                                   </Col>
 
-<<<<<<< HEAD
+                                  <Col sm="12">
+                                    <Form.Group
+                                      controlId="formCheckbox2"
+                                      className="formCheckbox mt-2"
+                                    >
+                                      <Form.Check
+                                        type="checkbox"
+                                        label="Sale invitations"
+                                        name="sale_invitations"
+                                        checked={saleInvitations}
+                                        onChange={e =>
+                                          setSaleInvitations(!saleInvitations)
+                                        }
+                                      />
+                                    </Form.Group>
+                                  </Col>
+
+                                  <Col sm="12">
+                                    <Form.Group
+                                      controlId="formCheckbox3"
+                                      className="formCheckbox mt-2"
+                                    >
+                                      <Form.Check
+                                        type="checkbox"
+                                        label="Weekly Newsletter"
+                                        name="weekly_newsletter"
+                                        checked={weeklyNewsletter}
+                                        onChange={e =>
+                                          setWeeklyNewsletter(!weeklyNewsletter)
+                                        }
+                                      />
+                                    </Form.Group>
+                                  </Col>
+
                                   <Col sm="12">
                                     <Form.Group
                                       controlId="formCheckbox4"
@@ -130,16 +141,6 @@ const Subscription = (props) => {
                                         name="unsubscribe"
                                         checked={unsubscribe}
                                         onChange={handleUnsubscribe}
-=======
-                                <Col sm="12">
-                                   <Form.Group controlId="formCheckbox4" className="formCheckbox mt-2">
-                                    <Form.Check
-                                     type="checkbox"
-                                     label="Unsubscribe"
-                                     name="unsubscribe"
-                                     checked={unsubscribe}
-                                     onChange = {handleUnsubscribe}
->>>>>>> master
                                       />
                                     </Form.Group>
                                   </Col>
