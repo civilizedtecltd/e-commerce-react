@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 import HeaderComponent from "../../components/header/Header";
 import MobileHeader from "../../components/header/MobileHeader";
 import {NewsLetterComponent} from "../../components/offerPageComponents/NewsLetterComponent";
 import TermConditionsComponent from '../../components/terms/TermConditionsComponent'
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import { connect } from "react-redux";
-import PageLoader from "../../components/pageLoader/PageLoaderComponent";
+// import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const DeliveryDetails = (props) => {
     const totalItem = props.cart.length

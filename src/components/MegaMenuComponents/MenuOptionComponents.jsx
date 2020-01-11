@@ -5,13 +5,17 @@ import { URL } from '../../constants/config'
 import axios from 'axios'
 const MenuOptionComponents = props => {
   const [menu, setMenu] = useState([]);
-  useEffect(() => {
+    useEffect(() => {
+       const abortController = new AbortController();
     const fetchData = async () => {
       await axios
         .get(URL._GET_STAGE_FILTER)
         .then(res => setMenu(res.data.categories));
     };
-    fetchData();
+        fetchData();
+        return () => {
+          abortController.abort();
+        };
   }, []);
   return (
     <>

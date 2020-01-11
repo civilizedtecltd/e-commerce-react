@@ -30,9 +30,7 @@ const CartPage = (props) => {
   let delivery_cost         = (props.delivery) ? props.delivery[0].price : 0;
 
   if (cartItems.length !== 0) {
-    cartItems.map((item) => {
-      totalBookPrice += item.amountPrice;
-    })
+     cartItems.map((item) => totalBookPrice += item.amountPrice)
   }
 
   const promoInfo   = (props.promoInfo) ? props.promoInfo : { status: false };
@@ -59,7 +57,7 @@ const CartPage = (props) => {
   }, [])
 
   const handleDeleteClick = (id) => {
-    cartItems.find((book) => {
+    return cartItems.find((book) => {
       if (Number(book.id) === Number(id)) {
         props.removeItem(book.id)
       }
