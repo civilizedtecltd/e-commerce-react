@@ -56,7 +56,7 @@ const FavoritesPage = (props) => {
                                     <Col xs={12}>
                                         <div className="contentArea text-center mt-5 mb-5">
                                             <h2 className="sectionTitle mb-3">
-                                                You don’t have any <span>Favorites</span>
+                                                You don’t have any <span> Favorites</span>
                                             </h2>
 
                                             <p>
@@ -91,17 +91,17 @@ const FavoritesPage = (props) => {
                         >
                             <Container>
                                 <Row className="mt-5 mb-5 ">
-                                    {favoriteItems.map((item, index) => {
+                                    { favoriteItems.map((item, index) => {
                                         return(
                                             <NewBookComponent
                                                 key={index}
                                                 bookId={item.id}
                                                 ImageBg="bgGray"
                                                 BookImage={`${item.cover_images.img_1}`}
-                                                ProductTitle={item.name}
-                                                AuthorName={item.book_author.name}
+                                                ProductTitle={ item.name }
+                                                AuthorName={ item.book_author.name }
                                                 ProductPrice={item.price}
-                                                isFev = {true}
+                                                isFev = { true }
                                                 removeFavItem = { removeFavoriteItem }
                                             />
                                         )} )}
