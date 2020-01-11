@@ -16,7 +16,6 @@ const MenuOptionComponents = props => {
   return (
     <>
           {menu ? menu.map((m, i) => {
-              console.log(m.stage)
               return (
                 <Col sm="3" key={i}>
                   <h3 className="cardWidgetTitle mb-3">{m.category}</h3>
