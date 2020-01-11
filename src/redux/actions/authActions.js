@@ -146,6 +146,7 @@ const authNotInState = (authData) => ({
 
 
 const updatePaymentMethod = (data) => dispatch => {
+    setAuthToken();
     axios.post(URL.UPDATE_PAYMENT_METHOD, data).then(res => {
         return dispatch({
           type: Types.UPDATE_PAYMENT_METHOD,

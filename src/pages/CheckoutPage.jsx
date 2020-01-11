@@ -17,6 +17,7 @@ const CheckoutPage = (props) => {
   let delivery_costs = (props.delivery) ?  props.delivery[0].price : 0 ;
   const [delivery_cost , setDeliveryCost] = useState(delivery_costs)
   const totalQuantity = cartItems.map(data=>data.quantity)
+
   let sumTotalQty = totalQuantity.reduce((ac,crr)=>ac+crr,0)
   window.localStorage.setItem("sumQty",sumTotalQty);
   if (sumTotalQty) {
@@ -52,7 +53,7 @@ const CheckoutPage = (props) => {
 
 
   const getPaymentMethod = (paymentMethod) =>{
-    setDeliveryCost(paymentMethod.paymentData.price)
+      setDeliveryCost(paymentMethod.paymentData.price)
   }
 
   return (
