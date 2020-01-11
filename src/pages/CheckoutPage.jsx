@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import {getUser} from '../redux/actions/authActions';
 import { deliveryMethod } from '../redux/actions/shopActions'
 import CheckoutTab from './CheckoutTab';
-import { URL} from '../constants/config';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import './checkout.css';
 
@@ -137,7 +136,7 @@ const CheckoutPage = (props) => {
             </Container>
           </section> }
           <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
-           <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
+              <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
           </section>
         </main>
       </div>
