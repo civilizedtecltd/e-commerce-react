@@ -119,7 +119,7 @@ const UserProfile = (props) => {
         />
       <MobileHeader />
       <div className="userBodyArea clearfix" id="userBodyArea">
-        <Container fluid="{true}" className="pl-0 pr-0">
+        <Container fluid={true} className="pl-0 pr-0">
           <Row noGutters>
               <UserNav />
 
@@ -253,10 +253,7 @@ const UserProfile = (props) => {
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </div>{/* end of userBodyArea */}
-
-
     </div>{/* end of allWrapper */}
-
   </>);
 }
 

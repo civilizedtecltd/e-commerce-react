@@ -52,9 +52,7 @@ const Home = (props) => {
       <main className="mainContent clearfix" id="mainContent">
         <section className="productCat secGap clearfix" id="productCat">
           <Container>
-              <div className="categorySlider">
                 <CategoryHome callback={handleCategoryLoading}/>
-              </div>
           </Container>
         </section>
 
