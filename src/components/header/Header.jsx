@@ -30,7 +30,7 @@ const HeaderComponent = (props) => {
   }, []);
 
   useEffect(() => {
-    props.fetchCategoryList();
+    return props.fetchCategoryList();
   }, []);
 
   const handleOpen = () => setOpen(!open)
@@ -101,7 +101,7 @@ const HeaderComponent = (props) => {
                       <ul className="navbar-nav">
                         {props.categories
                           ? props.categories.map((data, index) => {
-                              if (index < 5)
+                              if (index < 5){
                                 return (
                                   <Menu
                                     key={index}
@@ -111,7 +111,10 @@ const HeaderComponent = (props) => {
                                     Url={`/shop/category/${data.id}/${data.category}`}
                                     ActiveClassName={"active"}
                                   />
-                                );
+                              )
+                              } else {
+                                return false
+                            }
                             })
                           : ""}
                         {(props.categories && props.categories.length>5)

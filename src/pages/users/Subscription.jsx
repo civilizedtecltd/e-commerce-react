@@ -13,20 +13,30 @@ const Subscription = (props) => {
   const [saleInvitations, setSaleInvitations] = useState(false)
   const [weeklyNewsletter, setWeeklyNewsletter] = useState(false)
   const [unsubscribe,setUnsubscribe] = useState(true)
+<<<<<<< HEAD
+  const [message , setMessage] = useState('')//this message you can use for show message in frontend 
+=======
 
   const [message , setMessage] = useState('')//this message you can use for show message in frontend
+>>>>>>> master
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
   const handleUnsubscribe = (e)=> {
      setUnsubscribe(!unsubscribe)
+<<<<<<< HEAD
+     if(unsubscribe === true)
+        setAnnouncement(false) 
+        setSaleInvitations(false) 
+=======
      if(unsubscribe===true)
         setAnnouncement(false)
         setSaleInvitations(false)
+>>>>>>> master
         setWeeklyNewsletter(false)
     }
 
 
-  const hangleSubmit = async(e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
      await axios.post(URL._UPDATE_SUBSCRIBER,{
       email:props.auth.email,
@@ -105,9 +115,22 @@ const Subscription = (props) => {
                                      checked={weeklyNewsletter}
                                      onChange = {(e)=>setWeeklyNewsletter(!weeklyNewsletter)}
                                       />
-                                </Form.Group>
-                                </Col>
+                                    </Form.Group>
+                                  </Col>
 
+<<<<<<< HEAD
+                                  <Col sm="12">
+                                    <Form.Group
+                                      controlId="formCheckbox4"
+                                      className="formCheckbox mt-2"
+                                    >
+                                      <Form.Check
+                                        type="checkbox"
+                                        label="Unsubscribe"
+                                        name="unsubscribe"
+                                        checked={unsubscribe}
+                                        onChange={handleUnsubscribe}
+=======
                                 <Col sm="12">
                                    <Form.Group controlId="formCheckbox4" className="formCheckbox mt-2">
                                     <Form.Check
@@ -116,27 +139,35 @@ const Subscription = (props) => {
                                      name="unsubscribe"
                                      checked={unsubscribe}
                                      onChange = {handleUnsubscribe}
+>>>>>>> master
                                       />
-                                </Form.Group>
-                                </Col>
-                                <Col sm="12">
-                                  <Button className={"mt-3"} type="submit" name="save">Save</Button>
-                                </Col>
-                              </Row>
-                            </Form>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    </Row>
-                  </Container>
-                </section>
-              </main>
-            </Col>
-          </Row>
-        </Container>
+                                    </Form.Group>
+                                  </Col>
+                                  <Col sm="12">
+                                    <Button
+                                      className={"mt-3"}
+                                      type="submit"
+                                      name="save"
+                                    >
+                                      Save
+                                    </Button>
+                                  </Col>
+                                </Row>
+                              </Form>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </Container>
+                  </section>
+                </main>
+              </Col>
+            </Row>
+          </Container>
+        </div>
       </div>
-    </div>
-    </>);
+    </>
+  );
 }
 
 

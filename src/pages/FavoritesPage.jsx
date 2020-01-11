@@ -18,8 +18,12 @@ const FavoritesPage = (props) => {
     const favoriteItems = (totalFavoriteItems !== 0 )? props.favorite.items : [];
 
     useEffect(() => {
+        const abortController = new AbortController();
         props.showAllFavItem()
-    },[props.favorite.items.length]);
+          return () => {
+            abortController.abort();
+          };
+    },[]);
 
     const removeFavoriteItem = (id) => props.removeFavItem(id);
 
