@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import {getUser} from '../redux/actions/authActions';
 import { deliveryMethod } from '../redux/actions/shopActions'
 import CheckoutTab from './CheckoutTab';
-import { URL} from '../constants/config';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import './checkout.css';
 
@@ -18,6 +17,7 @@ const CheckoutPage = (props) => {
   let delivery_costs = (props.delivery) ?  props.delivery[0].price : 0 ;
   const [delivery_cost , setDeliveryCost] = useState(delivery_costs)
   const totalQuantity = cartItems.map(data=>data.quantity)
+
   let sumTotalQty = totalQuantity.reduce((ac,crr)=>ac+crr,0)
   window.localStorage.setItem("sumQty",sumTotalQty);
   if (sumTotalQty) {
@@ -53,7 +53,7 @@ const CheckoutPage = (props) => {
 
 
   const getPaymentMethod = (paymentMethod) =>{
-    setDeliveryCost(paymentMethod.paymentdata.price)
+      setDeliveryCost(paymentMethod.paymentData.price)
   }
 
   return (
@@ -117,7 +117,7 @@ const CheckoutPage = (props) => {
                             { (!promoInfo.status) ?<></> :
                                 (
                                 <li>
-                                    <strong>Price after Discount: </strong> ${promoPrice}
+                                    <strong>Price after Discount: </strong> Ksh {promoPrice}
                                 </li>
                                 )
                             }
@@ -137,7 +137,7 @@ const CheckoutPage = (props) => {
             </Container>
           </section> }
           <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
-           <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
+              <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
           </section>
         </main>
       </div>
