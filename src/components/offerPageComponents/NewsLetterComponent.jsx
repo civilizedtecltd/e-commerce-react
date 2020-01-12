@@ -1,17 +1,25 @@
 import React,{ useState }from 'react';
-import {Row, Col, Card,Form , Button} from 'react-bootstrap';
+import {Row, Col, Card,Form , Button, Alert} from 'react-bootstrap';
 import {URL} from '../../constants/config'
 import axios from 'axios'
 
 function NewsLetterComponent(props) {
   const [email , setEmail ] = useState('');
-  const [setMessage] = useState('') //if any body want he can use this response message for frontend
-
+  const [message,setMessage] = useState('') //if any body want he can use this response message for frontend
+  const [show, setShow] = useState(false)
   const handleSubmit = async (e) => {
     e.preventDefault()
     await axios.post(URL._SUBSCRIBE,{email:email})
-    .then(res=>setMessage(res.data.message))
-    .catch(ex=>console.log(ex))
+    .then(res=>{
+      setMessage(res.data.message)
+      return setTimeout(setShow(false),3000)
+    })
+    .catch(ex=>{
+      setMessage(ex.data.message)
+      setTimeout(setShow(false),3000)
+      return console.log(ex)
+    })
+    
   }
 
     return (
@@ -42,6 +50,14 @@ function NewsLetterComponent(props) {
                   Subscribe
                 </Button>
               </Form>
+              { message ?
+                  <Alert variant={message[0].success ? 'success' : "danger" } onClose={() => setShow(false)} dismissible>
+                  <Alert.Heading>{message[0].success ? 'Thank you!' : 'Opts!'}</Alert.Heading>
+                    <p>
+                     {message[0].message}
+                    </p>
+                  </Alert>
+              :''}
             </Card.Body>
           </Card>
         </Col>

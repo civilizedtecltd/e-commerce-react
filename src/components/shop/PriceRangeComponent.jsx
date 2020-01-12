@@ -26,21 +26,27 @@ class PriceRanger extends Component{
         });
 
     }
-
+    
     handleChange(name, event){
         let value = event.target.value;
         if(name === "second"){
             if(parseInt(this.state.minimumPrice) < parseInt(value)){
                 this.setState({maximumPrice:value});
-                this.props.callback(Number(this.state.minimumPrice), Number(this.state.maximumPrice))
+                
             }
         }
+                        
         else{
             if(parseInt(value) < parseInt(this.state.maximumPrice)){
                 this.setState({minimumPrice: value});
-                this.props.callback(Number(this.state.minimumPrice),Number(this.state.maximumPrice))
+
             }
         }
+    }
+
+
+    handleOnMouseUp(){
+        this.props.callback(Number(this.state.minimumPrice),Number(this.state.maximumPrice))
     }
 
     render(){
@@ -53,9 +59,9 @@ class PriceRanger extends Component{
                                min={this.state.minValue}
                                max={this.state.maxValue}
                                step={this.state.step}
-                               onChange={this.handleChange.bind(this, "first")
-
-                               }/>
+                               onChange={this.handleChange.bind(this, "first")}
+                               onMouseUp={this.handleOnMouseUp.bind(this)}
+                               />
 
 
                         <input type="range"
@@ -63,7 +69,9 @@ class PriceRanger extends Component{
                                min={this.state.minValue}
                                max={this.state.maxValue}
                                step={this.state.step}
-                               onChange={this.handleChange.bind(this, "second")}/>
+                               onChange={this.handleChange.bind(this, "second")}
+                               onMouseUp={this.handleOnMouseUp.bind(this)}
+                               />
                     </div>
 
 
