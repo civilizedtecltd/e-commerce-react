@@ -50,7 +50,15 @@ function NewsLetterComponent(props) {
                   Subscribe
                 </Button>
               </Form>
-              { message ?
+              { message && show ?
+                  <Alert variant={message[0].success ? 'success' : "danger" } onClose={() => setShow(false)} dismissible>
+                  <Alert.Heading>{message[0].success ? 'Thank you!' : 'Opts!'}</Alert.Heading>
+                    <p>
+                     {message[0].message}
+                    </p>
+                  </Alert>
+              :''}
+              { message && !show ?
                   <Alert variant={message[0].success ? 'success' : "danger" } onClose={() => setShow(false)} dismissible>
                   <Alert.Heading>{message[0].success ? 'Thank you!' : 'Opts!'}</Alert.Heading>
                     <p>
