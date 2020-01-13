@@ -14,7 +14,7 @@ import { HomeCarouselFooter } from "../components/HomePage/HomeCarouselFooter";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
-import {CategoryHome} from "../components/HomePage/Category";
+import  CategoryHome from "../components/HomePage/Category";
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 import {fetchMaxMinPrice, fetchDiscipline, fetchAuthors, fetchPublishers, fetchPublishingYears, fetchLanguages} from '../redux/actions/filterAction';
