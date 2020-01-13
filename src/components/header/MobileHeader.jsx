@@ -4,7 +4,8 @@ import { Container, Row, Col, Badge, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import checkAuth from '../../helpers/checkAuth';
+import isEmpty from 'lodash/isEmpty';
+//import checkAuth from '../../helpers/checkAuth';
 import '../../assets/css/heder.css';
 import Search from "../Search";
 
@@ -15,16 +16,16 @@ const Mobile = ({ children }) => {
 }
 
 const MobileHeader = (props) => {
+
     const [open, setOpen] = useState(false);
     const [show, setShow] = useState(false);
-    const [isAuth, setAuth] = useState(false);
+
+    const isAuth = (!isEmpty(props.auth.jwt)) ? true : false;
+
     let page = 1;
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    useEffect(()=>{
-        return (checkAuth()) ? setAuth(true) : setAuth(false);
-    },[]);
     const handleOpen = () => setOpen(!open)
 
     return(<>
