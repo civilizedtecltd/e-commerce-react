@@ -58,3 +58,10 @@
 td.aligneMiddle {
     vertical-align: middle !important;
 }
+.order-successful {
+    justify-content: center;
+    display: flex;
+}
+.terms-and-condition{
+    display: flex;
+}

@@ -16,7 +16,7 @@ function PaymentMethodComponent(props) {
     }
 
   const handleOnClick = (e) => {
-  
+
       e.preventDefault();
        if (!card.card_number && !card.mm && !card.yy && !card.ccv) {
          setMessage("Field should not be empty");
@@ -46,47 +46,47 @@ function PaymentMethodComponent(props) {
       if (!card.ccv) {
         setMessage("CVV should not be empty");
         setShowCardAlert(true);
-        return setTimeout(() => setShowCardAlert(false), 2000); 
+        return setTimeout(() => setShowCardAlert(false), 2000);
       }
-      
-     
+
+
       else if (card.card_number && card.mm && card.yy && card.ccv) {
         props.callback(card);
         setReset(true);
-           }              
+           }
   }
-  
-    //Card Input Format
-    const limit = (val, max) => {
-      if (val.length === 1 && val[0] > max[0]) {
-        val = '0' + val;
+
+  //Card Input Format
+  const limit = (val, max) => {
+    if (val.length === 1 && val[0] > max[0]) {
+      val = '0' + val;
+    }
+
+    if (val.length === 2) {
+      if (Number(val) === 0) {
+        val = '01';
+
+        //this can happen when user paste number
+      } else if (val > max) {
+        val = max;
       }
-
-      if (val.length === 2) {
-        if (Number(val) === 0) {
-          val = '01';
-
-          //this can happen when user paste number
-        } else if (val > max) {
-          val = max;
-        }
-      }
-
-      return val;
     }
 
-    const cardExpiryMonth = (val) => {
-      return limit(val.substring(0, 2), '12');
-    }
+    return val;
+  }
 
-    const cardExpiryYear = (val) => {
-      return val.substring(0,2);
-    }
+  const cardExpiryMonth = (val) => {
+    return limit(val.substring(0, 2), '12');
+  }
+
+  const cardExpiryYear = (val) => {
+    return val.substring(0,2);
+  }
 
   return (
     <Card.Body className="addPaymentCard m-0 p-0">
       <Row>
-        <Col>
+        <Col className="p-0">
           <Form className="selectPaymentOption">
             <div className="formRadioGroup bgGray mb-2">
               <div className="payInfoDetails clearfix">
@@ -144,7 +144,7 @@ function PaymentMethodComponent(props) {
                       <Form.Group>
                         <Form.Label>Expiry date</Form.Label>
                         <ul className="cardPayFiled d-flex align-items-center justify-content-start">
-                          <li>
+                          <li className="width-45">
                             <NumberFormat
                               id="card-mm"
                               format={cardExpiryMonth}
@@ -156,7 +156,7 @@ function PaymentMethodComponent(props) {
                             />
                           </li>
                           <li className="cardBl">/</li>
-                          <li>
+                          <li className="width-45">
                             <NumberFormat
                               id="card-yy"
                               format={cardExpiryYear}
@@ -173,8 +173,8 @@ function PaymentMethodComponent(props) {
                     </Col>
 
                     <Col sm={{ offset: 4 }}>
-                      <Form.Group>
-                        <Form.Label> CVV </Form.Label>
+                      <Form.Group controlId="card-cvv" className="ccv-group">
+                        <Form.Label className="ccv-input"> CVV </Form.Label>
                         <NumberFormat
                           type="text"
                           id="card-cvv"

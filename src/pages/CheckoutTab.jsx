@@ -227,26 +227,28 @@ const CheckoutTab = (props) => {
                                                 <textarea name="comments" id="comment" cols="30" rows="4" className="form-control" onChange={handleOnChange}></textarea>
                                             </Col>
 
-                                            <Col className="form-group fromCheckbox mt-1">
-                                                <Form.Check
-                                                    custom
-                                                    type={"checkbox"}
-                                                    label={`I agree with `}
-                                                    id={`checkboxTerms`}
-                                                    onChange={handleTermsCheck}
-                                                />
-                                                <Link to="#" className="termsTxt">Terms and Conditions</Link>
+                                            <Col sm={12} className="form-group fromCheckbox mt-1">
+                                               <div className="terms-and-condition">
+                                                   <Form.Check
+                                                       custom
+                                                       type={"checkbox"}
+                                                       label={``}
+                                                       id={`checkboxTerms`}
+                                                       onChange={handleTermsCheck}
+                                                   />
+                                                   <p>I agree with<Link to="/term/conditions" className="termsTxt">Terms and Conditions</Link></p>
+                                               </div>
                                             </Col>
 
-                                            <Col className="col-md-12 form-group fromCheckbox mt-1">
+                                            <Col sm={12} className="col-md-12 form-group fromCheckbox mt-1 terms-and-condition">
                                                 <Form.Check
                                                     custom
                                                     type={"checkbox"}
-                                                    label={`I agree with `}
+                                                    label={``}
                                                     id={`checkboxPrivacy`}
                                                     onChange={handlePrivacyCheck}
                                                 />
-                                                <Link to="#" className="termsTxt">Privacy Policy</Link>
+                                                <p>I agree with<Link to="/privacy" className="termsTxt">Privacy Policy</Link></p>
                                             </Col>
                                         </Row>
                                         <Col className="text-right p-0">
@@ -337,8 +339,10 @@ const CheckoutTab = (props) => {
             <Modal.Body>
                 <h2 className={"text-center"}>
                     Order Completed successfully!
-                    <Link to="/" className="btn btn-primary mt-3" style={{color:'white'}}> Go to Shopping </Link>
                 </h2>
+                <div className="order-successful">
+                    <Link to="/shop" className="btn btn-primary mt-3" style={{color:'white'}}> Go to Shopping </Link>
+                </div>
             </Modal.Body>
             <Modal.Footer className={"border-0"}>
 
