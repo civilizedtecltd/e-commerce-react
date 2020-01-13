@@ -21,8 +21,8 @@ function InputFrom ({ LabelId, TypeName, LabelTitle, Name, Value, Placeholder, C
 //Select From Components
 function SelectFrom({ LabelTitle, categories, callback }) {
 
-    const state = window.localStorage.getItem('state')
-    const category_id = JSON.parse(state).auth.user.category_id;
+    const state = JSON.parse(window.localStorage.getItem('state'));
+    const category_id = (state !== null && state.auth.user.category_id) ? state.auth.user.category_id : 0;
 
     const handleOnchange = (event) => {
         event.preventDefault();
