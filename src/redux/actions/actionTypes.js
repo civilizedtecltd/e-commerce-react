@@ -55,6 +55,7 @@ export const GET_PUBLISHER_LIST         = 'GET_PUBLISHER_LIST';
 export const GET_PUBLISHING_YEAR_LIST   = 'GET_PUBLISHING_YEAR_LIST';
 export const GET_LANGUAGE_LIST          = 'GET_LANGUAGE_LIST';
 
+
 //fetching action
 export const FETCH_BOOK_PENDING         = 'FETCH_BOOK_PENDING';
 export const FETCH_BOOK_SUCCESS         = 'FETCH_BOOK_SUCCESS';
@@ -70,6 +71,8 @@ export const FETCH_MAX_MIN_PRICE        = 'FETCH_MAX_MIN_PRICE';
 export const UPDATE_PAYMENT_METHOD      = 'UPDATE_PAYMENT_METHOD';
 export const FILTER_NOT_IN_STATE        = "FILTER_NOT_IN_STATE";
 export const AUTH_DATA_NOT_IN_STATE     = "AUTH_DATA_NOT_IN_STATE";
+
+export const SITE_NOT_IN_STATE          = 'SITE_NOT_IN_STATE';
 
 
 
