@@ -165,5 +165,5 @@
       "react-app"
     ]
   },
-  "proxy": "http://localhost:3333"
+  "homepage": "http://abookstore.co.ke"
 }
