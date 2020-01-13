@@ -120,20 +120,20 @@ const CheckoutTab = (props) => {
         const books = [];
 
         props.cart.map(item => {
-            books.push({
-                id: item.id,
-                quantity: item.quantity
-            });
+            return books.push({
+                    id: item.id,
+                    quantity: item.quantity
+                });
         });
 
         const promoId = (props.promo) ? props.promo.id : null ;
 
-        console.log({
+        /* console.log({
             address: formData,
             ...payment,
             books,
             promo: promoId
-        });
+        }); */
 
         props.confirmOrder({
             address: formData,
@@ -148,7 +148,8 @@ const CheckoutTab = (props) => {
     }
 
     return(<>
-            <PageLoader loading={false}/>
+
+        <PageLoader loading={false}/>
         <Container>
 
             <Card>
@@ -311,7 +312,7 @@ const CheckoutTab = (props) => {
 
                                     <Col sm="6" className="mt-4">
                                         <ul className="orderConfrimationList text-large">
-                                            <li><strong>Total Price : </strong>{props.totalPrice}</li>
+                                            <li><strong>Total Price : </strong>Ksh {props.totalPrice}</li>
                                             <li><strong>Delivery method : </strong> {(!isEmpty(payment) && payment.delivery === 0) ? 'Standard' : 'Express'}</li>
                                             <li><strong>Expected arrival : </strong>  {futureDate(7)}</li>
                                         </ul>

@@ -36,11 +36,11 @@ import store from './redux/store';
 import { favoriteNotInState } from './redux/actions/favoriteActions';
 import { filterNotInState } from "./redux/actions/filterAction";
 import { shopNotInState } from './redux/actions/shopActions';
-import { authDataNotInState } from "./redux/actions/authActions";
+import { authNotInState } from "./redux/actions/authActions";
 import isEqual from 'lodash/isEqual';
 import {Col} from "react-bootstrap";
 
-const Router = (props) => {
+const Router = () => {
 
     const localState = JSON.parse(localStorage.getItem('state'));
     const location = useLocation();
@@ -59,7 +59,7 @@ const Router = (props) => {
             store.dispatch(filterNotInState(localState.filter));
         }
          if (!isEqual(presentState.auth, localState.auth)) {
-            store.dispatch(authDataNotInState(localState.auth));
+            store.dispatch(authNotInState(localState.auth));
         }
 
     }

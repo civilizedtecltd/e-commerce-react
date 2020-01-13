@@ -67,7 +67,6 @@ const ShopPage = (props) => {
         return props.fetchAllBook(1, 5, null)
       }
       else if(page && show && filter_type && filter_id ){
-        console.log(page, show, filter_type, filter_id);
         props.getBooksByFilter(page, show, filter_type, filter_id);
 
       }
@@ -79,7 +78,7 @@ const ShopPage = (props) => {
 
         return props.fetchAllBook(page, show, keyword)
 
-      }else if (!isNaN(!isNaN_id) && page && show) {
+      }else if (!isNaN(isNaN_id) && page && show) {
               return props.fetchBooksByCategory(id, page, show);
             }
       //eslint-disable-next-line

@@ -30,9 +30,7 @@ const CartPage = (props) => {
   let delivery_cost         = (props.delivery) ? props.delivery[0].price : 0;
 
   if (cartItems.length !== 0) {
-    cartItems.map((item) => {
-      totalBookPrice += item.amountPrice;
-    })
+     cartItems.map((item) => totalBookPrice += item.amountPrice)
   }
 
   const promoInfo   = (props.promoInfo) ? props.promoInfo : { status: false };
@@ -55,11 +53,11 @@ const CartPage = (props) => {
   let costWithDelivery  = parseFloat(promoPrice) + parseFloat(delivery_cost);
 
   useEffect(() => {
-    return props.deliveryMethodFetch();
+    //return props.deliveryMethodFetch();
   }, [])
 
   const handleDeleteClick = (id) => {
-    cartItems.find((book) => {
+    return cartItems.find((book) => {
       if (Number(book.id) === Number(id)) {
         props.removeItem(book.id)
       }
@@ -86,6 +84,10 @@ const CartPage = (props) => {
   const handleApplyPromoOnClick = (e) => {
     e.preventDefault();
     props.getPromoCodeInfo(state.promo);
+  }
+
+  const handleCheckoutOnClick = (e) => {
+      props.deliveryMethodFetch();
   }
 
   return (
@@ -190,7 +192,7 @@ const CartPage = (props) => {
                                     <tr>
                                         <td className="priceCartPage">Price after Discount</td>
                                         <td className="priceCartPage">.........................................</td>
-                                        <td className="text-right priceCartPage"><span className="priceCartPage">$ {promoPrice}</span></td>
+                                        <td className="text-right priceCartPage"><span className="priceCartPage">Ksh {promoPrice}</span></td>
                                   </tr>)
                               }
                               <tr>
@@ -205,7 +207,7 @@ const CartPage = (props) => {
                               </tr>
                             </tbody>
                           </Table>
-                          <Link to="/checkout" className="btn btn-primary" style={{ color: 'white' }}>Checkout</Link>
+                          <Link to="/checkout" className="btn btn-primary" style={{ color: 'white' }} onClick={handleCheckoutOnClick} >Checkout</Link>
                         </div>
                       </Col>
                     </Row>

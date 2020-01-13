@@ -76,18 +76,43 @@ const OrderPage = (props) => {
                                     </thead>{/* end of thead */}
 
                                     <tbody>
-                                        {orders.map(order => {
+                                        {orders.map((order,index) => {
                                                     return (
-                                                        <tr>
-                                                            <td>{order.order_code}</td>
-                                                            <td><Link to={`/product/${order.book_id}`}>{order.name}</Link></td>
-                                                            <td>Ksh {order.price}</td>
-                                                            <td>{order.quantity}</td>
-                                                            <td>Ksh {order.total}</td>
-                                                            <td><span className="tableDate">{order.created_at}</span> <span className="tableTime">14:53</span> </td>
-                                                            <td><span className="stockInfo">{order.status}</span></td>
-                                                        </tr>
-                                                    )
+                                                      <tr key={index}>
+                                                        <td>
+                                                          {order.order_code}
+                                                        </td>
+                                                        <td>
+                                                          <Link
+                                                            to={`/product/${order.book_id}`}
+                                                          >
+                                                            {order.name}
+                                                          </Link>
+                                                        </td>
+                                                        <td>
+                                                          Ksh {order.price}
+                                                        </td>
+                                                        <td>
+                                                          {order.quantity}
+                                                        </td>
+                                                        <td>
+                                                          Ksh {order.total}
+                                                        </td>
+                                                        <td>
+                                                          <span className="tableDate">
+                                                            {order.created_at}
+                                                          </span>{" "}
+                                                          <span className="tableTime">
+                                                            14:53
+                                                          </span>{" "}
+                                                        </td>
+                                                        <td>
+                                                          <span className="stockInfo">
+                                                            {order.status}
+                                                          </span>
+                                                        </td>
+                                                      </tr>
+                                                    );
                                                 }
                                             )
                                         }

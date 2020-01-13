@@ -14,8 +14,8 @@ const rootReducers = combineReducers(
         auth        :   authReducer,
         favorite    :   favoriteReducer,
         filter      :   filterReducer,
-        site: siteReducers,
-      
+        site        :   siteReducers,
+
     }
 );
 

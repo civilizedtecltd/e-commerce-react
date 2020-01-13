@@ -4,7 +4,9 @@ import {NavLink, Link} from 'react-router-dom';
 import { connect } from 'react-redux'
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Menu from '../LiComponent/MenuComponents'
+
 import checkAuth from '../../helpers/checkAuth';
+import isEmpty from 'lodash/isEmpty';
 import '../../assets/css/heder.css';
 import { useMediaQuery } from 'react-responsive';
 import { fetchCategoryList } from "../../redux/actions/siteActions";
@@ -21,16 +23,15 @@ const Default = ({ children }) => {
 const HeaderComponent = (props) => {
 
   const [open, setOpen] = useState(false);
-  const [isAuth, setAuth] = useState(false);
+
   let page = 1;
   let show =5
+
   const user = { ...props.auth.user}
-  useEffect(()=>{
-    return (checkAuth()) ? setAuth(true) : setAuth(false);
-  }, []);
+  const isAuth = (!isEmpty(props.auth.user)) ? true : false;
 
   useEffect(() => {
-    props.fetchCategoryList();
+    return props.fetchCategoryList();
   }, []);
 
   const handleOpen = () => setOpen(!open)
@@ -101,7 +102,7 @@ const HeaderComponent = (props) => {
                       <ul className="navbar-nav">
                         {props.categories
                           ? props.categories.map((data, index) => {
-                              if (index < 5)
+                              if (index < 5){
                                 return (
                                   <Menu
                                     key={index}
@@ -111,7 +112,10 @@ const HeaderComponent = (props) => {
                                     Url={`/shop/category/${data.id}/${data.category}`}
                                     ActiveClassName={"active"}
                                   />
-                                );
+                              )
+                              } else {
+                                return false
+                            }
                             })
                           : ""}
                         {(props.categories && props.categories.length>5)
@@ -122,7 +126,7 @@ const HeaderComponent = (props) => {
                                     <ul>
                                     {props.categories.map((data, index) => {
                                        if (index >= 5)
-                                        return ( <li className="nav-item">
+                                        return ( <li key={index} className="nav-item">
                                           <NavLink to={`/shop/category/${data.id}/${data.category}`} className="nav-link">{data.category}</NavLink>
                                         </li>)
                                        })}

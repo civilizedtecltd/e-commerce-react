@@ -64,12 +64,15 @@ const shopNotInState = (shop) =>({
     payload: {...shop}
 })
 
-const deliveryMethod = () => dispatch=>{
-    axios.get(URL.PAYMENT_METHOD)
-          .then(res=>dispatch({
-              type:Types.DELIVERY_METHOD_FETCH,
-              payload: res.data.data
-          }))
+const deliveryMethod = () => dispatch => {
+    axios.get(URL.DELIVERY_METHOD)
+          .then(res => {
+            return dispatch({
+                type:Types.DELIVERY_METHOD_FETCH,
+                payload: res.data.data
+            })
+          })
+          .catch(error => console.log(error))
 }
 
 const promoCodeInfo = (code) => dispatch => {
