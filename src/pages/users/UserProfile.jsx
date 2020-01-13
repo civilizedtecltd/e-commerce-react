@@ -16,7 +16,6 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const UserProfile = (props) => {
 
-    const [category, setCategory] = useState([]);
     const [alert, setAlert] = useState({
         status: false,
         type: 'danger',
@@ -27,16 +26,6 @@ const UserProfile = (props) => {
     const user = { ...props.auth.user}
     const totalFavorite = props.favorite.items.length;
     const totalItem = props.cart.length;
-
-    useEffect(() => {
-        const fetchData = async () => {
-          const result = await axios(URL._CATEGORY);
-          setCategory(result.data);
-        };
-
-       fetchData();
-        props.getUser();
-      },[user.id]);
 
     useEffect(()=>{
         const clearAlert = setTimeout(() => {
@@ -56,6 +45,7 @@ const UserProfile = (props) => {
 
 
     const categoryData = (data) => {
+
         if(data.category_id !== undefined || data.category_id !== 'Select Category')
             formData.category_id = Number(data.category_id);
     }
@@ -140,7 +130,7 @@ const UserProfile = (props) => {
                                   <Col sm="6">
                                     <SelectFrom
                                       LabelTitle="Category"
-                                      category = { (category.data !== undefined) ? category.data : [] }
+                                      categories = { (props.categories !== undefined) ? props.categories : [] }
                                       callback = { categoryData }
                                     />
                                   </Col>{/* end of Col */}
@@ -199,7 +189,6 @@ const UserProfile = (props) => {
                                       LabelTitle="Current Password"
                                       TypeName="password"
                                       Name="password"
-                                      Value=""
                                       Placeholder="Current Password"
                                       callback      = { fromFileData }
                                     />
@@ -210,7 +199,6 @@ const UserProfile = (props) => {
                                       LabelTitle="Create New Password"
                                       TypeName="password"
                                       Name="new_password"
-                                      Value=""
                                       Placeholder="Create New Password"
                                       callback      = { fromFileData }
                                     />
@@ -221,7 +209,6 @@ const UserProfile = (props) => {
                                       LabelTitle="Repeat new password"
                                       TypeName="password"
                                       Name="repeat_new_password"
-                                      Value=""
                                       Placeholder="Repeat new password"
                                       callback      = { fromFileData }
                                     />
@@ -258,6 +245,8 @@ const UserProfile = (props) => {
 }
 
 const mapStateToProps = state => ({
+
+    categories: state.site.categories,
     auth: state.auth,
     status: state.auth.status,
     cart: state.shop.cart,

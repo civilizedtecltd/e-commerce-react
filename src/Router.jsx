@@ -40,7 +40,7 @@ import { authNotInState } from "./redux/actions/authActions";
 import isEqual from 'lodash/isEqual';
 import {Col} from "react-bootstrap";
 
-const Router = (props) => {
+const Router = () => {
 
     const localState = JSON.parse(localStorage.getItem('state'));
     const location = useLocation();
