@@ -4,7 +4,9 @@ import {NavLink, Link} from 'react-router-dom';
 import { connect } from 'react-redux'
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Menu from '../LiComponent/MenuComponents'
-import checkAuth from '../../helpers/checkAuth';
+
+//import checkAuth from '../../helpers/checkAuth';
+import isEmpty from 'lodash/isEmpty';
 import '../../assets/css/heder.css';
 import { useMediaQuery } from 'react-responsive';
 import { fetchCategoryList } from "../../redux/actions/siteActions";
@@ -21,13 +23,12 @@ const Default = ({ children }) => {
 const HeaderComponent = (props) => {
 
   const [open, setOpen] = useState(false);
-  const [isAuth, setAuth] = useState(false);
+
   let page = 1;
   let show =5
+
   const user = { ...props.auth.user}
-  useEffect(()=>{
-    return (checkAuth()) ? setAuth(true) : setAuth(false);
-  }, []);
+  const isAuth = (!isEmpty(props.auth.jwt)) ? true : false;
 
   useEffect(() => {
     return props.fetchCategoryList();
