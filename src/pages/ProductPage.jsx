@@ -17,6 +17,7 @@ import TabComponent from "../components/TabComponent/TabComponent";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 
 import "../pages/assets/product.css";
+import "../assets/css/theme.css";
 import checkAuth from "../helpers/checkAuth";
 import TotalRating from "../components/ratingComponent/TotalRating";
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
@@ -213,7 +214,7 @@ function ProductPage(props) {
           </section>
           <hr />
           <section
-            className="similarBooks productView secGap clearfix secBorder"
+            className="similarBooks SimilarBookSlider productView secGap clearfix secBorder"
             id="similarBooks"
           >
             <Container>
@@ -250,9 +251,13 @@ function ProductPage(props) {
             Product added to cart successfully!
           </h2>
         </Modal.Body>
-        <Modal.Footer className={"border-0"}>
-          <Link to="/checkout" className="btn btn-primary" style={{color:'white'}}> Go to checkout </Link>
-          <Link to='/shopping' className="btn btn-outline linkBtnBorder" style={{color:'white !important'}}> Continue shopping</Link>
+        <Modal.Footer className={"border-0 modal-footer-mobile modal-footer-alignment"}>
+
+         <div className="modalBottomAlignment">
+             <Link to="/checkout" className="btn btn-primary mobile-view-btn" style={{color:'white'}}> Go to checkout </Link>
+             <Link to='/shopping' className="btn btn-outline linkBtnBorder mobile-view-btn" style={{color:'white !important'}}> Continue shopping</Link>
+         </div>
+
         </Modal.Footer>
       </Modal>
     </>

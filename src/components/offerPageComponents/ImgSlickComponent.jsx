@@ -17,9 +17,11 @@ const ImgSlick = (props) => {
                     <div key={index} className="col-sm-3">
                         <LazyLoad once={true} height={200}>
                             <Card className="productCard border-0 bg-transparent">
-                                <div className= "productMedia mb-3 bgGray">
-                                    <Image src={(item.cover_images !== null) ? `${item.cover_images.img_1}`: ''} alt="Book Image" />
-                                </div>
+                                    <div className= "productMedia mb-3 bgGray">
+                                        <Link to={`/product/${item.id}`}>
+                                        <Image src={(item.cover_images !== null) ? `${item.cover_images.img_1}`: ''} alt="Book Image" />
+                                        </Link>
+                                    </div>
 
                                 <div className="productContent">
                                     <Link to={`/product/${item.id}`}><h4 className="productTitle limit-character mr-4" >{item.name} </h4></Link>
@@ -105,7 +107,9 @@ const ImgSlick = (props) => {
                                     <LazyLoad once={true} height={200}>
                                         <Card className="productCard border-0 bg-transparent">
                                             <div className= "productMedia mb-3 bgGray">
+                                                <Link to={`/product/${item.id}`}>
                                                 <Image src={(item.cover_images !== null) ? `${item.cover_images.img_1}`: ''} alt="Book Image" />
+                                                </Link>
                                             </div>
 
                                             <div className="productContent">

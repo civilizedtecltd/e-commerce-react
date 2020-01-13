@@ -113,14 +113,13 @@ const MobileHeader = (props) => {
                 </Modal.Body>
                 <Modal.Footer className="modal-footer-btn-group pt-4 pb-4 pl-1 pr-1">
                     <Col>
-                        {(!isAuth)? <Link to="/login" className="btn btn-border">Login</Link> : <Link to="/profile-settings" className="btn btn-border">My Profile</Link> }
+                        {(!isAuth)? <Link to="/login" className="btn btn-border">Login</Link> : <Link to="/logout" className="btn btn-border">Logout</Link> }
 
                     </Col>
                     <Col>
                         <Link to="/favorites">
                              <span className="cartBadge">
                             <i className="far fa-star"></i>{props.favorite_item !== 0 ? <Badge variant="danger"> {props.favorite_item} </Badge> : ''}</span> Favorites
-                            {/* <li><Link to="/favorites"><span className="cartBadge"><i className="far fa-star"></i>{props.favorite_item !== 0 ? <Badge variant="danger"> {props.favorite_item} </Badge> : ''}</span> Favorites</Link></li> */}
                         </Link>
                     </Col>
                 </Modal.Footer>
