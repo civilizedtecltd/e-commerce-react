@@ -1,7 +1,7 @@
-import React, {useState, useEffect}from 'react';
+import React, {useState}from 'react';
 import axios from 'axios';
-
-
+import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {Container, Row, Col, Form, Button, Alert} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -13,91 +13,80 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const SignUp = (props) => {
 
-
-  const [data, setData] = useState([]);
   const [formData] = useState({});
   const [alert, setAlert] = useState({
       show: false,
       message: ''
   });
 
-    useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(URL._CATEGORY);
-      return setData(result.data);
-    };
+  const categories = (props.categories) ? props.categories : [];
 
-    fetchData();
+    const goToLoginPage = () => {
+        const { history } = props;
+        history.push('/login');
+    }
 
-  }, []);
+    const categoryData = (data) => {
+        if(data.category_id !== undefined || data.category_id !== 'Select Category')
+            formData.category_id = Number(data.category_id);
+    }
 
-
-const goToLoginPage = () => {
-    const { history } = props;
-    history.push('/login');
-}
-
-const categoryData = (data) => {
-    if(data.category_id !== undefined || data.category_id !== 'Select Category')
-        formData.category_id = Number(data.category_id);
-}
-
-const fromFileData = (data) => {
-  /*eslint-disable-next-line*/
-    Object.keys(data).map( key => {
-        formData[key] = data[key];
-    });
-}
-
-const handleSubmit = (event) => {
-   event.preventDefault();
-
-    if( formData.category_id === undefined   ||
-        formData.first_name === undefined    ||
-        formData.last_name === undefined     ||
-        formData.email === undefined         ||
-        formData.password === undefined      ||
-        formData.repeatPassword === undefined
-        ){
-
-        setAlert({
-            ...alert,
-            show: true,
-            message: 'Field Data missing'
+    const fromFileData = (data) => {
+    /*eslint-disable-next-line*/
+        Object.keys(data).map( key => {
+            formData[key] = data[key];
         });
+    }
 
-        const clearAlert = setTimeout(() => {
-            setAlert({...alert, show: false});
-        }, 5000);
+    const handleSubmit = (event) => {
+        event.preventDefault();
 
-        return () =>  clearTimeout(clearAlert);
-    }else{
-        if(String(formData.password) !== String(formData.repeatPassword)){
+        if( formData.category_id === undefined   ||
+            formData.first_name === undefined    ||
+            formData.last_name === undefined     ||
+            formData.email === undefined         ||
+            formData.password === undefined      ||
+            formData.repeatPassword === undefined
+            ){
+
             setAlert({
                 ...alert,
                 show: true,
-                message: 'Password did not match.'
-             });
+                message: 'Field Data missing'
+            });
 
             const clearAlert = setTimeout(() => {
                 setAlert({...alert, show: false});
             }, 5000);
 
             return () =>  clearTimeout(clearAlert);
-        }else {
-            axios.post(
-                URL._REGISTER,
-                formData
-            ).then( response => {
-                if(response.status === 201)
-                    goToLoginPage();
+        }else{
+            if(String(formData.password) !== String(formData.repeatPassword)){
+                setAlert({
+                    ...alert,
+                    show: true,
+                    message: 'Password did not match.'
+                });
 
-            }).catch( error => {
-                console.log(error);
-            });
+                const clearAlert = setTimeout(() => {
+                    setAlert({...alert, show: false});
+                }, 5000);
+
+                return () =>  clearTimeout(clearAlert);
+            }else {
+                axios.post(
+                    URL._REGISTER,
+                    formData
+                ).then( response => {
+                    if(response.status === 201)
+                        goToLoginPage();
+
+                }).catch( error => {
+                    console.log(error);
+                });
+            }
         }
     }
-}
 
 
 
@@ -122,7 +111,7 @@ const handleSubmit = (event) => {
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
                     <SelectFrom LabelTitle="Category"
-                      category = {(data.data !== undefined) ? data.data : []}
+                      categories = {categories}
                       callback = {categoryData}
                     />
 
@@ -188,4 +177,8 @@ const handleSubmit = (event) => {
     </>);
 }
 
-export default SignUp;
+const mapStateToProps = (state) => ({
+    categories: state.site.categories
+})
+
+export default withRouter(connect(mapStateToProps, null)(SignUp));
