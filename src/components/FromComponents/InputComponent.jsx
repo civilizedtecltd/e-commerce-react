@@ -19,13 +19,14 @@ function InputFrom ({ LabelId, TypeName, LabelTitle, Name, Value, Placeholder, C
 }
 
 //Select From Components
-function SelectFrom({ LabelTitle, category, callback }) {
+function SelectFrom({ LabelTitle, categories, callback }) {
+
     const state = window.localStorage.getItem('state')
     const category_id = JSON.parse(state).auth.user.category_id;
-     console.log(category_id)
+
     const handleOnchange = (event) => {
         event.preventDefault();
-   
+
         callback({
             category_id: event.target.value
         });
@@ -35,22 +36,17 @@ function SelectFrom({ LabelTitle, category, callback }) {
     return (
         <Form.Group>
             <Form.Label> {LabelTitle} </Form.Label>
-            <Form.Control as="select" onChange = {handleOnchange}>
-                <option defaultValue={"Select Category"}> Select Category </option>
-                {
-                    (category === undefined ) ? [] : category.map((element, index) =>(category_id===element.id) ?(<option selected 
-                        key = {index}
-                        id={index}
-                        value = {element.id}>
-                            { element.category }
-                        </option>) :(<option 
-                        key = {index}
-                        id={index}
-                        value = {element.id}>
-                            { element.category }
-                        </option> )
-                    )
-                }
+            <Form.Control as="select" value={category_id} onChange = {handleOnchange}>
+                    <option value = {0}>Select Category</option>
+                    {(categories === undefined) ? [] : categories.map((element, index) => (
+                        <option
+                            key = {index}
+                            id = {index}
+                            value = {element.id}
+                        >
+                            {element.category}
+                        </option>
+                    ))}
             </Form.Control>
       </Form.Group>
      )

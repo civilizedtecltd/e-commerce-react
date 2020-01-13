@@ -1,5 +1,5 @@
 import React, {useState}  from 'react';
-
+import { useLastLocation } from 'react-router-last-location';
 import { connect  } from 'react-redux';
 import { login } from '../../redux/actions/authActions';
 import { showFavItems } from '../../redux/actions/favoriteActions';
@@ -24,6 +24,10 @@ const Login = (props) => {
   const [state, setState] = useState(true);
   const [formData] = useState({});
   const [showAlert, setShowAlert] = useState(false);
+  const lastLocation = useLastLocation();
+
+  console.log("lastLocation: ", lastLocation);
+
   const { auth } = props;
 
   const loginData = (data) => {
@@ -40,7 +44,13 @@ const Login = (props) => {
       if(auth.status.success && state){
         setState(false);
         props.showAllFavItem();
-        props.history.goBack();
+
+        if(lastLocation.pathname === '/signup'){
+            props.history.push('/');
+        }else{
+            props.history.goBack();
+        }
+
       }
 
       if(!auth.status.success && state){
@@ -79,7 +89,6 @@ const Login = (props) => {
                    TypeName="email"
                    LabelTitle="Email"
                    Name="email"
-                   Value=""
                    Placeholder="Enter Your Email"
                    callback = {loginData}
                   />
@@ -89,7 +98,6 @@ const Login = (props) => {
                    TypeName="password"
                    LabelTitle="Password"
                    Name="password"
-                   Value=""
                    Placeholder="Enter Your Password"
                    callback = {loginData}
                   />{/* end of Form.Group */}

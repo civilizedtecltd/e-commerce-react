@@ -131,7 +131,6 @@ const handleSubmit = (event) => {
                       TypeName="text"
                       LabelTitle="First Name"
                       Name="first_name"
-                      Value=""
                       Placeholder="Enter Your First Name"
                       callback = {fromFileData}
                     />
@@ -141,7 +140,6 @@ const handleSubmit = (event) => {
                       TypeName="text"
                       LabelTitle="Last Name"
                       Name="last_name"
-                      Value=""
                       Placeholder="Enter Your Last Name"
                       callback = {fromFileData}
                     />
@@ -150,7 +148,6 @@ const handleSubmit = (event) => {
                       TypeName="email"
                       LabelTitle="Email"
                       Name="email"
-                      Value=""
                       Placeholder="Enter Your Email"
                       callback = {fromFileData}
                     />
@@ -160,7 +157,6 @@ const handleSubmit = (event) => {
                       TypeName="password"
                       LabelTitle="Password"
                       Name="password"
-                      Value=""
                       Placeholder="Enter Your Password"
                       callback = {fromFileData}
                     />
@@ -169,7 +165,6 @@ const handleSubmit = (event) => {
                       TypeName="password"
                       LabelTitle="Repeat Password"
                       Name="repeatPassword"
-                      Value=""
                       Placeholder="Enter Your Repeat Password"
                       callback = {fromFileData}
                     />
