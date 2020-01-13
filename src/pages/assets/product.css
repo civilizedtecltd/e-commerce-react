@@ -162,3 +162,7 @@
     cursor: pointer;
 }
 
+.modal-footer-alignment{
+    justify-content: center !important;
+}
+.mobile-view-btn{margin: 5px;}
