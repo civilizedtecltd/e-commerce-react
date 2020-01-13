@@ -79,7 +79,6 @@ const Login = (props) => {
                    TypeName="email"
                    LabelTitle="Email"
                    Name="email"
-                   Value=""
                    Placeholder="Enter Your Email"
                    callback = {loginData}
                   />
@@ -89,7 +88,6 @@ const Login = (props) => {
                    TypeName="password"
                    LabelTitle="Password"
                    Name="password"
-                   Value=""
                    Placeholder="Enter Your Password"
                    callback = {loginData}
                   />{/* end of Form.Group */}

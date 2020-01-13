@@ -1,7 +1,8 @@
-import * as Types from '../actions/actionTypes';
+import * as Types from './actionTypes';
 import axios from 'axios';
 import { URL } from '../../constants/config';
-import { setAuthToken } from '../../helpers/setAuthToken'
+import { setAuthToken } from '../../helpers/setAuthToken';
+import { fetchMaxMinPriceByFilter } from "./filterAction";
 
  const fetchAllBook = (page, show, keyword) => dispatch => {
     dispatch(fetchPending())
@@ -109,7 +110,8 @@ const filterShortBy = (page, show, query) => dispatch =>{
 const fetchBooksByFilter = (page, show, filterType, filterId) => dispatch => {
     dispatch(fetchPending());
     axios.get(URL._GET_FILTERED_BOOKS(filterType, filterId, page, show))
-         .then(res => {
+        .then(res => {
+              dispatch(fetchMaxMinPriceByFilter(res.data.price));
              return dispatch( {
                 type: Types.FETCH_BOOK_BY_FILTER,
                 payload: res.data,

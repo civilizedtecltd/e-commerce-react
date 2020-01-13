@@ -131,7 +131,6 @@ const handleSubmit = (event) => {
                       TypeName="text"
                       LabelTitle="First Name"
                       Name="first_name"
-                      Value=""
                       Placeholder="Enter Your First Name"
                       callback = {fromFileData}
                     />
@@ -141,7 +140,6 @@ const handleSubmit = (event) => {
                       TypeName="text"
                       LabelTitle="Last Name"
                       Name="last_name"
-                      Value=""
                       Placeholder="Enter Your Last Name"
                       callback = {fromFileData}
                     />
