@@ -17,7 +17,7 @@ function CategoryHome (props) {
 
     const categories = (props.categories) ? props.categories : [];
 
-    if(categories.length < 4){
+    if(categories.length < 3){
         return(<>
             <div className="categorySlider">
                 <div className="row">

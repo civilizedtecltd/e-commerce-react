@@ -30,7 +30,7 @@ function SelectFrom({ LabelTitle, categories, callback }) {
         callback({
             category_id: event.target.value
         });
-        return ((event.target.value === 'Select Category') ? (event.target.style.borderColor='rgb(216, 38, 38)') : event.target.style.borderColor='');
+        return ((event.target.value === 'Select Category') ? (event.target.style.borderColor='rgb(255,0,97)') : event.target.style.borderColor='');
     }
 
     return (

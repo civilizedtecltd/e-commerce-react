@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import React ,{useState, useEffect} from 'react';
-import { Container, Row, Col, Badge, Modal } from 'react-bootstrap';
+import {Container, Row, Col, Badge, Modal, Image} from 'react-bootstrap';
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
@@ -8,6 +8,7 @@ import isEmpty from 'lodash/isEmpty';
 //import checkAuth from '../../helpers/checkAuth';
 import '../../assets/css/heder.css';
 import Search from "../Search";
+import ProfileAvatar from "../../assets/images/user/avatar.png";
 
 
 const Mobile = ({ children }) => {
@@ -19,7 +20,7 @@ const MobileHeader = (props) => {
 
     const [open, setOpen] = useState(false);
     const [show, setShow] = useState(false);
-
+    const user = { ...props.auth.user}
     const isAuth = (!isEmpty(props.auth.jwt)) ? true : false;
 
     let page = 1;
@@ -90,7 +91,22 @@ const MobileHeader = (props) => {
             </header>
 
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header className="ModalCloseBtn" closeButton></Modal.Header>
+                <Modal.Header className="ModalCloseBtn" closeButton>
+                    {!isAuth ? (
+                        <Link to="/login" style={{fontSize:"16px", color:'black'}}>
+                            <i className="far fa-user"></i> <span >Login</span>
+                        </Link>
+                    ) : (
+                        <Link to="/profile-settings">
+                            <div className="Profile-avatar" style={{fontSize:"16px", color:'black'}}>
+                                <Image src={ProfileAvatar} />
+                                <p>
+                                    {user.first_name} {user.last_name}
+                                </p>
+                            </div>
+                        </Link>
+                    )}
+                </Modal.Header>
                 <Modal.Body>
                     <ul className="mobileNav">
                         {props.categories ?
