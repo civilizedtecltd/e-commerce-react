@@ -943,9 +943,9 @@
 }
 
 /*------------------------------------------------------------------------------*/
-/*                    Width : 380px
+/*                    Width : 399px
 /*------------------------------------------------------------------------------*/
-@media only screen and (max-width: 380px){
+@media only screen and (max-width: 399px){
   .headFeatureList {flex-flow:row wrap;}
   .footerLinksList li a{font-size: 16px;}
   .discountTxt{max-width: 100%;}
@@ -979,6 +979,10 @@
     .home-ctg-limit-character{display: block;width: 230px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;font-size: 16px}
     /*Payment methods*/
     ul.cardPayFiled.d-flex.align-items-center.justify-content-start { width: 100%; } li.width-45 { width: 42.5%; }
+    .mobileNav li a {
+        font-size: 1rem !important;
+    }
+
  }
 
 /*------------------------------------------------------------------------------*/

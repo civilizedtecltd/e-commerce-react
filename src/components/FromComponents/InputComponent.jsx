@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 
 function InputFrom ({ LabelId, TypeName, LabelTitle, Name, Value, Placeholder, ClassName, callback }) {
@@ -21,22 +21,27 @@ function InputFrom ({ LabelId, TypeName, LabelTitle, Name, Value, Placeholder, C
 //Select From Components
 function SelectFrom({ LabelTitle, categories, callback }) {
 
-    const state = JSON.parse(window.localStorage.getItem('state'));
-    const category_id = (state !== null && state.auth.user.category_id) ? state.auth.user.category_id : 0;
+    const [categoryId, setCategoryId] = useState(0);
+
+    useEffect(()=>{
+        const state = JSON.parse(window.localStorage.getItem('state'));
+        const category_id = (state !== null && state.auth.user.category_id) ? state.auth.user.category_id : 0;
+        setCategoryId(category_id);
+    },[]);
 
     const handleOnchange = (event) => {
         event.preventDefault();
-
+        setCategoryId(Number(event.target.value));
         callback({
             category_id: event.target.value
         });
-        return ((event.target.value === 'Select Category') ? (event.target.style.borderColor='rgb(216, 38, 38)') : event.target.style.borderColor='');
+        return ((event.target.value === 'Select Category') ? (event.target.style.borderColor='rgb(255,0,97)') : event.target.style.borderColor='');
     }
 
     return (
         <Form.Group>
             <Form.Label> {LabelTitle} </Form.Label>
-            <Form.Control as="select" value={category_id} onChange = {handleOnchange}>
+            <Form.Control as="select" value={categoryId} onChange = {handleOnchange}>
                     <option value = {0}>Select Category</option>
                     {(categories === undefined) ? [] : categories.map((element, index) => (
                         <option
