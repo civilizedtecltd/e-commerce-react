@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import {Collapse} from 'react-bootstrap';
 import '../../assets/css/theme.css'
 import {Form} from "react-bootstrap";
@@ -134,7 +135,8 @@ const Filters = (props) => {
                         <div id="collapse-price">
                             <Form>
                                 <PriceRanger
-                                 callback={props.callback}
+                                    callback={props.callback}
+                                    filter={props.filter}
                                   />
                             </Form>
                         </div>
@@ -259,4 +261,10 @@ const Filters = (props) => {
     )
 }
 
-export default Filters;
+const mapStateToProps = (state) => {
+    return {
+      filter: state.filter.priceFilter
+    };
+}
+
+export default connect(mapStateToProps,null)(Filters);
