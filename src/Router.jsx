@@ -37,6 +37,7 @@ import { favoriteNotInState } from './redux/actions/favoriteActions';
 import { filterNotInState } from "./redux/actions/filterAction";
 import { shopNotInState } from './redux/actions/shopActions';
 import { authNotInState } from "./redux/actions/authActions";
+import { siteNotInState } from './redux/actions/siteActions';
 import isEqual from 'lodash/isEqual';
 import {Col} from "react-bootstrap";
 
@@ -60,6 +61,10 @@ const Router = () => {
         }
          if (!isEqual(presentState.auth, localState.auth)) {
             store.dispatch(authNotInState(localState.auth));
+        }
+
+        if(!isEqual(presentState.site, localState.site)){
+            store.dispatch(siteNotInState(localState.site));
         }
 
     }
