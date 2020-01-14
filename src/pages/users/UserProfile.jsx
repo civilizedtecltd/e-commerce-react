@@ -112,12 +112,9 @@ const UserProfile = (props) => {
         <Container fluid={true} className="pl-0 pr-0">
           <Row noGutters>
               <UserNav />
-
             <Col>
               <main className="userMainContent clearfix bgImage bgImg03" id="userMainContent">
-
                 <section className="myOrderArea secGap clearfix" id="myOrderArea">
-
                   <Container fluid={true}>
                     <Row>
                       <Col>
@@ -133,7 +130,7 @@ const UserProfile = (props) => {
                                       categories = { (props.categories !== undefined) ? props.categories : [] }
                                       callback = { categoryData }
                                     />
-                                  </Col>{/* end of Col */}
+                                  </Col>
 
                                   <Col sm="6">
                                     <InputFrom
@@ -144,7 +141,7 @@ const UserProfile = (props) => {
                                       Placeholder   =   "First Name"
                                       callback      = { fromFileData }
                                     />
-                                  </Col>{/* end of Col */}
+                                  </Col>
 
                                   <Col sm="6">
                                     <InputFrom
@@ -155,7 +152,7 @@ const UserProfile = (props) => {
                                       Placeholder   =   "Last Name"
                                       callback      = { fromFileData }
                                     />
-                                  </Col>{/* end of Col */}
+                                  </Col>
 
                                   <Col sm="6">
                                     <InputFrom
@@ -166,7 +163,7 @@ const UserProfile = (props) => {
                                       Placeholder   =   "Email Address"
                                       callback      = { fromFileData }
                                     />
-                                  </Col>{/* end of Col */}
+                                  </Col>
 
                                   <Col sm="6">
                                     <InputFrom
@@ -177,11 +174,11 @@ const UserProfile = (props) => {
                                       Placeholder   =   "Phone Number"
                                       callback      =  { fromFileData }
                                     />
-                                  </Col>{/* end of Col */}
+                                  </Col>
 
                                   <Col sm="12">
                                     <hr className="hrBorder" />
-                                  </Col>{/* end of Col */}
+                                  </Col>
 
                                   <Col sm="6">
 
@@ -192,27 +189,27 @@ const UserProfile = (props) => {
                                       Placeholder="Current Password"
                                       callback      = { fromFileData }
                                     />
-                                  </Col>{/* end of Col */}
+                                  </Col>
 
                                   <Col sm="6">
                                     <InputFrom
-                                      LabelTitle="Create New Password"
-                                      TypeName="password"
-                                      Name="new_password"
+                                      LabelTitle ="Create New Password"
+                                      TypeName   ="password"
+                                      Name       ="new_password"
                                       Placeholder="Create New Password"
-                                      callback      = { fromFileData }
+                                      callback   = { fromFileData }
                                     />
-                                  </Col>{/* end of Col */}
+                                  </Col>
 
                                   <Col sm="6">
                                     <InputFrom
-                                      LabelTitle="Repeat new password"
-                                      TypeName="password"
-                                      Name="repeat_new_password"
-                                      Placeholder="Repeat new password"
-                                      callback      = { fromFileData }
+                                      LabelTitle  ="Repeat new password"
+                                      TypeName    ="password"
+                                      Name        ="repeat_new_password"
+                                      Placeholder ="Repeat new password"
+                                      callback    = { fromFileData }
                                     />
-                                  </Col>{/* end of Col */}
+                                  </Col>
 
 
                                   <Col sm="12">
@@ -225,18 +222,18 @@ const UserProfile = (props) => {
                                         onClick = { handleSubmit } >
                                             Save
                                     </Button>
-                                  </Col>{/* end of Col */}
+                                  </Col>
                                 </Row>{/* end of Row */}
                               </Form>{/* end of userProfile */}
                             </div>{/* end of userProfile */}
                           </Card.Body>{/* end of Card.Body */}
                         </Card>{/* end of Card */}
-                      </Col>{/* end of Col */}
+                      </Col>
                     </Row>{/* end of Row */}
                   </Container>{/* end of Container */}
                 </section>{/* end of myOrderArea */}
               </main>{/* end of mainContent */}
-            </Col>{/* end of Col */}
+            </Col>
           </Row>{/* end of Row */}
         </Container>{/* end of Container */}
       </div>{/* end of userBodyArea */}

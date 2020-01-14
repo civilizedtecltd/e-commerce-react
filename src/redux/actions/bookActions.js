@@ -35,17 +35,17 @@ const fetchBooksByCategory = (id, page, show) => dispatch => {
 
  const showSingleBook = (id) => dispatch => {
      dispatch(fetchPending());
-    axios.get(URL._SINGLE_BOOK(id))
-        .then(res=>{
-            dispatch({
-                type:Types.SHOW_SINGLE_BOOK,
-                payload: {
-                    info:  res.data.data,
-                    similar: res.data.similar,
-                    pending:false
-                }
+        axios.get(URL._SINGLE_BOOK(id))
+            .then(res=>{
+                dispatch({
+                    type:Types.SHOW_SINGLE_BOOK,
+                    payload: {
+                        info:  res.data.data,
+                        similar: res.data.similar,
+                        pending:false
+                    }
+                })
             })
-        })
           .catch(err=>{
               console.log(err)
           })
@@ -58,15 +58,15 @@ const fetchBooksByCategory = (id, page, show) => dispatch => {
 
 
 const searchBook = (page, show, keyword) => dispatch => {
-    axios.get(URL._SEARCH_BOOK(page,show,keyword))
-        .then( res =>{
-            dispatch({
-                type:Types.SEARCH_BOOK,
-                payload: res.data
+        axios.get(URL._SEARCH_BOOK(page,show,keyword))
+            .then( res =>{
+                dispatch({
+                    type:Types.SEARCH_BOOK,
+                    payload: res.data
+                })
+            }).catch( error =>{
+                console.log(error)
             })
-        }).catch( error =>{
-            console.log(error)
-        })
 };
 
 
@@ -111,7 +111,7 @@ const fetchBooksByFilter = (page, show, filterType, filterId) => dispatch => {
     dispatch(fetchPending());
     axios.get(URL._GET_FILTERED_BOOKS(filterType, filterId, page, show))
         .then(res => {
-              dispatch(fetchMaxMinPriceByFilter(res.data.price));
+            dispatch(fetchMaxMinPriceByFilter(res.data.price));
              return dispatch( {
                 type: Types.FETCH_BOOK_BY_FILTER,
                 payload: res.data,
