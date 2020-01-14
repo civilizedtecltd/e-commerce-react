@@ -39,7 +39,7 @@ const ShopPage = props => {
     pageNumber,
     keyword,
     filter_type,
-    filter_id
+    filter_id,
   } = useParams();
 
   //const isNaN_id = Number(id)
@@ -70,7 +70,9 @@ const ShopPage = props => {
       return props.filterShortBy(page, show, sortBy);
     } else if (shopUrl === "/shopping") {
       return props.fetchAllBook(1, 5, null);
-    } else if (page && show && filter_type && filter_id) {
+    }else if (page && show && lowerPrice && higherPrice && filter_type && filter_id) {
+      return props.filterByPrice(page, show, lowerPrice, higherPrice,filter_type, filter_id);
+    }else if (page && show && filter_type && filter_id) {
       return props.getBooksByFilter(page, show, filter_type, filter_id);
     } else if (page && show && lowerPrice && higherPrice) {
       return props.filterByPrice(page, show, lowerPrice, higherPrice);
@@ -84,7 +86,7 @@ const ShopPage = props => {
 
   const handleShowBook = e => {
     e.preventDefault();
-    setShowBook(e.target.value);
+    return setShowBook(e.target.value);
   };
 
   const handleNext = e => {
@@ -428,8 +430,8 @@ const mapDispatchToProps = dispatch => {
     fetchAllBook: (page, show) => dispatch(fetchAllBook(page, show)),
     fetchBooksByCategory: (id, page, show) =>
       dispatch(fetchBooksByCategory(id, page, show)),
-    filterByPrice: (page, show, lowPrice, highestPrice) =>
-      dispatch(filterByPriceRange(page, show, lowPrice, highestPrice)),
+    filterByPrice: (page, show, lowPrice, highestPrice,type,type_id) =>
+      dispatch(filterByPriceRange(page, show, lowPrice, highestPrice,type,type_id)),
     filterShortBy: (page, show, query) =>
       dispatch(filterShortBy(page, show, query)),
     stageList: category_id => dispatch(fetchStages(category_id)),

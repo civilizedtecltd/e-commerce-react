@@ -10,17 +10,17 @@ function NewsLetterComponent(props) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await axios.post(URL._SUBSCRIBE,{email:email})
-    .then(res=>{
-      setMessage(res.data.message)
-      return setTimeout(setShow(false),3000)
+      .then(res => {
+         setMessage(res.data.message)
+         setShow(true);
     })
-    .catch(ex=>{
+      .catch(ex => {
+      setShow(true);
       setMessage(ex.data.message)
-      setTimeout(setShow(false),3000)
-      return console.log(ex)
     })
-    
+     setTimeout(() => setShow(false), 3000);
   }
+  // 
 
     return (
       <Row className="justify-content-center">
@@ -50,7 +50,7 @@ function NewsLetterComponent(props) {
                   Subscribe
                 </Button>
               </Form>
-              { message && show ?
+              {show ?
                   <Alert variant={message[0].success ? 'success' : "danger" } onClose={() => setShow(false)} dismissible>
                   <Alert.Heading>{message[0].success ? 'Thank you!' : 'Opts!'}</Alert.Heading>
                     <p>
@@ -58,14 +58,7 @@ function NewsLetterComponent(props) {
                     </p>
                   </Alert>
               :''}
-              { message && !show ?
-                  <Alert variant={message[0].success ? 'success' : "danger" } onClose={() => setShow(false)} dismissible>
-                  <Alert.Heading>{message[0].success ? 'Thank you!' : 'Opts!'}</Alert.Heading>
-                    <p>
-                     {message[0].message}
-                    </p>
-                  </Alert>
-              :''}
+             
             </Card.Body>
           </Card>
         </Col>
