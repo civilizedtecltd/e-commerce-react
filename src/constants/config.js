@@ -5,7 +5,8 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
   class APP_URL {
      constructor(){
 
-        this.BASE = `http://admin.abookstore.co.ke`;
+        // this.BASE = `http://admin.abookstore.co.ke`;
+        this.BASE = `http://localhost:3333`;
         this.API  = `${this.BASE}/api`;
      }
 
@@ -66,8 +67,8 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
         return `${this.API}/book/review`;
     }
 
-    _FILTER_BY_PRICE_RANGE(page,show,lowPrice,highestPrice){
-        return  `${this.API}/product/range/${page}/${show}/${lowPrice}/${highestPrice}`;
+    _FILTER_BY_PRICE_RANGE(page,show,lowPrice,highestPrice,type,type_id){
+        return  `${this.API}/product/range/${page}/${show}/${lowPrice}/${highestPrice}${(type && type_id) ? '/'+ type +"/"+ type_id : ''}`;
     }
 
     _FILTER_SHORT_BY(page, show, query){

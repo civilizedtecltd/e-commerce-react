@@ -83,10 +83,9 @@ const postReview = (review) => dispatch => {
 }
 
 
-const filterByPriceRange = (page, show, lowPrice, highestPrice) => dispatch=>{
-
+const filterByPriceRange = (page, show, lowPrice, highestPrice,type,type_id) => dispatch=>{
         setAuthToken();
-        axios.get(URL._FILTER_BY_PRICE_RANGE(page, show, lowPrice, highestPrice))
+        axios.get(URL._FILTER_BY_PRICE_RANGE(page, show, lowPrice, highestPrice,type,type_id))
         .then(res=>dispatch({
             type: Types.FILTER_BY_PRICE_RANGE,
             payload: res.data
