@@ -48,7 +48,11 @@ const Subscription = (props) => {
           cartItem={totalItem}
           menuActive={true}
         />
-        <MobileHeader favorite_item={totalFavorite} cartItem={totalItem} />
+        <MobileHeader
+          favorite_item={totalFavorite}
+          cartItem={totalItem}
+          menuActive={true}
+         />
         <div className="userBodyArea clearfix" id="userBodyArea">
           <Container fluid="{true}" className="pl-0 pr-0">
             <Row noGutters>

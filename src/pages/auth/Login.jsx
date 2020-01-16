@@ -22,106 +22,135 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 const Login = (props) => {
 
   const [state, setState] = useState(true);
-  const [formData] = useState({});
-  const [showAlert, setShowAlert] = useState(false);
+  const [formData] = useState({ email: '', password: '' });
+  const [message, setMessage] = useState('');
+  const [alert, setAlert] = useState({status: false, message: ''});
   const lastLocation = useLastLocation();
-
-  console.log("lastLocation: ", lastLocation);
-
   const { auth } = props;
 
+  
   const loginData = (data) => {
-    Object.keys(data).map( key =>formData[key] = data[key])}
+    Object.keys(data).map(key => formData[key] = data[key])
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.login(formData)
-    setState(true);
+    if (formData.email === '') { 
+      setAlert({status: true, message: "Email should not be empty!"});
+      return setTimeout(() => setAlert({status: false}), 3000);
+    }
+    if (formData.password === '') {
+      setAlert({ status: true, message: "Password should not be empty" });
+      return setTimeout(() => setAlert({status:false }), 3000);
+    }
+    else {
+      props.login(formData);
+      setState(true);
+      return setTimeout(() => setAlert({ status:false }), 3000);
+    }
   }
-
-
     if(!isEmpty(auth.status)){
       if(auth.status.success && state){
         setState(false);
         props.showAllFavItem();
-
         if(lastLocation.pathname === '/signup'){
             props.history.push('/');
         }else{
             props.history.goBack();
         }
-
       }
-
       if(!auth.status.success && state){
-        setState(false);
-        setShowAlert(true);
-        const clearAlert = setTimeout(() => {
-          setShowAlert(false);
-        }, 5000);
-
-        return () =>  clearTimeout(clearAlert);
+         setState(false);
       }
     }
 
 
-  return (<>
-        <PageLoader loading={false}/>
-    <div className="AllWrapper fullHeight">
-      <main className="loginMainArea clearfix fullHeight bgImage loginBodyBg pb-4" id="loginBody">
-        <Container fluid={true}>
-          <Row>
-            <Col sm={6}>
-               <div className="logoWrapper mt-4 mb-4">
-                <h1 className="logoText"><Link to="/">LOGO</Link></h1>
-              </div>{/* end of logoWrapper */}
-            </Col>{/* end of col */}
-          </Row>{/* end of row */}
+  return (
+    <>
+      <PageLoader loading={false} />
+      <div className="AllWrapper fullHeight">
+        <main
+          className="loginMainArea clearfix fullHeight bgImage loginBodyBg pb-4"
+          id="loginBody"
+        >
+          <Container fluid={true}>
+            <Row>
+              <Col sm={6}>
+                <div className="logoWrapper mt-4 mb-4">
+                  <h1 className="logoText">
+                    <Link to="/">LOGO</Link>
+                  </h1>
+                </div>
+              </Col>
+            </Row>
 
-          <Row>
-            <Col sm={6}>
-              <SocialListComponent/>
+            <Row>
+              <Col sm={6}>
+                <SocialListComponent />
 
-              <div className="formWrapper clearfix" id="formWrapper">
-                <Form>
-                  <InputFrom
-                   LabelId="email"
-                   TypeName="email"
-                   LabelTitle="Email"
-                   Name="email"
-                   Placeholder="Enter Your Email"
-                   callback = {loginData}
-                  />
+                <div className="formWrapper clearfix" id="formWrapper">
+                  <Form>
+                    <InputFrom
+                      LabelId="email"
+                      TypeName="email"
+                      LabelTitle="Email"
+                      Name="email"
+                      Placeholder="Enter Your Email"
+                      callback={loginData}
+                    />
 
-                  <InputFrom
-                   LabelId="password"
-                   TypeName="password"
-                   LabelTitle="Password"
-                   Name="password"
-                   Placeholder="Enter Your Password"
-                   callback = {loginData}
-                  />{/* end of Form.Group */}
+                    <InputFrom
+                      LabelId="password"
+                      TypeName="password"
+                      LabelTitle="Password"
+                      Name="password"
+                      Placeholder="Enter Your Password"
+                      callback={loginData}
+                    />
 
-                  <Link className="linkText mb-3" to="/forgot-password">Forgot password?</Link>
+                    <Link className="linkText mb-3" to="/forgot-password">
+                      Forgot password?
+                    </Link>
+                    {alert.status ? (
+                      <Alert
+                        show={alert.status}
+                        variant="danger"
+                        onClose={() => setAlert({ status:false })}
+                        dismissible
+                      >
+                        <p>{alert.message}</p>
+                      </Alert>
+                    ) : (
+                      ""
+                    )}
 
-                    <Alert show={showAlert} variant="danger" onClose={() => setShowAlert(false)} dismissible>
-                        <p>Provided Email & Password combination miss matched.</p>
-                    </Alert>
-
-                  <input type="submit" className="btn submitBtn mb-3 " onClick = { handleSubmit } value="LOGIN"/>
-
-                  <p>Don’t have an account yet? <Link className="linkText" to="/signup">Sign up</Link></p>
-
-
-                </Form>{/* end of form */}
-              </div>{/* end of col */}
-            </Col>{/* end of col */}
-          </Row>{/* end of Row */}
-
-        </Container>{/* end of container */}
-      </main>{/* end of loginMainArea */}
-    </div>{/* end of loginMainArea */}
-  </>
+                    <input
+                      type="submit"
+                      className="btn submitBtn mb-3 "
+                      onClick={handleSubmit}
+                      value="LOGIN"
+                    />
+                    <p>
+                      Don’t have an account yet?
+                      <Link className="linkText" to="/signup">
+                        Sign up
+                      </Link>
+                    </p>
+                  </Form>
+                  {/* end of form */}
+                </div>
+                {/* end of col */}
+              </Col>
+              {/* end of col */}
+            </Row>
+            {/* end of Row */}
+          </Container>
+          {/* end of container */}
+        </main>
+        {/* end of loginMainArea */}
+      </div>
+      {/* end of loginMainArea */}
+    </>
   );
 }
 
