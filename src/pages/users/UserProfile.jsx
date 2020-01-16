@@ -99,146 +99,182 @@ const UserProfile = (props) => {
         props.updateUser(formData);
     }
 
-  return (<>
-      <PageLoader loading={props.favorite.pending}/>
-    <div className="allWrapper">
-     <HeaderComponent
+  return (
+    <>
+      <PageLoader loading={props.favorite.pending} />
+      <div className="allWrapper">
+        <HeaderComponent
           favorite_item={totalFavorite}
           cartItem={totalItem}
           menuActive={true}
         />
-      <MobileHeader />
-      <div className="userBodyArea clearfix" id="userBodyArea">
-        <Container fluid={true} className="pl-0 pr-0">
-          <Row noGutters>
+        <MobileHeader favorite_item={totalFavorite} cartItem={totalItem} />
+        <div className="userBodyArea clearfix" id="userBodyArea">
+          <Container fluid={true} className="pl-0 pr-0">
+            <Row noGutters>
               <UserNav />
-            <Col>
-              <main className="userMainContent clearfix bgImage bgImg03" id="userMainContent">
-                <section className="myOrderArea secGap clearfix" id="myOrderArea">
-                  <Container fluid={true}>
-                    <Row>
-                      <Col>
-                        <Card>
-                          <Card.Body>
-                            <div className="userProfileBody clearfix" id="userProfileBody">
-                              <h2 className="cardSecTitle mb-4">Profile settings</h2>
-                              <Form className="profileSettingsForm">
-                                <Row>
-                                  <Col sm="6">
-                                    <SelectFrom
-                                      LabelTitle="Category"
-                                      categories = { (props.categories !== undefined) ? props.categories : [] }
-                                      callback = { categoryData }
-                                    />
-                                  </Col>
+              <Col>
+                <main
+                  className="userMainContent clearfix bgImage bgImg03"
+                  id="userMainContent"
+                >
+                  <section
+                    className="myOrderArea secGap clearfix"
+                    id="myOrderArea"
+                  >
+                    <Container fluid={true}>
+                      <Row>
+                        <Col>
+                          <Card>
+                            <Card.Body>
+                              <div
+                                className="userProfileBody clearfix"
+                                id="userProfileBody"
+                              >
+                                <h2 className="cardSecTitle mb-4">
+                                  Profile settings
+                                </h2>
+                                <Form className="profileSettingsForm">
+                                  <Row>
+                                    <Col sm="6">
+                                      <SelectFrom
+                                        LabelTitle="Category"
+                                        categories={
+                                          props.categories !== undefined
+                                            ? props.categories
+                                            : []
+                                        }
+                                        callback={categoryData}
+                                      />
+                                    </Col>
 
-                                  <Col sm="6">
-                                    <InputFrom
-                                      LabelTitle    =   "First Name"
-                                      TypeName      =   "text"
-                                      Name          =   "first_name"
-                                      Value         =   { user.first_name }
-                                      Placeholder   =   "First Name"
-                                      callback      = { fromFileData }
-                                    />
-                                  </Col>
+                                    <Col sm="6">
+                                      <InputFrom
+                                        LabelTitle="First Name"
+                                        TypeName="text"
+                                        Name="first_name"
+                                        Value={user.first_name}
+                                        Placeholder="First Name"
+                                        callback={fromFileData}
+                                      />
+                                    </Col>
 
-                                  <Col sm="6">
-                                    <InputFrom
-                                      LabelTitle    =   "Last Name"
-                                      TypeName      =   "text"
-                                      Name          =   "last_name"
-                                      Value         =   { user.last_name }
-                                      Placeholder   =   "Last Name"
-                                      callback      = { fromFileData }
-                                    />
-                                  </Col>
+                                    <Col sm="6">
+                                      <InputFrom
+                                        LabelTitle="Last Name"
+                                        TypeName="text"
+                                        Name="last_name"
+                                        Value={user.last_name}
+                                        Placeholder="Last Name"
+                                        callback={fromFileData}
+                                      />
+                                    </Col>
 
-                                  <Col sm="6">
-                                    <InputFrom
-                                      LabelTitle    =   "Email Address"
-                                      TypeName      =   "email"
-                                      Name          =   "email"
-                                      Value         =   { user.email }
-                                      Placeholder   =   "Email Address"
-                                      callback      = { fromFileData }
-                                    />
-                                  </Col>
+                                    <Col sm="6">
+                                      <InputFrom
+                                        LabelTitle="Email Address"
+                                        TypeName="email"
+                                        Name="email"
+                                        Value={user.email}
+                                        Placeholder="Email Address"
+                                        callback={fromFileData}
+                                      />
+                                    </Col>
 
-                                  <Col sm="6">
-                                    <InputFrom
-                                      LabelTitle    =   "Phone Number"
-                                      TypeName      =   "text"
-                                      Name          =   "phone"
-                                      Value         =   {user.phone}
-                                      Placeholder   =   "Phone Number"
-                                      callback      =  { fromFileData }
-                                    />
-                                  </Col>
+                                    <Col sm="6">
+                                      <InputFrom
+                                        LabelTitle="Phone Number"
+                                        TypeName="text"
+                                        Name="phone"
+                                        Value={user.phone}
+                                        Placeholder="Phone Number"
+                                        callback={fromFileData}
+                                      />
+                                    </Col>
 
-                                  <Col sm="12">
-                                    <hr className="hrBorder" />
-                                  </Col>
+                                    <Col sm="12">
+                                      <hr className="hrBorder" />
+                                    </Col>
 
-                                  <Col sm="6">
+                                    <Col sm="6">
+                                      <InputFrom
+                                        LabelTitle="Current Password"
+                                        TypeName="password"
+                                        Name="password"
+                                        Placeholder="Current Password"
+                                        callback={fromFileData}
+                                      />
+                                    </Col>
 
-                                    <InputFrom
-                                      LabelTitle="Current Password"
-                                      TypeName="password"
-                                      Name="password"
-                                      Placeholder="Current Password"
-                                      callback      = { fromFileData }
-                                    />
-                                  </Col>
+                                    <Col sm="6">
+                                      <InputFrom
+                                        LabelTitle="Create New Password"
+                                        TypeName="password"
+                                        Name="new_password"
+                                        Placeholder="Create New Password"
+                                        callback={fromFileData}
+                                      />
+                                    </Col>
 
-                                  <Col sm="6">
-                                    <InputFrom
-                                      LabelTitle ="Create New Password"
-                                      TypeName   ="password"
-                                      Name       ="new_password"
-                                      Placeholder="Create New Password"
-                                      callback   = { fromFileData }
-                                    />
-                                  </Col>
+                                    <Col sm="6">
+                                      <InputFrom
+                                        LabelTitle="Repeat new password"
+                                        TypeName="password"
+                                        Name="repeat_new_password"
+                                        Placeholder="Repeat new password"
+                                        callback={fromFileData}
+                                      />
+                                    </Col>
 
-                                  <Col sm="6">
-                                    <InputFrom
-                                      LabelTitle  ="Repeat new password"
-                                      TypeName    ="password"
-                                      Name        ="repeat_new_password"
-                                      Placeholder ="Repeat new password"
-                                      callback    = { fromFileData }
-                                    />
-                                  </Col>
-
-
-                                  <Col sm="12">
-                                    <Alert show={alert.status} variant={alert.type} onClose={() => setAlert({...alert, status: false})} dismissible>
+                                    <Col sm="12">
+                                      <Alert
+                                        show={alert.status}
+                                        variant={alert.type}
+                                        onClose={() =>
+                                          setAlert({ ...alert, status: false })
+                                        }
+                                        dismissible
+                                      >
                                         <p>{alert.message}</p>
-                                    </Alert>
-                                    <Button
+                                      </Alert>
+                                      <Button
                                         type="submit"
                                         className="primary"
-                                        onClick = { handleSubmit } >
-                                            Save
-                                    </Button>
-                                  </Col>
-                                </Row>{/* end of Row */}
-                              </Form>{/* end of userProfile */}
-                            </div>{/* end of userProfile */}
-                          </Card.Body>{/* end of Card.Body */}
-                        </Card>{/* end of Card */}
-                      </Col>
-                    </Row>{/* end of Row */}
-                  </Container>{/* end of Container */}
-                </section>{/* end of myOrderArea */}
-              </main>{/* end of mainContent */}
-            </Col>
-          </Row>{/* end of Row */}
-        </Container>{/* end of Container */}
-      </div>{/* end of userBodyArea */}
-    </div>{/* end of allWrapper */}
-  </>);
+                                        onClick={handleSubmit}
+                                      >
+                                        Save
+                                      </Button>
+                                    </Col>
+                                  </Row>
+                                  {/* end of Row */}
+                                </Form>
+                                {/* end of userProfile */}
+                              </div>
+                              {/* end of userProfile */}
+                            </Card.Body>
+                            {/* end of Card.Body */}
+                          </Card>
+                          {/* end of Card */}
+                        </Col>
+                      </Row>
+                      {/* end of Row */}
+                    </Container>
+                    {/* end of Container */}
+                  </section>
+                  {/* end of myOrderArea */}
+                </main>
+                {/* end of mainContent */}
+              </Col>
+            </Row>
+            {/* end of Row */}
+          </Container>
+          {/* end of Container */}
+        </div>
+        {/* end of userBodyArea */}
+      </div>
+      {/* end of allWrapper */}
+    </>
+  );
 }
 
 const mapStateToProps = state => ({

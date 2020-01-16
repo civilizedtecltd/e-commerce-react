@@ -47,10 +47,13 @@ const CheckoutPage = (props) => {
   let costWithDelivery  = parseFloat(promoPrice) + parseFloat(delivery_cost);
 
   useEffect(()=>{
-    props.getUser();
-    props.deliveryMethodFetch()
-  },[]);
-
+    return fetchData()
+  });
+  
+ const fetchData = () => {
+   props.getUser();
+   props.deliveryMethodFetch();
+ };
 
   const getPaymentMethod = (paymentMethod) =>{
       setDeliveryCost(paymentMethod.paymentData.price)

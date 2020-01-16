@@ -92,11 +92,7 @@ const MobileHeader = (props) => {
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header className="ModalCloseBtn" closeButton>
-                    {!isAuth ? (
-                        <Link to="/login" style={{fontSize:"16px", color:'black'}}>
-                            <i className="far fa-user"></i> <span >Login</span>
-                        </Link>
-                    ) : (
+                    {!isAuth ? '' : (
                         <Link to="/profile-settings">
                             <div className="Profile-avatar" style={{fontSize:"16px", color:'black'}}>
                                 <Image src={ProfileAvatar} />

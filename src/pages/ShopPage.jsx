@@ -69,7 +69,7 @@ const ShopPage = props => {
     if (page && show && sortBy) {
       return props.filterShortBy(page, show, sortBy);
     } else if (shopUrl === "/shopping") {
-      return props.fetchAllBook(1, 5, null);
+      return props.fetchAllBook(page, show, null);
     }else if (page && show && lowerPrice && higherPrice && filter_type && filter_id) {
       return props.filterByPrice(page, show, lowerPrice, higherPrice,filter_type, filter_id);
     }else if (page && show && filter_type && filter_id) {

@@ -69,6 +69,7 @@ function ProductPage(props) {
 
   const addToCart = (e) => {
     e.preventDefault();
+    if(!checkAuth()) return window.location='/login';
     book.quantity = quantity;
     props.addToCart(book);
     setShow(true);
