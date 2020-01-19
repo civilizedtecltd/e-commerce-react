@@ -53,10 +53,6 @@ const fetchBooksByCategory = (id, page, show) => dispatch => {
 
 
 
-
-
-
-
 const searchBook = (page, show, keyword) => dispatch => {
         axios.get(URL._SEARCH_BOOK(page,show,keyword))
             .then( res =>{
@@ -136,12 +132,6 @@ const fetchPendingSuccess = (data) => {
         pending: false,
     }
 }
-
-
-
-
-
-
 
 
 export {

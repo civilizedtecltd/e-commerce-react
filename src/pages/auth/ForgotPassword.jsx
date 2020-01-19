@@ -1,12 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import "./assets/css/auth.css";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { URL } from '../../constants/config';
+import {Button, Alert} from 'react-bootstrap'
 import { InputFrom } from "../../components/FromComponents/InputComponent";
-import { ButtonComponents } from "../../components/ButtonComponents/ButtonComponents";
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const ForgotPassword = () => {
+
+    const [state, setState] = useState({
+        email: '',
+        status: false,
+        alertType: 'danger',
+        message:'',
+    });
+
+    const handleOnChange = (data) => {
+        setState({
+            ...state,
+            ...data
+        })
+    }
+
+    const handleOnClick = (e) =>{
+        e.preventDefault();
+        console.log("Email: ", state);
+
+        const clearAlert = setTimeout(() => {
+            setState({status: false, message:''});
+        }, 5000);
+
+
+        axios.post(URL._RESET_PASSWORD, {email: state.email})
+             .then(res => {
+                console.log(res.data.data)
+                setState({
+                    ...state,
+                    status: true,
+                    alertType: 'success',
+                    message: 'Please Check your mail for further instructions.'
+                });
+
+                return () =>  clearTimeout(clearAlert);
+             })
+             .catch(error => {
+                 console.log('forget password: ', error)
+                 setState({
+                     ...state,
+                     status: true,
+                     alertType:'danger',
+                     message: 'Email did not matched.'
+                 });
+
+                 return () =>  clearTimeout(clearAlert);
+             });
+    }
+
   return (
     <>
       <PageLoader loading={false}/>
@@ -43,15 +94,14 @@ const ForgotPassword = () => {
                       LabelId="email"
                       TypeName="email"
                       LabelTitle="Email"
-                      Name="name"
-                      Value=""
+                      Name="email"
                       Placeholder="Enter Your Email"
+                      callback = {handleOnChange}
                     />
-                    <ButtonComponents
-                      Type="submit"
-                      ClassName="btn mt-2 mb-3 submitBtn"
-                      Name="Send Code"
-                    />
+                    <Alert show={state.status} variant={state.alertType} onClose={() => setState({...state, status: false})} dismissible>
+                        <p>{state.message}</p>
+                    </Alert>
+                    <Button type="submit" className="btn mt-2 mb-3 submitBtn" onClick={handleOnClick}>SEND CODE</Button>
                   </Form>
                 </div>
               </Col>
