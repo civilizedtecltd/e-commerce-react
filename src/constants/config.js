@@ -135,6 +135,10 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
 
     get _RESET_PASSWORD(){
         return `${this.API}/auth/reset-password`;
+      }
+      
+      get _VERIFICATION_CODE() {
+        return `${this.API}/auth/verify-code`;
     }
  }
 

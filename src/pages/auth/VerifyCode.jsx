@@ -1,64 +1,123 @@
-import React from 'react';
-import {Container, Row, Col, Form} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
-import './assets/css/auth.css';
+import React, { useState } from 'react';
+import { Container, Row, Col, Form, Alert, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { URL } from "../../constants/config";
 import { InputFrom } from '../../components/FromComponents/InputComponent';
-import { ButtonComponents } from '../../components/ButtonComponents/ButtonComponents';
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
+import './assets/css/auth.css';
 const VerifyCode = () => {
-  return (<>
-    <PageLoader loading={false}/>
-    <div class="allWrapper fullHeight">
-      <header className="header authHeader clearfix" id="header">
-        <Container fluid={true}>
-          <Row>
-            <Col sm={6}>
-              <div class="logoWrapper mt-4 mb-4">
-                <h1 class="logoText"><Link to="/">LOGO</Link></h1>
-              </div>{/* end of logoWrapper */}
-            </Col>{/* end of Col */}
-          </Row>{/* end of Container */}
-        </Container>{/* end of Container */}
-      </header>{/* end of allWrapper  */}
+  const [state, setState] = useState({ code: null });
+  const [alert, setAlert] = useState({ show: false, message: "" });
 
-      <main class="loginMainArea clearfix fullHeight bgImage loginBodyBg" id="changepassBody">
-      <Container fluid={true}>
-          <Row>
-            <Col sm={4}>
-              <div class="loginBodyContent clearfix mb-4" id="loginBody">
-                <h2 class="headTitle mb-3">Verify code</h2>
-                <h5> Lorem ipsum dolor sit ament, consecrator advising elite, sed
-                    do elusion temporal incipient </h5>
-              </div>{/* end of loginBodyContent */}
+  const handleChange = data => {
+    setState({ ...state, ...data })
+  };
 
-              <div class="formWrapper clearfix" id="formWrapper">
-                <Form>
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    const clearAlert = setTimeout(() =>
+      setAlert({
+        show: false,
+        message: "",
+        success: false
+      }), 3000);
 
-                  <InputFrom
-                   LabelId="codeVerify"
-                   TypeName="text"
-                   LabelTitle="Verify Code"
-                   Name="codeVerify"
-                   Value=""
-                   Placeholder="Verify Code"
-                  />
+    axios.post(URL._VERIFICATION_CODE, { code: state.code})
+      .then(res => {
+        setAlert({
+          show: true,
+          message: res.data.message,
+          success: res.data.success
+        });
+        if (res.data.success === true) return window.location = `/change-password/${state.code}`;
+        return () => clearTimeout(clearAlert);
+      })
+      .catch(error => {
+        console.log(error.message)
+        setAlert({
+          show: true,
+          message: 'Server error occurred',
+          success: false
+        });
+        return () => clearTimeout(clearAlert);
+      });
+    
+    
+    
+  }
+  return (
+    <>
+      <PageLoader loading={false} />
+      <div className="allWrapper fullHeight">
+        <header className="header authHeader clearfix" id="header">
+          <Container fluid={true}>
+            <Row>
+              <Col sm={6}>
+                <div className="logoWrapper mt-4 mb-4">
+                  <h1 className="logoText">
+                    <Link to="/">LOGO</Link>
+                  </h1>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </header>
+        <main
+          className="loginMainArea clearfix fullHeight bgImage loginBodyBg"
+          id="changepassBody"
+        >
+          <Container fluid={true}>
+            <Row>
+              <Col sm={4}>
+                <div className="loginBodyContent clearfix mb-4" id="loginBody">
+                  <h2 className="headTitle mb-3">Verify code</h2>
+                  <h5>
+                    Lorem ipsum dolor sit ament, consecrator advising elite, sed
+                    do elusion temporal incipient
+                  </h5>
+                </div>
+                <div className="formWrapper clearfix" id="formWrapper">
+                  <Form>
+                    <InputFrom
+                      LabelId="codeVerify"
+                      TypeName="text"
+                      LabelTitle="Verify Code"
+                      Name="code"
+                      Placeholder="Verify Code"
+                      callback={handleChange}
+                    />
 
-                  <ButtonComponents
-                    Type="submit"
-                    ClassName="btn mt-2 mb-3 submitBtn"
-                    Name="Verify"
-                  />
+                    { alert.show ? (
+                      <Alert
+                        show={alert.show}
+                        variant={alert.success ? "success" : "danger"}
+                        onClose={() => setAlert({ show: false })}
+                        dismissible
+                      >
+                        <p>{alert.message}</p>
+                      </Alert>
+                    ) : (
+                      ""
+                    )}
 
-                </Form>{/* end of Form */}
-              </div>{/* end of formWrapper */}
-
-            </Col>{/* end of Col */}
-          </Row>{/* end of Row  */}
-        </Container>{/* end of Container  */}
-      </main>{/* end of loginMainArea  */}
-    </div>{/* end of allWrapper */}
-  </>);
+                    <Button
+                      type="submit"
+                      className="btn mt-2 mb-3 submitBtn"
+                      onClick={handleSubmit}
+                    >
+                      Verify
+                    </Button>
+                  </Form>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </main>
+      </div>
+    </>
+  );
 }
 
 export default VerifyCode;

@@ -50,7 +50,7 @@ const PaymentPage = props => {
   };
 
   const handleClose = () => setCardAlert(false);
-
+  
   const handleShow = e => {
     e.preventDefault();
     setCardId(e.target.id);

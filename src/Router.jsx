@@ -76,7 +76,7 @@ const Router = () => {
               <Route path="/signup" component={SignUp} />
               <PrivateRoute path="/profile-settings" component={UserProfile} />
               <Route path="/forgot-password" component={ForgotPassword} />
-              <Route path="/change-password" component={ChangePassword} />
+              <Route path="/change-password/:code" component={ChangePassword} />
               <Route path="/verify-code" component={VerifyCode} />
               <PrivateRoute path="/email-subscription" component={Subscription} />
               <PrivateRoute path="/my-order" component={OrderPage} />

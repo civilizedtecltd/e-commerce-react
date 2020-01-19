@@ -3,27 +3,20 @@ import { useLastLocation } from 'react-router-last-location';
 import { connect  } from 'react-redux';
 import { login } from '../../redux/actions/authActions';
 import { showFavItems } from '../../redux/actions/favoriteActions';
-
 import isEmpty from 'lodash/isEmpty';
-
 import {Container, Row, Col, Form, Alert} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom } from '../../components/FromComponents/InputComponent';
-
-
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import './assets/css/auth.css';
 import '../../assets/css/animate.css';
-import PageLoader from "../../components/pageLoader/PageLoaderComponent";
-
 
 
 const Login = (props) => {
 
   const [state, setState] = useState(true);
   const [formData] = useState({ email: '', password: '' });
-  const [message, setMessage] = useState('');
   const [alert, setAlert] = useState({status: false, message: ''});
   const lastLocation = useLastLocation();
   const { auth } = props;
@@ -137,19 +130,12 @@ const Login = (props) => {
                       </Link>
                     </p>
                   </Form>
-                  {/* end of form */}
                 </div>
-                {/* end of col */}
               </Col>
-              {/* end of col */}
             </Row>
-            {/* end of Row */}
           </Container>
-          {/* end of container */}
         </main>
-        {/* end of loginMainArea */}
       </div>
-      {/* end of loginMainArea */}
     </>
   );
 }

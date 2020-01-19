@@ -9,14 +9,14 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 const ChangePassword = () => {
   return (
     <>
-      <PageLoader loading={false}/>
+      <PageLoader loading={false} />
       <div className="allWrapper fullHeight">
         <header className="header authHeader clearfix" id="header">
           <Container fluid={true}>
             <Row>
               <Col sm={6}>
-                <div class="logoWrapper mt-4 mb-4">
-                  <h1 class="logoText">
+                <div className="logoWrapper mt-4 mb-4">
+                  <h1 className="logoText">
                     <Link to="/">LOGO</Link>
                   </h1>
                 </div>
@@ -31,14 +31,14 @@ const ChangePassword = () => {
         {/* end of allWrapper  */}
 
         <main
-          class="loginMainArea clearfix fullHeight bgImage loginBodyBg"
+          className="loginMainArea clearfix fullHeight bgImage loginBodyBg"
           id="changepassBody"
         >
           <Container fluid={true}>
             <Row>
               <Col sm={4}>
-                <div class="loginBodyContent clearfix mb-4" id="loginBody">
-                  <h2 class="headTitle mb-3">Enter a new password</h2>
+                <div className="loginBodyContent clearfix mb-4" id="loginBody">
+                  <h2 className="headTitle mb-3">Enter a new password</h2>
                   <h5>
                     Lorem ipsum dolor sit ament, consecrator advising elite, sed
                     do elusion temporal incipient{" "}
@@ -46,7 +46,7 @@ const ChangePassword = () => {
                 </div>
                 {/* end of loginBodyContent */}
 
-                <div class="formWrapper clearfix" id="formWrapper">
+                <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
                     <InputFrom
                       LabelId="createPass"
