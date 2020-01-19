@@ -9,58 +9,30 @@ import { InputFrom } from "../../components/FromComponents/InputComponent";
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const ForgotPassword = () => {
+  const [state, setState] = useState({ email: '', });
+  const [alert, setAlert] = useState({show:false, message:''})
 
-    const [state, setState] = useState({
-        email: '',
-        status: false,
-        alertType: 'danger',
-        message:'',
-    });
-
-    const handleOnChange = (data) => {
-        setState({
-            ...state,
-            ...data
-        })
-    }
-
+  const handleOnChange = (data) => setState({ ...state, ...data })
     const handleOnClick = (e) =>{
         e.preventDefault();
-        console.log("Email: ", state);
-
-        const clearAlert = setTimeout(() => {
-            setState({status: false, message:''});
-        }, 5000);
-
-
         axios.post(URL._RESET_PASSWORD, {email: state.email})
-             .then(res => {
-                console.log(res.data.data)
-                setState({
-                    ...state,
-                    status: true,
-                    alertType: 'success',
-                    message: 'Please Check your mail for further instructions.'
-                });
-
-                return () =>  clearTimeout(clearAlert);
-             })
-             .catch(error => {
-                 console.log('forget password: ', error)
-                 setState({
-                     ...state,
-                     status: true,
-                     alertType:'danger',
-                     message: 'Email did not matched.'
-                 });
-
-                 return () =>  clearTimeout(clearAlert);
-             });
+          .then(res => {
+            setAlert({ show: true, message: res.data.message, success: res.data.success });
+            setTimeout(() => setAlert({show:false,message:null,success:false}),2000);
+            return res.data.success ? setTimeout(() => (window.location = "/verify-code"),2000) : false;
+            })
+          .catch(error => {
+            console.log(error)
+              setAlert({ show: true, message: "Sorry server error occurred" });
+               return setTimeout(() =>
+                 setAlert({show: false, message: "", success:false },3000)
+               );
+          })
     }
 
   return (
     <>
-      <PageLoader loading={false}/>
+      <PageLoader loading={false} />
       <div className="AllWrapper fullHeight">
         <header className="header authHeader clearfix" id="header">
           <Container fluid={true}>
@@ -76,7 +48,10 @@ const ForgotPassword = () => {
           </Container>
         </header>
 
-        <main className="loginMainArea clearfix fullHeight bgImage loginBodyBg pb-4" id="loginArea">
+        <main
+          className="loginMainArea clearfix fullHeight bgImage loginBodyBg pb-4"
+          id="loginArea"
+        >
           <Container fluid={true}>
             <Row>
               <Col sm={4}>
@@ -96,12 +71,24 @@ const ForgotPassword = () => {
                       LabelTitle="Email"
                       Name="email"
                       Placeholder="Enter Your Email"
-                      callback = {handleOnChange}
+                      callback={handleOnChange}
                     />
-                    <Alert show={state.status} variant={state.alertType} onClose={() => setState({...state, status: false})} dismissible>
-                        <p>{state.message}</p>
-                    </Alert>
-                    <Button type="submit" className="btn mt-2 mb-3 submitBtn" onClick={handleOnClick}>SEND CODE</Button>
+                    { alert.show ? <Alert
+                      show={alert.show}
+                      variant={alert.success? 'success': 'danger'}
+                      onClose={() => setState({ ...state, status: false })}
+                      dismissible
+                    >
+                      <p>{alert.message}</p>
+                    </Alert>:""}
+                   
+                    <Button
+                      type="submit"
+                      className="btn mt-2 mb-3 submitBtn"
+                      onClick={handleOnClick}
+                    >
+                      SEND CODE
+                    </Button>
                   </Form>
                 </div>
               </Col>
