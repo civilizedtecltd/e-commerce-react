@@ -23,7 +23,6 @@ const Login = (props) => {
 
   const [state, setState] = useState(true);
   const [formData] = useState({ email: '', password: '' });
-  const [message, setMessage] = useState('');
   const [alert, setAlert] = useState({status: false, message: ''});
   const lastLocation = useLastLocation();
   const { auth } = props;
@@ -137,19 +136,12 @@ const Login = (props) => {
                       </Link>
                     </p>
                   </Form>
-                  {/* end of form */}
                 </div>
-                {/* end of col */}
               </Col>
-              {/* end of col */}
             </Row>
-            {/* end of Row */}
           </Container>
-          {/* end of container */}
         </main>
-        {/* end of loginMainArea */}
       </div>
-      {/* end of loginMainArea */}
     </>
   );
 }
