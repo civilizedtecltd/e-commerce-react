@@ -46,8 +46,12 @@ const Login = (props) => {
       if(auth.status.success && state){
         setState(false);
         props.showAllFavItem();
-        if(lastLocation.pathname === '/signup'){
-            props.history.push('/');
+    
+        const lastPath = (lastLocation) ? lastLocation.pathname : "/"; 
+        const lastPathMatched = lastPath.match("/change-password/");        
+
+        if (lastPath === "/signup" || (lastPathMatched && lastPathMatched[0] === "/change-password/")) {          
+          window.location = "/";
         }else{
             props.history.goBack();
         }
