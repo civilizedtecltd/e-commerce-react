@@ -20,6 +20,7 @@ const Login = (props) => {
   const [alert, setAlert] = useState({status: false, message: ''});
   const lastLocation = useLastLocation();
   const { auth } = props;
+  
 
   
   const loginData = (data) => {
@@ -38,6 +39,7 @@ const Login = (props) => {
     }
     else {
       props.login(formData);
+      setAlert({ status: true, message: props.error ? props.error : '' });
       setState(true);
       return setTimeout(() => setAlert({ status:false }), 3000);
     }
@@ -145,12 +147,14 @@ const Login = (props) => {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    error:state.auth.status ? state.auth.status.error.message : false
 });
 
 const mapDispatchToProps = dispatch =>  ({
     login: (formData) => dispatch(login(formData)),
-    showAllFavItem: () => dispatch(showFavItems())
+    showAllFavItem: () => dispatch(showFavItems()),
+   
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
