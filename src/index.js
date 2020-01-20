@@ -10,14 +10,14 @@ import './assets/css/normalize.css';
 import * as serviceWorker from './serviceWorker';
 
 const MainApp = () => (
-        <Router>
-          <LastLocationProvider>
-            <div>
-                <App />
-            </div>
-          </LastLocationProvider>
-        </Router>
-      );
+  <Router>
+    <LastLocationProvider watchOnlyPathname={true}>
+      <div>
+        <App />
+      </div>
+    </LastLocationProvider>
+  </Router>
+);
 
 ReactDOM.render(
 <Provider store={store} >

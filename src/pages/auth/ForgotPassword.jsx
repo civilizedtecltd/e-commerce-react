@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import "./assets/css/auth.css";
 import { Container, Row, Col, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 import { URL } from '../../constants/config';
 import {Button, Alert} from 'react-bootstrap'
 import { InputFrom } from "../../components/FromComponents/InputComponent";
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
-const ForgotPassword = () => {
+const ForgotPassword = (props) => {
   const [state, setState] = useState({ email: '', });
-  const [alert, setAlert] = useState({show:false, message:''})
+  const [alert, setAlert] = useState({ show: false, message: '' })
+  
+  const handleOnChange = (data) => setState({ ...state, ...data });
 
-  const handleOnChange = (data) => setState({ ...state, ...data })
     const handleOnClick = (e) =>{
         e.preventDefault();
         axios.post(URL._RESET_PASSWORD, {email: state.email})
           .then(res => {
             setAlert({ show: true, message: res.data.message, success: res.data.success });
             setTimeout(() => setAlert({show:false,message:null,success:false}),2000);
-            return res.data.success ? setTimeout(() => (window.location = "/verify-code"),2000) : false;
+            return res.data.success ? setTimeout(() => (props.history.push("/verify-code") ),2000) : false;
             })
           .catch(error => {
             console.log(error)
@@ -73,15 +74,19 @@ const ForgotPassword = () => {
                       Placeholder="Enter Your Email"
                       callback={handleOnChange}
                     />
-                    { alert.show ? <Alert
-                      show={alert.show}
-                      variant={alert.success? 'success': 'danger'}
-                      onClose={() => setState({ ...state, status: false })}
-                      dismissible
-                    >
-                      <p>{alert.message}</p>
-                    </Alert>:""}
-                   
+                    {alert.show ? (
+                      <Alert
+                        show={alert.show}
+                        variant={alert.success ? "success" : "danger"}
+                        onClose={() => setAlert({show:false})}
+                        dismissible
+                      >
+                        <p>{alert.message}</p>
+                      </Alert>
+                    ) : (
+                      ""
+                    )}
+
                     <Button
                       type="submit"
                       className="btn mt-2 mb-3 submitBtn"
@@ -100,4 +105,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default withRouter(ForgotPassword);
