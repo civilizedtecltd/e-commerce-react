@@ -1,16 +1,21 @@
-import React,{useState} from 'react'
+import React,{ useState, useRef, useEffect } from 'react';
+import {Button} from 'react-bootstrap'
 import paypal from 'paypal-checkout';
-import visa from './paypal.png';
-import './paymentbar.css'
+import paypal_icon from './paypal.png';
+import visa from './visa-2.png';
+import amex from './Amex-icon.jpg'
+import master_card from './master-card.png'
 
+import './paymentbar.css'
 function PaypalCheckoutButton() {
-    
-    const handleClick = (e) => {
-        e.preventDefault()
-        if (e.target.value == 'paypal') {
-            
-        }
-    }
+
+    const [check,setChecked] = useState({
+        paypal:false,
+        visa:false,
+        amex:false,
+        master:false,
+    })
+
     const paypalConf = {
         currency: "USD",
         env: "sandbox",
@@ -46,35 +51,25 @@ function PaypalCheckoutButton() {
     }
 
     return (
-        <div className="text-right">
-            <div class="btn-group paymentBtnGroup btn-group-justified" data-toggle="buttons">
+        <div className="text-right" >
 
-                <label class="btn paymentMethod active">
-                    <div class="method visa"></div>
-                    <input type="radio" name="options" checked/> 
-                </label>
-                
-                <label class="btn paymentMethod">
-                    <div class="method master-card"></div>
-                    <input type="radio" name="options"/>
-                </label>
-                
-                <label class="btn paymentMethod">
-                    <div class="method amex"></div>
-                    <input type="radio" name="options"/>
-                </label>
-                
-                <label class="btn paymentMethod">
-                    <div class="method vishwa"></div>
-                    <input type="radio" name="options"/> 
-                </label>
-                
-                <label class="btn paymentMethod">
-                <div class="method ez-cash"></div>
-                   <input type="radio" name="options"/>
-                </label>
-
-                </div>     
+            <input type="radio" class="radio_item" value="paypal" name="item" id="radio1" onChange={()=>setChecked({paypal:!check.paypal})} checked={ check.paypal ? true : false }/>
+            <label class="label_item" for="radio1"> <img src={paypal_icon}/></label> 
+             &nbsp;
+             &nbsp;
+            <input type="radio" class="radio_item" value="visa" name="item" id="radio2" onChange={()=>setChecked({visa:!check.visa})}  checked={ check.visa ? true : false } />
+            <label class="label_item" for="radio2"> <img src={visa} /> </label>
+             &nbsp;
+             &nbsp;
+            <input type="radio" class="radio_item" value="amex" name="item" id="radio3" onChange={()=>setChecked({amex:!check.amex})}  checked={ check.amex ? true : false }/>
+            <label class="label_item" for="radio3"><img src={amex} /></label>
+             &nbsp;
+             &nbsp;
+            <input type="radio" class="radio_item" value="master" name="item" id="radio4" onChange={()=>setChecked({master:!check.master})} checked={ check.master ? true : false } />
+            <label class="label_item" for="radio4"> <img src={master_card} /></label>
+            <div>
+                <Button className="mt-5"> Checkout </Button>
+            </div>
         </div>
     )
 }

@@ -19,7 +19,7 @@ import PaymentPage from './pages/users/PaymentPage';
 import Home from './pages/Home';
 import OfferPage from './pages/offerPage';
 import CartPage from './pages/CartPage';
-import CheckoutPage from './pages/CheckoutPage.old';
+import CheckoutPage from './pages/CheckoutPage';
 import FavoritesPage from './pages/FavoritesPage';
 import ShopPage from './pages/ShopPage';
 import ProductPage from "./pages/ProductPage";
@@ -39,6 +39,8 @@ import { shopNotInState } from './redux/actions/shopActions';
 import { authNotInState } from "./redux/actions/authActions";
 import { siteNotInState } from './redux/actions/siteActions';
 import isEqual from 'lodash/isEqual';
+
+
 
 
 const Router = () => {
