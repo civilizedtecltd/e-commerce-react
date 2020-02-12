@@ -19,7 +19,7 @@ import PaymentPage from './pages/users/PaymentPage';
 import Home from './pages/Home';
 import OfferPage from './pages/offerPage';
 import CartPage from './pages/CartPage';
-import CheckoutPage from './pages/CheckoutPage';
+import CheckoutPage from './pages/CheckoutPage.old';
 import FavoritesPage from './pages/FavoritesPage';
 import ShopPage from './pages/ShopPage';
 import ProductPage from "./pages/ProductPage";
@@ -39,7 +39,7 @@ import { shopNotInState } from './redux/actions/shopActions';
 import { authNotInState } from "./redux/actions/authActions";
 import { siteNotInState } from './redux/actions/siteActions';
 import isEqual from 'lodash/isEqual';
-import {Col} from "react-bootstrap";
+
 
 const Router = () => {
 
@@ -101,7 +101,8 @@ const Router = () => {
               <Route path='/googlePlus' component={() => {window.location = 'https://google.com'; return null;}}/>
               <Route path='/instagram' component={() => {window.location = 'https://instagram.com'; return null;}}/>
               <Route path='/twitter' component={() => {window.location = 'https://twitter.com'; return null;}}/>
-              <Route path='/logout' component={Logout} />
+            <Route path='/logout' component={Logout} />
+            {/* <Route path="/test-pay" component={Test}/> */}
               <Route path='*'  component={ErrorPage} />
         </Switch>
     )
