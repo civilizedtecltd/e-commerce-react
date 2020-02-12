@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Alert, Button } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 import { URL } from "../../constants/config";
 import { InputFrom } from '../../components/FromComponents/InputComponent';
@@ -120,4 +120,4 @@ const VerifyCode = () => {
   );
 }
 
-export default VerifyCode;
+export default withRouter(VerifyCode);

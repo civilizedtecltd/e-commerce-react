@@ -4,7 +4,6 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
 
   class APP_URL {
      constructor(){
-
         // this.BASE = `http://admin.abookstore.co.ke`;
         this.BASE = `http://localhost:3333`;
         this.API  = `${this.BASE}/api`;
@@ -39,7 +38,7 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
      }
 
       _ALL_BOOKS(page, show, keyword){
-         return `${this.API}/product/all-books/${page}/${show} ${keyword ? "/"+keyword : ''}`;
+         return `${this.API}/product/all-books/${page}/${show} ${keyword ? "/" +keyword : ''}`;
       }
 
      _DELETE_PAYMENT(id){
@@ -52,7 +51,7 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
      }
 
      _CATEGORY_BOOKS(id, page , show){
-        return `${this.API}/product/category/${id}/${page}/${show}`
+         return `${this.API}/product/category/${id}/${page}/${show}`;
      }
 
     get _FAVORITE_ITEMS(){
@@ -137,9 +136,13 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
         return `${this.API}/auth/reset-password`;
       }
       
-      get _VERIFICATION_CODE() {
+    get _VERIFICATION_CODE() {
         return `${this.API}/auth/verify-code`;
+      }
+      get _RECOVER_PASSWORD() {
+        return `${this.API}/auth/recover-password`;
     }
+      
  }
 
  const URL = new APP_URL();
