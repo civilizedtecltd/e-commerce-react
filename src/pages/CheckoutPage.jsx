@@ -1,73 +1,162 @@
-import React from 'react';
-import { Container, Row, Col, Table, Button } from 'react-bootstrap';
-import PaypalCheckoutButton from '../components/paymentMethodComponent/PaypalCheckoutButton';
+import React, {useState,useEffect}  from "react";
+import { Link } from "react-router-dom";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import { connect } from 'react-redux';
+import {getUser} from '../redux/actions/authActions';
+import { deliveryMethod } from '../redux/actions/shopActions'
+import CheckoutTab from './CheckoutTab';
+import PageLoader from "../components/pageLoader/PageLoaderComponent";
+import './checkout.css';
 
-const CheckoutPage = () => {
-  const products = [
-    {
-     price: 30.40,
-     name: 'comfy chair',
-     description: 'fancy chair, like new',
-     quantity:1,
-     image:'',
 
-    },
-    {
-     price: 30.40,
-     name: 'comfy chair',
-     description: 'fancy chair, like new',
-     quantity:1,
-     image:'',
+const CheckoutPage = (props) => {
 
-    },
+  const cartItems = props.cart;
 
-    ]
+  let totalBookPrice = 0;
+  let delivery_costs = props.delivery[0] ?  props.delivery[0].price : 0 ;
+  const [delivery_cost , setDeliveryCost] = useState(delivery_costs)
+  const totalQuantity = cartItems.map(data=>data.quantity)
+
+  let sumTotalQty = totalQuantity.reduce((ac,crr)=>ac+crr,0)
+  window.localStorage.setItem("sumQty",sumTotalQty);
+  if (sumTotalQty) {
+    sumTotalQty = window.localStorage.getItem('sumQty');
+  }
+    if (cartItems.length !== 0) {
+      cartItems.map(item => (totalBookPrice += item.amountPrice));
+    }
+
+  const promoInfo   = (props.promoInfo) ? props.promoInfo : { status: false };
+  let promoPrice    = totalBookPrice;
+
+  if(promoInfo.status){
+    const { discount, upto } = promoInfo;
+
+    if(Number(totalBookPrice) <= Number(upto)){
+
+        promoPrice = totalBookPrice - (totalBookPrice*(discount/100));
+
+    }else if(Number(totalBookPrice) > Number(upto)){
+
+        promoPrice = totalBookPrice - upto;
+    }
+
+  }
+
+  let costWithDelivery  = parseFloat(promoPrice) + parseFloat(delivery_cost);
+
+  useEffect(()=>{
+    return fetchData()
+  });
+  
+ const fetchData = () => {
+   props.getUser();
+   props.deliveryMethodFetch();
+ };
+
+  const getPaymentMethod = (paymentMethod) =>{
+      setDeliveryCost(paymentMethod.paymentData.price)
+  }
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <div className="m-auto">
-             <h4 className="text-uppercase mt-5">Shop Cart</h4>
-            <div className="mt-5">
-            <Table responsive="sm md lg xl" className="light">
-              <thead>
-                <th className="text-center" width="5%">###</th>
-                <th className="text-center" width="45%">Product Name</th>
-                <th className="text-center" width="35%">Details</th>
-                <th className="text-center" width="5%">Quantity</th>
-                <th className="text-center" width="10%">Total</th>
-              </thead>
-              <tbody>
-                {products.map((product,index)=>{
-                  return(
-                    <tr>
-                        <td>
-                         <i title="remove" class="fas fa-window-close"></i>
-                        </td>
-                         <td>
-                          <label>{product.name}</label>
-                          <img src={product.image} alt=""/>
-                        </td>
-                        <td>{product.description}</td>
-                        <td>
-                          <input className="text-center" type="number" name="quantity" id="quantity" min="1" value={product.quantity}/>
-                        </td>
-                        <td>{product.total}KE</td>
-                  </tr>
-                  )
-                })}
-              </tbody>
-            </Table>
-            </div>
-            <div className="text-right">
-              <PaypalCheckoutButton product={products[0]}/>
-            </div>
-          </div>
-        </Col>
-      </Row>
-   </Container>
-  );
-}
+    <>
+      <PageLoader loading={false}/>
+      <div className="allWrapper bgGray">
 
-export default CheckoutPage;
+        <Container >
+          <Row>
+            <Col className="text-center">
+              <div className="logoWrapper">
+                <h1 className="logoText"><Link to="/">LOGO</Link></h1>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+
+        <main className="mainContent clearfix" id="mainContent">
+          {cartItems.length === 0 ?'' :
+          <section className="checkoutProductDetails clearfix pt-5 pb-5" id="checkoutProductDetails">
+            <Container>
+              <Card className="border-0">
+                <Card.Body>
+                  <Row>
+                  <Col sm="8">
+                    <div className="productCartList webScrollbar">
+                    { cartItems.map((item,index)=>(
+                      <div key={index} className="productCartSingle d-flex align-items-center mb-2">
+                          <div className="cartProductMedia bgGray">
+                            <img src={item.cover_images.img_1} alt="" />
+                          </div>
+                          <div className="cartProductDes pl-3">
+                            <h3>
+                              <Link to="!#">
+                               { item.name }
+                              </Link>
+                            </h3>
+                            <p>
+                            Price:<span className="price"> Ksh { item.price } </span>
+                            </p>
+                            <p>
+                            Quantity:<span className="qut"> { item.quantity } </span>
+                            </p>
+                            <p>
+                            Total:<span className="totalPrice"> Ksh { item.amountPrice } </span>
+                            </p>
+                        </div>
+                  </div>))}
+                    </div>
+                 </Col>
+                  <Col className="align-self-end">
+                        <div className="cartProductValue clearfix" id="cartProductValue">
+                          <ul className="productValue text-right">
+                            <li>
+                              <strong>Total Quantity: </strong> {sumTotalQty}
+                            </li>
+
+                            <li>
+                              <strong>Total Product Price: </strong> Ksh {totalBookPrice}
+                            </li>
+                            { (!promoInfo.status) ?<></> :
+                                (
+                                <li>
+                                    <strong>Price after Discount: </strong> Ksh {promoPrice}
+                                </li>
+                                )
+                            }
+                            <li>
+                              <strong>Delivery:</strong> Ksh {delivery_cost}
+                            </li>
+
+                            <li>
+                              <strong>In Total Total:</strong> Ksh {costWithDelivery}
+                            </li>
+                          </ul>
+                        </div>
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Card>
+            </Container>
+          </section> }
+          <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
+              <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
+          </section>
+        </main>
+      </div>
+    </>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  cart:state.shop.cart,
+  delivery: state.shop.deliveryMethod,
+  promoInfo: state.shop.promo
+});
+
+const mapDispatchToProps = dispatch => ({
+    getUser : () => dispatch(getUser()),
+    deliveryMethodFetch:()=> dispatch(deliveryMethod())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage);

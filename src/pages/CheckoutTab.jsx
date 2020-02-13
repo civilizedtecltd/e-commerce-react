@@ -274,7 +274,7 @@ const CheckoutTab = (props) => {
                                                 </Col>
 
                                                 <Col sm="6" className="col-6 text-right">
-                                                    <button type="button" className="btn btn-primary" disabled={(isEmpty(payment.payment) ? true : false)} onClick={handleNext}>Next</button>
+                                                    <button type="button" className="btn btn-primary" onClick={handleNext}>Next</button>
                                                 </Col>
                                             </div>
                                         </Row>
