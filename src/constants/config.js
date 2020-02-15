@@ -6,6 +6,7 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
      constructor(){
         // this.BASE = `http://admin.abookstore.co.ke`;
         this.BASE = `http://localhost:3333`;
+
         this.API  = `${this.BASE}/api`;
      }
 
