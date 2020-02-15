@@ -39,7 +39,9 @@ import { shopNotInState } from './redux/actions/shopActions';
 import { authNotInState } from "./redux/actions/authActions";
 import { siteNotInState } from './redux/actions/siteActions';
 import isEqual from 'lodash/isEqual';
-import {Col} from "react-bootstrap";
+
+
+
 
 const Router = () => {
 
@@ -101,7 +103,8 @@ const Router = () => {
               <Route path='/googlePlus' component={() => {window.location = 'https://google.com'; return null;}}/>
               <Route path='/instagram' component={() => {window.location = 'https://instagram.com'; return null;}}/>
               <Route path='/twitter' component={() => {window.location = 'https://twitter.com'; return null;}}/>
-              <Route path='/logout' component={Logout} />
+            <Route path='/logout' component={Logout} />
+            {/* <Route path="/test-pay" component={Test}/> */}
               <Route path='*'  component={ErrorPage} />
         </Switch>
     )

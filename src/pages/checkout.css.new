@@ -1,0 +1,30 @@
+.remove-button{
+  background-color: rgb(255, 0, 0); /* Green */
+  border: none;
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: .8rem;
+  border-radius: .2rem;
+  cursor: pointer;
+}
+.action:hover{
+    box-shadow: 1px 1px 1px 3px red;
+}
+
+
+.payment-table tbody, .payment-table thead
+{
+    display: block;
+}
+
+.payment-table tbody 
+{
+   overflow: auto;
+   height: 200px;
+}
+
+
+
