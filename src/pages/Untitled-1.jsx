@@ -1,6 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 
+
 function Product({ product }) {
     const [paidFor, setPaidFor] = useState(false);
     const [error, setError] = useState(null);
