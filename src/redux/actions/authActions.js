@@ -27,7 +27,7 @@ const login = (authData) => dispatch => {
                     }
                 });
 
-            }catch(error){                
+            } catch (error) {                  
                 return dispatch({
                     type: Types.USER_LOGIN_ERROR,
                     payload: {
@@ -40,13 +40,13 @@ const login = (authData) => dispatch => {
             }
 
         }).catch(error => {  
-            console.log(error)
+            console.log("login error: ", error);
             return dispatch({
                     type: Types.USER_LOGIN_ERROR,
                     payload: {
                         status: {
                             success: false,
-                            error: error.response.data
+                            error: error.response
                         }
                     }
                 });
