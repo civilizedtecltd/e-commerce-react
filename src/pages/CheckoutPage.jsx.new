@@ -1,0 +1,170 @@
+import React,{useState} from 'react';
+import { Container, Row, Col, Table,Form,Button } from 'react-bootstrap';
+import {connect} from 'react-redux'
+import PaypalCheckoutButton from '../components/paymentMethodComponent/PaypalCheckoutButton';
+import  HeaderComponent from "../components/header/Header";
+import  MobileHeader from "../components/header/MobileHeader";
+import './checkout.css';
+const CheckoutPage = (props) => {
+  const [products]= useState(()=>[...props.cart])
+  const totalItem = props.cart.length
+  const favoriteItem = props.favorite.items;
+  const totalPrice = products.map(data=>data.amountPrice)
+  const totatQuantity = products.map(data=>data.quantity)
+  const grandTotal = totalPrice.reduce((ac,crr)=>ac+crr,0)
+  const grandQty = totatQuantity.reduce((ac,crr)=>ac+crr,0)
+
+  const [quantity, setQuantity]= useState({
+    quantity0:null
+  })
+ 
+
+  return (
+    <Container>
+      <Row>
+        <Col>
+         <HeaderComponent
+            favorite_item={favoriteItem.length}
+            cartItem={totalItem}
+          />
+          <MobileHeader
+            favorite_item={favoriteItem.length}
+            cartItem={totalItem}
+           />
+          <div className="m-auto">
+            <h4 className="text-uppercase mt-5">SHOPPING CART</h4>
+             <h6>Total Price: {grandTotal} KE</h6>
+             <h6>Total Quantity: {grandQty} KE</h6>
+            <div className="mt-5">
+            <Table striped responsive="sm md lg xl" className="payment-table">
+              <thead>
+               <tr>
+                <th className="text-center font-weight-bold" width="37%">Product Name</th>
+                <th className="text-center font-weight-bold" width="32%">Details</th>
+                <th className="text-center font-weight-bold" width="5%">Quantity</th>
+                <th className="text-center font-weight-bold" width="8%">Unit Price</th>
+                <th className="text-center font-weight-bold" width="10%">Total</th>
+               </tr>
+              </thead>
+              <tbody>
+                {products.map((product,index)=>{
+                  return(
+                    <tr key={index}>
+                      <td className="font-weight-bold" width="37%" >
+                        <label>{product.name}</label>
+                        <img src={product.cover_images.img_1} alt="" height="50px" width="50px" />         
+                        </td>
+                      <td className="text-center font-weight-bold" width="32%">{product.short_description}</td>
+                      <td className="text-center font-weight-bold" width="5%">{product.quantity}</td>
+                      <td className="text-center font-weight-bold" width="8%" >{product.price}</td>
+                      <td className="text-center font-weight-bold" width="10%" >{product.amountPrice} KE</td>
+                  </tr>
+                  )
+                })}
+              </tbody>
+            </Table>
+            
+            <div>
+                  <h2 className="text-center">Shipping Address</h2>
+                  <Form>
+                      <Row>
+                    <Col md={6}>
+                      <Form.Group controlId="firstName">
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control type="text" placeholder="First Name" />
+                      </Form.Group>
+
+                     <Form.Group controlId="email">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" />
+                      </Form.Group>
+
+                      <Form.Group controlId="country">
+                        <Form.Label>Country</Form.Label>
+                        <Form.Control type="text" placeholder="Country" />
+                      </Form.Group>
+                      <Form.Group controlId="zipcode">
+                        <Form.Label>Zip Code</Form.Label>
+                        <Form.Control type="text" placeholder="Zip code" />
+                      </Form.Group>
+                      <Form.Group controlId="address">
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control as="textarea" rows="3"/>
+                      </Form.Group>
+
+                      <div>
+                        <h4 className="mb-2">Accept</h4>
+                      <Form.Group controlId="accept">
+                        <Form.Check type="checkbox" label="Termis and Conditions"/>
+                      </Form.Group>
+
+                      <Form.Group controlId="accept">
+                        <Form.Check type="checkbox" label="Privecy and policy" />
+                      </Form.Group>
+                      </div>
+                      <div className="text-left">
+                        <PaypalCheckoutButton product={products[0]}/>
+                      </div>
+                    </Col>
+
+                    <Col md={6}>
+                       <Form.Group controlId="lastName">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control type="text" placeholder="Last Name" />
+                      </Form.Group>
+                       <Form.Group controlId="phonenumber">
+                        <Form.Label>Phone Number</Form.Label>
+                        <Form.Control type="text" placeholder="Phone Number" />
+                      </Form.Group>
+                       <Form.Group controlId="city">
+                        <Form.Label>City</Form.Label>
+                        <Form.Control type="text" placeholder="City" />
+                      </Form.Group>
+                       <Form.Group controlId="house">
+                        <Form.Label>House/apartment number</Form.Label>
+                        <Form.Control type="text" placeholder="House/apartment number"/>
+                      </Form.Group>
+
+                       <div>
+                         <h4 className="mt-5">Delivery Type</h4>
+                        <Form.Group controlId="accept">
+                          <Form.Check type="checkbox" label="Standard"/>
+                        </Form.Group>
+
+                        <Form.Group controlId="accept">
+                          <Form.Check type="checkbox" label="Express" />
+                        </Form.Group>
+                       </div>
+
+                    </Col>
+                </Row>
+              </Form>
+                  
+                
+            </div>
+
+            </div>
+             
+
+          </div>
+        </Col>
+      </Row>
+   </Container>
+  );
+}
+
+const mapStateToProps = (state) => {
+  return {
+    cart:state.shop.cart,
+    favorite: state.favorite,
+    method:state.shop.deliveryMethod
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CheckoutPage);

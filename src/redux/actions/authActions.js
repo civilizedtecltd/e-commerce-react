@@ -39,7 +39,8 @@ const login = (authData) => dispatch => {
                 });
             }
 
-        }).catch(error => {            
+        }).catch(error => {  
+            console.log(error)
             return dispatch({
                     type: Types.USER_LOGIN_ERROR,
                     payload: {
@@ -56,7 +57,7 @@ const logout = () => dispatch => {
     const { jwt } = store.getState().auth;
     setAuthToken();
     axios.post(URL._LOGOUT, { refreshToken: jwt.refreshToken })
-        .then(res => {
+        .then(res=> {
             localStorage.removeItem('authData');
             localStorage.removeItem('state');
             return dispatch({

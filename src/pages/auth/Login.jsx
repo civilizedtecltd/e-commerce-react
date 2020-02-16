@@ -147,8 +147,8 @@ const Login = (props) => {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth,
-    error:state.auth.status ? state.auth.status.error.message : false
+  auth: state.auth,
+  error: (state.auth.status.error !== undefined) ? (state.auth.status.error.message) : ""
 });
 
 const mapDispatchToProps = dispatch =>  ({
