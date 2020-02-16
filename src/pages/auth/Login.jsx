@@ -17,7 +17,8 @@ const Login = (props) => {
 
   const [state, setState] = useState(true);
   const [formData] = useState({ email: '', password: '' });
-  const [alert, setAlert] = useState({status: false, message: ''});
+  const [alert, setAlert] = useState({ status: false, message: '' });
+  
   const lastLocation = useLastLocation();
   const { auth } = props;
   
@@ -38,10 +39,11 @@ const Login = (props) => {
       return setTimeout(() => setAlert({status:false }), 3000);
     }
     else {
+    
       props.login(formData);
-      setAlert({ status: true, message: props.error ? props.error : '' });
       setState(true);
-      return setTimeout(() => setAlert({ status:false }), 3000);
+      setAlert({ status: true, message: props.error ? props.error : '' });
+      return setTimeout(() => setAlert({ status: false }), 3000);
     }
   }
     if(!isEmpty(auth.status)){
@@ -113,7 +115,7 @@ const Login = (props) => {
                     {alert.status ? (
                       <Alert
                         show={alert.status}
-                        variant="danger"
+                        variant={'danger'}
                         onClose={() => setAlert({ status:false })}
                         dismissible
                       >
@@ -148,7 +150,7 @@ const Login = (props) => {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  error: (state.auth.status.error !== undefined) ? (state.auth.status.error.message) : ""
+  error: (state.auth.status.error !== undefined) ? (state.auth.status.error.data.message) : ""
 });
 
 const mapDispatchToProps = dispatch =>  ({
