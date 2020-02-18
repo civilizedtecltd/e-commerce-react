@@ -162,6 +162,62 @@ const updatePaymentMethod = (data) => dispatch => {
 } */
 
 
+export const OauthLogin = (email) => dispatch => {
+    removeAuthToken();
+    axios.post(URL.__OAUTH('login'), {email: email})
+        .then(res => {
+            try {
+                const jwt = res.data.data;
+                const { data } = decode(jwt.token);
+                setAuthToken(jwt.token);
+                return dispatch({
+                    type: Types.USER_LOGIN,
+                    payload: {
+                        jwt: jwt,
+                        user: data,
+                        status: {
+                            success: true
+                        }
+                    }
+                });
+
+            } catch (error) {
+                return dispatch({
+                    type: Types.USER_LOGIN_ERROR,
+                    payload: {
+                        status: {
+                            success: false,
+                            error: error
+                        }
+                    }
+                });
+            }
+
+        }).catch(error => {
+            console.log("login error: ", error);
+            console.log("login")
+            return dispatch({
+                type: Types.USER_LOGIN_ERROR,
+                payload: {
+                    status: {
+                        success: false,
+                        error: error.response
+                    }
+                }
+            });
+        });
+}
+
+export const emptyStatus = ()  => {
+    return ({
+        type: Types.EMPTY_STATUS,
+        payload: {            
+            status: {}
+        }
+    });
+}
+
+
 export {
   login,
   logout,
@@ -171,6 +227,6 @@ export {
   setPayment,
   deletePayment,
   confirmOrder,
-  updatePaymentMethod,
+    updatePaymentMethod,
  /*  authDataNotInState */
 };

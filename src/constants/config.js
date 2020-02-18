@@ -4,8 +4,8 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
 
   class APP_URL {
      constructor(){
-        this.BASE = `https://admin.abookstore.co.ke`;
-        //this.BASE = `http://localhost:3333`;
+        // this.BASE = `https://admin.abookstore.co.ke`;
+        this.BASE = `http://localhost:3333`;
 
         this.API  = `${this.BASE}/api`;
      }
@@ -142,7 +142,11 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
       }
       get _RECOVER_PASSWORD() {
         return `${this.API}/auth/recover-password`;
-    }
+      }
+      
+      __OAUTH(type) {
+          return `${this.API}/auth0/${type}`
+      }
       
  }
 

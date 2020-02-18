@@ -1,11 +1,24 @@
 import React from 'react';
 import { FacebookSignIn, GoogleSignIn } from "google-facebook-signin-react";
+import {connect} from 'react-redux'
+import { OauthLogin, emptyStatus } from '../../redux/actions/authActions'
 
-const OAuth = () => {
+
+const OAuth = (props) => {
 
     const success =(res) =>{
         return new Promise((resolve, reject) => {
-            console.log(res);
+            if (res.provider === "google") {
+                console.log(res.data.Qt.ZU)
+                props.login(res.data.Qt.ZU)
+            }
+            if (res.provider==='facebook') {
+                console.log(res.data.email)
+                props.login(res.data.email)
+                setTimeout(() => {
+                    props.emptyStatus()
+                }, 3000);
+            }
             resolve();
         });
     }
@@ -20,6 +33,7 @@ const OAuth = () => {
                 appId={"1011773875863022"}
                 onReject={error}
                 onResolve={success}
+                fetch_basic_profile={true}
             >
                 Facebook
         </FacebookSignIn>
@@ -35,4 +49,11 @@ const OAuth = () => {
         </div>
     )
 }
-export default OAuth;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (email) => dispatch(OauthLogin(email)),
+        emptyStatus:()=>dispatch(emptyStatus())
+   }
+}
+export default connect(null,mapDispatchToProps)(OAuth);
