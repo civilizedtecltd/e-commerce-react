@@ -4919,6 +4919,11 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
+google-facebook-signin-react@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/google-facebook-signin-react/-/google-facebook-signin-react-1.2.0.tgz#fb886a5b94abf6c571897534aa150547af44a9ae"
+  integrity sha512-Zfs0xB1pa5ufgY9RSid7yrkG2oXgeOtX1W3elrtBbGnjvkLPrKZ0IW0LfUmgdVpKuaLIyGNiWiYeVeu0d+c0bw==
+
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.3.tgz#4a12ff1b60376ef09862c2093edd908328be8423"

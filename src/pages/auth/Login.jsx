@@ -39,11 +39,16 @@ const Login = (props) => {
       return setTimeout(() => setAlert({status:false }), 3000);
     }
     else {
-    
       props.login(formData);
       setState(true);
-      setAlert({ status: true, message: props.error ? props.error : '' });
-      return setTimeout(() => setAlert({ status: false }), 3000);
+      if (props.error) {
+        setAlert({ status: true, message: props.error ? props.error : '' });
+        return setTimeout(() => setAlert({ status: false }), 3000);
+      }
+      else {
+        setAlert({ status: false});
+      }
+      
     }
   }
     if(!isEmpty(auth.status)){

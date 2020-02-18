@@ -11,10 +11,8 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 const ForgotPassword = (props) => {
   const [state, setState] = useState({ email: '', });
   const [alert, setAlert] = useState({ show: false, message: '' })
-  
   const handleOnChange = (data) => setState({ ...state, ...data });
-
-    const handleOnClick = (e) =>{
+  const handleOnClick = (e) =>{
         e.preventDefault();
         axios.post(URL._RESET_PASSWORD, {email: state.email})
           .then(res => {
