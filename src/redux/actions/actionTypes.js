@@ -26,6 +26,8 @@ export const USER_UPDATE_ERROR          =   'USER_UPDATE_ERROR';
 export const SET_PAYMENT                =   'SET_PAYMENT';
 export const DELETE_PAYMENT             =   'DELETE_PAYMENT';
 export const AUTH_NOT_IN_STATE          =   'AUTH_NOT_IN_STATE';
+export const EMPTY_STATUS               =   'EMPTY_STATUS';
+export const SIGNUP_USER                =   'SIGNUP_USER';
 
 //add to favorite  types
 export const ADD_FAVORITE               =   'ADD_FAVORITE';

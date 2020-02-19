@@ -1,7 +1,7 @@
 import React, {useState}  from 'react';
 import { useLastLocation } from 'react-router-last-location';
 import { connect  } from 'react-redux';
-import { login } from '../../redux/actions/authActions';
+import { login, emptyStatus } from '../../redux/actions/authActions';
 import { showFavItems } from '../../redux/actions/favoriteActions';
 import isEmpty from 'lodash/isEmpty';
 import {Container, Row, Col, Form, Alert} from 'react-bootstrap';
@@ -32,24 +32,35 @@ const Login = (props) => {
     event.preventDefault();
     if (formData.email === '') { 
       setAlert({status: true, message: "Email should not be empty!"});
-      return setTimeout(() => setAlert({status: false}), 3000);
+      return setTimeout(() => {
+        setAlert({ status: false })
+        props.emptyStatus()
+      }, 3000);
     }
     if (formData.password === '') {
       setAlert({ status: true, message: "Password should not be empty" });
-      return setTimeout(() => setAlert({status:false }), 3000);
+      return setTimeout(() => {
+        setAlert({ status: false })
+        props.emptyStatus()
+      }, 3000);
     }
     else {
       props.login(formData);
       setState(true);
+      
       if (props.error) {
         setAlert({ status: true, message: props.error ? props.error : '' });
-        return setTimeout(() => setAlert({ status: false }), 3000);
+        return setTimeout(() => {
+          setAlert({ status: false })
+          props.emptyStatus()
+        }, 3000);
       }
       else {
         setAlert({ status: false});
       }
       
     }
+    
   }
     if(!isEmpty(auth.status)){
       if(auth.status.success && state){
@@ -161,7 +172,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>  ({
     login: (formData) => dispatch(login(formData)),
     showAllFavItem: () => dispatch(showFavItems()),
-   
+    emptyStatus: () => dispatch(emptyStatus())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
