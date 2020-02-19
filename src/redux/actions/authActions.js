@@ -154,6 +154,7 @@ const updatePaymentMethod = (data) => dispatch => {
     }).catch(error=>console.log(error))
 }
 
+
 /* const authDataNotInState = (auth) => {
     return {
         type: Types.AUTH_NOT_IN_STATE,
@@ -162,9 +163,9 @@ const updatePaymentMethod = (data) => dispatch => {
 } */
 
 
-export const OauthLogin = (email) => dispatch => {
+export const OauthLogin = (OauthData) => dispatch => {
     removeAuthToken();
-    axios.post(URL.__OAUTH('login'), {email: email})
+    axios.post(URL.__OAUTH('login'), { email: OauthData.email ? OauthData.email : OauthData.zu })
         .then(res => {
             try {
                 const jwt = res.data.data;
@@ -206,6 +207,27 @@ export const OauthLogin = (email) => dispatch => {
                 }
             });
         });
+}
+
+
+
+
+export const OauthSignUp = (OauthData) => dispatch=> {
+    axios.post(URL.__OAUTH('signup'), {
+        email: OauthData.email ? OauthData.email : OauthData.zu,
+        first_name: OauthData.first_name ? OauthData.first_name : OauthData.vW,
+        last_name: OauthData.last_name ? OauthData.last_name : OauthData.wU
+    }).then(res => {
+        dispatch({
+            type: Types.SIGNUP_USER,
+            payload: {
+                signup:true
+            }
+        })
+        console.log(res.data)
+    }).catch(error => {
+        console.log(error)
+    })
 }
 
 export const emptyStatus = ()  => {
