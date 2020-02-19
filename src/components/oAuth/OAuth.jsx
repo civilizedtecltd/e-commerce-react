@@ -21,7 +21,7 @@ const OAuth = (props) => {
             if (path === '/signup') {
                   console.log(res)
                 if (res.provider === "google") {
-                    props.signup(res.data.Qt)
+                    props.signup(res.data.Qt || res.data.Rt)
                 }
                 if (res.provider === 'facebook') {
                     // console.log(res)
