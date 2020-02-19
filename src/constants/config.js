@@ -140,7 +140,7 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     get _VERIFICATION_CODE() {
         return `${this.API}/auth/verify-code`;
       }
-      get _RECOVER_PASSWORD() {
+    get _RECOVER_PASSWORD() {
         return `${this.API}/auth/recover-password`;
       }
       

@@ -197,7 +197,6 @@ export const OauthLogin = (OauthData) => dispatch => {
 
         }).catch(error => {
             console.log("login error: ", error);
-            console.log("login")
             return dispatch({
                 type: Types.USER_LOGIN_ERROR,
                 payload: {
@@ -213,7 +212,8 @@ export const OauthLogin = (OauthData) => dispatch => {
 
 
 
-export const OauthSignUp = (OauthData) => dispatch=> {
+export const OauthSignUp = (OauthData) => dispatch => {
+    console.log('form AuthActon',OauthData)
     axios.post(URL.__OAUTH('signup'), {
         email: OauthData.email ? OauthData.email : OauthData.zu,
         first_name: OauthData.first_name ? OauthData.first_name : OauthData.vW,
