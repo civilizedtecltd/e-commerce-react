@@ -10,7 +10,8 @@ const OAuth = (props) => {
             const path = window.location.pathname;
             if (path ==='/login') {
                 if (res.provider === "google") {
-                    props.login(res.data.Qt || res.data.Rt)
+                    const loginData = res.data.Qt || res.data.Rt 
+                    props.login(loginData)
                 }
                 if (res.provider === 'facebook') {
                     props.login(res.data)
