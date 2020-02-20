@@ -150,7 +150,7 @@ function ProductPage(props) {
                     <div className="card-body productCardBody">
                       <h5 className="product-single-Price mb-4">
                         Ksh {book ? book.price : 0 }
-                        <span className="productAvaility">{book ? ((book.status === 1) ? `Available` : `Unavailable`) : ``}</span>
+                        <span className="productAvailability">{book ? ((book.status === 1) ? `Available` : `Unavailable`) : ``}</span>
                       </h5>
                       <div className="productSortDes">
                         <p>
