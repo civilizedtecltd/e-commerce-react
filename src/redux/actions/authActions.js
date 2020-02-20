@@ -172,7 +172,9 @@ export const OauthLogin = (OauthData) => dispatch => {
         .then(res => {
             try {
                 const jwt = res.data.data;
-                const {data} = decode(jwt);
+                console.log("OAuth Login JWT: ", jwt);
+
+                const { data } = decode(jwt);
                 //localStorage.setItem('authData', JSON.stringify(jwt));
                 setAuthToken(jwt.token);
                 return dispatch({

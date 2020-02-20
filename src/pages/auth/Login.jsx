@@ -38,7 +38,7 @@ const Login = (props) => {
       }, 3000);
     }
     if (formData.password === '') {
-      setAlert({ status: true, message: "Password should not be empty" });
+      setAlert({ status: true, message: "Password should not be empty"});
       return setTimeout(() => {
         setAlert({ status: false })
         props.emptyStatus()
