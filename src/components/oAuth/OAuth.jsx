@@ -5,16 +5,12 @@ import { OauthLogin, emptyStatus, OauthSignUp } from '../../redux/actions/authAc
 
 
 const OAuth = (props) => {
-
     const success = (res) => {
-        const path = window.location.pathname;
         return new Promise((resolve, reject) => {
+            const path = window.location.pathname;
             if (path ==='/login') {
                 if (res.provider === "google") {
-                    props.login(res.data.Qt)
-                    return setTimeout(() => {
-                        props.emptyStatus()
-                    }, 3000);
+                    props.login(res.data.Qt || res.data.Rt)
                 }
                 if (res.provider === 'facebook') {
                     props.login(res.data)
@@ -22,12 +18,12 @@ const OAuth = (props) => {
                 resolve();
             }
 
-            if (path ==='/signup') {
+            if (path === '/signup') {
                 if (res.provider === "google") {
-                    props.signup(res.data.Qt)
+                    const OauthData = res.data.Qt ? res.data.Qt : res.data.Rt;
+                    props.signup(OauthData)
                 }
                 if (res.provider === 'facebook') {
-                    console.log(res)
                     props.signup(res.data)
                 }
                 resolve();
