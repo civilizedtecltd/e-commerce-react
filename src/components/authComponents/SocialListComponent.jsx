@@ -14,7 +14,7 @@ export default function SocialListComponent() {
           {/* <li className="googlePlus">
             <a href="#!" onClick={googleLogin}><i className="fab fa-google"></i></a>
           </li> */}
-          <OAuth/>
+          <OAuth />
         </ul>
         <h4>OR</h4>
       </div>

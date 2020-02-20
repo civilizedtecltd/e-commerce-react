@@ -107,7 +107,7 @@ const SignUp = (props) => {
 
             <Row>
               <Col sm={6}>
-                <SocialListComponent/>
+                <SocialListComponent />
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
                     <SelectFrom LabelTitle="Category"
