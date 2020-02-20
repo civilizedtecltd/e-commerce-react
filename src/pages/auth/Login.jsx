@@ -63,6 +63,10 @@ const Login = (props) => {
 
   }
     if(!isEmpty(auth.status)){
+
+        console.log('Login page auth.status: ', auth.status);
+        console.log("state: ", state);
+
       if(auth.status.success && state){
         setState(false);
         props.showAllFavItem();
@@ -83,7 +87,7 @@ const Login = (props) => {
 
 
   const OAuthLogin = (state) =>{
-      console.log("Login page OAuth Login state");
+      console.log("Login page OAuth Login state: ",state);
     setState(state);
   }
 
