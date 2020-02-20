@@ -13,7 +13,7 @@ const login = (authData) => dispatch => {
                 const jwt = res.data.data;
                 const { data } = decode(jwt.token);
 
-                localStorage.setItem('authData', JSON.stringify(jwt));
+                //localStorage.setItem('authData', JSON.stringify(jwt));
                 setAuthToken(jwt.token);
 
                 return dispatch({
@@ -171,9 +171,9 @@ export const OauthLogin = (OauthData) => dispatch => {
     })
         .then(res => {
             try {
-                const jwt = res.data.data.token;
+                const jwt = res.data.data;
                 const {data} = decode(jwt);
-                localStorage.setItem('authData', JSON.stringify(jwt));
+                //localStorage.setItem('authData', JSON.stringify(jwt));
                 setAuthToken(jwt.token);
                 return dispatch({
                     type: Types.USER_LOGIN,
