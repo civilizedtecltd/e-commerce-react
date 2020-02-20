@@ -41,11 +41,11 @@ const OAuth = (props) => {
             <FacebookSignIn appId={"1011773875863022"} onReject={error} onResolve={success} fieldsProfile={'first_name, last_name, email'} fetch_basic_profile={true}>
                     Facebook
             </FacebookSignIn>
-            
+
             <GoogleSignIn client_id={"959352266819-f73q6j7ph8vik97t2l25lb0ndqj1odrc.apps.googleusercontent.com"} onReject={error} onResolve={success}>
                     Google
             </GoogleSignIn>
-            
+
         </div>
     )
 }

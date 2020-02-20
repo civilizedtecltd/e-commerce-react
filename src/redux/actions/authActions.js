@@ -174,6 +174,9 @@ export const OauthLogin = (OauthData) => dispatch => {
             try {
                 const jwt = res.data.data;
                 const { data } = decode(jwt.token);
+
+                console.log('OauthLogin data: ', data);
+
                 setAuthToken(jwt.token);
                 return dispatch({
                     type: Types.USER_LOGIN,
@@ -254,7 +257,7 @@ export const OauthSignUp = (OauthData) => dispatch => {
 export const emptyStatus = ()  => {
     return ({
         type: Types.EMPTY_STATUS,
-        payload: {            
+        payload: {
             status: {}
         }
     });
