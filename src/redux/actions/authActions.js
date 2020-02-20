@@ -166,17 +166,14 @@ const updatePaymentMethod = (data) => dispatch => {
 
 export const OauthLogin = (OauthData) => dispatch => {
     removeAuthToken();
-    console.log(OauthData)
     axios.post(URL.__OAUTH('login'), {
         email: OauthData.email ? OauthData.email : OauthData.zu || OauthData.Au
     })
         .then(res => {
             try {
-                const jwt = res.data.data;
-                const { data } = decode(jwt.token);
-
-                console.log('OauthLogin data: ', data);
-
+                const jwt = res.data.data.token;
+                const {data} = decode(jwt);
+                localStorage.setItem('authData', JSON.stringify(jwt));
                 setAuthToken(jwt.token);
                 return dispatch({
                     type: Types.USER_LOGIN,
@@ -215,6 +212,8 @@ export const OauthLogin = (OauthData) => dispatch => {
         });
 }
 
+
+
 //local server response
 
 // eV: "112585867732884445950"
@@ -235,8 +234,9 @@ wU: "Kungu"
 UK: "https://lh4.googleusercontent.com/-0Oz3x1oblls/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcbqfJawRFL9lBKMKEXPhaNuLSdeA/s96-c/photo.jpg"
 zu: "abookstore254@gmail.com"
  */
+
+
 export const OauthSignUp = (OauthData) => dispatch => {
-    console.log('form AuthActon',OauthData)
     axios.post(URL.__OAUTH('signup'), {
         email: OauthData.email ? OauthData.email : OauthData.zu || OauthData.Au ,
         first_name: OauthData.first_name ? OauthData.first_name : OauthData.vW || OauthData.JW,
@@ -248,7 +248,9 @@ export const OauthSignUp = (OauthData) => dispatch => {
                 signup:true
             }
         })
-        console.log(res.data)
+        if (res.data.success === true) {
+           return window.location.href='/login'
+        }
     }).catch(error => {
         console.log(error)
     })
