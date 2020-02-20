@@ -18,7 +18,7 @@ const ReviewComponent = ({name, date, comment, rating,value}) => {
                     <div className="reviewCardBody">
                         <div className="row reviewUserInfo">
                             <div className="col mb-2">
-                                <h6 className="reviewUserName">{name}<span className="reviewDate">{date}</span></h6>
+                                <h6 className="reviewUserName">{name}</h6> {/* <span className="reviewDate">{date}</span> */}
                             </div>
                             <div className="col">
                             <TotalRating value={ rating} />
