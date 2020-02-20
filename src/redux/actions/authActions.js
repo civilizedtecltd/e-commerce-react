@@ -166,7 +166,10 @@ const updatePaymentMethod = (data) => dispatch => {
 
 export const OauthLogin = (OauthData) => dispatch => {
     removeAuthToken();
-    axios.post(URL.__OAUTH('login'), { email: OauthData.email ? OauthData.email : OauthData.zu })
+    console.log(OauthData)
+    axios.post(URL.__OAUTH('login'), {
+        email: OauthData.email ? OauthData.email : OauthData.zu || OauthData.Au
+    })
         .then(res => {
             try {
                 const jwt = res.data.data;
@@ -200,7 +203,6 @@ export const OauthLogin = (OauthData) => dispatch => {
 
         }).catch(error => {
             console.log("login error: ", error);
-            console.log("login")
             return dispatch({
                 type: Types.USER_LOGIN_ERROR,
                 payload: {
@@ -213,14 +215,32 @@ export const OauthLogin = (OauthData) => dispatch => {
         });
 }
 
+//local server response
+
+// eV: "112585867732884445950"
+// Ad: "John Kungu"
+// JW: "John"
+// JU: "Kungu"
+// kL: "https://lh4.googleusercontent.com/-0Oz3x1oblls/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcbqfJawRFL9lBKMKEXPhaNuLSdeA/s96-c/photo.jpg"
+// Au: "abookstore254@gmail.com"
 
 
 
-export const OauthSignUp = (OauthData) => dispatch=> {
+/*
+//https server response
+SU: "112585867732884445950"
+Ad: "John Kungu"
+vW: "John"
+wU: "Kungu"
+UK: "https://lh4.googleusercontent.com/-0Oz3x1oblls/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcbqfJawRFL9lBKMKEXPhaNuLSdeA/s96-c/photo.jpg"
+zu: "abookstore254@gmail.com"
+ */
+export const OauthSignUp = (OauthData) => dispatch => {
+    console.log('form AuthActon',OauthData)
     axios.post(URL.__OAUTH('signup'), {
-        email: OauthData.email ? OauthData.email : OauthData.zu,
-        first_name: OauthData.first_name ? OauthData.first_name : OauthData.vW,
-        last_name: OauthData.last_name ? OauthData.last_name : OauthData.wU
+        email: OauthData.email ? OauthData.email : OauthData.zu || OauthData.Au ,
+        first_name: OauthData.first_name ? OauthData.first_name : OauthData.vW || OauthData.JW,
+        last_name: OauthData.last_name ? OauthData.last_name : OauthData.wU || OauthData.JU
     }).then(res => {
         dispatch({
             type: Types.SIGNUP_USER,
@@ -253,6 +273,6 @@ export {
   setPayment,
   deletePayment,
   confirmOrder,
-    updatePaymentMethod,
+  updatePaymentMethod,
  /*  authDataNotInState */
 };
