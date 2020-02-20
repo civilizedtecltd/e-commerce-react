@@ -18,19 +18,19 @@ const Login = (props) => {
   const [state, setState] = useState(true);
   const [formData] = useState({ email: '', password: '' });
   const [alert, setAlert] = useState({ status: false, message: '' });
-  
+
   const lastLocation = useLastLocation();
   const { auth } = props;
-  
 
-  
+
+
   const loginData = (data) => {
     Object.keys(data).map(key => formData[key] = data[key])
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (formData.email === '') { 
+    if (formData.email === '') {
       setAlert({status: true, message: "Email should not be empty!"});
       return setTimeout(() => {
         setAlert({ status: false })
@@ -38,7 +38,7 @@ const Login = (props) => {
       }, 3000);
     }
     if (formData.password === '') {
-      setAlert({ status: true, message: "Password should not be empty" });
+      setAlert({ status: true, message: "Password should not be empty"});
       return setTimeout(() => {
         setAlert({ status: false })
         props.emptyStatus()
@@ -47,7 +47,7 @@ const Login = (props) => {
     else {
       props.login(formData);
       setState(true);
-      
+
       if (props.error) {
         setAlert({ status: true, message: props.error ? props.error : '' });
         return setTimeout(() => {
@@ -58,19 +58,23 @@ const Login = (props) => {
       else {
         setAlert({ status: false});
       }
-      
+
     }
-    
+
   }
     if(!isEmpty(auth.status)){
+
+        console.log('Login page auth.status: ', auth.status);
+        console.log("state: ", state);
+
       if(auth.status.success && state){
         setState(false);
         props.showAllFavItem();
-    
-        const lastPath = (lastLocation) ? lastLocation.pathname : "/"; 
-        const lastPathMatched = lastPath.match("/change-password/");        
 
-        if (lastPath === "/signup" || (lastPathMatched && lastPathMatched[0] === "/change-password/")) {          
+        const lastPath = (lastLocation) ? lastLocation.pathname : "/";
+        const lastPathMatched = lastPath.match("/change-password/");
+
+        if (lastPath === "/signup" || (lastPathMatched && lastPathMatched[0] === "/change-password/")) {
           window.location = "/";
         }else{
             props.history.goBack();
@@ -80,9 +84,12 @@ const Login = (props) => {
          setState(false);
       }
   }
-  
 
-  const OAuthLogin = (state) =>setState(state)
+
+  const OAuthLogin = (state) =>{
+      console.log("Login page OAuth Login state: ",state);
+    setState(state);
+  }
 
 
   return (

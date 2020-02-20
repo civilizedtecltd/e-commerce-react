@@ -171,8 +171,10 @@ export const OauthLogin = (OauthData) => dispatch => {
     })
         .then(res => {
             try {
-                const jwt = res.data.data.token;
-                const {data} = decode(jwt);
+                const jwt = res.data.data;
+                console.log("OAuth Login JWT: ", jwt);
+
+                const { data } = decode(jwt);
                 localStorage.setItem('authData', JSON.stringify(jwt));
                 setAuthToken(jwt.token);
                 return dispatch({
@@ -187,6 +189,7 @@ export const OauthLogin = (OauthData) => dispatch => {
                 });
 
             } catch (error) {
+                console.log('Try Catch login error: ', error);
                 return dispatch({
                     type: Types.USER_LOGIN_ERROR,
                     payload: {
