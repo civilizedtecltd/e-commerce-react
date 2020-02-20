@@ -57,9 +57,11 @@ const CartsTableComponent = (props) => {
             <td className="aligneMiddle" id={`tp-${item.id}`}>Ksh {item.amountPrice}</td>
 
             <td className="aligneMiddle">
-              <Button className="btn btn-danger btnItemDelete" id={item.id} onClick={handleDeleteClick} >
+
+              <Button className="btn-dark" id={item.id} onClick={handleDeleteClick} >
                 Delete <i className="fas fa-times"></i>
               </Button>
+
             </td>
 
           </tr>
