@@ -166,6 +166,7 @@ const updatePaymentMethod = (data) => dispatch => {
 
 export const OauthLogin = (OauthData) => dispatch => {
     removeAuthToken();
+    console.log(OauthData)
     axios.post(URL.__OAUTH('login'), {
         email: OauthData.email ? OauthData.email : OauthData.zu || OauthData.Au
     })
@@ -221,8 +222,9 @@ export const OauthLogin = (OauthData) => dispatch => {
 // Au: "abookstore254@gmail.com"
 
 
-//https server response
+
 /*
+//https server response
 SU: "112585867732884445950"
 Ad: "John Kungu"
 vW: "John"
@@ -268,6 +270,6 @@ export {
   setPayment,
   deletePayment,
   confirmOrder,
-    updatePaymentMethod,
+  updatePaymentMethod,
  /*  authDataNotInState */
 };

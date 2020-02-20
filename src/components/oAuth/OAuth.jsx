@@ -10,7 +10,7 @@ const OAuth = (props) => {
             const path = window.location.pathname;
             if (path ==='/login') {
                 if (res.provider === "google") {
-                    props.login(res.data.Qt)
+                    props.login(res.data.Qt || res.data.Rt)
                 }
                 if (res.provider === 'facebook') {
                     props.login(res.data)
@@ -19,12 +19,11 @@ const OAuth = (props) => {
             }
 
             if (path === '/signup') {
-                  console.log(res)
                 if (res.provider === "google") {
-                    props.signup(res.data.Qt || res.data.Rt)
+                    const OauthData = res.data.Qt ? res.data.Qt : res.data.Rt;
+                    props.signup(OauthData)
                 }
                 if (res.provider === 'facebook') {
-                    // console.log(res)
                     props.signup(res.data)
                 }
                 resolve();
