@@ -89,7 +89,7 @@ const Login = (props) => {
   const OAuthLogin = (OAuth_state) =>{
       console.log("Login page OAuth Login state: ",OAuth_state);
       console.log("login page OAuth auth.status ", auth.status);
-      if(auth.status.success && OAuth_state){
+      /* if(auth.status.success && OAuth_state){
         setState(false);
         props.showAllFavItem();
 
@@ -104,8 +104,8 @@ const Login = (props) => {
       }
       if(!auth.status.success && OAuth_state){
          setState(false);
-      }
-    //setState(state);
+      } */
+    setState(state);
   }
 
 
