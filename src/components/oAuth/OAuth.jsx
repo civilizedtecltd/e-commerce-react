@@ -12,9 +12,11 @@ const OAuth = (props) => {
                 if (res.provider === "google") {
                     const loginData = res.data.Qt || res.data.Rt 
                     props.login(loginData)
+                    props.callback(true);
                 }
                 if (res.provider === 'facebook') {
                     props.login(res.data)
+                    props.callback(true);
                 }
                 resolve();
             }

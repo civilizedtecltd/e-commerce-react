@@ -79,7 +79,10 @@ const Login = (props) => {
       if(!auth.status.success && state){
          setState(false);
       }
-    }
+  }
+  
+
+  const OAuthLogin = (state) =>setState(state)
 
 
   return (
@@ -103,7 +106,7 @@ const Login = (props) => {
 
             <Row>
               <Col sm={6}>
-                <SocialListComponent />
+                <SocialListComponent callback={OAuthLogin} />
 
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form>
