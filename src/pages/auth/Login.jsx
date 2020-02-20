@@ -94,8 +94,8 @@ const Login = (props) => {
 
         const lastPath = (lastLocation) ? lastLocation.pathname : "/";
         const lastPathMatched = lastPath.match("/change-password/");
-
-        if (lastPath === "/signup" || (lastPathMatched && lastPathMatched[0] === "/change-password/")) {
+        console.log("lastpath: ", lastPath)
+        if (lastPath === "/signup" || lastPath === "/login" || (lastPathMatched && lastPathMatched[0] === "/change-password/")) {
           window.location = "/";
         }else{
             props.history.goBack();
