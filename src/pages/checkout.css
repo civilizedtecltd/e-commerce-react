@@ -65,3 +65,6 @@ td.aligneMiddle {
 .terms-and-condition{
     display: flex;
 }
+.cardTable .btn:hover{
+   background-color: #bd2130;
+}
