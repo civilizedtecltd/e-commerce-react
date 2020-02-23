@@ -12,10 +12,8 @@ const login = (authData) => dispatch => {
             try{
                 const jwt = res.data.data;
                 const { data } = decode(jwt.token);
-
                 localStorage.setItem('authData', JSON.stringify(jwt));
                 setAuthToken(jwt.token);
-
                 return dispatch({
                     type: Types.USER_LOGIN,
                     payload: {
@@ -28,7 +26,6 @@ const login = (authData) => dispatch => {
                 });
 
             } catch (error) {
-                console.log(error);
                 return dispatch({
                     type: Types.USER_LOGIN_ERROR,
                     payload: {
@@ -41,7 +38,6 @@ const login = (authData) => dispatch => {
             }
 
         }).catch(error => {
-            console.log("login error: ", error);
             return dispatch({
                     type: Types.USER_LOGIN_ERROR,
                     payload: {
@@ -264,6 +260,10 @@ export const emptyStatus = ()  => {
         }
     });
 }
+
+
+
+
 
 
 export {

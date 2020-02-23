@@ -1,10 +1,16 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux';
+import { useLastLocation } from 'react-router-last-location'
 import { FacebookSignIn, GoogleSignIn } from "google-facebook-signin-react";
 import { OauthLogin, emptyStatus, OauthSignUp } from '../../redux/actions/authActions'
-
-
 const OAuth = (props) => {
+    const previewsLocation = useLastLocation();
+    const lastPath = previewsLocation ? previewsLocation.pathname : previewsLocation;
+    const { auth, history, location } = props
+    const status = auth ? auth.status : false
+    if (status === true) {
+        return lastPath === '/signup' ? props.history.push('/profile-settings') : history.push(lastPath ? lastPath : location.pathname)
+    }
     const success = (res) => {
         return new Promise((resolve, reject) => {
             const path = window.location.pathname;
@@ -12,11 +18,9 @@ const OAuth = (props) => {
                 if (res.provider === "google") {
                     const loginData = res.data.Qt || res.data.Rt 
                     props.login(loginData)
-                    props.callback(true);
                 }
                 if (res.provider === 'facebook') {
                     props.login(res.data)
-                    props.callback(true);
                 }
                 resolve();
             }
@@ -53,6 +57,9 @@ const OAuth = (props) => {
     )
 }
 
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+})
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (email) => dispatch(OauthLogin(email)),

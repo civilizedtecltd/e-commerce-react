@@ -1,5 +1,6 @@
-import React, {useState}from 'react';
+import React, {useState,useEffect}from 'react';
 import axios from 'axios';
+import { useLastLocation } from 'react-router-last-location'
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {Container, Row, Col, Form, Button, Alert} from 'react-bootstrap';
@@ -10,87 +11,63 @@ import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComp
 import { URL } from '../../constants/config'
 import './assets/css/auth.css';
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
-
 const SignUp = (props) => {
-
-  const [formData] = useState({});
-  const [alert, setAlert] = useState({
-      show: false,
-      message: ''
-  });
-
+  const [data, setData] = useState({ category_id: null, first_name: null, last_name: null, email: null, password: null, repeatPassword: null })
+  const [alert, setAlert] = useState({ show: false, type: 'danger', message: '' });
   const categories = (props.categories) ? props.categories : [];
+  const { auth} = props
+  const status = auth.status
+  if (status.success === true) {
+     props.history.goBack()
+  }
 
-    const goToLoginPage = () => {
-        const { history } = props;
-        history.push('/login');
+  const handleOnchange = (e) => {
+    e.preventDefault()
+    return setData({ ...data, [e.target.name]: e.target.value })
+  }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!data.category_id) {
+      return setAlert({ show: true, type: 'danger', message: "Select A category" })
     }
-
-    const categoryData = (data) => {
-        if(data.category_id !== undefined || data.category_id !== 'Select Category')
-            formData.category_id = Number(data.category_id);
+    else if (!data.first_name || data.first_name !== '') {
+      return setAlert({ show: true, type: 'danger',  message: "First Name Required" })
     }
-
-    const fromFileData = (data) => {
-    /*eslint-disable-next-line*/
-        Object.keys(data).map( key => {
-            formData[key] = data[key];
-        });
+    else if (!data.last_name === null || undefined || '') {
+      return setAlert({ show: true, type: 'danger', message: "Last name Required" })
     }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        if( formData.category_id === undefined   ||
-            formData.first_name === undefined    ||
-            formData.last_name === undefined     ||
-            formData.email === undefined         ||
-            formData.password === undefined      ||
-            formData.repeatPassword === undefined
-            ){
-
-            setAlert({
-                ...alert,
-                show: true,
-                message: 'Field Data missing'
-            });
-
-            const clearAlert = setTimeout(() => {
-                setAlert({...alert, show: false});
-            }, 5000);
-
-            return () =>  clearTimeout(clearAlert);
-        }else{
-            if(String(formData.password) !== String(formData.repeatPassword)){
-                setAlert({
-                    ...alert,
-                    show: true,
-                    message: 'Password did not match.'
-                });
-
-                const clearAlert = setTimeout(() => {
-                    setAlert({...alert, show: false});
-                }, 5000);
-
-                return () =>  clearTimeout(clearAlert);
-            }else {
-                axios.post(
-                    URL._REGISTER,
-                    formData
-                ).then( response => {
-                    if(response.status === 201)
-                        goToLoginPage();
-
-                }).catch( error => {
-                    console.log(error);
-                });
-            }
-        }
+    else if (!data.email || data.email === '') {
+      return setAlert({ show: true, type: 'danger', message: "Email Required" })
     }
-
-
-
-
+    else if (!data.password || data.password === '') {
+      return setAlert({ show: true, type: 'danger', message: "Password Required" })
+    }
+    else if (data.repeatPassword === '') {
+      return setAlert({ show: true, type: 'danger', message: "Repeat Password Required" })
+    }
+    else if (data.password !== data.repeatPassword) {
+      return setAlert({ show: true, type: 'danger', message: "Password not match" })
+    }
+    else if (!data.category_id || !data.first_name || !data.last_name || !data.email || !data.password || !data.repeatPassword) {
+      return setAlert({ show: true, type: 'danger', message: "Fields can not be empty"})
+    }
+    else {
+      delete data.repeatPassword;
+      axios.post(URL._REGISTER, data)
+        .then(res => {
+          setAlert({ show: res.data.status, type: 'success', message: res.data.message })
+          if (res.data.message) {
+            setTimeout(() => {
+              props.history.push("/login")
+              setAlert({ show: false })
+            }, 3000);
+          }
+        })
+        .catch(error => setAlert({show: error.response.data.status,type: 'danger', message:error.response.data.message}))
+    }
+  }
 
     return (<>
         <PageLoader loading={false}/>
@@ -101,18 +78,18 @@ const SignUp = (props) => {
               <Col sm={6}>
                 <div className="logoWrapper mt-4 mb-4">
                   <h1 className="logoText"><Link to="/">LOGO</Link></h1>
-                </div>{/* end of logoWrapper */}
-              </Col>{/* end of col */}
-            </Row>{/* end of row */}
-
-            <Row>
+                </div>
+              </Col>
+            </Row>
+          <Row>
               <Col sm={6}>
                 <SocialListComponent />
                 <div className="formWrapper clearfix" id="formWrapper">
-                  <Form>
+                  <Form action='post' onSubmit={handleSubmit}>
                     <SelectFrom LabelTitle="Category"
+                      Name="category_id"
                       categories = {categories}
-                      callback = {categoryData}
+                      handleOnchange={handleOnchange}
                     />
 
                     <InputFrom
@@ -121,7 +98,8 @@ const SignUp = (props) => {
                       LabelTitle="First Name"
                       Name="first_name"
                       Placeholder="Enter Your First Name"
-                      callback = {fromFileData}
+                      Value={data.first_name}
+                      handleOnchange={handleOnchange}
                     />
 
                     <InputFrom
@@ -130,7 +108,8 @@ const SignUp = (props) => {
                       LabelTitle="Last Name"
                       Name="last_name"
                       Placeholder="Enter Your Last Name"
-                      callback = {fromFileData}
+                      Value={data.last_name}
+                      handleOnchange={handleOnchange}
                     />
                     <InputFrom
                       LabelId="email"
@@ -138,7 +117,8 @@ const SignUp = (props) => {
                       LabelTitle="Email"
                       Name="email"
                       Placeholder="Enter Your Email"
-                      callback = {fromFileData}
+                      Value={data.email}
+                      handleOnchange={handleOnchange}
                     />
 
                     <InputFrom
@@ -147,7 +127,8 @@ const SignUp = (props) => {
                       LabelTitle="Password"
                       Name="password"
                       Placeholder="Enter Your Password"
-                      callback = {fromFileData}
+                      Value={data.password}
+                      handleOnchange={handleOnchange}
                     />
                     <InputFrom
                       LabelId="repeatPassword"
@@ -155,30 +136,30 @@ const SignUp = (props) => {
                       LabelTitle="Repeat Password"
                       Name="repeatPassword"
                       Placeholder="Enter Your Repeat Password"
-                      callback = {fromFileData}
+                      Value={data.repeatPassword}
+                      handleOnchange={handleOnchange}
                     />
-
                     <Link className="linkText mb-3" to="/forgot-password">Forgot password?</Link>
-
-                      <Alert show={alert.show} variant="danger" onClose={() => setAlert({...alert, show:false})} dismissible>
+                      <Alert show={alert.show} variant={alert.type} onClose={() => setAlert({...alert, show:false})} dismissible>
                           <p>{alert.message}</p>
                       </Alert>
-                    <Button type="submit" className="btn submitBtn mb-3 " onClick={handleSubmit} >Sign Up</Button>
+                    <Button type="submit" className="btn submitBtn mb-3 " >Sign Up</Button>
                     <p>I already have an account! <Link className="linkText mb-3" to="/login">Sign In</Link></p>
-
-                  </Form>{/* end of form */}
-                </div>{/* end of formWrapper */}
-              </Col>{/* end of Col */}
-            </Row>{/* end of row */}
-          </Container>{/* end of Container */}
-        </main>{/* end of loginMainArea */}
-      </div>{/* end of allWrapper */}
-
+                  </Form>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </main>
+      </div>
     </>);
 }
 
 const mapStateToProps = (state) => ({
+    auth: state.auth,
     categories: state.site.categories
 })
+
+
 
 export default withRouter(connect(mapStateToProps, null)(SignUp));

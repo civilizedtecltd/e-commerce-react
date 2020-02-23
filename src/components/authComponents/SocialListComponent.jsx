@@ -7,14 +7,8 @@ export default function SocialListComponent() {
     <div className="loginBodyContent clearfix" id="loginBody">
       <h2 className="headTitle">Login to Your Account</h2>
       <div className="socialLogin mb-4">
-        <ul className="socialList mt-4 mb-4">
-          {/* <li className="facebook">
-            <a href="#!" onClick={facebookLogin}><i className="fab fa-facebook-f"></i></a>
-          </li> */}
-          {/* <li className="googlePlus">
-            <a href="#!" onClick={googleLogin}><i className="fab fa-google"></i></a>
-          </li> */}
-          <OAuth />
+        <ul className="socialList mt-4 mb-4" >
+          <OAuth/>
         </ul>
         <h4>OR</h4>
       </div>
