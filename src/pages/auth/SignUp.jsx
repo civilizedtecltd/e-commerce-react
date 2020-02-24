@@ -29,10 +29,11 @@ const SignUp = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(data)
     if (!data.category_id) {
       return setAlert({ show: true, type: 'danger', message: "Select A category" })
     }
-    else if (!data.first_name || data.first_name !== '') {
+    else if (!data.first_name || data.first_name === '') {
       return setAlert({ show: true, type: 'danger',  message: "First Name Required" })
     }
     else if (!data.last_name === null || undefined || '') {
@@ -88,7 +89,8 @@ const SignUp = (props) => {
                   <Form action='post' onSubmit={handleSubmit}>
                     <SelectFrom LabelTitle="Category"
                       Name="category_id"
-                      categories = {categories}
+                      categories={categories}
+                      Value={data.category_id}
                       handleOnchange={handleOnchange}
                     />
 

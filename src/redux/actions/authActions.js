@@ -181,7 +181,6 @@ export const OauthLogin = (OauthData) => dispatch => {
                         }
                     }
                 });
-
             } catch (error) {
                 return dispatch({
                     type: Types.USER_LOGIN_ERROR,
@@ -256,7 +255,11 @@ export const emptyStatus = ()  => {
     return ({
         type: Types.EMPTY_STATUS,
         payload: {
-            status: {}
+            status: {
+                error: {
+                    data:null
+                }
+            }
         }
     });
 }

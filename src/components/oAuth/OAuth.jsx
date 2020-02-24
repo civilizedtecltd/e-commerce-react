@@ -1,16 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useLastLocation } from 'react-router-last-location'
 import { FacebookSignIn, GoogleSignIn } from "google-facebook-signin-react";
-import { OauthLogin, emptyStatus, OauthSignUp } from '../../redux/actions/authActions'
+import { OauthLogin, emptyStatus, OauthSignUp } from '../../redux/actions/authActions';
+import { showFavItems } from '../../redux/actions/favoriteActions';
 const OAuth = (props) => {
-    const previewsLocation = useLastLocation();
-    const lastPath = previewsLocation ? previewsLocation.pathname : previewsLocation;
-    const { auth, history, location } = props
-    const status = auth ? auth.status : false
-    if (status === true) {
-        return lastPath === '/signup' ? props.history.push('/profile-settings') : history.push(lastPath ? lastPath : location.pathname)
-    }
+
     const success = (res) => {
         return new Promise((resolve, reject) => {
             const path = window.location.pathname;
@@ -18,6 +12,7 @@ const OAuth = (props) => {
                 if (res.provider === "google") {
                     const loginData = res.data.Qt || res.data.Rt 
                     props.login(loginData)
+                    props.showAllFavItem()
                 }
                 if (res.provider === 'facebook') {
                     props.login(res.data)
@@ -64,7 +59,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         login: (email) => dispatch(OauthLogin(email)),
         signup: (Oauth) => dispatch(OauthSignUp(Oauth)),
-        emptyStatus:()=>dispatch(emptyStatus())
+        emptyStatus: () => dispatch(emptyStatus()),
+        showAllFavItem: () => dispatch(showFavItems()),
    }
 }
-export default connect(null,mapDispatchToProps)(OAuth);
+export default connect(mapStateToProps,mapDispatchToProps)(OAuth);

@@ -1,4 +1,5 @@
-import React, {useState}  from 'react';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from "react-router-dom";
 import { useLastLocation } from 'react-router-last-location';
 import { connect  } from 'react-redux';
 import { login, emptyStatus } from '../../redux/actions/authActions';
@@ -13,22 +14,47 @@ import '../../assets/css/animate.css';
 
 
 const Login = (props) => {
-  const [alert, setAlert] = useState({ status: false, message: '' });
+  
+  const [alert, setAlert] = useState({ show: false, type:'', message: ''});
   const [data, setData] = useState({ email: null, password: null })
   const previewsLocation = useLastLocation();
-  const lastPath = previewsLocation ? previewsLocation.pathname : props.location.pathname;
-  const { auth } = props
-  const status = auth ? auth.status : false
- 
+  const lastPath = previewsLocation ? previewsLocation.pathname : false;
+  const { auth, error, removeError, login_success, history, login_status } = props
 
-  if (status.success) {
-    if (lastPath === '/signup') {
-        props.history.push('/profile-settings') 
+  useEffect(() => {
+    if (login_success) {
+      if (lastPath === '/signup') {
+        setAlert({ show: true, type: 'success', message: 'You are logged in' })
+        setTimeout(() => {
+          history.push('/profile-settings')
+        }, 1000);
+      }
+      else {
+        history.goBack()
+      }
     }
-    else {
-      props.history.goBack()
+    if (login_status) {
+      if (lastPath === '/signup') {
+        setTimeout(() => {
+          history.push('/profile-settings')
+        }, 1000);
+      }
+      else {
+        history.goBack()
+      }
     }
-  }
+    
+    if (error) {
+      setAlert({ show: true, type: 'danger', message: error.message })
+      setTimeout(() => {
+        setAlert({ show: false, type: 'unknown', message: '' })
+        removeError()
+      }, 2000);
+    }
+  }, [auth.status.error, error, removeError, login_success, lastPath, history, login_status])
+
+
+  
   
   const handleOnchange = (e) => {
     e.preventDefault()
@@ -49,7 +75,7 @@ const Login = (props) => {
      }
   }
 
-  
+  // console.log(alert)
   return (
     <>
       <PageLoader loading={false} />
@@ -120,13 +146,15 @@ const Login = (props) => {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  error: (state.auth.status.error !== undefined) ? (state.auth.status.error.data.message) : ""
+  error: state.auth.status.error ? (state.auth.status.error.data) : false,
+  login_success: state.auth.jwt ? state.auth.jwt.token : false,
+  login_status: state.auth.status ? state.auth.status.success : false
 });
 
 const mapDispatchToProps = dispatch =>  ({
     login: (data) => dispatch(login(data)),
     showAllFavItem: () => dispatch(showFavItems()),
-    emptyStatus: () => dispatch(emptyStatus())
+    removeError: () => dispatch(emptyStatus())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (Login));

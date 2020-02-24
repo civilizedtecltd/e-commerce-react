@@ -186,11 +186,7 @@ const HeaderComponent = (props) => {
                       </Link>
                     </li>
                     <li>
-                      {!isAuth ? (
-                        <Link to="/login">
-                          <i className="far fa-user"></i>Login
-                        </Link>
-                      ) : (
+                      {!isAuth ? (<Link to="/login"><i className="far fa-user"></i>Login</Link>) : (
                         <Link to="/profile-settings">
                           <div className="Profile-avatar">
                             <Image src={ProfileAvatar} />
