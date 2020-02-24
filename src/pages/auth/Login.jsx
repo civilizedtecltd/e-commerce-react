@@ -86,28 +86,7 @@ const Login = (props) => {
   }
 
 
-  const OAuthLogin = (OAuth_state) =>{
-      console.log("Login page OAuth Login state: ",OAuth_state);
-      console.log("login page OAuth auth.status ", auth.status);
-      /* if(auth.status.success && OAuth_state){
-        setState(false);
-        props.showAllFavItem();
-
-        const lastPath = (lastLocation) ? lastLocation.pathname : "/";
-        const lastPathMatched = lastPath.match("/change-password/");
-        console.log("lastpath: ", lastPath)
-        if (lastPath === "/signup" || lastPath === "/login" || (lastPathMatched && lastPathMatched[0] === "/change-password/")) {
-          window.location = "/";
-        }else{
-            props.history.goBack();
-        }
-      }
-      if(!auth.status.success && OAuth_state){
-         setState(false);
-      } */
-    setState(state);
-  }
-
+  const OAuthLogin = (OAuth_state) =>setState(state);
 
   return (
     <>
