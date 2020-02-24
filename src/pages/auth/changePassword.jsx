@@ -9,47 +9,29 @@ import "./assets/css/auth.css";
 
 const ChangePassword = (props) => {
   const { code } = useParams()
-  const [state, setState] = useState({
-    verifyCode: code,
-    password: "",
-    confirmPassword: ""
-  });
-  const [alert, setAlert] = useState({ show: false, message: "" });
+  const [state, setState] = useState({verifyCode: code, password: "", confirmPassword: ""});
+  const [alert, setAlert] = useState({ show: false, type:'unknown', message: "" });
   
-  const handleChange = (data) => setState({ ...state, ...data })
+  const handleOnchange = (e) => {
+    e.preventDefault()
+    setState({...state, [e.target.name]: e.target.value })
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault()
-     const clearAlert=setTimeout(()=>setAlert({
-      show: false,
-      message: '',
-      success: false
-    }),3000);
-    axios
-      .post(URL._RECOVER_PASSWORD, {
-        password: state.password,
-        confirmPassword: state.confirmPassword,
-        verifyCode: code
-      })
+    console.log(state)
+    axios.post(URL._RECOVER_PASSWORD, state)
       .then(res => {
-        setTimeout(
-          setAlert({
-            show: true,
-            message: res.data.message,
-            success: res.data.success
-          }),
-          3000
-        );
-        return res.data.success ? props.history.push("/login") : false;
+        setAlert({ show: true, message: res.data.message, type: 'success' });
+        setTimeout(() => {
+          setAlert({ show: true, message: res.data.message, type: 'unknown'})
+          return res.data.success ? props.history.push("/login") : false;
+        },3000)
+           
+      }).catch(error => {
+        setAlert({ show: true, type: 'danger', message: error.response.data.message })
+        return setTimeout(setAlert({ show: true, message: '', type: 'Unknown' }), 3000);
       })
-      .catch(error =>
-        setTimeout(setAlert({
-          show: true,
-          message: "Server error",
-          success: false
-        })
-      ),3000);
-    
-      return () => clearTimeout(clearAlert);
   }
   
   return (
@@ -84,14 +66,14 @@ const ChangePassword = (props) => {
                   </h5>
                 </div>
                 <div className="formWrapper clearfix" id="formWrapper">
-                  <Form>
+                  <Form onSubmit={handleSubmit}>
                     <InputFrom
                       LabelId="createPass"
                       TypeName="password"
                       LabelTitle="Create Password"
                       Name="password"
                       Placeholder="Create Password"
-                      callback={handleChange}
+                      handleOnchange={handleOnchange}
                     />
 
                     <InputFrom
@@ -100,28 +82,16 @@ const ChangePassword = (props) => {
                       LabelTitle="Confirm password"
                       Name="confirmPassword"
                       Placeholder="Confirm password"
-                      callback={handleChange}
+                      handleOnchange={handleOnchange}
                     />
 
-                    {alert.show ? (
-                      <Alert
-                        show={alert.show}
-                        variant={alert.success ? "success" : "danger"}
-                        onClose={() => setAlert({ show: false })}
-                        dismissible
-                      >
+                    {alert.show ? (<Alert show={alert.show} variant={alert.type} onClose={() => setAlert({ show: false })} dismissible >
                         <p>{alert.message}</p>
                       </Alert>
                     ) : (
                       ""
                     )}
-                    <Button
-                      type="submit"
-                      className="btn mt-2 mb-3 submitBtn"
-                      onClick={handleSubmit}
-                    >
-                      Save
-                    </Button>
+                    <Button type="submit" className="btn mt-2 mb-3 submitBtn"> Save </Button>
                   </Form>
                 </div>
               </Col>

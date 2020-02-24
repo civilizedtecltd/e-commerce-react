@@ -10,22 +10,24 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 
 const ForgotPassword = (props) => {
   const [state, setState] = useState({ email: '', });
-  const [alert, setAlert] = useState({ show: false, message: '' })
-  const handleOnChange = (data) => setState({ ...state, ...data });
+  const [alert, setAlert] = useState({ show: false, type: 'unknown', message: '' })
+  
+  const handleOnchange = (e) => {
+    e.preventDefault()
+    setState({...state,[e.target.name]: e.target.value})
+  };
+  
   const handleOnClick = (e) =>{
         e.preventDefault();
         axios.post(URL._RESET_PASSWORD, {email: state.email})
           .then(res => {
-            setAlert({ show: true, message: res.data.message, success: res.data.success });
-            setTimeout(() => setAlert({show:false,message:null,success:false}),2000);
-            return res.data.success ? setTimeout(() => (props.history.push("/verify-code") ),2000) : false;
+            setAlert({show: true, type:"success", message:res.data.message});
+            setTimeout(() => setAlert({show:false, type:"unknown", message:null}),2000);
+            return res.data.success ? setTimeout(() => (props.history.push("/verify-code")),2000) : false;
             })
           .catch(error => {
-            console.log(error)
-              setAlert({ show: true, message: "Sorry server error occurred" });
-               return setTimeout(() =>
-                 setAlert({show: false, message: "", success:false },3000)
-               );
+            setAlert({ show: true, type: 'danger', message: error.response.data.message })
+            setTimeout(() => {setAlert({ show: false, type: 'unknown', message:''})}, 3000)
           })
     }
 
@@ -69,22 +71,15 @@ const ForgotPassword = (props) => {
                       TypeName="email"
                       LabelTitle="Email"
                       Name="email"
+                      Value={state.email}
                       Placeholder="Enter Your Email"
-                      callback={handleOnChange}
+                      handleOnchange={handleOnchange}
                     />
-                    {alert.show ? (
-                      <Alert
-                        show={alert.show}
-                        variant={alert.success ? "success" : "danger"}
-                        onClose={() => setAlert({show:false})}
-                        dismissible
-                      >
+                   
+                      <Alert show={alert.show} variant={alert.type} onClose={() => setAlert({show:false})} dismissible>
                         <p>{alert.message}</p>
                       </Alert>
-                    ) : (
-                      ""
-                    )}
-
+                    
                     <Button
                       type="submit"
                       className="btn mt-2 mb-3 submitBtn"

@@ -6,42 +6,26 @@ import { URL } from "../../constants/config";
 import { InputFrom } from '../../components/FromComponents/InputComponent';
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import './assets/css/auth.css';
-const VerifyCode = () => {
+const VerifyCode = (props) => {
   const [state, setState] = useState({ code: null });
   const [alert, setAlert] = useState({ show: false, message: "" });
 
-  const handleChange = data => {
-    setState({ ...state, ...data })
+  const handleOnchange = (e) => {
+    e.preventDefault()
+    setState({ ...state, [e.target.name]: e.target.value })
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const clearAlert = setTimeout(() =>
-      setAlert({
-        show: false,
-        message: "",
-        success: false
-      }), 3000);
-
-    axios.post(URL._VERIFICATION_CODE, { code: state.code})
+    axios.post(URL._VERIFICATION_CODE, state)
       .then(res => {
-        setAlert({
-          show: true,
-          message: res.data.message,
-          success: res.data.success
-        });
-        if (res.data.success === true) return window.location = `/change-password/${state.code}`;
-        return () => clearTimeout(clearAlert);
+        setAlert({ show: true, type: "success", message: res.data.message });
+        setTimeout(() => setAlert({ show: false, type: "unknown", message: '' }), 3000);
+        return res.data.success ? setTimeout(() => props.history.push(`/change-password/${state.code}`), 2000) : false;
       })
       .catch(error => {
-        console.log(error.message)
-        setAlert({
-          show: true,
-          message: 'Server error occurred',
-          success: false
-        });
-        return () => clearTimeout(clearAlert);
+        setAlert({ show: true, type: 'danger', message: error.response.data.message })
+        setTimeout(() => { setAlert({ show: false, type: 'unknown', message: '' }) }, 3000)
       });
     
     
@@ -86,27 +70,16 @@ const VerifyCode = () => {
                       LabelTitle="Verify Code"
                       Name="code"
                       Placeholder="Verify Code"
-                      callback={handleChange}
+                      handleOnchange={handleOnchange}
                     />
 
-                    { alert.show ? (
-                      <Alert
-                        show={alert.show}
-                        variant={alert.success ? "success" : "danger"}
-                        onClose={() => setAlert({ show: false })}
-                        dismissible
-                      >
+                  
+                      <Alert show={alert.show} variant={alert.type} onClose={() => setAlert({ show: false })} dismissible>
                         <p>{alert.message}</p>
                       </Alert>
-                    ) : (
-                      ""
-                    )}
+                 
 
-                    <Button
-                      type="submit"
-                      className="btn mt-2 mb-3 submitBtn"
-                      onClick={handleSubmit}
-                    >
+                    <Button type="submit" className="btn mt-2 mb-3 submitBtn" onClick={handleSubmit}>
                       Verify
                     </Button>
                   </Form>
