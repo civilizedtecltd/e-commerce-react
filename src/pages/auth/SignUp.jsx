@@ -1,25 +1,38 @@
 import React, {useState,useEffect}from 'react';
 import axios from 'axios';
-import { useLastLocation } from 'react-router-last-location'
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {Container, Row, Col, Form, Button, Alert} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
 import { URL } from '../../constants/config'
 import './assets/css/auth.css';
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
+
+
+
+
+
 const SignUp = (props) => {
   const [data, setData] = useState({ category_id: null, first_name: null, last_name: null, email: null, password: null, repeatPassword: null })
   const [alert, setAlert] = useState({ show: false, type: 'danger', message: '' });
   const categories = (props.categories) ? props.categories : [];
-  const { auth} = props
+  const { auth , error } = props
   const status = auth.status
   if (status.success === true) {
      props.history.goBack()
   }
+
+
+  useEffect(() => {
+    if (error) {
+      setAlert({ show: true, type:'danger', message: error.message })
+    }
+    if(!error) {
+      setAlert({ show: false, type: 'unknown', message:''})
+    }  
+  },[error])
 
   const handleOnchange = (e) => {
     e.preventDefault()
@@ -29,7 +42,6 @@ const SignUp = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data)
     if (!data.category_id) {
       return setAlert({ show: true, type: 'danger', message: "Select A category" })
     }
@@ -66,7 +78,9 @@ const SignUp = (props) => {
             }, 3000);
           }
         })
-        .catch(error => setAlert({show: error.response.data.status,type: 'danger', message:error.response.data.message}))
+        .catch(error => {
+          setAlert({ show: error.response.data.status, type: 'danger', message: error.response.data.message })
+        })
     }
   }
 
@@ -145,8 +159,8 @@ const SignUp = (props) => {
                       <Alert show={alert.show} variant={alert.type} onClose={() => setAlert({...alert, show:false})} dismissible>
                           <p>{alert.message}</p>
                       </Alert>
-                    <Button type="submit" className="btn submitBtn mb-3 " >Sign Up</Button>
-                    <p>I already have an account! <Link className="linkText mb-3" to="/login">Sign In</Link></p>
+                    <Button type="submit" className="btn submitBtn mb-3 " > Sign Up</Button>
+                    <p>I already have an account! &nbsp; <Link className="linkText mb-3" to="/login">Sign In</Link></p>
                   </Form>
                 </div>
               </Col>
@@ -159,7 +173,8 @@ const SignUp = (props) => {
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    categories: state.site.categories
+    categories: state.site.categories,
+    error: state.auth.sign_up_error
 })
 
 

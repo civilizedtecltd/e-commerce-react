@@ -17,11 +17,7 @@ const CheckoutTab = (props) => {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const [step, setStep] = useState({
-        prev:0,
-        next:1,
-        show:false
-    })
+    const [step, setStep] = useState({prev:0, next:1, show:false})
 
     const [formData, setFormData] = useState({
         first_name: props.user.first_name,
@@ -127,14 +123,6 @@ const CheckoutTab = (props) => {
         });
 
         const promoId = (props.promo) ? props.promo.id : null ;
-
-        /* console.log({
-            address: formData,
-            ...payment,
-            books,
-            promo: promoId
-        }); */
-
         props.confirmOrder({
             address: formData,
             ...payment,
@@ -169,7 +157,7 @@ const CheckoutTab = (props) => {
                             <Row>
                                 <Col sm="12">
                                     <button disabled className="btn btn-primary btn-block d-md-none d-lg-none d-xl-none">Address details</button>
-                                    <Form className='mt-5' action="">
+                                    <Form className='mt-5' action="post">
                                         <Row>
 
                                             <Col sm={6} className="form-group">
@@ -248,7 +236,7 @@ const CheckoutTab = (props) => {
                                                     id={`checkboxPrivacy`}
                                                     onChange={handlePrivacyCheck}
                                                 />
-                                                <p>I agree with<Link to="/privacy" className="termsTxt">Privacy Policy</Link></p>
+                                                <p>I agree with <Link to="/privacy" className="termsTxt"> Privacy Policy</Link></p>
                                             </Col>
                                         </Row>
                                         <Col className="text-right p-0">
@@ -256,7 +244,7 @@ const CheckoutTab = (props) => {
                                         </Col>
                                     </Form>
                                 </Col>
-                            </Row>{/* tab-section -1 */}
+                            </Row>
                         </div>
 
 

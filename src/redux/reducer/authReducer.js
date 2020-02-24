@@ -58,6 +58,11 @@ const authReducer = (state = initState, {type, payload}) => {
                 ...state,
                 ...payload
             }
+        case Types.SIGNUP_ERROR:
+            return {
+                ...state,
+                sign_up_error:payload
+            }
         default:
             return {
                 ...state

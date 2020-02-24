@@ -12,9 +12,7 @@ import './checkout.css';
 const CheckoutPage = (props) => {
 
   const cartItems = props.cart;
-
   let totalBookPrice = 0;
-  // console.log(props)
   let delivery_costs = props.delivery ? props.delivery[0].price : 0;
   
   const [delivery_cost , setDeliveryCost] = useState(delivery_costs)
@@ -49,13 +47,14 @@ const CheckoutPage = (props) => {
 
   let costWithDelivery = parseFloat(promoPrice) + parseFloat(delivery_cost);
   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchData = () => {
     props.getUser();
     props.deliveryMethodFetch();
   }
 
   const getPaymentMethod = (paymentMethod) => setDeliveryCost(paymentMethod.paymentData.price);
-  useEffect(() => fetchData(), []);
+  useEffect(() => fetchData(), [fetchData]);
   
 
 
@@ -92,7 +91,7 @@ const CheckoutPage = (props) => {
                           </div>
                           <div className="cartProductDes pl-3">
                             <h3>
-                              <Link to="!#">
+                            <Link to={`/product/${item.id}`}>
                                { item.name }
                               </Link>
                             </h3>

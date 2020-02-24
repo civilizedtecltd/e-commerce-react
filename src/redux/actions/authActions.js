@@ -247,7 +247,16 @@ export const OauthSignUp = (OauthData) => dispatch => {
            return window.location.href='/login'
         }
     }).catch(error => {
-        console.log(error)
+        dispatch({
+            type: Types.SIGNUP_ERROR,
+            payload: error.response.data
+        })
+        setTimeout(() => {
+            dispatch({
+                type: Types.SIGNUP_ERROR,
+                payload:null
+            })
+        }, 5000);
     })
 }
 

@@ -33,7 +33,7 @@ const Login = (props) => {
         history.goBack()
       }
     }
-    if (login_status) {
+    else if (login_status) {
       if (lastPath === '/signup') {
         setTimeout(() => {
           history.push('/profile-settings')
@@ -54,12 +54,11 @@ const Login = (props) => {
   }, [auth.status.error, error, removeError, login_success, lastPath, history, login_status])
 
 
-  
-  
   const handleOnchange = (e) => {
     e.preventDefault()
     return setData({ ...data, [e.target.name]: e.target.value })
   }
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -75,7 +74,6 @@ const Login = (props) => {
      }
   }
 
-  // console.log(alert)
   return (
     <>
       <PageLoader loading={false} />
@@ -126,12 +124,9 @@ const Login = (props) => {
                       <p>{alert.message}</p>
                     </Alert>
 
-                    <Button type="submit" className="btn submitBtn mb-3 " >Sign Up</Button>
+                    <Button type="submit" className="btn submitBtn mb-3 " >Sign In</Button>
                     <p>
-                      Don’t have an account yet?
-                      <Link className="linkText" to="/signup">
-                        Sign up
-                      </Link>
+                      Don’t have an account yet? &nbsp; <Link className="linkText" to="/signup">Sign up</Link>
                     </p>
                   </Form>
                 </div>
