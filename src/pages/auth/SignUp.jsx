@@ -45,7 +45,7 @@ const SignUp = (props) => {
       return setAlert({ show: true, type: 'danger', message: "Password Required" })
     }
     else if (data.repeatPassword === '') {
-      return setAlert({ show: true, type: 'danger', message: "Repeat Password Required" })
+      return setAlert({ show: true, type: 'danger', message: "Repeat Password Required"})
     }
     else if (data.password !== data.repeatPassword) {
       return setAlert({ show: true, type: 'danger', message: "Password not match" })

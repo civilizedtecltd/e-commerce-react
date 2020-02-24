@@ -3,7 +3,7 @@ import { connect  } from 'react-redux';
 import {getUser, update} from '../../redux/actions/authActions';
 import isEmpty from 'lodash/isEmpty';
 import {Container, Row, Col, Card, Form, Button, Alert} from 'react-bootstrap';
-import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
+import { InputFrom, SelectFrom } from '../../components/FromComponents/inputComponent2';
 import  HeaderComponent from "../../components/header/Header";
 import  MobileHeader from "../../components/header/MobileHeader";
 
@@ -39,7 +39,7 @@ const UserProfile = (props) => {
             return () =>  clearTimeout(clearAlert);
         }
 
-    }, [props.status.success]);
+    }, [props.status.message, props.status.success]);
 
 
     const categoryData = (data) => {
@@ -244,33 +244,20 @@ const UserProfile = (props) => {
                                       </Button>
                                     </Col>
                                   </Row>
-                                  {/* end of Row */}
                                 </Form>
-                                {/* end of userProfile */}
                               </div>
-                              {/* end of userProfile */}
                             </Card.Body>
-                            {/* end of Card.Body */}
                           </Card>
-                          {/* end of Card */}
                         </Col>
                       </Row>
-                      {/* end of Row */}
                     </Container>
-                    {/* end of Container */}
                   </section>
-                  {/* end of myOrderArea */}
                 </main>
-                {/* end of mainContent */}
               </Col>
             </Row>
-            {/* end of Row */}
           </Container>
-          {/* end of Container */}
         </div>
-        {/* end of userBodyArea */}
       </div>
-      {/* end of allWrapper */}
     </>
   );
 }

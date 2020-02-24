@@ -1,4 +1,4 @@
-import React, {useState,useEffect}  from 'react';
+import React, {useState}  from 'react';
 import { useLastLocation } from 'react-router-last-location';
 import { connect  } from 'react-redux';
 import { login, emptyStatus } from '../../redux/actions/authActions';
@@ -37,7 +37,7 @@ const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!data.email && data.password) {
+    if (!data.email && !data.password) {
       return setAlert({ show: true, type: 'danger', message: "Password and Email required"})
     }
     if (!data.email || data.email === '')
