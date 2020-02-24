@@ -167,8 +167,8 @@ export const OauthLogin = (OauthData) => dispatch => {
     })
         .then(res => {
             try {
-                const jwt = res.data.data.token;
-                const {data} = decode(jwt);
+                const jwt = res.data.data;
+                const {data} = decode(jwt.token);
                 localStorage.setItem('authData', JSON.stringify(jwt));
                 setAuthToken(jwt.token);
                 return dispatch({
