@@ -56,7 +56,11 @@ const CheckoutPage = (props) => {
   const getPaymentMethod = (paymentMethod) => setDeliveryCost(paymentMethod.paymentData.price);
   useEffect(() => fetchData(), [fetchData]);
   
-
+  const userData = {
+    uid: 1,
+    token: props.token,
+    total:1
+  }
 
   
 
@@ -141,7 +145,7 @@ const CheckoutPage = (props) => {
             </Container>
           </section> }
           <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
-              <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
+            <CheckoutTab userData={userData} totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
           </section>
         </main>
       </div>
@@ -152,7 +156,8 @@ const CheckoutPage = (props) => {
 const mapStateToProps = (state) => ({
   cart:state.shop.cart,
   delivery: state.shop.deliveryMethod,
-  promoInfo: state.shop.promo
+  promoInfo: state.shop.promo,
+  token: state.auth.jwt.token
 });
 
 const mapDispatchToProps = dispatch => ({

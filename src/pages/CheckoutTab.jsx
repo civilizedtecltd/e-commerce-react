@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import {Container, Card, Form, Col, Row, Button, Modal } from 'react-bootstrap';
+import { Container, Card, Form, Col, Row, Button, Modal } from 'react-bootstrap';
+import PaypalExpressBtn from "react-paypal-express-checkout";
 import {Link} from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty';
 import {connect} from 'react-redux';
@@ -13,8 +14,11 @@ import '../assets/css/theme.css';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 
-const CheckoutTab = (props) => {
 
+const CheckoutTab = (props) => {
+    const [state, setState] = useState({
+        redirect: false
+    })
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const [step, setStep] = useState({prev:0, next:1, show:false})
@@ -133,6 +137,54 @@ const CheckoutTab = (props) => {
         props.clearPromo();
 
         setShow(true);
+    }
+
+
+
+
+
+    const createOrder = (payment) => {
+        // const postData = {
+        //     uid: props.userData.uid,
+        //     token: props.userData.token,
+        //     payerID: payment.payerID,
+        //     paymentID: payment.PaymentID,
+        //     paymentToken:payment.paymentToken
+        // }
+        // postData('createOrder', postData).then(result => {
+        //     let responseJSON = result;
+        //     if (responseJSON.status === 'true') {
+        //         setState({
+        //             redirect: true
+        //         })
+        //     }
+        // })
+    }
+
+    const onSuccess = payment => {
+        console.log(payment)
+        // createOrder(payment);
+    }
+
+    const onCancel = data => {
+        console.log('The payment was cancelled',data)
+        return window.location.href = data.cancelUrl
+    }
+
+
+    const onError = err => {
+        console.log('Error',err)
+    }
+
+
+    const Config = {
+        env: 'sandbox',
+        currency: 'USD',
+        total: props.userData.total,
+        client: {
+            sandbox: 'AealZEZeqmY7Losu4ottC6QaYcqXdXNODFgEsyhM-p4sVbUhNESDO2fivVthS7vbnR7lrt2FrIhKGynm',
+            production:'AcmOk1IjB5Rwg-UR8hXaNoA_V5vUygu3J1ZZ3aAZ1dasN51hwonSMchFqSyyD5V_OaPUPcIXFIPIkpDy'
+        }
     }
 
     return(<>
@@ -310,18 +362,27 @@ const CheckoutTab = (props) => {
                                 <Row className="form-group mt-5">
                                     <div className="col-12 d-flex justify-content-between">
                                         <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
-                                        <button type="submit" className="btn btn-primary" data-target="#confirmOrder" data-toggle="modal" onClick={confirmOrder}>Confirm order</button>
+                                        <PaypalExpressBtn
+                                            env={Config.env}
+                                            client={Config.client}
+                                            currency={Config.currency}
+                                            total={Config.total}
+                                            onError={onError}
+                                            onSuccess={onSuccess}
+                                            onCancel={onCancel}
+                                        />
                                     </div>
                                 </Row>
 
                             </Form>
                         </div>
+                    
                     </div>
                 </Card.Body>
             </Card>
         </Container>
 
-        <Modal show = {show} onHide = { handleClose }>
+        {/* <Modal show = {show} onHide = { handleClose }>
             <Modal.Header className={"border-0"} closeButton>
             </Modal.Header>
             <Modal.Body>
@@ -335,7 +396,7 @@ const CheckoutTab = (props) => {
             <Modal.Footer className={"border-0"}>
 
             </Modal.Footer>
-        </Modal>
+        </Modal> */}
 </>)
 }
 

@@ -7,9 +7,7 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import card_icon_img from '../assets/images/user/card_icon_img.png';
 import './checkout.css';
 import '../assets/css/theme.css'
-import NumberFormat from 'react-number-format';
 import defaultMethods from '../inc/PaymentMethods/defaultPaymentMethods.json';
-import paypal from 'paypal-checkout';
 import paypal_icon from './assets/images/paypal.png';
 import visa from './assets/images/visa-2.png';
 import amex from './assets/images/Amex-icon.jpg'
@@ -201,19 +199,19 @@ const PaymentMethods = (props) => {
         
        <div className="text-center" >
             <input type="radio" className="radio_item" value="paypal" name="item" id="radio1" onChange={()=>setChecked({paypal:!check.paypal})} checked={ check.paypal ? true : false }/>
-            <label className="label_item" for="radio1"> <img src={paypal_icon} alt="paypal icon"/></label> 
+            <label className="label_item" htmlFor="radio1"> <img src={paypal_icon} alt="paypal icon"/></label> 
              &nbsp;
              &nbsp;
-            <input type="radio" className="radio_item" value="visa" name="item" id="radio2" onChange={()=>setChecked({visa:!check.visa})}  checked={ check.visa ? true : false } />
-            <label className="label_item" for="radio2"> <img src={visa} alt="visa-icon" /> </label>
+            <input type="radio" className="radio_item" value="visa" name="item" id="radio2" /* onChange={()=>setChecked({visa:!check.visa})} */ onClick={()=>window.alert('Service Currently not available')} checked={ check.visa ? true : false } />
+            <label className="label_item" htmlFor="radio2"> <img src={visa} alt="visa-icon" /> </label>
              &nbsp;
+            &nbsp;
+            <input type="radio" className="radio_item" value="amex" name="item" id="radio3" /* onChange={()=>setChecked({amex:!check.amex})}  */ onClick={() => window.alert('Service Currently not available')} checked={ check.amex ? true : false }/>
+            <label className="label_item" htmlFor="radio3"><img src={amex} alt="american-express" /></label>
              &nbsp;
-            <input type="radio" className="radio_item" value="amex" name="item" id="radio3" onChange={()=>setChecked({amex:!check.amex})}  checked={ check.amex ? true : false }/>
-            <label className="label_item" for="radio3"><img src={amex} alt="american-express" /></label>
-             &nbsp;
-             &nbsp;
-            <input type="radio" className="radio_item" value="master" name="item" id="radio4" onChange={()=>setChecked({master:!check.master})} checked={ check.master ? true : false } />
-            <label className="label_item" for="radio4"> <img src={master_card} alt="master-card" /></label>
+            &nbsp;
+            <input type="radio" className="radio_item" value="master" name="item" id="radio4" /* onChange={()=>setChecked({master:!check.master})} */ onClick={() => window.alert('Service Currently not available')} checked={ check.master ? true : false } />
+            <label className="label_item" htmlFor="radio4"> <img src={master_card} alt="master-card" /></label>
         </div>
 
         <h3 className="mt-4 mb-2">Choose a delivery method</h3>

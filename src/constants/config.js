@@ -146,7 +146,10 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
       }
     __OAUTH(type) {
           return `${this.API}/auth0/${type}`
-      }  
+      } 
+      __SUBSCRIBER(email) {
+         return `${this.API}/get-subscriber/${email}`
+     }
  }
 
  const URL = new APP_URL();
