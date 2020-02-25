@@ -7,6 +7,7 @@ import filterReducer  from './filterReducer';
 import siteReducers from './siteReducers';
 
 
+
 const rootReducers = combineReducers(
     {
         book        :   bookReducer,
@@ -15,7 +16,6 @@ const rootReducers = combineReducers(
         favorite    :   favoriteReducer,
         filter      :   filterReducer,
         site        :   siteReducers,
-
     }
 );
 
