@@ -17,8 +17,6 @@ const Subscription = (props) => {
     subscriber(auth.email)
   }, [auth.email, subscriber])
 
-  
-
   useEffect(() => {
     if (subscription.unsubscribe) {
        setSubscription({
@@ -28,6 +26,7 @@ const Subscription = (props) => {
         unsubscribe: true
        })
     }
+    
   }, [subscription.unsubscribe])
   
   
@@ -46,7 +45,7 @@ const Subscription = (props) => {
       weekly_newsletter: subscription.weekly_newsletter,
       unsubscribe: subscription.unsubscribe
      }).then(res => {
-       setMessage({ show: true, type: 'success', message: res.data.message[0].message }) 
+       setMessage({ show: true, type: 'success', message: res.data.message }) 
        setTimeout(() => {
          setMessage({ show: false, type: 'unknown', message: '' }) 
        }, 3000);
@@ -179,9 +178,11 @@ const Subscription = (props) => {
                           </Card>
                         </Col>
                       </Row>
+
                       <Alert show={message.show} variant={message.type} onClose={() => setMessage({ ...message, show: false })} dismissible>
                         <p>{message.message}</p>
                       </Alert>
+
                     </Container>
                   </section>
                 </main>
