@@ -32,7 +32,10 @@ const Subscription = (props) => {
   
   
 
-  const handleChange = (e) => setSubscription({...subscription, [e.target.name]: e.target.checked })
+  const handleChange = (e) => setSubscription({ ...subscription, [e.target.name]: e.target.checked })
+  
+
+
 
   const handleSubmit = async(e) => {
     e.preventDefault();
