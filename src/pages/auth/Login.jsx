@@ -20,10 +20,10 @@ const Login = (props) => {
   const previewsLocation = useLastLocation();
   const lastPath = previewsLocation ? previewsLocation.pathname : false;
   const { auth, error, removeError, login_success, history, login_status } = props
-
+  const lastPathMatched = lastPath.match("/change-password/");
   useEffect(() => {
     if (login_success) {
-      if (lastPath === '/signup') {
+      if (lastPath === '/signup' || lastPathMatched === '/change-password') {
         setAlert({ show: true, type: 'success', message: 'You are logged in' })
         setTimeout(() => {
           history.push('/profile-settings')
@@ -34,7 +34,8 @@ const Login = (props) => {
       }
     }
     else if (login_status) {
-      if (lastPath === '/signup') {
+      
+      if (lastPath === '/signup' || lastPathMatched === '/change-password') {
         setTimeout(() => {
           history.push('/profile-settings')
         }, 1000);
