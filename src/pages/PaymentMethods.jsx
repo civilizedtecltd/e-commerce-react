@@ -14,9 +14,9 @@ import amex from './assets/images/Amex-icon.jpg'
 import master_card from './assets/images/master-card.png'
 import './assets/paymentbar.css'
 const CheckToggle = ({ children, eventKey, title }) => {
-  
+
     const decoratedOnClick = useAccordionToggle(eventKey, () => {});
-  
+
     return (
         <Form.Check
             custom
@@ -35,13 +35,14 @@ const CheckToggle = ({ children, eventKey, title }) => {
 
 
 const PaymentMethods = (props) => {
-  const products = []
+
     const [card, setCard] = useState({});
-    const [selectedMethod, setSelectedMethods]= useState(null);
+    //const [selectedMethod, setSelectedMethods]= useState(null);
     const [deliveryMethod, setDeliveryMethod] = useState({
         standard: true,
         express: false
     });
+
     const [alert, setAlert] = useState({
         status: false,
         type: 'danger',
@@ -82,7 +83,7 @@ const PaymentMethods = (props) => {
         props.getDeliveryMethod()
     }, []);
 
-    const handleCardOnChange = (e) => {
+    /* const handleCardOnChange = (e) => {
         const currentMethod = {
             ...paymentMethods[selectedMethod],
             [e.target.name]: e.target.value
@@ -93,10 +94,10 @@ const PaymentMethods = (props) => {
         setCard({
             ...currentMethod
         });
-    }
+    } */
 
 
-    const handleAccordionOnSelect = (selectedKey) => {
+    /* const handleAccordionOnSelect = (selectedKey) => {
 
       if(selectedKey !== null){
         setSelectedMethods(selectedKey);
@@ -110,7 +111,7 @@ const PaymentMethods = (props) => {
             paymentData: (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
         });
       }
-    }
+    } */
 
     const checkDelivery = (e) => {
 
@@ -141,9 +142,8 @@ const PaymentMethods = (props) => {
             });
         }
     }
-    
 
-    const handleCardOnClick = (e) => {
+    /* const handleCardOnClick = (e) => {
         e.preventDefault();
 
         if (!card.payment_type) return setAlert({status: true, type: 'danger', message: 'Please select payment type.'})
@@ -163,12 +163,10 @@ const PaymentMethods = (props) => {
                 paymentData:  (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
             });
         }
-        /* console.log("card: ", card); */
-
-    }
+    } */
 
     //Card Input Format
-    const limit = (val, max) => {
+    /* const limit = (val, max) => {
         if (val.length === 1 && val[0] > max[0]) {
             val = '0' + val;
         }
@@ -192,25 +190,38 @@ const PaymentMethods = (props) => {
 
     const cardExpiryYear = (val) => {
         return val.substring(0,2);
+    } */
+
+    const paymentMethodSelect = (e) => {
+        e.preventDefault();
+        switch(e.target.value){
+            case 'paypal':
+                    setCard({method: 'PAYPAL'});
+                break;
+            case 'visa':
+            case 'amex':
+            case 'master':
+                window.alert('Currently this payment method is not supported!.');
+        }
     }
 
     return (<>
         <PageLoader loading={false} />
-        
-       <div className="text-center" >
-            <input type="radio" className="radio_item" value="paypal" name="item" id="radio1" onChange={()=>setChecked({paypal:!check.paypal})} checked={ check.paypal ? true : false }/>
-            <label className="label_item" htmlFor="radio1"> <img src={paypal_icon} alt="paypal icon"/></label> 
+
+       <div className="text-center">
+            <input type="radio" className="radio_item" value="paypal" name="item" id="radio1" onChange={()=> setChecked({paypal:!check.paypal})} onClick={paymentMethodSelect} checked={ check.paypal ? true : false }/>
+            <label className="label_item" htmlFor="radio1"> <img src={paypal_icon} alt="paypal icon"/></label>
              &nbsp;
              &nbsp;
-            <input type="radio" className="radio_item" value="visa" name="item" id="radio2" /* onChange={()=>setChecked({visa:!check.visa})} */ onClick={()=>window.alert('Service Currently not available')} checked={ check.visa ? true : false } />
+            <input type="radio" className="radio_item" value="visa" name="item" id="radio2" onChange={()=>setChecked({visa:!check.visa})} onClick={paymentMethodSelect} checked={ check.visa ? true : false } />
             <label className="label_item" htmlFor="radio2"> <img src={visa} alt="visa-icon" /> </label>
              &nbsp;
             &nbsp;
-            <input type="radio" className="radio_item" value="amex" name="item" id="radio3" /* onChange={()=>setChecked({amex:!check.amex})}  */ onClick={() => window.alert('Service Currently not available')} checked={ check.amex ? true : false }/>
+            <input type="radio" className="radio_item" value="amex" name="item" id="radio3" onChange={()=>setChecked({amex:!check.amex})}  onClick={paymentMethodSelect} checked={ check.amex ? true : false }/>
             <label className="label_item" htmlFor="radio3"><img src={amex} alt="american-express" /></label>
              &nbsp;
             &nbsp;
-            <input type="radio" className="radio_item" value="master" name="item" id="radio4" /* onChange={()=>setChecked({master:!check.master})} */ onClick={() => window.alert('Service Currently not available')} checked={ check.master ? true : false } />
+            <input type="radio" className="radio_item" value="master" name="item" id="radio4" onChange={()=>setChecked({master:!check.master})} onClick={paymentMethodSelect} checked={ check.master ? true : false } />
             <label className="label_item" htmlFor="radio4"> <img src={master_card} alt="master-card" /></label>
         </div>
 

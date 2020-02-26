@@ -16,9 +16,11 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 
 const CheckoutTab = (props) => {
+
     const [state, setState] = useState({
         redirect: false
     })
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const [step, setStep] = useState({prev:0, next:1, show:false})
@@ -86,12 +88,7 @@ const CheckoutTab = (props) => {
 
     }
 
-    const handleOnChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name] : e.target.value
-        })
-    }
+    const handleOnChange = (e) => setFormData({...formData, [e.target.name] : e.target.value });
 
     const handleTermsCheck = () => {
         setFormData({
@@ -108,14 +105,15 @@ const CheckoutTab = (props) => {
     }
 
     const getPaymentDetails = (data) => {
-        props.getPaymentMethod(data)
+        console.log("getPaymentDetails: ", data);
+        props.getPaymentMethod(data);
         setPayment({
             ...data
         })
     }
 
-    const confirmOrder = (e) => {
-        e.preventDefault();
+    const confirmOrder = () => {
+        //e.preventDefault();
 
         const books = [];
 
@@ -127,7 +125,15 @@ const CheckoutTab = (props) => {
         });
 
         const promoId = (props.promo) ? props.promo.id : null ;
-        props.confirmOrder({
+
+        /* props.confirmOrder({
+            address: formData,
+            ...payment,
+            books,
+            promo: promoId
+        }); */
+
+        console.log('Confirm Order: ', {
             address: formData,
             ...payment,
             books,
@@ -162,7 +168,8 @@ const CheckoutTab = (props) => {
     }
 
     const onSuccess = payment => {
-        console.log(payment)
+        console.log("PayPalPayment: ", payment);
+        confirmOrder();
         // createOrder(payment);
     }
 
@@ -187,6 +194,7 @@ const CheckoutTab = (props) => {
         }
     }
 
+
     return(<>
 
         <PageLoader loading={false}/>
@@ -194,7 +202,6 @@ const CheckoutTab = (props) => {
 
             <Card>
                 <Card.Body>
-
                     <div className="checkout-tab">
                         <div className="header-section">
                             <button id='step-1' className="btn btn-primary active-tab">Address details</button>
@@ -204,14 +211,12 @@ const CheckoutTab = (props) => {
                             <button id="step-3" className="btn btn-primary">Order confirmation</button>
                         </div>
 
-
                         <div id="address-section" className="tab address-section tab-active-content mt-5">
                             <Row>
                                 <Col sm="12">
                                     <button disabled className="btn btn-primary btn-block d-md-none d-lg-none d-xl-none">Address details</button>
                                     <Form className='mt-5' action="post">
                                         <Row>
-
                                             <Col sm={6} className="form-group">
                                                 <label htmlFor="first-name">First Name</label>
                                                 <input type="text" name='first_name' id="first-name" className="form-control" value={formData.first_name} onChange={handleOnChange}/>
@@ -299,7 +304,6 @@ const CheckoutTab = (props) => {
                             </Row>
                         </div>
 
-
                         <div id="payment-section" className="tab payment-section mt-3">
                             <div className="row">
                                 <div className="col col-12">
@@ -323,7 +327,6 @@ const CheckoutTab = (props) => {
                             </div>
                         </div>
 
-
                         <div id='order-confirmation-section' className="tab order-confirmation-section">
                             <Form className="userInfoForm mt-3">
                                 <button disabled className="btn btn-primary btn-block d-md-none d-lg-none d-xl-none mb-3">Payment and delivery</button>
@@ -339,7 +342,6 @@ const CheckoutTab = (props) => {
                                             <li><strong>Email : </strong>{ props.user.email }</li>
                                         </ul>
                                     </Col>
-
 
                                     <Col sm="6">
                                         <ul className="orderConfrimationList">
@@ -376,7 +378,7 @@ const CheckoutTab = (props) => {
 
                             </Form>
                         </div>
-                    
+
                     </div>
                 </Card.Body>
             </Card>

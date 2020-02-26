@@ -207,7 +207,7 @@ const CartPage = (props) => {
                               </tr>
                             </tbody>
                           </Table>
-                          <Link to="/checkout" className="btn btn-primary" style={{ color: 'white' }} onClick={handleCheckoutOnClick} >Checkout</Link>
+                          <Link to="/checkout" className="btn btn-primary" style={{ color: 'white' }} onClick={handleCheckoutOnClick}>Checkout</Link>
                         </div>
                       </Col>
                     </Row>
