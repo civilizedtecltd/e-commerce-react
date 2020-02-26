@@ -174,8 +174,6 @@ const PaymentMethods = (props) => {
         if (val.length === 2) {
             if (Number(val) === 0) {
                 val = '01';
-
-                //this can happen when user paste number
             } else if (val > max) {
                 val = max;
             }
