@@ -45,11 +45,10 @@ const CheckoutPage = (props) => {
 
   useEffect(() => {
     props.getUser();
-    props.deliveryMethodFetch();
+    //props.deliveryMethodFetch();
   }, []);
 
   const getPaymentMethod = (paymentMethod) => {
-      console.log("getPaymentMethod: ", paymentMethod);
     setDeliveryCost(paymentMethod.paymentData.price);
   }
 
@@ -134,7 +133,7 @@ const CheckoutPage = (props) => {
             </Container>
           </section> }
           <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
-            <CheckoutTab productPrice = {promoPrice} costWithDelivery = {costWithDelivery} getPaymentMethod={getPaymentMethod}/>
+            <CheckoutTab productPrice = {promoPrice} costWithDelivery = {costWithDelivery} getPaymentMethod = {getPaymentMethod}/>
           </section>
         </main>
       </div>

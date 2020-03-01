@@ -12,32 +12,13 @@ import paypal_icon from './assets/images/paypal.png';
 import visa from './assets/images/visa-2.png';
 import amex from './assets/images/Amex-icon.jpg'
 import master_card from './assets/images/master-card.png'
-import './assets/paymentbar.css'
-const CheckToggle = ({ children, eventKey, title }) => {
-
-    const decoratedOnClick = useAccordionToggle(eventKey, () => {});
-
-    return (
-        <Form.Check
-            custom
-            className="ml-2"
-            type="radio"
-            label={title}
-            name="formHorizontalRadios"
-            id={`ch-${eventKey}`}
-            onClick={decoratedOnClick}
-        >
-            {children}
-
-        </Form.Check>
-    );
-}
+import './assets/paymentbar.css';
 
 
 const PaymentMethods = (props) => {
 
-    const [card, setCard] = useState({});
-    //const [selectedMethod, setSelectedMethods]= useState(null);
+    const [method, setMethod] = useState('');
+
     const [deliveryMethod, setDeliveryMethod] = useState({
         standard: true,
         express: false
@@ -57,61 +38,12 @@ const PaymentMethods = (props) => {
         master:false,
     })
 
-    const paymentMethods = (props.user.payment && props.user.payment.length >= 3) ? props.user.payment : defaultMethods;
-
-    if(props.user.payment && props.user.payment.length < 3){
-
-        const savedMethods = props.user.payment;
-        savedMethods.map(item => {
-            switch(item.payment_type){
-                case 'MPESA':
-                        paymentMethods[0] = { ...item}
-                    break;
-                case 'VISA':
-                        paymentMethods[1] = { ...item}
-                    break;
-                case 'PAYPAL':
-                       paymentMethods[2] = { ...item}
-                    break;
-                default :
-                  return paymentMethods
-            }
-        });
-    }
 
     useEffect(()=>{
         props.getDeliveryMethod()
     }, []);
 
-    /* const handleCardOnChange = (e) => {
-        const currentMethod = {
-            ...paymentMethods[selectedMethod],
-            [e.target.name]: e.target.value
-        }
 
-        paymentMethods[selectedMethod] = currentMethod;
-
-        setCard({
-            ...currentMethod
-        });
-    } */
-
-
-    /* const handleAccordionOnSelect = (selectedKey) => {
-
-      if(selectedKey !== null){
-        setSelectedMethods(selectedKey);
-        setCard({
-            ...paymentMethods[selectedKey]
-        });
-
-        props.callback({
-            payment: { ...paymentMethods[selectedKey]},
-            delivery: (deliveryMethod.standard) ? 1 : 2,
-            paymentData: (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
-        });
-      }
-    } */
 
     const checkDelivery = (e) => {
 
@@ -122,7 +54,7 @@ const PaymentMethods = (props) => {
           })
 
           props.callback({
-                payment: { ...card},
+                method: method,
                 delivery: 1,
                 paymentData: props.delivery[0]
           });
@@ -136,65 +68,19 @@ const PaymentMethods = (props) => {
             })
 
             props.callback({
-                payment: { ...card},
+                method: method,
                 delivery: 2,
                 paymentData: props.delivery[1]
             });
         }
     }
 
-    /* const handleCardOnClick = (e) => {
-        e.preventDefault();
-
-        if (!card.payment_type) return setAlert({status: true, type: 'danger', message: 'Please select payment type.'})
-        if (!card.ccv)          return setAlert({status: true, type: 'danger', message: 'Please provide cvv number.'})
-        if (!card.card_number)  return setAlert({status: true, type: 'danger', message: 'Please provide card number.'})
-        if (!card.yy)           return setAlert({status: true, type: 'danger', message: 'Please provide YY.'})
-        if (!card.mm)           return setAlert({status: true, type: 'danger', message: 'Please provide MM.'})
-
-        if(card.ccv && card.card_number && card.mm && card.yy){
-             props.addCard({
-                ...card
-            });
-
-            props.callback({
-                payment: {...card},
-                delivery: (deliveryMethod.standard) ? 1 : 2,
-                paymentData:  (deliveryMethod.standard) ? props.delivery[0] : props.delivery[1]
-            });
-        }
-    } */
-
-    //Card Input Format
-    /* const limit = (val, max) => {
-        if (val.length === 1 && val[0] > max[0]) {
-            val = '0' + val;
-        }
-
-        if (val.length === 2) {
-            if (Number(val) === 0) {
-                val = '01';
-            } else if (val > max) {
-                val = max;
-            }
-        }
-
-        return val;
-    }
-
-    const cardExpiryMonth = (val) => {
-        return limit(val.substring(0, 2), '12');
-    }
-
-    const cardExpiryYear = (val) => {
-        return val.substring(0,2);
-    } */
 
     const paymentMethodSelect = (e) => {
         e.preventDefault();
         switch(e.target.value){
             case 'paypal':
-                    setCard({method: 'PAYPAL'});
+                    setMethod('PAYPAL');
                 break;
             case 'visa':
             case 'amex':

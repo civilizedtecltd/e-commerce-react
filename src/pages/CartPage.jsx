@@ -15,7 +15,7 @@ import MegaMenu from "../components/MegaMenuComponents/MegaMenuComponent";
 
 import '../pages/checkout.css';
 
-import { removeFromCart, deleteAllFromCart, updateQuantity, deliveryMethod, promoCodeInfo } from '../redux/actions/shopActions';
+import { removeFromCart, deleteAllFromCart, updateQuantity, deliveryMethod, promoCodeInfo, currencyExchangeRate } from '../redux/actions/shopActions';
 
 const CartPage = (props) => {
 
@@ -53,7 +53,7 @@ const CartPage = (props) => {
   let costWithDelivery  = parseFloat(promoPrice) + parseFloat(delivery_cost);
 
   useEffect(() => {
-    //return props.deliveryMethodFetch();
+    return  props.getDeliveryMethods();
   }, [])
 
   const handleDeleteClick = (id) => {
@@ -87,7 +87,7 @@ const CartPage = (props) => {
   }
 
   const handleCheckoutOnClick = (e) => {
-      props.deliveryMethodFetch();
+      props.getCurrencyExchangeRate('USD');
   }
 
   return (
@@ -246,11 +246,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeItem          : (id) => dispatch(removeFromCart(id)),
-    updateItem          : ({ id, qty }) => dispatch(updateQuantity({ id, qty })),
-    deleteAll           : () => dispatch(deleteAllFromCart()),
-    deliveryMethodFetch : () => dispatch(deliveryMethod()),
-    getPromoCodeInfo    : (code) => dispatch(promoCodeInfo(code))
+    removeItem              : (id) => dispatch(removeFromCart(id)),
+    updateItem              : ({ id, qty }) => dispatch(updateQuantity({ id, qty })),
+    deleteAll               : () => dispatch(deleteAllFromCart()),
+    getDeliveryMethods      : () => dispatch(deliveryMethod()),
+    getPromoCodeInfo        : (code) => dispatch(promoCodeInfo(code)),
+    getCurrencyExchangeRate : (base) => dispatch(currencyExchangeRate(base))
   }
 }
 
