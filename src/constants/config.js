@@ -4,8 +4,8 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
 
   class APP_URL {
      constructor(){
-         this.BASE = `https://admin.abookstore.co.ke`;
-        // this.BASE = `http://localhost:3333`;
+        this.BASE = `https://admin.abookstore.co.ke`;
+        //this.BASE = `http://localhost:3333`;
         this.API  = `${this.BASE}/api`;
      }
 
@@ -85,7 +85,7 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
         return `${this.API}/subscribe-update`
       }
 
-    get DELIVERY_METHOD(){
+    get _DELIVERY_METHOD(){
         return `${this.API}/delivery-method`
       }
 
@@ -149,6 +149,10 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
       }
     __SUBSCRIBER(email) {
          return `${this.API}/get-subscriber/${email}`
+     }
+
+     __CURRENCY_EXCHANGE_RATE(base){
+         return `https://openexchangerates.org/api/latest.json?app_id=f09d5860616c45edb2ab8346180efe75&base=${base}`
      }
  }
 

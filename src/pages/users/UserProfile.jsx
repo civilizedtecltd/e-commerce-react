@@ -39,6 +39,8 @@ const UserProfile = (props) => {
             return () =>  clearTimeout(clearAlert);
         }
 
+        props.getUser();
+
     }, [props.status.message, props.status.success]);
 
 

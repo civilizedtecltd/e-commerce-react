@@ -7,7 +7,7 @@ export const FETCH_ALL_CATEGORY         =   'FETCH_ALL_CATEGORY';
 export const POST_REVIEW                =   'POST_REVIEW';
 
 
-//Cart action types
+//Shop Cart action types
 export const ADD_TO_CART                =   'ADD_TO_CART';
 export const REMOVE_FROM_CART           =   'REMOVE_FROM_CART';
 export const INCREASE_QUANTITY          =   'INCREASE_QUANTITY';
@@ -15,6 +15,7 @@ export const DECREASE_QUANTITY          =   'DECREASE_QUANTITY';
 export const UPDATE_QUANTITY            =   'UPDATE_QUANTITY';
 export const DELETE_ALL_FORM_CART       =   'DELETE_ALL_FORM_CART';
 export const SHOP_NOT_IN_STATE          =   'SHOP_NOT_IN_STATE';
+export const CURRENCY_EXCHANGE_RATE     =   'CURRENCY_EXCHANGE_RATE';
 
 //Auth action types
 export const USER_LOGIN                 =   'USER_LOGIN';
@@ -77,10 +78,11 @@ export const UPDATE_PAYMENT_METHOD      = 'UPDATE_PAYMENT_METHOD';
 export const FILTER_NOT_IN_STATE        = "FILTER_NOT_IN_STATE";
 export const AUTH_DATA_NOT_IN_STATE     = "AUTH_DATA_NOT_IN_STATE";
 
-export const SITE_NOT_IN_STATE = 'SITE_NOT_IN_STATE';
+export const SITE_NOT_IN_STATE          = 'SITE_NOT_IN_STATE';
 
-export const GET_SUBSCRIBER = 'GET_SUBSCRIBER';
-export const NOT_STATE_SUBSCRIBER = 'NOT_STATE_SUBSCRIBER';
+export const GET_SUBSCRIBER             = 'GET_SUBSCRIBER';
+export const NOT_STATE_SUBSCRIBER       = 'NOT_STATE_SUBSCRIBER';
+
 
 
 

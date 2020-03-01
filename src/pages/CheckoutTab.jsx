@@ -18,10 +18,6 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const CheckoutTab = (props) => {
 
-    /* const [state, setState] = useState({
-        redirect: false
-    })
-    const handleClose = () => setShow(false); */
 
     const [show, setShow] = useState(false);
     const [step, setStep] = useState({prev:0, next:1, show:false})
@@ -34,10 +30,12 @@ const CheckoutTab = (props) => {
         policy: false
     });
 
-    const [payment, setPayment] = useState({});
+    const [paymentDetails, setPaymentDetails] = useState({});
 
-    const deliveryCost = (payment.paymentData) ? payment.paymentData.price : props.delivery[0].price;
-    const deliveryTime = (payment.paymentData) ? payment.paymentData.delivery_time : props.delivery[0].delivery_time;
+    const deliveryCost = (paymentDetails.paymentData) ? paymentDetails.paymentData.price : props.delivery[0].price;
+    const deliveryTime = (paymentDetails.paymentData) ? paymentDetails.paymentData.delivery_time : props.delivery[0].delivery_time;
+    const currencyExchangeRate = (props.currencyRate) ? props.currencyRate.kes : 1;
+    const total_cost_in_usd = Math.ceil(props.costWithDelivery/currencyExchangeRate);
 
     const handleNext = () => {
 
@@ -111,13 +109,12 @@ const CheckoutTab = (props) => {
     const getPaymentDetails = (data) => {
         console.log("getPaymentDetails: ", data);
         props.getPaymentMethod(data);
-        setPayment({
+        setPaymentDetails({
             ...data
         })
     }
 
-    const confirmOrder = () => {
-        //e.preventDefault();
+    const confirmOrder = (paymentInfo) => {
 
         const books = [];
 
@@ -128,18 +125,20 @@ const CheckoutTab = (props) => {
                 });
         });
 
-        const promoId = (props.promo) ? props.promo.id : null ;
+        const promoId = (props.promo) ? props.promo.id : null;
 
-        /* props.confirmOrder({
+        props.confirmOrder({
             address: formData,
-            ...payment,
+            payment: {method: paymentDetails.method, info: paymentInfo},
+            delivery: paymentDetails.delivery,
             books,
             promo: promoId
-        }); */
+        });
 
         console.log('Confirm Order: ', {
             address: formData,
-            ...payment,
+            payment: {method: paymentDetails.method, info: paymentInfo},
+            delivery: paymentDetails.delivery,
             books,
             promo: promoId
         });
@@ -149,32 +148,9 @@ const CheckoutTab = (props) => {
         setShow(true);
     }
 
-
-
-
-
-    const createOrder = (payment) => {
-        // const postData = {
-        //     uid: props.userData.uid,
-        //     token: props.userData.token,
-        //     payerID: payment.payerID,
-        //     paymentID: payment.PaymentID,
-        //     paymentToken:payment.paymentToken
-        // }
-        // postData('createOrder', postData).then(result => {
-        //     let responseJSON = result;
-        //     if (responseJSON.status === 'true') {
-        //         setState({
-        //             redirect: true
-        //         })
-        //     }
-        // })
-    }
-
-    const onSuccess = payment => {
-        console.log("PayPalPayment: ", payment);
-        confirmOrder();
-        // createOrder(payment);
+    const onSuccess = paypalInfo => {
+        confirmOrder(paypalInfo);
+        return window.location.href = '/my-order'
     }
 
     const onCancel = data => {
@@ -347,7 +323,7 @@ const CheckoutTab = (props) => {
                                     <Col sm="6" className="mt-4">
                                         <ul className="orderConfrimationList text-large">
                                             <li><strong>Product(s) Price : </strong>Ksh {props.productPrice}</li>
-                                            <li><strong>Delivery method : </strong> {(!isEmpty(payment) && payment.delivery === 0) ? 'Standard' : 'Express'}</li>
+                                            <li><strong>Delivery method : </strong> {(!isEmpty(paymentDetails) && paymentDetails.delivery === 0) ? 'Standard' : 'Express'}</li>
                                             <li><strong>Delivery cost : </strong>Ksh {deliveryCost}</li>
                                             <li><strong>In Total: </strong>Ksh {props.costWithDelivery}</li>
                                             <li><strong>Expected arrival : </strong>  {futureDate(deliveryTime)}</li>
@@ -362,7 +338,7 @@ const CheckoutTab = (props) => {
                                             env       = {paypalConfig.env}
                                             client    = {paypalConfig.client}
                                             currency  = {paypalConfig.currency}
-                                            total     = {props.costWithDelivery}
+                                            total     = {total_cost_in_usd}
                                             onError   = {onError}
                                             onSuccess = {onSuccess}
                                             onCancel  = {onCancel}
