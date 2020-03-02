@@ -121,14 +121,17 @@ const deletePayment = (id) => dispatch => {
          .catch(error => console.log(error));
 }
 
-const confirmOrder = (data) => dispatch => {
+const confirmOrder = (data) => dispatch => {      
     setAuthToken();
     axios.post(URL._CONFIRM_ORDER, { ...data })
          .then(res => {
-            return dispatch({
+             dispatch({
                 type: Types.CONFIRM_ORDER,
                 payload: [ ...res.data.data ]
-            })
+             })
+
+             dispatch(getUser())
+            return window.location ='/my-order' 
          })
          .catch(error => {
              console.log(error.response)

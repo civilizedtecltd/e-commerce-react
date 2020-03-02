@@ -107,7 +107,7 @@ const CheckoutTab = (props) => {
     }
 
     const getPaymentDetails = (data) => {
-        console.log("getPaymentDetails: ", data);
+        // console.log("getPaymentDetails: ", data);
         props.getPaymentMethod(data);
         setPaymentDetails({
             ...data
@@ -135,26 +135,23 @@ const CheckoutTab = (props) => {
             promo: promoId
         });
 
-        console.log('Confirm Order: ', {
+        /* console.log('Confirm Order: ', {
             address: formData,
             payment: {method: paymentDetails.method, info: paymentInfo},
             delivery: paymentDetails.delivery,
             books,
             promo: promoId
-        });
+        }); */
 
         props.clearPromo();
 
         setShow(true);
     }
 
-    const onSuccess = paypalInfo => {
-        confirmOrder(paypalInfo);
-        return window.location.href = '/my-order'
-    }
+    const onSuccess = paypalInfo => confirmOrder(paypalInfo);     
 
     const onCancel = data => {
-        console.log('The payment was cancelled',data)
+        // console.log('The payment was cancelled',data)
         return window.location.href = data.cancelUrl
     }
 
