@@ -139,6 +139,11 @@ const shopReducer = (state = initSate, { type, payload }) => {
                     ...state,
                     promo: payload
                 }
+            case Types.CURRENCY_EXCHANGE_RATE:
+                return {
+                    ...state,
+                    currencyRate: payload
+                }
 
             default:
                 return state;

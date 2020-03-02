@@ -15,8 +15,8 @@ const CheckoutPage = (props) => {
   let totalBookPrice = 0;
   let delivery_costs = props.delivery ? props.delivery[0].price : 0;
 
-  const [delivery_cost , setDeliveryCost] = useState(delivery_costs)
-  const totalQuantity = cartItems.map(data=>data.quantity)
+  const [delivery_cost , setDeliveryCost] = useState(delivery_costs);
+  const totalQuantity = cartItems.map(data => data.quantity);
 
   let sumTotalQty = totalQuantity.reduce((ac, crr) => ac + crr, 0)
   window.localStorage.setItem("sumQty", sumTotalQty);
@@ -33,36 +33,23 @@ const CheckoutPage = (props) => {
   let promoPrice    = totalBookPrice;
 
   if(promoInfo.status){
-
     const { discount, upto } = promoInfo;
 
-    if(Number(totalBookPrice) <= Number(upto)){
-
+    if(Number(totalBookPrice) <= Number(upto))
         promoPrice = totalBookPrice - (totalBookPrice*(discount/100));
-
-    }else if(Number(totalBookPrice) > Number(upto)){
-
+    else if(Number(totalBookPrice) > Number(upto))
         promoPrice = totalBookPrice - upto;
-    }
   }
 
   let costWithDelivery = parseFloat(promoPrice) + parseFloat(delivery_cost);
 
   useEffect(() => {
     props.getUser();
-    props.deliveryMethodFetch();
+    //props.deliveryMethodFetch();
   }, []);
 
   const getPaymentMethod = (paymentMethod) => {
-      console.log("getPaymentMethod: ", paymentMethod);
     setDeliveryCost(paymentMethod.paymentData.price);
-  }
-
-
-  const userData = {
-    uid: 1,
-    token: props.token,
-    total:1
   }
 
   return (
@@ -146,7 +133,7 @@ const CheckoutPage = (props) => {
             </Container>
           </section> }
           <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
-            <CheckoutTab userData={userData} totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
+            <CheckoutTab productPrice = {promoPrice} costWithDelivery = {costWithDelivery} getPaymentMethod = {getPaymentMethod}/>
           </section>
         </main>
       </div>

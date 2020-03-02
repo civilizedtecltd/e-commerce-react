@@ -56,7 +56,7 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     get _FAVORITE_ITEMS(){
          return `${this.API}/user/favorite`;
       }
-      
+
     _DELETE_FAVORITE(id){
         return `${this.API}/user/favorite/${id}/delete`
     }
@@ -76,19 +76,19 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     get _CONFIRM_ORDER(){
         return `${this.API}/order`;
     }
-      
+
     get _SUBSCRIBE(){
         return `${this.API}/subscribe`
     }
-      
+
     get _UPDATE_SUBSCRIBER(){
         return `${this.API}/subscribe-update/`
       }
-      
-    get DELIVERY_METHOD(){
+
+    get _DELIVERY_METHOD(){
         return `${this.API}/delivery-method`
       }
-      
+
     get MAX_MIN_PRICE(){
     return `${this.API}/price-max-min`
       }
@@ -96,19 +96,19 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     get UPDATE_PAYMENT_METHOD() {
         return `${this.API}/update-payment-method`
       }
-      
+
     _GET_STAGES(id){
         return `${this.API}/filter/stage/category/${id}`
       }
-      
+
     get _GET_DISCIPLINES(){
         return `${this.API}/filter/disciplines`
       }
-      
+
     get _GET_AUTHORS(){
         return `${this.API}/filter/authors`
       }
-      
+
     get _GET_PUBLISHERS(){
         return `${this.API}/filter/publishers`
     }
@@ -146,9 +146,19 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
       }
     __OAUTH(type) {
           return `${this.API}/auth0/${type}`
+<<<<<<< HEAD
       } 
       __SUBSCRIBER(email, subscriber_id) {
           return `${this.API}/get-subscriber/${email}`
+=======
+      }
+    __SUBSCRIBER(email) {
+         return `${this.API}/get-subscriber/${email}`
+>>>>>>> 4a54cfd36840906dabd9e738648e2c7ef296cea2
+     }
+
+     __CURRENCY_EXCHANGE_RATE(base){
+         return `https://openexchangerates.org/api/latest.json?app_id=f09d5860616c45edb2ab8346180efe75&base=${base}`
      }
  }
 

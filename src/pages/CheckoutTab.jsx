@@ -8,6 +8,7 @@ import {setDeliveryAddress, setPaymentDetails} from '../redux/actions/shopAction
 import { confirmOrder } from '../redux/actions/authActions';
 import { clearPromo } from '../redux/actions/shopActions';
 import PaymentsMethods from './PaymentMethods';
+import { paypalConfig } from '../constants/constants';
 import {futureDate} from '../helpers/utils';
 import './checkout.css';
 import '../assets/css/theme.css';
@@ -17,12 +18,8 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 const CheckoutTab = (props) => {
 
-    const [state, setState] = useState({
-        redirect: false
-    })
 
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
     const [step, setStep] = useState({prev:0, next:1, show:false})
 
     const [formData, setFormData] = useState({
@@ -33,7 +30,12 @@ const CheckoutTab = (props) => {
         policy: false
     });
 
-    const [payment, setPayment] = useState({});
+    const [paymentDetails, setPaymentDetails] = useState({});
+
+    const deliveryCost = (paymentDetails.paymentData) ? paymentDetails.paymentData.price : props.delivery[0].price;
+    const deliveryTime = (paymentDetails.paymentData) ? paymentDetails.paymentData.delivery_time : props.delivery[0].delivery_time;
+    const currencyExchangeRate = (props.currencyRate) ? props.currencyRate.kes : 1;
+    const total_cost_in_usd = Math.ceil(props.costWithDelivery/currencyExchangeRate);
 
     const handleNext = () => {
 
@@ -107,13 +109,12 @@ const CheckoutTab = (props) => {
     const getPaymentDetails = (data) => {
         console.log("getPaymentDetails: ", data);
         props.getPaymentMethod(data);
-        setPayment({
+        setPaymentDetails({
             ...data
         })
     }
 
-    const confirmOrder = () => {
-        //e.preventDefault();
+    const confirmOrder = (paymentInfo) => {
 
         const books = [];
 
@@ -124,18 +125,20 @@ const CheckoutTab = (props) => {
                 });
         });
 
-        const promoId = (props.promo) ? props.promo.id : null ;
+        const promoId = (props.promo) ? props.promo.id : null;
 
-        /* props.confirmOrder({
+        props.confirmOrder({
             address: formData,
-            ...payment,
+            payment: {method: paymentDetails.method, info: paymentInfo},
+            delivery: paymentDetails.delivery,
             books,
             promo: promoId
-        }); */
+        });
 
         console.log('Confirm Order: ', {
             address: formData,
-            ...payment,
+            payment: {method: paymentDetails.method, info: paymentInfo},
+            delivery: paymentDetails.delivery,
             books,
             promo: promoId
         });
@@ -145,32 +148,9 @@ const CheckoutTab = (props) => {
         setShow(true);
     }
 
-
-
-
-
-    const createOrder = (payment) => {
-        // const postData = {
-        //     uid: props.userData.uid,
-        //     token: props.userData.token,
-        //     payerID: payment.payerID,
-        //     paymentID: payment.PaymentID,
-        //     paymentToken:payment.paymentToken
-        // }
-        // postData('createOrder', postData).then(result => {
-        //     let responseJSON = result;
-        //     if (responseJSON.status === 'true') {
-        //         setState({
-        //             redirect: true
-        //         })
-        //     }
-        // })
-    }
-
-    const onSuccess = payment => {
-        console.log("PayPalPayment: ", payment);
-        confirmOrder();
-        // createOrder(payment);
+    const onSuccess = paypalInfo => {
+        confirmOrder(paypalInfo);
+        return window.location.href = '/my-order'
     }
 
     const onCancel = data => {
@@ -183,20 +163,8 @@ const CheckoutTab = (props) => {
         console.log('Error',err)
     }
 
-
-    const Config = {
-        env: 'sandbox',
-        currency: 'USD',
-        total: props.userData.total,
-        client: {
-            sandbox: 'AealZEZeqmY7Losu4ottC6QaYcqXdXNODFgEsyhM-p4sVbUhNESDO2fivVthS7vbnR7lrt2FrIhKGynm',
-            production:'AcmOk1IjB5Rwg-UR8hXaNoA_V5vUygu3J1ZZ3aAZ1dasN51hwonSMchFqSyyD5V_OaPUPcIXFIPIkpDy'
-        }
-    }
-
-
-    return(<>
-
+    return(
+        <>
         <PageLoader loading={false}/>
         <Container>
 
@@ -354,9 +322,11 @@ const CheckoutTab = (props) => {
 
                                     <Col sm="6" className="mt-4">
                                         <ul className="orderConfrimationList text-large">
-                                            <li><strong>Total Price : </strong>Ksh {props.totalPrice}</li>
-                                            <li><strong>Delivery method : </strong> {(!isEmpty(payment) && payment.delivery === 0) ? 'Standard' : 'Express'}</li>
-                                            <li><strong>Expected arrival : </strong>  {futureDate(7)}</li>
+                                            <li><strong>Product(s) Price : </strong>Ksh {props.productPrice}</li>
+                                            <li><strong>Delivery method : </strong> {(!isEmpty(paymentDetails) && paymentDetails.delivery === 0) ? 'Standard' : 'Express'}</li>
+                                            <li><strong>Delivery cost : </strong>Ksh {deliveryCost}</li>
+                                            <li><strong>In Total: </strong>Ksh {props.costWithDelivery}</li>
+                                            <li><strong>Expected arrival : </strong>  {futureDate(deliveryTime)}</li>
                                         </ul>
                                     </Col>
                                 </Row>
@@ -365,13 +335,13 @@ const CheckoutTab = (props) => {
                                     <div className="col-12 d-flex justify-content-between">
                                         <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
                                         <PaypalExpressBtn
-                                            env={Config.env}
-                                            client={Config.client}
-                                            currency={Config.currency}
-                                            total={Config.total}
-                                            onError={onError}
-                                            onSuccess={onSuccess}
-                                            onCancel={onCancel}
+                                            env       = {paypalConfig.env}
+                                            client    = {paypalConfig.client}
+                                            currency  = {paypalConfig.currency}
+                                            total     = {total_cost_in_usd}
+                                            onError   = {onError}
+                                            onSuccess = {onSuccess}
+                                            onCancel  = {onCancel}
                                         />
                                     </div>
                                 </Row>
@@ -405,7 +375,8 @@ const CheckoutTab = (props) => {
 
 const mapStateToProps = state =>({
     ...state.auth,
-    ...state.shop
+    ...state.shop,
+    delivery: state.shop.deliveryMethod
 })
 
 const mapDispatchToProps = dispatch => ({
