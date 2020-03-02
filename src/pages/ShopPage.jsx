@@ -20,14 +20,12 @@ const useStyle = createUseStyles({page_field: {width: "50px",marginRight: "5px",
 const ShopPage = props => {
   const classes = useStyle();
   const { id, title, showItem, pageNumber, keyword, filter_type, filter_id } = useParams();
-  const { stageList, filterShortByType, fetchBooks, filterByPrice, getBooksByFilter, booksByCategory } = props
+  const { stageList, filterShortByType, fetchBooks, filterByPrice, getBooksByFilter, booksByCategory, book: { totalPage, data, pending} } = props
   const [priceFilter, setPriceFilter] = useState({higherPrice:null,lowerPrice:null})
   const [pagination, setPagination] = useState({ show: 5, page: 1 })
-  let [totalPage] = useState(() => props.book.totalPage);
   let [sortBy, setSortBy] = useState("");
   const totalItem = props.cart.length;
   const favoriteItem = props.favorite.items;
-  const books = props.book.data ? props.book.data : [];
   const shopUrl = window.location.pathname;
 
 
@@ -47,10 +45,11 @@ const ShopPage = props => {
       return filterByPrice(page, show, lowerPrice, higherPrice);
     } else if (id === "all" && pageNumber && showItem && keyword) {
       return fetchBooks(page, show, keyword);
-    } else if (!isNaN(id) && page && show) {
+    } else if (!isNaN(id) && id && title && page && show) {
       return booksByCategory(id, page, show);
     }
-  }, [sortBy, priceFilter, id, filter_type, filter_id, pagination, stageList, shopUrl,pageNumber, showItem, keyword, filterShortByType, fetchBooks, filterByPrice, getBooksByFilter, booksByCategory]);
+  }, [sortBy, priceFilter, id, filter_type, filter_id, pagination, stageList, shopUrl, pageNumber, showItem,
+      keyword, filterShortByType, fetchBooks, filterByPrice, getBooksByFilter, booksByCategory, title]);
 
   const PriceRange = (minPrice, maxPrice) => setPriceFilter({higherPrice:maxPrice,lowerPrice:minPrice})
 
@@ -65,7 +64,7 @@ const ShopPage = props => {
 
   return (
     <>
-      <PageLoader loading={props.book.pending} />
+      <PageLoader loading={pending} />
       <div className="allWrapper">
         <HeaderComponent
           favorite_item={favoriteItem.length}
@@ -111,7 +110,7 @@ const ShopPage = props => {
                         </h2>
                       </Col>
                     </Row>
-                    {books.length === 0 ? (
+                    { data && data.length === 0 ? (
                       <h1 className="text-center">Sorry, No Result Found :(</h1>
                     ) : (
                       <>
@@ -176,7 +175,7 @@ const ShopPage = props => {
                                 </li>
                                 <li className="page-item">of</li>
                                 <li className={`page-item ${classes.page_field}`}>
-                                  <input type="text" value={props.book.totalPage} className="page-link" readOnly/>
+                                  <input type="text" value={totalPage} className="page-link" readOnly/>
                                 </li>
                                 <li className="page-item" onClick={handleNext}>
                                   <button className="page-link">
@@ -189,10 +188,10 @@ const ShopPage = props => {
                         </Row>
 
                         <Row className="Product_Row">
-                          {books.length === 0 ? (
+                          {data && data.length === 0 ? (
                             <></>
                           ) : (
-                            books.map((book, index) => {
+                            data && data.map((book, index) => {
                               return (
                                 <Col key={index} sm="3 mb-5">
                                   <LazyLoad once={true} height={200}>
@@ -292,7 +291,7 @@ const ShopPage = props => {
                                 </li>
                                 <li className="page-item">of</li>
                                 <li className={`page-item ${classes.page_field}`}>
-                                  <input type="text" value={props.book.totalPage} className="page-link" readOnly/>
+                                  <input type="text" value={totalPage} className="page-link" readOnly/>
                                 </li>
                                 <li className="page-item" onClick={handleNext}>
                                   <button className="page-link">
@@ -326,7 +325,7 @@ const mapStateToProps = state => {
   const initItem = state.book.total !== undefined ? state.book.total : 1;
   const initShowItem = state.book.show !== undefined ? state.book.show : 5;
   return {
-    book: state.book,
+    book: state.book ? state.book : [],
     cart: state.shop.cart,
     totalItem: initItem,
     showItem: initShowItem,
