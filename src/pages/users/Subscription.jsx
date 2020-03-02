@@ -12,10 +12,11 @@ import { getSubscriber} from '../../redux/actions/siteActions'
 const Subscription = (props) => {
   const { auth, subscriber} = props
   const [subscription, setSubscription] = useState({ ...props.subscribeOption })
-  const [message, setMessage] = useState({show:false, type:'unknown', message:''})
+  const [message, setMessage] = useState({ show: false, type: 'unknown', message: '' })
+  
   useEffect(() => {
     subscriber(auth.email)
-  }, [auth.email, subscriber])
+  }, [auth.email, subscriber, subscriber.announcement, subscription.unsubscribe, subscriber.sale_invitation,subscriber.weekly_newsletter])
 
   useEffect(() => {
     if (subscription.unsubscribe) {
@@ -26,20 +27,17 @@ const Subscription = (props) => {
         unsubscribe: true
        })
     }
-    
   }, [subscription.unsubscribe])
   
   
 
   const handleChange = (e) => setSubscription({ ...subscription, [e.target.name]: e.target.checked })
   
-
-
-
   const handleSubmit = async(e) => {
     e.preventDefault();
-     axios.post(URL._UPDATE_SUBSCRIBER, {
+    axios.post(URL._UPDATE_SUBSCRIBER, {
       email: auth.email,
+      subscriber_id: auth.id,
       announcement: subscription.announcement,
       sale_invitation: subscription.sale_invitation,
       weekly_newsletter: subscription.weekly_newsletter,
@@ -48,12 +46,12 @@ const Subscription = (props) => {
        setMessage({ show: true, type: 'success', message: res.data.message }) 
        setTimeout(() => {
          setMessage({ show: false, type: 'unknown', message: '' }) 
-       }, 3000);
+       }, 5000);
     }).catch(error => {
       setMessage({ show: true, type: 'danger', message: error.response.data.message })
       setTimeout(() => {
         setMessage({ show: false, type: 'unknown', message: '' })
-      }, 3000);
+      }, 5000);
     })
   }
 
@@ -75,7 +73,7 @@ const Subscription = (props) => {
           menuActive={true}
          />
         <div className="userBodyArea clearfix" id="userBodyArea">
-          <Container fluid="{true}" className="pl-0 pr-0">
+          <Container fluid={true} className="pl-0 pr-0">
             <Row noGutters>
               <UserNav />
               <Col>

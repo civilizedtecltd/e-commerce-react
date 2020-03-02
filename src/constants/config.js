@@ -4,8 +4,8 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
 
   class APP_URL {
      constructor(){
-         this.BASE = `https://admin.abookstore.co.ke`;
-        // this.BASE = `http://localhost:3333`;
+        //  this.BASE = `https://admin.abookstore.co.ke`;
+        this.BASE = `http://localhost:3333`;
         this.API  = `${this.BASE}/api`;
      }
 
@@ -82,7 +82,7 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     }
       
     get _UPDATE_SUBSCRIBER(){
-        return `${this.API}/subscribe-update`
+        return `${this.API}/subscribe-update/`
       }
       
     get DELIVERY_METHOD(){
@@ -147,8 +147,8 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
     __OAUTH(type) {
           return `${this.API}/auth0/${type}`
       } 
-    __SUBSCRIBER(email) {
-         return `${this.API}/get-subscriber/${email}`
+      __SUBSCRIBER(email, subscriber_id) {
+          return `${this.API}/get-subscriber/${email}`
      }
  }
 

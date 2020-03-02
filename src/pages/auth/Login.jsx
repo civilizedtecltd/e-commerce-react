@@ -18,32 +18,37 @@ const Login = (props) => {
   const [alert, setAlert] = useState({ show: false, type:'', message: ''});
   const [data, setData] = useState({ email: null, password: null })
   const previewsLocation = useLastLocation();
-  const lastPath = previewsLocation ? previewsLocation.pathname : false;
-  const { auth, error, removeError, login_success, history, login_status } = props
-  const lastPathMatched = lastPath.match("/change-password/");
+  const lastPath = previewsLocation ? previewsLocation.pathname  : '/';
+  const { auth, error, removeError, login_success, history, login_status, location } = props
+  
   useEffect(() => {
     if (login_success) {
-      if (lastPath === '/signup' || lastPathMatched === '/change-password') {
+      if (lastPath === '/signup' || lastPath.match("/change-password/")) {
         setAlert({ show: true, type: 'success', message: 'You are logged in' })
-        setTimeout(() => {
-          history.push('/profile-settings')
-        }, 1000);
+        return setTimeout(() => history.push('/profile-settings'), 1000);
+      }
+      else if (location.pathname === '/login') {
+        return setTimeout(() => history.push('/profile-settings'), 1000);
       }
       else {
+        window.alert(lastPath)
         history.goBack()
       }
     }
-    else if (login_status) {
-      
-      if (lastPath === '/signup' || lastPathMatched === '/change-password') {
-        setTimeout(() => {
-          history.push('/profile-settings')
-        }, 1000);
-      }
-      else {
-        history.goBack()
-      }
-    }
+
+    // else if (login_status) {
+    //   if (lastPath === '/signup' || lastPath.match("/change-password/")) {
+    //     setTimeout(() => {
+    //       history.push('/profile-settings')
+    //     }, 1000);
+    //   }
+    //   else if (location.pathname === '/login') {
+    //     return setTimeout(() => history.push('/profile-settings'), 1000);
+    //   }
+    //   else {
+    //     history.goBack()
+    //   }
+    // }
     
     if (error) {
       setAlert({ show: true, type: 'danger', message: error.message })
@@ -52,7 +57,7 @@ const Login = (props) => {
         removeError()
       }, 2000);
     }
-  }, [auth.status.error, error, removeError, login_success, lastPath, history, login_status])
+  }, [auth.status.error, error, removeError, login_success, lastPath, history, login_status,location])
 
 
   const handleOnchange = (e) => {

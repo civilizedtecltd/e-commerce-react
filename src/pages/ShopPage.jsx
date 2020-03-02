@@ -210,43 +210,22 @@ const ShopPage = props => {
                           <div className="col">
                             <nav aria-label="Page navigation">
                               <ul className="pagination align-items-center justify-content-between">
-                                <li
-                                  className={`page-item ${classes.page_field}`}
-                                  onClick={handlePreviews}
-                                >
+                                <li className={`page-item ${classes.page_field}`} onClick={handlePreviews} >
                                   <button className="page-link">
                                     <i className="fas fa-chevron-left"></i>
                                   </button>
                                 </li>
-                                <li
-                                  className={`page-item ${classes.page_field}`}
-                                >
-                                  Page
-                                </li>
-                                <li
-                                  className={`page-item ${classes.page_field}`}
-                                >
-                                  <input
-                                    type="text"
-                                    className="page-link"
-                                    value={page}
-                                    readOnly
-                                  />
+                                <li className={`page-item ${classes.page_field}`}>Page</li>
+                                <li className={`page-item ${classes.page_field}`}>
+                                  <input type="text" className="page-link"  value={page} readOnly />
                                 </li>
                                 <li className="page-item">of</li>
-                                <li
-                                  className={`page-item ${classes.page_field}`}
-                                >
-                                  <input
-                                    type="text"
-                                    value={props.book.totalPage}
-                                    className="page-link"
-                                    readOnly
-                                  />
+                                <li className={`page-item ${classes.page_field}`}>
+                                  <input type="text" value={props.book.totalPage} className="page-link" readOnly/>
                                 </li>
                                 <li className="page-item" onClick={handleNext}>
                                   <button className="page-link">
-                                    <i className="fas fa-chevron-right"></i>
+                                     <i className="fas fa-chevron-right"></i>
                                   </button>
                                 </li>
                               </ul>
