@@ -19,45 +19,29 @@ const Login = (props) => {
   const [data, setData] = useState({ email: null, password: null })
   const previewsLocation = useLastLocation();
   const lastPath = previewsLocation ? previewsLocation.pathname  : '/';
-  const { auth, error, removeError, login_success, history, login_status, location } = props
+  const { auth, login, showAllFavItem, error, removeError, login_success, history, login_status, location } = props
   
   useEffect(() => {
     if (login_success) {
       if (lastPath === '/signup' || lastPath.match("/change-password/")) {
         setAlert({ show: true, type: 'success', message: 'You are logged in' })
-        return setTimeout(() => history.push('/profile-settings'), 1000);
+        showAllFavItem()
+        return history.push('/profile-settings');
       }
       else if (location.pathname === '/login') {
-        return setTimeout(() => history.push('/profile-settings'), 1000);
+        showAllFavItem()
+        return history.push('/profile-settings');
       }
       else {
-        window.alert(lastPath)
-        history.goBack()
+        showAllFavItem()
+        return history.goBack()
       }
     }
-
-    // else if (login_status) {
-    //   if (lastPath === '/signup' || lastPath.match("/change-password/")) {
-    //     setTimeout(() => {
-    //       history.push('/profile-settings')
-    //     }, 1000);
-    //   }
-    //   else if (location.pathname === '/login') {
-    //     return setTimeout(() => history.push('/profile-settings'), 1000);
-    //   }
-    //   else {
-    //     history.goBack()
-    //   }
-    // }
-    
     if (error) {
-      setAlert({ show: true, type: 'danger', message: error.message })
-      setTimeout(() => {
-        setAlert({ show: false, type: 'unknown', message: '' })
-        removeError()
-      }, 2000);
+       setAlert({ show: true, type: 'danger', message: error.message })
+      return removeError()
     }
-  }, [auth.status.error, error, removeError, login_success, lastPath, history, login_status,location])
+  }, [auth.status.error, error, removeError, login_success, lastPath, history, login_status, location, showAllFavItem])
 
 
   const handleOnchange = (e) => {
@@ -76,7 +60,7 @@ const Login = (props) => {
     else if (!data.password || data.password === '')
        return setAlert({show: true, type: 'danger', message:"Password should not be empty"})
     else {
-       props.login(data)
+      login(data)
      }
   }
 

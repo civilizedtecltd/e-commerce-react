@@ -194,7 +194,6 @@ export const OauthLogin = (OauthData) => dispatch => {
             }
 
         }).catch(error => {
-            console.log("login error: ", error);
             return dispatch({
                 type: Types.USER_LOGIN_ERROR,
                 payload: {

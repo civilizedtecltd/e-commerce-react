@@ -39,13 +39,16 @@ const showFavItems = () => dispatch => {
     setAuthToken();
     dispatch(fetchPendingFavorite());
     axios.get(URL._FAVORITE_ITEMS)
-         .then(res => dispatch({
+        .then(res => {
+            return dispatch({
                 type: Types.SHOW_ALL_FAVORITE,
                 payload: {
                     items: [ ...res.data.data ],
                     pending: false
                 },                
-             })) 
+            })
+        }
+        ) 
          .catch(error => console.log(error))
 }
 

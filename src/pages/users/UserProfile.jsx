@@ -6,42 +6,33 @@ import {Container, Row, Col, Card, Form, Button, Alert} from 'react-bootstrap';
 import { InputFrom, SelectFrom } from '../../components/FromComponents/inputComponent2';
 import  HeaderComponent from "../../components/header/Header";
 import  MobileHeader from "../../components/header/MobileHeader";
-
-import './assets/css/user.css';
 import UserNav from "../../components/UserNav/UserNav";
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
+import './assets/css/user.css';
 
 
 const UserProfile = (props) => {
-
-    const [alert, setAlert] = useState({
-        status: false,
-        type: 'danger',
-        message: ''
-    });
+  const { auth: { user }, favorite: { items }, cart, status: { message, success }, getUser }= props
+    const [alert, setAlert] = useState({status: false, type: 'danger', message: ''});
     const [formData, setFormData] = useState({});
-
-    const user = { ...props.auth.user}
-    const totalFavorite = props.favorite.items.length;
-    const totalItem = props.cart.length;
+    const totalFavorite = items.length;
+    const totalItem = cart.length;
 
     useEffect(()=>{
         const clearAlert = setTimeout(() => {
             setAlert({status: false, message:''});
         }, 5000);
 
-        if(!props.status.success){
+        if(!success){
             setAlert({
                 status: true,
                 type: 'danger',
-                message: props.status.message
+                message: message
             });
             return () =>  clearTimeout(clearAlert);
         }
-
-        props.getUser();
-
-    }, [props.status.message, props.status.success]);
+        getUser();
+    }, [getUser, message, success]);
 
 
     const categoryData = (data) => {

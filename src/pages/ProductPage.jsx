@@ -4,7 +4,7 @@ import { Container, Modal, Button, Row, Col } from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
 import {createUseStyles} from 'react-jss';
 import { showSingleBook } from '../redux/actions/bookActions';
-import { addToCart, updateQuantity } from '../redux/actions/shopActions';
+import { addToCart, updateQuantity, deliveryMethod } from '../redux/actions/shopActions';
 import { addToFavorite,removeFavItem } from "../redux/actions/favoriteActions";
 
 import FooterComponent from "../components/FooterComponent/FooterComponent";
@@ -53,7 +53,8 @@ function ProductPage(props) {
 
   useEffect(() => {
      window.scrollTo(0, 0);
-     props.showSingleBook(id);
+    props.showSingleBook(id);
+    props.getDeliveryMethods()
   }, [id]);
 
   const handleClose = () => setShow(false);
@@ -285,7 +286,8 @@ const mapDispatchToProps = (dispatch) => {
       addToCart      : (book) => dispatch(addToCart(book)),
       updateItem     : ({id, qty}) => dispatch(updateQuantity({id, qty})),
       addToFavorite  : (id)=> dispatch(addToFavorite(id)),
-      removeFavorite : (id)=>dispatch(removeFavItem(id))
+      removeFavorite: (id) => dispatch(removeFavItem(id)),
+      getDeliveryMethods: () => dispatch(deliveryMethod()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

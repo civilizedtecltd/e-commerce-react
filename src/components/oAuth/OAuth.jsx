@@ -12,7 +12,6 @@ const OAuth = (props) => {
                 if (res.provider === "google") {
                     const loginData = res.data.Qt || res.data.Rt 
                     props.login(loginData)
-                    props.showAllFavItem()
                 }
                 if (res.provider === 'facebook') {
                     props.login(res.data)
