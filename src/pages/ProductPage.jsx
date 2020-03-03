@@ -1,4 +1,4 @@
- import React, { useState ,useEffect } from "react";
+import React, { useState ,useEffect } from "react";
 import { connect } from 'react-redux'
 import { Container, Modal, Button, Row, Col } from "react-bootstrap";
 import { Link , useParams } from "react-router-dom";
@@ -6,7 +6,6 @@ import {createUseStyles} from 'react-jss';
 import { showSingleBook } from '../redux/actions/bookActions';
 import { addToCart, updateQuantity, deliveryMethod } from '../redux/actions/shopActions';
 import { addToFavorite,removeFavItem } from "../redux/actions/favoriteActions";
-
 import FooterComponent from "../components/FooterComponent/FooterComponent";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import ImgSlick  from "../components/offerPageComponents/ImgSlickComponent";
@@ -15,12 +14,11 @@ import  HeaderComponent from "../components/header/Header";
 import  MobileHeader from "../components/header/MobileHeader";
 import TabComponent from "../components/TabComponent/TabComponent";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
-
-import "../pages/assets/product.css";
-import "../assets/css/theme.css";
 import checkAuth from "../helpers/checkAuth";
 import TotalRating from "../components/ratingComponent/TotalRating";
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
+import "../pages/assets/product.css";
+import "../assets/css/theme.css";
 
 const useStyles = createUseStyles({
   addFevButton: {
@@ -31,74 +29,83 @@ const useStyles = createUseStyles({
 
 
 function ProductPage(props) {
-
+  const { showSingleBook,
+    getDeliveryMethods,
+    book,
+    cart,
+    favorite,
+    totalItems,
+    similar,
+    pending,
+    history,
+    updateItem,
+    addToCart,
+    addToFavorite,
+    removeFavorite } = props
+  
     const classes = useStyles()
     const { id } = useParams();
     const [show, setShow] = useState(false);
     const [quantity, setQuantity] = useState(1);
+ 
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      showSingleBook(id);
+      getDeliveryMethods()
+    }, [id, getDeliveryMethods, showSingleBook]);
 
 
-    let itemQty  = quantity;
-    props.cart.map(item => {
+  let itemQty = quantity;
+  const handleClose = () => setShow(false);
+    cart.map(item => {
         if(item.id === Number(id)){
            return itemQty = Number(item.quantity)
         }
     })
-    const rating = props.book ? props.book.rating : 0
-    const book = (props.book !== undefined ) ? props.book : false;
-    const favoriteItem = props.favorite.items;
+    const rating = book ? book.rating : 0
+    const favoriteItem = favorite.items;
     const isFavoriteItem = favoriteItem.find(fav=> fav.id === Number(id))
 
+    const updateItemQty = (e) => {
+    let countQty = quantity
+      setQuantity(++countQty);
+      updateItem({id: Number(book.id),qty: Number(e.target.value)});
+    }
 
-
-  useEffect(() => {
-     window.scrollTo(0, 0);
-    props.showSingleBook(id);
-    props.getDeliveryMethods()
-  }, [id]);
-
-  const handleClose = () => setShow(false);
-
-  const updateItemQty = (e) => {
-   let countQty = quantity
-    setQuantity(++countQty);
-    props.updateItem({
-                        id: Number(book.id),
-                        qty: Number(e.target.value)
-                    });
-  }
-
-  const addToCart = (e) => {
-    e.preventDefault();
-    if(!checkAuth()) return window.location='/login';
-    book.quantity = quantity;
-    props.addToCart(book);
-    setShow(true);
-  };
-
-  const handleAddFavorite = (e) =>{
+    const handleAddToCart = (e) => {
       e.preventDefault();
-      if(checkAuth()!==true){
-        return props.history.push('/login')
-      }else if(isFavoriteItem !== undefined ){
-        return props.removeFavorite(id)
+      if(!checkAuth()) return window.location='/login';
+      book.quantity = quantity;
+      addToCart(book);
+      setShow(true);
+      if (favoriteItem.length !== 0) {
+        favoriteItem.map(item => item.id === book.id ? removeFavorite(book.id) : '')
       }
-      else if(isFavoriteItem === undefined){
-        props.addToFavorite(id)
-      }
-  }
+    };
+
+    const handleAddFavorite = (e) =>{
+        e.preventDefault();
+        if(!checkAuth()){
+          return history.push('/login')
+        }else if(isFavoriteItem){
+          return removeFavorite(id)
+        }
+        else if(!isFavoriteItem){
+          addToFavorite(id)
+        }
+    }
 
   return (
     <>
-      <PageLoader loading={props.pending}/>
+      <PageLoader loading={ pending && pending}/>
       <div className="allWrapper">
         <HeaderComponent
-        favorite_item={favoriteItem.length}
-        cartItem = { props.totalItems }
+          favorite_item={favoriteItem.length}
+          cartItem={ totalItems && totalItems }
         />
         <MobileHeader
-          favorite_item={favoriteItem.length}
-          cartItem = { props.totalItems }
+          favorite_item ={favoriteItem.length}
+          cartItem={totalItems && totalItems }
          />
         <main className="mainContent clearfix" id="mainContent">
           <section
@@ -121,9 +128,7 @@ function ProductPage(props) {
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">
-                  <ImageCarousel
-                        images = {(book ? book.cover_images : false )}
-                   />
+                  <ImageCarousel images = {(book && book.cover_images )}/>
                 </div>
 
                 <div className="col-sm-6">
@@ -138,12 +143,12 @@ function ProductPage(props) {
                         </div>
                         <div className="d-flex text-right">
                           <TotalRating  value= { rating }/>
-                          <div style={{marginTop:"-3px"}}><p>{'\u00A0'} {'\u00A0'} {`(${book.total_review} reviews) `} </p></div>
+                          <div style={{marginTop:"-3px"}}><p>{'\u00A0'} {'\u00A0'} {`(${book && book.total_review} reviews) `} </p></div>
                         </div>
                       </div>
 
                       <h6 className="authName">
-                        by <span>{book ? book.book_author.name : `` } </span>
+                        by <span>{ book && book.book_author.name} </span>
                       </h6>
 
                     </div>
@@ -174,7 +179,7 @@ function ProductPage(props) {
                           <div className="col text-center">
                             <Button
                               className="btn linkBtn"
-                              onClick = {addToCart}
+                              onClick={handleAddToCart}
                             >
                               <i className="fas fa-shopping-cart"></i> Add to
                               cart
@@ -191,7 +196,7 @@ function ProductPage(props) {
                         <hr className="hrBorder mt-4" />
                       </div>
                       <TabComponent
-                        routeHistory = {props.history}
+                        routeHistory = {history}
                         description = {book ? book.long_description : `` }
                         specification = {book ? [{
                             id              : book.id,
@@ -206,7 +211,7 @@ function ProductPage(props) {
 
                         }] : {}}
 
-                        reviews = {book.book_review ? book.book_review : []}
+                        reviews = { book && book.book_review ? book.book_review : []}
                         />
                     </div>
                   </div>
@@ -228,7 +233,7 @@ function ProductPage(props) {
                     </div>
                 </div>
 
-                <ImgSlick images={( props.similar !== undefined ) ? props.similar : [] } />
+                <ImgSlick images={similar ? similar : [] } />
 
             </Container>
           </section>
@@ -282,12 +287,12 @@ const mapStateToProps = (state)=> {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-      showSingleBook : (id) => dispatch(showSingleBook(id)),
-      addToCart      : (book) => dispatch(addToCart(book)),
-      updateItem     : ({id, qty}) => dispatch(updateQuantity({id, qty})),
-      addToFavorite  : (id)=> dispatch(addToFavorite(id)),
-      removeFavorite: (id) => dispatch(removeFavItem(id)),
-      getDeliveryMethods: () => dispatch(deliveryMethod()),
+      showSingleBook      : (id) => dispatch(showSingleBook(id)),
+      addToCart           : (favorite, book) => dispatch(addToCart(favorite, book)),
+      updateItem          : ({id, qty}) => dispatch(updateQuantity({id, qty})),
+      addToFavorite       : (id)=> dispatch(addToFavorite(id)),
+      removeFavorite      : (id) => dispatch(removeFavItem(id)),
+      getDeliveryMethods  : () => dispatch(deliveryMethod()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps) (ProductPage);

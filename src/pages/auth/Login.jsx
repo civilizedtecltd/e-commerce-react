@@ -28,7 +28,7 @@ const Login = (props) => {
         showAllFavItem()
         return history.push('/profile-settings');
       }
-      else if (location.pathname === '/login') {
+      else if (!lastPath) {
         showAllFavItem()
         return history.push('/profile-settings');
       }
@@ -38,7 +38,7 @@ const Login = (props) => {
       }
     }
     if (error) {
-       setAlert({ show: true, type: 'danger', message: error.message })
+      setAlert({ show: true, type: 'danger', message: error.message })
       return removeError()
     }
   }, [auth.status.error, error, removeError, login_success, lastPath, history, login_status, location, showAllFavItem])
