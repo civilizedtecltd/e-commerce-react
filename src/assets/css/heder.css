@@ -119,7 +119,11 @@ width: 50%;
     border: 2px solid;
     border-radius: 50px;
 }
-
+.headPopBarList a.signUpBG {
+    background-color: #3897cf;
+    padding: 5px 10px 5px 10px;
+    color: #fff !important;
+}
 .Profile-avatar p {
     font-size: 16px;
     font-weight: 500;
