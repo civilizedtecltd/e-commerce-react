@@ -11,6 +11,7 @@ import { InputFrom } from '../../components/FromComponents/InputComponent';
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import './assets/css/auth.css';
 import '../../assets/css/animate.css';
+import Logo from '../../assets/images/logo.png'
 
 
 const Login = (props) => {
@@ -77,7 +78,7 @@ const Login = (props) => {
               <Col sm={6}>
                 <div className="logoWrapper mt-4 mb-4">
                   <h1 className="logoText">
-                    <Link to="/">LOGO</Link>
+                    <Link to="/"><img src={Logo} style={{width:"100px"}} /></Link>
                   </h1>
                 </div>
               </Col>

@@ -7,6 +7,7 @@ import { URL } from '../../constants/config';
 import {Button, Alert} from 'react-bootstrap'
 import { InputFrom } from "../../components/FromComponents/InputComponent";
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
+import Logo from '../../assets/images/logo.png';
 
 const ForgotPassword = (props) => {
   const [state, setState] = useState({ email: '', });
@@ -41,7 +42,7 @@ const ForgotPassword = (props) => {
               <Col sm={6}>
                 <div className="logoWrapper mt-4 mb-4">
                   <h1 className="logoText">
-                    <Link to="/">LOGO</Link>
+                    <Link to="/"><img src={Logo} style={{width:"300px"}} /></Link>
                   </h1>
                 </div>
               </Col>

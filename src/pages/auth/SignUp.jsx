@@ -9,8 +9,7 @@ import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComp
 import { URL } from '../../constants/config'
 import './assets/css/auth.css';
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
-
-
+import Logo from '../../assets/images/logo.png'
 
 
 
@@ -92,7 +91,7 @@ const SignUp = (props) => {
             <Row>
               <Col sm={6}>
                 <div className="logoWrapper mt-4 mb-4">
-                  <h1 className="logoText"><Link to="/">LOGO</Link></h1>
+                  <h1 className="logoText"><Link to="/"><img src={Logo} style={{width:"100px"}} /></Link></h1>
                 </div>
               </Col>
             </Row>
