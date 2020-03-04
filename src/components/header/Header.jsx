@@ -12,6 +12,7 @@ import { useMediaQuery } from 'react-responsive';
 import { fetchCategoryList } from "../../redux/actions/siteActions";
 import Search from '../Search';
 import ProfileAvatar from '../../assets/images/user/avatar.png';
+import Logo2 from '../../assets/images/logo2.png';
 
 const Default = ({ children }) => {
   const isNotMobile = useMediaQuery({ minWidth: 992 })
@@ -79,7 +80,7 @@ const HeaderComponent = (props) => {
               <Col sm={props.menuActive ? 2 : 1}>
                 <div className="logoWrapper">
                   <h1 className="logoText">
-                    <Link to="/">LOGO</Link>
+                    <Link to="/"><img src={Logo2} style={{width: "65px"}} /></Link>
                   </h1>
                 </div>
               </Col>
@@ -186,7 +187,7 @@ const HeaderComponent = (props) => {
                       </Link>
                     </li>
                     <li>
-                      {!isAuth ? (<Link to="/login"><i className="far fa-user"></i>Login</Link>) : (
+                      {!isAuth ? (<Link to="/login"><i className="far fa-user"></i>Sign In</Link>) : (
                         <Link to="/profile-settings">
                           <div className="Profile-avatar">
                             <Image src={ProfileAvatar} />
@@ -195,6 +196,11 @@ const HeaderComponent = (props) => {
                             </p>
                           </div>
                         </Link>
+                      )}
+                    </li>
+                    <li>
+                      {!isAuth ? (<Link to="/signup" className="signUpBG">Sign Up</Link>) : (
+                        <Link to="/profile-settings"></Link>
                       )}
                     </li>
                   </ul>

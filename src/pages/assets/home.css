@@ -1,5 +1,10 @@
-.productCatCard .productCatTitle:hover {
-    color: #3897cf;
+
+.productCatCard.card:hover {
+    border: 2px solid #2196F3;
+}
+
+.productCatCard.card:hover .productCatTitle {
+    color: #2196F3;
 }
 .partnersCarousel   .slick-prev:before {
     content: "\f053";

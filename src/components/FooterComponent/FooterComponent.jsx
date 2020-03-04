@@ -6,6 +6,7 @@ import {Lia ,LiAi } from '../LiComponent/CommonLiComponent'
 import paypalIcon from '../../assets/images/paypal_icon_img.png';
 import masterCardIcon from '../../assets/images/master_card_icon_img.png';
 import visaIcon from '../../assets/images/visa_icon_img.png';
+import Logo from '../../assets/images/logo.png';
 import footer from "../../inc/footer/footer";
 
 function FooterComponent(props) {
@@ -17,7 +18,7 @@ function FooterComponent(props) {
               <div className="footerWidget">
                 <div className="footerLogo">
                   <div className="logoWrapper">
-                    <h1 className="logoText"><Link to="/">LOGO</Link></h1>
+                    <h1 className="logoText"><Link to="/"><img src={Logo} /></Link></h1>
                   </div>{/*  end of logoWrapper */}
                 </div>{/*  end of footerLogo */}
               </div>{/*  end of footerWidget */}

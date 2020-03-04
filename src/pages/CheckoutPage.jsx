@@ -7,7 +7,7 @@ import { deliveryMethod } from '../redux/actions/shopActions'
 import CheckoutTab from './CheckoutTab';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import './checkout.css';
-
+import Logo from '../assets/images/logo.png'
 
 const CheckoutPage = (props) => {
 
@@ -61,7 +61,7 @@ const CheckoutPage = (props) => {
           <Row>
             <Col className="text-center">
               <div className="logoWrapper">
-                <h1 className="logoText"><Link to="/">LOGO</Link></h1>
+                <h1 className="logoText"><Link to="/"><img src={Logo} style={{width:"150px", marginTop:"35px"}}/></Link></h1>
               </div>
             </Col>
           </Row>
