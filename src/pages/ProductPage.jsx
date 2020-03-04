@@ -41,17 +41,20 @@ function ProductPage(props) {
     updateItem,
     addToCart,
     addToFavorite,
-    removeFavorite } = props
-  
+    removeFavorite,
+
+  } = props
+
     const classes = useStyles()
     const { id } = useParams();
     const [show, setShow] = useState(false);
     const [quantity, setQuantity] = useState(1);
- 
+    
     useEffect(() => {
       window.scrollTo(0, 0);
       showSingleBook(id);
       getDeliveryMethods()
+      
     }, [id, getDeliveryMethods, showSingleBook]);
 
 
@@ -62,7 +65,7 @@ function ProductPage(props) {
            return itemQty = Number(item.quantity)
         }
     })
-    const rating = book ? book.rating : 0
+    
     const favoriteItem = favorite.items;
     const isFavoriteItem = favoriteItem.find(fav=> fav.id === Number(id))
 
@@ -142,7 +145,7 @@ function ProductPage(props) {
                           </p>
                         </div>
                         <div className="d-flex text-right">
-                          <TotalRating  value= { rating }/>
+                          <TotalRating  value= { book && book.rating }/>
                           <div style={{marginTop:"-3px"}}><p>{'\u00A0'} {'\u00A0'} {`(${book && book.total_review} reviews) `} </p></div>
                         </div>
                       </div>
