@@ -1,5 +1,4 @@
 import * as Types from '../actions/actionTypes';
-
 const initSate = {
     cart: []
 };
@@ -9,21 +8,19 @@ const shopReducer = (state = initSate, { type, payload }) => {
     let updatedCart = [];
     let updatedItemIndex;
 
-        switch(type){
-            case Types.ADD_TO_CART:
-
-                    const localState = JSON.parse(localStorage.getItem('state'));
-
-                    updatedCart = ((localState.shop.cart !== undefined ) ? localState.shop.cart : [] )
-
-                    updatedItemIndex = updatedCart.findIndex(item => item.id === payload.id )
+    switch (type) {
+        case Types.ADD_TO_CART:
+                const localState = JSON.parse(localStorage.getItem('state'));
+                updatedCart = localState.shop.cart ? localState.shop.cart : [];
+                updatedItemIndex = updatedCart.findIndex(item => item.id === payload.id )
 
                     if(updatedItemIndex < 0 ){
-
-                        if(payload.quantity !== undefined){
+                        
+                        if (payload.quantity) {
+                            
                             updatedCart.push({...payload, amountPrice: payload.price*payload.quantity})
-                        }else{
-                                updatedCart.push({...payload, quantity: 1, amountPrice: payload.price })
+                        } else {
+                             updatedCart.push({...payload, quantity: 1, amountPrice: payload.price })
                             }
 
                     }else{
@@ -139,7 +136,11 @@ const shopReducer = (state = initSate, { type, payload }) => {
                     ...state,
                     promo: payload
                 }
-
+            case Types.CURRENCY_EXCHANGE_RATE:
+                return {
+                    ...state,
+                    currencyRate: payload
+                }
             default:
                 return state;
         }

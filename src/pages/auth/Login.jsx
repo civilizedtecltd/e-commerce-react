@@ -1,10 +1,10 @@
-import React, {useState}  from 'react';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from "react-router-dom";
 import { useLastLocation } from 'react-router-last-location';
-import { connect  } from 'react-redux';
+import { connect } from 'react-redux';
 import { login, emptyStatus } from '../../redux/actions/authActions';
 import { showFavItems } from '../../redux/actions/favoriteActions';
-import isEmpty from 'lodash/isEmpty';
-import {Container, Row, Col, Form, Alert} from 'react-bootstrap';
+import { Container, Row, Col, Form, Alert, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
 import { InputFrom } from '../../components/FromComponents/InputComponent';
@@ -15,82 +15,54 @@ import '../../assets/css/animate.css';
 
 const Login = (props) => {
 
-  const [state, setState] = useState(true);
-  const [formData] = useState({ email: '', password: '' });
-  const [alert, setAlert] = useState({ status: false, message: '' });
+  const [alert, setAlert] = useState({ show: false, type: '', message: '' });
+  const [data, setData] = useState({ email: null, password: null })
+  const previewsLocation = useLastLocation();
+  const lastPath = previewsLocation ? previewsLocation.pathname : '/';
+  const { auth, login, showAllFavItem, error, removeError, login_success, history, login_status, location } = props
 
-  const lastLocation = useLastLocation();
-  const { auth } = props;
-
-
-
-  const loginData = (data) => {
-    Object.keys(data).map(key => formData[key] = data[key])
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (formData.email === '') {
-      setAlert({status: true, message: "Email should not be empty!"});
-      return setTimeout(() => {
-        setAlert({ status: false })
-        props.emptyStatus()
-      }, 3000);
-    }
-    if (formData.password === '') {
-      setAlert({ status: true, message: "Password should not be empty"});
-      return setTimeout(() => {
-        setAlert({ status: false })
-        props.emptyStatus()
-      }, 3000);
-    }
-    else {
-      props.login(formData);
-      setState(true);
-
-      if (props.error) {
-        setAlert({ status: true, message: props.error ? props.error : '' });
-        return setTimeout(() => {
-          setAlert({ status: false })
-          props.emptyStatus()
-        }, 3000);
+  useEffect(() => {
+    if (login_success) {
+      if (lastPath === '/signup' || lastPath.match("/change-password/")) {
+        setAlert({ show: true, type: 'success', message: 'You are logged in' })
+        showAllFavItem()
+        return history.push('/profile-settings');
+      }
+      else if (!lastPath) {
+        showAllFavItem()
+        return history.push('/profile-settings');
       }
       else {
-        setAlert({ status: false});
+        showAllFavItem()
+        return history.goBack()
       }
-
     }
+    if (error) {
+      setAlert({ show: true, type: 'danger', message: error.message })
+      return removeError()
+    }
+  }, [auth.status.error, error, removeError, login_success, lastPath, history, login_status, location, showAllFavItem])
 
-  }
-    if(!isEmpty(auth.status)){
 
-        console.log('Login page auth.status: ', auth.status);
-        console.log("state: ", state);
-
-      if(auth.status.success && state){
-        setState(false);
-        props.showAllFavItem();
-
-        const lastPath = (lastLocation) ? lastLocation.pathname : "/";
-        const lastPathMatched = lastPath.match("/change-password/");
-
-        if (lastPath === "/signup" || (lastPathMatched && lastPathMatched[0] === "/change-password/")) {
-          window.location = "/";
-        }else{
-            props.history.goBack();
-        }
-      }
-      if(!auth.status.success && state){
-         setState(false);
-      }
+  const handleOnchange = (e) => {
+    e.preventDefault()
+    return setData({ ...data, [e.target.name]: e.target.value })
   }
 
 
-  const OAuthLogin = (state) =>{
-      console.log("Login page OAuth Login state: ",state);
-    setState(state);
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!data.email && !data.password) {
+      return setAlert({ show: true, type: 'danger', message: "Password and Email required" })
+    }
+    if (!data.email || data.email === '')
+      return setAlert({ show: true, type: 'danger', message: "Mail should not be empty" })
+    else if (!data.password || data.password === '')
+      return setAlert({ show: true, type: 'danger', message: "Password should not be empty" })
+    else {
+      login(data)
+    }
   }
-
 
   return (
     <>
@@ -113,17 +85,17 @@ const Login = (props) => {
 
             <Row>
               <Col sm={6}>
-                <SocialListComponent callback={OAuthLogin} />
+                <SocialListComponent />
 
                 <div className="formWrapper clearfix" id="formWrapper">
-                  <Form>
+                  <Form onSubmit={handleSubmit}>
                     <InputFrom
                       LabelId="email"
                       TypeName="email"
                       LabelTitle="Email"
                       Name="email"
                       Placeholder="Enter Your Email"
-                      callback={loginData}
+                      handleOnchange={handleOnchange}
                     />
 
                     <InputFrom
@@ -132,36 +104,19 @@ const Login = (props) => {
                       LabelTitle="Password"
                       Name="password"
                       Placeholder="Enter Your Password"
-                      callback={loginData}
+                      handleOnchange={handleOnchange}
                     />
 
                     <Link className="linkText mb-3" to="/forgot-password">
                       Forgot password?
                     </Link>
-                    {alert.status ? (
-                      <Alert
-                        show={alert.status}
-                        variant={'danger'}
-                        onClose={() => setAlert({ status:false })}
-                        dismissible
-                      >
-                        <p>{alert.message}</p>
-                      </Alert>
-                    ) : (
-                      ""
-                    )}
+                    <Alert show={alert.show} variant={alert.type} onClose={() => setAlert({ ...alert, show: false })} dismissible>
+                      <p>{alert.message}</p>
+                    </Alert>
 
-                    <input
-                      type="submit"
-                      className="btn submitBtn mb-3 "
-                      onClick={handleSubmit}
-                      value="LOGIN"
-                    />
+                    <Button type="submit" className="btn submitBtn mb-3 " >Sign In</Button>
                     <p>
-                      Don’t have an account yet?
-                      <Link className="linkText" to="/signup">
-                        Sign up
-                      </Link>
+                      Don’t have an account yet? &nbsp; <Link className="linkText" to="/signup">Sign up</Link>
                     </p>
                   </Form>
                 </div>
@@ -173,16 +128,15 @@ const Login = (props) => {
     </>
   );
 }
-
 const mapStateToProps = state => ({
   auth: state.auth,
-  error: (state.auth.status.error !== undefined) ? (state.auth.status.error.data.message) : ""
+  error: state.auth.status.error ? (state.auth.status.error.data) : false,
+  login_success: state.auth.jwt ? state.auth.jwt.token : false,
+  login_status: state.auth.status ? state.auth.status.success : false
 });
-
-const mapDispatchToProps = dispatch =>  ({
-    login: (formData) => dispatch(login(formData)),
-    showAllFavItem: () => dispatch(showFavItems()),
-    emptyStatus: () => dispatch(emptyStatus())
+const mapDispatchToProps = dispatch => ({
+  login: (data) => dispatch(login(data)),
+  showAllFavItem: () => dispatch(showFavItems()),
+  removeError: () => dispatch(emptyStatus())
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

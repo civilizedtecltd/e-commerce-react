@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Card, Form, Row, Col, Button, Alert} from "react-bootstrap";
 import NumberFormat from 'react-number-format';
 function PaymentMethodComponent(props) {
+  
   const [showCardAlert, setShowCardAlert] = useState(false);
   const [message, setMessage] = useState("This information is not valid!");
   const [card, setCard] = useState({})

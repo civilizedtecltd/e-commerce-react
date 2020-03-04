@@ -1,43 +1,62 @@
-import React,{useState} from 'react';
-
-import {Container, Row, Col, Card, Form, Button} from 'react-bootstrap';
+import React,{useState, useEffect} from 'react';
+import { Container, Row, Col, Card, Form, Button, Alert} from 'react-bootstrap';
 import  HeaderComponent from "../../components/header/Header";
 import  MobileHeader from "../../components/header/MobileHeader";
 import { connect } from 'react-redux';
 import UserNav from "../../components/UserNav/UserNav";
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import axios from 'axios'
-import {URL} from '../../constants/config'
+import { URL } from '../../constants/config'
+import { getSubscriber} from '../../redux/actions/siteActions'
+
 const Subscription = (props) => {
-  const [announcement, setAnnouncement] = useState(false)
-  const [saleInvitations, setSaleInvitations] = useState(false)
-  const [weeklyNewsletter, setWeeklyNewsletter] = useState(false)
-  const [unsubscribe,setUnsubscribe] = useState(true)
+  const { auth, subscriber} = props
+  const [subscription, setSubscription] = useState({ ...props.subscribeOption })
+  const [message, setMessage] = useState({ show: false, type: 'unknown', message: '' })
+  
+  useEffect(() => {
+    subscriber(auth.email)
+  }, [auth.email, subscriber, subscriber.announcement, subscription.unsubscribe, subscriber.sale_invitation,subscriber.weekly_newsletter])
 
-  const [message , setMessage] = useState('')//this message you can use for show message in frontend
-  const totalItem = props.cart.length;
-  const totalFavorite = props.favorite.items.length;
-  const handleUnsubscribe = (e)=> {
-     setUnsubscribe(!unsubscribe)
-     if(unsubscribe===true)
-        setAnnouncement(false)
-        setSaleInvitations(false)
-        setWeeklyNewsletter(false)
+  useEffect(() => {
+    if (subscription.unsubscribe) {
+       setSubscription({
+        announcement: false,
+        sale_invitation:false,
+        weekly_newsletter: false,
+        unsubscribe: true
+       })
     }
+  }, [subscription.unsubscribe])
+  
+  
 
-
+  const handleChange = (e) => setSubscription({ ...subscription, [e.target.name]: e.target.checked })
+  
   const handleSubmit = async(e) => {
     e.preventDefault();
-     await axios.post(URL._UPDATE_SUBSCRIBER,{
-      email:props.auth.email,
-      announcement: announcement,
-      sale_invitation: saleInvitations,
-      weekly_newsletter:weeklyNewsletter ,
-      unsubscribe : unsubscribe
-    }).then(res=>setMessage(res.data.message))
-    .catch(error=>console.error(error))
+    axios.post(URL._UPDATE_SUBSCRIBER, {
+      email: auth.email,
+      subscriber_id: auth.id,
+      announcement: subscription.announcement,
+      sale_invitation: subscription.sale_invitation,
+      weekly_newsletter: subscription.weekly_newsletter,
+      unsubscribe: subscription.unsubscribe
+     }).then(res => {
+       setMessage({ show: true, type: 'success', message: res.data.message }) 
+       setTimeout(() => {
+         setMessage({ show: false, type: 'unknown', message: '' }) 
+       }, 5000);
+    }).catch(error => {
+      setMessage({ show: true, type: 'danger', message: error.response.data.message })
+      setTimeout(() => {
+        setMessage({ show: false, type: 'unknown', message: '' })
+      }, 5000);
+    })
   }
- /*  console.log(message) */
+
+  const totalItem = props.cart.length;
+  const totalFavorite = props.favorite.items.length;
 
   return (
     <>
@@ -54,7 +73,7 @@ const Subscription = (props) => {
           menuActive={true}
          />
         <div className="userBodyArea clearfix" id="userBodyArea">
-          <Container fluid="{true}" className="pl-0 pr-0">
+          <Container fluid={true} className="pl-0 pr-0">
             <Row noGutters>
               <UserNav />
               <Col>
@@ -91,11 +110,9 @@ const Subscription = (props) => {
                                       <Form.Check
                                         type={"checkbox"}
                                         label={"Announcements"}
-                                        name={"announcements"}
-                                        checked={announcement}
-                                        onChange={e =>
-                                          setAnnouncement(!announcement)
-                                        }
+                                        name='announcement'
+                                        checked={subscription.announcement}
+                                        onChange={handleChange}
                                       />
                                     </Form.Group>
                                   </Col>
@@ -108,11 +125,9 @@ const Subscription = (props) => {
                                       <Form.Check
                                         type="checkbox"
                                         label="Sale invitations"
-                                        name="sale_invitations"
-                                        checked={saleInvitations}
-                                        onChange={e =>
-                                          setSaleInvitations(!saleInvitations)
-                                        }
+                                        name="sale_invitation"
+                                        checked={subscription.sale_invitation}
+                                        onChange={handleChange}
                                       />
                                     </Form.Group>
                                   </Col>
@@ -126,10 +141,8 @@ const Subscription = (props) => {
                                         type="checkbox"
                                         label="Weekly Newsletter"
                                         name="weekly_newsletter"
-                                        checked={weeklyNewsletter}
-                                        onChange={e =>
-                                          setWeeklyNewsletter(!weeklyNewsletter)
-                                        }
+                                        checked={subscription.weekly_newsletter}
+                                        onChange={handleChange}
                                       />
                                     </Form.Group>
                                   </Col>
@@ -143,8 +156,8 @@ const Subscription = (props) => {
                                         type="checkbox"
                                         label="Unsubscribe"
                                         name="unsubscribe"
-                                        checked={unsubscribe}
-                                        onChange={handleUnsubscribe}
+                                        checked={subscription.unsubscribe}
+                                        onChange={handleChange}
                                       />
                                     </Form.Group>
                                   </Col>
@@ -163,10 +176,16 @@ const Subscription = (props) => {
                           </Card>
                         </Col>
                       </Row>
+
+                      <Alert show={message.show} variant={message.type} onClose={() => setMessage({ ...message, show: false })} dismissible>
+                        <p>{message.message}</p>
+                      </Alert>
+
                     </Container>
                   </section>
                 </main>
               </Col>
+             
             </Row>
           </Container>
         </div>
@@ -179,7 +198,14 @@ const Subscription = (props) => {
 const mapStateToProps = state => ({
   cart: state.shop.cart,
   favorite: state.favorite,
-  auth: state.auth.user
+  auth: state.auth.user,
+  subscribeOption: state.site.subscriber
 })
 
-export default connect(mapStateToProps, null)(Subscription);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    subscriber: (email) => dispatch(getSubscriber(email)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Subscription);

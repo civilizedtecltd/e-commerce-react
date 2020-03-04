@@ -66,7 +66,7 @@ const shopNotInState = (shop) =>({
 })
 
 const deliveryMethod = () => dispatch => {
-    axios.get(URL.DELIVERY_METHOD)
+    axios.get(URL._DELIVERY_METHOD)
           .then(res => {
             return dispatch({
                 type:Types.DELIVERY_METHOD_FETCH,
@@ -118,6 +118,21 @@ const clearPromo = () => ({
     }
 })
 
+const currencyExchangeRate = (base) => dispatch => {
+    axios.get(URL.__CURRENCY_EXCHANGE_RATE(base))
+         .then(res =>{
+             const data = {
+                 base: base,
+                 kes: res.data.rates.KES
+             }
+            return dispatch({
+                type: Types.CURRENCY_EXCHANGE_RATE,
+                payload: data
+            })
+         })
+         .catch(error => console.log(error))
+}
+
 export {
     addToCart,
     removeFromCart,
@@ -130,5 +145,6 @@ export {
     updateQuantity,
     deliveryMethod,
     promoCodeInfo,
-    clearPromo
+    clearPromo,
+    currencyExchangeRate
 }

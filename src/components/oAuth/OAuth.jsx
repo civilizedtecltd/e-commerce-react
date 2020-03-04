@@ -1,10 +1,10 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux';
 import { FacebookSignIn, GoogleSignIn } from "google-facebook-signin-react";
-import { OauthLogin, emptyStatus, OauthSignUp } from '../../redux/actions/authActions'
-
-
+import { OauthLogin, emptyStatus, OauthSignUp } from '../../redux/actions/authActions';
+import { showFavItems } from '../../redux/actions/favoriteActions';
 const OAuth = (props) => {
+
     const success = (res) => {
         return new Promise((resolve, reject) => {
             const path = window.location.pathname;
@@ -12,11 +12,9 @@ const OAuth = (props) => {
                 if (res.provider === "google") {
                     const loginData = res.data.Qt || res.data.Rt 
                     props.login(loginData)
-                    props.callback(true);
                 }
                 if (res.provider === 'facebook') {
                     props.login(res.data)
-                    props.callback(true);
                 }
                 resolve();
             }
@@ -53,11 +51,15 @@ const OAuth = (props) => {
     )
 }
 
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+})
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (email) => dispatch(OauthLogin(email)),
         signup: (Oauth) => dispatch(OauthSignUp(Oauth)),
-        emptyStatus:()=>dispatch(emptyStatus())
+        emptyStatus: () => dispatch(emptyStatus()),
+        showAllFavItem: () => dispatch(showFavItems()),
    }
 }
-export default connect(null,mapDispatchToProps)(OAuth);
+export default connect(mapStateToProps,mapDispatchToProps)(OAuth);
