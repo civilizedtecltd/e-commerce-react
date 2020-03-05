@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Form, Accordion , useAccordionToggle, Alert} from 'react-bootstrap';
+import {Form, Accordion , useAccordionToggle, Alert, Tabs, Tab} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import { setPayment } from '../redux/actions/authActions';
 import { deliveryMethod } from '../redux/actions/shopActions';
@@ -12,6 +12,9 @@ import paypal_icon from './assets/images/paypal.png';
 import visa from './assets/images/visa-2.png';
 import amex from './assets/images/Amex-icon.jpg'
 import master_card from './assets/images/master-card.png'
+import visa_master from '../assets/images/payment/visa_master_cart.png'
+import Skrill from '../assets/images/payment/skrill.png'
+import Paypal from '../assets/images/payment/paypal.png'
 import './assets/paymentbar.css';
 
 
@@ -92,25 +95,42 @@ const PaymentMethods = (props) => {
     return (<>
         <PageLoader loading={false} />
 
-       <div className="text-center">
-            <input type="radio" className="radio_item" value="paypal" name="item" id="radio1" onChange={()=> setChecked({paypal:!check.paypal})} onClick={paymentMethodSelect} checked={ check.paypal ? true : false }/>
-            <label className="label_item" htmlFor="radio1"> <img src={paypal_icon} alt="paypal icon"/></label>
-             &nbsp;
-             &nbsp;
-            <input type="radio" className="radio_item" value="visa" name="item" id="radio2" onChange={()=>setChecked({visa:!check.visa})} onClick={paymentMethodSelect} checked={ check.visa ? true : false } />
-            <label className="label_item" htmlFor="radio2"> <img src={visa} alt="visa-icon" /> </label>
-             &nbsp;
-            &nbsp;
-            <input type="radio" className="radio_item" value="amex" name="item" id="radio3" onChange={()=>setChecked({amex:!check.amex})}  onClick={paymentMethodSelect} checked={ check.amex ? true : false }/>
-            <label className="label_item" htmlFor="radio3"><img src={amex} alt="american-express" /></label>
-             &nbsp;
-            &nbsp;
-            <input type="radio" className="radio_item" value="master" name="item" id="radio4" onChange={()=>setChecked({master:!check.master})} onClick={paymentMethodSelect} checked={ check.master ? true : false } />
-            <label className="label_item" htmlFor="radio4"> <img src={master_card} alt="master-card" /></label>
-        </div>
 
-        <h3 className="mt-4 mb-2">Choose a delivery method</h3>
 
+    {/*     <h3 className="mt-4 mb-2">Select Payment Method</h3> */}
+            {/* ======================================================  */}
+            <div className="paymentMethodsArea">
+                <ul className="nav nav-tabs">
+                    <li className="nav-item">
+                        <a className="nav-link  " data-toggle="tab" href="#Visa"><img src={visa_master}/></a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link active" data-toggle="tab" href="#Paypal"><img src={Paypal} /></a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link  " data-toggle="tab" href="#menu2"><img src={Skrill} /></a>
+                    </li>
+                </ul>
+                <div className="tab-content">
+                     <div className="text-center" id="Paypal">
+                        <input type="radio" className="radio_item" value="paypal" name="item" id="radio1" onChange={()=> setChecked({paypal:!check.paypal})} onClick={paymentMethodSelect} checked={ check.paypal ? true : false }/>
+                        <label className="label_item" htmlFor="radio1"> <img src={paypal_icon} alt="paypal icon"/></label>
+                        &nbsp;
+                        &nbsp;
+                        <input type="radio" className="radio_item" value="visa" name="item" id="radio2" onChange={()=>setChecked({visa:!check.visa})} onClick={paymentMethodSelect} checked={ check.visa ? true : false } />
+                        <label className="label_item" htmlFor="radio2"> <img src={visa} alt="visa-icon" /> </label>
+                        &nbsp;
+                        &nbsp;
+                        <input type="radio" className="radio_item" value="amex" name="item" id="radio3" onChange={()=>setChecked({amex:!check.amex})}  onClick={paymentMethodSelect} checked={ check.amex ? true : false }/>
+                        <label className="label_item" htmlFor="radio3"><img src={amex} alt="american-express" /></label>
+                        &nbsp;
+                        &nbsp;
+                        <input type="radio" className="radio_item" value="master" name="item" id="radio4" onChange={()=>setChecked({master:!check.master})} onClick={paymentMethodSelect} checked={ check.master ? true : false } />
+                        <label className="label_item" htmlFor="radio4"> <img src={master_card} alt="master-card" /></label>
+                    </div>
+                </div>
+            </div>
+        {/* ======================================================  */}
         <div className="payment-header-card mt-3 d-flex justify-content-between">
             <div>
             <Form.Check

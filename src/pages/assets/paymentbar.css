@@ -22,3 +22,22 @@ label {
  cursor: pointer;   
 }
 
+.paymentMethodsArea ul.nav.nav-tabs {
+    width: 100%;
+}
+
+.paymentMethodsArea ul.nav.nav-tabs li.nav-item {
+    width: 33%;
+}
+
+.paymentMethodsArea ul.nav.nav-tabs li.nav-item .active {
+    border-top: 5px solid;
+}
+.paymentMethodsArea ul.nav.nav-tabs li.nav-item img {
+    height: 100px;
+}
+
+.paymentMethodsArea .tab-content {
+    margin-top: 25px;
+}
+
