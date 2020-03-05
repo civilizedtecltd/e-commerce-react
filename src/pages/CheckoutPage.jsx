@@ -7,28 +7,27 @@ import { deliveryMethod } from '../redux/actions/shopActions'
 import CheckoutTab from './CheckoutTab';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 import './checkout.css';
-
+import Logo from '../assets/images/logo.png'
 
 const CheckoutPage = (props) => {
 
   const cartItems = props.cart;
-
   let totalBookPrice = 0;
-  // console.log(props)
   let delivery_costs = props.delivery ? props.delivery[0].price : 0;
-  
-  const [delivery_cost , setDeliveryCost] = useState(delivery_costs)
-  const totalQuantity = cartItems.map(data=>data.quantity)
+
+  const [delivery_cost , setDeliveryCost] = useState(delivery_costs);
+  const totalQuantity = cartItems.map(data => data.quantity);
 
   let sumTotalQty = totalQuantity.reduce((ac, crr) => ac + crr, 0)
   window.localStorage.setItem("sumQty", sumTotalQty);
-  
+
   if (sumTotalQty) {
     sumTotalQty = window.localStorage.getItem('sumQty');
   }
-    if (cartItems.length !== 0) {
-      cartItems.map(item => (totalBookPrice += item.amountPrice));
-    }
+
+  if (cartItems.length !== 0) {
+    cartItems.map(item => (totalBookPrice += item.amountPrice));
+  }
 
   const promoInfo   = (props.promoInfo) ? props.promoInfo : { status: false };
   let promoPrice    = totalBookPrice;
@@ -36,30 +35,22 @@ const CheckoutPage = (props) => {
   if(promoInfo.status){
     const { discount, upto } = promoInfo;
 
-    if(Number(totalBookPrice) <= Number(upto)){
-
+    if(Number(totalBookPrice) <= Number(upto))
         promoPrice = totalBookPrice - (totalBookPrice*(discount/100));
-
-    }else if(Number(totalBookPrice) > Number(upto)){
-
+    else if(Number(totalBookPrice) > Number(upto))
         promoPrice = totalBookPrice - upto;
-    }
-
   }
 
   let costWithDelivery = parseFloat(promoPrice) + parseFloat(delivery_cost);
-  
-  const fetchData = () => {
+
+  useEffect(() => {
     props.getUser();
-    props.deliveryMethodFetch();
+    //props.deliveryMethodFetch();
+  }, []);
+
+  const getPaymentMethod = (paymentMethod) => {
+    setDeliveryCost(paymentMethod.paymentData.price);
   }
-
-  const getPaymentMethod = (paymentMethod) => setDeliveryCost(paymentMethod.paymentData.price);
-  useEffect(() => fetchData(), []);
-  
-
-
-  
 
   return (
     <>
@@ -70,7 +61,7 @@ const CheckoutPage = (props) => {
           <Row>
             <Col className="text-center">
               <div className="logoWrapper">
-                <h1 className="logoText"><Link to="/">LOGO</Link></h1>
+                <h1 className="logoText"><Link to="/"><img src={Logo} style={{width:"150px", marginTop:"35px"}}/></Link></h1>
               </div>
             </Col>
           </Row>
@@ -92,7 +83,7 @@ const CheckoutPage = (props) => {
                           </div>
                           <div className="cartProductDes pl-3">
                             <h3>
-                              <Link to="!#">
+                            <Link to={`/product/${item.id}`}>
                                { item.name }
                               </Link>
                             </h3>
@@ -142,7 +133,7 @@ const CheckoutPage = (props) => {
             </Container>
           </section> }
           <section className="checkoutInfoDetails pb-5 clearfix" id="checkoutInfoDetails">
-              <CheckoutTab totalPrice={totalBookPrice} getPaymentMethod={getPaymentMethod}/>
+            <CheckoutTab productPrice = {promoPrice} costWithDelivery = {costWithDelivery} getPaymentMethod = {getPaymentMethod}/>
           </section>
         </main>
       </div>
@@ -153,7 +144,8 @@ const CheckoutPage = (props) => {
 const mapStateToProps = (state) => ({
   cart:state.shop.cart,
   delivery: state.shop.deliveryMethod,
-  promoInfo: state.shop.promo
+  promoInfo: state.shop.promo,
+  token: state.auth.jwt.token
 });
 
 const mapDispatchToProps = dispatch => ({

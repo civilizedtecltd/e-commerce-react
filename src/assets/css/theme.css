@@ -387,6 +387,9 @@
 /* Feature End */
 .footerLogo .logoText {
     line-height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center
 }
 .footerWidgetHeader {
     font-size: 25px;
@@ -772,6 +775,7 @@
     .Pagination-Row .singleFilter li:nth-child(2){width: 80%;}
     .Pagination-Row .singleFilter li select{width: 100%;}
     .home-ctg-limit-character{display: block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+    .footerLogo .logoText img{width: 150px;}
 }
 
 /*------------------------------------------------------------------------------*/

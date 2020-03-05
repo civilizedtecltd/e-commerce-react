@@ -12,6 +12,26 @@ export const fetchCategoryList = () => dispatch => {
         })
 };
 
+
+export const getSubscriber = (email) => dispatch => {
+    axios.get(URL.__SUBSCRIBER(email)).then(res => {
+        dispatch({
+            type: Types.GET_SUBSCRIBER,
+            payload: res.data.data
+        })
+    }).catch(error => {
+        console.log(error)
+    })
+}
+
+export const subscriberNotInState = (subscriber) => {
+    return {
+        type: Types.NOT_STATE_SUBSCRIBER,
+        payload: subscriber
+    }
+}
+
+
 export const siteNotInState = (data) => ({
     type: Types.SITE_NOT_IN_STATE,
     payload: data

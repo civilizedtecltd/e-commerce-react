@@ -4,15 +4,8 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import LazyLoad from "react-lazyload";
 import { connect } from "react-redux";
 import { createUseStyles } from "react-jss";
-import {
-  fetchAllBook,
-  fetchBooksByCategory,
-  filterByPriceRange,
-  filterShortBy,
-  fetchBooksByFilter
-} from "../redux/actions/bookActions";
+import { fetchAllBook, fetchBooksByCategory,filterByPriceRange,filterShortBy,fetchBooksByFilter} from "../redux/actions/bookActions";
 import { fetchStages } from "../redux/actions/filterAction";
-
 import Filters from "../components/shop/FiltersComponents";
 import { NewsLetterComponent } from "../components/offerPageComponents/NewsLetterComponent";
 import FooterComponent from "../components/FooterComponent/FooterComponent";
@@ -21,96 +14,57 @@ import MobileHeader from "../components/header/MobileHeader";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import "./assets/shop.css";
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
-const useStyle = createUseStyles({
-  page_field: {
-    width: "50px",
-    marginRight: "5px",
-    marginLeft: "5px"
-  }
-});
 
+
+const useStyle = createUseStyles({page_field: {width: "50px",marginRight: "5px",marginLeft: "5px"}});
 const ShopPage = props => {
   const classes = useStyle();
-
-  const {
-    id,
-    title,
-    showItem,
-    pageNumber,
-    keyword,
-    filter_type,
-    filter_id,
-  } = useParams();
-
-  //const isNaN_id = Number(id)
-
-  const [isNaN_id] = useState(Number(id));
-  const [lowerPrice, setLowerPrice] = useState(null);
-  const [higherPrice, setHigherPrice] = useState(null);
-  let [show, setShowBook] = useState(5);
-  let [page, setPage] = useState(1);
-  // let [totalPage , setTotalPage] = useState(()=>props.book.totalPage)
-  let [totalPage] = useState(() => props.book.totalPage);
+  const { id, title, showItem, pageNumber, keyword, filter_type, filter_id } = useParams();
+  const { stageList, filterShortByType, fetchBooks, filterByPrice, getBooksByFilter, booksByCategory, book: { totalPage, data, pending} } = props
+  const [priceFilter, setPriceFilter] = useState({higherPrice:null,lowerPrice:null})
+  const [pagination, setPagination] = useState({ show: 5, page: 1 })
   let [sortBy, setSortBy] = useState("");
-
   const totalItem = props.cart.length;
   const favoriteItem = props.favorite.items;
-  const books = props.book.data ? props.book.data : [];
   const shopUrl = window.location.pathname;
 
-  const PriceRange = (minPrice, maxPrice) => {
-    setLowerPrice(minPrice);
-    return setHigherPrice(maxPrice);
-  };
 
   useEffect(() => {
-    props.stageList(isNaN_id);
-
+    const { show, page } = pagination
+    const { higherPrice, lowerPrice } = priceFilter;
+       stageList(id);
     if (page && show && sortBy) {
-      return props.filterShortBy(page, show, sortBy);
+      return filterShortByType(page, show, sortBy);
     } else if (shopUrl === "/shopping") {
-      return props.fetchAllBook(page, show, null);
+      return fetchBooks(page, show, null);
     }else if (page && show && lowerPrice && higherPrice && filter_type && filter_id) {
-      return props.filterByPrice(page, show, lowerPrice, higherPrice,filter_type, filter_id);
+      return filterByPrice(page, show, lowerPrice, higherPrice,filter_type, filter_id);
     }else if (page && show && filter_type && filter_id) {
-      return props.getBooksByFilter(page, show, filter_type, filter_id);
+      return getBooksByFilter(page, show, filter_type, filter_id);
     } else if (page && show && lowerPrice && higherPrice) {
-      return props.filterByPrice(page, show, lowerPrice, higherPrice);
+      return filterByPrice(page, show, lowerPrice, higherPrice);
     } else if (id === "all" && pageNumber && showItem && keyword) {
-      return props.fetchAllBook(page, show, keyword);
-    } else if (!isNaN(isNaN_id) && page && show) {
-      return props.fetchBooksByCategory(id, page, show);
+      return fetchBooks(page, show, keyword);
+    } else if (!isNaN(id) && id && title && page && show) {
+      return booksByCategory(id, page, show);
     }
-    //eslint-disable-next-line
-  }, [sortBy, higherPrice, lowerPrice, page, show, id, filter_type, filter_id]);
+  }, [sortBy, priceFilter, id, filter_type, filter_id, pagination, stageList, shopUrl, pageNumber, showItem,
+      keyword, filterShortByType, fetchBooks, filterByPrice, getBooksByFilter, booksByCategory, title]);
 
-  const handleShowBook = e => {
-    e.preventDefault();
-    return setShowBook(e.target.value);
-  };
+  const PriceRange = (minPrice, maxPrice) => setPriceFilter({higherPrice:maxPrice,lowerPrice:minPrice})
 
-  const handleNext = e => {
-    e.preventDefault();
-    if (page !== totalPage) {
-      return setPage(++page);
-    }
-  };
+  const handleShowBook = e => setPagination({...pagination, show:e.target.value});
+  
+  const handleNext = () => (pagination.page <= totalPage) ? setPagination({ ...pagination, page: pagination.page + 1 }) : pagination;
 
-  const handlePreviews = e => {
-    e.preventDefault();
-    if (page !== 1) {
-      setPage(--page);
-    }
-    if (page === 0) return setPage(1);
-  };
-  const handleSortBy = e => {
-    e.preventDefault();
-    return setSortBy(e.target.value);
-  };
+  const handlePreviews =()=> (pagination.page !== 1 || pagination > 0) ? setPagination({ ...pagination, page: pagination.page - 1 }) : pagination;
+  
+  const handleSortBy = e=> setSortBy(e.target.value);
+  
 
   return (
     <>
-      <PageLoader loading={props.book.pending} />
+      <PageLoader loading={pending} />
       <div className="allWrapper">
         <HeaderComponent
           favorite_item={favoriteItem.length}
@@ -156,7 +110,7 @@ const ShopPage = props => {
                         </h2>
                       </Col>
                     </Row>
-                    {books.length === 0 ? (
+                    { data && data.length === 0 ? (
                       <h1 className="text-center">Sorry, No Result Found :(</h1>
                     ) : (
                       <>
@@ -196,7 +150,7 @@ const ShopPage = props => {
                                 <select
                                   name="up-filter-select"
                                   className="filterSelect form-control"
-                                  value={show}
+                                  value={pagination.show}
                                   onChange={handleShowBook}
                                 >
                                   <option value="16">16</option>
@@ -210,43 +164,22 @@ const ShopPage = props => {
                           <div className="col">
                             <nav aria-label="Page navigation">
                               <ul className="pagination align-items-center justify-content-between">
-                                <li
-                                  className={`page-item ${classes.page_field}`}
-                                  onClick={handlePreviews}
-                                >
+                                <li className={`page-item ${classes.page_field}`} onClick={handlePreviews} >
                                   <button className="page-link">
                                     <i className="fas fa-chevron-left"></i>
                                   </button>
                                 </li>
-                                <li
-                                  className={`page-item ${classes.page_field}`}
-                                >
-                                  Page
-                                </li>
-                                <li
-                                  className={`page-item ${classes.page_field}`}
-                                >
-                                  <input
-                                    type="text"
-                                    className="page-link"
-                                    value={page}
-                                    readOnly
-                                  />
+                                <li className={`page-item ${classes.page_field}`}>Page</li>
+                                <li className={`page-item ${classes.page_field}`}>
+                                  <input type="text" className="page-link"  value={pagination.page} readOnly />
                                 </li>
                                 <li className="page-item">of</li>
-                                <li
-                                  className={`page-item ${classes.page_field}`}
-                                >
-                                  <input
-                                    type="text"
-                                    value={props.book.totalPage}
-                                    className="page-link"
-                                    readOnly
-                                  />
+                                <li className={`page-item ${classes.page_field}`}>
+                                  <input type="text" value={totalPage} className="page-link" readOnly/>
                                 </li>
                                 <li className="page-item" onClick={handleNext}>
                                   <button className="page-link">
-                                    <i className="fas fa-chevron-right"></i>
+                                     <i className="fas fa-chevron-right"></i>
                                   </button>
                                 </li>
                               </ul>
@@ -255,10 +188,10 @@ const ShopPage = props => {
                         </Row>
 
                         <Row className="Product_Row">
-                          {books.length === 0 ? (
+                          {data && data.length === 0 ? (
                             <></>
                           ) : (
-                            books.map((book, index) => {
+                            data && data.map((book, index) => {
                               return (
                                 <Col key={index} sm="3 mb-5">
                                   <LazyLoad once={true} height={200}>
@@ -286,7 +219,7 @@ const ShopPage = props => {
                                           {book.book_author.name}
                                         </h5>
                                         <p className="productPrice">
-                                          Ksh {book.price}{" "}
+                                          Ksh {book.price}
                                         </p>
                                       </div>
                                     </Card>
@@ -333,7 +266,7 @@ const ShopPage = props => {
                                 <select
                                   name="up-filter-select"
                                   className="filterSelect form-control"
-                                  value={show}
+                                  value={pagination.show}
                                   onChange={handleShowBook}
                                 >
                                   <option value="16">16</option>
@@ -347,39 +280,18 @@ const ShopPage = props => {
                           <div className="col">
                             <nav aria-label="Page navigation">
                               <ul className="pagination align-items-center justify-content-between">
-                                <li
-                                  className="page-item"
-                                  onClick={handlePreviews}
-                                >
+                                <li className="page-item" onClick={handlePreviews}>
                                   <button className="page-link">
                                     <i className="fas fa-chevron-left"></i>
                                   </button>
                                 </li>
-                                <li
-                                  className={`page-item ${classes.page_field}`}
-                                >
-                                  Page
-                                </li>
-                                <li
-                                  className={`page-item ${classes.page_field}`}
-                                >
-                                  <input
-                                    type="text"
-                                    className="page-link"
-                                    value={page}
-                                    readOnly
-                                  />
+                                <li className={`page-item ${classes.page_field}`}>Page</li>
+                                <li className={`page-item ${classes.page_field}`} >
+                                  <input type="text" className="page-link" value={pagination.page} readOnly/>
                                 </li>
                                 <li className="page-item">of</li>
-                                <li
-                                  className={`page-item ${classes.page_field}`}
-                                >
-                                  <input
-                                    type="text"
-                                    value={props.book.totalPage}
-                                    className="page-link"
-                                    readOnly
-                                  />
+                                <li className={`page-item ${classes.page_field}`}>
+                                  <input type="text" value={totalPage} className="page-link" readOnly/>
                                 </li>
                                 <li className="page-item" onClick={handleNext}>
                                   <button className="page-link">
@@ -397,10 +309,7 @@ const ShopPage = props => {
               </Row>
             </Container>
           </section>
-          <section
-            className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap"
-            id="mailSubscribe"
-          >
+          <section className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap" id="mailSubscribe">
             <Container className="container">
               <NewsLetterComponent />
             </Container>
@@ -416,7 +325,7 @@ const mapStateToProps = state => {
   const initItem = state.book.total !== undefined ? state.book.total : 1;
   const initShowItem = state.book.show !== undefined ? state.book.show : 5;
   return {
-    book: state.book,
+    book: state.book ? state.book : [],
     cart: state.shop.cart,
     totalItem: initItem,
     showItem: initShowItem,
@@ -427,16 +336,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchAllBook: (page, show) => dispatch(fetchAllBook(page, show)),
-    fetchBooksByCategory: (id, page, show) =>
-      dispatch(fetchBooksByCategory(id, page, show)),
-    filterByPrice: (page, show, lowPrice, highestPrice,type,type_id) =>
-      dispatch(filterByPriceRange(page, show, lowPrice, highestPrice,type,type_id)),
-    filterShortBy: (page, show, query) =>
-      dispatch(filterShortBy(page, show, query)),
-    stageList: category_id => dispatch(fetchStages(category_id)),
-    getBooksByFilter: (page, show, filterType, filterId) =>
-      dispatch(fetchBooksByFilter(page, show, filterType, filterId))
+      fetchBooks: (page, show) => dispatch(fetchAllBook(page, show)),
+      booksByCategory: (id, page, show) =>dispatch(fetchBooksByCategory(id, page, show)),
+      filterByPrice: (page, show, lowPrice, highestPrice,type,type_id) =>dispatch(filterByPriceRange(page, show, lowPrice, highestPrice,type,type_id)),
+      filterShortByType: (page, show, query) =>dispatch(filterShortBy(page, show, query)),
+      stageList: category_id => dispatch(fetchStages(category_id)),
+      getBooksByFilter: (page, show, filterType, filterId) =>dispatch(fetchBooksByFilter(page, show, filterType, filterId))
   };
 };
 

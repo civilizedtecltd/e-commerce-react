@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import {Container, Card, Form, Col, Row, Button, Modal } from 'react-bootstrap';
+import { Container, Card, Form, Col, Row, Button, Modal } from 'react-bootstrap';
+import PaypalExpressBtn from "react-paypal-express-checkout";
 import {Link} from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty';
 import {connect} from 'react-redux';
@@ -7,21 +8,19 @@ import {setDeliveryAddress, setPaymentDetails} from '../redux/actions/shopAction
 import { confirmOrder } from '../redux/actions/authActions';
 import { clearPromo } from '../redux/actions/shopActions';
 import PaymentsMethods from './PaymentMethods';
+import { paypalConfig } from '../constants/constants';
 import {futureDate} from '../helpers/utils';
 import './checkout.css';
 import '../assets/css/theme.css';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 
+
 const CheckoutTab = (props) => {
 
+
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const [step, setStep] = useState({
-        prev:0,
-        next:1,
-        show:false
-    })
+    const [step, setStep] = useState({prev:0, next:1, show:false})
 
     const [formData, setFormData] = useState({
         first_name: props.user.first_name,
@@ -31,7 +30,12 @@ const CheckoutTab = (props) => {
         policy: false
     });
 
-    const [payment, setPayment] = useState({});
+    const [paymentDetails, setPaymentDetails] = useState({});
+
+    const deliveryCost = (paymentDetails.paymentData) ? paymentDetails.paymentData.price : props.delivery[0].price;
+    const deliveryTime = (paymentDetails.paymentData) ? paymentDetails.paymentData.delivery_time : props.delivery[0].delivery_time;
+    const currencyExchangeRate = (props.currencyRate) ? props.currencyRate.kes : 1;
+    const total_cost_in_usd = Math.ceil(props.costWithDelivery/currencyExchangeRate);
 
     const handleNext = () => {
 
@@ -86,12 +90,7 @@ const CheckoutTab = (props) => {
 
     }
 
-    const handleOnChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name] : e.target.value
-        })
-    }
+    const handleOnChange = (e) => setFormData({...formData, [e.target.name] : e.target.value });
 
     const handleTermsCheck = () => {
         setFormData({
@@ -108,14 +107,14 @@ const CheckoutTab = (props) => {
     }
 
     const getPaymentDetails = (data) => {
-        props.getPaymentMethod(data)
-        setPayment({
+        // console.log("getPaymentDetails: ", data);
+        props.getPaymentMethod(data);
+        setPaymentDetails({
             ...data
         })
     }
 
-    const confirmOrder = (e) => {
-        e.preventDefault();
+    const confirmOrder = (paymentInfo) => {
 
         const books = [];
 
@@ -126,35 +125,48 @@ const CheckoutTab = (props) => {
                 });
         });
 
-        const promoId = (props.promo) ? props.promo.id : null ;
-
-        /* console.log({
-            address: formData,
-            ...payment,
-            books,
-            promo: promoId
-        }); */
+        const promoId = (props.promo) ? props.promo.id : null;
 
         props.confirmOrder({
             address: formData,
-            ...payment,
+            payment: {method: paymentDetails.method, info: paymentInfo},
+            delivery: paymentDetails.delivery,
             books,
             promo: promoId
         });
+
+        /* console.log('Confirm Order: ', {
+            address: formData,
+            payment: {method: paymentDetails.method, info: paymentInfo},
+            delivery: paymentDetails.delivery,
+            books,
+            promo: promoId
+        }); */
 
         props.clearPromo();
 
         setShow(true);
     }
 
-    return(<>
+    const onSuccess = paypalInfo => confirmOrder(paypalInfo);     
 
+    const onCancel = data => {
+        // console.log('The payment was cancelled',data)
+        return window.location.href = data.cancelUrl
+    }
+
+
+    const onError = err => {
+        console.log('Error',err)
+    }
+
+    return(
+        <>
         <PageLoader loading={false}/>
         <Container>
 
             <Card>
                 <Card.Body>
-
                     <div className="checkout-tab">
                         <div className="header-section">
                             <button id='step-1' className="btn btn-primary active-tab">Address details</button>
@@ -164,14 +176,12 @@ const CheckoutTab = (props) => {
                             <button id="step-3" className="btn btn-primary">Order confirmation</button>
                         </div>
 
-
                         <div id="address-section" className="tab address-section tab-active-content mt-5">
                             <Row>
                                 <Col sm="12">
                                     <button disabled className="btn btn-primary btn-block d-md-none d-lg-none d-xl-none">Address details</button>
-                                    <Form className='mt-5' action="">
+                                    <Form className='mt-5' action="post">
                                         <Row>
-
                                             <Col sm={6} className="form-group">
                                                 <label htmlFor="first-name">First Name</label>
                                                 <input type="text" name='first_name' id="first-name" className="form-control" value={formData.first_name} onChange={handleOnChange}/>
@@ -248,7 +258,7 @@ const CheckoutTab = (props) => {
                                                     id={`checkboxPrivacy`}
                                                     onChange={handlePrivacyCheck}
                                                 />
-                                                <p>I agree with<Link to="/privacy" className="termsTxt">Privacy Policy</Link></p>
+                                                <p>I agree with <Link to="/privacy" className="termsTxt"> Privacy Policy</Link></p>
                                             </Col>
                                         </Row>
                                         <Col className="text-right p-0">
@@ -256,9 +266,8 @@ const CheckoutTab = (props) => {
                                         </Col>
                                     </Form>
                                 </Col>
-                            </Row>{/* tab-section -1 */}
+                            </Row>
                         </div>
-
 
                         <div id="payment-section" className="tab payment-section mt-3">
                             <div className="row">
@@ -283,7 +292,6 @@ const CheckoutTab = (props) => {
                             </div>
                         </div>
 
-
                         <div id='order-confirmation-section' className="tab order-confirmation-section">
                             <Form className="userInfoForm mt-3">
                                 <button disabled className="btn btn-primary btn-block d-md-none d-lg-none d-xl-none mb-3">Payment and delivery</button>
@@ -300,7 +308,6 @@ const CheckoutTab = (props) => {
                                         </ul>
                                     </Col>
 
-
                                     <Col sm="6">
                                         <ul className="orderConfrimationList">
                                             <li><strong>City : </strong>{ formData.city}</li>
@@ -312,9 +319,11 @@ const CheckoutTab = (props) => {
 
                                     <Col sm="6" className="mt-4">
                                         <ul className="orderConfrimationList text-large">
-                                            <li><strong>Total Price : </strong>Ksh {props.totalPrice}</li>
-                                            <li><strong>Delivery method : </strong> {(!isEmpty(payment) && payment.delivery === 0) ? 'Standard' : 'Express'}</li>
-                                            <li><strong>Expected arrival : </strong>  {futureDate(7)}</li>
+                                            <li><strong>Product(s) Price : </strong>Ksh {props.productPrice}</li>
+                                            <li><strong>Delivery method : </strong> {(!isEmpty(paymentDetails) && paymentDetails.delivery === 0) ? 'Standard' : 'Express'}</li>
+                                            <li><strong>Delivery cost : </strong>Ksh {deliveryCost}</li>
+                                            <li><strong>In Total: </strong>Ksh {props.costWithDelivery}</li>
+                                            <li><strong>Expected arrival : </strong>  {futureDate(deliveryTime)}</li>
                                         </ul>
                                     </Col>
                                 </Row>
@@ -322,18 +331,27 @@ const CheckoutTab = (props) => {
                                 <Row className="form-group mt-5">
                                     <div className="col-12 d-flex justify-content-between">
                                         <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
-                                        <button type="submit" className="btn btn-primary" data-target="#confirmOrder" data-toggle="modal" onClick={confirmOrder}>Confirm order</button>
+                                        <PaypalExpressBtn
+                                            env       = {paypalConfig.env}
+                                            client    = {paypalConfig.client}
+                                            currency  = {paypalConfig.currency}
+                                            total     = {total_cost_in_usd}
+                                            onError   = {onError}
+                                            onSuccess = {onSuccess}
+                                            onCancel  = {onCancel}
+                                        />
                                     </div>
                                 </Row>
 
                             </Form>
                         </div>
+
                     </div>
                 </Card.Body>
             </Card>
         </Container>
 
-        <Modal show = {show} onHide = { handleClose }>
+        {/* <Modal show = {show} onHide = { handleClose }>
             <Modal.Header className={"border-0"} closeButton>
             </Modal.Header>
             <Modal.Body>
@@ -347,14 +365,15 @@ const CheckoutTab = (props) => {
             <Modal.Footer className={"border-0"}>
 
             </Modal.Footer>
-        </Modal>
+        </Modal> */}
 </>)
 }
 
 
 const mapStateToProps = state =>({
     ...state.auth,
-    ...state.shop
+    ...state.shop,
+    delivery: state.shop.deliveryMethod
 })
 
 const mapDispatchToProps = dispatch => ({

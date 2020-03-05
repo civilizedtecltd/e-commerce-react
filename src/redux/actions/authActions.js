@@ -12,10 +12,8 @@ const login = (authData) => dispatch => {
             try{
                 const jwt = res.data.data;
                 const { data } = decode(jwt.token);
-
                 localStorage.setItem('authData', JSON.stringify(jwt));
                 setAuthToken(jwt.token);
-
                 return dispatch({
                     type: Types.USER_LOGIN,
                     payload: {
@@ -28,7 +26,6 @@ const login = (authData) => dispatch => {
                 });
 
             } catch (error) {
-                console.log(error);
                 return dispatch({
                     type: Types.USER_LOGIN_ERROR,
                     payload: {
@@ -41,7 +38,6 @@ const login = (authData) => dispatch => {
             }
 
         }).catch(error => {
-            console.log("login error: ", error);
             return dispatch({
                     type: Types.USER_LOGIN_ERROR,
                     payload: {
@@ -125,14 +121,17 @@ const deletePayment = (id) => dispatch => {
          .catch(error => console.log(error));
 }
 
-const confirmOrder = (data) => dispatch => {
+const confirmOrder = (data) => dispatch => {      
     setAuthToken();
     axios.post(URL._CONFIRM_ORDER, { ...data })
          .then(res => {
-            return dispatch({
+             dispatch({
                 type: Types.CONFIRM_ORDER,
                 payload: [ ...res.data.data ]
-            })
+             })
+
+             dispatch(getUser())
+            return window.location ='/my-order' 
          })
          .catch(error => {
              console.log(error.response)
@@ -172,9 +171,7 @@ export const OauthLogin = (OauthData) => dispatch => {
         .then(res => {
             try {
                 const jwt = res.data.data;
-                console.log("OAuth Login JWT: ", jwt);
-
-                const { data } = decode(jwt.token);
+                const {data} = decode(jwt.token);
                 localStorage.setItem('authData', JSON.stringify(jwt));
                 setAuthToken(jwt.token);
                 return dispatch({
@@ -187,7 +184,6 @@ export const OauthLogin = (OauthData) => dispatch => {
                         }
                     }
                 });
-
             } catch (error) {
                 console.log('Try Catch login error: ', error);
                 return dispatch({
@@ -202,7 +198,6 @@ export const OauthLogin = (OauthData) => dispatch => {
             }
 
         }).catch(error => {
-            console.log("login error: ", error);
             return dispatch({
                 type: Types.USER_LOGIN_ERROR,
                 payload: {
@@ -255,7 +250,16 @@ export const OauthSignUp = (OauthData) => dispatch => {
            return window.location.href='/login'
         }
     }).catch(error => {
-        console.log(error)
+        dispatch({
+            type: Types.SIGNUP_ERROR,
+            payload: error.response.data
+        })
+        setTimeout(() => {
+            dispatch({
+                type: Types.SIGNUP_ERROR,
+                payload:null
+            })
+        }, 5000);
     })
 }
 
@@ -263,10 +267,18 @@ export const emptyStatus = ()  => {
     return ({
         type: Types.EMPTY_STATUS,
         payload: {
-            status: {}
+            status: {
+                error: {
+                    data:null
+                }
+            }
         }
     });
 }
+
+
+
+
 
 
 export {
@@ -279,5 +291,4 @@ export {
   deletePayment,
   confirmOrder,
   updatePaymentMethod,
- /*  authDataNotInState */
 };

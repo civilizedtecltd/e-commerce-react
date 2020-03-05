@@ -10,6 +10,17 @@ const siteReducers = (state = {}, {type, payload}) => {
                 ...state,
                 ...payload
             }
+        
+        case Types.GET_SUBSCRIBER:
+            return {
+                ...state,
+                subscriber:payload
+            }
+        case Types.NOT_STATE_SUBSCRIBER:
+            return {
+                ...state,
+                subscriber: payload
+            }
         default:
             return state
     }
