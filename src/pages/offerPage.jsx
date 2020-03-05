@@ -4,8 +4,6 @@ import {Container, Row, Col} from 'react-bootstrap';
 import {connect} from 'react-redux'
 import  './assets/offerPage.css';
 import '../assets/css/theme.css';
-
-//Components
 import NewBookComponent from '../components/offerPageComponents/NewBookComponent';
 import ImgSlick from '../components/offerPageComponents/ImgSlickComponent';
 import {NewsLetterComponent} from '../components/offerPageComponents/NewsLetterComponent';
@@ -13,16 +11,28 @@ import FooterComponent from '../components/FooterComponent/FooterComponent';
 import HeaderComponent from "../components/header/Header";
 import MobileHeader from "../components/header/MobileHeader";
 import {NewBookDB}from '../inc/offerPage/NewBook';
-
-// Product Images
 import blogPostImage1 from '../assets/images/post_img_01.jpg';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
+import bannerImage from '../assets/images/banner_img_01.jpg'
 
 
 const offerPage = (props) => {
 
   const totalItem = props.cart.length
   const favoriteItem = props.favorite.items;
+
+  const image =[
+    {
+      book_author:"Author 1",
+      cover_images:{
+        img_1: bannerImage,
+        img_2: bannerImage,
+        img_3: bannerImage
+      }
+    },
+   
+  
+  ]
   return (<>
   <PageLoader loading={props.favorite.pending}/>
     <div className="allWrapper">
@@ -58,7 +68,7 @@ const offerPage = (props) => {
               </Col>
             </Row>
             <div className="ImageSlickOfferPage">
-              <ImgSlick/>
+              <ImgSlick images={image}/>
             </div>
           </Container>
         </section>
@@ -75,8 +85,8 @@ const offerPage = (props) => {
                   <div className="articleBody p-5">
                     <h2 className="postTitle mb-2"><Link to="#">New books on math</Link></h2>
                     <p className="postPara">Lorem ipsum dolor sit ament, connecter advising elite, sed do elusion</p>
-                  </div>{/* end of articleBody */}
-                </article>{/* end of singleArticle */}
+                  </div>
+                </article>
               </Col>
 
               <Col sm="4">
@@ -88,8 +98,8 @@ const offerPage = (props) => {
                   <div className="articleBody p-3">
                     <h2 className="postTitle mb-1"><Link to="#">Environment programme</Link></h2>
                     <p className="postPara">Lorem ipsum dolor sit ament, connecter advising elite, sed do elusion</p>
-                  </div>{/* end of articleBody */}
-                </article>{/* end of singleArticle */}
+                  </div>
+                </article>
 
                 <article className="singleArticle articleArea mt-3">
                   <div className="articleMedia">
@@ -99,13 +109,12 @@ const offerPage = (props) => {
                   <div className="articleBody p-3">
                     <h2 className="postTitle mb-1"><Link to="#">Environment programme</Link></h2>
                     <p className="postPara">Lorem ipsum dolor sit ament, connecter advising elite, sed do elusion</p>
-                    </div>{/* end of articleBody */}
-                </article>{/* end of singleArticle */}
+                    </div>
+                </article>
               </Col>
-
-            </Row>{/* end of Row */}
-          </Container>{/* end of Container */}
-        </section>{/* end of blogArea */}
+            </Row>
+          </Container>
+        </section>
 
         <section className="actualProduct productView secGap clearfix" id="newProduct">
           <Container>
@@ -113,15 +122,11 @@ const offerPage = (props) => {
               <Col>
                 <h2 className="sectionTitle"><span>Actual </span> New</h2>
               </Col>
-
               <Col className="text-right">
                 <Link to="#" className="btn linkBtn">View more</Link>
               </Col>
-            </Row>{/* end of Row */}
-
+            </Row>
             <Row className="justify-content-between">
-
-
               {NewBookDB.map((newBook, index) => <NewBookComponent
                   key={index}
                   ImageBg="bgGray"
@@ -129,24 +134,17 @@ const offerPage = (props) => {
                   ProductTitle={newBook.Title}
                   AuthorName={newBook.Author}
                   ProductPrice={newBook.Price}
-                />
-
-                )
+                />)
               }
-
             </Row>
-          </Container>{/* end of Container */}
-        </section>{/* end of newProduct */}
-
+          </Container>
+        </section>
         <section className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap" id="mailSubscribe">
           <Container className="container">
-
               <NewsLetterComponent/>
-
-          </Container>{/* end of Container */}
-        </section>{/* end of mailSubscribe */}
-
-      </main>{/* end of mainContent */}
+          </Container>
+        </section>
+      </main>
      <FooterComponent/>
     </div>
     </>);

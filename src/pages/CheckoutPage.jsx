@@ -85,7 +85,7 @@ const CheckoutPage = (props) => {
                             <h3>
                             <Link to={`/product/${item.id}`}>
                                { item.name }
-                              </Link>
+                            </Link>
                             </h3>
                             <p>
                             Price:<span className="price"> Ksh { item.price } </span>
