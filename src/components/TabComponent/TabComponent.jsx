@@ -1,22 +1,18 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Tabs,Tab,Form,Button}  from 'react-bootstrap';
 import RatingComponent from '../ratingComponent/Rating';
 import ReviewComponent from './ReviewComponent';
 import checkAuth from '../../helpers/checkAuth';
-
-import { postReview } from '../../redux/actions/bookActions';
-
+import { postReview,showSingleBook } from '../../redux/actions/bookActions';
 import '../../assets/css/productTab.css'
 
 
 function TabComponent(props) {
-
-    const [key, setKey] = useState('description');
-    const [newReview, setNewReview] = useState({});
-    const spec = props.specification[0];
-   
-
+  const [key, setKey] = useState('description');
+  const [newReview, setNewReview] = useState({});
+  const spec = props.specification[0];
+  const { postReview } =props
     const getReview = (e) => {
         e.preventDefault()
         setNewReview({
@@ -32,19 +28,18 @@ function TabComponent(props) {
         })
     }
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
         const reviewInfo = {
             ...newReview,
             book_id: spec.id
         }
-
         if(!checkAuth()){
             props.routeHistory.push("/login")
         }else{
-            props.postReview(reviewInfo)
-            setNewReview({ reviewer_rating: 0, comment: '' });
-        }   
+          postReview(reviewInfo)
+          setNewReview({ reviewer_rating: 0, comment: '' });
+      } 
     }
 
   
@@ -147,8 +142,14 @@ function TabComponent(props) {
     );
 }
 
+const mapStateToProps = state => {
+  return {
+    post_review: state.book.info
+  }
+}
 const mapDispatchToProps = dispatch =>({
-    postReview: (review) => dispatch(postReview(review))
+  postReview: (review) => dispatch(postReview(review)),
+  showBook: (id) => showSingleBook(id)
 })
 
-export default connect(null, mapDispatchToProps)(TabComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(TabComponent);

@@ -12,6 +12,7 @@ import { getSubscriber} from '../../redux/actions/siteActions'
 const Subscription = (props) => {
   const { auth, subscriber} = props
   const [subscription, setSubscription] = useState({ ...props.subscribeOption })
+  console.log(subscription)
   const [message, setMessage] = useState({ show: false, type: 'unknown', message: '' })
   
   useEffect(() => {
@@ -111,6 +112,7 @@ const Subscription = (props) => {
                                         type={"checkbox"}
                                         label={"Announcements"}
                                         name='announcement'
+                                        disabled={subscription.unsubscribe && true}
                                         checked={subscription.announcement}
                                         onChange={handleChange}
                                       />
@@ -126,6 +128,7 @@ const Subscription = (props) => {
                                         type="checkbox"
                                         label="Sale invitations"
                                         name="sale_invitation"
+                                        disabled={subscription.unsubscribe && true}
                                         checked={subscription.sale_invitation}
                                         onChange={handleChange}
                                       />
@@ -141,6 +144,7 @@ const Subscription = (props) => {
                                         type="checkbox"
                                         label="Weekly Newsletter"
                                         name="weekly_newsletter"
+                                        disabled={subscription.unsubscribe && true}
                                         checked={subscription.weekly_newsletter}
                                         onChange={handleChange}
                                       />

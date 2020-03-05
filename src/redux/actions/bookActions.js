@@ -68,13 +68,23 @@ const searchBook = (page, show, keyword) => dispatch => {
 
 const postReview = (review) => dispatch => {
     setAuthToken();
+
+    
+    
     axios.post(URL._POST_REVIEW, review)
-         .then(res => dispatch({
+        .then(res =>
+        {
+            dispatch({
             type: Types.POST_REVIEW,
              payload: {
                 book_review:  [...res.data.data]
-            }
-         }))
+                }
+            })
+            dispatch(showSingleBook(review.book_id))
+        }
+            
+            
+         )
          .catch(error => console.log(error))
 }
 
