@@ -9,7 +9,7 @@ import isEmpty from 'lodash/isEmpty';
 import '../../assets/css/heder.css';
 import Search from "../Search";
 import ProfileAvatar from "../../assets/images/user/avatar.png";
-
+import Logo2 from '../../assets/images/logo2.png';
 
 const Mobile = ({ children }) => {
     const isMobile = useMediaQuery({ maxWidth: 991 })
@@ -57,7 +57,7 @@ const MobileHeader = (props) => {
                     <Row className="align-items-center justify-content-between">
                         <Col className="col-auto">
                             <div className="logoWrapper">
-                                <h1 className="logoText"><Link to="/">LOGO</Link></h1>
+                                <h1 className="logoText"><Link to="/"><img src={Logo2} style={{width: "65px"}} /></Link></h1>
                             </div>
                         </Col>
 
