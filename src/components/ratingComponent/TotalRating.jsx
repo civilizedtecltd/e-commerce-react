@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import './total_rating.css';
 
-const range = (min, max) =>
-  Array(max - min + 1).fill().map((_, i) => min + i)
-
+const range = (min, max) =>Array(max - min + 1).fill().map((_, i) => min + i)
 const RatingItem  = ({ checked, colored, value }) => (
   <label className={`rating_item ${colored ? 'rating_item--selected' : ''}`}>
     <input
