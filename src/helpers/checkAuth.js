@@ -33,7 +33,9 @@ const checkAuth = () => {
         }
 
         const currentTime = new Date().getTime()/1000;
-        if(exp <= currentTime ){
+        const remainingTime = exp - currentTime
+
+        if( remainingTime <= 10 ){
             console.log(`token expired....`);
             store.dispatch(login({refreshToken: refreshToken}))
             const auth = store.getState().auth;
