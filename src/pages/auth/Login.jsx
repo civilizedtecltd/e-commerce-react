@@ -22,26 +22,31 @@ const Login = (props) => {
   const lastPath = previewsLocation ? previewsLocation.pathname : '/';
   const { auth, login, showAllFavItem, error, removeError, login_success, history, login_status, location } = props
 
-  useEffect(() => {
+  const logInSuccess =()=>{
     if (login_success) {
-      if (lastPath === '/signup' || lastPath.match("/change-password/")) {
-        setAlert({ show: true, type: 'success', message: 'You are logged in' })
-        showAllFavItem()
-        return history.push('/profile-settings');
+
+        if (lastPath === '/signup' || lastPath.match("/change-password/")) {
+          setAlert({ show: true, type: 'success', message: 'You are logged in' })
+            showAllFavItem()
+           history.push('/profile-settings');
+        }
+        else if (!lastPath) {
+            showAllFavItem()
+           history.push('/profile-settings');
+        }
+        else {
+            showAllFavItem()
+           history.goBack()
+        }
       }
-      else if (!lastPath) {
-        showAllFavItem()
-        return history.push('/profile-settings');
+      if (error) {
+        setAlert({ show: true, type: 'danger', message: error.message })
+        removeError()
       }
-      else {
-        showAllFavItem()
-        return history.goBack()
-      }
-    }
-    if (error) {
-      setAlert({ show: true, type: 'danger', message: error.message })
-      return removeError()
-    }
+  }
+
+  useEffect(() => {
+    logInSuccess()
   }, [auth.status.error, error, removeError, login_success, lastPath, history, login_status, location, showAllFavItem])
 
 
