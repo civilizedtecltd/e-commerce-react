@@ -14,6 +14,7 @@ import Logo from '../../assets/images/logo.png'
 
 
 const SignUp = (props) => {
+
   const [data, setData] = useState({ category_id: null, first_name: null, last_name: null, email: null, password: null, repeatPassword: null })
   const [alert, setAlert] = useState({ show: false, type: 'danger', message: '' });
   const categories = (props.categories) ? props.categories : [];
@@ -30,7 +31,7 @@ const SignUp = (props) => {
     }
     if(!error) {
       setAlert({ show: false, type: 'unknown', message:''})
-    }  
+    }
   },[error])
 
   const handleOnchange = (e) => {
