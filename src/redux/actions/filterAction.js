@@ -94,6 +94,17 @@ export const fetchLanguages = () => dispatch => {
          .catch(error => console.log(error))
 }
 
+export const fetchBookCovers = () => dispatch => {
+    axios.get(URL._GET_BOOK_COVERS)
+         .then(res => dispatch({
+            type: Types.GET_BOOK_COVER_LIST,
+            payload: {
+                book_covers: [ ...res.data.data ]
+            }
+         }))
+         .catch(error => console.log(error))
+}
+
 
 export const filterNotInState = filter => {
     return {

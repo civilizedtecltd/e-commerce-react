@@ -121,6 +121,10 @@ require('dotenv').config({path: path.join('/home/dell/Freelancing/book_eCommerce
         return `${this.API}/filter/languages`
     }
 
+    get _GET_BOOK_COVERS(){
+        return `${this.API}/filter/book-covers`
+    }
+
     _GET_FILTERED_BOOKS(filter_type, filter_id, page, show){
         return `${this.API}/filter/${filter_type}/${filter_id}/${page}/${show}`
     }
