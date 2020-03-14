@@ -81,6 +81,7 @@ const getUser = () => dispatch => {
 }
 
 const update = (info) => dispatch => {
+    console.log('update userInfo: ', info);
     setAuthToken();
     axios.post(URL._USER_UPDATE, info)
          .then(res => dispatch({
@@ -121,7 +122,7 @@ const deletePayment = (id) => dispatch => {
          .catch(error => console.log(error));
 }
 
-const confirmOrder = (data) => dispatch => {      
+const confirmOrder = (data) => dispatch => {
     setAuthToken();
     axios.post(URL._CONFIRM_ORDER, { ...data })
          .then(res => {
@@ -131,7 +132,7 @@ const confirmOrder = (data) => dispatch => {
              })
 
              dispatch(getUser())
-            return window.location ='/my-order' 
+            return window.location ='/my-order'
          })
          .catch(error => {
              console.log(error.response)

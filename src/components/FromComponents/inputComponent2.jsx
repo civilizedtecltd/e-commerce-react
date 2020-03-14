@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 
-function InputFrom({ LabelId, TypeName, LabelTitle, Name, Value, Placeholder, ClassName, callback }) {
-
-    const handleOnchange = event => {
-        let data = {
-            [event.target.name]: event.target.value
-        }
-        callback(data)
-    }
+function InputFrom({ LabelId, TypeName, LabelTitle, Name, Value, Placeholder, ClassName, handleOnChange }) {
 
     return (
         <Form.Group className={ClassName}>
             <Form.Label htmlFor={LabelId} > {LabelTitle} </Form.Label>
-            <Form.Control type={TypeName} id={LabelId} name={Name} value={Value} placeholder={Placeholder} onChange={handleOnchange} />
+            <Form.Control type={TypeName} id={LabelId} name={Name} value={(Value)? Value : ''} placeholder={Placeholder} onChange={handleOnChange} />
         </Form.Group>
     )
 }
