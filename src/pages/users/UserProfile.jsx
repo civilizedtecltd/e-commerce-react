@@ -12,13 +12,16 @@ import './assets/css/user.css';
 
 
 const UserProfile = (props) => {
-  const { auth: { user }, favorite: { items }, cart, status: { message, success }, getUser }= props
+
+  const { auth: { user }, favorite: { items }, cart, status: { message, success }, getUser } = props
+
     const [alert, setAlert] = useState({status: false, type: 'danger', message: ''});
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({...user});
     const totalFavorite = items.length;
     const totalItem = cart.length;
 
-    useEffect(()=>{
+    useEffect(() => {
+
         const clearAlert = setTimeout(() => {
             setAlert({status: false, message:''});
         }, 5000);
@@ -31,20 +34,24 @@ const UserProfile = (props) => {
             });
             return () =>  clearTimeout(clearAlert);
         }
+
         getUser();
+
     }, [getUser, message, success]);
 
 
     const categoryData = (data) => {
-
         if(data.category_id !== undefined || data.category_id !== 'Select Category')
             formData.category_id = Number(data.category_id);
     }
 
-    const fromFileData = (data) => {
+    //console.log('form data: ', formData);
+
+    const handleOnChange = (e) => {
+        e.preventDefault();
         setFormData({
             ...formData,
-            ...data
+            [e.target.name] : e.target.value
         });
     }
 
@@ -66,7 +73,6 @@ const UserProfile = (props) => {
         }
 
         if( formData.new_password !== undefined ){
-
             if(formData.password !== undefined ){
 
                 if(String(formData.new_password) !== String(formData.repeat_new_password)){
@@ -87,6 +93,7 @@ const UserProfile = (props) => {
             }
         }
 
+        console.log('formData: ', formData);
         props.updateUser(formData);
     }
 
@@ -144,9 +151,9 @@ const UserProfile = (props) => {
                                         LabelTitle="First Name"
                                         TypeName="text"
                                         Name="first_name"
-                                        Value={user.first_name}
+                                        Value={formData.first_name}
                                         Placeholder="First Name"
-                                        callback={fromFileData}
+                                        handleOnChange = {handleOnChange}
                                       />
                                     </Col>
 
@@ -155,9 +162,9 @@ const UserProfile = (props) => {
                                         LabelTitle="Last Name"
                                         TypeName="text"
                                         Name="last_name"
-                                        Value={user.last_name}
+                                        Value={formData.last_name}
                                         Placeholder="Last Name"
-                                        callback={fromFileData}
+                                       handleOnChange = {handleOnChange}
                                       />
                                     </Col>
 
@@ -166,9 +173,9 @@ const UserProfile = (props) => {
                                         LabelTitle="Email Address"
                                         TypeName="email"
                                         Name="email"
-                                        Value={user.email}
+                                        Value={formData.email}
                                         Placeholder="Email Address"
-                                        callback={fromFileData}
+                                        handleOnChange = {handleOnChange}
                                       />
                                     </Col>
 
@@ -177,9 +184,9 @@ const UserProfile = (props) => {
                                         LabelTitle="Phone Number"
                                         TypeName="text"
                                         Name="phone"
-                                        Value={user.phone}
+                                        Value={formData.phone}
                                         Placeholder="Phone Number"
-                                        callback={fromFileData}
+                                       handleOnChange = {handleOnChange}
                                       />
                                     </Col>
 
@@ -193,7 +200,7 @@ const UserProfile = (props) => {
                                         TypeName="password"
                                         Name="password"
                                         Placeholder="Current Password"
-                                        callback={fromFileData}
+                                       handleOnChange = {handleOnChange}
                                       />
                                     </Col>
 
@@ -203,7 +210,7 @@ const UserProfile = (props) => {
                                         TypeName="password"
                                         Name="new_password"
                                         Placeholder="Create New Password"
-                                        callback={fromFileData}
+                                        handleOnChange = {handleOnChange}
                                       />
                                     </Col>
 
@@ -213,7 +220,7 @@ const UserProfile = (props) => {
                                         TypeName="password"
                                         Name="repeat_new_password"
                                         Placeholder="Repeat new password"
-                                        callback={fromFileData}
+                                       handleOnChange = {handleOnChange}
                                       />
                                     </Col>
 

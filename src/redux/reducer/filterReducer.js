@@ -9,6 +9,7 @@ const filterReducer = (state = [] , {type, payload}) => {
             case Types.GET_PUBLISHER_LIST:
             case Types.GET_PUBLISHING_YEAR_LIST:
             case Types.GET_LANGUAGE_LIST:
+            case Types.GET_BOOK_COVER_LIST:
                 return {
                     ...state,
                     ...payload

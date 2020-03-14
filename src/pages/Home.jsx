@@ -17,7 +17,7 @@ import  MobileHeader from "../components/header/MobileHeader";
 import  CategoryHome from "../components/HomePage/Category";
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
-import {fetchMaxMinPrice, fetchDiscipline, fetchAuthors, fetchPublishers, fetchPublishingYears, fetchLanguages} from '../redux/actions/filterAction';
+import {fetchMaxMinPrice, fetchDiscipline, fetchAuthors, fetchPublishers, fetchPublishingYears, fetchLanguages, fetchBookCovers} from '../redux/actions/filterAction';
 
 const Home = (props) => {
 
@@ -36,6 +36,7 @@ const Home = (props) => {
     props.getPublisherList();
     props.getPublishingYearList();
     props.getLanguageList();
+    props.getBookCoverList();
  },[])
 
   return (<>
@@ -160,7 +161,8 @@ const mapDispatchToProps = (dispatch)=> {
     getAuthorsList          : () => dispatch(fetchAuthors()),
     getPublisherList        : () => dispatch(fetchPublishers()),
     getPublishingYearList   : () => dispatch(fetchPublishingYears()),
-    getLanguageList         : () => dispatch(fetchLanguages())
+    getLanguageList         : () => dispatch(fetchLanguages()),
+    getBookCoverList        : () => dispatch(fetchBookCovers())
   }
 }
 
