@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect }from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Container, Row, Col, Card, Table} from 'react-bootstrap';
@@ -10,13 +10,17 @@ import './assets/css/user.css';
 import orderIcon from '../assets/images/order_icon.png'
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import MegaMenu from "../../components/MegaMenuComponents/MegaMenuComponent";
+import { getSubscriber } from '../../redux/actions/siteActions'
 
 const OrderPage = (props) => {
+  const { auth,subscriber } = props
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
 
   const orders = (props.orders)? props.orders : [];
-
+  useEffect(() => {
+    subscriber(auth.email)
+  },[])
   return (
     <>
       <PageLoader loading={props.favorite.pending} />
@@ -143,7 +147,13 @@ const OrderPage = (props) => {
 const mapStateToProps = state => ({
   cart: state.shop.cart,
   favorite: state.favorite,
-  orders: state.auth.user.order
+  orders: state.auth.user.order,
+  auth: state.auth.user,
 })
+const mapDispatchToProps = dispatch => {
+  return {
+    subscriber: (email) => dispatch(getSubscriber(email)),
+  }
+}
 
-export default connect(mapStateToProps , null)(OrderPage);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderPage);
