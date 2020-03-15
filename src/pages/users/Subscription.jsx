@@ -10,25 +10,33 @@ import { URL } from '../../constants/config'
 import { getSubscriber} from '../../redux/actions/siteActions'
 
 const Subscription = (props) => {
-  const { auth, subscriber} = props
-  const [subscription, setSubscription] = useState({ ...props.subscribeOption })
-  console.log(subscription)
+  const { auth, subscriber, pending, subscribeOption} = props
+  const [subscription, setSubscription] = useState({...subscribeOption})
   const [message, setMessage] = useState({ show: false, type: 'unknown', message: '' })
   
   useEffect(() => {
-    subscriber(auth.email)
-  }, [auth.email, subscriber, subscriber.announcement, subscription.unsubscribe, subscriber.sale_invitation,subscriber.weekly_newsletter])
-
-  useEffect(() => {
     if (subscription.unsubscribe) {
-       setSubscription({
+      setSubscription({
         announcement: false,
-        sale_invitation:false,
+        sale_invitation: false,
         weekly_newsletter: false,
         unsubscribe: true
-       })
+      })
     }
-  }, [subscription.unsubscribe])
+    subscriber(auth.email)
+    return () => {
+      subscriber(auth.email)
+      setSubscription({
+        announcement: false,
+        sale_invitation: false,
+        weekly_newsletter: false,
+        unsubscribe: true
+      })
+    }
+    
+  }, [auth.email, subscription.announcement])
+
+
   
   
 
@@ -58,10 +66,10 @@ const Subscription = (props) => {
 
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
-
+console.log(props)
   return (
     <>
-      <PageLoader loading={props.favorite.pending} />
+      <PageLoader loading={pending} />
       <div className="allWrapper">
         <HeaderComponent
           favorite_item={totalFavorite}
@@ -203,7 +211,8 @@ const mapStateToProps = state => ({
   cart: state.shop.cart,
   favorite: state.favorite,
   auth: state.auth.user,
-  subscribeOption: state.site.subscriber
+  subscribeOption: state.site.subscriber,
+  pending:state.site.pending
 })
 
 const mapDispatchToProps = (dispatch) => {

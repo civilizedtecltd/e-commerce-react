@@ -9,11 +9,11 @@ import  MobileHeader from "../../components/header/MobileHeader";
 import UserNav from "../../components/UserNav/UserNav";
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import './assets/css/user.css';
-
+import { getSubscriber } from '../../redux/actions/siteActions'
 
 const UserProfile = (props) => {
 
-  const { auth: { user }, favorite: { items }, cart, status: { message, success }, getUser } = props
+  const { auth: { user }, favorite: { items }, cart, status: { message, success }, getUser,subscriber } = props
 
     const [alert, setAlert] = useState({status: false, type: 'danger', message: ''});
     const [formData, setFormData] = useState({...user});
@@ -36,7 +36,7 @@ const UserProfile = (props) => {
         }
 
         getUser();
-
+       subscriber(user.email)
     }, [getUser, message, success]);
 
 
@@ -268,12 +268,14 @@ const mapStateToProps = state => ({
     auth: state.auth,
     status: state.auth.status,
     cart: state.shop.cart,
-    favorite: state.favorite
+    favorite: state.favorite,
+    
 })
 
 const mapDispatchToProps = dispatch => ({
     getUser: () => dispatch(getUser()),
-    updateUser: (info) => dispatch(update(info))
+    updateUser: (info) => dispatch(update(info)),
+    subscriber: (email) => dispatch(getSubscriber(email)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
