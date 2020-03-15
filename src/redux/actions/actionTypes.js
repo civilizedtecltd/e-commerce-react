@@ -60,6 +60,7 @@ export const GET_AUTHOR_LIST            = 'GET_AUTHOR_LIST';
 export const GET_PUBLISHER_LIST         = 'GET_PUBLISHER_LIST';
 export const GET_PUBLISHING_YEAR_LIST   = 'GET_PUBLISHING_YEAR_LIST';
 export const GET_LANGUAGE_LIST          = 'GET_LANGUAGE_LIST';
+export const GET_BOOK_COVER_LIST        = 'GET_BOOK_COVER_LIST';
 
 
 //fetching action

@@ -17,6 +17,7 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 
 const useStyle = createUseStyles({page_field: {width: "50px",marginRight: "5px",marginLeft: "5px"}});
+
 const ShopPage = props => {
   const classes = useStyle();
   const { id, title, showItem, pageNumber, keyword, filter_type, filter_id } = useParams();
@@ -54,13 +55,13 @@ const ShopPage = props => {
   const PriceRange = (minPrice, maxPrice) => setPriceFilter({higherPrice:maxPrice,lowerPrice:minPrice})
 
   const handleShowBook = e => setPagination({...pagination, show:e.target.value});
-  
+
   const handleNext = () => (pagination.page <= totalPage) ? setPagination({ ...pagination, page: pagination.page + 1 }) : pagination;
 
   const handlePreviews =()=> (pagination.page !== 1 || pagination > 0) ? setPagination({ ...pagination, page: pagination.page - 1 }) : pagination;
-  
+
   const handleSortBy = e=> setSortBy(e.target.value);
-  
+
 
   return (
     <>
