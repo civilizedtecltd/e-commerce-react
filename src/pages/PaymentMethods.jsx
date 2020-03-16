@@ -21,6 +21,8 @@ import amex from '../assets/images/payment/amex.png'
 import visa_master from '../assets/images/payment/visa_master_cart.png'
 import Paypal from '../assets/images/payment/paypal.png'
 import Mpesa from '../assets/images/payment/mpesa.png'
+import Discover from '../assets/images/payment/Discover.jpg'
+import UnionPay from '../assets/images/payment/UnionPay_logo.svg'
 
 import './assets/paymentbar.css';
 
@@ -115,26 +117,38 @@ const PaymentMethods = (props) => {
                 </Tab>
                 <Tab eventKey="payPal" title={<Image src={Paypal} />}>
                         <div className="paypalTitle">
-                            <p>After payment via PayPal's secure checkout, we will sed youj  a link to download your files.</p>
+                            <p>After payment via PayPal's secure checkout, we will send you a link to download your files.</p>
                         </div> 
-                            <input type="radio" className="radio_item" value="paypal" name="item" id="radio1" 
-                            onChange={()=> setChecked({paypal:!check.paypal})} onClick={paymentMethodSelect} checked={ check.paypal ? true : false }/>
-                            <label className="label_item" htmlFor="radio1"> <img src={paypal_icon} alt="paypal icon"/></label>
-
-                            {/*  */}
+                        <div className="card-area">
+                            <div className="payment-title"> <h4>PayPal accepts</h4> </div>
+                            <div className="payment-card-section">
+                                {/* visa */}
                             <input type="radio" className="radio_item" value="visa" name="item" id="radio2" 
                             onChange={()=>setChecked({visa:!check.visa})} onClick={paymentMethodSelect} checked={ check.visa ? true : false } />
                             <label className="label_item" htmlFor="radio2"> <img src={visa} alt="visa-icon" /> </label>
+                            
+                            {/* master */}
+                            <input type="radio" className="radio_item" value="master" name="item" id="radio4" 
+                            onChange={()=>setChecked({master:!check.master})} onClick={paymentMethodSelect} checked={ check.master ? true : false } />
+                            <label className="label_item" htmlFor="radio4"> <img src={master_card} alt="master-card" /></label>
 
-                            {/*  */}
+                            {/* amex */}
                             <input type="radio" className="radio_item" value="amex" name="item" id="radio3" 
                             onChange={()=>setChecked({amex:!check.amex})}  onClick={paymentMethodSelect} checked={ check.amex ? true : false }/>
                             <label className="label_item" htmlFor="radio3"><img src={amex} alt="american-express" /></label>
 
-                            {/*  */}
-                            <input type="radio" className="radio_item" value="master" name="item" id="radio4" 
-                            onChange={()=>setChecked({master:!check.master})} onClick={paymentMethodSelect} checked={ check.master ? true : false } />
-                            <label className="label_item" htmlFor="radio4"> <img src={master_card} alt="master-card" /></label>
+                            {/* Discover */}
+                            <input type="radio" className="radio_item" value="Discover" name="item" id="radio1" 
+                            onChange={()=> setChecked({paypal:!check.paypal})} onClick={paymentMethodSelect} checked={ check.paypal ? true : false }/>
+                            <label className="label_item" htmlFor="radio1"> <img src={Discover} alt="paypal icon"/></label>
+
+                            {/* UnionPay */}
+                            <input type="radio" className="radio_item" value="UnionPay" name="item" id="radio1" 
+                            onChange={()=> setChecked({paypal:!check.paypal})} onClick={paymentMethodSelect} checked={ check.paypal ? true : false }/>
+                            <label className="label_item" htmlFor="radio1"> <img src={UnionPay} alt="paypal icon"/></label>
+                            </div>
+                        </div>
+                           
                          
                 </Tab>
                 <Tab eventKey="mpeg" title={<Image src={Mpesa}  />} disabled>
