@@ -60,7 +60,7 @@ const ShopPage = props => {
 
   const handlePreviews =()=> (pagination.page !== 1 || pagination > 0) ? setPagination({ ...pagination, page: pagination.page - 1 }) : pagination;
 
-  const handleSortBy = e=> setSortBy(e.target.value);
+  const handleSortBy = e => setSortBy(e.target.value);
 
 
   return (

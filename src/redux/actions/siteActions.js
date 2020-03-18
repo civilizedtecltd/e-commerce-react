@@ -15,18 +15,35 @@ export const fetchCategoryList = () => dispatch => {
 };
 
 
-export const getSubscriber = (email) => dispatch => {
+export const getSubscriptions = (email) => dispatch => {
     dispatch(fetchPending())
-    axios.get(URL.__SUBSCRIBER(email)).then(res => {
-        dispatch({
-            type: Types.GET_SUBSCRIBER,
-            payload: res.data.data,
-            pending:false
+    axios.get(URL.__GET_SUBSCRIPTIONS(email))
+        .then(res => {
+            dispatch({
+                type: Types.GET_SUBSCRIPTIONS,
+                payload: res.data.data,
+                pending:false
+            })
+        }).catch(error => {
+            console.log(error)
         })
-        
-    }).catch(error => {
-        console.log(error)
-    })
+}
+
+export const setSubscriptions = (options) => dispatch => {
+    axios.post(URL.__SET_SUBSCRIPTIONS, options)
+         .then(res => dispatch({
+                type: Types.SET_SUBSCRIPTIONS,
+                payload: {
+                    ...res.data.data,
+                    message: res.data.message
+                }
+         }))
+         .catch(error => dispatch({
+                type: Types.SET_SUBSCRIPTIONS_ERROR,
+                payload: {
+                    message: error.response.data.message
+                }
+         }))
 }
 
 
