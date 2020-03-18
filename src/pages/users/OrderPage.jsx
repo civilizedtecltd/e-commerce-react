@@ -10,16 +10,16 @@ import './assets/css/user.css';
 import orderIcon from '../assets/images/order_icon.png'
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import MegaMenu from "../../components/MegaMenuComponents/MegaMenuComponent";
-import { getSubscriber } from '../../redux/actions/siteActions'
+import { getSubscriptions } from '../../redux/actions/siteActions'
 
 const OrderPage = (props) => {
-  const { auth,subscriber } = props
+  const { auth, subscriptions } = props;
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
 
   const orders = (props.orders)? props.orders : [];
   useEffect(() => {
-    subscriber(auth.email)
+    subscriptions(auth.email)
   },[])
   return (
     <>
@@ -152,7 +152,7 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = dispatch => {
   return {
-    subscriber: (email) => dispatch(getSubscriber(email)),
+    subscriptions : (email) => dispatch(getSubscriptions(email)),
   }
 }
 
