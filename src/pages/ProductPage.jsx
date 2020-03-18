@@ -49,12 +49,12 @@ function ProductPage(props) {
     const { id } = useParams();
     const [show, setShow] = useState(false);
     const [quantity, setQuantity] = useState(1);
-    
+
     useEffect(() => {
       window.scrollTo(0, 0);
       showSingleBook(id);
       getDeliveryMethods()
-      
+
     }, [id, getDeliveryMethods, showSingleBook]);
 
 
@@ -65,7 +65,7 @@ function ProductPage(props) {
            return itemQty = Number(item.quantity)
         }
     })
-    
+
     const favoriteItem = favorite.items;
     const isFavoriteItem = favoriteItem.find(fav=> fav.id === Number(id))
 
@@ -208,7 +208,7 @@ function ProductPage(props) {
                             stage           : book.book_stage.stage,
                             publisher       : book.book_publisher.name,
                             publishing_year : book.book_publishing_year.name,
-                            book_cover      : book.book_cover,
+                            book_covers     : book.book_covers.name,
                             language        : book.book_language.name,
                             page_number     : book.page_number
 

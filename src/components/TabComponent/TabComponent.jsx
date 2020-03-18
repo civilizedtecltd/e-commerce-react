@@ -39,10 +39,10 @@ function TabComponent(props) {
         }else{
           postReview(reviewInfo)
           setNewReview({ reviewer_rating: 0, comment: '' });
-      } 
+      }
     }
 
-  
+
 
 
     return props.description === undefined ||
@@ -89,7 +89,7 @@ function TabComponent(props) {
               </li>
               <li>
                 <strong>Book cover : </strong>
-                {spec.book_cover !== undefined ? spec.book_cover : ``}
+                {spec.book_covers !== undefined ? spec.book_covers : ``}
               </li>
               <li>
                 <strong>Language : </strong>
