@@ -86,10 +86,16 @@ const update = (info) => dispatch => {
     axios.post(URL._USER_UPDATE, info)
          .then(res => dispatch({
              type: Types.USER_UPDATE,
-             payload: { ...res.data.data}
+             payload: {
+                 user: { ...res.data.data },
+                 status: {
+                    success: true,
+                    message: res.data.messages
+                 }
+             }
          }))
          .catch(error => {
-            const response = (error.response.data) ? error.response.data :  '';
+            const response = (error.response) ? error.response.data :  {messages: 'Unknown Error!'};
             return dispatch({
                 type: Types.USER_UPDATE_ERROR,
                 payload: {
