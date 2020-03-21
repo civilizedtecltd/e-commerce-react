@@ -80,8 +80,7 @@ const getUser = () => dispatch => {
          .catch(error => console.log(error))
 }
 
-const update = (info) => dispatch => {
-    console.log('update userInfo: ', info);
+const update = (info) => dispatch => {    
     setAuthToken();
     axios.post(URL._USER_UPDATE, info)
          .then(res => dispatch({
@@ -259,7 +258,7 @@ export const OauthSignUp = (OauthData) => dispatch => {
     }).catch(error => {
         dispatch({
             type: Types.SIGNUP_ERROR,
-            payload: error.response.data
+            payload: (typeof error.response !== undefined ) ? error.response.data : ''
         })
         setTimeout(() => {
             dispatch({

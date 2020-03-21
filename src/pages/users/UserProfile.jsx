@@ -56,7 +56,7 @@ const UserProfile = (props) => {
     //console.log('form data: ', formData);
 
     const handleOnChange = (e) => {
-        e.preventDefault();
+        e.preventDefault();        
         setFormData({
             ...formData,
             [e.target.name] : e.target.value
@@ -100,8 +100,7 @@ const UserProfile = (props) => {
                 return () =>  clearTimeout(clearAlert);
             }
         }
-
-        console.log('formData: ', formData);
+                
         props.updateUser(formData);
     }
 
@@ -207,6 +206,7 @@ const UserProfile = (props) => {
                                         LabelTitle="Current Password"
                                         TypeName="password"
                                         Name="password"
+                                        Value={formData.password}
                                         Placeholder="Current Password"
                                        handleOnChange = {handleOnChange}
                                       />
@@ -217,6 +217,7 @@ const UserProfile = (props) => {
                                         LabelTitle="Create New Password"
                                         TypeName="password"
                                         Name="new_password"
+                                        Value={formData.new_password}
                                         Placeholder="Create New Password"
                                         handleOnChange = {handleOnChange}
                                       />
@@ -227,6 +228,7 @@ const UserProfile = (props) => {
                                         LabelTitle="Repeat new password"
                                         TypeName="password"
                                         Name="repeat_new_password"
+                                        Value={formData.repeat_new_password}
                                         Placeholder="Repeat new password"
                                        handleOnChange = {handleOnChange}
                                       />
