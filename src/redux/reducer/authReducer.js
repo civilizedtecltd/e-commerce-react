@@ -13,16 +13,20 @@ const authReducer = (state = initState, {type, payload}) => {
         case Types.USER_LOGOUT:
         case Types.USER_LOGIN_ERROR:
         case Types.AUTH_NOT_IN_STATE:
-        case Types.EMPTY_STATUS:    
+        case Types.EMPTY_STATUS:
             return {
                 ...state,
                 ...payload
             }
         case Types.USER_INFO:
+            return {
+                ...state,
+                user: { ...payload }
+            }
         case Types.USER_UPDATE:
             return {
                 ...state,
-                user: {...payload}
+                ...payload
             }
         case Types.USER_UPDATE_ERROR:
             return {

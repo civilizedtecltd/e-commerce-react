@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect  } from 'react-redux';
-import {getUser, update} from '../../redux/actions/authActions';
+import {getUser, update, emptyStatus} from '../../redux/actions/authActions';
 import isEmpty from 'lodash/isEmpty';
 import {Container, Row, Col, Card, Form, Button, Alert} from 'react-bootstrap';
 import { InputFrom, SelectFrom } from '../../components/FromComponents/inputComponent2';
@@ -13,7 +13,7 @@ import { getSubscriptions } from '../../redux/actions/siteActions'
 
 const UserProfile = (props) => {
 
-  const { auth: { user }, favorite: { items }, cart, status: { message, success }, getUser, subscriptions } = props
+  const { auth: { user }, favorite: { items }, cart, status: { message, success }, getUser, subscriptions } = props;
 
     const [alert, setAlert] = useState({status: false, type: 'danger', message: ''});
     const [formData, setFormData] = useState({...user});
@@ -23,13 +23,21 @@ const UserProfile = (props) => {
     useEffect(() => {
 
         const clearAlert = setTimeout(() => {
+            props.removeStatus();
             setAlert({status: false, message:''});
         }, 5000);
 
-        if(!success){
+        if(typeof success !== undefined && success === false){
             setAlert({
                 status: true,
                 type: 'danger',
+                message: message
+            });
+            return () =>  clearTimeout(clearAlert);
+        }else if(typeof success !== undefined && success === true){
+            setAlert({
+                status: true,
+                type: 'success',
                 message: message
             });
             return () =>  clearTimeout(clearAlert);
@@ -48,7 +56,7 @@ const UserProfile = (props) => {
     //console.log('form data: ', formData);
 
     const handleOnChange = (e) => {
-        e.preventDefault();
+        e.preventDefault();        
         setFormData({
             ...formData,
             [e.target.name] : e.target.value
@@ -92,8 +100,7 @@ const UserProfile = (props) => {
                 return () =>  clearTimeout(clearAlert);
             }
         }
-
-        console.log('formData: ', formData);
+                
         props.updateUser(formData);
     }
 
@@ -199,6 +206,7 @@ const UserProfile = (props) => {
                                         LabelTitle="Current Password"
                                         TypeName="password"
                                         Name="password"
+                                        Value={formData.password}
                                         Placeholder="Current Password"
                                        handleOnChange = {handleOnChange}
                                       />
@@ -209,6 +217,7 @@ const UserProfile = (props) => {
                                         LabelTitle="Create New Password"
                                         TypeName="password"
                                         Name="new_password"
+                                        Value={formData.new_password}
                                         Placeholder="Create New Password"
                                         handleOnChange = {handleOnChange}
                                       />
@@ -219,6 +228,7 @@ const UserProfile = (props) => {
                                         LabelTitle="Repeat new password"
                                         TypeName="password"
                                         Name="repeat_new_password"
+                                        Value={formData.repeat_new_password}
                                         Placeholder="Repeat new password"
                                        handleOnChange = {handleOnChange}
                                       />
@@ -275,6 +285,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     getUser         : () => dispatch(getUser()),
     updateUser      : (info) => dispatch(update(info)),
+    removeStatus    : () => dispatch(emptyStatus()),
     subscriptions   : (email) => dispatch(getSubscriptions(email)),
 })
 
