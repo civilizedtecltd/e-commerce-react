@@ -11,21 +11,22 @@ import { getSubscriptions, setSubscriptions } from '../../redux/actions/siteActi
 
 const Subscription = (props) => {
 
-  const { auth, subscriptions, pending, subscribeOption} = props
-  const [subscription, setSubscription] = useState({...subscribeOption})
+  const { auth, AllSubscriptions, pending, subscribeOption} = props
   const [updated, setUpdated] = useState(false)
   const [message, setMessage] = useState({ show: false, type: 'unknown', message: '' })
 
+  const subscription = { ...subscribeOption}
+
   useEffect(() => {
     (async function(){
-        subscriptions(auth.email);
+      AllSubscriptions(auth.email);
     })();
   }, [auth.email, updated])
 
   const handleChange = (e) => {
 
     if((e.target.name === 'unsubscribe') && (e.target.checked)){
-        return setSubscription({
+        return props.setSubscriptions({
             announcement       : false,
             sale_invitation    : false,
             weekly_newsletter  : false,
@@ -33,7 +34,8 @@ const Subscription = (props) => {
         })
     }
 
-    setSubscription({ ...subscription, [e.target.name]: e.target.checked })
+    //setSubscription({ ...subscription, [e.target.name]: e.target.checked })
+    props.setSubscriptions({ ...subscription, [e.target.name]: e.target.checked })
   }
 
   const handleSubmit = async(e) => {
@@ -222,7 +224,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    subscriptions       : (email) => dispatch(getSubscriptions(email)),
+    AllSubscriptions       : (email) => dispatch(getSubscriptions(email)),
     setSubscriptions    : (options)  => dispatch(setSubscriptions(options))
   }
 }

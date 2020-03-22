@@ -29,8 +29,8 @@ export const getSubscriptions = (email) => dispatch => {
         })
 }
 
-export const setSubscriptions = (options) => dispatch => {
-    axios.post(URL.__SET_SUBSCRIPTIONS, options)
+export const setSubscriptions = (options) => {
+    /* axios.post(URL.__SET_SUBSCRIPTIONS, options)
          .then(res => dispatch({
                 type: Types.SET_SUBSCRIPTIONS,
                 payload: {
@@ -43,7 +43,12 @@ export const setSubscriptions = (options) => dispatch => {
                 payload: {
                     message: error.response.data.message
                 }
-         }))
+         })) */
+
+    return {
+        type: Types.SET_SUBSCRIPTIONS,
+        payload: { ...options }
+    }     
 }
 
 
