@@ -18,7 +18,7 @@ const Subscription = (props) => {
   const subscription = { ...subscribeOption}
 
   useEffect(() => {
-    (async function(){
+    (async function(){      
       AllSubscriptions(auth.email);
     })();
   }, [auth.email, updated])

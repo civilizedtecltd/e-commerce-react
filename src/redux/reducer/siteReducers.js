@@ -10,6 +10,7 @@ const siteReducers = (state = { pending:false }, actions) => {
             }
         case Types.FETCH_ALL_CATEGORY:
             return {
+                ...state,
                 categories: payload
             }
         case Types.SITE_NOT_IN_STATE:
