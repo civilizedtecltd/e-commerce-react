@@ -59,6 +59,7 @@ function ProductPage(props) {
 
 
   let itemQty = quantity;
+  
   const handleClose = () => setShow(false);
     cart.map(item => {
         if(item.id === Number(id)){
