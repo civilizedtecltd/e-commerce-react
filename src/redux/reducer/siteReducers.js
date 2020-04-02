@@ -10,6 +10,7 @@ const siteReducers = (state = { pending:false }, actions) => {
             }
         case Types.FETCH_ALL_CATEGORY:
             return {
+                ...state,
                 categories: payload
             }
         case Types.SITE_NOT_IN_STATE:
@@ -17,17 +18,27 @@ const siteReducers = (state = { pending:false }, actions) => {
                 ...state,
                 ...payload,
             }
-        
-        case Types.GET_SUBSCRIBER:
+
+        case Types.GET_SUBSCRIPTIONS:
             return {
                 ...state,
-                subscriber: payload,
+                subscriptions: payload,
                 pending:false
+            }
+        case Types.SET_SUBSCRIPTIONS:
+            return {
+                ...state,
+                subscriptions: payload,
+            }
+        case Types.SET_SUBSCRIPTIONS_ERROR:
+            return {
+                ...state,
+                subscriptions: payload
             }
         case Types.NOT_STATE_SUBSCRIBER:
             return {
                 ...state,
-                subscriber: payload,
+                subscriptions: payload,
                 pending:false
             }
         default:

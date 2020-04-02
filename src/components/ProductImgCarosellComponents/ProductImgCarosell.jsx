@@ -27,10 +27,13 @@ function ImageCarousel(props) {
         if(props.images){
             const images = [];
 
-            images.push(`${props.images.img_1}`);
-            images.push(`${props.images.img_2}`);
-            images.push(`${props.images.img_3}`);
-
+            if(props.images.img_1 !== undefined)
+                images.push(`${props.images.img_1}`);
+            if(props.images.img_2 !== undefined)                    
+                images.push(`${props.images.img_2}`);
+            if(props.images.img_3 !== undefined)                        
+                images.push(`${props.images.img_3}`);
+            
             setImages([...images]);
             setCoverImage(images[0]);
         }

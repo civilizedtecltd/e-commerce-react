@@ -33,6 +33,8 @@ const checkJwtToken =  () => {
             const { exp } = decode(jwt.token);
             const currentTime = new Date().getTime()/1000;
             const remainingTime = exp - currentTime;
+            
+            //console.log('remaining time: ', remainingTime);
 
              if( remainingTime <= 10 ){
                  store.dispatch(login({refreshToken: jwt.refreshToken}))

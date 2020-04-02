@@ -1,21 +1,26 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import book_cover from "../../inc/shop/book_cover";
 import {LiSpan} from "../LiComponent/CommonLiComponent";
 
-const BookCover = () => {
+const BookCover = (props) => {
     return (
         <div>
-            {book_cover.map((data, index) => (
+            {props.book_covers.map((data, index) => (
                 <LiSpan
 
                     key={index}
-                    Url={data.url}
+                    Url={`/shop/filter/category/book-covers/${data.id}`}
                     itemName={data.name}
-                    Value={data.value}
+                    Value={data.total_books}
                 />)
             )}
         </div>
     );
 };
 
-export default BookCover;
+const mapStateToProps = (state) => ({
+    book_covers: state.filter.book_covers
+})
+
+export default connect(mapStateToProps, null)(BookCover);

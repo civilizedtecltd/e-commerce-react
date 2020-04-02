@@ -7,66 +7,74 @@ import UserNav from "../../components/UserNav/UserNav";
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import axios from 'axios'
 import { URL } from '../../constants/config'
-import { getSubscriber} from '../../redux/actions/siteActions'
+import { getSubscriptions, setSubscriptions } from '../../redux/actions/siteActions'
 
 const Subscription = (props) => {
-  const { auth, subscriber, pending, subscribeOption} = props
-  const [subscription, setSubscription] = useState({...subscribeOption})
+
+  const { auth, AllSubscriptions, pending, subscribeOption} = props
+  const [updated, setUpdated] = useState(false)
   const [message, setMessage] = useState({ show: false, type: 'unknown', message: '' })
-  
+
+  const subscription = { ...subscribeOption}
+
   useEffect(() => {
-    if (subscription.unsubscribe) {
-      setSubscription({
-        announcement: false,
-        sale_invitation: false,
-        weekly_newsletter: false,
-        unsubscribe: true
-      })
+    (async function(){      
+      AllSubscriptions(auth.email);
+    })();
+  }, [auth.email, updated])
+
+  const handleChange = (e) => {
+
+    if((e.target.name === 'unsubscribe') && (e.target.checked)){
+        return props.setSubscriptions({
+            announcement       : false,
+            sale_invitation    : false,
+            weekly_newsletter  : false,
+            unsubscribe        : true
+        })
     }
-    subscriber(auth.email)
-    return () => {
-      subscriber(auth.email)
-      setSubscription({
-        announcement: false,
-        sale_invitation: false,
-        weekly_newsletter: false,
-        unsubscribe: true
-      })
-    }
-    
-  }, [auth.email, subscription.announcement])
 
+    //setSubscription({ ...subscription, [e.target.name]: e.target.checked })
+    props.setSubscriptions({ ...subscription, [e.target.name]: e.target.checked })
+  }
 
-  
-  
-
-  const handleChange = (e) => setSubscription({ ...subscription, [e.target.name]: e.target.checked })
-  
   const handleSubmit = async(e) => {
+
     e.preventDefault();
-    axios.post(URL._UPDATE_SUBSCRIBER, {
+
+    axios.post(URL.__SET_SUBSCRIPTIONS, {
+
       email: auth.email,
       subscriber_id: auth.id,
       announcement: subscription.announcement,
       sale_invitation: subscription.sale_invitation,
       weekly_newsletter: subscription.weekly_newsletter,
       unsubscribe: subscription.unsubscribe
+
      }).then(res => {
-       setMessage({ show: true, type: 'success', message: res.data.message }) 
+
+       setMessage({ show: true, type: 'success', message: res.data.message });
+       setUpdated(true);
        setTimeout(() => {
-         setMessage({ show: false, type: 'unknown', message: '' }) 
+         setMessage({ show: false, type: 'unknown', message: '' })
        }, 5000);
+
     }).catch(error => {
-      setMessage({ show: true, type: 'danger', message: error.response.data.message })
-      setTimeout(() => {
-        setMessage({ show: false, type: 'unknown', message: '' })
-      }, 5000);
+
+      if(error.response){
+          setMessage({ show: true, type: 'danger', message: error.response.data.message });
+          setUpdated(false);
+          setTimeout(() => {
+            setMessage({ show: false, type: 'unknown', message: '' })
+          }, 5000);
+      }
     })
+
   }
 
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
-console.log(props)
+
   return (
     <>
       <PageLoader loading={pending} />
@@ -197,7 +205,6 @@ console.log(props)
                   </section>
                 </main>
               </Col>
-             
             </Row>
           </Container>
         </div>
@@ -208,16 +215,17 @@ console.log(props)
 
 
 const mapStateToProps = state => ({
-  cart: state.shop.cart,
-  favorite: state.favorite,
-  auth: state.auth.user,
-  subscribeOption: state.site.subscriber,
-  pending:state.site.pending
+  cart              : state.shop.cart,
+  favorite          : state.favorite,
+  auth              : state.auth.user,
+  subscribeOption   : state.site.subscriptions,
+  pending           : state.site.pending
 })
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    subscriber: (email) => dispatch(getSubscriber(email)),
+    AllSubscriptions       : (email) => dispatch(getSubscriptions(email)),
+    setSubscriptions    : (options)  => dispatch(setSubscriptions(options))
   }
 }
 

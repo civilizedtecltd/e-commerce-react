@@ -22,7 +22,7 @@ import UserNav from "../../components/UserNav/UserNav";
 import AddPaymentMethod from "../../components/paymentMethodComponent/AddPaymentMethod";
 import "./assets/css/user.css";
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
-import { getSubscriber } from '../../redux/actions/siteActions'
+import { getSubscriptions } from '../../redux/actions/siteActions'
 
 const PaymentPage = props => {
   const {auth} = props
@@ -52,7 +52,7 @@ const PaymentPage = props => {
   };
 
   const handleClose = () => setCardAlert(false);
-  
+
   const handleShow = e => {
     e.preventDefault();
     setCardId(e.target.id);
@@ -67,7 +67,7 @@ const PaymentPage = props => {
       yy:year,
       ccv: cvv,
     });
-    props.subscriber(auth.email)
+    props.subscriptions(auth.email)
   }, [cardNumber,card_id, year, month, cvv]);
 
   const updatePaymentMethod = e => {
@@ -395,16 +395,16 @@ const PaymentPage = props => {
 };
 
 const mapStateToProps = state => ({
-  cart: state.shop.cart,
-  favorite: state.favorite,
-  payment: state.auth.user.payment,
-  auth: state.auth.user,
+  cart      : state.shop.cart,
+  favorite  : state.favorite,
+  payment   : state.auth.user.payment,
+  auth      : state.auth.user
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteCard: id => dispatch(deletePayment(id)),
-  update: data => dispatch(updatePaymentMethod(data)),
-  subscriber: (email) => dispatch(getSubscriber(email)),
+  deleteCard    : id => dispatch(deletePayment(id)),
+  update        : data => dispatch(updatePaymentMethod(data)),
+  subscriptions : (email) => dispatch(getSubscriptions(email)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentPage);

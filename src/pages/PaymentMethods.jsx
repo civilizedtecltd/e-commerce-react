@@ -98,7 +98,10 @@ const PaymentMethods = (props) => {
             case 'visa':
             case 'amex':
             case 'master':
-                window.alert('Currently this payment method is not supported!.');
+                    window.alert('Currently this payment method is not supported!.');
+                break;
+            default:
+                window.alert('Currently this payment method is not supported!.');    
         }
     }
 
@@ -117,7 +120,7 @@ const PaymentMethods = (props) => {
                 </Tab>
                 <Tab eventKey="payPal" title={<Image src={Paypal} />}>
                         <div className="paypalTitle">
-                            <p>After payment via PayPal's secure checkout, we will send you a link to download your files.</p>
+                            <p>You can pay by following cards through paypal.</p>
                         </div> 
                         <div className="card-area">
                             <div className="payment-title"> <h4>PayPal accepts</h4> </div>
