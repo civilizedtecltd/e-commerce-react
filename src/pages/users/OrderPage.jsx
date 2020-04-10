@@ -20,7 +20,7 @@ const OrderPage = (props) => {
   const orders = (props.orders)? props.orders : [];
   useEffect(() => {
     subscriptions(auth.email)
-  },[])
+  },[auth.email, subscriptions])
   return (
     <>
       <PageLoader loading={props.favorite.pending} />

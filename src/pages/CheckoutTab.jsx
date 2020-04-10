@@ -29,11 +29,12 @@ const CheckoutTab = (props) => {
         terms: false,
         policy: false
     });
+   
+    const paymentDetails = props.payment;
+    console.log('paymentDetails from props: ', paymentDetails);
 
-    const [paymentDetails, setPaymentDetails] = useState({});
-
-    const deliveryCost = (paymentDetails.paymentData) ? paymentDetails.paymentData.price : props.delivery[0].price;
-    const deliveryTime = (paymentDetails.paymentData) ? paymentDetails.paymentData.delivery_time : props.delivery[0].delivery_time;
+    const deliveryCost = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.price : props.delivery[0].price;
+    const deliveryTime = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.delivery_time : props.delivery[0].delivery_time;
     const currencyExchangeRate = (props.currencyRate) ? props.currencyRate.kes : 1;
     const total_cost_in_usd = Math.ceil(props.costWithDelivery/currencyExchangeRate);
 
@@ -107,13 +108,15 @@ const CheckoutTab = (props) => {
     }
 
     const getPaymentDetails = (data) => {
-        // console.log("getPaymentDetails: ", data);
-        props.getPaymentMethod(data);
-        setPaymentDetails({
+        console.log("getPaymentDetails: ", data);
+        props.getPaymentMethod(data);               
+        props.setPayment({
+            ...paymentDetails, 
             ...data
-        })
+        });
     }
 
+    
     const confirmOrder = (paymentInfo) => {
 
         const books = [];
@@ -148,16 +151,20 @@ const CheckoutTab = (props) => {
         setShow(true);
     }
 
-    const onSuccess = paypalInfo => confirmOrder(paypalInfo);     
+    const payPalOnSuccess = paypalInfo => confirmOrder(paypalInfo);     
 
-    const onCancel = data => {
+    const payPalOnCancel = data => {
         // console.log('The payment was cancelled',data)
         return window.location.href = data.cancelUrl
     }
 
-
-    const onError = err => {
+    const payPalOnError = err => {
         console.log('Error',err)
+    }
+
+    const mpesaOnCheckout = (e) => {
+        e.preventDefault();
+        console.log('mPesa Checkout ....');
     }
 
     return(
@@ -331,15 +338,25 @@ const CheckoutTab = (props) => {
                                 <Row className="form-group mt-5">
                                     <div className="col-12 d-flex justify-content-between">
                                         <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
-                                        <PaypalExpressBtn
-                                            env       = {paypalConfig.env}
-                                            client    = {paypalConfig.client}
-                                            currency  = {paypalConfig.currency}
-                                            total     = {total_cost_in_usd}
-                                            onError   = {onError}
-                                            onSuccess = {onSuccess}
-                                            onCancel  = {onCancel}
-                                        />
+                                        {(()=>{
+                                            switch(paymentDetails.method){
+                                                case 'payPal':
+                                                    return <PaypalExpressBtn
+                                                                env       = {paypalConfig.env}
+                                                                client    = {paypalConfig.client}
+                                                                currency  = {paypalConfig.currency}
+                                                                total     = {total_cost_in_usd}
+                                                                onError   = {payPalOnError}
+                                                                onSuccess = {payPalOnSuccess}
+                                                                onCancel  = {payPalOnCancel}
+                                                            />
+                                                case 'mpesa':
+                                                    return <Button onClick={mpesaOnCheckout}>Checkout</Button>;
+                                                default:
+                                                    return null;        
+                                            }
+                                        })()}
+                                        
                                     </div>
                                 </Row>
 
