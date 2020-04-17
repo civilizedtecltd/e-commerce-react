@@ -141,8 +141,10 @@ const confirmOrder = (data) => dispatch => {
          })
          .catch(error => {
              console.log(error.response)
+            
          })
 }
+
 
 const authNotInState = (authData) => ({
     type: Types.AUTH_NOT_IN_STATE,
@@ -171,6 +173,7 @@ const updatePaymentMethod = (data) => dispatch => {
 
 export const OauthLogin = (OauthData) => dispatch => {
     removeAuthToken();
+    console.log(OauthData)
     axios.post(URL.__OAUTH('login'), {
         email: OauthData.email ? OauthData.email : OauthData.zu || OauthData.Au
     })
@@ -296,5 +299,5 @@ export {
   setPayment,
   deletePayment,
   confirmOrder,
-  updatePaymentMethod,
+  updatePaymentMethod,  
 };

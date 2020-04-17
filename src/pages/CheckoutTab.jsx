@@ -31,12 +31,12 @@ const CheckoutTab = (props) => {
     });
    
     const paymentDetails = props.payment;
-    console.log('paymentDetails from props: ', paymentDetails);
+    
 
-    const deliveryCost = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.price : props.delivery[0].price;
-    const deliveryTime = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.delivery_time : props.delivery[0].delivery_time;
-    const currencyExchangeRate = (props.currencyRate) ? props.currencyRate.kes : 1;
-    const total_cost_in_usd = Math.ceil(props.costWithDelivery/currencyExchangeRate);
+    const deliveryCost              = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.price : props.delivery[0].price;
+    const deliveryTime              = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.delivery_time : props.delivery[0].delivery_time;
+    const currencyExchangeRate      = (props.currencyRate) ? props.currencyRate.kes : 1;
+    const total_cost_in_usd         = Math.ceil(props.costWithDelivery/currencyExchangeRate);
 
     const handleNext = () => {
 
@@ -163,8 +163,24 @@ const CheckoutTab = (props) => {
     }
 
     const mpesaOnCheckout = (e) => {
-        e.preventDefault();
-        console.log('mPesa Checkout ....');
+        const books = [];
+
+        props.cart.map(item => {
+            return books.push({
+                    id: item.id,
+                    quantity: item.quantity
+                });
+        });
+
+        const promoId = (props.promo) ? props.promo.id : null;
+
+        props.confirmOrder({
+            address: formData,
+            payment: {method: paymentDetails.method, info: {mpesa_number: paymentDetails.mpesa_number, price: props.costWithDelivery}},
+            delivery: paymentDetails.delivery,
+            books,
+            promo: promoId
+        });
     }
 
     return(

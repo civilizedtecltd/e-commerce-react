@@ -46,6 +46,7 @@ export const FAVORITE_NOT_IN_STATE      =   'FAVORITE_NOT_IN_STATE';
 export const SET_ADDRESS_DETAILS        =   'SET_ADDRESS_DETAILS';
 export const SET_PAYMENT_DETAILS        =   'SET_PAYMENT_DETAILS';
 export const CONFIRM_ORDER              =   'CONFIRM_ORDER';
+export const CONFIRM_ORDER_ERROR        =   'CONFIRM_ORDER_ERROR';
 
 //Search action types
 
