@@ -44,12 +44,11 @@ const CheckoutPage = (props) => {
   let costWithDelivery = parseFloat(promoPrice) + parseFloat(delivery_cost);
 
   useEffect(() => {
-    props.getUser();
-    //props.deliveryMethodFetch();
+    props.getUser();    
   }, []);
 
   const getPaymentMethod = (paymentMethod) => {
-    setDeliveryCost(paymentMethod.paymentData.price);
+    setDeliveryCost(paymentMethod.deliveryInfo.price);
   }
 
   return (
@@ -61,7 +60,7 @@ const CheckoutPage = (props) => {
           <Row>
             <Col className="text-center">
               <div className="logoWrapper">
-                <h1 className="logoText"><Link to="/"><img src={Logo} style={{width:"150px", marginTop:"35px"}}/></Link></h1>
+                <h1 className="logoText"><Link to="/"><img alt='A Book Store' src={Logo} style={{width:"150px", marginTop:"35px"}}/></Link></h1>
               </div>
             </Col>
           </Row>

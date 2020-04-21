@@ -140,9 +140,23 @@ const confirmOrder = (data) => dispatch => {
             return window.location ='/my-order'
          })
          .catch(error => {
-             console.log(error.response)
+             console.log(error.response)    
+
+              dispatch({
+               type: Types.CONFIRM_ORDER_ERROR,
+               payload: error.response.data  
+             })
+             
+             setTimeout(() => {
+                dispatch({
+                    type: Types.CONFIRM_ORDER_ERROR,
+                    payload: null
+                  })
+                return window.location='/cart'  
+             }, 5000)
          })
 }
+
 
 const authNotInState = (authData) => ({
     type: Types.AUTH_NOT_IN_STATE,
@@ -171,6 +185,7 @@ const updatePaymentMethod = (data) => dispatch => {
 
 export const OauthLogin = (OauthData) => dispatch => {
     removeAuthToken();
+    console.log(OauthData)
     axios.post(URL.__OAUTH('login'), {
         email: OauthData.email ? OauthData.email : OauthData.zu || OauthData.Au
     })
@@ -296,5 +311,5 @@ export {
   setPayment,
   deletePayment,
   confirmOrder,
-  updatePaymentMethod,
+  updatePaymentMethod,  
 };

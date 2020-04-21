@@ -57,6 +57,15 @@ const authReducer = (state = initState, {type, payload}) => {
                     order: payload
                 }
             }
+        case Types.CONFIRM_ORDER_ERROR:
+            return {
+                ...state,
+                status:{
+                    error: {
+                        data: payload
+                    }
+                }
+            }    
         case Types.AUTH_DATA_NOT_IN_STATE:
             return {
                 ...state,

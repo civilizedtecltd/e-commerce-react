@@ -1,20 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import {Form, Accordion , useAccordionToggle, Alert, Tabs, Tab, Image, Col} from 'react-bootstrap';
+import {Form,  Alert, Tabs, Tab, Image} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import { setPayment } from '../redux/actions/authActions';
-import { deliveryMethod } from '../redux/actions/shopActions';
+import { setPaymentDetails } from '../redux/actions/shopActions';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
-import card_icon_img from '../assets/images/user/card_icon_img.png';
+//import card_icon_img from '../assets/images/user/card_icon_img.png';
 import './checkout.css';
 import '../assets/css/theme.css'
-import defaultMethods from '../inc/PaymentMethods/defaultPaymentMethods.json';
+//import defaultMethods from '../inc/PaymentMethods/defaultPaymentMethods.json';
 /* import paypal_icon from './assets/images/paypal.png'; */
 /* import visa from '../assets/images/payment/visa.png'; */
 /* import amex from './assets/images/Amex-icon.jpg' */
 
 import master_card from '../assets/images/payment/master.png'
 import visa from '../assets/images/payment/visa.png'
-import paypal_icon from '../assets/images/payment/paypal2.png'
+//import paypal_icon from '../assets/images/payment/paypal2.png'
 import amex from '../assets/images/payment/amex.png'
 
 
@@ -29,9 +29,8 @@ import './assets/paymentbar.css';
 
 const PaymentMethods = (props) => {
 
-    const [method, setMethod] = useState('');
-    const [key, setKey] = useState('payPal');
-
+    const [paymentType, setPaymentType] = useState('payPal');
+    
     const [deliveryMethod, setDeliveryMethod] = useState({
         standard: true,
         express: false
@@ -42,18 +41,15 @@ const PaymentMethods = (props) => {
         type: 'danger',
         message: ''
     });
-
-
-    const [check,setChecked] = useState({
-        paypal:true,
-        visa:false,
-        amex:false,
-        master:false,
-    })
-
-
-    useEffect(()=>{
-        props.getDeliveryMethod()
+    
+    useEffect( ()=>{            
+       if(deliveryMethod.standard){
+            props.callback({
+                method: paymentType,
+                delivery: 1,
+                deliveryInfo: props.delivery[0]
+            });
+       }
     }, []);
 
 
@@ -67,9 +63,9 @@ const PaymentMethods = (props) => {
           })
 
           props.callback({
-                method: method,
+                method: paymentType,
                 delivery: 1,
-                paymentData: props.delivery[0]
+                deliveryInfo: props.delivery[0]
           });
 
         }
@@ -81,40 +77,49 @@ const PaymentMethods = (props) => {
             })
 
             props.callback({
-                method: method,
+                method: paymentType,
                 delivery: 2,
-                paymentData: props.delivery[1]
+                deliveryInfo: props.delivery[1]
             });
         }
     }
 
+    const selectPaymentType = type => {
+        
+        setPaymentType(type);
 
-    const paymentMethodSelect = (e) => {
-        e.preventDefault();
-        switch(e.target.value){
-            case 'paypal':
-                    setMethod('PAYPAL');
-                break;
-            case 'visa':
-            case 'amex':
-            case 'master':
-                    window.alert('Currently this payment method is not supported!.');
-                break;
-            default:
-                window.alert('Currently this payment method is not supported!.');    
+        if(deliveryMethod.standard){
+            props.callback({
+                method: type,
+                delivery: 1,
+                deliveryInfo: props.delivery[0]
+            });
+        }else{
+            props.callback({
+                method: type,
+                delivery: 2,
+                deliveryInfo: props.delivery[1]
+            });    
         }
     }
 
+    const updatePaymentInfo = e => {
+       e.preventDefault();
+       props.setPayment({
+           ...props.payment,
+           [e.target.name]: e.target.value
+       });
+    }
+
+       
     return (<>
         <PageLoader loading={false} />
-
-
 
     {/*     <h3 className="mt-4 mb-2">Select Payment Method</h3> */}
             {/* ======================================================  */}
             <div className="paymentMethodsArea1">
 
-            <Tabs id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
+            <Tabs id="controlled-tab-example" activeKey={paymentType} onSelect={selectPaymentType}>
                 <Tab eventKey="visaMaster" title={<Image src={visa_master} style={{width:"10",}} />} disabled>
                     <h1>Not available</h1>
                 </Tab>
@@ -126,36 +131,38 @@ const PaymentMethods = (props) => {
                             <div className="payment-title"> <h4>PayPal accepts</h4> </div>
                             <div className="payment-card-section">
                                 {/* visa */}
-                            <input type="radio" className="radio_item" value="visa" name="item" id="radio2" 
-                            onChange={()=>setChecked({visa:!check.visa})} onClick={paymentMethodSelect} checked={ check.visa ? true : false } />
+                            <input type="radio" className="radio_item" value="visa" name="item" id="radio2"/>
                             <label className="label_item" htmlFor="radio2"> <img src={visa} alt="visa-icon" /> </label>
                             
                             {/* master */}
-                            <input type="radio" className="radio_item" value="master" name="item" id="radio4" 
-                            onChange={()=>setChecked({master:!check.master})} onClick={paymentMethodSelect} checked={ check.master ? true : false } />
+                            <input type="radio" className="radio_item" value="master" name="item" id="radio4"/>
                             <label className="label_item" htmlFor="radio4"> <img src={master_card} alt="master-card" /></label>
 
                             {/* amex */}
-                            <input type="radio" className="radio_item" value="amex" name="item" id="radio3" 
-                            onChange={()=>setChecked({amex:!check.amex})}  onClick={paymentMethodSelect} checked={ check.amex ? true : false }/>
+                            <input type="radio" className="radio_item" value="amex" name="item" id="radio3"/>
                             <label className="label_item" htmlFor="radio3"><img src={amex} alt="american-express" /></label>
 
                             {/* Discover */}
-                            <input type="radio" className="radio_item" value="Discover" name="item" id="radio1" 
-                            onChange={()=> setChecked({paypal:!check.paypal})} onClick={paymentMethodSelect} checked={ check.paypal ? true : false }/>
+                            <input type="radio" className="radio_item" value="Discover" name="item" id="radio1"/>
                             <label className="label_item" htmlFor="radio1"> <img src={Discover} alt="paypal icon"/></label>
 
                             {/* UnionPay */}
-                            <input type="radio" className="radio_item" value="UnionPay" name="item" id="radio1" 
-                            onChange={()=> setChecked({paypal:!check.paypal})} onClick={paymentMethodSelect} checked={ check.paypal ? true : false }/>
+                            <input type="radio" className="radio_item" value="UnionPay" name="item" id="radio1"/>
                             <label className="label_item" htmlFor="radio1"> <img src={UnionPay} alt="paypal icon"/></label>
                             </div>
-                        </div>
-                           
-                         
+                        </div>                                                    
                 </Tab>
-                <Tab eventKey="mpeg" title={<Image src={Mpesa}  />} disabled>
-                   <h1>Not available</h1>
+                <Tab eventKey="mpesa" title={<Image src={Mpesa}  />}>
+                   <div className="row">
+                       <div className="col-md-4">
+                           <h3>Mobile Number:</h3>
+                       </div>
+                        <div className="col-md-4">
+                            <div className="input-group">
+                                <input type="text" className="form-control" name="mpesa_number" onChange={updatePaymentInfo} />
+                            </div>
+                        </div>
+                   </div>
                 </Tab>
             </Tabs>
             </div>
@@ -213,10 +220,11 @@ const PaymentMethods = (props) => {
 }
 const mapStateToProps = state =>({
     ...state.auth,
-    delivery: state.shop.deliveryMethod
+    delivery: state.shop.deliveryMethod,
+    payment: state.shop.payment
 })
-const mapDispatchToProps = dispatch => ({
-    getDeliveryMethod   : () => dispatch(deliveryMethod),
-    addCard             : (info) => dispatch(setPayment(info))
+const mapDispatchToProps = dispatch => ({   
+    addCard             : (info) => dispatch(setPayment(info)),
+    setPayment          : (payment) => dispatch(setPaymentDetails(payment))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentMethods);
