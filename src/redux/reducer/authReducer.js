@@ -5,7 +5,11 @@ const initState = {
         payment:[],
         order:[]
     },
-    status: {}
+    status: {
+        error: {
+            data: null
+        }
+    }
 }
 const authReducer = (state = initState, {type, payload}) => {
     switch(type){
