@@ -140,8 +140,20 @@ const confirmOrder = (data) => dispatch => {
             return window.location ='/my-order'
          })
          .catch(error => {
-             console.log(error.response)
-            
+             console.log(error.response)    
+
+              dispatch({
+               type: Types.CONFIRM_ORDER_ERROR,
+               payload: error.response.data  
+             })
+             
+             setTimeout(() => {
+                dispatch({
+                    type: Types.CONFIRM_ORDER_ERROR,
+                    payload: null
+                  })
+                return window.location='/cart'  
+             }, 5000)
          })
 }
 
