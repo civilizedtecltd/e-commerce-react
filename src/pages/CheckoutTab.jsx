@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Card, Form, Col, Row, Button, Alert, Modal } from 'react-bootstrap';
 import PaypalExpressBtn from "react-paypal-express-checkout";
 import {Link} from 'react-router-dom'
@@ -29,21 +29,27 @@ const CheckoutTab = (props) => {
         policy: false
     });
 
-    /* const [alert, setAlert] = useState({
+    const [alert, setAlert] = useState({
         status: false,
         type: 'danger',
         message: ''
     });
 
-    console.log('Props status error data: ', props.status.error)
+   
+    useEffect(() => {             
+        if(props.status.error){
+            if(props.status.error.data){
+                setAlert({
+                    status: true, 
+                    type: 'danger',
+                    message: props.status.error.data.messages
+                })
+            }
+        }
 
-    if(props.status.error.data){
-        setAlert({
-            status: true,
-            type: 'danger',
-            message: props.status.error.messages
-        })
-    } */
+        
+    }, [props.status.error])
+
    
     const paymentDetails = props.payment;
     
@@ -397,8 +403,8 @@ const CheckoutTab = (props) => {
                     </div>
                 </Card.Body>
             </Card>
-            <Alert show={(props.status.error.data) ? true : false } variant='danger' onClose={()=>console.log('close alert')} dismissible>
-                <p>{(props.status.error.data) ? props.status.error.data.messages : ''}</p>
+            <Alert show={alert.status} variant={alert.type} onClose={() => setAlert({...alert, status: false})} dismissible>
+                <p>{alert.message}</p>
             </Alert>
         </Container>
 
