@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Container, Card, Form, Col, Row, Button, Modal } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Card, Form, Col, Row, Button, Alert, Modal } from 'react-bootstrap';
 import PaypalExpressBtn from "react-paypal-express-checkout";
 import {Link} from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty';
@@ -17,8 +17,7 @@ import PageLoader from "../components/pageLoader/PageLoaderComponent";
 
 
 const CheckoutTab = (props) => {
-
-
+    
     const [show, setShow] = useState(false);
     const [step, setStep] = useState({prev:0, next:1, show:false})
 
@@ -30,12 +29,35 @@ const CheckoutTab = (props) => {
         policy: false
     });
 
-    const [paymentDetails, setPaymentDetails] = useState({});
+    const [alert, setAlert] = useState({
+        status: false,
+        type: 'danger',
+        message: ''
+    });
 
-    const deliveryCost = (paymentDetails.paymentData) ? paymentDetails.paymentData.price : props.delivery[0].price;
-    const deliveryTime = (paymentDetails.paymentData) ? paymentDetails.paymentData.delivery_time : props.delivery[0].delivery_time;
-    const currencyExchangeRate = (props.currencyRate) ? props.currencyRate.kes : 1;
-    const total_cost_in_usd = Math.ceil(props.costWithDelivery/currencyExchangeRate);
+   
+    useEffect(() => {             
+        if(props.status.error){
+            if(props.status.error.data){
+                setAlert({
+                    status: true, 
+                    type: 'danger',
+                    message: props.status.error.data.messages
+                })
+            }
+        }
+
+        
+    }, [props.status.error])
+
+   
+    const paymentDetails = props.payment;
+    
+
+    const deliveryCost              = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.price : props.delivery[0].price;
+    const deliveryTime              = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.delivery_time : props.delivery[0].delivery_time;
+    const currencyExchangeRate      = (props.currencyRate) ? props.currencyRate.kes : 1;
+    const total_cost_in_usd         = Math.ceil(props.costWithDelivery/currencyExchangeRate);
 
     const handleNext = () => {
 
@@ -107,13 +129,15 @@ const CheckoutTab = (props) => {
     }
 
     const getPaymentDetails = (data) => {
-        // console.log("getPaymentDetails: ", data);
-        props.getPaymentMethod(data);
-        setPaymentDetails({
+        console.log("getPaymentDetails: ", data);
+        props.getPaymentMethod(data);               
+        props.setPayment({
+            ...paymentDetails, 
             ...data
-        })
+        });
     }
 
+    
     const confirmOrder = (paymentInfo) => {
 
         const books = [];
@@ -148,16 +172,36 @@ const CheckoutTab = (props) => {
         setShow(true);
     }
 
-    const onSuccess = paypalInfo => confirmOrder(paypalInfo);     
+    const payPalOnSuccess = paypalInfo => confirmOrder(paypalInfo);     
 
-    const onCancel = data => {
+    const payPalOnCancel = data => {
         // console.log('The payment was cancelled',data)
         return window.location.href = data.cancelUrl
     }
 
-
-    const onError = err => {
+    const payPalOnError = err => {
         console.log('Error',err)
+    }
+
+    const mpesaOnCheckout = (e) => {
+        const books = [];
+
+        props.cart.map(item => {
+            return books.push({
+                    id: item.id,
+                    quantity: item.quantity
+                });
+        });
+
+        const promoId = (props.promo) ? props.promo.id : null;
+
+        props.confirmOrder({
+            address: formData,
+            payment: {method: paymentDetails.method, info: {mpesa_number: paymentDetails.mpesa_number, price: props.costWithDelivery}},
+            delivery: paymentDetails.delivery,
+            books,
+            promo: promoId
+        });
     }
 
     return(
@@ -331,15 +375,25 @@ const CheckoutTab = (props) => {
                                 <Row className="form-group mt-5">
                                     <div className="col-12 d-flex justify-content-between">
                                         <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
-                                        <PaypalExpressBtn
-                                            env       = {paypalConfig.env}
-                                            client    = {paypalConfig.client}
-                                            currency  = {paypalConfig.currency}
-                                            total     = {total_cost_in_usd}
-                                            onError   = {onError}
-                                            onSuccess = {onSuccess}
-                                            onCancel  = {onCancel}
-                                        />
+                                        {(()=>{
+                                            switch(paymentDetails.method){
+                                                case 'payPal':
+                                                    return <PaypalExpressBtn
+                                                                env       = {paypalConfig.env}
+                                                                client    = {paypalConfig.client}
+                                                                currency  = {paypalConfig.currency}
+                                                                total     = {total_cost_in_usd}
+                                                                onError   = {payPalOnError}
+                                                                onSuccess = {payPalOnSuccess}
+                                                                onCancel  = {payPalOnCancel}
+                                                            />
+                                                case 'mpesa':
+                                                    return <Button onClick={mpesaOnCheckout}>Checkout</Button>;
+                                                default:
+                                                    return null;        
+                                            }
+                                        })()}
+                                        
                                     </div>
                                 </Row>
 
@@ -349,6 +403,9 @@ const CheckoutTab = (props) => {
                     </div>
                 </Card.Body>
             </Card>
+            <Alert show={alert.status} variant={alert.type} onClose={() => setAlert({...alert, status: false})} dismissible>
+                <p>{alert.message}</p>
+            </Alert>
         </Container>
 
         {/* <Modal show = {show} onHide = { handleClose }>

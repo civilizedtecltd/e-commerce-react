@@ -47,7 +47,7 @@ label {
 	width: 200px;
 }
 
-.paymentMethodsArea1 a#controlled-tab-example-tab-mpeg {
+.paymentMethodsArea1 a#controlled-tab-example-tab-mpesa {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -55,7 +55,7 @@ label {
 	height: 100px;
 }
 
-.paymentMethodsArea1 a#controlled-tab-example-tab-mpeg img{
+.paymentMethodsArea1 a#controlled-tab-example-tab-mpesa img{
 	width: 200px;
 }
 
