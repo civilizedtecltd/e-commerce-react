@@ -35,19 +35,41 @@ const ShopPage = props => {
     const { higherPrice, lowerPrice } = priceFilter;
        stageList(id);
     if (page && show && sortBy) {
-      return filterShortByType(page, show, sortBy);
+       return filterShortByType(page, show, sortBy);
     } else if (shopUrl === "/shopping") {
-      return fetchBooks(page, show, null);
+       return fetchBooks(page, show, null);
     }else if (page && show && lowerPrice && higherPrice && filter_type && filter_id) {
-      return filterByPrice(page, show, lowerPrice, higherPrice,filter_type, filter_id);
+       return filterByPrice(page, show, lowerPrice, higherPrice,filter_type, filter_id);
     }else if (page && show && filter_type && filter_id) {
-      return getBooksByFilter(page, show, filter_type, filter_id);
+       return getBooksByFilter(page, show, filter_type, filter_id);
     } else if (page && show && lowerPrice && higherPrice) {
-      return filterByPrice(page, show, lowerPrice, higherPrice);
-    } else if (id === "all" && pageNumber && showItem && keyword) {
-      return fetchBooks(page, show, keyword);
-    } else if (!isNaN(id) && id && title && page && show) {
+       return filterByPrice(page, show, lowerPrice, higherPrice);
+    } else if (typeof id ==="number" && id && title && page && show) {
       return booksByCategory(id, page, show);
+    }
+    else if (id !== "number" && pageNumber && showItem && keyword) {
+      console.log("fetchbook")
+       return fetchBooks(page, show, keyword);
+    }
+
+    return ()=>{
+      stageList(id);
+      if (page && show && sortBy) {
+         filterShortByType(page, show, sortBy);
+      } else if (shopUrl === "/shopping") {
+         fetchBooks(page, show, null);
+      }else if (id === "all" && pageNumber && showItem && keyword) {
+         fetchBooks(page, show, keyword);
+      }
+      else if (page && show && lowerPrice && higherPrice && filter_type && filter_id) {
+         filterByPrice(page, show, lowerPrice, higherPrice,filter_type, filter_id);
+      }else if (page && show && filter_type && filter_id) {
+         getBooksByFilter(page, show, filter_type, filter_id);
+      } else if (page && show && lowerPrice && higherPrice) {
+         filterByPrice(page, show, lowerPrice, higherPrice);
+      }else if (!isNaN(id) && id && title && page && show) {
+         booksByCategory(id, page, show);
+      }
     }
   }, [sortBy, priceFilter, id, filter_type, filter_id, pagination, stageList, shopUrl, pageNumber, showItem,
       keyword, filterShortByType, fetchBooks, filterByPrice, getBooksByFilter, booksByCategory, title]);
