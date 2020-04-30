@@ -25,7 +25,7 @@ import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import { getSubscriptions } from '../../redux/actions/siteActions'
 
 const PaymentPage = props => {
-  const {auth} = props
+  const {auth,subscriptions} = props
   const [visible, setVisible] = useState(false);
   const [cardAlert, setCardAlert] = useState(false);
   const totalItem = props.cart.length;
@@ -60,6 +60,7 @@ const PaymentPage = props => {
   };
 
   useEffect(() => {
+    const {email}=auth;
     setData({
       id: card_id,
       card_number:cardNumber,
@@ -67,8 +68,18 @@ const PaymentPage = props => {
       yy:year,
       ccv: cvv,
     });
-    props.subscriptions(auth.email)
-  }, [cardNumber,card_id, year, month, cvv]);
+    subscriptions(email)
+    return ()=>{
+      setData({
+        id: card_id,
+        card_number:cardNumber,
+        mm: month,
+        yy:year,
+        ccv: cvv,
+      });
+      subscriptions(email)
+    }
+  }, [cardNumber,card_id, year, month, cvv,auth,subscriptions]);
 
   const updatePaymentMethod = e => {
     e.preventDefault();

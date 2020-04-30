@@ -2,7 +2,7 @@ import axios from 'axios';
 import decode from 'jwt-decode';
 import isEmpty from 'lodash/isEmpty';
 import store from '../redux/store';
-import {login, authNotInState} from '../redux/actions/authActions';
+import {login, /* authNotInState */} from '../redux/actions/authActions';
 const setAuthToken = (token) => {
 
     checkJwtToken();

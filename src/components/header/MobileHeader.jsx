@@ -57,7 +57,7 @@ const MobileHeader = (props) => {
                     <Row className="align-items-center justify-content-between">
                         <Col className="col-auto">
                             <div className="logoWrapper">
-                                <h1 className="logoText"><Link to="/"><img src={Logo2} style={{width: "65px"}} /></Link></h1>
+                                <h1 className="logoText"><Link to="/"><img src={Logo2} style={{width: "65px"}} alt="logo2" /></Link></h1>
                             </div>
                         </Col>
 

@@ -18,7 +18,8 @@ function NewsLetterComponent(props) {
       setShow(true);
       setMessage(ex.data.message)
     })
-     setTimeout(() => setShow(false), 3000);
+   setTimeout(() => setShow(false), 3000);
+     
   }
   // 
 

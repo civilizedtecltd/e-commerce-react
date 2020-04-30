@@ -32,7 +32,8 @@ const HeaderComponent = (props) => {
   const isAuth = (!isEmpty(props.auth.jwt)) ? true : false;
 
   useEffect(() => {
-    return props.fetchCategoryList();
+     props.fetchCategoryList();
+     return ()=> props.fetchCategoryList()
   }, []);
 
   const handleOpen = () => setOpen(!open)
