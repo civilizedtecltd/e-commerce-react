@@ -4,7 +4,7 @@ import {Collapse} from 'react-bootstrap';
 import '../../assets/css/theme.css'
 import {Form} from "react-bootstrap";
 import Language from "./LanguageComponent";
-import BookCover from "./BookCoverComponent";
+//import BookCover from "./BookCoverComponent";
 import PublishYear from "./PublishYearComponent";
 import StageComponent from "./StageComponent";
 import Discipline from "./DisciplineComponent";
@@ -212,7 +212,7 @@ const Filters = (props) => {
                 </div>
 
 
-                <div className="singleFilterCard">
+               {/*  <div className="singleFilterCard">
 
                     <div className="d-flex justify-content-between">
                         <h5>Book Cover</h5>
@@ -232,7 +232,7 @@ const Filters = (props) => {
                             </ul>
                         </div>
                     </Collapse>
-                </div>
+                </div> */}
 
 
                 <div className="singleFilterCard p-0 border-0 m-0">

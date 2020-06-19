@@ -86,11 +86,7 @@ function TabComponent(props) {
               <li>
                 <strong>Publishing year: </strong>{" "}
                 {spec.publishing_year !== undefined ? spec.publishing_year : ``}
-              </li>
-              <li>
-                <strong>Book cover : </strong>
-                {spec.book_covers !== undefined ? spec.book_covers : ``}
-              </li>
+              </li>             
               <li>
                 <strong>Language : </strong>
                 {spec.language !== undefined ? spec.language : ``}

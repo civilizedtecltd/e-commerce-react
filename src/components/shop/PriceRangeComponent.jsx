@@ -54,23 +54,23 @@ class PriceRanger extends Component{
             <div>
                 <section className="range-slider">
                     <div className="multi-range">
-                        <input type="range"
-                               value={this.state.minimumPrice}
-                               min={this.state.minValue}
-                               max={this.state.maxValue}
-                               step={this.state.step}
-                               onChange={this.handleChange.bind(this, "first")}
-                               onMouseUp={this.handleOnMouseUp.bind(this)}
+                        <input type      = "range"
+                               value     =  { this.state.minimumPrice || 0 }
+                               min       =  { this.state.minValue || 0 }
+                               max       =  { this.state.maxValue || 0 }
+                               step      =  { this.state.step || 0 }
+                               onChange  =  {this.handleChange.bind(this, "first")}
+                               onMouseUp =  {this.handleOnMouseUp.bind(this)}
                                />
 
 
                         <input type="range"
-                               value={this.state.maximumPrice}
-                               min={this.state.minValue}
-                               max={this.state.maxValue}
-                               step={this.state.step}
-                               onChange={this.handleChange.bind(this, "second")}
-                               onMouseUp={this.handleOnMouseUp.bind(this)}
+                               value     =  { this.state.maximumPrice || 0}
+                               min       =  { this.state.minValue || 0 }
+                               max       =  { this.state.maxValue || 0 }
+                               step      =  { this.state.step || 0 }
+                               onChange  =  {this.handleChange.bind(this, "second")}
+                               onMouseUp =  {this.handleOnMouseUp.bind(this)}
                                />
                     </div>
 

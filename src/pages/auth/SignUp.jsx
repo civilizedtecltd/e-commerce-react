@@ -42,10 +42,11 @@ const SignUp = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!data.category_id) {
+  /*   if (!data.category_id) {
       return setAlert({ show: true, type: 'danger', message: "Select A category" })
     }
-    else if (!data.first_name || data.first_name === '') {
+    else */ 
+    if (!data.first_name || data.first_name === '') {
       return setAlert({ show: true, type: 'danger',  message: "First Name Required" })
     }
     else if (!data.last_name === null || undefined || '') {
@@ -92,7 +93,7 @@ const SignUp = (props) => {
             <Row>
               <Col sm={6}>
                 <div className="logoWrapper mt-4 mb-4">
-                  <h1 className="logoText"><Link to="/"><img src={Logo} style={{width:"100px"}} /></Link></h1>
+                  <h1 className="logoText"><Link to="/"><img alt={'Logo'} src={Logo} style={{width:"100px"}} /></Link></h1>
                 </div>
               </Col>
             </Row>
@@ -101,12 +102,13 @@ const SignUp = (props) => {
                 <SocialListComponent />
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form action='post' onSubmit={handleSubmit}>
-                    <SelectFrom LabelTitle="Category"
+
+                    {/* <SelectFrom LabelTitle="Category"
                       Name="category_id"
                       categories={categories}
                       Value={data.category_id}
                       handleOnchange={handleOnchange}
-                    />
+                    /> */}
 
                     <InputFrom
                       LabelId="firstName"
