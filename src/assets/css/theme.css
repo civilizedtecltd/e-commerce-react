@@ -703,6 +703,21 @@
     display: none;
 }
 
+
+#collapse-discipline, #collapse-author, #collapse-publishingHouse{
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+div#controlled-tab-example-tabpane-mpesa {
+  padding: 50px 15px;
+  background-color: #ececec;
+}
+
+
+
+
+
 /*------------------------------------------------------------------------------*/
 /*                    Width : 1199px
 /*------------------------------------------------------------------------------*/
