@@ -47,8 +47,7 @@ const ShopPage = props => {
     } else if (typeof id ==="number" && id && title && page && show) {
       return booksByCategory(id, page, show);
     }
-    else if (id !== "number" && pageNumber && showItem && keyword) {
-      console.log("fetchbook")
+    else if (id !== "number" && pageNumber && showItem && keyword) {      
        return fetchBooks(page, show, keyword);
     }
 
@@ -198,7 +197,7 @@ const ShopPage = props => {
                                 </li>
                                 <li className="page-item">of</li>
                                 <li className={`page-item ${classes.page_field}`}>
-                                  <input type="text" value={totalPage} className="page-link" readOnly/>
+                                  <input type="text" value = { totalPage || 0 } className="page-link" readOnly/>
                                 </li>
                                 <li className="page-item" onClick={handleNext}>
                                   <button className="page-link">
@@ -314,7 +313,7 @@ const ShopPage = props => {
                                 </li>
                                 <li className="page-item">of</li>
                                 <li className={`page-item ${classes.page_field}`}>
-                                  <input type="text" value={totalPage} className="page-link" readOnly/>
+                                  <input type="text" value = { totalPage ||  ' 0' } className="page-link" readOnly/>
                                 </li>
                                 <li className="page-item" onClick={handleNext}>
                                   <button className="page-link">

@@ -5,7 +5,7 @@ function InputFrom ({ LabelId, TypeName, LabelTitle, Name, Value, Placeholder, C
     return (
         <Form.Group className = {ClassName}>
             <Form.Label htmlFor = {LabelId} > {LabelTitle} </Form.Label>
-            <Form.Control type = {TypeName} id = {LabelId} name={Name} value={Value} placeholder={Placeholder} onChange = {handleOnchange} />
+            <Form.Control type = {TypeName} id = {LabelId} name={Name} value={Value || ''} placeholder={Placeholder} onChange = {handleOnchange} />
         </Form.Group>
     )
 }

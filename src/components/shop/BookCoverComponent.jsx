@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import book_cover from "../../inc/shop/book_cover";
+//import book_cover from "../../inc/shop/book_cover";
 import {LiSpan} from "../LiComponent/CommonLiComponent";
 
 const BookCover = (props) => {
