@@ -64,7 +64,7 @@ const SignUp = (props) => {
     else if (data.password !== data.repeatPassword) {
       return setAlert({ show: true, type: 'danger', message: "Password not match" })
     }
-    else if (!data.category_id || !data.first_name || !data.last_name || !data.email || !data.password || !data.repeatPassword) {
+    else if (!data.first_name || !data.last_name || !data.email || !data.password || !data.repeatPassword) {
       return setAlert({ show: true, type: 'danger', message: "Fields can not be empty"})
     }
     else {
