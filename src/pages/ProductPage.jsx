@@ -29,6 +29,7 @@ const useStyles = createUseStyles({
 
 
 function ProductPage(props) {
+
   const { showSingleBook,
     getDeliveryMethods,
     book,
@@ -71,8 +72,8 @@ function ProductPage(props) {
     const isFavoriteItem = favoriteItem.find(fav=> fav.id === Number(id))
 
     const updateItemQty = (e) => {
-    let countQty = quantity
-      setQuantity(++countQty);
+      //let countQty = quantity
+      setQuantity(Number(e.target.value));
       updateItem({id: Number(book.id),qty: Number(e.target.value)});
     }
 
@@ -185,8 +186,7 @@ function ProductPage(props) {
                               className="btn linkBtn"
                               onClick={handleAddToCart}
                             >
-                              <i className="fas fa-shopping-cart"></i> Add to
-                              cart
+                              <i className="fas fa-shopping-cart"></i> Add to Cart
                             </Button>
 
                           </div>

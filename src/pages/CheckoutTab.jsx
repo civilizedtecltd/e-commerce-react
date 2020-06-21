@@ -129,7 +129,7 @@ const CheckoutTab = (props) => {
     }
 
     const getPaymentDetails = (data) => {
-        console.log("getPaymentDetails: ", data);
+        //console.log("getPaymentDetails: ", data);
         props.getPaymentMethod(data);               
         props.setPayment({
             ...paymentDetails, 
