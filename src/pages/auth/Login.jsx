@@ -83,7 +83,7 @@ const Login = (props) => {
               <Col sm={6}>
                 <div className="logoWrapper mt-4 mb-4">
                   <h1 className="logoText">
-                    <Link to="/"><img src={Logo} style={{width:"100px"}} /></Link>
+                    <Link to="/"><img alt={'Logo'} src={Logo} style={{width:"100px"}} /></Link>
                   </h1>
                 </div>
               </Col>
@@ -96,10 +96,11 @@ const Login = (props) => {
                 <div className="formWrapper clearfix" id="formWrapper">
                   <Form onSubmit={handleSubmit}>
                     <InputFrom
-                      LabelId="email"
-                      TypeName="email"
-                      LabelTitle="Email"
-                      Name="email"
+                      LabelId  ="email"
+                      TypeName ="email"
+                      LabelTitle ="Email"
+                      Name ="email"
+                      Value = {data.email}
                       Placeholder="Enter Your Email"
                       handleOnchange={handleOnchange}
                     />
@@ -109,6 +110,7 @@ const Login = (props) => {
                       TypeName="password"
                       LabelTitle="Password"
                       Name="password"
+                      Value = {data.password}
                       Placeholder="Enter Your Password"
                       handleOnchange={handleOnchange}
                     />
