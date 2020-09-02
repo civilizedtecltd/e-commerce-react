@@ -1,12 +1,12 @@
 import * as Types from '../actions/actionTypes';
 
-const siteReducers = (state = { pending:false }, actions) => {
+const siteReducers = (state = { pending: false }, actions) => {
     const { type, payload, pending } = actions;
     switch (type) {
         case Types.FETCH_SUBSCRIBER_PENDING:
             return {
                 ...state,
-                pending:pending
+                pending: pending
             }
         case Types.FETCH_ALL_CATEGORY:
             return {
@@ -18,12 +18,11 @@ const siteReducers = (state = { pending:false }, actions) => {
                 ...state,
                 ...payload,
             }
-
         case Types.GET_SUBSCRIPTIONS:
             return {
                 ...state,
                 subscriptions: payload,
-                pending:false
+                pending: false
             }
         case Types.SET_SUBSCRIPTIONS:
             return {
@@ -39,8 +38,14 @@ const siteReducers = (state = { pending:false }, actions) => {
             return {
                 ...state,
                 subscriptions: payload,
-                pending:false
+                pending: false
             }
+        case Types.REDIRECT_ORDER: {
+            return {
+                ...state,
+                redirect_order: payload
+            }
+        }
         default:
             return state
     }

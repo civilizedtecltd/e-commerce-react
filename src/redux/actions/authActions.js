@@ -3,13 +3,13 @@ import axios from 'axios';
 import decode from 'jwt-decode';
 import store from '../store';
 import { URL } from '../../constants/config';
-import {setAuthToken, removeAuthToken } from '../../helpers/setAuthToken';
+import { setAuthToken, removeAuthToken } from '../../helpers/setAuthToken';
 
 const login = (authData) => dispatch => {
     removeAuthToken();
     axios.post(URL._LOGIN, authData)
         .then(res => {
-            try{
+            try {
                 const jwt = res.data.data;
                 const { data } = decode(jwt.token);
                 localStorage.setItem('authData', JSON.stringify(jwt));
@@ -39,14 +39,14 @@ const login = (authData) => dispatch => {
 
         }).catch(error => {
             return dispatch({
-                    type: Types.USER_LOGIN_ERROR,
-                    payload: {
-                        status: {
-                            success: false,
-                            error: error.response
-                        }
+                type: Types.USER_LOGIN_ERROR,
+                payload: {
+                    status: {
+                        success: false,
+                        error: error.response
                     }
-                });
+                }
+            });
         });
 }
 
@@ -54,7 +54,7 @@ const logout = () => dispatch => {
     const { jwt } = store.getState().auth;
     setAuthToken();
     axios.post(URL._LOGOUT, { refreshToken: jwt.refreshToken })
-        .then(res=> {
+        .then(res => {
             localStorage.removeItem('authData');
             localStorage.removeItem('state');
             return dispatch({
@@ -73,88 +73,90 @@ const logout = () => dispatch => {
 const getUser = () => dispatch => {
     setAuthToken();
     axios.get(URL._GET_USER)
-         .then(res => dispatch({
+        .then(res => dispatch({
             type: Types.USER_INFO,
             payload: { ...res.data.data }
-         }))
-         .catch(error => console.log(error))
+        }))
+        .catch(error => console.log(error))
 }
 
-const update = (info) => dispatch => {    
+const update = (info) => dispatch => {
     setAuthToken();
     axios.post(URL._USER_UPDATE, info)
-         .then(res => dispatch({
-             type: Types.USER_UPDATE,
-             payload: {
-                 user: { ...res.data.data },
-                 status: {
+        .then(res => dispatch({
+            type: Types.USER_UPDATE,
+            payload: {
+                user: { ...res.data.data },
+                status: {
                     success: true,
                     message: res.data.messages
-                 }
-             }
-         }))
-         .catch(error => {
-            const response = (error.response) ? error.response.data :  {messages: 'Unknown Error!'};
+                }
+            }
+        }))
+        .catch(error => {
+            const response = (error.response) ? error.response.data : { messages: 'Unknown Error!' };
             return dispatch({
                 type: Types.USER_UPDATE_ERROR,
                 payload: {
-                           success: false,
-                           message: response.messages
-                         }
+                    success: false,
+                    message: response.messages
+                }
             });
-         })
+        })
 }
 
 const setPayment = (info) => dispatch => {
     setAuthToken();
     axios.post(URL._USER_PAYMENT, info)
-         .then(res => {
-             return dispatch({
+        .then(res => {
+            return dispatch({
                 type: Types.SET_PAYMENT,
-                payload: [ ...res.data.data ]
+                payload: [...res.data.data]
             })
-         })
-         .catch(error=> console.log(error));
+        })
+        .catch(error => console.log(error));
 }
 
 const deletePayment = (id) => dispatch => {
     setAuthToken();
     axios.post(URL._DELETE_PAYMENT(id))
-         .then(res=> dispatch({
-             type: Types.DELETE_PAYMENT,
-             payload: [...res.data.data]
-         }))
-         .catch(error => console.log(error));
+        .then(res => dispatch({
+            type: Types.DELETE_PAYMENT,
+            payload: [...res.data.data]
+        }))
+        .catch(error => console.log(error));
 }
 
 const confirmOrder = (data) => dispatch => {
     setAuthToken();
+    console.log('order data send', data);
     axios.post(URL._CONFIRM_ORDER, { ...data })
-         .then(res => {
-             dispatch({
+        .then(res => {
+            dispatch({
                 type: Types.CONFIRM_ORDER,
-                payload: [ ...res.data.data ]
-             })
+                payload: [...res.data.data]
+            })
 
-             dispatch(getUser())
-            return window.location ='/my-order'
-         })
-         .catch(error => {
-             console.log(error.response)    
+            dispatch(getUser())
+            return
+            //return window.location = '/my-order'
+        })
+        .catch(error => {
+            console.log(error.response)
 
-              dispatch({
-               type: Types.CONFIRM_ORDER_ERROR,
-               payload: error.response.data  
-             })
-             
-             setTimeout(() => {
+            dispatch({
+                type: Types.CONFIRM_ORDER_ERROR,
+                payload: error.response.data
+            })
+
+            setTimeout(() => {
                 dispatch({
                     type: Types.CONFIRM_ORDER_ERROR,
                     payload: null
-                  })
-                return window.location='/cart'  
-             }, 5000)
-         })
+                })
+                return window.location = '/cart'
+            }, 5000)
+        })
 }
 
 
@@ -168,10 +170,10 @@ const updatePaymentMethod = (data) => dispatch => {
     setAuthToken();
     axios.post(URL.UPDATE_PAYMENT_METHOD, data).then(res => {
         return dispatch({
-          type: Types.UPDATE_PAYMENT_METHOD,
-          payload: [res.data.data]
+            type: Types.UPDATE_PAYMENT_METHOD,
+            payload: [res.data.data]
         });
-    }).catch(error=>console.log(error))
+    }).catch(error => console.log(error))
 }
 
 
@@ -192,7 +194,7 @@ export const OauthLogin = (OauthData) => dispatch => {
         .then(res => {
             try {
                 const jwt = res.data.data;
-                const {data} = decode(jwt.token);
+                const { data } = decode(jwt.token);
                 localStorage.setItem('authData', JSON.stringify(jwt));
                 setAuthToken(jwt.token);
                 return dispatch({
@@ -257,40 +259,40 @@ zu: "abookstore254@gmail.com"
 
 export const OauthSignUp = (OauthData) => dispatch => {
     axios.post(URL.__OAUTH('signup'), {
-        email: OauthData.email ? OauthData.email : OauthData.zu || OauthData.Au ,
+        email: OauthData.email ? OauthData.email : OauthData.zu || OauthData.Au,
         first_name: OauthData.first_name ? OauthData.first_name : OauthData.vW || OauthData.JW,
         last_name: OauthData.last_name ? OauthData.last_name : OauthData.wU || OauthData.JU
     }).then(res => {
         dispatch({
             type: Types.SIGNUP_USER,
             payload: {
-                signup:true
+                signup: true
             }
         })
         if (res.data.success === true) {
-           return window.location.href='/login'
+            return window.location.href = '/login'
         }
     }).catch(error => {
         dispatch({
             type: Types.SIGNUP_ERROR,
-            payload: (typeof error.response !== undefined ) ? error.response.data : ''
+            payload: (typeof error.response !== undefined) ? error.response.data : ''
         })
         setTimeout(() => {
             dispatch({
                 type: Types.SIGNUP_ERROR,
-                payload:null
+                payload: null
             })
         }, 5000);
     })
 }
 
-export const emptyStatus = ()  => {
+export const emptyStatus = () => {
     return ({
         type: Types.EMPTY_STATUS,
         payload: {
             status: {
                 error: {
-                    data:null
+                    data: null
                 }
             }
         }
@@ -303,13 +305,13 @@ export const emptyStatus = ()  => {
 
 
 export {
-  login,
-  logout,
-  authNotInState,
-  update,
-  getUser,
-  setPayment,
-  deletePayment,
-  confirmOrder,
-  updatePaymentMethod,  
+    login,
+    logout,
+    authNotInState,
+    update,
+    getUser,
+    setPayment,
+    deletePayment,
+    confirmOrder,
+    updatePaymentMethod,
 };

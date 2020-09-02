@@ -9,7 +9,7 @@ export const fetchCategoryList = () => dispatch => {
             dispatch({
                 type: Types.FETCH_ALL_CATEGORY,
                 payload: res.data.data,
-                pending:false
+                pending: false
             })
         })
 };
@@ -22,7 +22,7 @@ export const getSubscriptions = (email) => dispatch => {
             dispatch({
                 type: Types.GET_SUBSCRIPTIONS,
                 payload: res.data.data,
-                pending:false
+                pending: false
             })
         }).catch(error => {
             console.log(error)
@@ -48,7 +48,7 @@ export const setSubscriptions = (options) => {
     return {
         type: Types.SET_SUBSCRIPTIONS,
         payload: { ...options }
-    }     
+    }
 }
 
 
@@ -70,5 +70,11 @@ export const subscriberNotInState = (subscriber) => {
 
 export const siteNotInState = (data) => ({
     type: Types.SITE_NOT_IN_STATE,
+    payload: data
+})
+
+
+export const setRedirectToOrder = (data) => ({
+    type: Types.REDIRECT_ORDER,
     payload: data
 })

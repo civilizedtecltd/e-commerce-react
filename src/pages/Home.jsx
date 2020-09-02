@@ -73,8 +73,8 @@ const Home = (props) => {
                   </div>
 
                   <Card.Body className="text-center">
-                    <h4>Fast delivery</h4>
-                    <p>Lorem ipsum dolor sit ament, consect etur  adipiscing elit, sed do eiusmod</p>
+                    <h4>Quick delivery</h4>
+                    <p>You can track your order</p>
                   </Card.Body>
                 </Card>
               </Col>
@@ -86,8 +86,8 @@ const Home = (props) => {
                   </div>{/* end of featureMedia */}
 
                   <Card.Body className="text-center">
-                    <h4>LOREM IPSUM</h4>
-                    <p>Lorem ipsum dolor sit amet, consect etur  adipiscing elit, sed do eiusmod</p>
+                    <h4>Best Price</h4>
+                    <p>Get the perfect deal</p>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of Card */}
               </Col>{/* end of Col */}
@@ -99,8 +99,8 @@ const Home = (props) => {
                   </div>{/* end of featureMedia */}
 
                   <Card.Body className="text-center">
-                    <h4>Dolor set ament</h4>
-                    <p>Lorem ipsum dolor sit amet, consect etur  adipiscing elit, sed do eiusmod</p>
+                    <h4>Explore</h4>
+                    <p> Browse our website, it is effortless</p>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of Card */}
               </Col>{/* end of Col */}
@@ -112,8 +112,8 @@ const Home = (props) => {
                   </div>{/* end of featureMedia */}
 
                   <Card.Body className="text-center">
-                    <h4>Adipiscing vero</h4>
-                    <p>Lorem ipsum dolor sit amet, consent etui advising elite, sed do elusion</p>
+                    <h4>Customized packages</h4>
+                    <p>Books in perfect condition</p>
                   </Card.Body>{/* end of Card.Body */}
                 </Card>{/* end of Card */}
               </Col>{/* end of Col */}

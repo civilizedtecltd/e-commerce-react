@@ -1,26 +1,32 @@
-import React, { useEffect }from 'react';
-import {Link} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {Container, Row, Col, Card, Table} from 'react-bootstrap';
-import  HeaderComponent from "../../components/header/Header";
-import  MobileHeader from "../../components/header/MobileHeader";
+import { Container, Row, Col, Card, Table } from 'react-bootstrap';
+import HeaderComponent from "../../components/header/Header";
+import MobileHeader from "../../components/header/MobileHeader";
 import UserNav from "../../components/UserNav/UserNav";
 
 import './assets/css/user.css';
 import orderIcon from '../assets/images/order_icon.png'
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
 import MegaMenu from "../../components/MegaMenuComponents/MegaMenuComponent";
-import { getSubscriptions } from '../../redux/actions/siteActions'
+import { getSubscriptions, setRedirectToOrder } from '../../redux/actions/siteActions'
 
 const OrderPage = (props) => {
   const { auth, subscriptions } = props;
   const totalItem = props.cart.length;
   const totalFavorite = props.favorite.items.length;
 
-  const orders = (props.orders)? props.orders : [];
+  const orders = (props.orders) ? props.orders : [];
+
   useEffect(() => {
     subscriptions(auth.email)
-  },[auth.email, subscriptions])
+  }, [auth.email, subscriptions])
+  
+  useEffect(() => {
+    props.setRedirectToOrder(0)
+  }, [])
+  
   return (
     <>
       <PageLoader loading={props.favorite.pending} />
@@ -79,56 +85,56 @@ const OrderPage = (props) => {
                                 </div>
                               </Card.Body>
                             ) : (
-                              <Card.Body className="pt-5">
-                                <Table responsive className="cardTable">
-                                  <thead>
-                                    <tr>
-                                      <th>Order code</th>
-                                      <th>Product name</th>
-                                      <th>Price</th>
-                                      <th>Amount</th>
-                                      <th>Total</th>
-                                      <th>Order date</th>
-                                      <th>Order status</th>
-                                    </tr>
-                                  </thead>
-                                  {/* end of thead */}
+                                <Card.Body className="pt-5">
+                                  <Table responsive className="cardTable">
+                                    <thead>
+                                      <tr>
+                                        <th>Order code</th>
+                                        <th>Product name</th>
+                                        <th>Price</th>
+                                        <th>Amount</th>
+                                        <th>Total</th>
+                                        <th>Order date</th>
+                                        <th>Order status</th>
+                                      </tr>
+                                    </thead>
+                                    {/* end of thead */}
 
-                                  <tbody>
-                                    {orders.map((order, index) => {
-                                      return (
-                                        <tr key={index}>
-                                          <td>{order.order_code}</td>
-                                          <td>
-                                            <Link
-                                              to={`/product/${order.book_id}`}
-                                            >
-                                              {order.name}
-                                            </Link>
-                                          </td>
-                                          <td>Ksh {order.price}</td>
-                                          <td>{order.quantity}</td>
-                                          <td>Ksh {order.total}</td>
-                                          <td>
-                                            <span className="tableDate">
-                                              {order.created_at}
+                                    <tbody>
+                                      {orders.map((order, index) => {
+                                        return (
+                                          <tr key={index}>
+                                            <td>{order.order_code}</td>
+                                            <td>
+                                              <Link
+                                                to={`/product/${order.book_id}`}
+                                              >
+                                                {order.name}
+                                              </Link>
+                                            </td>
+                                            <td>Ksh {order.price}</td>
+                                            <td>{order.quantity}</td>
+                                            <td>Ksh {order.total}</td>
+                                            <td>
+                                              <span className="tableDate">
+                                                {order.created_at}
+                                              </span>{" "}
+                                              <span className="tableTime">
+                                                14:53
                                             </span>{" "}
-                                            <span className="tableTime">
-                                              14:53
-                                            </span>{" "}
-                                          </td>
-                                          <td>
-                                            <span className="stockInfo">
-                                              {order.status}
-                                            </span>
-                                          </td>
-                                        </tr>
-                                      );
-                                    })}
-                                  </tbody>
-                                </Table>
-                              </Card.Body>
-                            )}
+                                            </td>
+                                            <td>
+                                              <span className="stockInfo">
+                                                {order.status}
+                                              </span>
+                                            </td>
+                                          </tr>
+                                        );
+                                      })}
+                                    </tbody>
+                                  </Table>
+                                </Card.Body>
+                              )}
                           </Card>
                         </Col>
                       </Row>
@@ -149,10 +155,12 @@ const mapStateToProps = state => ({
   favorite: state.favorite,
   orders: state.auth.user.order,
   auth: state.auth.user,
+  site: state.site
 })
 const mapDispatchToProps = dispatch => {
   return {
-    subscriptions : (email) => dispatch(getSubscriptions(email)),
+    subscriptions: (email) => dispatch(getSubscriptions(email)),
+    setRedirectToOrder: (status) => dispatch(setRedirectToOrder(status)),
   }
 }
 

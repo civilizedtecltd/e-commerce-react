@@ -10,7 +10,7 @@ function Product({ product }) {
     useEffect(() => {
         window.paypal
             .Buttons({
-                
+
                 createOrder: (data, actions) => {
                     return actions.order.create({
                         purchase_units: [
@@ -22,7 +22,7 @@ function Product({ product }) {
                                 },
                             },
                         ],
-                        
+
                     });
                 },
                 onApprove: async (data, actions) => {

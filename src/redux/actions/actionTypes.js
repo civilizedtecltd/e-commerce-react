@@ -30,6 +30,7 @@ export const AUTH_NOT_IN_STATE          =   'AUTH_NOT_IN_STATE';
 export const EMPTY_STATUS               =   'EMPTY_STATUS';
 export const SIGNUP_USER                =   'SIGNUP_USER';
 export const SIGNUP_ERROR               =   'SIGNUP_ERROR';
+export const REDIRECT_ORDER             =   'REDIRECT_ORDER';
 
 
 
