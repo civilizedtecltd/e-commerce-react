@@ -9150,13 +9150,12 @@ react-transition-group@^4.0.0, react-transition-group@^4.3.0:
     prop-types "^15.6.2"
 
 react@next:
-  version "0.0.0-b53ea6ca0"
-  resolved "https://registry.yarnpkg.com/react/-/react-0.0.0-b53ea6ca0.tgz#851c25c669c0298a3e3ed818edf83b6b335d1cda"
-  integrity sha512-CPNI9vCE6eAJoI0TgWUdS+ziRafa3iQN4gJwjglj8SsxkwWs1IvKu/vO5Nf5DEZlDJmYP/ikmMaJci41Tkv7IQ==
+  version "17.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-17.0.0-rc.1.tgz#2f7575465517153dcd0d6a596f75f200c1612e2a"
+  integrity sha512-sQ7X+k3zwf6cFQu9pD6FFJMwHwoKAV+EKLWRW4rD1ruyRiFkmC09cjtqFySLtaZbUdzYEc8iy4uOwisJNlXytg==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-    prop-types "^15.6.2"
 
 reactstrap@^8.1.1:
   version "8.1.1"
