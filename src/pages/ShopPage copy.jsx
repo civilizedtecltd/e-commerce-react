@@ -31,7 +31,6 @@ const ShopPage = props => {
 
 
   useEffect(() => {
-    console.log('render shopage')
     const { show, page } = pagination
     const { higherPrice, lowerPrice } = priceFilter;
        stageList(id);
@@ -45,7 +44,7 @@ const ShopPage = props => {
        return getBooksByFilter(page, show, filter_type, filter_id);
     } else if (page && show && lowerPrice && higherPrice) {
        return filterByPrice(page, show, lowerPrice, higherPrice);
-    } else if (!isNaN(id) && id && title && page && show) {
+    } else if (typeof id ==="number" && id && title && page && show) {
       console.log('fetch by catrr')
       return booksByCategory(id, page, show);
     }
@@ -54,8 +53,6 @@ const ShopPage = props => {
     }
 
     return ()=>{
-    console.log('unmount shopage')
-
       stageList(id);
       if (page && show && sortBy) {
          filterShortByType(page, show, sortBy);

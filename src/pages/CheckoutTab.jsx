@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
 import { setDeliveryAddress, setPaymentDetails } from '../redux/actions/shopActions';
-import { confirmOrder } from '../redux/actions/authActions';
+import { confirmOrder, setPayment } from '../redux/actions/authActions';
 import { clearPromo } from '../redux/actions/shopActions';
 import { setRedirectToOrder } from '../redux/actions/siteActions';
 import PaymentsMethods from './PaymentMethods';
@@ -40,7 +40,6 @@ const CheckoutTab = (props) => {
     message: ''
   });
 
-
   useEffect(() => {
     if (props.redirect_order) {
       setTimeout(() => {
@@ -58,7 +57,7 @@ const CheckoutTab = (props) => {
     }
   }, [props.status.error, props])
 
-  const paymentDetails = props.payment;
+  const paymentDetails = props.payment
 
   const deliveryCost = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.price : props.delivery[0].price;
   const deliveryTime = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.delivery_time : props.delivery[0].delivery_time;
@@ -140,11 +139,9 @@ const CheckoutTab = (props) => {
       step_3_tab.classList.add('active-tab')
       setStep({ prev: 2, next: 3 })
     }
-
   }
 
   const handleOnChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
   const handleTermsCheck = () => {
     setFormData({
       ...formData,
@@ -159,14 +156,20 @@ const CheckoutTab = (props) => {
     })
   }
 
-  const getPaymentDetails = (data) => {
-    props.getPaymentMethod(data);
-    props.setPayment({
-      ...paymentDetails,
-      ...data
-    });
+  const handleEstate = e => {
+    const { id, delivery_name, delivery_time, price } = props.delivery[e.target.value]
+    setFormData({ ...formData, estate: delivery_name })
+    props.setPayment({ method: "swype", delivery: id, deliveryInfo: { id, delivery_name, delivery_time, price } })
+    props.getPaymentMethod({ method: "swype", delivery: id, deliveryInfo: { id, delivery_name, delivery_time, price } });
   }
 
+  const getPaymentDetails = (data) => {
+    props.getPaymentMethod(data);
+    /* props.setPayment({
+      ...paymentDetails,
+      ...data
+    }) */
+  }
 
   const confirmOrder = (paymentInfo) => {
     const books = [];
@@ -178,7 +181,6 @@ const CheckoutTab = (props) => {
     });
 
     const promoId = (props.promo) ? props.promo.id : null;
-
     props.confirmOrder({
       address: formData,
       payment: { method: paymentDetails.method, info: paymentInfo },
@@ -238,7 +240,12 @@ const CheckoutTab = (props) => {
 
     props.confirmOrder({
       address: formData,
-      payment: { method: paymentDetails.method, info: { mpesa_number: paymentDetails.mpesa_number, price: props.costWithDelivery } },
+      payment: {
+        method: paymentDetails.method,
+        delivery_time: paymentDetails.deliveryInfo.delivery_time,
+        delivery_cost: paymentDetails.deliveryInfo.price,
+        info: { mpesa_number: paymentDetails.mpesa_number, price: props.costWithDelivery }
+      },
       delivery: paymentDetails.delivery,
       books,
       promo: promoId,
@@ -297,14 +304,19 @@ const CheckoutTab = (props) => {
                           <input type="text" name='last_name' id="last-name" className="form-control" value={formData.last_name} onChange={handleOnChange} />
                         </Col>
 
-                        <Col sm={12} className="form-group">
+                        {/* <Col sm={12} className="form-group">
                           <label htmlFor="estate">Estate</label>
                           <input type="text" name="estate" id="estate" className="form-control" onChange={handleOnChange} />
-                        </Col>
+                        </Col> */}
 
                         <Col col={12} className="form-group">
-                          <label htmlFor="country">Country</label>
-                          <input type="text" name="country" id="country" className="form-control" onChange={handleOnChange} />
+                          <label htmlFor="country">Estate</label>
+                          <select name="estate" id="estate" className="form-control" onChange={handleEstate}>
+                            <option value="">--Select one--</option>
+                            {props.delivery.map((itm, i) =>
+                              <option key={itm.id} value={i}>{itm.delivery_name}</option>
+                            )}
+                          </select>
                         </Col>
 
                         <Col col={12} className="form-group">
@@ -367,7 +379,7 @@ const CheckoutTab = (props) => {
                         </Col>
                       </Row>
                       <Col className="text-right p-0">
-                        <Button className="btn btn-primary cart-btn-next" disabled={(!formData.terms || !formData.policy) ? true : false} onClick={handleNext}> Next</Button>
+                        <Button className="btn btn-primary cart-btn-next" disabled={(!formData.terms || !formData.policy || !formData.estate) ? true : false} onClick={handleNext}> Next</Button>
                       </Col>
                     </Form>
                   </Col>
@@ -427,10 +439,10 @@ const CheckoutTab = (props) => {
                     <Col sm="6" className="mt-4">
                       <ul className="orderConfrimationList text-large">
                         <li><strong>Product(s) Price : </strong>Ksh {props.productPrice}</li>
-                        <li><strong>Delivery method : </strong> {(!isEmpty(paymentDetails) && paymentDetails.delivery === 0) ? 'Standard' : 'Express'}</li>
-                        <li><strong>Delivery cost : </strong>Ksh {deliveryCost}</li>
+                        <li><strong>Delivery method : </strong> {paymentDetails?.deliveryInfo?.delivery_name}</li>
+                        <li><strong>Delivery cost : </strong>Ksh {paymentDetails?.deliveryInfo?.price}</li>
                         <li><strong>In Total: </strong>Ksh {props.costWithDelivery}</li>
-                        <li><strong>Expected arrival : </strong>  {futureDate(deliveryTime)}</li>
+                        <li><strong>Expected arrival : </strong>  {futureDate(paymentDetails?.deliveryInfo?.delivery_time)}</li>
                       </ul>
                     </Col>
                   </Row>
@@ -438,7 +450,7 @@ const CheckoutTab = (props) => {
                   <Row className="form-group mt-5">
                     <div className="col-12 d-flex justify-content-between">
                       <button type="button" className="btn btnSecondary" onClick={handlePrev} >Prev</button>
-                      <button type="button" className="btn btnSecondary" onClick={handleNext} >Next</button>
+                      <button type="button" className="btn btnSecondary" onClick={handleNext} disabled={iframe === ""} >Next {iframe === "" && <span className="fa fa-spinner fa-spin" />}</button>
                       {(() => {
                         switch (paymentDetails.method) {
                           case 'payPal':
@@ -488,7 +500,7 @@ const CheckoutTab = (props) => {
         <Alert show={alert.status} variant={alert.type} onClose={() => setAlert({ ...alert, status: false })} dismissible>
           <p>{alert.message}</p>
         </Alert>
-      </Container>
+      </Container >
 
       {/* <Modal show = {show} onHide = { handleClose }>
             <Modal.Header className={"border-0"} closeButton>
@@ -514,7 +526,7 @@ const mapStateToProps = state => {
     ...state.auth,
     ...state.shop,
     ...state.site,
-    delivery: state.shop.deliveryMethod
+    delivery: state.shop.deliveryMethod,
   }
 }
 

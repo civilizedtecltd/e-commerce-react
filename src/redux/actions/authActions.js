@@ -129,9 +129,9 @@ const deletePayment = (id) => dispatch => {
 
 const confirmOrder = (data) => dispatch => {
     setAuthToken();
-    console.log('order data send', data);
     axios.post(URL._CONFIRM_ORDER, { ...data })
         .then(res => {
+            if(res.data?.mail) localStorage.setItem('usr_mail', JSON.stringify(res.data.mail))
             dispatch({
                 type: Types.CONFIRM_ORDER,
                 payload: [...res.data.data]
@@ -142,8 +142,6 @@ const confirmOrder = (data) => dispatch => {
             //return window.location = '/my-order'
         })
         .catch(error => {
-            console.log(error.response)
-
             dispatch({
                 type: Types.CONFIRM_ORDER_ERROR,
                 payload: error.response.data

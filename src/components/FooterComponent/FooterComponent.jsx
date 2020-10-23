@@ -42,13 +42,13 @@ function FooterComponent(props) {
                 <h4 className="footerWidgetHeader">Contact us</h4>
                 <ul className="getInTouchList">
                   <li>
-                    <Link to="mailto:you@example.com" title="click to mail us">nobelPay@example.com</Link>
+                    <Link to="mailto:you@example.com" title="click to mail us">info@abookstore.co.ke</Link>
                   </li>{/*  end of li */}
                   <li>
-                    <Link to="tele:1234567890" title="click to call us">+(123) 456 7890</Link>
+                    <Link to="tele:1234567890" title="click to call us">0745203001</Link>
                   </li>{/*  end of li */}
                   <li>
-                    <p>Your long address, city, region, zip code</p>
+                    <p>P.O. BOX 50726 , Nairobi , City Square. 00200</p>
                   </li>{/*  end of li */}
                 </ul>{/*  end of getInTouchList */}
               </div>{/*  end of footerWidget */}

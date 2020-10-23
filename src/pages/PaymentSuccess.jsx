@@ -15,23 +15,26 @@ function PaymentSuccess(props) {
     ref = ""
   }
   const order_ref_decode = atob(ref)
-  //console.log('statu', order_ref_decode, atob(ref), useParams())
 
   useEffect(() => {
     setAuthToken();
     const order_ref = atob(atob(localStorage.getItem('or') || ''))
+    const user_mail = JSON.parse(localStorage.getItem('usr_mail'))
+
     if (order_ref_decode === order_ref) {
 
-      axios.post(URL._SET_PAY_SUCCESS, { order_ref })
+      axios.post(URL._SET_PAY_SUCCESS, { order_ref, user_mail })
         .then(res => {
           if (res?.data?.success) {
             setMsg(1)
             localStorage.removeItem('or')
+            localStorage.removeItem('usr_mail')
             setTimeout(() => {
-              window.top.location.href = `${window.location.origin}/my-order`
+             window.top.location.href = `${window.location.origin}/my-order`
             }, 3000);
           } else {
             localStorage.removeItem('or')
+            localStorage.removeItem('usr_mail')
             setMsg(2)
             setTimeout(() => {
               window.top.location.href = `${window.location.origin}/my-order`

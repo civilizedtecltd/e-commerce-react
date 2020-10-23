@@ -12,19 +12,17 @@ import '../assets/css/theme.css'
 /* import visa from '../assets/images/payment/visa.png'; */
 /* import amex from './assets/images/Amex-icon.jpg' */
 
-import master_card from '../assets/images/payment/master.png'
-import visa from '../assets/images/payment/visa.png'
 //import paypal_icon from '../assets/images/payment/paypal2.png'
-import amex from '../assets/images/payment/amex.png'
+// import master_card from '../assets/images/payment/master.png'
+// import visa from '../assets/images/payment/visa.png'
+// import amex from '../assets/images/payment/amex.png'
+// import visa_master from '../assets/images/payment/visa_master_cart.png'
+// import Paypal from '../assets/images/payment/paypal.png'
+// import Mpesa from '../assets/images/payment/mpesa.png'
+// import Discover from '../assets/images/payment/Discover.jpg'
+// import UnionPay from '../assets/images/payment/UnionPay_logo.svg'
 
-
-import visa_master from '../assets/images/payment/visa_master_cart.png'
-import Paypal from '../assets/images/payment/paypal.png'
-import Mpesa from '../assets/images/payment/mpesa.png'
-import Discover from '../assets/images/payment/Discover.jpg'
-import UnionPay from '../assets/images/payment/UnionPay_logo.svg'
-
-import './assets/paymentbar.css';
+// import './assets/paymentbar.css';
 
 
 const PaymentMethods = (props) => {
@@ -52,8 +50,6 @@ const PaymentMethods = (props) => {
         }
     }, []);
 
-
-
     const checkDelivery = (e) => {
 
         if (e.target.name === 'standard') {
@@ -62,11 +58,11 @@ const PaymentMethods = (props) => {
                 express: false
             })
 
-            props.callback({
+            /* props.callback({
                 method: paymentType,
                 delivery: 1,
                 deliveryInfo: props.delivery[0]
-            });
+            }); */
 
         }
 
@@ -76,11 +72,11 @@ const PaymentMethods = (props) => {
                 express: true
             })
 
-            props.callback({
+            /* props.callback({
                 method: paymentType,
                 delivery: 2,
                 deliveryInfo: props.delivery[1]
-            });
+            }); */
         }
     }
 
@@ -162,20 +158,31 @@ const PaymentMethods = (props) => {
         </div> */}
         {/* ======================================================  */}
 
-        <div className="row d-flex align-items-center">
+        <div className="row d-flex align-items-center m-3">
             <div className="col-md-3">
                 <h3>Payment Mobile Number:</h3>
             </div>
             <div className="col-md-4">
                 <div className="input-group">
-                    <input type="text" className="form-control" name="payment_number" onChange={updatePaymentInfo} value={props.payment.payment_number} />
+                    <input type="text" className="form-control" name="payment_number" onChange={updatePaymentInfo} />
                 </div>
             </div>
             <div className="col-md-3">
                 {props.inputErr && <Alert variant="danger" className="ml-2">{props.inputErr}</Alert>}
             </div>
         </div>
-        <div className="payment-header-card mt-3 d-flex justify-content-between">
+        <div className="row payment-header-card m-3">
+            <div className="col-4">
+                <p>Delivery Place: {props.payment?.deliveryInfo?.delivery_name}</p>
+            </div>
+            <div className="col-4">
+                <p>Delivery Time : {props.payment?.deliveryInfo?.delivery_time} days</p>
+            </div>
+            <div className="col-4">
+                <p>Delivery Cost : {props.payment?.deliveryInfo?.price} Ksh</p>
+            </div>
+        </div>
+        {/* <div className="payment-header-card mt-3 d-flex justify-content-between">
             <div>
                 <Form.Check
                     custom
@@ -193,9 +200,9 @@ const PaymentMethods = (props) => {
                     <span className="shippingCost"><strong>Time:</strong> {props.delivery ? 24 * props.delivery[0].delivery_time : 24 * 7} hours</span> <span className="shippingPrice pl-3 pr-3"><strong>Price:</strong> Ksh {props.delivery ? props.delivery[0].price : '0'}</span>
                 </div>
             </div>
-        </div>
+        </div> */}
 
-        <div className="payment-header-card mt-3 d-flex justify-content-between">
+        {/* <div className="payment-header-card mt-3 d-flex justify-content-between">
             <div>
                 <Form.Check
                     custom
@@ -218,7 +225,8 @@ const PaymentMethods = (props) => {
                     </span>
                 </div>
             </div>
-        </div>
+        </div> */}
+
         <div className="mt-3">
             <Alert show={alert.status} variant={alert.type} onClose={() => setAlert({ ...alert, status: false })} dismissible>
                 <p>{alert.message}</p>

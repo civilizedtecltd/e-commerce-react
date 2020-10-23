@@ -5,11 +5,11 @@
   },
   {
     "name":"How to place an order",
-    "url": ""
+    "url": "/place/order"
   },
   {
     "name":"Return",
-    "url": ""
+    "url": "refunds"
   },
   {
     "name":"Terms & Conditions",
@@ -17,14 +17,14 @@
   },
   {
     "name":"Delivery details",
-    "url": ""
+    "url": "/delivery/details"
   },
   {
     "name":"Privacy Policy",
-    "url": ""
+    "url": "privacy"
   },
   {
     "name":"Blog",
-    "url": ""
+    "url": "https://blog.abookstore.co.ke/"
   }
 ]

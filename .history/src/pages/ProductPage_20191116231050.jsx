@@ -35,7 +35,6 @@ function ProductPage(props) {
     setShow(true)
   };
 
-  console.log(window.localStorage.getItem('checkoutItems'))
 
   const book = (props.shop.book !== undefined ) ? props.shop.book : false;
 

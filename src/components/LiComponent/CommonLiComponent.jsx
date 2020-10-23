@@ -15,7 +15,7 @@ function Li({ListClass,Title}) {
 function Lia({ListClass,Title,Url}) {
    return(
     <li className={ListClass}>
-      <Link to={Url}>{Title}</Link>
+      <a href={Url}>{Title}</a>
     </li>
    )
 }
