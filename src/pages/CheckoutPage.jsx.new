@@ -52,7 +52,7 @@ const CheckoutPage = (props) => {
                     <tr key={index}>
                       <td className="font-weight-bold" width="37%" >
                         <label>{product.name}</label>
-                        <img src={product.cover_images.img_1} alt="" height="50px" width="50px" />         
+                        <img loading="lazy" src={product.cover_images.img_1} alt="" height="50px" width="50px" />         
                         </td>
                       <td className="text-center font-weight-bold" width="32%">{product.short_description}</td>
                       <td className="text-center font-weight-bold" width="5%">{product.quantity}</td>

@@ -1,7 +1,7 @@
 [
   {
     "name":"Order status",
-    "url": "my-order"
+    "url": "/my-order"
   },
   {
     "name":"How to place an order",
@@ -9,7 +9,7 @@
   },
   {
     "name":"Return",
-    "url": "refunds"
+    "url": "/refunds"
   },
   {
     "name":"Terms & Conditions",
@@ -21,7 +21,7 @@
   },
   {
     "name":"Privacy Policy",
-    "url": "privacy"
+    "url": "/privacy"
   },
   {
     "name":"Blog",

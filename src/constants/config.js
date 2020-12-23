@@ -5,7 +5,7 @@ require('dotenv').config({ path: path.join('/home/dell/Freelancing/book_eCommerc
 class APP_URL {
     constructor() {
         //this.BASE = `https://admin.abookstore.co.ke`;
-        this.BASE = ` http://127.0.0.1:3333`;
+        this.BASE = `http://127.0.0.1:3333`;
         this.API = `${this.BASE}/api`;
     }
 
@@ -38,7 +38,7 @@ class APP_URL {
     }
 
     _ALL_BOOKS(page, show, keyword) {
-        return `${this.API}/product/all-books/${page}/${show}${keyword ?"/" +keyword : ''}`;
+        return `${this.API}/product/all-books/${page}/${show}${keyword ? "/" + keyword : ''}`;
     }
 
     _SEARCH_BOOKS(page, show, keyword) {
@@ -85,7 +85,7 @@ class APP_URL {
         return `${this.API}/get_pay_iframe`;
     }
 
-    get _SET_PAY_SUCCESS(){
+    get _SET_PAY_SUCCESS() {
         return `${this.API}/swype_success`
     }
 
@@ -137,7 +137,8 @@ class APP_URL {
         return `${this.API}/filter/book-covers`
     }
 
-    _GET_FILTERED_BOOKS(filter_type, filter_id, page, show) {
+    _GET_FILTERED_BOOKS(filter_type, filter_id, page, show) {   
+        console.log('************', `${this.API}/filter/${filter_type}/${filter_id}/${page}/${show}`)
         return `${this.API}/filter/${filter_type}/${filter_id}/${page}/${show}`
     }
 

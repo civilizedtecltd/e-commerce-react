@@ -7,9 +7,9 @@
 .productDetailsTabs .nav-tabs .nav-link:hover,
 .productDetailsTabs .nav-tabs .nav-link:focus{
     background-color: transparent;
-    color: #3897cf;
+    color:#0b7bc1;
     border-color: transparent;
-    border-bottom: 2px solid #3897cf;
+    border-bottom: 2px solid#0b7bc1;
 }
 .productDetailsTabs .nav-tabs{
     margin-bottom: 1rem;

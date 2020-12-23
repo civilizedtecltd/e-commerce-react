@@ -67,27 +67,29 @@ function ImageCarousel(props) {
 
         <div className="row productImageGallery">
             <LazyLoad once={true} height={200}>
-                <div className="col-sm-3">
-                    <div className="productGallery">
-                        {
-                            images.map((item, index) =>
-                                <div key={index} className="singleItem bgGray p-2 mb-2">
-                                    <img src={item} alt="" onClick={ImgHandler} className="CursorPointerProduct" />
-                                </div>)
-                        }
-                    </div>
-                </div>
-                {/* {console.log(ProductCarouselImg[0])} */}
-                <div className="col-sm-9">
-                    <div className="productSingleView bgGray p-3 text-center">
-                        <span onClick={() => setHidden(true)} > <i className="fas fa-expand-arrows-alt Modal CursorPointerProduct"></i></span>
-                        <Image src={coverImages} id={"photo"} alt="image" />
-                        <div className="mt-3">
-                            <span className="mr-5 CursorPointerProduct" onClick={() => PrevPhoto()} ><i className="fas fa-arrow-left fa-2x"></i></span>
-                            <span className="ml-5 CursorPointerProduct" onClick={() => NextPhoto()} ><i className="fas fa-arrow-right fa-2x"></i></span>
+                <div className="row">
+                    <div className="col-sm-3">
+                        <div className="productGallery">
+                            {
+                                images.map((item, index) =>
+                                    <div key={index} className="singleItem bgGray p-2 mb-2">
+                                        <img loading="lazy" src={item} alt="img" onClick={ImgHandler} className="CursorPointerProduct" />
+                                    </div>)
+                            }
                         </div>
                     </div>
-
+                    {/* {console.log(ProductCarouselImg[0])} */}
+                    <div className="col-sm-9">
+                        <div className="productSingleView bgGray p-3 text-center">
+                            <span onClick={() => setHidden(true)} > <i className="fas fa-expand-arrows-alt Modal CursorPointerProduct"></i></span>
+                            <Image src={coverImages} id={"photo"} alt="image" />
+                            <div className="mt-3">
+                                <span className="mr-5 CursorPointerProduct" onClick={() => PrevPhoto()} ><i className="fas fa-arrow-left fa-2x"></i></span>
+                                <span className="ml-5 CursorPointerProduct" onClick={() => NextPhoto()} ><i className="fas fa-arrow-right fa-2x"></i></span>
+                            </div>
+                        </div>
+    
+                    </div>
                 </div>
             </LazyLoad>
         </div>

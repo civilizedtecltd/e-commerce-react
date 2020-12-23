@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import {Container, Row, Col, Form, Button, Alert} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SocialListComponent from '../../components/authComponents/SocialListComponent';
-import { InputFrom, SelectFrom } from '../../components/FromComponents/InputComponent';
+import { InputFrom } from '../../components/FromComponents/InputComponent';
 import { URL } from '../../constants/config'
 import './assets/css/auth.css';
 import PageLoader from "../../components/pageLoader/PageLoaderComponent";
@@ -93,7 +93,7 @@ const SignUp = (props) => {
             <Row>
               <Col sm={6}>
                 <div className="logoWrapper mt-4 mb-4">
-                  <h1 className="logoText"><Link to="/"><img alt={'Logo'} src={Logo} style={{width:"100px"}} /></Link></h1>
+                  <h1 className="logoText"><Link to="/"><img loading="lazy" alt={'Logo'} src={Logo} style={{width:"100px"}} /></Link></h1>
                 </div>
               </Col>
             </Row>

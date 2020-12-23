@@ -60,7 +60,7 @@ const CheckoutPage = (props) => {
           <Row>
             <Col className="text-center">
               <div className="logoWrapper">
-                <h1 className="logoText"><Link to="/"><img alt='A Book Store' src={Logo} style={{width:"150px", marginTop:"35px"}}/></Link></h1>
+                <h1 className="logoText"><Link to="/"><img loading="lazy" alt='A Book Store' src={Logo} style={{width:"150px", marginTop:"35px"}}/></Link></h1>
               </div>
             </Col>
           </Row>
@@ -78,7 +78,7 @@ const CheckoutPage = (props) => {
                     { cartItems.map((item,index)=>(
                       <div key={index} className="productCartSingle d-flex align-items-center mb-2">
                           <div className="cartProductMedia bgGray">
-                            <img src={item.cover_images.img_1} alt="" />
+                            <img loading="lazy" src={item.cover_images.img_1} alt="" />
                           </div>
                           <div className="cartProductDes pl-3">
                             <h3>

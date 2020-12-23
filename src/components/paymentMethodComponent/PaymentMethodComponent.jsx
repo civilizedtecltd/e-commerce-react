@@ -136,7 +136,7 @@ function PaymentMethodComponent(props) {
                     </Col>
 
                     <Col>
-                      <img src="" alt="" />
+                      <img loading="lazy" src="" alt="none" />
                     </Col>
                   </Row>
 
@@ -189,7 +189,7 @@ function PaymentMethodComponent(props) {
                     </Col>
 
                     <Col sm="2">
-                      <img src="" alt="" />
+                      <img loading="lazy" src="" alt="none" />
                     </Col>
                   </Row>
 

@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import  './assets/offerPage.css';
 import '../assets/css/theme.css';
 import NewBookComponent from '../components/offerPageComponents/NewBookComponent';
-import ImgSlick from '../components/offerPageComponents/ImgSlickComponent';
+// import ImgSlick from '../components/offerPageComponents/ImgSlickComponent';
 import {NewsLetterComponent} from '../components/offerPageComponents/NewsLetterComponent';
 import FooterComponent from '../components/FooterComponent/FooterComponent';
 import HeaderComponent from "../components/header/Header";
@@ -13,7 +13,7 @@ import MobileHeader from "../components/header/MobileHeader";
 import {NewBookDB}from '../inc/offerPage/NewBook';
 import blogPostImage1 from '../assets/images/post_img_01.jpg';
 import PageLoader from "../components/pageLoader/PageLoaderComponent";
-import bannerImage from '../assets/images/banner_img_01.jpg'
+import bannerImage from '../assets/images/banner_img_01.webp'
 
 
 const offerPage = (props) => {
@@ -68,7 +68,7 @@ const offerPage = (props) => {
               </Col>
             </Row>
             <div className="ImageSlickOfferPage">
-              <ImgSlick images={image}/>
+              <img loading="lazy"Slick images={image} alt="product"/>
             </div>
           </Container>
         </section>
@@ -79,7 +79,7 @@ const offerPage = (props) => {
               <Col sm="8">
                 <article className="singleArticle articleArea">
                   <div className="articleMedia">
-                    <img src={blogPostImage1} alt="" />
+                    <img loading="lazy" src={blogPostImage1} alt="" />
                   </div>
 
                   <div className="articleBody p-5">
@@ -92,7 +92,7 @@ const offerPage = (props) => {
               <Col sm="4">
                 <article className="singleArticle articleArea">
                   <div className="articleMedia">
-                    <img src={blogPostImage1} alt="" />
+                    <img loading="lazy" src={blogPostImage1} alt="" />
                   </div>
 
                   <div className="articleBody p-3">
@@ -103,7 +103,7 @@ const offerPage = (props) => {
 
                 <article className="singleArticle articleArea mt-3">
                   <div className="articleMedia">
-                    <img src={blogPostImage1} alt="" />
+                    <img loading="lazy" src={blogPostImage1} alt="" />
                   </div>
 
                   <div className="articleBody p-3">

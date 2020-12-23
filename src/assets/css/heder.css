@@ -22,6 +22,7 @@ outline-offset: 0px;
     font-size: 16px;
     font-family: 'Crimson Text', serif;
     font-weight: 600;
+    font-display: swap
 }
 
 .navbar-expand-lg .navbar-nav .active .nav-link,
@@ -30,7 +31,7 @@ outline-offset: 0px;
 }
 
 .navbar-expand-lg a.active{
-    color: #3897cf !important;
+    color:#0b7bc1 !important;
 }
 .cartBadge{
     position: relative;
@@ -71,7 +72,7 @@ width: 50%;
     font-weight: 600;
 }
 .mobileNav li a:hover{
-    color: #3897cf;
+    color:#0b7bc1;
 }
 
 /*Modal Footer*/
@@ -90,8 +91,8 @@ width: 50%;
     color: #363636 !important;
 }
 .btn-border:hover {
-    color: #3897cf!important;
-    border: 2px solid #3897cf !important;
+    color:#0b7bc1!important;
+    border: 2px solid#0b7bc1 !important;
 }
 
 .customer-support{
@@ -105,7 +106,7 @@ width: 50%;
 
 .customer-support span:hover,
 .customer-support i:hover{
-    color: #3897CF;
+    color:#0b7bc1;
 }
 
 .Profile-avatar {
@@ -120,7 +121,7 @@ width: 50%;
     border-radius: 50px;
 }
 .headPopBarList a.signUpBG {
-    background-color: #3897cf;
+    background-color:#0b7bc1;
     padding: 5px 10px 5px 10px;
     color: #fff !important;
 }
@@ -175,8 +176,9 @@ width: 50%;
     font-size: 16px;
     font-family: 'Crimson Text', serif;
     font-weight: 600;
+    font-display: swap
 }.inner-mega-menu ul li a:hover{
-     color: #3897cf;
+     color:#0b7bc1;
 }
 
 .nav-bar ul li:hover .mega-menu {

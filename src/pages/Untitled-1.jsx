@@ -42,7 +42,7 @@ function Product({ product }) {
         return (
             <div>
                 <h1>Congrats, you just bought {product.name}!</h1>
-                <img alt={product.description} src={'image'} />
+                <img loading="lazy" alt={product.description} src={'image'} />
             </div>
         );
     }
@@ -53,7 +53,7 @@ function Product({ product }) {
             <h1>
                 {product.description} for ${product.price}
             </h1>
-            <img alt={product.description} src={product.image} width="200" />
+            <img loading="lazy" alt={product.description} src={product.image} width="200" />
             <div ref={paypalRef} />
         </div>
     );

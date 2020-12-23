@@ -73,7 +73,7 @@ function HomeCarouselFooter() {
             PartnerDB.map((Partner, index) => (
             <ul className=" partnerCarouselItem" key = {index}>
                 <li className="item">
-                <img src = { Partner } alt="" />
+                <img loading="lazy" src = { Partner } alt="abookstore partner" />
                 </li>
             </ul>
             ))

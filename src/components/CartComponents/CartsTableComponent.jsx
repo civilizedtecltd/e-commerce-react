@@ -38,7 +38,7 @@ const CartsTableComponent = (props) => {
             <td>
               <div className="cartProductDetails d-flex flex-fill align-items-center">
                 <div className="cartProductMedia bgGray ">
-                  <img src={item.cover_images.img_1} alt="" />
+                  <img loading="lazy" src={item.cover_images.img_1} alt="book-cover" />
                 </div>
                 <div className="cartProductTitle">
                   <h3>

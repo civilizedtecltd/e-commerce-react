@@ -83,7 +83,7 @@ const Login = (props) => {
               <Col sm={6}>
                 <div className="logoWrapper mt-4 mb-4">
                   <h1 className="logoText">
-                    <Link to="/"><img alt={'Logo'} src={Logo} style={{width:"100px"}} /></Link>
+                    <Link to="/"><img loading="lazy" alt={'Logo'} src={Logo} style={{width:"100px"}} /></Link>
                   </h1>
                 </div>
               </Col>

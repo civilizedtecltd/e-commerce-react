@@ -36,7 +36,7 @@
 }
 .authName span{
     font-size: 18px;
-    color: #3897cf;
+    color:#0b7bc1;
 }
 .authName a{text-decoration: underline!important;}
 .product-single-Price{
@@ -59,11 +59,11 @@
 }
 .linkBtnBorder{
     background-color: white !important;
-    color: #3897cf;
-    border: 1px solid #3897cf !important;
+    color:#0b7bc1;
+    border: 1px solid#0b7bc1 !important;
 }
 .linkBtnBorder:hover{
-    color: #3897cf !important;
+    color:#0b7bc1 !important;
 }
 
 .favorite-btn{
@@ -90,8 +90,8 @@
 }
 .productNavTabs .nav-link.active, .productNavTabs .show>.nav-link{
     background-color: transparent;
-    color: #3897cf;
-    border-bottom:2px solid #3897cf;
+    color:#0b7bc1;
+    border-bottom:2px solid#0b7bc1;
 }
 .productTabContent{padding: 0 15px;}
 .specifications li{
@@ -122,9 +122,9 @@
     font-weight: 600;
     padding-left: 0px;
 }
-.helpNavList .active .nav-link{color: #3897cf;font-weight: 700;}
+.helpNavList .active .nav-link{color:#0b7bc1;font-weight: 700;}
 .helpNavList .active .nav-link:hover{margin-left: 0px;}
-.helpNavList .nav-link:hover{color: #3897cf;margin-left: 5px;}
+.helpNavList .nav-link:hover{color:#0b7bc1;margin-left: 5px;}
 .helpPara p{margin-bottom: 10px;font-weight: 400;}
 .slick-prev:before, .slick-next:before{color: #bfbfbf;font-size: 1.5rem;}
 /*.slick-next:before {*/

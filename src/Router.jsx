@@ -1,36 +1,11 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 
-// User Area
-import Login from './pages/auth/Login';
-import Logout from './pages/auth/Logout'
-import SignUp from './pages/auth/SignUp';
-import ForgotPassword from './pages/auth/ForgotPassword';
-import ChangePassword from './pages/auth/changePassword';
-import VerifyCode from './pages/auth/VerifyCode';
-
-// Logged User Profile
-import UserProfile from './pages/users/UserProfile';
-import Subscription from './pages/users/Subscription';
-import OrderPage from './pages/users/OrderPage';
-import PaymentPage from './pages/users/PaymentPage';
 
 // Theme Page
 import Home from './pages/Home';
-import OfferPage from './pages/offerPage';
-import CartPage from './pages/CartPage';
-import CheckoutPage from './pages/CheckoutPage';
-import FavoritesPage from './pages/FavoritesPage';
-import ShopPage from './pages/ShopPage';
-import ProductPage from "./pages/ProductPage";
 
 import PrivateRoute from './components/authComponents/PrivateRoute';
-import ErrorPage from './pages/Error404';
-import TermConditions from "./pages/terms/TermConditions";
-import Privacy from "./pages/terms/Privacy";
-import Refunds from "./pages/terms/Refunds";
-import DeliveryDetails from "./pages/terms/DeliveryDetails";
-import PlaceOrder from "./pages/terms/PlaceOrder";
 
 import store from './redux/store';
 import { favoriteNotInState } from './redux/actions/favoriteActions';
@@ -39,10 +14,37 @@ import { shopNotInState } from './redux/actions/shopActions';
 import { authNotInState } from "./redux/actions/authActions";
 import { siteNotInState } from './redux/actions/siteActions';
 import isEqual from 'lodash/isEqual';
-import PaymentSuccess from './pages/PaymentSuccess';
+import offerPage from './pages/offerPage';
 
+const PaymentSuccess = lazy(() => import('./pages/PaymentSuccess'));
 
+// Logged User Profile
+const UserProfile = lazy(() => import('./pages/users/UserProfile'))
+const Subscription = lazy(() => import('./pages/users/Subscription'))
+const OrderPage = lazy(() => import('./pages/users/OrderPage'))
+const PaymentPage = lazy(() => import('./pages/users/PaymentPage'))
 
+// User Area
+const Login = lazy(() => import('./pages/auth/Login'))
+const Logout = lazy(() => import('./pages/auth/Logout'))
+const SignUp = lazy(() => import('./pages/auth/SignUp'))
+const ForgotPassword = lazy(() => import('./pages/auth/ForgotPassword'))
+const ChangePassword = lazy(() => import('./pages/auth/changePassword'))
+const VerifyCode = lazy(() => import('./pages/auth/VerifyCode'))
+
+const ErrorPage = lazy(() => import('./pages/Error404'));
+const TermConditions = lazy(() => import("./pages/terms/TermConditions"));
+const Privacy = lazy(() => import("./pages/terms/Privacy"));
+const Refunds = lazy(() => import("./pages/terms/Refunds"));
+const DeliveryDetails = lazy(() => import("./pages/terms/DeliveryDetails"));
+const PlaceOrder = lazy(() => import("./pages/terms/PlaceOrder"));
+
+const OfferPage = lazy(() => import('./pages/offerPage'));
+const CartPage = lazy(() => import('./pages/CartPage'));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
+const FavoritesPage = lazy(() => import('./pages/FavoritesPage'));
+const ShopPage = lazy(() => import('./pages/ShopPage'));
+const ProductPage = lazy(() => import('./pages/ProductPage'));
 
 const Router = () => {
 
@@ -75,31 +77,31 @@ const Router = () => {
     return (
         <Switch /* location={props.location} */>
             <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/swype_success/:ref?" component={PaymentSuccess} />
-            <PrivateRoute path="/profile-settings" component={UserProfile} />
-            <Route path="/forgot-password" component={ForgotPassword} />
-            <Route path="/change-password/:code" component={ChangePassword} />
-            <Route path="/verify-code" component={VerifyCode} />
-            <PrivateRoute path="/email-subscription" component={Subscription} />
-            <PrivateRoute path="/my-order" component={OrderPage} />
-            <PrivateRoute path="/payment-methods" component={PaymentPage} />
-            <Route path="/book-offer" component={OfferPage} />
-            <PrivateRoute path="/cart" component={CartPage} />
-            <PrivateRoute path="/checkout" component={CheckoutPage} />
-            <Route path="/favorites" component={FavoritesPage} />
-            <Route exact path="/shop/category/:id?/:title?" component={ShopPage} />
+            <Route path="/login" render={props => <Suspense fallback={<h1>Loading</h1>}><Login {...props} /></Suspense>} />
+            <Route path="/signup" render={props => <Suspense fallback={<h1>Loading</h1>}><SignUp {...props} /></Suspense>} />
+            <Route path="/swype_success/:ref?" render={props => <Suspense fallback={<h1>Loading</h1>}><PaymentSuccess {...props} /></Suspense>} />
+            <PrivateRoute path="/profile-settings" render={props => <Suspense fallback={<h1>Loading</h1>}><UserProfile {...props} /></Suspense>} />
+            <Route path="/forgot-password" render={props => <Suspense fallback={<h1>Loading</h1>}><ForgotPassword {...props} /></Suspense>} />
+            <Route path="/change-password/:code" render={props => <Suspense fallback={<h1>Loading</h1>}><ChangePassword {...props} /></Suspense>} />
+            <Route path="/verify-code" render={props => <Suspense fallback={<h1>Loading</h1>}><VerifyCode {...props} /></Suspense>} />
+            <PrivateRoute path="/email-subscription" render={props => <Suspense fallback={<h1>Loading</h1>}><Subscription {...props} /></Suspense>} />
+            <PrivateRoute path="/my-order" render={props => <Suspense fallback={<h1>Loading</h1>}><OrderPage {...props} /></Suspense>} />
+            <PrivateRoute path="/payment-methods" render={props => <Suspense fallback={<h1>Loading</h1>}><PaymentPage {...props} /></Suspense>} />
+            <Route path="/book-offer" render={props => <Suspense fallback={<h1>Loading</h1>}><offerPage {...props} /></Suspense>} />
+            <PrivateRoute path="/cart" render={props => <Suspense fallback={<h1>Loading</h1>}><CartPage {...props} /></Suspense>} />
+            <PrivateRoute path="/checkout" render={props => <Suspense fallback={<h1>Loading</h1>}><CheckoutPage {...props} /></Suspense>} />
+            <Route path="/favorites" render={props => <Suspense fallback={<h1>Loading</h1>}><FavoritesPage {...props} /></Suspense>} />
+            <Route exact path="/shop/category/:id?/:title?" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
             <Route exact path="/shop" render={() => <Redirect to={{ pathname: "/shopping", state: { from: location } }} />} />
-            <Route exact path="/shopping" component={ShopPage} />
-            <Route exact path="/shop/category/all/:pageNumber/:showItem/:keyword?" component={ShopPage} />
-            <Route exact path="/shop/filter/category/:id?/:filter_type/:filter_id" component={ShopPage} />
-            <Route path="/product/:id" component={ProductPage} />
-            <Route path="/term/conditions" component={TermConditions} />
-            <Route path="/privacy" component={Privacy} />
-            <Route path="/refunds" component={Refunds} />
-            <Route path="/delivery/details" component={DeliveryDetails} />
-            <Route path="/place/order" component={PlaceOrder} />
+            <Route exact path="/shopping" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
+            <Route exact path="/shop/category/all/:pageNumber/:showItem/:keyword?" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
+            <Route exact path="/shop/filter/category/:id?/:filter_type/:filter_id" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
+            <Route path="/product/:id" render={props => <Suspense fallback={<h1>Loading</h1>}><ProductPage {...props} /></Suspense>} />
+            <Route path="/term/conditions" render={props => <Suspense fallback={<h1>Loading</h1>}><TermConditions {...props} /></Suspense>} />
+            <Route path="/privacy" render={props => <Suspense fallback={<h1>Loading</h1>}><Privacy {...props} /></Suspense>} />
+            <Route path="/refunds" render={props => <Suspense fallback={<h1>Loading</h1>}><Refunds {...props} /></Suspense>} />
+            <Route path="/delivery/details" render={props => <Suspense fallback={<h1>Loading</h1>}><DeliveryDetails {...props} /></Suspense>} />
+            <Route path="/place/order" render={props => <Suspense fallback={<h1>Loading</h1>}><PlaceOrder {...props} /></Suspense>} />
             {/*social link */}
             <Route path='/facebook' component={() => { window.location = 'https://facebook.com'; return null; }} />
             <Route path='/googlePlus' component={() => { window.location = 'https://google.com'; return null; }} />

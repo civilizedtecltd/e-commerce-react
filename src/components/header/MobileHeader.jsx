@@ -43,7 +43,7 @@ const MobileHeader = (props) => {
                         <Col className="col-auto">
                             <div className="headFeature">
                                 <ul className="headFeatureList d-flex justify-content-between">
-                                    <li><i className="fas fa-truck"></i> <span>Free delivery</span></li>
+                                    <li><i className="fas fa-truck"></i> <span>Quick delivery</span></li>
                                     <li><i className="fas fa-award"></i> <span>Genuine goods</span></li>
                                     <li><Link to="#"> <i className="fas fa-headset"></i> <span>Customer support</span></Link></li>
                                 </ul>
@@ -57,7 +57,7 @@ const MobileHeader = (props) => {
                     <Row className="align-items-center justify-content-between">
                         <Col className="col-auto">
                             <div className="logoWrapper">
-                                <h1 className="logoText"><Link to="/"><img src={Logo2} style={{width: "65px"}} alt="logo2" /></Link></h1>
+                                <h1 className="logoText"><Link to="/"><img loading="lazy" src={Logo2} style={{width: "65px"}} alt="logo2" /></Link></h1>
                             </div>
                         </Col>
 

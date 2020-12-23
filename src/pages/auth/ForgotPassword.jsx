@@ -42,7 +42,7 @@ const ForgotPassword = (props) => {
               <Col sm={6}>
                 <div className="logoWrapper mt-4 mb-4">
                   <h1 className="logoText">
-                    <Link to="/"><img src={Logo} style={{width:"300px"}} /></Link>
+                    <Link to="/"><img loading="lazy" src={Logo} style={{width:"300px"}} /></Link>
                   </h1>
                 </div>
               </Col>

@@ -21,7 +21,7 @@ const fetchAllBook = (page, show, keyword) => dispatch => {
 
 const fetchBooksByCategory = (id, page, show) => dispatch => {
   console.log('----------------fetchBooksByCategory')
-  
+
   dispatch(fetchPending())
   axios.get(URL._CATEGORY_BOOKS(id, page, show))
     .then(res => {
@@ -123,6 +123,7 @@ const fetchBooksByFilter = (page, show, filterType, filterId) => dispatch => {
   dispatch(fetchPending());
   axios.get(URL._GET_FILTERED_BOOKS(filterType, filterId, page, show))
     .then(res => {
+      console.log('fetch book by filer', res)
       dispatch(fetchMaxMinPriceByFilter(res.data.price));
       return dispatch({
         type: Types.FETCH_BOOK_BY_FILTER,

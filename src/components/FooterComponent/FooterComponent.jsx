@@ -18,7 +18,7 @@ function FooterComponent(props) {
               <div className="footerWidget">
                 <div className="footerLogo">
                   <div className="logoWrapper">
-                    <h1 className="logoText"><Link to="/"><img src={Logo} /></Link></h1>
+                    <h1 className="logoText"><Link to="/"><img loading="lazy" src={Logo} alt="abooksore logo" /></Link></h1>
                   </div>{/*  end of logoWrapper */}
                 </div>{/*  end of footerLogo */}
               </div>{/*  end of footerWidget */}
@@ -26,7 +26,7 @@ function FooterComponent(props) {
 
             <Col sm="5">
               <div className="footerWidget">
-                <h4 className="footerWidgetHeader">Information</h4>
+                <div className="footerWidgetHeader">Information</div>
                 <ul className="footerLinksList">
                     {footer.map((list, index)=><Lia
                       key={index}
@@ -39,7 +39,7 @@ function FooterComponent(props) {
 
             <Col sm="2">
               <div className="footerWidget">
-                <h4 className="footerWidgetHeader">Contact us</h4>
+                <div className="footerWidgetHeader">Contact us</div>
                 <ul className="getInTouchList">
                   <li>
                     <Link to="mailto:you@example.com" title="click to mail us">info@abookstore.co.ke</Link>
@@ -48,7 +48,7 @@ function FooterComponent(props) {
                     <Link to="tele:1234567890" title="click to call us">0745203001</Link>
                   </li>{/*  end of li */}
                   <li>
-                    <p>P.O. BOX 50726 , Nairobi , City Square. 00200</p>
+                    <p>P.O. BOX 50726 , City Square - 00200</p>
                   </li>{/*  end of li */}
                 </ul>{/*  end of getInTouchList */}
               </div>{/*  end of footerWidget */}
@@ -58,9 +58,9 @@ function FooterComponent(props) {
               <div className="footerWidget">
                 <ul className="footerSocial">
                   {[
-                      {ListClass:"facebook", Url:"facebook",IconName:"fab fa-facebook-f"},
-                      {ListClass:"facebook" ,Url:"instagram",IconName:"fab fa-instagram"},
-                      {ListClass:"facebook",Url:"twitter",IconName:"fab fa-twitter"},
+                      {ListClass:"facebook", Url:"https://www.facebook.com/Abookstore-574617176550119/",IconName:"fab fa-facebook-f"},
+                      {ListClass:"facebook" ,Url:"https://www.instagram.com/abookstore_/",IconName:"fab fa-instagram"},
+                      {ListClass:"facebook",Url:"https://twitter.com/abookstore3",IconName:"fab fa-twitter"},
                     ].map((list,index)=><LiAi
                       key={index}
                       ListClass={list.ListClass}
@@ -85,13 +85,13 @@ function FooterComponent(props) {
             <Col sm="3">
               <ul className="paymentsNav d-flex justify-content-between align-items-center">
                 <li className="paypal">
-                  <Link to="//paypal.com" title="paypal" target="_blank" ><img alt="paypal" src={paypalIcon} title="paypal" /></Link>
+                  <Link to="//paypal.com" title="paypal" rel="noopener noreferrer" target="_blank" ><img loading="lazy" src={paypalIcon} alt="abookstore paypal" title="paypal" /></Link>
                 </li>{/* end of li */}
                 <li className="visa">
-                  <Link to="//visa.com" title="visa" target="_blank"><img alt="visa card" src={visaIcon} title="visa card" /></Link>
+                  <Link to="//visa.com" title="visa" rel="noopener noreferrer" target="_blank"><img loading="lazy" alt="visa card" src={visaIcon} title="visa card" /></Link>
                 </li>{/* end of li */}
                 <li className="master">
-                  <Link to="//www.mastercard.us/en-us.html" title="master card" target="_blank"><img alt="master card" src={masterCardIcon} title="master card" /></Link>
+                  <Link to="//www.mastercard.us/en-us.html" rel="noopener noreferrer" title="master card" target="_blank"><img loading="lazy" alt="master card" src={masterCardIcon} title="master card" /></Link>
                 </li>{/* end of li */}
               </ul>{/* end of paymentsNav */}
             </Col>{/* end of Col */}

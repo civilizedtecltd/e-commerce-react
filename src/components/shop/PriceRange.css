@@ -26,7 +26,7 @@ input[type=range]::-webkit-slider-thumb {
     width: 10px;
     border-radius: 28px;
     background-color: #ffffff;
-    border: 2px solid #3897cf;
+    border: 2px solid#0b7bc1;
     position: relative;
     margin: 5px 0;
     /* Add some margin to ensure box shadow is shown */
@@ -44,7 +44,7 @@ input[type=range]::-webkit-slider-thumb::before {
     left: 100%;
     width: 2000px;
     height: 2px;
-    background-color: #3897cf;
+    background-color:#0b7bc1;
 }
 .multi-range {
     position: relative;

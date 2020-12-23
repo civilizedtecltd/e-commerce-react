@@ -126,19 +126,19 @@ const PaymentMethods = (props) => {
                         <div className="payment-title"> <h4>PayPal accepts</h4> </div>
                         <div className="payment-card-section">
                             <input type="radio" className="radio_item" value="visa" name="item" id="radio2" />
-                            <label className="label_item" htmlFor="radio2"> <img src={visa} alt="visa-icon" /> </label>
+                            <label className="label_item" htmlFor="radio2"> <img loading="lazy" src={visa} alt="visa-icon" /> </label>
 
                             <input type="radio" className="radio_item" value="master" name="item" id="radio4" />
-                            <label className="label_item" htmlFor="radio4"> <img src={master_card} alt="master-card" /></label>
+                            <label className="label_item" htmlFor="radio4"> <img loading="lazy" src={master_card} alt="master-card" /></label>
 
                             <input type="radio" className="radio_item" value="amex" name="item" id="radio3" />
-                            <label className="label_item" htmlFor="radio3"><img src={amex} alt="american-express" /></label>
+                            <label className="label_item" htmlFor="radio3"><img loading="lazy" src={amex} alt="american-express" /></label>
 
                             <input type="radio" className="radio_item" value="Discover" name="item" id="radio1" />
-                            <label className="label_item" htmlFor="radio1"> <img src={Discover} alt="paypal icon" /></label>
+                            <label className="label_item" htmlFor="radio1"> <img loading="lazy" src={Discover} alt="paypal icon" /></label>
 
                             <input type="radio" className="radio_item" value="UnionPay" name="item" id="radio1" />
-                            <label className="label_item" htmlFor="radio1"> <img src={UnionPay} alt="paypal icon" /></label>
+                            <label className="label_item" htmlFor="radio1"> <img loading="lazy" src={UnionPay} alt="paypal icon" /></label>
                         </div>
                     </div>
                 </Tab>

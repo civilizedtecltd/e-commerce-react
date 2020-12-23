@@ -63,7 +63,7 @@ const OrderPage = (props) => {
                               <Card.Body>
                                 <div className="cardHeadDetails clearfix pt-5 text-center">
                                   <div className="orderMedia">
-                                    <img src={orderIcon} alt="" />
+                                    <img loading="lazy" src={orderIcon} alt="" />
                                   </div>
 
                                   <div className="orderSortDes">

@@ -36,14 +36,16 @@ function NewsLetterComponent(props) {
               className="d-flex subscribeForm justify-content-center mt-3"
               onSubmit={handleSubmit}
             >
-              <Form.Group controlId="subscribeEmail" className="mb-2">
-                <Form.Control
-                  type="email"
-                  placeholder="Enter email"
-                  className="mr-2"
-                  onChange={e => setEmail(e.target.value)}
-                />
-              </Form.Group>
+              <label htmlFor="subscribeEmail">
+                <Form.Group controlId="subscribeEmail" className="mb-2">
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    className="mr-2"
+                    onChange={e => setEmail(e.target.value)}
+                  />
+                </Form.Group>
+              </label>
               <Button type="submit" className="mb-2">
                 Subscribe
                 </Button>

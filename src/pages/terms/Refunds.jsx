@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderComponent from "../../components/header/Header";
 import MobileHeader from "../../components/header/MobileHeader";
-import {NewsLetterComponent} from "../../components/offerPageComponents/NewsLetterComponent";
+import { NewsLetterComponent } from "../../components/offerPageComponents/NewsLetterComponent";
 import TermConditionsComponent from '../../components/terms/TermConditionsComponent'
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import { connect } from "react-redux";
@@ -14,7 +14,7 @@ const Refunds = (props) => {
 
     return (
         <>
-            <PageLoader loading={false}/>
+            <PageLoader loading={false} />
             <div className="allWrapper">
 
                 <HeaderComponent
@@ -45,20 +45,9 @@ const Refunds = (props) => {
                                     <div className="helpContentArea">
                                         <h2>Refunds</h2>
                                         <div className="helpPara mt-3">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat.</p>
-                                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                                                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                                sunt in culpa qui officia deserunt mollit anim id est laborum. Minima
-                                                veniam, quis nostrum exercitationem ullam corporis. Ut enim ad minima
-                                                veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi
-                                                ut aliquid.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat.</p>
+                                            <p>Refunds are <b><u>not acceptable</u></b> save for in the event that:-<br />
+                                                <div style={{ marginLeft: 20 }}>1. You are eligible for a full refund of the purchase price, including original shipping<br />costs, only if your return is a result of an error on our part; where we have shipped<br />the incorrect product, or a product that is damaged, or one that does not conform to<br />the description offered on our website. To receive a refund, you must return your<br />ordered item directly to us within 7 days of the estimated delivery date and in the<br />same condition you received it in.</div>
+                                            </p>
                                         </div>
 
                                     </div>
@@ -73,21 +62,21 @@ const Refunds = (props) => {
 
                     <section className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap" id="mailSubscribe">
                         <div className="container">
-                            <NewsLetterComponent/>
+                            <NewsLetterComponent />
                         </div>
 
                     </section>
 
 
                 </main>
-                <FooterComponent/>
+                <FooterComponent />
             </div>
         </>
     )
 }
 
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
     return {
         cart: state.shop.cart,
         favorite: state.favorite

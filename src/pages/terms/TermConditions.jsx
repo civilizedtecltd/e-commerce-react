@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderComponent from "../../components/header/Header";
 import MobileHeader from "../../components/header/MobileHeader";
-import {NewsLetterComponent} from "../../components/offerPageComponents/NewsLetterComponent";
+import { NewsLetterComponent } from "../../components/offerPageComponents/NewsLetterComponent";
 import TermConditionsComponent from '../../components/terms/TermConditionsComponent'
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
 import { connect } from "react-redux";
@@ -13,77 +13,64 @@ const TermConditions = (props) => {
     const favoriteItem = props.favorite.items;
 
     return (<>
-            <PageLoader loading={false}/>
-            <div className="allWrapper">
-                <HeaderComponent
-                    favorite_item={favoriteItem.length}
-                    cartItem={totalItem}
-                />
-                <MobileHeader
-                    favorite_item={favoriteItem.length}
-                    cartItem={totalItem}
-                />
-                <main className="mainContent clearfix" id="mainContent">
+        <PageLoader loading={false} />
+        <div className="allWrapper">
+            <HeaderComponent
+                favorite_item={favoriteItem.length}
+                cartItem={totalItem}
+            />
+            <MobileHeader
+                favorite_item={favoriteItem.length}
+                cartItem={totalItem}
+            />
+            <main className="mainContent clearfix" id="mainContent">
 
-                    <section className="helpContentArea secGap clearfix" id="helpContentArea">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-sm-4">
-                                    <div className="card helpNavBar">
-                                        <div className="card-body">
-                                            <h3 className="sectionTitle">Help</h3>
-                                            <ul className="helpNavList mt-3">
-                                                <TermConditionsComponent />
-                                            </ul>
-                                        </div>
+                <section className="helpContentArea secGap clearfix" id="helpContentArea">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-4">
+                                <div className="card helpNavBar">
+                                    <div className="card-body">
+                                        <h3 className="sectionTitle">Help</h3>
+                                        <ul className="helpNavList mt-3">
+                                            <TermConditionsComponent />
+                                        </ul>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div className="col">
-                                    <div className="helpContentArea">
-                                        <h2>Terms and conditions</h2>
-                                        <div className="helpPara mt-3">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat.</p>
-                                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                                                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                                sunt in culpa qui officia deserunt mollit anim id est laborum. Minima
-                                                veniam, quis nostrum exercitationem ullam corporis. Ut enim ad minima
-                                                veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi
-                                                ut aliquid.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat.</p>
-                                        </div>
-
+                            <div className="col">
+                                <div className="helpContentArea">
+                                    <h2>Terms and conditions</h2>
+                                    <div className="helpPara mt-3">
+                                        <p>1. Returned items should be in the same condition as they were at the time of shipment.<br />2. We have a no refund policy however as our customer you are at liberty to choose any other<br />item of similar cost from our website.<br />3. Delivery charges are only refundable where goods are faulty and a refund is made.<br />4. The cost of returning the item to us is your responsibility.<br />5. There are no refunds on items damaged in delivery. In that case, you must file a claim with the<br />carrier.<br />6. In case of a refund, either partial or full, the transaction fees incurred by<br /><a href="https://abookstore.co.ke" target="_blank">https://abookstore.co.ke</a> &nbsp;will be deducted from the refund amount.<br />7. Facilitate delivery. Failure to which, <a target="_blank" href="https://abookstore.co.ke">https://abookstore.co.ke</a> &nbsp;will deliver the item to the<br />nearest or most convenient town/county.<br />8. For international orders (outside Kenya), the client will be required to contact <u>(insert name of<br />the bookshop)</u> before making an order for a shipping fee estimate</p>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
 
                         </div>
 
-                    </section>
+                    </div>
+
+                </section>
 
 
-                    <section className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap" id="mailSubscribe">
-                        <div className="container">
-                            <NewsLetterComponent/>
-                        </div>
+                <section className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap" id="mailSubscribe">
+                    <div className="container">
+                        <NewsLetterComponent />
+                    </div>
 
-                    </section>
+                </section>
 
 
-                </main>
-                <FooterComponent/>
-            </div>
-        </>
+            </main>
+            <FooterComponent />
+        </div>
+    </>
     )
 }
-const mapStateToProps = (state) =>  {
+const mapStateToProps = (state) => {
     return {
         cart: state.shop.cart,
         favorite: state.favorite

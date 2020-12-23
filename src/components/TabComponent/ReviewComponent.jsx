@@ -10,7 +10,7 @@ const ReviewComponent = ({name, date, comment, rating,value}) => {
             <div className="row no-gutters">
                 <div className="col-auto">
                     <div className="reviewUserAvater">
-                        <img src={ reviewAvatar } alt="" />
+                        <img loading="lazy" src={ reviewAvatar } alt="profile avater" />
                     </div>
                 </div>
 

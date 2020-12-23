@@ -1,6 +1,6 @@
-import React ,{useState, useEffect} from 'react';
-import {Container, Row, Col, Badge, Image} from 'react-bootstrap';
-import {NavLink, Link} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Badge, Image } from 'react-bootstrap';
+import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Menu from '../LiComponent/MenuComponents'
@@ -26,14 +26,14 @@ const HeaderComponent = (props) => {
   const [open, setOpen] = useState(false);
 
   let page = 1;
-  let show =5
+  let show = 5
 
-  const user = { ...props.auth.user}
+  const user = { ...props.auth.user }
   const isAuth = (!isEmpty(props.auth.jwt)) ? true : false;
 
   useEffect(() => {
-     props.fetchCategoryList();
-     return ()=> props.fetchCategoryList()
+    props.fetchCategoryList();
+    return () => props.fetchCategoryList()
   }, []);
 
   const handleOpen = () => setOpen(!open)
@@ -56,7 +56,7 @@ const HeaderComponent = (props) => {
                   <ul className="headFeatureList d-flex justify-content-between">
                     <li>
                       <i className="fas fa-truck"></i>{" "}
-                      <span>Free delivery</span>
+                      <span>Quick  delivery</span>
                     </li>
                     <li>
                       <i className="fas fa-award"></i>{" "}
@@ -81,7 +81,7 @@ const HeaderComponent = (props) => {
               <Col sm={props.menuActive ? 2 : 1}>
                 <div className="logoWrapper">
                   <h1 className="logoText">
-                    <Link to="/"><img src={Logo2} style={{width: "65px"}} /></Link>
+                    <Link to="/" rel="noopener noreferrer"><img loading="lazy" alt="abookstore logo" src={Logo2} style={{ width: "65px" }} /></Link>
                   </h1>
                 </div>
               </Col>
@@ -104,39 +104,39 @@ const HeaderComponent = (props) => {
                       <ul className="navbar-nav">
                         {props.categories
                           ? props.categories.map((data, index) => {
-                              if (index < 5){
-                                return (
-                                  <Menu
-                                    key={index}
-                                    NavItem={"nav-item"}
-                                    ClassName={"nav-link"}
-                                    Title={data.category}
-                                    Url={`/shop/category/${data.id}/${data.category}`}
-                                    ActiveClassName={"active"}
-                                  />
+                            if (index < 5) {
+                              return (
+                                <Menu
+                                  key={index}
+                                  NavItem={"nav-item"}
+                                  ClassName={"nav-link"}
+                                  Title={data.category}
+                                  Url={`/shop/category/${data.id}/${data.category}`}
+                                  ActiveClassName={"active"}
+                                />
                               )
-                              } else {
-                                return false
+                            } else {
+                              return false
                             }
-                            })
+                          })
                           : ""}
-                        {(props.categories && props.categories.length>5)
+                        {(props.categories && props.categories.length > 5)
                           ? <li className="nav-item">
-                                <i className="fas fa-ellipsis-h megaMenuIcon"></i>
-                                <div className="mega-menu">
-                                  <div className="inner-mega-menu">
-                                    <ul>
-                                    {props.categories.map((data, index) => {
-                                       if (index >= 5)
-                                        return ( <li key={index} className="nav-item">
-                                          <NavLink to={`/shop/category/${data.id}/${data.category}`} className="nav-link">{data.category}</NavLink>
-                                        </li>)
-                                       })}
-                                    </ul>
-                                  </div>
-                                </div>
-                              </li>
-                         : ""}
+                            <i className="fas fa-ellipsis-h megaMenuIcon"></i>
+                            <div className="mega-menu">
+                              <div className="inner-mega-menu">
+                                <ul>
+                                  {props.categories.map((data, index) => {
+                                    if (index >= 5)
+                                      return (<li key={index} className="nav-item">
+                                        <NavLink to={`/shop/category/${data.id}/${data.category}`} className="nav-link">{data.category}</NavLink>
+                                      </li>)
+                                  })}
+                                </ul>
+                              </div>
+                            </div>
+                          </li>
+                          : ""}
                       </ul>
                     </div>
                   </nav>
@@ -168,8 +168,8 @@ const HeaderComponent = (props) => {
                               {props.favorite_item}{" "}
                             </Badge>
                           ) : (
-                            ""
-                          )}
+                              ""
+                            )}
                         </span>{" "}
                         Favorites
                       </Link>
@@ -181,8 +181,8 @@ const HeaderComponent = (props) => {
                           {props.cartItem !== 0 ? (
                             <Badge variant="primary">{props.cartItem}</Badge>
                           ) : (
-                            ""
-                          )}
+                              ""
+                            )}
                         </span>{" "}
                         Cart
                       </Link>

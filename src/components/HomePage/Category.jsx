@@ -1,7 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Card, Col} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import { connect } from 'react-redux';
+import { Card, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 //===============slider====================
 import Slider from "react-slick";
@@ -12,13 +12,13 @@ import LazyLoad from 'react-lazyload';
 
 
 
-function CategoryHome (props) {
+function CategoryHome(props) {
 
 
     const categories = (props.categories) ? props.categories : [];
 
-    if(categories.length < 3){
-        return(<>
+    if (categories.length < 3) {
+        return (<>
             <div className="categorySlider">
                 <div className="row">
                     {categories.map((item, index) =>
@@ -27,10 +27,10 @@ function CategoryHome (props) {
                                 <Link to={`/shop/category/${item.id}/${item.category}`}>
                                     <Card className="productCatCard">
                                         <div className="productCatMedia">
-                                            <img src={`${item.image}`} alt="" />
+                                            <img loading="lazy" src={`${item.image}`} alt="book cover" />
                                         </div>
                                         <Card.Body className="text-center">
-                                            <h3 className="productCatTitle home-ctg-limit-character">{item.category} </h3>
+                                            <div className="productCatTitle home-ctg-limit-character">{item.category} </div>
                                         </Card.Body>
                                     </Card>
                                 </Link>
@@ -39,22 +39,22 @@ function CategoryHome (props) {
                     )}
                 </div>
             </div>
-            </>)
-    }else{
+        </>)
+    } else {
         const settings = {
             dots: false,
             infinite: true,
-            slidesToShow:3,
+            slidesToShow: 3,
             slidesToScroll: 1,
             responsive: [
                 {
                     breakpoint: 1199,
                     settings: {
-                        slidesToShow:3,
+                        slidesToShow: 3,
                         slidesToScroll: 1,
                         infinite: true,
                     }
-                },  {
+                }, {
                     breakpoint: 991,
                     settings: {
                         slidesToShow: 3,
@@ -103,26 +103,26 @@ function CategoryHome (props) {
 
         return (
             <div className="categorySlider">
-            <Slider {...settings} >
+                <Slider {...settings} >
 
-                {categories.map((item, index) =>
-                    <Col key={index}>
-                        <LazyLoad once={true} height={200}>
-                            <Link to={`/shop/category/${item.id}/${item.category}`}>
-                                <Card className="productCatCard">
-                                    <div className="productCatMedia">
-                                        <img src={`${item.image}`} alt="" />
-                                    </div>
-                                    <Card.Body className="text-center">
-                                        <h3 className="productCatTitle home-ctg-limit-character">{item.category} </h3>
-                                    </Card.Body>
-                                </Card>
-                            </Link>
-                        </LazyLoad>
-                    </Col>
-                )}
+                    {categories.map((item, index) =>
+                        <Col key={index}>
+                            <LazyLoad once={true} height={200}>
+                                <Link to={`/shop/category/${item.id}/${item.category}`}>
+                                    <Card className="productCatCard">
+                                        <div className="productCatMedia">
+                                            <img loading="lazy" src={`${item.image}`} alt="" />
+                                        </div>
+                                        <Card.Body className="text-center">
+                                            <div className="productCatTitle home-ctg-limit-character">{item.category} </div>
+                                        </Card.Body>
+                                    </Card>
+                                </Link>
+                            </LazyLoad>
+                        </Col>
+                    )}
 
-            </Slider>
+                </Slider>
             </div>
         );
     }
@@ -135,4 +135,4 @@ const mapStateToProps = (state) => ({
     categories: state.site.categories
 })
 
-export default connect(mapStateToProps, null)(CategoryHome) ;
+export default connect(mapStateToProps, null)(CategoryHome);

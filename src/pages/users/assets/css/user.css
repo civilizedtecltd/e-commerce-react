@@ -1,79 +1,87 @@
-.userAsideBar{
+.userAsideBar {
     height: 100vh;
 }
-.userName{
+.userName {
     font-size: 16px;
     font-weight: 600;
     color: #363636;
     padding-left: 10px;
-    font-family: 'Crimson Text', serif;
+    font-family: "Crimson Text", serif;
 }
-.userAvater{
+.userAvater {
     width: 35px;
     height: 35px;
     border-radius: 50%;
 }
 
-.userNavBar .nav-link{
+.userNavBar .nav-link {
     font-size: 16px;
     color: #363636;
-    font-family: 'Crimson Text', serif;
+    font-family: "Crimson Text", serif;
     font-weight: 600;
 }
-.userNavBar .nav-link i{padding-right: 10px;}
-.userNavBar .active .nav-link, .userNavBar .nav-link:hover{
-    color: #3897cf;
+.userNavBar .nav-link i {
+    padding-right: 10px;
+}
+.userNavBar .active .nav-link,
+.userNavBar .nav-link:hover {
+    color: #0b7bc1;
     background-color: #f9f9f9;
-    border-left: 3px solid #3897cf;
+    border-left: 3px solid#0b7bc1;
 }
 
-.userNavBar a.active{
-    color: #3897cf !important;
+.userNavBar a.active {
+    color: #0b7bc1 !important;
     background-color: #f9f9f9 !important;
-    border-left: 3px solid #3897cf !important;
+    border-left: 3px solid#0b7bc1 !important;
 }
 
 /*User Main Content*/
 
-.userMainContent{height: 100vh;}
-.bgImg03{
-    background-image: url('../images/bg_img_02.jpg');
+.userMainContent {
+    height: 100vh;
+}
+.bgImg03 {
+    background-image: url("../images/bg_img_02.jpg");
     background-size: cover;
 }
-.headTitle{
+.headTitle {
     color: #363636;
     text-transform: uppercase;
 }
-.headTitle span{
+.headTitle span {
     text-transform: uppercase;
-    color: #3897cf;
+    color: #0b7bc1;
 }
-.payTitle{
+.payTitle {
     font-size: 18px;
     font-weight: 600;
 }
-.payExp{
+.payExp {
     font-size: 14px;
     color: #363636;
 }
-.btnSm{
-    font-size: 12px!important;
-    color: #ffffff!important;
-
+.btnSm {
+    font-size: 12px !important;
+    color: #ffffff !important;
 }
-.cardBtBorder{
+.cardBtBorder {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
-.addPaymentCard{
+.addPaymentCard {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }
 
 /*User Profile*/
 
-.cardSecTitle{font-size: 16px;color: #363636;text-transform: uppercase;}
-.cardSubtitle{
+.cardSecTitle {
+    font-size: 16px;
+    color: #363636;
+    text-transform: uppercase;
+}
+.cardSubtitle {
     font-size: 17px;
     color: #363636;
     font-weight: 600;
@@ -82,7 +90,7 @@
 .add-payment h3 {
     text-transform: uppercase;
 }
-.add-payment .btn-cancel{
+.add-payment .btn-cancel {
     color: #000000;
     font-size: 12px;
     font-weight: 700;
@@ -98,8 +106,8 @@
     line-height: 5rem;
 }
 .modalCancelBtn.btn.btn-primary {
-    background-color: #DC3545 !important;
+    background-color: #dc3545 !important;
 }
-.ModalFromInput{
+.ModalFromInput {
     width: 35%;
 }

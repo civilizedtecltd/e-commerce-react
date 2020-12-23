@@ -17,7 +17,7 @@
 /* Header Style */
 
 .logoText a{font-size: 30px;}
-.logoText a:hover{color: #3897cf;}
+.logoText a:hover{color:#0b7bc1;}
 
 /* Logo Style */
 
@@ -176,7 +176,7 @@
 }
 .cardWidgetList li a:hover{
   margin-left: 5px;
-  color: #3897cf;
+  color:#0b7bc1;
 }
 .cardWidgetList2{
     display: flex;
@@ -297,7 +297,7 @@
     transition: all 250ms ease;
 }
 .formRadio input[type="radio"]:checked + label:before {
-    background-color: #3897cf;
+    background-color:#0b7bc1;
     box-shadow: inset 0 0 0 2px #f4f4f4;
 }
 .formCheckbox a{text-decoration: underline!important;}
@@ -329,7 +329,7 @@
     font-weight: 600;
     line-height: 35px;
 }
-.cardTable td a{color: #3897cf;}
+.cardTable td a{color:#0b7bc1;}
 .stockInfo{
     text-transform: uppercase;
     background-color: #f7f7f7;
@@ -346,7 +346,7 @@
 }
 .cardTable .btnActionUpdate:hover{
     color: #ffffff;
-    background-color: #3897cf;
+    background-color:#0b7bc1;
 }
 .cardTable .btnActionDelete:hover{
     color: #ffffff;
@@ -365,6 +365,8 @@
 .productCatTitle {
     text-transform: uppercase;
     font-size: 23px;
+    font-weight: 600;
+    color: rgb(29, 29, 29);
 }
 /*Category Style End*/
 
@@ -372,7 +374,7 @@
     text-transform: uppercase;
 }
 .sectionTitle span {
-    color: #3897cf;
+    color:#0b7bc1;
     text-transform: uppercase;
 }
 .singleFeature .card-body h4 {
@@ -389,14 +391,18 @@
     line-height: 25px;
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    content-visibility:auto;
 }
 .footerWidgetHeader {
     font-size: 25px;
+    content-visibility:auto;
     margin-bottom: 1rem;
+    font-weight: 600;
 }
 .footerLinksList {
     display: -webkit-box;
+    content-visibility:auto;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
@@ -405,17 +411,19 @@
     flex-flow: row wrap;
 }
 .footerLinksList li {
+    content-visibility:auto;
     max-width: 50%;
     width: 50%;
     margin-bottom: 0.5rem;
 }
 .footerLinksList li a {
     color: #404041;
+    content-visibility:auto;
     font-size: 18px;
     font-weight: 600;
 }
 .footerLinksList li a:hover {
-    color: #3897cf;
+    color:#0b7bc1;
     margin-left: 5px;
 }
 
@@ -430,6 +438,7 @@
 
 .footerSocial {
     display: -webkit-box;
+    content-visibility:auto;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: end;
@@ -440,6 +449,7 @@
 	font-size: 17px;
     color: rgba(0, 0, 0, 0.5);
     border: 1px solid #333333;
+    content-visibility:auto;
     margin-right: 10px;
     padding: 5px;
     width: 35px;
@@ -448,8 +458,8 @@
     text-align: center;
 }
 .footerSocial li a:hover {
-    color: #3897cf;
-    border: 2px solid #3897cf;
+    color:#0b7bc1;
+    border: 2px solid#0b7bc1;
 }
 /* Footer Top End */
 .subscribeCard {
@@ -474,7 +484,7 @@
     text-transform: uppercase;
 }
 .discountTxt {
-  color: #3897cf;
+  color:#0b7bc1;
   font-size: 90px;
   font-style: italic;
   position: relative;
@@ -487,7 +497,7 @@
   top: 45px;
   width: 60px;
   height: 3px;
-  background-color: #3897cf;
+  background-color:#0b7bc1;
 }
 .discountTxt:before {
   right: 0;
@@ -500,7 +510,7 @@
   text-transform: uppercase;
 }
 .offerBannerCard .offerBannerBtn {
-  color: #3897cf;
+  color:#0b7bc1;
   font-size: 15px;
   max-width: 300px;
   width: 300px;
@@ -509,7 +519,7 @@
   background-color: #ffffff;
 }
 .offerBannerCard .offerBannerBtn:hover {
-  background-color: #3897cf;
+  background-color:#0b7bc1;
   color: #ffffff;
 }
 /* Offer Page End */
@@ -520,7 +530,7 @@
   min-height: 250px;
 }
 .productTitle {
-  color: #3897cf;
+  color:#0b7bc1;
 }
 .authorName {
   font-size: 16px;
@@ -658,7 +668,7 @@
   line-height: 30px;
 }
 .filterList li a:hover {
-  color: #3897cf;
+  color:#0b7bc1;
   margin-left: 2px;
 }
 .pageTitle, .pageTitle span {
@@ -666,7 +676,7 @@
   text-transform: uppercase;
 }
 .pageTitle span {
-  color: #3897cf;
+  color:#0b7bc1;
 }
 .singleFilter label {
   font-size: 18px;
@@ -797,7 +807,9 @@ div#controlled-tab-example-tabpane-payPal {
     .home-ctg-limit-character{display: block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
     .footerLogo .logoText img{width: 150px;}
 }
-
+.ourPartners{
+  content-visibility:auto;
+}
 /*------------------------------------------------------------------------------*/
 /*                    Width : 767px
 /*------------------------------------------------------------------------------*/
@@ -845,7 +857,7 @@ div#controlled-tab-example-tabpane-payPal {
   .productCatTitle {font-size: 25px;}
   .paymentsNav {justify-content: space-around!important;margin-top: 20px;}
   .footer .col, .footer .col-sm-5, .footer .col-sm-2{flex: 0 0 100%;max-width: 100%;margin-bottom: 20px;}
-  .ourBenefits .col-sm-3 {flex: 0 0 100%;max-width: 100%;}
+  .ourBenefits .col-sm-3 {flex: 0 0 100%;max-width: 100%;content-visibility:auto; }
   .subscribeForm {flex-flow:row wrap;}
   .subscribeForm .form-group{width: 100%;}
   .subscribeForm .btn{width: 100%;margin-left: 0px;margin-top: 10px;}

@@ -222,7 +222,7 @@ const ShopPage = props => {
                                     <Card className="productCard border-0 bg-transparent">
                                       <div className="productMedia mb-3 bgGray">
                                         <Link to={`/product/${book.id}`}>
-                                          <img
+                                          <img loading="lazy"
                                             src={
                                               book.cover_images !== null
                                                 ? `${book.cover_images.img_1}`
