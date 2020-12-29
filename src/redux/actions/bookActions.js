@@ -20,7 +20,7 @@ const fetchAllBook = (page, show, keyword) => dispatch => {
 };
 
 const fetchBooksByCategory = (id, page, show) => dispatch => {
-  console.log('----------------fetchBooksByCategory')
+  console.log('----------------fetchBooksByCategory',{id,page,show})
 
   dispatch(fetchPending())
   axios.get(URL._CATEGORY_BOOKS(id, page, show))

@@ -32,7 +32,7 @@ export const fetchMaxMinPriceByFilter = (data) => {
 }
 
 export const fetchStages = (category_id) => dispatch => {
-  console.log('----------------fetchStages')
+  console.log('----------------fetchStages', {category_id})
 
   axios.get(URL._GET_STAGES(category_id))
     .then(res => dispatch({
