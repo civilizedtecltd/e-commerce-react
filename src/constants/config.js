@@ -4,8 +4,8 @@ require('dotenv').config({ path: path.join('/home/dell/Freelancing/book_eCommerc
 
 class APP_URL {
     constructor() {
-        //this.BASE = `https://admin.abookstore.co.ke`;
-        this.BASE = `http://127.0.0.1:3333`;
+        this.BASE = `https://admin.abookstore.co.ke`;
+        //this.BASE = `http://127.0.0.1:3333`;
         this.API = `${this.BASE}/api`;
     }
 
