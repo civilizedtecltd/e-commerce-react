@@ -235,9 +235,7 @@ function ProductPage(props) {
                         </h2>
                     </div>
                 </div>
-
-                <img loading="lazy"Slick images={similar ? similar : [] } alt="similar book" />
-
+                  <ImgSlick images={similar ? similar : [] } />
             </Container>
           </section>
         </main>
