@@ -14,7 +14,7 @@ import { shopNotInState } from './redux/actions/shopActions';
 import { authNotInState } from "./redux/actions/authActions";
 import { siteNotInState } from './redux/actions/siteActions';
 import isEqual from 'lodash/isEqual';
-import offerPage from './pages/offerPage';
+//import offerPage from './pages/offerPage';
 
 const PaymentSuccess = lazy(() => import('./pages/PaymentSuccess'));
 
@@ -75,42 +75,44 @@ const Router = () => {
     }
 
     return (
-        <Switch /* location={props.location} */>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" render={props => <Suspense fallback={<h1>Loading</h1>}><Login {...props} /></Suspense>} />
-            <Route path="/signup" render={props => <Suspense fallback={<h1>Loading</h1>}><SignUp {...props} /></Suspense>} />
-            <Route path="/swype_success/:ref?" render={props => <Suspense fallback={<h1>Loading</h1>}><PaymentSuccess {...props} /></Suspense>} />
-            <PrivateRoute path="/profile-settings" render={props => <Suspense fallback={<h1>Loading</h1>}><UserProfile {...props} /></Suspense>} />
-            <Route path="/forgot-password" render={props => <Suspense fallback={<h1>Loading</h1>}><ForgotPassword {...props} /></Suspense>} />
-            <Route path="/change-password/:code" render={props => <Suspense fallback={<h1>Loading</h1>}><ChangePassword {...props} /></Suspense>} />
-            <Route path="/verify-code" render={props => <Suspense fallback={<h1>Loading</h1>}><VerifyCode {...props} /></Suspense>} />
-            <PrivateRoute path="/email-subscription" render={props => <Suspense fallback={<h1>Loading</h1>}><Subscription {...props} /></Suspense>} />
-            <PrivateRoute path="/my-order" render={props => <Suspense fallback={<h1>Loading</h1>}><OrderPage {...props} /></Suspense>} />
-            <PrivateRoute path="/payment-methods" render={props => <Suspense fallback={<h1>Loading</h1>}><PaymentPage {...props} /></Suspense>} />
-            <Route path="/book-offer" render={props => <Suspense fallback={<h1>Loading</h1>}><offerPage {...props} /></Suspense>} />
-            <PrivateRoute path="/cart" render={props => <Suspense fallback={<h1>Loading</h1>}><CartPage {...props} /></Suspense>} />
-            <PrivateRoute path="/checkout" render={props => <Suspense fallback={<h1>Loading</h1>}><CheckoutPage {...props} /></Suspense>} />
-            <Route path="/favorites" render={props => <Suspense fallback={<h1>Loading</h1>}><FavoritesPage {...props} /></Suspense>} />
-            <Route exact path="/shop/category/:id?/:title?" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
-            <Route exact path="/shop" render={() => <Redirect to={{ pathname: "/shopping", state: { from: location } }} />} />
-            <Route exact path="/shopping" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
-            <Route exact path="/shop/category/all/:pageNumber/:showItem/:keyword?" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
-            <Route exact path="/shop/filter/category/:id?/:filter_type/:filter_id" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
-            <Route path="/product/:id" render={props => <Suspense fallback={<h1>Loading</h1>}><ProductPage {...props} /></Suspense>} />
-            <Route path="/term/conditions" render={props => <Suspense fallback={<h1>Loading</h1>}><TermConditions {...props} /></Suspense>} />
-            <Route path="/privacy" render={props => <Suspense fallback={<h1>Loading</h1>}><Privacy {...props} /></Suspense>} />
-            <Route path="/refunds" render={props => <Suspense fallback={<h1>Loading</h1>}><Refunds {...props} /></Suspense>} />
-            <Route path="/delivery/details" render={props => <Suspense fallback={<h1>Loading</h1>}><DeliveryDetails {...props} /></Suspense>} />
-            <Route path="/place/order" render={props => <Suspense fallback={<h1>Loading</h1>}><PlaceOrder {...props} /></Suspense>} />
-            {/*social link */}
-            <Route path='/facebook' component={() => { window.location = 'https://facebook.com'; return null; }} />
-            <Route path='/googlePlus' component={() => { window.location = 'https://google.com'; return null; }} />
-            <Route path='/instagram' component={() => { window.location = 'https://instagram.com'; return null; }} />
-            <Route path='/twitter' component={() => { window.location = 'https://twitter.com'; return null; }} />
-            <Route path='/logout' component={Logout} />
-            {/* <Route path="/test-pay" component={Test}/> */}
-            <Route path='*' component={ErrorPage} />
-        </Switch>
+        <Suspense fallback={<h1>Loading...</h1>}>
+            <Switch /* location={props.location} */>
+                <Route exact path="/" component={Home} />
+                <Route path="/login" render={props => <Suspense fallback={<h1>Loading</h1>}><Login {...props} /></Suspense>} />
+                <Route path="/signup" render={props => <Suspense fallback={<h1>Loading</h1>}><SignUp {...props} /></Suspense>} />
+                <Route path="/swype_success/:ref?" render={props => <Suspense fallback={<h1>Loading</h1>}><PaymentSuccess {...props} /></Suspense>} />
+                <PrivateRoute path="/profile-settings" component={props => <Suspense fallback={<h1>Loading</h1>}><UserProfile {...props} /></Suspense>} />
+                <Route path="/forgot-password" render={props => <Suspense fallback={<h1>Loading</h1>}><ForgotPassword {...props} /></Suspense>} />
+                <Route path="/change-password/:code" render={props => <Suspense fallback={<h1>Loading</h1>}><ChangePassword {...props} /></Suspense>} />
+                <Route path="/verify-code" render={props => <Suspense fallback={<h1>Loading</h1>}><VerifyCode {...props} /></Suspense>} />
+                <PrivateRoute path="/email-subscription" component={props => <Suspense fallback={<h1>Loading</h1>}><Subscription {...props} /></Suspense>} />
+                <PrivateRoute path="/my-order" component={props => <Suspense fallback={<h1>Loading</h1>}><OrderPage {...props} /></Suspense>} />
+                <PrivateRoute path="/payment-methods" component={props => <Suspense fallback={<h1>Loading</h1>}><PaymentPage {...props} /></Suspense>} />
+                <Route path="/book-offer" render={props => <Suspense fallback={<h1>Loading</h1>}><OfferPage {...props} /></Suspense>} />
+                <PrivateRoute path="/cart" component={props => <Suspense fallback={<h1>Loading</h1>}><CartPage {...props} /></Suspense>} />
+                <PrivateRoute path="/checkout" component={props => <Suspense fallback={<h1>Loading</h1>}><CheckoutPage {...props} /></Suspense>} />
+                <Route path="/favorites" render={props => <Suspense fallback={<h1>Loading</h1>}><FavoritesPage {...props} /></Suspense>} />
+                <Route exact path="/shop/category/:id?/:title?" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
+                <Route exact path="/shop" render={() => <Redirect to={{ pathname: "/shopping", state: { from: location } }} />} />
+                <Route exact path="/shopping" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
+                <Route exact path="/shop/category/all/:pageNumber/:showItem/:keyword?" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
+                <Route exact path="/shop/filter/category/:id?/:filter_type/:filter_id" render={props => <Suspense fallback={<h1>Loading</h1>}><ShopPage {...props} /></Suspense>} />
+                <Route path="/product/:id" render={props => <Suspense fallback={<h1>Loading</h1>}><ProductPage {...props} /></Suspense>} />
+                <Route path="/term/conditions" render={props => <Suspense fallback={<h1>Loading</h1>}><TermConditions {...props} /></Suspense>} />
+                <Route path="/privacy" render={props => <Suspense fallback={<h1>Loading</h1>}><Privacy {...props} /></Suspense>} />
+                <Route path="/refunds" render={props => <Suspense fallback={<h1>Loading</h1>}><Refunds {...props} /></Suspense>} />
+                <Route path="/delivery/details" render={props => <Suspense fallback={<h1>Loading</h1>}><DeliveryDetails {...props} /></Suspense>} />
+                <Route path="/place/order" render={props => <Suspense fallback={<h1>Loading</h1>}><PlaceOrder {...props} /></Suspense>} />
+                {/*social link */}
+                <Route path='/facebook' component={() => { window.location = 'https://facebook.com'; return null; }} />
+                <Route path='/googlePlus' component={() => { window.location = 'https://google.com'; return null; }} />
+                <Route path='/instagram' component={() => { window.location = 'https://instagram.com'; return null; }} />
+                <Route path='/twitter' component={() => { window.location = 'https://twitter.com'; return null; }} />
+                <Route path='/logout' component={Logout} />
+                {/* <Route path="/test-pay" component={Test}/> */}
+                <Route path='*' component={ErrorPage} />
+            </Switch>
+        </Suspense>
     )
 }
 
