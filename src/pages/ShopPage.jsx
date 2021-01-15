@@ -31,7 +31,6 @@ const ShopPage = props => {
 
 
   useEffect(() => {
-    console.log('render shopage')
     const { show, page } = pagination
     const { higherPrice, lowerPrice } = priceFilter;
     stageList(id);
@@ -50,6 +49,7 @@ const ShopPage = props => {
       return booksByCategory(id, page, show);
     }
     else if (id !== "number" && pageNumber && showItem && keyword) {
+      console.log({ page, show, keyword })
       return fetchBooks(page, show, keyword);
     }
 
@@ -363,7 +363,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchBooks: (page, show) => dispatch(fetchAllBook(page, show)),
+    fetchBooks: (page, show, keyword) => dispatch(fetchAllBook(page, show, keyword)),
     booksByCategory: (id, page, show) => dispatch(fetchBooksByCategory(id, page, show)),
     filterByPrice: (page, show, lowPrice, highestPrice, type, type_id) => dispatch(filterByPriceRange(page, show, lowPrice, highestPrice, type, type_id)),
     filterShortByType: (page, show, query) => dispatch(filterShortBy(page, show, query)),
