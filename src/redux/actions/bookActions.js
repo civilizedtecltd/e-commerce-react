@@ -5,8 +5,9 @@ import { setAuthToken } from '../../helpers/setAuthToken';
 import { fetchMaxMinPriceByFilter } from "./filterAction";
 
 const fetchAllBook = (page, show, keyword) => dispatch => {
-  console.log('----------------fetchAllBook')
+  console.log('----------------fetchAllBook', { page, show, keyword })
   dispatch(fetchPending())
+  console.log('fetch book axios call')
   axios.get(URL._ALL_BOOKS(page, show, keyword))
     .then(res => {
       return dispatch({
@@ -20,7 +21,7 @@ const fetchAllBook = (page, show, keyword) => dispatch => {
 };
 
 const fetchBooksByCategory = (id, page, show) => dispatch => {
-  console.log('----------------fetchBooksByCategory',{id,page,show})
+  console.log('----------------fetchBooksByCategory', { id, page, show })
 
   dispatch(fetchPending())
   axios.get(URL._CATEGORY_BOOKS(id, page, show))
