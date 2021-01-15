@@ -26,7 +26,7 @@ const HeaderComponent = (props) => {
   const [open, setOpen] = useState(false);
 
   let page = 1;
-  let show = 5
+  let show = 20
 
   const user = { ...props.auth.user }
   const isAuth = (!isEmpty(props.auth.jwt)) ? true : false;
