@@ -949,6 +949,9 @@ div#controlled-tab-example-tabpane-payPal {
     /*Payment methods*/
     ul.cardPayFiled.d-flex.align-items-center.justify-content-start { width: 100%; } li.width-45 { width: 45%; }
 
+    section#productsBodyAsidebar .container > .row {
+        flex-direction: column-reverse;
+    }
 
 }
 
