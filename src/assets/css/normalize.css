@@ -157,9 +157,9 @@ h6 {
 p {
   font-size: 18px;
   line-height: 25px;
-  font-family: 'Crimson Text', serif;
+  font-family: 'lato', serif;
   color: #404041;
-  font-weight: 600;
+  font-weight: 500;
 }
 p:last-child {
   margin-bottom: 0px;
@@ -222,7 +222,7 @@ input[type='button'],
   display: inline-block;
   text-align: center;
   border: none;
-  font-family: 'Crimson Text', serif;
+  font-family: 'lato', serif;
   color: #ffffff;
   font-weight: 700;
   font-size: 14px;
@@ -245,7 +245,7 @@ button:focus {
 }
 label {
   color: #363636;
-  font-family: 'Crimson Text', serif;
+  font-family: 'lato', serif;
   font-size: 17px;
   font-weight: 600;
 }
@@ -275,6 +275,7 @@ img {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 /* --- links --------------------- */
 a,
 a:link,
@@ -284,7 +285,7 @@ a:focus {
   text-decoration: none !important;
   color: #0b7bc1;
   /* font-size: 17px; */
-  font-family: 'Crimson Text', serif;
+  font-family: 'lato', serif;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
