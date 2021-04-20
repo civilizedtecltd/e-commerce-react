@@ -48,7 +48,7 @@ const PaymentMethods = (props) => {
                 deliveryInfo: props.delivery[0]
             });
         }
-    }, []);
+    }, [deliveryMethod.standard, paymentType, props]);
 
     const checkDelivery = (e) => {
 
@@ -173,13 +173,13 @@ const PaymentMethods = (props) => {
         </div>
         <div className="row payment-header-card m-3">
             <div className="col-4">
-                <p>Delivery Place: {props.payment?.deliveryInfo?.delivery_name}</p>
+                <p>Delivery Place: {props.payment && props.payment.deliveryInfo && props.payment.deliveryInfo.delivery_name}</p>
             </div>
             <div className="col-4">
-                <p>Delivery Time : {props.payment?.deliveryInfo?.delivery_time} days</p>
+                <p>Delivery Time : {props.payment && props.payment.deliveryInfo && props.payment.deliveryInfo.delivery_time} days</p>
             </div>
             <div className="col-4">
-                <p>Delivery Cost : {props.payment?.deliveryInfo?.price} Ksh</p>
+                <p>Delivery Cost : {props.payment && props.payment.deliveryInfo && props.payment.deliveryInfo.price} Ksh</p>
             </div>
         </div>
         {/* <div className="payment-header-card mt-3 d-flex justify-content-between">

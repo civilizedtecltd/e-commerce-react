@@ -25,7 +25,7 @@ function PaymentSuccess(props) {
 
       axios.post(URL._SET_PAY_SUCCESS, { order_ref, user_mail })
         .then(res => {
-          if (res?.data?.success) {
+          if (res.data && res.data.success) {
             setMsg(1)
             localStorage.removeItem('or')
             localStorage.removeItem('usr_mail')
@@ -43,7 +43,7 @@ function PaymentSuccess(props) {
         })
 
     }
-  }, [])
+  }, [order_ref_decode])
 
   return (
     <div>

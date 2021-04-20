@@ -55,7 +55,7 @@ const CheckoutTab = (props) => {
         })
       }
     }
-  }, [props.status.error, props])
+  }, [props.status.error, props, history])
 
   const paymentDetails = props.payment
 
@@ -84,7 +84,7 @@ const CheckoutTab = (props) => {
       setStep({ prev: 1, next: 2 })
 
     } else if (step.next === 2) {
-      if (paymentDetails.payment_number?.length > 5) {
+      if (paymentDetails.payment_number && paymentDetails.payment_number.length > 5) {
         setIframe('')
         get_ifrm(paymentDetails.payment_number, props.costWithDelivery)
         payment_section.classList.remove('tab-active-content')
@@ -439,10 +439,10 @@ const CheckoutTab = (props) => {
                     <Col sm="6" className="mt-4">
                       <ul className="orderConfrimationList text-large">
                         <li><strong>Product(s) Price : </strong>Ksh {props.productPrice}</li>
-                        <li><strong>Delivery method : </strong> {paymentDetails?.deliveryInfo?.delivery_name}</li>
-                        <li><strong>Delivery cost : </strong>Ksh {paymentDetails?.deliveryInfo?.price}</li>
+                        <li><strong>Delivery method : </strong> {paymentDetails && paymentDetails.deliveryInfo && paymentDetails.deliveryInfo.delivery_name}</li>
+                        <li><strong>Delivery cost : </strong>Ksh {paymentDetails && paymentDetails.deliveryInfo && paymentDetails.deliveryInfo.price}</li>
                         <li><strong>In Total: </strong>Ksh {props.costWithDelivery}</li>
-                        <li><strong>Expected arrival : </strong>  {futureDate(paymentDetails?.deliveryInfo?.delivery_time)}</li>
+                        <li><strong>Expected arrival : </strong>  {futureDate(paymentDetails && paymentDetails.deliveryInfo && paymentDetails.deliveryInfo.delivery_time)}</li>
                       </ul>
                     </Col>
                   </Row>
@@ -480,7 +480,7 @@ const CheckoutTab = (props) => {
               <div id="payment-confirmation" className="tab payment-confirmation mt-3">
                 {/* <button onClick={() => set_ifrm_success()}>success</button> */}
                 {(iframe === '' || iframeLoading) && <div className="d-flex align-items-center justify-content-center"><LoaderSm size="100" clr="#3897cf" /></div>}
-                <iframe src={iframe?.iframe} onLoad={() => setIframeLoading(false)} title="Swype Pay" style={{ width: '100%', height: 580 }}></iframe>
+                <iframe src={iframe.iframe} onLoad={() => setIframeLoading(false)} title="Swype Pay" style={{ width: '100%', height: 580 }}></iframe>
                 <Row>
                   <div className="col-12 d-flex justify-content-between p-0">
                     {/* <Col sm="6">
