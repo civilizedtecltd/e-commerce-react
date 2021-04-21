@@ -50,7 +50,7 @@ const ForYou = () => {
   return (
     <Wrapper>
       <h4>Just For you</h4>
-      <div className='container'>
+      <div className='wrapper'>
         {data.map((item, index) => {
           const { img, desc, price, discount } = item;
           return (
@@ -82,10 +82,11 @@ const Wrapper = styled.div`
     margin-bottom: 1rem;
     padding-left: 1.4rem;
   }
-  .container {
+  .wrapper {
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
+    padding: 0 1rem;
     @media (max-width: 1150px) {
       flex-wrap: wrap;
       justify-content: center;

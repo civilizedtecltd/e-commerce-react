@@ -121,7 +121,10 @@ function ProductPage(props) {
   };
 
   //cart item number
-  const [itemNumber, setItemNumber] = useState(1);
+  const [readmore, setReadmore] = useState(false);
+  const info =
+    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit exercitationem, minima eos voluptas ex inventore sit provident veritatis reiciendis magni officia assumenda quasi, aliquam cupiditate quaerat nisi laborum! Suscipit, quam dolorum. Odio, fugiat! Explicabo neque illum eveniet odio veniam voluptatibus optio nesciunt placeat, iusto dolor tempore labore aliquid! Repudiandae, ipsa? assumenda quasi, aliquam cupiditate quaerat nisi laborum! Suscipit, quam dolorum. Odio, fugiat! Explicabo neque illum eveniet odio veniam voluptatibus optio nesciunt placeat, iusto dolor tempore labore aliquid! Repudiandae, ipsa?';
+
   const buttonData = [
     {
       text: 'abailable',
@@ -397,14 +400,13 @@ function ProductPage(props) {
                       </div>
                       <div className='desc'>
                         <p>
-                          Come along backstage and peek inside the spectacular
-                          and sometimes scandalous world of musical theatre. See
-                          the world's most-loved musical productions come to
-                          life in this lavishly illustrated book! This
-                          show-stopping reference book includes: - A
-                          chronological structure that makes the book work as a
-                          history of musicals - Includes a 20-page reference
-                          section .
+                          {readmore ? info : `${info.substring(0, 400)}...`}
+                          <p
+                            className='readmore'
+                            onClick={() => setReadmore(!readmore)}
+                          >
+                            {readmore ? `show less` : `read more`}
+                          </p>
                         </p>
                       </div>
                     </div>
@@ -485,17 +487,9 @@ function ProductPage(props) {
           </Wrapper>
           {/* For you components */}
           <section>
-            <Container>
-              <ForYou />
-            </Container>
-
-            <Container>
-              <ForYou />
-            </Container>
-
-            <Container>
-              <ForYou />
-            </Container>
+            <ForYou />
+            <ForYou />
+            <ForYou />
           </section>
 
           <Wrapper>
@@ -586,20 +580,30 @@ const Wrapper = styled.section`
     padding: 0.5rem;
     background: #fff;
     min-height: 410px;
-    margin-left: 0rem;
+    margin: 0rem;
   }
+
   .img-container {
-    height: 100%;
+    height: 400px;
     width: 115%;
     @media (max-width: 800px) {
       width: 103%;
     }
   }
-
+  .book-description {
+    margin-right: 0;
+    margin-left: 0.3rem;
+  }
   @media (max-width: 800px) {
     .book-description {
       margin-top: 1rem;
     }
+  }
+  .readmore {
+    cursor: pointer;
+    color: blue;
+    display: inline;
+    padding-left: 0.5rem;
   }
   .img-container img {
     height: 100%;
@@ -649,7 +653,7 @@ const Wrapper = styled.section`
       margin-bottom: 1rem;
       p {
         font-size: 12px;
-        font-weight: 300;
+        font-weight: 400;
         line-height: 18px;
         text-transform: capitalize;
       }
@@ -671,6 +675,7 @@ const Wrapper = styled.section`
         background-color: transparent;
         border: 1px solid #0b7bc1;
         min-width: 115px;
+        transition: all 0.3s ease;
       }
       .btn svg {
         font-size: 20px;
