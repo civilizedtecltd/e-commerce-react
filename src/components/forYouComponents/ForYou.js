@@ -76,6 +76,7 @@ const ForYou = () => {
   );
 };
 const Wrapper = styled.div`
+  padding-top: 1rem;
   margin-bottom: 2rem;
   h4 {
     margin-bottom: 1rem;

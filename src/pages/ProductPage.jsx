@@ -36,7 +36,13 @@ import { BiBookBookmark } from 'react-icons/bi';
 import { GiSpeaker } from 'react-icons/gi';
 import { FaFilePdf } from 'react-icons/fa';
 import { SiPublons } from 'react-icons/si';
+import { FiShoppingCart } from 'react-icons/fi';
+import { AiOutlineStar } from 'react-icons/ai';
+import { IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowDown } from 'react-icons/io';
 import Buttons from '../components/Product-page-buttons/Buttons';
+import ForYou from '../components/forYouComponents/ForYou';
+import { ProgressBar } from 'react-bootstrap';
 const useStyles = createUseStyles({
   addFevButton: {
     color: 'skyblue',
@@ -114,8 +120,8 @@ function ProductPage(props) {
     }
   };
 
-  //button show
-  // const [available, setAvailable] = useState(false);
+  //cart item number
+  const [itemNumber, setItemNumber] = useState(1);
   const buttonData = [
     {
       text: 'abailable',
@@ -140,6 +146,49 @@ function ProductPage(props) {
       name: 'pdf',
       icon: <FaFilePdf />,
       price: '$16.99',
+    },
+  ];
+
+  const productData = [
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
     },
   ];
 
@@ -308,7 +357,7 @@ function ProductPage(props) {
 
           <Wrapper>
             <div className='row'>
-              <div className='col-lg-8 col-md-6 col-sm-12 '>
+              <div className='col-lg-7 col-md-6 col-sm-12 '>
                 <div className='row left'>
                   <div className='col-lg-4'>
                     <div className='img-container'>
@@ -320,7 +369,7 @@ function ProductPage(props) {
                   </div>
                   <div className='col-lg-8'>
                     <div className='book-description'>
-                      <h2>Musicals : The Definitive Illustrated Story</h2>
+                      <h3>Musicals : The Definitive Illustrated Story</h3>
                       <hr />
                       <div className='rating'>
                         <p>4.04 (119 ratings by Goodreads)</p>
@@ -362,7 +411,7 @@ function ProductPage(props) {
                   </div>
                 </div>
               </div>
-              <div className='col-lg-4 col-md-6 col-sm-12 '>
+              <div className='col-lg-5 col-md-6 col-sm-12 '>
                 <div className='right'>
                   <div className='price'>
                     <h2>US$71.59</h2>
@@ -387,8 +436,76 @@ function ProductPage(props) {
                       return <Buttons key={index} {...item} />;
                     })}
                   </div>
+                  <div className='btn-container'>
+                    <input
+                      placeholder='1'
+                      type='number'
+                      className='input-btn'
+                    />
+
+                    <button className='cart-btn btn'>
+                      <FiShoppingCart /> add to cart
+                    </button>
+                    <button className='fab-btn btn'>
+                      <AiOutlineStar /> add to fabourites
+                    </button>
+                  </div>
                 </div>
               </div>
+            </div>
+
+            {/* Products details  */}
+
+            <div className='section'>
+              <h3>Products Details</h3>
+              <hr />
+              <div className='row'>
+                <div className='col-md-3 col-sm-12'>
+                  {productData.slice(0, 6).map((item, index) => {
+                    return (
+                      <p key={index}>
+                        <span>{item.title} : </span> {item.desc}
+                      </p>
+                    );
+                  })}
+                </div>
+                <div className='col-md-3 col-sm-12'>
+                  {productData.slice(6, 12).map((item, index) => {
+                    return (
+                      <p key={index}>
+                        <span>{item.title} : </span> {item.desc}
+                      </p>
+                    );
+                  })}
+                </div>
+                <div className='col-md-3 col-sm-12'></div>
+                <div className='col-md-3 col-sm-12'></div>
+              </div>
+            </div>
+          </Wrapper>
+          {/* For you components */}
+          <section>
+            <Container>
+              <ForYou />
+            </Container>
+
+            <Container>
+              <ForYou />
+            </Container>
+
+            <Container>
+              <ForYou />
+            </Container>
+          </section>
+
+          <Wrapper>
+            <div className='section'>
+              <h3>About DK</h3>
+              <hr />
+              <p>
+                Written by a team of writers with a foreword by a star of many
+                musicals, Elaine Paige.
+              </p>
             </div>
           </Wrapper>
         </main>
@@ -461,7 +578,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const Wrapper = styled.section`
   background-color: #f1f1f1;
-  padding: 3rem 2rem;
+  padding: 1rem;
   p {
     font-size: 16px;
   }
@@ -469,10 +586,20 @@ const Wrapper = styled.section`
     padding: 0.5rem;
     background: #fff;
     min-height: 410px;
+    margin-left: 0rem;
   }
   .img-container {
     height: 100%;
-    width: 110%;
+    width: 115%;
+    @media (max-width: 800px) {
+      width: 103%;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .book-description {
+      margin-top: 1rem;
+    }
   }
   .img-container img {
     height: 100%;
@@ -492,12 +619,18 @@ const Wrapper = styled.section`
     background-color: #d7d7d7;
     color: #807e7a;
     border-radius: 50%;
+    transition: all 0.3s;
   }
-  .social-icon svg {
+  .social-icon:hover {
+    color: blue;
   }
+
   .right {
     padding: 1rem;
     background: #fff;
+    @media (max-width: 764px) {
+      margin-top: 1rem;
+    }
     .price h2 {
       color: #ff0092;
     }
@@ -513,8 +646,9 @@ const Wrapper = styled.section`
       display: flex;
       gap: 0.5rem;
       flex-wrap: wrap;
+      margin-bottom: 1rem;
       p {
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 300;
         line-height: 18px;
         text-transform: capitalize;
@@ -533,11 +667,13 @@ const Wrapper = styled.section`
         display: flex;
         align-items: center;
         padding: 0 0.5rem;
+        color: #222;
         background-color: transparent;
-        border: 1px solid blue;
+        border: 1px solid #0b7bc1;
+        min-width: 115px;
       }
       .btn svg {
-        font-size: 15px;
+        font-size: 20px;
         margin-right: 0.6rem;
         color: blue;
       }
@@ -545,8 +681,11 @@ const Wrapper = styled.section`
         display: flex;
         flex-direction: column;
       }
+      .input-btn {
+        width: 50px;
+      }
       .btn:hover {
-        background-color: blue;
+        background-color: #0b7bc1;
         color: #fff;
         p {
           color: #fff;
@@ -556,6 +695,23 @@ const Wrapper = styled.section`
         }
       }
     }
+  }
+  .section {
+    background-color: #fff;
+    padding: 0.5rem 0.8rem;
+    margin-top: 0.7rem;
+    p {
+      text-transform: capitalize;
+      margin-bottom: 0.5rem;
+    }
+    span {
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+  }
+
+  section {
+    padding: 1rem 0 !important;
   }
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
