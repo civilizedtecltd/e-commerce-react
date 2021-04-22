@@ -42,13 +42,13 @@ function FooterComponent(props) {
                 <div className="footerWidgetHeader">Contact us</div>
                 <ul className="getInTouchList">
                   <li>
-                    <Link to="mailto:you@example.com" title="click to mail us">info@abookstore.co.ke</Link>
+                    <a href="mailto:you@example.com" title="click to mail us">info@abookstore.co.ke</a>
                   </li>{/*  end of li */}
                   <li>
-                    <Link to="tele:1234567890" title="click to call us">0745203001</Link>
+                    <a href="tele:1234567890" title="click to call us">0745203001</a>
                   </li>{/*  end of li */}
                   <li>
-                    <p>P.O. BOX 50726 , City Square - 00200</p>
+                    <p>P.O. BOX 50726, City Square - 00200</p>
                   </li>{/*  end of li */}
                 </ul>{/*  end of getInTouchList */}
               </div>{/*  end of footerWidget */}
@@ -58,9 +58,9 @@ function FooterComponent(props) {
               <div className="footerWidget">
                 <ul className="footerSocial">
                   {[
-                      {ListClass:"facebook", Url:"https://www.facebook.com/Abookstore-574617176550119/",IconName:"fab fa-facebook-f"},
-                      {ListClass:"facebook" ,Url:"https://www.instagram.com/abookstore_/",IconName:"fab fa-instagram"},
-                      {ListClass:"facebook",Url:"https://twitter.com/abookstore3",IconName:"fab fa-twitter"},
+                      {ListClass:"facebook", Url:"https://www.facebook.com/Abookstore-574617176550119/", IconName:"fab fa-facebook-f"},
+                      {ListClass:"facebook", Url:"https://www.instagram.com/abookstore_/", IconName:"fab fa-instagram"},
+                      {ListClass:"facebook", Url:"https://twitter.com/abookstore3", IconName:"fab fa-twitter"},
                     ].map((list,index)=><LiAi
                       key={index}
                       ListClass={list.ListClass}
