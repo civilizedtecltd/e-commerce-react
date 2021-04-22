@@ -1,72 +1,69 @@
-
 .productCatCard.card:hover {
-    border: 2px solid #2196F3;
+  border: 2px solid #2196f3;
 }
 
 .productCatCard.card:hover .productCatTitle {
-    color: #2196F3;
+  color: #2196f3;
 }
-.partnersCarousel   .slick-prev:before {
-    content: "\f053";
-    font-family: "Font Awesome 5 Free";
-    color: black;
+.partnersCarousel .slick-prev:before {
+  content: '\f053';
+  font-family: 'Font Awesome 5 Free';
+  color: black;
 }
 
-.partnersCarousel  .slick-next:before {
-    content: "\f054";
-    font-family: "Font Awesome 5 Free";
-    color: black;
+.partnersCarousel .slick-next:before {
+  content: '\f054';
+  font-family: 'Font Awesome 5 Free';
+  color: black;
 }
-.partnersCarousel .slick-slide img{
-    width: auto;
-    margin: 0 auto;
-}
-.partnersCarousel .slick-slide {
-    display: flex!important;
+.partnersCarousel .slick-slide img {
+  width: auto;
+  margin: 0 auto;
 }
 .partnersCarousel .slick-slide {
-    display: flex;
-    height: auto;
-    min-height: 36px;
-    align-items: center;
-    justify-content: center;
+  display: flex !important;
+}
+.partnersCarousel .slick-slide {
+  display: flex;
+  height: auto;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
 }
 
 .categorySlider .slick-prev:before {
-    content: "\f060";
-    font-family: "Font Awesome 5 Free";
-    color: black;
-    font-size: 16px;
-    padding: 11px;
-
+  content: '\f060';
+  font-family: 'Font Awesome 5 Free';
+  color: black;
+  font-size: 16px;
+  padding: 11px;
 }
 
 .categorySlider .slick-next:before {
-    content: "\f061";
-    font-family: "Font Awesome 5 Free";
-    color: black;
-    font-size: 16px;
-    padding: 11px;
-
+  content: '\f061';
+  font-family: 'Font Awesome 5 Free';
+  color: black;
+  font-size: 16px;
+  padding: 11px;
 }
 
 .categorySlider .slick-arrow.slick-prev {
-    background-color: #f1f2f3;
-    border-radius: 50%;
-    width: 2.5rem;
-    margin-left: -1rem
+  background-color: #f1f2f3;
+  border-radius: 50%;
+  width: 2.5rem;
+  margin-left: -1rem;
 }
 
 .categorySlider .slick-arrow.slick-next {
-    background-color: #f1f2f3;
-    border-radius: 50%;
-    width: 2.5rem;
-    margin-right: -1rem
+  background-color: #f1f2f3;
+  border-radius: 50%;
+  width: 2.5rem;
+  margin-right: -1rem;
 }
-.home-ctg-limit-character{
-    display: block;
-    width: 300px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.home-ctg-limit-character {
+  display: block;
+  width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
