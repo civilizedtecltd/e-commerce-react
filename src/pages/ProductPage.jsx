@@ -359,148 +359,154 @@ function ProductPage(props) {
           </section> */}
 
           <Wrapper>
-            <div className='row'>
-              <div className='col-lg-7 col-md-6 col-sm-12 '>
-                <div className='row left'>
-                  <div className='col-lg-4'>
-                    <div className='img-container'>
-                      <img
-                        src='https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/2414/9780241437537.jpg'
-                        alt=''
-                      />
+            <Container>
+              <div className='row'>
+                <div className='col-lg-7 col-md-6 col-sm-12 '>
+                  <div className='row left'>
+                    <div className='col-lg-4'>
+                      <div className='img-container'>
+                        <img
+                          src='https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/2414/9780241437537.jpg'
+                          alt=''
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className='col-lg-8'>
-                    <div className='book-description'>
-                      <h3>Musicals : The Definitive Illustrated Story</h3>
-                      <hr />
-                      <div className='rating'>
-                        <p>4.04 (119 ratings by Goodreads)</p>
-                      </div>
-                      <p className='s'>Hardback | English</p>
-                      <p className='author'>
-                        By (author) DK , Foreword by Elaine Paige
-                      </p>
-                      <div className='social'>
-                        <p>Share</p>
-                        <a href='#'>
-                          {' '}
-                          <AiOutlineMail className='social-icon' />
-                        </a>
-                        <a href='#'>
-                          <FaFacebookF className='social-icon' />
-                        </a>
-                        <a href='#'>
-                          {' '}
-                          <AiOutlineTwitter className='social-icon' />
-                        </a>
-                        <a href='#'>
-                          <FaPinterestP className='social-icon' />
-                        </a>
-                      </div>
-                      <div className='desc'>
-                        <p>
-                          {readmore ? info : `${info.substring(0, 400)}...`}
-                          <p
-                            className='readmore'
-                            onClick={() => setReadmore(!readmore)}
-                          >
-                            {readmore ? `show less` : `read more`}
-                          </p>
+                    <div className='col-lg-8'>
+                      <div className='book-description'>
+                        <h3>Musicals : The Definitive Illustrated Story</h3>
+                        <hr />
+                        <div className='rating'>
+                          <p>4.04 (119 ratings by Goodreads)</p>
+                        </div>
+                        <p className='s'>Hardback | English</p>
+                        <p className='author'>
+                          By (author) DK , Foreword by Elaine Paige
                         </p>
+                        <div className='social'>
+                          <p>Share</p>
+                          <a href='#'>
+                            {' '}
+                            <AiOutlineMail className='social-icon' />
+                          </a>
+                          <a href='#'>
+                            <FaFacebookF className='social-icon' />
+                          </a>
+                          <a href='#'>
+                            {' '}
+                            <AiOutlineTwitter className='social-icon' />
+                          </a>
+                          <a href='#'>
+                            <FaPinterestP className='social-icon' />
+                          </a>
+                        </div>
+                        <div className='desc'>
+                          <p>
+                            {readmore ? info : `${info.substring(0, 400)}...`}
+                            <p
+                              className='readmore'
+                              onClick={() => setReadmore(!readmore)}
+                            >
+                              {readmore ? `show less` : `read more`}
+                            </p>
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className='col-lg-5 col-md-6 col-sm-12 '>
-                <div className='right'>
-                  <div className='price'>
-                    <h2>US$71.59</h2>
-                    <hr />
-                  </div>
-                  <div className='desc'>
-                    <h5>
-                      <GiCommercialAirplane />
-                      Free delivery worldwide
-                    </h5>
-                    <h5>
-                      <AiOutlineCheckCircle />
-                      Available. Dispatched from the UK in 2 business days
-                    </h5>
-                    <p>
-                      <a href=''>When will my order arrive?</a>
+                <div className='col-lg-5 col-md-6 col-sm-12 '>
+                  <div className='right'>
+                    <div className='price'>
+                      <h2>US$71.59</h2>
                       <hr />
-                    </p>
+                    </div>
+                    <div className='desc'>
+                      <h5>
+                        <GiCommercialAirplane />
+                        Free delivery worldwide
+                      </h5>
+                      <h5>
+                        <AiOutlineCheckCircle />
+                        Available. Dispatched from the UK in 2 business days
+                      </h5>
+                      <p>
+                        <a href=''>When will my order arrive?</a>
+                        <hr />
+                      </p>
+                    </div>
+                    <div className='btn-container'>
+                      {buttonData.map((item, index) => {
+                        return <Buttons key={index} {...item} />;
+                      })}
+                    </div>
+                    <div className='btn-container'>
+                      <input
+                        placeholder='1'
+                        type='number'
+                        className='input-btn'
+                      />
+
+                      <button className='cart-btn btn'>
+                        <FiShoppingCart /> add to cart
+                      </button>
+                      <button className='fab-btn btn'>
+                        <AiOutlineStar /> add to fabourites
+                      </button>
+                    </div>
                   </div>
-                  <div className='btn-container'>
-                    {buttonData.map((item, index) => {
-                      return <Buttons key={index} {...item} />;
+                </div>
+              </div>
+
+              {/* Products details  */}
+
+              <div className='section'>
+                <h3>Products Details</h3>
+                <hr />
+                <div className='row'>
+                  <div className='col-md-3 col-sm-12'>
+                    {productData.slice(0, 6).map((item, index) => {
+                      return (
+                        <p key={index}>
+                          <span>{item.title} : </span> {item.desc}
+                        </p>
+                      );
                     })}
                   </div>
-                  <div className='btn-container'>
-                    <input
-                      placeholder='1'
-                      type='number'
-                      className='input-btn'
-                    />
-
-                    <button className='cart-btn btn'>
-                      <FiShoppingCart /> add to cart
-                    </button>
-                    <button className='fab-btn btn'>
-                      <AiOutlineStar /> add to fabourites
-                    </button>
+                  <div className='col-md-3 col-sm-12'>
+                    {productData.slice(6, 12).map((item, index) => {
+                      return (
+                        <p key={index}>
+                          <span>{item.title} : </span> {item.desc}
+                        </p>
+                      );
+                    })}
                   </div>
+                  <div className='col-md-3 col-sm-12'></div>
+                  <div className='col-md-3 col-sm-12'></div>
                 </div>
               </div>
-            </div>
-
-            {/* Products details  */}
-
-            <div className='section'>
-              <h3>Products Details</h3>
-              <hr />
-              <div className='row'>
-                <div className='col-md-3 col-sm-12'>
-                  {productData.slice(0, 6).map((item, index) => {
-                    return (
-                      <p key={index}>
-                        <span>{item.title} : </span> {item.desc}
-                      </p>
-                    );
-                  })}
-                </div>
-                <div className='col-md-3 col-sm-12'>
-                  {productData.slice(6, 12).map((item, index) => {
-                    return (
-                      <p key={index}>
-                        <span>{item.title} : </span> {item.desc}
-                      </p>
-                    );
-                  })}
-                </div>
-                <div className='col-md-3 col-sm-12'></div>
-                <div className='col-md-3 col-sm-12'></div>
-              </div>
-            </div>
+            </Container>
           </Wrapper>
-          {/* For you components */}
-          <section>
-            <ForYou />
-            <ForYou />
-            <ForYou />
-          </section>
+          <Container>
+            {/* For you components */}
+            <section>
+              <ForYou />
+              <ForYou />
+              <ForYou />
+            </section>
+          </Container>
 
           <Wrapper>
-            <div className='section'>
-              <h3>About DK</h3>
-              <hr />
-              <p>
-                Written by a team of writers with a foreword by a star of many
-                musicals, Elaine Paige.
-              </p>
-            </div>
+            <Container>
+              <div className='section'>
+                <h3>About DK</h3>
+                <hr />
+                <p>
+                  Written by a team of writers with a foreword by a star of many
+                  musicals, Elaine Paige.
+                </p>
+              </div>
+            </Container>
           </Wrapper>
         </main>
 
@@ -571,30 +577,20 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const Wrapper = styled.section`
-  background-color: #f1f1f1;
-  padding: 1rem;
   p {
     font-size: 16px;
   }
   .left {
     padding: 0.5rem;
-    background: #fff;
     min-height: 410px;
     margin: 0rem;
-  }
-
-  .img-container {
-    height: 400px;
-    width: 115%;
-    @media (max-width: 800px) {
-      width: 103%;
-    }
+    -webkit-box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
+    box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
   }
   .book-description {
-    margin-right: 0;
-    margin-left: 0.3rem;
+    margin-right: -5px;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 980px) {
     .book-description {
       margin-top: 1rem;
     }
@@ -605,10 +601,13 @@ const Wrapper = styled.section`
     display: inline;
     padding-left: 0.5rem;
   }
-  .img-container img {
+  .img-container {
     height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .img-container img {
     width: 100%;
-    margin-left: -15px;
   }
   .social {
     margin: 0.8rem 0;
@@ -630,8 +629,10 @@ const Wrapper = styled.section`
   }
 
   .right {
-    padding: 1rem;
     background: #fff;
+    padding: 1rem;
+    -webkit-box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
+    box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
     @media (max-width: 764px) {
       margin-top: 1rem;
     }
@@ -647,12 +648,13 @@ const Wrapper = styled.section`
       font-size: 30px;
     }
     .btn-container {
+      justify-content: space-between;
       display: flex;
       gap: 0.5rem;
       flex-wrap: wrap;
       margin-bottom: 1rem;
       p {
-        font-size: 12px;
+        font-size: 10px;
         font-weight: 400;
         line-height: 18px;
         text-transform: capitalize;
@@ -674,11 +676,11 @@ const Wrapper = styled.section`
         color: #222;
         background-color: transparent;
         border: 1px solid #0b7bc1;
-        min-width: 115px;
+        min-width: 90px;
         transition: all 0.3s ease;
       }
       .btn svg {
-        font-size: 20px;
+        font-size: 15px;
         margin-right: 0.6rem;
         color: blue;
       }
@@ -702,9 +704,10 @@ const Wrapper = styled.section`
     }
   }
   .section {
-    background-color: #fff;
+    -webkit-box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
+    box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
     padding: 0.5rem 0.8rem;
-    margin-top: 0.7rem;
+    margin: 1rem 0;
     p {
       text-transform: capitalize;
       margin-bottom: 0.5rem;
