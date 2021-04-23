@@ -651,8 +651,10 @@ const Wrapper = styled.section`
       justify-content: space-between;
       display: flex;
       gap: 0.5rem;
+      row-gap: 1rem;
       flex-wrap: wrap;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
+
       p {
         font-size: 10px;
         font-weight: 400;
@@ -661,9 +663,9 @@ const Wrapper = styled.section`
       }
       .available {
         color: #222;
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.1rem;
         opacity: 0;
-        font-size: 12px;
+        font-size: 10px;
       }
       .show {
         opacity: 1;
@@ -678,6 +680,18 @@ const Wrapper = styled.section`
         border: 1px solid #0b7bc1;
         min-width: 90px;
         transition: all 0.3s ease;
+        @media (min-width: 768px) and (max-width: 988px) {
+          min-width: 130px;
+        }
+        @media (max-width: 463px) {
+          min-width: 110px;
+        }
+        @media (min-width: 372px) and (max-width: 410px) {
+          min-width: 150px;
+        }
+        @media (min-width: 320px) and (max-width: 364px) {
+          min-width: 120px;
+        }
       }
       .btn svg {
         font-size: 15px;
@@ -690,6 +704,16 @@ const Wrapper = styled.section`
       }
       .input-btn {
         width: 50px;
+        @media (min-width: 768px) and (max-width: 1200px) {
+          min-width: 100px;
+          padding: 0 0.6rem;
+        }
+        @media (min-width: 335px) and (max-width: 466px) {
+          min-width: 120px;
+        }
+        @media (min-width: 296px) and (max-width: 334px) {
+          min-width: 80px;
+        }
       }
       .btn:hover {
         background-color: #0b7bc1;
