@@ -686,10 +686,10 @@ const Wrapper = styled.section`
         @media (max-width: 463px) {
           min-width: 110px;
         }
-        @media (min-width: 372px) and (max-width: 410px) {
+        @media (min-width: 367px) and (max-width: 410px) {
           min-width: 150px;
         }
-        @media (min-width: 320px) and (max-width: 364px) {
+        @media (min-width: 320px) and (max-width: 366px) {
           min-width: 120px;
         }
       }
