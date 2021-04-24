@@ -311,6 +311,7 @@ const Wrapper = styled.div`
       justify-content: center;
       visibility: hidden;
       opacity: 0;
+      transition: 0.5s;
       @media (max-width: 400px) {
         top: 36%;
       }

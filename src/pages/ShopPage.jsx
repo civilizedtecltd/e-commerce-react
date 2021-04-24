@@ -21,6 +21,8 @@ import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
 import './assets/shop.css';
 import PageLoader from '../components/pageLoader/PageLoaderComponent';
 import { BsFilter } from 'react-icons/bs';
+import { IoMdClose } from 'react-icons/io';
+
 import styled from 'styled-components';
 
 const useStyle = createUseStyles({
@@ -203,7 +205,7 @@ const ShopPage = (props) => {
       <div className='allWrapper'>
         <Wrapper>
           <a className='filter' onClick={handleFilterClick}>
-            <BsFilter />
+            {filterShow ? <IoMdClose /> : <BsFilter />}
           </a>
         </Wrapper>
         <HeaderComponent
