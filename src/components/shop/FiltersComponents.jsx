@@ -303,7 +303,7 @@ const Wrapper = styled.div`
       width: 100%;
       height: auto;
       max-height: 70%;
-      background-color: #fff;
+      background-color: rgba(0, 0, 0, 0.6);
       top: 30%;
       z-index: 88;
       left: 0;
