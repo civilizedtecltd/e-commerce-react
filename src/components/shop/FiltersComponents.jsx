@@ -304,7 +304,7 @@ const Wrapper = styled.div`
       height: auto;
       max-height: 70%;
       background-color: rgba(0, 0, 0, 0.6);
-      top: 30%;
+      top: 32%;
       z-index: 88;
       left: 0;
       display: flex;
@@ -312,14 +312,14 @@ const Wrapper = styled.div`
       visibility: hidden;
       opacity: 0;
       @media (max-width: 400px) {
-        top: 33%;
+        top: 36%;
       }
       @media (max-width: 385px) {
-        top: 36%;
+        top: 39%;
       }
 
       @media (max-width: 338px) {
-        top: 29%;
+        top: 30%;
       }
     }
     .asideFilterBar {

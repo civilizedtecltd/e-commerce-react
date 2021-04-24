@@ -169,6 +169,7 @@ const ShopPage = (props) => {
   //floating filter
   const [filterShow, setFilterShow] = useState(false);
   const [width, setWidth] = useState();
+
   const handleFilterClick = (e) => {
     setFilterShow(!filterShow);
   };
