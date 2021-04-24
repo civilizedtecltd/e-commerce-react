@@ -166,11 +166,28 @@ const ShopPage = (props) => {
 
   const handleSortBy = (e) => setSortBy(e.target.value);
 
+  //floating filter
   const [filterShow, setFilterShow] = useState(false);
-
+  const [width, setWidth] = useState();
   const handleFilterClick = (e) => {
     setFilterShow(!filterShow);
   };
+
+  //set the body with and checking
+  const setWidths = () => {
+    setWidth(document.body.clientWidth);
+    if (width > 990) {
+      setFilterShow(false);
+    }
+  };
+
+  //calling every time when window resize
+  useEffect(() => {
+    window.addEventListener('resize', setWidths);
+    return () => window.removeEventListener('resize', setWidths);
+  }, [width]);
+
+  //disabling body scrolling when floatng filter open
   useEffect(() => {
     if (filterShow) {
       document.body.style.overflow = 'hidden';
@@ -570,7 +587,7 @@ const Wrapper = styled.div`
   }
 `;
 const PaginationRowWrapper = styled.div`
-  @media (max-width: 990px) {
+  /* @media (max-width: 990px) {
     .Pagination-Row {
       background-color: #f6f6f6;
       z-index: 99;
@@ -582,8 +599,8 @@ const PaginationRowWrapper = styled.div`
       display: none;
     }
     .show {
-      /* display: block; */
+      display: block;
     }
-  }
+  } */
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
