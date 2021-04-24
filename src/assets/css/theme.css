@@ -1,7 +1,9 @@
 /* Header Top Bar End */
 .headerTopBar {
   min-height: 40px;
+  padding-top: 5px;
 }
+
 .headFeature {
   color: #ffffff;
   font-size: 15px;
@@ -1007,6 +1009,9 @@ div#controlled-tab-example-tabpane-payPal {
 /*                    Width : 767px
 /*------------------------------------------------------------------------------*/
 @media only screen and (max-width: 767px) {
+  .headerTopBar {
+    padding-bottom: 5px;
+  }
   .mailSubscribe .col-sm-10 {
     flex: 0 0 100%;
     max-width: 100%;

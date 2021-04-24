@@ -168,12 +168,23 @@ const ShopPage = (props) => {
 
   const [filterShow, setFilterShow] = useState(false);
 
+  const handleFilterClick = (e) => {
+    setFilterShow(!filterShow);
+  };
+  useEffect(() => {
+    if (filterShow) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [filterShow]);
+
   return (
     <>
       <PageLoader loading={pending} />
       <div className='allWrapper'>
         <Wrapper>
-          <a className='filter' onClick={() => setFilterShow(!filterShow)}>
+          <a className='filter' onClick={handleFilterClick}>
             <BsFilter />
           </a>
         </Wrapper>
@@ -523,9 +534,20 @@ const mapDispatchToProps = (dispatch) => {
 
 const Wrapper = styled.div`
   position: fixed;
-  top: 10%;
+  top: 25%;
   right: 5%;
   z-index: 99999999;
+  @media (max-width: 400px) {
+    top: 28%;
+  }
+  @media (max-width: 385px) {
+    top: 31%;
+  }
+
+  @media (max-width: 338px) {
+    top: 23%;
+  }
+
   .filter {
     height: 35px;
     width: 35px;

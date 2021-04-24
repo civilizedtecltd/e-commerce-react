@@ -296,37 +296,45 @@ const mapStateToProps = (state) => {
 };
 
 const Wrapper = styled.div`
-  overflow: scroll;
   @media (max-width: 990px) {
     .bg {
-      overflow: scroll;
+      overflow-y: auto;
       position: fixed;
       width: 100%;
       height: auto;
+      max-height: 70%;
       background-color: #fff;
-      top: 17%;
+      top: 30%;
       z-index: 88;
       left: 0;
       display: flex;
       justify-content: center;
       visibility: hidden;
       opacity: 0;
+      @media (max-width: 400px) {
+        top: 33%;
+      }
+      @media (max-width: 385px) {
+        top: 36%;
+      }
+
+      @media (max-width: 338px) {
+        top: 29%;
+      }
     }
     .asideFilterBar {
       margin-top: 1rem;
       background-color: #f6f6f6;
       position: relative;
       width: 90%;
-      overflow: scroll;
     }
     .asideTitle {
       margin-left: 1rem;
     }
-  }
-
-  .show {
-    visibility: visible;
-    opacity: 1;
+    .show {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 `;
 export default connect(mapStateToProps, null)(Filters);
