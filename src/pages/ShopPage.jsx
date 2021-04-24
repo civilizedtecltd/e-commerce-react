@@ -523,7 +523,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const Wrapper = styled.div`
   position: fixed;
-  top: 20%;
+  top: 10%;
   right: 5%;
   z-index: 99999999;
   .filter {
