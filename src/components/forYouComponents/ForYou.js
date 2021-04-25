@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ForYou = () => {
-  const data = [
+const ForYou = ({ data }) => {
+  const data1 = [
     {
       img:
         'https://static-01.daraz.com.bd/p/0a926044688596b6598d9ba384fb8383.jpg_200x200q75-product.jpg_.webp',
@@ -46,31 +46,28 @@ const ForYou = () => {
       discount: 't 40000',
     },
   ];
-
+  console.log(data);
   return (
     <Wrapper>
       <h4>Just For you</h4>
       <div className='wrapper'>
-        {data.map((item, index) => {
-          const { img, desc, price, discount } = item;
-          return (
-            <div className='single-card'>
-              <div className='img-container'>
-                <img src={img} alt='product image' />
+        {data &&
+          data.map((item, index) => {
+            const { cover_images, name, price, discount } = item;
+            return (
+              <div className='single-card' key={index}>
+                <div className='img-container'>
+                  <img src={cover_images.img_1} alt='product image' />
+                </div>
+                <div className='footer'>
+                  <p className='desc'>{name}</p>
+                  <span className='span'>
+                    <p className='price'>Ksh {price}</p>
+                  </span>
+                </div>
               </div>
-              <div className='footer'>
-                <p className='desc'>{desc}</p>
-                <span className='span'>
-                  <p className='price'>{price}</p>
-                  <del>
-                    {' '}
-                    <p className='discount'>{discount}</p>
-                  </del>
-                </span>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </Wrapper>
   );
@@ -106,8 +103,8 @@ const Wrapper = styled.div`
     }
 
     .img-container img {
-      max-height: 100%;
-      max-width: 100%;
+      height: 100%;
+      width: 100%;
       object-fit: cover;
     }
     .footer {
@@ -123,6 +120,7 @@ const Wrapper = styled.div`
         height: 50px;
       }
       .price {
+        margin-top: 1.5rem;
         color: #f88824;
         font-size: 20px;
       }
@@ -130,6 +128,9 @@ const Wrapper = styled.div`
         color: #9e9e9e;
         margin-top: 0.2rem;
       }
+    }
+    .span {
+      margin-top: 2rem;
     }
   }
   .single-card:hover {

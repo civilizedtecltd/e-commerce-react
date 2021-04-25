@@ -1,13 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {connect} from 'react-redux';
-import {Col, Container, Modal, Row} from 'react-bootstrap';
-import {Link, useParams} from 'react-router-dom';
-import {createUseStyles} from 'react-jss';
-import {showSingleBook} from '../redux/actions/bookActions';
-import {addToCart, deliveryMethod, updateQuantity,} from '../redux/actions/shopActions';
-import {addToFavorite, removeFavItem} from '../redux/actions/favoriteActions';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Col, Container, Modal, Row } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
+import { createUseStyles } from 'react-jss';
+import { showSingleBook } from '../redux/actions/bookActions';
+import {
+  addToCart,
+  deliveryMethod,
+  updateQuantity,
+} from '../redux/actions/shopActions';
+import { addToFavorite, removeFavItem } from '../redux/actions/favoriteActions';
 import FooterComponent from '../components/FooterComponent/FooterComponent';
-import {NewsLetterComponent} from '../components/offerPageComponents/NewsLetterComponent';
+import { NewsLetterComponent } from '../components/offerPageComponents/NewsLetterComponent';
 import HeaderComponent from '../components/header/Header';
 import MobileHeader from '../components/header/MobileHeader';
 import BreadCrumb from '../components/BreadCrumb/BreadCrumb';
@@ -18,194 +22,199 @@ import '../assets/css/theme.css';
 import styled from 'styled-components';
 
 //react icons
-import {GiCommercialAirplane, GiSpeaker} from 'react-icons/gi';
-import {AiOutlineCheckCircle, AiOutlineMail, AiOutlineStar, AiOutlineTwitter} from 'react-icons/ai';
-import {FaFacebookF, FaFilePdf, FaPinterestP} from 'react-icons/fa';
-import {BiBookBookmark} from 'react-icons/bi';
-import {SiPublons} from 'react-icons/si';
-import {FiShoppingCart} from 'react-icons/fi';
+import { GiCommercialAirplane, GiSpeaker } from 'react-icons/gi';
+import {
+  AiOutlineCheckCircle,
+  AiOutlineMail,
+  AiOutlineStar,
+  AiOutlineTwitter,
+} from 'react-icons/ai';
+import { FaFacebookF, FaFilePdf, FaPinterestP } from 'react-icons/fa';
+import { BiBookBookmark } from 'react-icons/bi';
+import { SiPublons } from 'react-icons/si';
+import { FiShoppingCart } from 'react-icons/fi';
 import Buttons from '../components/Product-page-buttons/Buttons';
 import ForYou from '../components/forYouComponents/ForYou';
 
 const useStyles = createUseStyles({
-    addFevButton: {
-        color: 'skyblue',
-        backgroundColor: 'white',
-    },
+  addFevButton: {
+    color: 'skyblue',
+    backgroundColor: 'white',
+  },
 });
 
 function ProductPage(props) {
-    const {
-        showSingleBook,
-        getDeliveryMethods,
-        book,
-        cart,
-        favorite,
-        totalItems,
-        similar,
-        pending,
-        history,
-        updateItem,
-        addToCart,
-        addToFavorite,
-        removeFavorite,
-    } = props;
+  const {
+    showSingleBook,
+    getDeliveryMethods,
+    book,
+    cart,
+    favorite,
+    totalItems,
+    similar,
+    pending,
+    history,
+    updateItem,
+    addToCart,
+    addToFavorite,
+    removeFavorite,
+  } = props;
 
-    const classes = useStyles();
-    const {id} = useParams();
-    const [show, setShow] = useState(false);
-    const [quantity, setQuantity] = useState(1);
+  const classes = useStyles();
+  const { id } = useParams();
+  const [show, setShow] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        showSingleBook(id);
-        getDeliveryMethods();
-    }, [id, getDeliveryMethods, showSingleBook]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    showSingleBook(id);
+    getDeliveryMethods();
+  }, [id, getDeliveryMethods, showSingleBook]);
 
-    let itemQty = quantity;
+  let itemQty = quantity;
 
-    const handleClose = () => setShow(false);
-    cart.map((item) => {
-        if (item.id === Number(id)) {
-            return (itemQty = Number(item.quantity));
-        }
-    });
+  const handleClose = () => setShow(false);
+  cart.map((item) => {
+    if (item.id === Number(id)) {
+      return (itemQty = Number(item.quantity));
+    }
+  });
 
-    const favoriteItem = favorite.items;
-    const isFavoriteItem = favoriteItem.find((fav) => fav.id === Number(id));
+  const favoriteItem = favorite.items;
+  const isFavoriteItem = favoriteItem.find((fav) => fav.id === Number(id));
 
-    const updateItemQty = (e) => {
-        //let countQty = quantity
-        setQuantity(Number(e.target.value));
-        updateItem({id: Number(book.id), qty: Number(e.target.value)});
-    };
+  const updateItemQty = (e) => {
+    //let countQty = quantity
+    setQuantity(Number(e.target.value));
+    updateItem({ id: Number(book.id), qty: Number(e.target.value) });
+  };
 
-    const handleAddToCart = (e) => {
-        e.preventDefault();
-        if (!checkAuth()) return (window.location = '/login');
-        book.quantity = quantity;
-        addToCart(book);
-        setShow(true);
-        if (favoriteItem.length !== 0) {
-            favoriteItem.map((item) =>
-                item.id === book.id ? removeFavorite(book.id) : ''
-            );
-        }
-    };
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    if (!checkAuth()) return (window.location = '/login');
+    book.quantity = quantity;
+    addToCart(book);
+    setShow(true);
+    if (favoriteItem.length !== 0) {
+      favoriteItem.map((item) =>
+        item.id === book.id ? removeFavorite(book.id) : ''
+      );
+    }
+  };
 
-    const handleAddFavorite = (e) => {
-        e.preventDefault();
-        if (!checkAuth()) {
-            return history.push('/login');
-        } else if (isFavoriteItem) {
-            return removeFavorite(id);
-        } else if (!isFavoriteItem) {
-            addToFavorite(id);
-        }
-    };
+  const handleAddFavorite = (e) => {
+    e.preventDefault();
+    if (!checkAuth()) {
+      return history.push('/login');
+    } else if (isFavoriteItem) {
+      return removeFavorite(id);
+    } else if (!isFavoriteItem) {
+      addToFavorite(id);
+    }
+  };
 
-    //cart item number
-    const [readmore, setReadmore] = useState(false);
-    const info =
-        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit exercitationem, minima eos voluptas ex inventore sit provident veritatis reiciendis magni officia assumenda quasi, aliquam cupiditate quaerat nisi laborum! Suscipit, quam dolorum. Odio, fugiat! Explicabo neque illum eveniet odio veniam voluptatibus optio nesciunt placeat, iusto dolor tempore labore aliquid! Repudiandae, ipsa? assumenda quasi, aliquam cupiditate quaerat nisi laborum! Suscipit, quam dolorum. Odio, fugiat! Explicabo neque illum eveniet odio veniam voluptatibus optio nesciunt placeat, iusto dolor tempore labore aliquid! Repudiandae, ipsa?';
+  //cart item number
+  const [readmore, setReadmore] = useState(false);
+  const info =
+    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit exercitationem, minima eos voluptas ex inventore sit provident veritatis reiciendis magni officia assumenda quasi, aliquam cupiditate quaerat nisi laborum! Suscipit, quam dolorum. Odio, fugiat! Explicabo neque illum eveniet odio veniam voluptatibus optio nesciunt placeat, iusto dolor tempore labore aliquid! Repudiandae, ipsa? assumenda quasi, aliquam cupiditate quaerat nisi laborum! Suscipit, quam dolorum. Odio, fugiat! Explicabo neque illum eveniet odio veniam voluptatibus optio nesciunt placeat, iusto dolor tempore labore aliquid! Repudiandae, ipsa?';
 
-    const buttonData = [
-        {
-            text: 'abailable',
-            name: 'hardcover',
-            icon: <BiBookBookmark/>,
-            price: '$16.99',
-        },
-        {
-            text: 'abailable',
-            name: 'audio book',
-            icon: <GiSpeaker/>,
-            price: '$16.99',
-        },
-        {
-            text: 'out of stock',
-            name: 'e pub',
-            icon: <SiPublons/>,
-            price: '$16.99',
-        },
-        {
-            text: 'abailable',
-            name: 'pdf',
-            icon: <FaFilePdf/>,
-            price: '$16.99',
-        },
-    ];
+  const buttonData = [
+    {
+      text: 'abailable',
+      name: 'hardcover',
+      icon: <BiBookBookmark />,
+      price: '$16.99',
+    },
+    {
+      text: 'abailable',
+      name: 'audio book',
+      icon: <GiSpeaker />,
+      price: '$16.99',
+    },
+    {
+      text: 'out of stock',
+      name: 'e pub',
+      icon: <SiPublons />,
+      price: '$16.99',
+    },
+    {
+      text: 'abailable',
+      name: 'pdf',
+      icon: <FaFilePdf />,
+      price: '$16.99',
+    },
+  ];
+  console.log(book);
+  const productData = [
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+    {
+      title: 'format',
+      desc: 'Hardback | 360 pages',
+    },
+  ];
 
-    const productData = [
-        {
-            title: 'format',
-            desc: 'Hardback | 360 pages',
-        },
-        {
-            title: 'format',
-            desc: 'Hardback | 360 pages',
-        },
-        {
-            title: 'format',
-            desc: 'Hardback | 360 pages',
-        },
-        {
-            title: 'format',
-            desc: 'Hardback | 360 pages',
-        },
-        {
-            title: 'format',
-            desc: 'Hardback | 360 pages',
-        },
-        {
-            title: 'format',
-            desc: 'Hardback | 360 pages',
-        },
-        {
-            title: 'format',
-            desc: 'Hardback | 360 pages',
-        },
-        {
-            title: 'format',
-            desc: 'Hardback | 360 pages',
-        },
-        {
-            title: 'format',
-            desc: 'Hardback | 360 pages',
-        },
-        {
-            title: 'format',
-            desc: 'Hardback | 360 pages',
-        },
-    ];
+  return (
+    <>
+      <PageLoader loading={pending && pending} />
+      <div className='allWrapper'>
+        <HeaderComponent
+          favorite_item={favoriteItem.length}
+          cartItem={totalItems && totalItems}
+        />
+        <MobileHeader
+          favorite_item={favoriteItem.length}
+          cartItem={totalItems && totalItems}
+        />
+        <main className='mainContent clearfix' id='mainContent'>
+          <section
+            className='breadcrumbArea secGap pb-0 clearfix'
+            id='breadcrumb'
+          >
+            <Container>
+              <Row>
+                <Col>
+                  <BreadCrumb />
+                </Col>
+              </Row>
+            </Container>
+          </section>
 
-    return (
-        <>
-            <PageLoader loading={pending && pending}/>
-            <div className='allWrapper'>
-                <HeaderComponent
-                    favorite_item={favoriteItem.length}
-                    cartItem={totalItems && totalItems}
-                />
-                <MobileHeader
-                    favorite_item={favoriteItem.length}
-                    cartItem={totalItems && totalItems}
-                />
-                <main className='mainContent clearfix' id='mainContent'>
-                    <section
-                        className='breadcrumbArea secGap pb-0 clearfix'
-                        id='breadcrumb'
-                    >
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <BreadCrumb/>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </section>
-
-                    {/* <section
+          {/* <section
             className='mainBodyContent productDetails secGap clearfix'
             id='mainBodyContent'
           >
@@ -342,222 +351,246 @@ function ProductPage(props) {
             </Container>
           </section> */}
 
-                    <Wrapper>
-                        <Container>
-                            <div className='row'>
-                                <div className='col-lg-7 col-md-6 col-sm-12 '>
-                                    <div className='row left'>
-                                        <div className='col-lg-4'>
-                                            <div className='img-container'>
-                                                <img
-                                                    src='https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/2414/9780241437537.jpg'
-                                                    alt=''
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className='col-lg-8'>
-                                            <div className='book-description'>
-                                                <h3>Musicals : The Definitive Illustrated Story</h3>
-                                                <hr/>
-                                                <div className='rating'>
-                                                    <p>4.04 (119 ratings by Goodreads)</p>
-                                                </div>
-                                                <p className='s'>Hardback | English</p>
-                                                <p className='author'>
-                                                    By (author) DK , Foreword by Elaine Paige
-                                                </p>
-                                                <div className='social'>
-                                                    <p>Share</p>
-                                                    <a href='#'>
-                                                        {' '}
-                                                        <AiOutlineMail className='social-icon'/>
-                                                    </a>
-                                                    <a href='#'>
-                                                        <FaFacebookF className='social-icon'/>
-                                                    </a>
-                                                    <a href='#'>
-                                                        {' '}
-                                                        <AiOutlineTwitter className='social-icon'/>
-                                                    </a>
-                                                    <a href='#'>
-                                                        <FaPinterestP className='social-icon'/>
-                                                    </a>
-                                                </div>
-                                                <div className='desc'>
-                                                    <p>
-                                                        {readmore ? info : `${info.substring(0, 400)}...`}
-                                                        <p
-                                                            className='readmore'
-                                                            onClick={() => setReadmore(!readmore)}
-                                                        >
-                                                            {readmore ? `show less` : `read more`}
-                                                        </p>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='col-lg-5 col-md-6 col-sm-12 '>
-                                    <div className='right'>
-                                        <div className='price'>
-                                            <h2>US$71.59</h2>
-                                            <hr/>
-                                        </div>
-                                        <div className='desc'>
-                                            <h5>
-                                                <GiCommercialAirplane/>
-                                                Free delivery worldwide
-                                            </h5>
-                                            <h5>
-                                                <AiOutlineCheckCircle/>
-                                                Available. Dispatched from the UK in 2 business days
-                                            </h5>
-                                            <p>
-                                                <a href=''>When will my order arrive?</a>
-                                                <hr/>
-                                            </p>
-                                        </div>
-                                        <div className='btn-container'>
-                                            {buttonData.map((item, index) => {
-                                                return <Buttons key={index} {...item} />;
-                                            })}
-                                        </div>
-                                        <div className='btn-container'>
-                                            <input
-                                                placeholder='1'
-                                                type='number'
-                                                className='input-btn'
-                                            />
-
-                                            <button className='cart-btn btn'>
-                                                <FiShoppingCart/> add to cart
-                                            </button>
-                                            <button className='fab-btn btn'>
-                                                <AiOutlineStar/> add to fabourites
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Products details  */}
-
-                            <div className='section'>
-                                <h3>Products Details</h3>
-                                <hr/>
-                                <div className='row'>
-                                    <div className='col-md-3 col-sm-12'>
-                                        {productData.slice(0, 6).map((item, index) => {
-                                            return (
-                                                <p key={index}>
-                                                    <span>{item.title} : </span> {item.desc}
-                                                </p>
-                                            );
-                                        })}
-                                    </div>
-                                    <div className='col-md-3 col-sm-12'>
-                                        {productData.slice(6, 12).map((item, index) => {
-                                            return (
-                                                <p key={index}>
-                                                    <span>{item.title} : </span> {item.desc}
-                                                </p>
-                                            );
-                                        })}
-                                    </div>
-                                    <div className='col-md-3 col-sm-12'></div>
-                                    <div className='col-md-3 col-sm-12'></div>
-                                </div>
-                            </div>
-                        </Container>
-                    </Wrapper>
-                    <Container>
-                        {/* For you components */}
-                        <section>
-                            <ForYou/>
-                            <ForYou/>
-                            <ForYou/>
-                        </section>
-                    </Container>
-
-                    <Wrapper>
-                        <Container>
-                            <div className='section'>
-                                <h3>About DK</h3>
-                                <hr/>
-                                <p>
-                                    Written by a team of writers with a foreword by a star of many
-                                    musicals, Elaine Paige.
-                                </p>
-                            </div>
-                        </Container>
-                    </Wrapper>
-                </main>
-
-                <section
-                    className='mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap'
-                    id='mailSubscribe'
-                >
-                    <Container className='container'>
-                        <NewsLetterComponent/>
-                    </Container>
-                </section>
-                <FooterComponent/>
-            </div>
-
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header className={'border-0'} closeButton></Modal.Header>
-                <Modal.Body>
-                    <h2 className={'text-center'}>Product added to cart successfully!</h2>
-                </Modal.Body>
-                <Modal.Footer
-                    className={'border-0 modal-footer-mobile modal-footer-alignment'}
-                >
-                    <div className='modalBottomAlignment'>
-                        <Link
-                            to='/checkout'
-                            className='btn btn-primary mobile-view-btn'
-                            style={{color: 'white'}}
-                        >
-                            {' '}
-                            Go to checkout{' '}
-                        </Link>
-                        <Link
-                            to='/shopping'
-                            className='btn btn-outline linkBtnBorder mobile-view-btn'
-                            style={{color: 'white !important'}}
-                        >
-                            {' '}
-                            Continue shopping
-                        </Link>
+          <Wrapper>
+            <Container>
+              <div className='row'>
+                <div className='col-lg-7 col-md-6 col-sm-12 '>
+                  <div className='row left'>
+                    <div className='col-lg-4'>
+                      <div className='img-container'>
+                        <img src={book && book.cover_images.img_1} alt='' />
+                      </div>
                     </div>
-                </Modal.Footer>
-            </Modal>
-        </>
-    );
+                    <div className='col-lg-8'>
+                      <div className='book-description'>
+                        <h3> {book ? book.name : ``}</h3>
+                        <hr />
+                        <div className='rating'>
+                          <p>
+                            {book ? book.rating : '0'}
+                            {'\u00A0'} {'\u00A0'}{' '}
+                            {`(${book && book.total_review} reviews) `}{' '}
+                          </p>
+                        </div>
+                        <p className='s'>Hardback | English</p>
+                        <p className='author'>
+                          By {book && book.book_author.name}
+                        </p>
+                        <div className='social'>
+                          <p>Share</p>
+                          <a href='#'>
+                            {' '}
+                            <AiOutlineMail className='social-icon' />
+                          </a>
+                          <a href='#'>
+                            <FaFacebookF className='social-icon' />
+                          </a>
+                          <a href='#'>
+                            {' '}
+                            <AiOutlineTwitter className='social-icon' />
+                          </a>
+                          <a href='#'>
+                            <FaPinterestP className='social-icon' />
+                          </a>
+                        </div>
+                        <div className='desc'>
+                          <p>
+                            {readmore
+                              ? book && book.long_description
+                              : `${
+                                  book &&
+                                  book.long_description.substring(0, 400)
+                                }...`}
+                            <p
+                              className='readmore'
+                              onClick={() => setReadmore(!readmore)}
+                            >
+                              {readmore ? `show less` : `read more`}
+                            </p>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='col-lg-5 col-md-6 col-sm-12 '>
+                  <div className='right'>
+                    <div className='price'>
+                      <h2> Ksh {book ? book.price : 0}</h2>
+                      <hr />
+                    </div>
+                    <div className='desc'>
+                      <h5>
+                        <GiCommercialAirplane />
+                        Free delivery worldwide
+                      </h5>
+                      <h5>
+                        <AiOutlineCheckCircle />
+                        Available. Dispatched from the UK in 2 business days
+                      </h5>
+                      <p>
+                        <a href=''>When will my order arrive?</a>
+                        <hr />
+                      </p>
+                    </div>
+                    <div className='btn-container'>
+                      {buttonData.map((item, index) => {
+                        return <Buttons key={index} {...item} />;
+                      })}
+                    </div>
+                    <div className='btn-container'>
+                      <input
+                        className='input-btn'
+                        type='number'
+                        value={itemQty}
+                        onChange={updateItemQty}
+                        min={1}
+                      />
+
+                      <button
+                        className='cart-btn btn'
+                        onClick={handleAddToCart}
+                      >
+                        <FiShoppingCart /> add to cart
+                      </button>
+                      <button
+                        className='fab-btn btn'
+                        onClick={handleAddFavorite}
+                      >
+                        <AiOutlineStar /> add to fabourites
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Products details  */}
+
+              <div className='section'>
+                <h3>Book Details</h3>
+                <hr />
+                <div className='row'>
+                  <div className='col-md-3 col-sm-12'>
+                    <p>
+                      <span> id: </span> {book && book.id}
+                    </p>
+                    <p>
+                      <span> author: </span> {book && book.book_author.name}
+                    </p>
+                    <p>
+                      <span> discipline: </span>{' '}
+                      {book && book.book_discipline.name}
+                    </p>
+                    <p>
+                      <span> stage: </span> {book && book.book_stage.stage}
+                    </p>
+                    <p>
+                      <span> publisher: </span>{' '}
+                      {book && book.book_publisher.name}
+                    </p>
+                    <p>
+                      <span> publishing_year: </span>{' '}
+                      {book && book.book_publishing_year.name}
+                    </p>
+                  </div>
+                  <div className='col-md-3 col-sm-12'>
+                    <p>
+                      <span> language: </span> {book && book.book_language.name}
+                    </p>
+                    <p>
+                      <span> page_number: </span> {book && book.page_number}
+                    </p>
+                  </div>
+                  <div className='col-md-3 col-sm-12'></div>
+                  <div className='col-md-3 col-sm-12'></div>
+                </div>
+              </div>
+            </Container>
+          </Wrapper>
+          <Container>
+            {/* For you components */}
+            <section>
+              <ForYou data={similar && similar.slice(0, 6)} />
+              <ForYou data={similar && similar.slice(6, 12)} />
+              <ForYou data={similar && similar.slice(12, 18)} />
+            </section>
+          </Container>
+
+          <Wrapper>
+            <Container>
+              <div className='section'>
+                <h3>About DK</h3>
+                <hr />
+                <p>Written by {book && book.book_author.name}</p>
+              </div>
+            </Container>
+          </Wrapper>
+        </main>
+
+        <section
+          className='mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap'
+          id='mailSubscribe'
+        >
+          <Container className='container'>
+            <NewsLetterComponent />
+          </Container>
+        </section>
+        <FooterComponent />
+      </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header className={'border-0'} closeButton></Modal.Header>
+        <Modal.Body>
+          <h2 className={'text-center'}>Product added to cart successfully!</h2>
+        </Modal.Body>
+        <Modal.Footer
+          className={'border-0 modal-footer-mobile modal-footer-alignment'}
+        >
+          <div className='modalBottomAlignment'>
+            <Link
+              to='/checkout'
+              className='btn btn-primary mobile-view-btn'
+              style={{ color: 'white' }}
+            >
+              {' '}
+              Go to checkout{' '}
+            </Link>
+            <Link
+              to='/shopping'
+              className='btn btn-outline linkBtnBorder mobile-view-btn'
+              style={{ color: 'white !important' }}
+            >
+              {' '}
+              Continue shopping
+            </Link>
+          </div>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 }
 
 const mapStateToProps = (state) => {
-    return {
-        book: state.book.info,
-        similar: state.book.similar,
-        pending: state.book.pending ? state.book.pending : false,
-        cart: state.shop.cart,
-        totalItems: state.shop.cart.length,
-        favorite: state.favorite,
-        rating: state.book.info,
-    };
+  return {
+    book: state.book.info,
+    similar: state.book.similar,
+    pending: state.book.pending ? state.book.pending : false,
+    cart: state.shop.cart,
+    totalItems: state.shop.cart.length,
+    favorite: state.favorite,
+    rating: state.book.info,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        showSingleBook: (id) => dispatch(showSingleBook(id)),
-        addToCart: (favorite, book) => dispatch(addToCart(favorite, book)),
-        updateItem: ({id, qty}) => dispatch(updateQuantity({id, qty})),
-        addToFavorite: (id) => dispatch(addToFavorite(id)),
-        removeFavorite: (id) => dispatch(removeFavItem(id)),
-        getDeliveryMethods: () => dispatch(deliveryMethod()),
-    };
+  return {
+    showSingleBook: (id) => dispatch(showSingleBook(id)),
+    addToCart: (favorite, book) => dispatch(addToCart(favorite, book)),
+    updateItem: ({ id, qty }) => dispatch(updateQuantity({ id, qty })),
+    addToFavorite: (id) => dispatch(addToFavorite(id)),
+    removeFavorite: (id) => dispatch(removeFavItem(id)),
+    getDeliveryMethods: () => dispatch(deliveryMethod()),
+  };
 };
 
 const Wrapper = styled.section`
