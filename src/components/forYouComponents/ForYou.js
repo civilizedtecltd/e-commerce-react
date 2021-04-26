@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ForYou = ({ data }) => {
@@ -50,22 +51,25 @@ const ForYou = ({ data }) => {
   return (
     <Wrapper>
       <h4>Just For you</h4>
+
       <div className='wrapper'>
         {data &&
           data.map((item, index) => {
-            const { cover_images, name, price, discount } = item;
+            const { cover_images, name, price } = item;
             return (
-              <div className='single-card' key={index}>
-                <div className='img-container'>
-                  <img src={cover_images.img_1} alt='product image' />
+              <Link to={`/product/${item.id}`} key={index}>
+                <div className='single-card'>
+                  <div className='img-container'>
+                    <img src={cover_images.img_1} alt='product image' />
+                  </div>
+                  <div className='footer'>
+                    <p className='desc'>{name}</p>
+                    <span className='span'>
+                      <p className='price'>Ksh {price}</p>
+                    </span>
+                  </div>
                 </div>
-                <div className='footer'>
-                  <p className='desc'>{name}</p>
-                  <span className='span'>
-                    <p className='price'>Ksh {price}</p>
-                  </span>
-                </div>
-              </div>
+              </Link>
             );
           })}
       </div>
