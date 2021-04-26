@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Image } from 'react-bootstrap';
 import LazyLoad from 'react-lazyload';
-import { URL } from '../../constants/config';
-import { ProductCarouselImg } from '../../inc/product/ImgCarousel';
+
+import { ProductCarouselImg } from './../inc/product/ImgCarousel';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import '../../pages/assets/product.css';
+import './../pages/assets/product.css';
+import styled from 'styled-components';
 
-function ImageCarousel(props) {
+const ReactImageCarosule = (props) => {
   let [count] = useState(0);
   const [hidden, setHidden] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -65,48 +66,23 @@ function ImageCarousel(props) {
   return (
     <>
       <div className='row productImageGallery'>
-        <LazyLoad once={true} height={200}>
-          <div className='row'>
-            <div className='col-sm-3'>
-              <div className='productGallery'>
-                {images.map((item, index) => (
-                  <div key={index} className='singleItem bgGray p-2 mb-2'>
-                    <img
-                      loading='lazy'
-                      src={item}
-                      alt='img'
-                      onClick={ImgHandler}
-                      className='CursorPointerProduct'
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-            {/* {console.log(ProductCarouselImg[0])} */}
-            <div className='col-sm-9'>
-              <div className='productSingleView bgGray p-3 text-center'>
-                <span onClick={() => setHidden(true)}>
-                  {' '}
-                  <i className='fas fa-expand-arrows-alt Modal CursorPointerProduct'></i>
+        <LazyLoad once={true}>
+          <Wrapper>
+            <div className='container-img'>
+              <span className='zoom' onClick={() => setHidden(true)}>
+                <i className='fas fa-expand-arrows-alt Modal CursorPointerProduct'></i>
+              </span>
+              <Image src={coverImages} id={'photo'} alt='image' />
+              <div className='next-prev-btn'>
+                <span className='arrow left-arrow ' onClick={() => PrevPhoto()}>
+                  <i className='fas fa-arrow-left fa-2x'></i>
                 </span>
-                <Image src={coverImages} id={'photo'} alt='image' />
-                <div className='mt-3'>
-                  <span
-                    className='mr-5 CursorPointerProduct'
-                    onClick={() => PrevPhoto()}
-                  >
-                    <i className='fas fa-arrow-left fa-2x'></i>
-                  </span>
-                  <span
-                    className='ml-5 CursorPointerProduct'
-                    onClick={() => NextPhoto()}
-                  >
-                    <i className='fas fa-arrow-right fa-2x'></i>
-                  </span>
-                </div>
+                <span className='arrow right-arrow' onClick={() => NextPhoto()}>
+                  <i className='fas fa-arrow-right fa-2x'></i>
+                </span>
               </div>
             </div>
-          </div>
+          </Wrapper>
         </LazyLoad>
       </div>
       <div>
@@ -129,8 +105,72 @@ function ImageCarousel(props) {
           />
         )}
       </div>
+      <Thumbnails>
+        <div className='thumbnails'>
+          {images.map((item, index) => (
+            <div key={index} className='singleimg'>
+              <img loading='lazy' src={item} alt='img' onClick={ImgHandler} />
+            </div>
+          ))}
+        </div>
+      </Thumbnails>
     </>
   );
-}
+};
 
-export { ImageCarousel };
+const Wrapper = styled.div`
+  .container-img {
+    position: relative;
+  }
+  .zoom {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .next-prev-btn {
+    cursor: pointer;
+    color: #fff;
+  }
+  .arrow {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    font-size: 7px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .left-arrow {
+    left: 0;
+  }
+  .right-arrow {
+    right: 0;
+  }
+`;
+const Thumbnails = styled.div`
+  .thumbnails {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    /* flex-wrap: wrap; */
+  }
+
+  .singleimg img {
+    height: 50px;
+    width: 50px !important;
+    object-fit: cover;
+    cursor: pointer;
+  }
+`;
+
+export default ReactImageCarosule;

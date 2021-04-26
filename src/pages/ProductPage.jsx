@@ -20,6 +20,7 @@ import PageLoader from '../components/pageLoader/PageLoaderComponent';
 import '../pages/assets/product.css';
 import '../assets/css/theme.css';
 import styled from 'styled-components';
+import { ImageCarousel } from '../components/ProductImgCarosellComponents/ProductImgCarosell';
 
 //react icons
 import { GiCommercialAirplane, GiSpeaker } from 'react-icons/gi';
@@ -35,7 +36,9 @@ import { SiPublons } from 'react-icons/si';
 import { FiShoppingCart } from 'react-icons/fi';
 import Buttons from '../components/Product-page-buttons/Buttons';
 import ForYou from '../components/forYouComponents/ForYou';
-
+//image slider react
+import ReactImageCarosule from '../components/ReactImageCarosule';
+import TotalRating from '../components/ratingComponent/TotalRating';
 const useStyles = createUseStyles({
   addFevButton: {
     color: 'skyblue',
@@ -115,8 +118,6 @@ function ProductPage(props) {
 
   //cart item number
   const [readmore, setReadmore] = useState(false);
-  const info =
-    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit exercitationem, minima eos voluptas ex inventore sit provident veritatis reiciendis magni officia assumenda quasi, aliquam cupiditate quaerat nisi laborum! Suscipit, quam dolorum. Odio, fugiat! Explicabo neque illum eveniet odio veniam voluptatibus optio nesciunt placeat, iusto dolor tempore labore aliquid! Repudiandae, ipsa? assumenda quasi, aliquam cupiditate quaerat nisi laborum! Suscipit, quam dolorum. Odio, fugiat! Explicabo neque illum eveniet odio veniam voluptatibus optio nesciunt placeat, iusto dolor tempore labore aliquid! Repudiandae, ipsa?';
 
   const buttonData = [
     {
@@ -142,49 +143,6 @@ function ProductPage(props) {
       name: 'pdf',
       icon: <FaFilePdf />,
       price: '$16.99',
-    },
-  ];
-  console.log(book);
-  const productData = [
-    {
-      title: 'format',
-      desc: 'Hardback | 360 pages',
-    },
-    {
-      title: 'format',
-      desc: 'Hardback | 360 pages',
-    },
-    {
-      title: 'format',
-      desc: 'Hardback | 360 pages',
-    },
-    {
-      title: 'format',
-      desc: 'Hardback | 360 pages',
-    },
-    {
-      title: 'format',
-      desc: 'Hardback | 360 pages',
-    },
-    {
-      title: 'format',
-      desc: 'Hardback | 360 pages',
-    },
-    {
-      title: 'format',
-      desc: 'Hardback | 360 pages',
-    },
-    {
-      title: 'format',
-      desc: 'Hardback | 360 pages',
-    },
-    {
-      title: 'format',
-      desc: 'Hardback | 360 pages',
-    },
-    {
-      title: 'format',
-      desc: 'Hardback | 360 pages',
     },
   ];
 
@@ -358,8 +316,29 @@ function ProductPage(props) {
                   <div className='row left'>
                     <div className='col-lg-4'>
                       <div className='img-container'>
-                        <img src={book && book.cover_images.img_1} alt='' />
+                        {/* <img src={book && book.cover_images.img_1} alt='' /> */}
+                        {/* <ImageCarousel images={book && book.cover_images} /> */}
+                        {/* <div>
+                          <SimpleImageSlider
+                            width={200}
+                            height={200}
+                            images={book && book.cover_images}
+                          />
+                        </div> */}
+                        <ReactImageCarosule
+                          images={book && book.cover_images}
+                        />
                       </div>
+                      {/* <div className='thumbnail'>
+                        {book &&
+                          book.cover_images.map((image, index) => {
+                            return (
+                              <div key={index}>
+                                <img src={image} alt='' />
+                              </div>
+                            );
+                          })}
+                      </div> */}
                     </div>
                     <div className='col-lg-8'>
                       <div className='book-description'>
@@ -367,6 +346,7 @@ function ProductPage(props) {
                         <hr />
                         <div className='rating'>
                           <p>
+                            <TotalRating value={book && book.rating} />
                             {book ? book.rating : '0'}
                             {'\u00A0'} {'\u00A0'}{' '}
                             {`(${book && book.total_review} reviews) `}{' '}
@@ -508,12 +488,9 @@ function ProductPage(props) {
             </Container>
           </Wrapper>
           <Container>
-            {/* For you components */}
-            <section>
-              <ForYou data={similar && similar.slice(0, 6)} />
-              <ForYou data={similar && similar.slice(6, 12)} />
-              <ForYou data={similar && similar.slice(12, 18)} />
-            </section>
+            <ForYou data={similar && similar.slice(0, 5)} />
+            <ForYou data={similar && similar.slice(6, 11)} />
+            <ForYou data={similar && similar.slice(12, 17)} />
           </Container>
 
           <Wrapper>
@@ -609,6 +586,10 @@ const Wrapper = styled.section`
   .book-description {
     margin-right: -5px;
   }
+  .book-description h3 {
+    line-height: 30px;
+    margin-bottom: 0;
+  }
 
   @media (max-width: 980px) {
     .book-description {
@@ -626,7 +607,9 @@ const Wrapper = styled.section`
   .img-container {
     height: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
 
   .img-container img {

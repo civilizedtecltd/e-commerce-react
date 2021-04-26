@@ -39,15 +39,7 @@ const ForYou = ({ data }) => {
       price: 't 3300',
       discount: 't 40000',
     },
-    {
-      img:
-        'https://static-01.daraz.com.bd/p/0a926044688596b6598d9ba384fb8383.jpg_200x200q75-product.jpg_.webp',
-      desc: 'High quality battery',
-      price: 't 3300',
-      discount: 't 40000',
-    },
   ];
-  console.log(data);
   return (
     <Wrapper>
       <h4>Just For you</h4>
