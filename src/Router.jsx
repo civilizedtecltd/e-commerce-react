@@ -44,7 +44,7 @@ const CartPage = lazy(() => import('./pages/CartPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const FavoritesPage = lazy(() => import('./pages/FavoritesPage'));
 const ShopPage = lazy(() => import('./pages/ShopPage'));
-const ProductPage = lazy(() => import('./pages/ProductPage'));
+const ProductPage = lazy(() => import('./pages/Product/ProductPage'));
 
 const Router = () => {
 

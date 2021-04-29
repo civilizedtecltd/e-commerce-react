@@ -1,127 +1,165 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Image } from 'react-bootstrap';
+import React, {useEffect, useRef, useState} from 'react';
+import {Image} from 'react-bootstrap';
 import LazyLoad from 'react-lazyload';
 
-import { ProductCarouselImg } from './../inc/product/ImgCarousel';
+import {ProductCarouselImg} from './../inc/product/ImgCarousel';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import './../pages/assets/product.css';
 import styled from 'styled-components';
 
 const ReactImageCarosule = (props) => {
-  let [count] = useState(0);
-  const [hidden, setHidden] = useState(false);
-  const [photoIndex, setPhotoIndex] = useState(0);
-  const [images, setImages] = useState([]);
-  const [coverImages, setCoverImage] = useState('');
-  let ImgHandler = (e) => {
-    setCoverImage(e.target.src);
-  };
+    let [count] = useState(0);
+    const [hidden, setHidden] = useState(false);
+    const [photoIndex, setPhotoIndex] = useState(0);
+    const [images, setImages] = useState([]);
+    const [coverImages, setCoverImage] = useState('');
+    let ImgHandler = (e) => {
+        setCoverImage(e.target.src);
+    };
 
-  useRef(() => {
-    if (count === 3) {
-      count = 3;
-    }
-  });
+    useRef(() => {
+        if (count === 3) {
+            count = 3;
+        }
+    });
 
-  useEffect(() => {
-    if (props.images) {
-      const images = [];
+    useEffect(() => {
+        if (props.images) {
+            const images = [];
 
-      if (props.images.img_1 !== undefined)
-        images.push(`${props.images.img_1}`);
-      if (props.images.img_2 !== undefined)
-        images.push(`${props.images.img_2}`);
-      if (props.images.img_3 !== undefined)
-        images.push(`${props.images.img_3}`);
+            if (props.images.img_1 !== undefined)
+                images.push(`${props.images.img_1}`);
+            if (props.images.img_2 !== undefined)
+                images.push(`${props.images.img_2}`);
+            if (props.images.img_3 !== undefined)
+                images.push(`${props.images.img_3}`);
 
-      setImages([...images]);
-      setCoverImage(images[0]);
-    }
-  }, [props.images]);
+            setImages([...images]);
+            setCoverImage(images[0]);
+        }
+    }, [props.images]);
 
-  const image = { index: 0 };
+    const image = {index: 0};
 
-  const NextPhoto = () => {
-    if (image.index < images.length - 1) {
-      const SingleImage = document.getElementById('photo');
+    const NextPhoto = () => {
+        if (image.index < images.length - 1) {
+            const SingleImage = document.getElementById('photo');
 
-      image.index += 1;
+            image.index += 1;
 
-      if (image.index >= 3) image.index = 2;
+            if (image.index >= 3) image.index = 2;
 
-      SingleImage.src = images[image.index];
-    }
-  };
-  const PrevPhoto = () => {
-    const SingleImage = document.getElementById('photo');
+            SingleImage.src = images[image.index];
+        }
+    };
+    const PrevPhoto = () => {
+        const SingleImage = document.getElementById('photo');
 
-    image.index -= 1;
+        image.index -= 1;
 
-    if (image.index === -1 || image.index < 0) image.index = 0;
+        if (image.index === -1 || image.index < 0) image.index = 0;
 
-    SingleImage.src = images[image.index];
-  };
+        SingleImage.src = images[image.index];
+    };
 
-  return (
-    <>
-      <div className='row productImageGallery'>
-        <LazyLoad once={true}>
-          <Wrapper>
-            <div className='container-img'>
-              <span className='zoom' onClick={() => setHidden(true)}>
-                <i className='fas fa-expand-arrows-alt Modal CursorPointerProduct'></i>
-              </span>
-              <Image src={coverImages} id={'photo'} alt='image' />
-              <div className='next-prev-btn'>
-                <span className='arrow left-arrow ' onClick={() => PrevPhoto()}>
-                  <i className='fas fa-arrow-left fa-2x'></i>
-                </span>
-                <span className='arrow right-arrow' onClick={() => NextPhoto()}>
-                  <i className='fas fa-arrow-right fa-2x'></i>
-                </span>
-              </div>
+    return (
+        <>
+            <div className='productImageGallery'>
+                <LazyLoad once={true}>
+                    <Wrapper>
+                        <div className='container-img'>
+                              <span className='zoom' onClick={() => setHidden(true)}>
+                                <i className='fas fa-expand-arrows-alt Modal CursorPointerProduct'/>
+                              </span>
+                            <Image src={coverImages} id={'photo'} alt='image' className="main-image"/>
+                            {/*<div className='next-prev-btn'>*/}
+                            {/*    <span className='arrow left-arrow ' onClick={() => PrevPhoto()}>*/}
+                            {/*      <i className='fas fa-arrow-left fa-2x'/>*/}
+                            {/*    </span>*/}
+                            {/*    <span className='arrow right-arrow' onClick={() => NextPhoto()}>*/}
+                            {/*      <i className='fas fa-arrow-right fa-2x'/>*/}
+                            {/*    </span>*/}
+                            {/*</div>*/}
+
+                            <ul className="nav justify-content-center carousel-btn-container">
+                                <li className="nav-item">
+                                    <button className="btn btn-block" onClick={() => PrevPhoto()}>
+                                        <i className='fas fa-arrow-left fa-2x'/>
+                                    </button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="btn btn-block" onClick={() => NextPhoto()}>
+                                        <i className='fas fa-arrow-right fa-2x'/>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </Wrapper>
+                </LazyLoad>
             </div>
-          </Wrapper>
-        </LazyLoad>
-      </div>
-      <div>
-        {hidden && (
-          <Lightbox
-            mainSrc={images[photoIndex]}
-            nextSrc={images[(photoIndex + 1) % images.length]}
-            prevSrc={
-              images[
-                (photoIndex + ProductCarouselImg.length - 1) % images.length
-              ]
-            }
-            onCloseRequest={() => setHidden(false)}
-            onMovePrevRequest={() =>
-              setPhotoIndex(photoIndex + images.length - (1 % images.length))
-            }
-            onMoveNextRequest={() =>
-              setPhotoIndex((photoIndex + 1) % images.length)
-            }
-          />
-        )}
-      </div>
-      <Thumbnails>
-        <div className='thumbnails'>
-          {images.map((item, index) => (
-            <div key={index} className='singleimg'>
-              <img loading='lazy' src={item} alt='img' onClick={ImgHandler} />
+            <div>
+                {hidden && (
+                    <Lightbox
+                        mainSrc={images[photoIndex]}
+                        nextSrc={images[(photoIndex + 1) % images.length]}
+                        prevSrc={
+                            images[
+                            (photoIndex + ProductCarouselImg.length - 1) % images.length
+                                ]
+                        }
+                        onCloseRequest={() => setHidden(false)}
+                        onMovePrevRequest={() =>
+                            setPhotoIndex(photoIndex + images.length - (1 % images.length))
+                        }
+                        onMoveNextRequest={() =>
+                            setPhotoIndex((photoIndex + 1) % images.length)
+                        }
+                    />
+                )}
             </div>
-          ))}
-        </div>
-      </Thumbnails>
-    </>
-  );
+            <Thumbnails>
+                <div className='thumbnails'>
+                    {images.map((item, index) => (
+                        <div key={index} className='singleimg'>
+                            <img loading='lazy' src={item} alt='img' onClick={ImgHandler}/>
+                        </div>
+                    ))}
+                </div>
+            </Thumbnails>
+        </>
+    );
 };
 
 const Wrapper = styled.div`
   .container-img {
     position: relative;
+
+    .main-image {
+      width: 100%;
+    }
   }
+
+  .carousel-btn-container {
+    width: 100%;
+
+    .nav-item {
+      flex: 1;
+    }
+
+    .btn {
+      background-color: transparent;
+      color: #262A2C;
+      outline: 0 !important;
+      box-shadow: none !important;
+      transform: none;
+
+      i {
+        font-size: 20px;
+      }
+    }
+  }
+
   .zoom {
     position: absolute;
     top: 0%;
@@ -137,10 +175,12 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
+
   .next-prev-btn {
     cursor: pointer;
     color: #fff;
   }
+
   .arrow {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 0.5rem;
@@ -150,16 +190,20 @@ const Wrapper = styled.div`
     top: 50%;
     transform: translateY(-50%);
   }
+
   .left-arrow {
     left: 0;
   }
+
   .right-arrow {
     right: 0;
   }
 `;
+
 const Thumbnails = styled.div`
   .thumbnails {
     display: flex;
+    justify-content: center;
     gap: 0.6rem;
     margin-top: 1rem;
     /* flex-wrap: wrap; */

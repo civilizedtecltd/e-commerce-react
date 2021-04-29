@@ -10749,6 +10749,11 @@ react-router@5.1.2:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
+react-simple-image-slider@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-simple-image-slider/-/react-simple-image-slider-2.1.0.tgz#1945cab06f7b0c82a9acb7a83c6ac647d096e0a5"
+  integrity sha512-5fbApkODamlU1kgwr6Y/OWfAiBXLoxaPTc+y35l/a/rbRjM6aaOrwH2+CDhIwbzmmoCoDLzg6xJrfuStVbAHgQ==
+
 react-slick@^0.25.2:
   version "0.25.2"
   resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.25.2.tgz#56331b67d47d8bcfe2dceb6acab1c8fd5bd1f6bc"
