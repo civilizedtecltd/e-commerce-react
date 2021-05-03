@@ -1,99 +1,93 @@
-
 // Book action types
-export const FETCH_ALL_BOOKS            =   'FETCH_ALL_BOOKS';
-export const SHOW_SINGLE_BOOK           =   'SHOW_SINGLE_BOOK';
-export const FETCH_BOOK_BY_CATEGORY     =   'FETCH_BOOK_BY_CATEGORY';
-export const FETCH_ALL_CATEGORY         =   'FETCH_ALL_CATEGORY';
-export const POST_REVIEW                =   'POST_REVIEW';
-
+export const FETCH_ALL_BOOKS = "FETCH_ALL_BOOKS";
+export const SHOW_SINGLE_BOOK = "SHOW_SINGLE_BOOK";
+export const FETCH_BOOK_BY_CATEGORY = "FETCH_BOOK_BY_CATEGORY";
+export const FETCH_ALL_CATEGORY = "FETCH_ALL_CATEGORY";
+export const POST_REVIEW = "POST_REVIEW";
 
 //Shop Cart action types
-export const ADD_TO_CART                =   'ADD_TO_CART';
-export const REMOVE_FROM_CART           =   'REMOVE_FROM_CART';
-export const INCREASE_QUANTITY          =   'INCREASE_QUANTITY';
-export const DECREASE_QUANTITY          =   'DECREASE_QUANTITY';
-export const UPDATE_QUANTITY            =   'UPDATE_QUANTITY';
-export const DELETE_ALL_FORM_CART       =   'DELETE_ALL_FORM_CART';
-export const SHOP_NOT_IN_STATE          =   'SHOP_NOT_IN_STATE';
-export const CURRENCY_EXCHANGE_RATE     =   'CURRENCY_EXCHANGE_RATE';
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const INCREASE_QUANTITY = "INCREASE_QUANTITY";
+export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
+export const UPDATE_QUANTITY = "UPDATE_QUANTITY";
+export const DELETE_ALL_FORM_CART = "DELETE_ALL_FORM_CART";
+export const SHOP_NOT_IN_STATE = "SHOP_NOT_IN_STATE";
+export const CURRENCY_EXCHANGE_RATE = "CURRENCY_EXCHANGE_RATE";
 
 //Auth action types
-export const USER_LOGIN                 =   'USER_LOGIN';
-export const USER_LOGIN_ERROR           =   'USER_LOGIN_ERROR';
-export const USER_LOGOUT                =   'USER_LOGOUT';
-export const USER_INFO                  =   'USER_INFO';
-export const USER_UPDATE                =   'USER_UPDATE';
-export const USER_UPDATE_ERROR          =   'USER_UPDATE_ERROR';
-export const SET_PAYMENT                =   'SET_PAYMENT';
-export const DELETE_PAYMENT             =   'DELETE_PAYMENT';
-export const AUTH_NOT_IN_STATE          =   'AUTH_NOT_IN_STATE';
-export const EMPTY_STATUS               =   'EMPTY_STATUS';
-export const SIGNUP_USER                =   'SIGNUP_USER';
-export const SIGNUP_ERROR               =   'SIGNUP_ERROR';
-export const REDIRECT_ORDER             =   'REDIRECT_ORDER';
-
-
+export const USER_LOGIN = "USER_LOGIN";
+export const USER_LOGIN_ERROR = "USER_LOGIN_ERROR";
+export const USER_LOGOUT = "USER_LOGOUT";
+export const USER_INFO = "USER_INFO";
+export const USER_UPDATE = "USER_UPDATE";
+export const USER_UPDATE_ERROR = "USER_UPDATE_ERROR";
+export const SET_PAYMENT = "SET_PAYMENT";
+export const DELETE_PAYMENT = "DELETE_PAYMENT";
+export const AUTH_NOT_IN_STATE = "AUTH_NOT_IN_STATE";
+export const EMPTY_STATUS = "EMPTY_STATUS";
+export const SIGNUP_USER = "SIGNUP_USER";
+export const SIGNUP_ERROR = "SIGNUP_ERROR";
+export const REDIRECT_ORDER = "REDIRECT_ORDER";
 
 //add to favorite  types
-export const ADD_FAVORITE               =   'ADD_FAVORITE';
-export const REMOVE_FAVORITE_ITEM       =   'REMOVE_FAVORITE_ITEM';
-export const GO_TO_CHECKOUT             =   'GO_TO_CHECKOUT';
-export const SHOW_ALL_FAVORITE          =   'SHOW_ALL_FAVORITE';
-export const EMPTY_FAVORITE_ITEMS       =   'EMPTY_FAVORITE_ITEMS';
-export const FAVORITE_NOT_IN_STATE      =   'FAVORITE_NOT_IN_STATE';
-
+export const ADD_FAVORITE = "ADD_FAVORITE";
+export const REMOVE_FAVORITE_ITEM = "REMOVE_FAVORITE_ITEM";
+export const GO_TO_CHECKOUT = "GO_TO_CHECKOUT";
+export const SHOW_ALL_FAVORITE = "SHOW_ALL_FAVORITE";
+export const EMPTY_FAVORITE_ITEMS = "EMPTY_FAVORITE_ITEMS";
+export const FAVORITE_NOT_IN_STATE = "FAVORITE_NOT_IN_STATE";
 
 //Checkout Actions types
-export const SET_ADDRESS_DETAILS        =   'SET_ADDRESS_DETAILS';
-export const SET_PAYMENT_DETAILS        =   'SET_PAYMENT_DETAILS';
-export const CONFIRM_ORDER              =   'CONFIRM_ORDER';
-export const CONFIRM_ORDER_ERROR        =   'CONFIRM_ORDER_ERROR';
+export const SET_ADDRESS_DETAILS = "SET_ADDRESS_DETAILS";
+export const SET_PAYMENT_DETAILS = "SET_PAYMENT_DETAILS";
+export const CONFIRM_ORDER = "CONFIRM_ORDER";
+export const CONFIRM_ORDER_ERROR = "CONFIRM_ORDER_ERROR";
 
 //Search action types
 
-export const SEARCH_BOOK                = 'SEARCH_BOOK';
+export const SEARCH_BOOK = "SEARCH_BOOK";
 
-export const FILTER_BY_PRICE_RANGE      = 'FILTER_BY_PRICE_RANGE';
-export const FILTER_SHORT_BY            = 'FILTER_SHORT_BY';
-export const GET_STAGE_LIST             = 'GET_STAGE_LIST';
-export const FETCH_BOOK_BY_FILTER       = 'FETCH_BOOK_BY_FILTER';
-export const GET_DISCIPLINE_LIST        = 'GET_DISCIPLINE_LIST';
-export const GET_AUTHOR_LIST            = 'GET_AUTHOR_LIST';
-export const GET_PUBLISHER_LIST         = 'GET_PUBLISHER_LIST';
-export const GET_PUBLISHING_YEAR_LIST   = 'GET_PUBLISHING_YEAR_LIST';
-export const GET_LANGUAGE_LIST          = 'GET_LANGUAGE_LIST';
-export const GET_BOOK_COVER_LIST        = 'GET_BOOK_COVER_LIST';
-
+export const FILTER_BY_PRICE_RANGE = "FILTER_BY_PRICE_RANGE";
+export const FILTER_SHORT_BY = "FILTER_SHORT_BY";
+export const GET_STAGE_LIST = "GET_STAGE_LIST";
+export const FETCH_BOOK_BY_FILTER = "FETCH_BOOK_BY_FILTER";
+export const GET_DISCIPLINE_LIST = "GET_DISCIPLINE_LIST";
+export const GET_AUTHOR_LIST = "GET_AUTHOR_LIST";
+export const GET_PUBLISHER_LIST = "GET_PUBLISHER_LIST";
+export const GET_PUBLISHING_YEAR_LIST = "GET_PUBLISHING_YEAR_LIST";
+export const GET_LANGUAGE_LIST = "GET_LANGUAGE_LIST";
+export const GET_BOOK_COVER_LIST = "GET_BOOK_COVER_LIST";
 
 //fetching action
-export const FETCH_BOOK_PENDING         = 'FETCH_BOOK_PENDING';
-export const FETCH_BOOK_SUCCESS         = 'FETCH_BOOK_SUCCESS';
-export const FETCH_BOOK_ERROR           = 'FETCH_BOOK_ERROR';
-export const FETCH_FAVORITE_PENDING     = 'FETCH_FAVORITE_PENDING';
-export const FETCH_SHOPPING_PENDING     = 'FETCH_SHOPPING_PENDING';
+export const FETCH_BOOK_PENDING = "FETCH_BOOK_PENDING";
+export const FETCH_BOOK_SUCCESS = "FETCH_BOOK_SUCCESS";
+export const FETCH_BOOK_ERROR = "FETCH_BOOK_ERROR";
+export const FETCH_FAVORITE_PENDING = "FETCH_FAVORITE_PENDING";
+export const FETCH_SHOPPING_PENDING = "FETCH_SHOPPING_PENDING";
 
-export const DELIVERY_METHOD_FETCH      = 'DELIVERY_METHOD_FETCH';
-export const PROMO_CODE_FETCH           = 'PROMO_CODE_FETCH';
-export const PROMO_CLEAR                = 'PROMO_CLEAR';
-export const FETCH_MAX_MIN_PRICE        = 'FETCH_MAX_MIN_PRICE';
+export const DELIVERY_METHOD_FETCH = "DELIVERY_METHOD_FETCH";
+export const PROMO_CODE_FETCH = "PROMO_CODE_FETCH";
+export const PROMO_CLEAR = "PROMO_CLEAR";
+export const FETCH_MAX_MIN_PRICE = "FETCH_MAX_MIN_PRICE";
 
-export const UPDATE_PAYMENT_METHOD      = 'UPDATE_PAYMENT_METHOD';
-export const FILTER_NOT_IN_STATE        = "FILTER_NOT_IN_STATE";
-export const AUTH_DATA_NOT_IN_STATE     = "AUTH_DATA_NOT_IN_STATE";
+export const UPDATE_PAYMENT_METHOD = "UPDATE_PAYMENT_METHOD";
+export const FILTER_NOT_IN_STATE = "FILTER_NOT_IN_STATE";
+export const AUTH_DATA_NOT_IN_STATE = "AUTH_DATA_NOT_IN_STATE";
 
-export const SITE_NOT_IN_STATE          = 'SITE_NOT_IN_STATE';
+export const SITE_NOT_IN_STATE = "SITE_NOT_IN_STATE";
 
-export const GET_SUBSCRIPTIONS          = 'GET_SUBSCRIPTIONS';
-export const SET_SUBSCRIPTIONS          = 'SET_SUBSCRIPTIONS';
-export const SET_SUBSCRIPTIONS_ERROR    = 'SET_SUBSCRIPTIONS_ERROR';
-export const NOT_STATE_SUBSCRIBER       = 'NOT_STATE_SUBSCRIBER';
-export const FETCH_SUBSCRIBER_PENDING   = 'FETCH_SUBSCRIBER_PENDING';
+export const GET_SUBSCRIPTIONS = "GET_SUBSCRIPTIONS";
+export const SET_SUBSCRIPTIONS = "SET_SUBSCRIPTIONS";
+export const SET_SUBSCRIPTIONS_ERROR = "SET_SUBSCRIPTIONS_ERROR";
+export const NOT_STATE_SUBSCRIBER = "NOT_STATE_SUBSCRIBER";
+export const FETCH_SUBSCRIBER_PENDING = "FETCH_SUBSCRIBER_PENDING";
 
+export const FETCH_RECENT_SALE_BOOKS = "FETCH_RECENT_SALE_BOOKS";
+export const FETCH_LIMIT_RECENT_SALE_BOOKS = "FETCH_LIMIT_RECENT_SALE_BOOKS";
 
+export const FETCH_TOP_SALE_BOOKS = "FETCH_TOP_SALE_BOOKS";
+export const FETCH_LIMIT_TOP_SALE_BOOKS = "FETCH_LIMIT_TOP_SALE_BOOKS";
 
-
-
-
-
-
-
+export const FETCH_TOP_DISCOUNT_BOOKS = "FETCH_TOP_DISCOUNT_BOOKS";
+export const FETCH_LIMIT_TOP_DISCOUNT_BOOKS = "FETCH_LIMIT_TOP_DISCOUNT_BOOKS";

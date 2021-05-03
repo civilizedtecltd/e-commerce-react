@@ -1,11 +1,17 @@
-import * as path from 'path';
+import * as path from "path";
 
-require('dotenv').config({ path: path.join('/home/dell/Freelancing/book_eCommerce/e-commerce-react', '.env') });
+require("dotenv").config({
+    path: path.join(
+        "/home/dell/Freelancing/book_eCommerce/e-commerce-react",
+        ".env"
+    ),
+});
 
 class APP_URL {
     constructor() {
         this.BASE = `https://admin.abookstore.co.ke`;
         // this.BASE = `http://127.0.0.1:3333`;
+        this.LOCAL = `http://127.0.0.1:3333`;
         this.API = `${this.BASE}/api`;
     }
 
@@ -38,11 +44,15 @@ class APP_URL {
     }
 
     _ALL_BOOKS(page, show, keyword) {
-        return `${this.API}/product/all-books/${page}/${show}${keyword ? "/" + keyword : ''}`;
+        return `${this.API}/product/all-books/${page}/${show}${
+            keyword ? "/" + keyword : ""
+        }`;
     }
 
     _SEARCH_BOOKS(page, show, keyword) {
-        return `${this.API}/product/all-books/${page}/${show}${keyword ? "/" + keyword : ''}`;
+        return `${this.API}/product/all-books/${page}/${show}${
+            keyword ? "/" + keyword : ""
+        }`;
     }
 
     _DELETE_PAYMENT(id) {
@@ -50,7 +60,7 @@ class APP_URL {
     }
 
     _SINGLE_BOOK(id) {
-        return `${this.API}/product/book/${id}`
+        return `${this.API}/product/book/${id}`;
     }
 
     _CATEGORY_BOOKS(id, page, show) {
@@ -62,7 +72,7 @@ class APP_URL {
     }
 
     _DELETE_FAVORITE(id) {
-        return `${this.API}/user/favorite/${id}/delete`
+        return `${this.API}/user/favorite/${id}/delete`;
     }
 
     get _POST_REVIEW() {
@@ -70,7 +80,11 @@ class APP_URL {
     }
 
     _FILTER_BY_PRICE_RANGE(page, show, lowPrice, highestPrice, type, type_id) {
-        return `${this.API}/product/range/${page}/${show}/${lowPrice}/${highestPrice}${(type && type_id) ? '/' + type + "/" + type_id : ''}`;
+        return `${
+            this.API
+        }/product/range/${page}/${show}/${lowPrice}/${highestPrice}${
+            type && type_id ? "/" + type + "/" + type_id : ""
+        }`;
     }
 
     _FILTER_SHORT_BY(page, show, query) {
@@ -86,64 +100,67 @@ class APP_URL {
     }
 
     get _SET_PAY_SUCCESS() {
-        return `${this.API}/swype_success`
+        return `${this.API}/swype_success`;
     }
 
     get _SUBSCRIBE() {
-        return `${this.API}/subscribe`
+        return `${this.API}/subscribe`;
     }
 
     get _UPDATE_SUBSCRIBER() {
-        return `${this.API}/subscribe-update/`
+        return `${this.API}/subscribe-update/`;
     }
 
     get _DELIVERY_METHOD() {
-        return `${this.API}/delivery-method`
+        return `${this.API}/delivery-method`;
     }
 
     get MAX_MIN_PRICE() {
-        return `${this.API}/price-max-min`
+        return `${this.API}/price-max-min`;
     }
 
     get UPDATE_PAYMENT_METHOD() {
-        return `${this.API}/update-payment-method`
+        return `${this.API}/update-payment-method`;
     }
 
     _GET_STAGES(id) {
-        return `${this.API}/filter/stage/category/${id}`
+        return `${this.API}/filter/stage/category/${id}`;
     }
 
     get _GET_DISCIPLINES() {
-        return `${this.API}/filter/disciplines`
+        return `${this.API}/filter/disciplines`;
     }
 
     get _GET_AUTHORS() {
-        return `${this.API}/filter/authors`
+        return `${this.API}/filter/authors`;
     }
 
     get _GET_PUBLISHERS() {
-        return `${this.API}/filter/publishers`
+        return `${this.API}/filter/publishers`;
     }
 
     get _GET_PUBLISHING_YEARS() {
-        return `${this.API}/filter/publishing-years`
+        return `${this.API}/filter/publishing-years`;
     }
 
     get _GET_LANGUAGES() {
-        return `${this.API}/filter/languages`
+        return `${this.API}/filter/languages`;
     }
 
     get _GET_BOOK_COVERS() {
-        return `${this.API}/filter/book-covers`
+        return `${this.API}/filter/book-covers`;
     }
 
-    _GET_FILTERED_BOOKS(filter_type, filter_id, page, show) {   
-        console.log('************', `${this.API}/filter/${filter_type}/${filter_id}/${page}/${show}`)
-        return `${this.API}/filter/${filter_type}/${filter_id}/${page}/${show}`
+    _GET_FILTERED_BOOKS(filter_type, filter_id, page, show) {
+        console.log(
+            "************",
+            `${this.API}/filter/${filter_type}/${filter_id}/${page}/${show}`
+        );
+        return `${this.API}/filter/${filter_type}/${filter_id}/${page}/${show}`;
     }
 
     _GET_PROMO_INFO(code) {
-        return `${this.API}/promo-code/info/${code}`
+        return `${this.API}/promo-code/info/${code}`;
     }
 
     get _GET_STAGE_FILTER() {
@@ -162,23 +179,21 @@ class APP_URL {
         return `${this.API}/auth/recover-password`;
     }
     __OAUTH(type) {
-        return `${this.API}/auth0/${type}`
+        return `${this.API}/auth0/${type}`;
     }
 
     __GET_SUBSCRIPTIONS(email) {
-        return `${this.API}/subscriptions/${email}`
+        return `${this.API}/subscriptions/${email}`;
     }
 
     get __SET_SUBSCRIPTIONS() {
-        return `${this.API}/subscriptions`
+        return `${this.API}/subscriptions`;
     }
 
     __CURRENCY_EXCHANGE_RATE(base) {
-        return `https://openexchangerates.org/api/latest.json?app_id=f09d5860616c45edb2ab8346180efe75&base=${base}`
+        return `https://openexchangerates.org/api/latest.json?app_id=f09d5860616c45edb2ab8346180efe75&base=${base}`;
     }
 }
 
 const URL = new APP_URL();
-export {
-    URL
-};
+export { URL };

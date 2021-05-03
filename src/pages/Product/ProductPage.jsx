@@ -1,36 +1,50 @@
-import React, {useEffect, useState} from 'react';
-import {connect} from 'react-redux';
-import {Col, Container, Modal, Row} from 'react-bootstrap';
-import {Link, useParams} from 'react-router-dom';
-import {showSingleBook} from '../../redux/actions/bookActions';
-import {addToCart, deliveryMethod, updateQuantity,} from '../../redux/actions/shopActions';
-import {addToFavorite, removeFavItem} from '../../redux/actions/favoriteActions';
-import FooterComponent from '../../components/FooterComponent/FooterComponent';
-import {NewsLetterComponent} from '../../components/offerPageComponents/NewsLetterComponent';
-import HeaderComponent from '../../components/header/Header';
-import MobileHeader from '../../components/header/MobileHeader';
-import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
-import checkAuth from '../../helpers/checkAuth';
-import PageLoader from '../../components/pageLoader/PageLoaderComponent';
-import '../assets/product.css';
-import '../../assets/css/theme.css';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { Col, Container, Modal, Row } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import { showSingleBook } from "../../redux/actions/bookActions";
+import {
+    addToCart,
+    deliveryMethod,
+    updateQuantity,
+} from "../../redux/actions/shopActions";
+import {
+    addToFavorite,
+    removeFavItem,
+} from "../../redux/actions/favoriteActions";
+import FooterComponent from "../../components/FooterComponent/FooterComponent";
+import { NewsLetterComponent } from "../../components/offerPageComponents/NewsLetterComponent";
+import HeaderComponent from "../../components/header/Header";
+import MobileHeader from "../../components/header/MobileHeader";
+import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
+import checkAuth from "../../helpers/checkAuth";
+import PageLoader from "../../components/pageLoader/PageLoaderComponent";
+import "../assets/product.css";
+import "../../assets/css/theme.css";
+import styled from "styled-components";
 
 //react icons
-import {GiCommercialAirplane, GiSpeaker} from 'react-icons/gi';
-import {AiOutlineCheckCircle, AiOutlineMail, AiOutlineStar, AiOutlineTwitter,} from 'react-icons/ai';
-import {FaFacebookF, FaFilePdf, FaPinterestP} from 'react-icons/fa';
-import {BiBookBookmark} from 'react-icons/bi';
-import {SiPublons} from 'react-icons/si';
-import {FiShoppingCart} from 'react-icons/fi';
-import Buttons from '../../components/Product-page-buttons/Buttons';
-import ForYou from '../../components/forYouComponents/ForYou';
+import { GiCommercialAirplane, GiSpeaker } from "react-icons/gi";
+import {
+    AiOutlineCheckCircle,
+    AiOutlineMail,
+    AiOutlineStar,
+    AiOutlineTwitter,
+} from "react-icons/ai";
+import { FaFacebookF, FaFilePdf, FaPinterestP } from "react-icons/fa";
+import { BiBookBookmark } from "react-icons/bi";
+import { SiPublons } from "react-icons/si";
+import { FiShoppingCart } from "react-icons/fi";
+import Buttons from "../../components/Product-page-buttons/Buttons";
+import ForYou from "../../components/forYouComponents/ForYou";
 //image slider react
-import ReactImageCarosule from '../../components/ReactImageCarosule';
-import TotalRating from '../../components/ratingComponent/TotalRating';
-import {useStyles} from "./styled";
+import ReactImageCarosule from "../../components/ReactImageCarosule";
+import TotalRating from "../../components/ratingComponent/TotalRating";
+import { useStyles } from "./styled";
 import TabComponent from "../../components/TabComponent/TabComponent";
-
+import TopDiscountProduct from "../../components/DifferentProduct/TopDiscountProducts";
+import TopSaleProducts from "../../components/DifferentProduct/TopSaleProducts";
+import RecentSaleProducts from "../../components/DifferentProduct/RecentSaleProducts";
 
 function ProductPage(props) {
     const {
@@ -49,8 +63,8 @@ function ProductPage(props) {
         removeFavorite,
     } = props;
 
-    const classes = useStyles()
-    const {id} = useParams();
+    const classes = useStyles();
+    const { id } = useParams();
     const [show, setShow] = useState(false);
     const [quantity, setQuantity] = useState(1);
 
@@ -75,18 +89,18 @@ function ProductPage(props) {
     const updateItemQty = (e) => {
         //let countQty = quantity
         setQuantity(Number(e.target.value));
-        updateItem({id: Number(book.id), qty: Number(e.target.value)});
+        updateItem({ id: Number(book.id), qty: Number(e.target.value) });
     };
 
     const handleAddToCart = (e) => {
         e.preventDefault();
-        if (!checkAuth()) return (window.location = '/login');
+        if (!checkAuth()) return (window.location = "/login");
         book.quantity = quantity;
         addToCart(book);
         setShow(true);
         if (favoriteItem.length !== 0) {
             favoriteItem.map((item) =>
-                item.id === book.id ? removeFavorite(book.id) : ''
+                item.id === book.id ? removeFavorite(book.id) : ""
             );
         }
     };
@@ -94,7 +108,7 @@ function ProductPage(props) {
     const handleAddFavorite = (e) => {
         e.preventDefault();
         if (!checkAuth()) {
-            return history.push('/login');
+            return history.push("/login");
         } else if (isFavoriteItem) {
             return removeFavorite(id);
         } else if (!isFavoriteItem) {
@@ -105,37 +119,86 @@ function ProductPage(props) {
     //cart item number
     const [readmore, setReadmore] = useState(false);
 
-    const buttonData = [
+    const [bookPriceBtn, setBookPriceBtn] = useState([
         {
-            text: 'abailable',
-            name: 'hardcover',
-            icon: <BiBookBookmark/>,
-            price: '$16.99',
+            text: "not available",
+            name: "hard cover",
+            icon: <BiBookBookmark />,
+            price: "",
         },
         {
-            text: 'abailable',
-            name: 'audio book',
-            icon: <GiSpeaker/>,
-            price: '$16.99',
+            text: "not available",
+            name: "audio book",
+            icon: <GiSpeaker />,
+            price: "",
         },
         {
-            text: 'out of stock',
-            name: 'e pub',
-            icon: <SiPublons/>,
-            price: '$16.99',
+            text: "not available",
+            name: "e pub",
+            icon: <SiPublons />,
+            price: "",
         },
         {
-            text: 'abailable',
-            name: 'pdf',
-            icon: <FaFilePdf/>,
-            price: '$16.99',
+            text: "not available",
+            name: "pdf",
+            icon: <FaFilePdf />,
+            price: "",
         },
-    ];
+    ]);
+
+    useEffect(() => {
+        if (book && book.price_hardcover) {
+            setBookPriceBtn([
+                ...bookPriceBtn,
+                {
+                    text: book.stock && "Available",
+                    name: "hard cover",
+                    icon: <BiBookBookmark />,
+                    price: book.price_hardcover,
+                },
+            ]);
+        }
+        if (book && book.price_audiobook) {
+            setBookPriceBtn([
+                ...bookPriceBtn,
+                {
+                    text: book.book_files.audiobook_file && "Available",
+                    name: "audio book",
+                    icon: <GiSpeaker />,
+                    price: book.price_hardcover,
+                },
+            ]);
+        }
+        if (book && book.price_epub) {
+            setBookPriceBtn([
+                ...bookPriceBtn,
+                {
+                    text: book.book_files.epub_file && "Available",
+                    name: "e pub",
+                    icon: <SiPublons />,
+                    price: book.price_epub,
+                },
+            ]);
+        }
+        if (book && book.price_pdf) {
+            setBookPriceBtn([
+                ...bookPriceBtn,
+                {
+                    text: book.book_files.pdf_file && "Available",
+                    name: "pdf",
+                    icon: <FaFilePdf />,
+                    price: book.price_pdf,
+                },
+            ]);
+        }
+    }, [book]);
+
+    console.log(book);
 
     return (
         <>
-            <PageLoader loading={pending && pending}/>
-            <div className='allWrapper'>
+            <PageLoader loading={pending && pending} />
+            <div className="allWrapper">
                 <HeaderComponent
                     favorite_item={favoriteItem.length}
                     cartItem={totalItems && totalItems}
@@ -144,15 +207,18 @@ function ProductPage(props) {
                     favorite_item={favoriteItem.length}
                     cartItem={totalItems && totalItems}
                 />
-                <main className={`mainContent clearfix ${classes.main}`} id='mainContent'>
+                <main
+                    className={`mainContent clearfix ${classes.main}`}
+                    id="mainContent"
+                >
                     <section
                         className="breadcrumbArea secGap pb-0 clearfix"
-                        id='breadcrumb'
+                        id="breadcrumb"
                     >
                         <Container>
                             <Row>
                                 <Col>
-                                    <BreadCrumb/>
+                                    <BreadCrumb />
                                 </Col>
                             </Row>
                         </Container>
@@ -164,9 +230,13 @@ function ProductPage(props) {
                                 {/*Image Slider*/}
                                 <div className="col-md-3 col-12">
                                     <div className={`card ${classes.card}`}>
-                                        <div className={`card-body ${classes.cardBody}`}>
+                                        <div
+                                            className={`card-body ${classes.cardBody}`}
+                                        >
                                             <ReactImageCarosule
-                                                images={book && book.cover_images}
+                                                images={
+                                                    book && book.cover_images
+                                                }
                                             />
                                         </div>
                                     </div>
@@ -174,80 +244,136 @@ function ProductPage(props) {
                                 {/*Product Information*/}
                                 <div className="col-md-6 col-12">
                                     <div className={`card ${classes.card}`}>
-                                        <div className={`card-body ${classes.cardBody}`}>
-                                            <h3 className={classes.bookName}>{book && book.name}</h3>
+                                        <div
+                                            className={`card-body ${classes.cardBody}`}
+                                        >
+                                            <h3 className={classes.bookName}>
+                                                {book && book.name}
+                                            </h3>
                                             <p className={classes.bookAuthor}>
-                                                <span>By</span> {book && book.book_author.name}</p>
+                                                <span>By</span>{" "}
+                                                {book && book.book_author.name}
+                                            </p>
                                             <div className={classes.bookRating}>
-                                                <TotalRating value={book && book.rating}/>
-                                                {book && book.rating} {`(${book && book.total_review} reviews)`}
+                                                <TotalRating
+                                                    value={book && book.rating}
+                                                />
+                                                {book && book.rating}{" "}
+                                                {`(${
+                                                    book && book.total_review
+                                                } reviews)`}
                                             </div>
 
-                                            <div className={classes.btnContainer}>
-                                                {buttonData.map((item, index) => {
-                                                    return <Buttons key={index} {...item} />;
-                                                })}
+                                            <div
+                                                className={classes.btnContainer}
+                                            >
+                                                {bookPriceBtn.map(
+                                                    (item, index) => {
+                                                        return (
+                                                            <Buttons
+                                                                key={index}
+                                                                item={item}
+                                                            />
+                                                        );
+                                                    }
+                                                )}
                                             </div>
 
                                             <TabComponent
                                                 routeHistory={history}
-                                                description={book ? book.long_description : ``}
+                                                description={
+                                                    book
+                                                        ? book.long_description
+                                                        : ``
+                                                }
                                                 specification={
                                                     book
                                                         ? [
-                                                            {
-                                                                id: book.id,
-                                                                author: book.book_author.name,
-                                                                discipline: book.book_discipline.name,
-                                                                stage: book.book_stage.stage,
-                                                                publisher: book.book_publisher.name,
-                                                                publishing_year:
-                                                                book.book_publishing_year.name,
-                                                                language: book.book_language.name,
-                                                                page_number: book.page_number,
-                                                            },
-                                                        ]
+                                                              {
+                                                                  id: book.id,
+                                                                  author:
+                                                                      book
+                                                                          .book_author
+                                                                          .name,
+                                                                  discipline:
+                                                                      book
+                                                                          .book_discipline
+                                                                          .name,
+                                                                  stage:
+                                                                      book
+                                                                          .book_stage
+                                                                          .stage,
+                                                                  publisher:
+                                                                      book
+                                                                          .book_publisher
+                                                                          .name,
+                                                                  publishing_year:
+                                                                      book
+                                                                          .book_publishing_year
+                                                                          .name,
+                                                                  language:
+                                                                      book
+                                                                          .book_language
+                                                                          .name,
+                                                                  page_number:
+                                                                      book.page_number,
+                                                              },
+                                                          ]
                                                         : {}
                                                 }
                                                 reviews={
-                                                    book && book.book_review ? book.book_review : []
+                                                    book && book.book_review
+                                                        ? book.book_review
+                                                        : []
                                                 }
                                             />
                                         </div>
                                     </div>
-
                                 </div>
                                 <div className="col-md-3 col-12">
                                     <div className={`card ${classes.card}`}>
-                                        <div className={`card-body ${classes.cardBody}`}>
-                                            <h2 className={classes.bookCode}>Ksh {book && book.price}
-                                                <small>Available</small></h2>
+                                        <div
+                                            className={`card-body ${classes.cardBody}`}
+                                        >
+                                            <h2 className={classes.bookCode}>
+                                                Ksh {book && book.price}
+                                                <small>Available</small>
+                                            </h2>
 
-                                            <ul className={`nav flex-column ${classes.deliveryNav}`}>
+                                            <ul
+                                                className={`nav flex-column ${classes.deliveryNav}`}
+                                            >
                                                 <li>Free delivery worldwide</li>
-                                                <li>Available. Dispatched from the UK in 2 business days</li>
+                                                <li>
+                                                    Available. Dispatched from
+                                                    the UK in 2 business days
+                                                </li>
                                             </ul>
 
                                             <input
-                                                className={classes.quantityInput}
-                                                type='number'
+                                                className={
+                                                    classes.quantityInput
+                                                }
+                                                type="number"
                                                 value={itemQty}
                                                 onChange={updateItemQty}
                                                 min={1}
                                             />
 
-                                            <div className='mt-3'>
+                                            <div className="mt-3">
                                                 <button
                                                     className={`btn btn-block ${classes.cartBtn}`}
                                                     onClick={handleAddToCart}
                                                 >
-                                                    <FiShoppingCart/> add to cart
+                                                    <FiShoppingCart /> add to
+                                                    cart
                                                 </button>
                                                 <button
                                                     className={`btn btn-block ${classes.favBtn}`}
                                                     onClick={handleAddFavorite}
                                                 >
-                                                    <AiOutlineStar/> add to fabourites
+                                                    <AiOutlineStar /> add to
+                                                    fabourites
                                                 </button>
                                             </div>
                                         </div>
@@ -408,57 +534,69 @@ function ProductPage(props) {
                             {/*</div>*/}
                         </Container>
                     </Wrapper>
-                    <Container>
-                        <ForYou data={similar && similar.slice(0, 5)}/>
-                        <ForYou data={similar && similar.slice(6, 11)}/>
-                        <ForYou data={similar && similar.slice(12, 17)}/>
-                    </Container>
+                    {/* <Container>
+                        <ForYou data={similar && similar.slice(0, 5)} />
+                        <ForYou data={similar && similar.slice(6, 11)} />
+                        <ForYou data={similar && similar.slice(12, 17)} />
+                    </Container> */}
+
+                    <section>
+                        <TopDiscountProduct />
+                        <TopSaleProducts />
+                        <RecentSaleProducts />
+                    </section>
 
                     <Wrapper>
                         <Container>
-                            <div className='section'>
+                            <div className="section">
                                 <h3>About DK</h3>
-                                <hr/>
-                                <p>Written by {book && book.book_author.name}</p>
+                                <hr />
+                                <p>
+                                    Written by {book && book.book_author.name}
+                                </p>
                             </div>
                         </Container>
                     </Wrapper>
                 </main>
 
                 <section
-                    className='mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap'
-                    id='mailSubscribe'
+                    className="mailSubscribe clearfix sectionBgImage sectionBgImg01 secGap"
+                    id="mailSubscribe"
                 >
-                    <Container className='container'>
-                        <NewsLetterComponent/>
+                    <Container className="container">
+                        <NewsLetterComponent />
                     </Container>
                 </section>
-                <FooterComponent/>
+                <FooterComponent />
             </div>
 
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header className={'border-0'} closeButton></Modal.Header>
+                <Modal.Header className={"border-0"} closeButton></Modal.Header>
                 <Modal.Body>
-                    <h2 className={'text-center'}>Product added to cart successfully!</h2>
+                    <h2 className={"text-center"}>
+                        Product added to cart successfully!
+                    </h2>
                 </Modal.Body>
                 <Modal.Footer
-                    className={'border-0 modal-footer-mobile modal-footer-alignment'}
+                    className={
+                        "border-0 modal-footer-mobile modal-footer-alignment"
+                    }
                 >
-                    <div className='modalBottomAlignment'>
+                    <div className="modalBottomAlignment">
                         <Link
-                            to='/checkout'
-                            className='btn btn-primary mobile-view-btn'
-                            style={{color: 'white'}}
+                            to="/checkout"
+                            className="btn btn-primary mobile-view-btn"
+                            style={{ color: "white" }}
                         >
-                            {' '}
-                            Go to checkout{' '}
+                            {" "}
+                            Go to checkout{" "}
                         </Link>
                         <Link
-                            to='/shopping'
-                            className='btn btn-outline linkBtnBorder mobile-view-btn'
-                            style={{color: 'white !important'}}
+                            to="/shopping"
+                            className="btn btn-outline linkBtnBorder mobile-view-btn"
+                            style={{ color: "white !important" }}
                         >
-                            {' '}
+                            {" "}
                             Continue shopping
                         </Link>
                     </div>
@@ -484,7 +622,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         showSingleBook: (id) => dispatch(showSingleBook(id)),
         addToCart: (favorite, book) => dispatch(addToCart(favorite, book)),
-        updateItem: ({id, qty}) => dispatch(updateQuantity({id, qty})),
+        updateItem: ({ id, qty }) => dispatch(updateQuantity({ id, qty })),
         addToFavorite: (id) => dispatch(addToFavorite(id)),
         removeFavorite: (id) => dispatch(removeFavItem(id)),
         getDeliveryMethods: () => dispatch(deliveryMethod()),
@@ -492,220 +630,220 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const Wrapper = styled.section`
-  p {
-    font-size: 16px;
-  }
+    p {
+        font-size: 16px;
+    }
 
-  .left {
-    padding: 0.5rem;
-    min-height: 410px;
-    margin: 0rem;
-    -webkit-box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
-    box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
-  }
+    .left {
+        padding: 0.5rem;
+        min-height: 410px;
+        margin: 0rem;
+        -webkit-box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
+        box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
+    }
 
-  .book-description {
-    margin-right: -5px;
-  }
-
-  .book-description h3 {
-    line-height: 30px;
-    margin-bottom: 0;
-  }
-
-  @media (max-width: 980px) {
     .book-description {
-      margin-top: 1rem;
-    }
-  }
-
-  .readmore {
-    cursor: pointer;
-    color: blue;
-    display: inline;
-    padding-left: 0.5rem;
-  }
-
-  .img-container {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .img-container img {
-    width: 100%;
-  }
-
-  .social {
-    margin: 0.8rem 0;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .social-icon {
-    height: 35px;
-    width: 35px;
-    padding: 10px;
-    background-color: #d7d7d7;
-    color: #807e7a;
-    border-radius: 50%;
-    transition: all 0.3s;
-  }
-
-  .social-icon:hover {
-    color: blue;
-  }
-
-  .right {
-    background: #fff;
-    padding: 1rem;
-    -webkit-box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
-    box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
-    @media (max-width: 764px) {
-      margin-top: 1rem;
+        margin-right: -5px;
     }
 
-    .price h2 {
-      color: #ff0092;
+    .book-description h3 {
+        line-height: 30px;
+        margin-bottom: 0;
     }
 
-    h5 {
-      display: flex;
-      gap: 0.6rem;
-      margin: 0.5rem 0;
-    }
-
-    h5 svg {
-      font-size: 30px;
-    }
-
-    .btn-container {
-      justify-content: space-between;
-      display: flex;
-      gap: 0.5rem;
-      row-gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-
-      @media (max-width: 525px) {
-        flex-direction: column;
-      }
-
-      p {
-        font-size: 10px;
-        font-weight: 400;
-        line-height: 18px;
-        text-transform: capitalize;
-      }
-
-      .available {
-        color: #222;
-        margin-bottom: 0.1rem;
-        opacity: 0;
-        font-size: 10px;
-      }
-
-      .show {
-        opacity: 1;
-      }
-
-      .btn {
-        display: flex;
-        align-items: center;
-        padding: 0 0.5rem;
-        color: #222;
-        background-color: transparent;
-        border: 1px solid #0b7bc1;
-        min-width: 90px;
-        transition: all 0.3s ease;
-        @media (max-width: 1199px) {
-          min-width: 150px;
+    @media (max-width: 980px) {
+        .book-description {
+            margin-top: 1rem;
         }
-        @media (max-width: 992px) {
-          min-width: 140px;
-        }
-        @media (max-width: 767px) {
-          min-width: 110px;
-        }
-        @media (max-width: 525px) {
-          min-width: 100%;
-        }
-        //@media (min-width: 768px) and (max-width: 988px) {
-        //  min-width: 130px;
-        //}
-        //@media (max-width: 463px) {
-        //  min-width: 110px;
-        //}
-        //@media (min-width: 370px) and (max-width: 410px) {
-        //  min-width: 150px;
-        //}
-        //@media (min-width: 320px) and (max-width: 369px) {
-        //  min-width: 120px;
-        //}
-      }
+    }
 
-      .btn svg {
-        font-size: 15px;
-        margin-right: 0.6rem;
+    .readmore {
+        cursor: pointer;
         color: blue;
-      }
+        display: inline;
+        padding-left: 0.5rem;
+    }
 
-      button span {
+    .img-container {
+        height: 100%;
         display: flex;
+        justify-content: center;
+        align-items: center;
         flex-direction: column;
-      }
+    }
 
-      .input-btn {
-        width: 50px;
-        @media (min-width: 768px) and (max-width: 1200px) {
-          min-width: 100px;
-          padding: 0 0.6rem;
-        }
-        @media (min-width: 335px) and (max-width: 466px) {
-          min-width: 120px;
-        }
-        @media (min-width: 296px) and (max-width: 334px) {
-          min-width: 80px;
-        }
-      }
+    .img-container img {
+        width: 100%;
+    }
 
-      .btn:hover {
-        background-color: #0b7bc1;
-        color: #fff;
+    .social {
+        margin: 0.8rem 0;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .social-icon {
+        height: 35px;
+        width: 35px;
+        padding: 10px;
+        background-color: #d7d7d7;
+        color: #807e7a;
+        border-radius: 50%;
+        transition: all 0.3s;
+    }
+
+    .social-icon:hover {
+        color: blue;
+    }
+
+    .right {
+        background: #fff;
+        padding: 1rem;
+        -webkit-box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
+        box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
+        @media (max-width: 764px) {
+            margin-top: 1rem;
+        }
+
+        .price h2 {
+            color: #ff0092;
+        }
+
+        h5 {
+            display: flex;
+            gap: 0.6rem;
+            margin: 0.5rem 0;
+        }
+
+        h5 svg {
+            font-size: 30px;
+        }
+
+        .btn-container {
+            justify-content: space-between;
+            display: flex;
+            gap: 0.5rem;
+            row-gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+
+            @media (max-width: 525px) {
+                flex-direction: column;
+            }
+
+            p {
+                font-size: 10px;
+                font-weight: 400;
+                line-height: 18px;
+                text-transform: capitalize;
+            }
+
+            .available {
+                color: #222;
+                margin-bottom: 0.1rem;
+                opacity: 0;
+                font-size: 10px;
+            }
+
+            .show {
+                opacity: 1;
+            }
+
+            .btn {
+                display: flex;
+                align-items: center;
+                padding: 0 0.5rem;
+                color: #222;
+                background-color: transparent;
+                border: 1px solid #0b7bc1;
+                min-width: 90px;
+                transition: all 0.3s ease;
+                @media (max-width: 1199px) {
+                    min-width: 150px;
+                }
+                @media (max-width: 992px) {
+                    min-width: 140px;
+                }
+                @media (max-width: 767px) {
+                    min-width: 110px;
+                }
+                @media (max-width: 525px) {
+                    min-width: 100%;
+                }
+                //@media (min-width: 768px) and (max-width: 988px) {
+                //  min-width: 130px;
+                //}
+                //@media (max-width: 463px) {
+                //  min-width: 110px;
+                //}
+                //@media (min-width: 370px) and (max-width: 410px) {
+                //  min-width: 150px;
+                //}
+                //@media (min-width: 320px) and (max-width: 369px) {
+                //  min-width: 120px;
+                //}
+            }
+
+            .btn svg {
+                font-size: 15px;
+                margin-right: 0.6rem;
+                color: blue;
+            }
+
+            button span {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .input-btn {
+                width: 50px;
+                @media (min-width: 768px) and (max-width: 1200px) {
+                    min-width: 100px;
+                    padding: 0 0.6rem;
+                }
+                @media (min-width: 335px) and (max-width: 466px) {
+                    min-width: 120px;
+                }
+                @media (min-width: 296px) and (max-width: 334px) {
+                    min-width: 80px;
+                }
+            }
+
+            .btn:hover {
+                background-color: #0b7bc1;
+                color: #fff;
+
+                p {
+                    color: #fff;
+                }
+
+                svg {
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .section {
+        -webkit-box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
+        box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
+        padding: 0.5rem 0.8rem;
+        margin: 1rem 0;
 
         p {
-          color: #fff;
+            text-transform: capitalize;
+            margin-bottom: 0.5rem;
         }
 
-        svg {
-          color: #fff;
+        span {
+            font-weight: 600;
+            text-transform: capitalize;
         }
-      }
-    }
-  }
-
-  .section {
-    -webkit-box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
-    box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.45);
-    padding: 0.5rem 0.8rem;
-    margin: 1rem 0;
-
-    p {
-      text-transform: capitalize;
-      margin-bottom: 0.5rem;
     }
 
-    span {
-      font-weight: 600;
-      text-transform: capitalize;
+    section {
+        padding: 1rem 0 !important;
     }
-  }
-
-  section {
-    padding: 1rem 0 !important;
-  }
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
