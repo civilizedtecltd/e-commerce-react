@@ -179,7 +179,7 @@ const fetchTopDiscountBooks = () => (dispatch) => {
             console.log(res.data);
             return dispatch({
                 type: Types.FETCH_TOP_DISCOUNT_BOOKS,
-                payload: res.data.data,
+                payload: res.data,
             });
         })
         .catch((err) => console.log(err));

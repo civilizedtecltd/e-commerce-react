@@ -19,7 +19,7 @@ export const useStyles = createUseStyles({
     },
     content: {
         display: "flex",
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
         gap: "0.5rem",
         padding: "0 1rem",
         "@media (max-width: 1150px)": {

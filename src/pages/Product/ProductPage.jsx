@@ -45,6 +45,7 @@ import TabComponent from "../../components/TabComponent/TabComponent";
 import TopDiscountProduct from "../../components/DifferentProduct/TopDiscountProducts";
 import TopSaleProducts from "../../components/DifferentProduct/TopSaleProducts";
 import RecentSaleProducts from "../../components/DifferentProduct/RecentSaleProducts";
+import ReviewProduct from "./shared/ReviewProduct";
 
 function ProductPage(props) {
     const {
@@ -549,11 +550,19 @@ function ProductPage(props) {
                     <Wrapper>
                         <Container>
                             <div className="section">
-                                <h3>About DK</h3>
+                                <ReviewProduct
+                                    reviews={
+                                        book && book.book_review
+                                            ? book.book_review
+                                            : []
+                                    }
+                                    book_id={book && book.id}
+                                />
+                                {/* <h3>About DK</h3>
                                 <hr />
                                 <p>
                                     Written by {book && book.book_author.name}
-                                </p>
+                                </p> */}
                             </div>
                         </Container>
                     </Wrapper>

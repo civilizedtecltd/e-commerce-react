@@ -96,7 +96,7 @@ const TopProducts = () => {
                                 id="allShopProduct"
                             >
                                 <Row className="mb-5">
-                                    <Col className="col">
+                                    <Col>
                                         <h2 className="pageTitle">
                                             <span>{title}</span> Books
                                         </h2>
