@@ -181,49 +181,51 @@ function ProductPage(props) {
   ]);
 
   useEffect(() => {
-    if (book && book.price_hardcover) {
-      setBookPriceBtn([
-        ...bookPriceBtn,
-        {
-          text: book.stock && 'Available',
-          name: 'hard cover',
-          icon: <BiBookBookmark />,
-          price: book.price_hardcover,
-        },
-      ]);
-    }
-    if (book && book.price_audiobook) {
-      setBookPriceBtn([
-        ...bookPriceBtn,
-        {
-          text: book.book_files.audiobook_file && 'Available',
-          name: 'audio book',
-          icon: <GiSpeaker />,
-          price: book.price_hardcover,
-        },
-      ]);
-    }
-    if (book && book.price_epub) {
-      setBookPriceBtn([
-        ...bookPriceBtn,
-        {
-          text: book.book_files.epub_file && 'Available',
-          name: 'e pub',
-          icon: <SiPublons />,
-          price: book.price_epub,
-        },
-      ]);
-    }
-    if (book && book.price_pdf) {
-      setBookPriceBtn([
-        ...bookPriceBtn,
-        {
-          text: book.book_files.pdf_file && 'Available',
-          name: 'pdf',
-          icon: <FaFilePdf />,
-          price: book.price_pdf,
-        },
-      ]);
+    if(book && !book.price){
+      if (book && book.price_hardcover) {
+        setBookPriceBtn([
+          ...bookPriceBtn,
+          {
+            text: book.stock && 'Available',
+            name: 'hard cover',
+            icon: <BiBookBookmark />,
+            price: book.price_hardcover,
+          },
+        ]);
+      }
+      if (book && book.price_audiobook) {
+        setBookPriceBtn([
+          ...bookPriceBtn,
+          {
+            text: book.book_files.audiobook_file && 'Available',
+            name: 'audio book',
+            icon: <GiSpeaker />,
+            price: book.price_hardcover,
+          },
+        ]);
+      }
+      if (book && book.price_epub) {
+        setBookPriceBtn([
+          ...bookPriceBtn,
+          {
+            text: book.book_files.epub_file && 'Available',
+            name: 'e pub',
+            icon: <SiPublons />,
+            price: book.price_epub,
+          },
+        ]);
+      }
+      if (book && book.price_pdf) {
+        setBookPriceBtn([
+          ...bookPriceBtn,
+          {
+            text: book.book_files.pdf_file && 'Available',
+            name: 'pdf',
+            icon: <FaFilePdf />,
+            price: book.price_pdf,
+          },
+        ]);
+      }
     }
   }, [book]);
 
@@ -260,10 +262,10 @@ function ProductPage(props) {
 
           <Wrapper>
             <Container>
-              <div className='row mb-5'>
+              <div className='row mb-5 align-items-stretch'>
                 {/*Image Slider*/}
                 <div className='col-md-3 col-12'>
-                  <div className={`card ${classes.card}`}>
+                  <div className={`card ${classes.card} h-100`}>
                     <div className={`card-body ${classes.cardBody}`}>
                       <ReactImageCarosule images={book && book.cover_images} />
                     </div>
@@ -271,7 +273,7 @@ function ProductPage(props) {
                 </div>
                 {/*Product Information*/}
                 <div className='col-md-6 col-12'>
-                  <div className={`card ${classes.card}`}>
+                  <div className={`card ${classes.card} h-100`}>
                     <div className={`card-body ${classes.cardBody}`}>
                       <h3 className={classes.bookName}>{book && book.name}</h3>
                       <p className={classes.bookAuthor}>
@@ -283,18 +285,20 @@ function ProductPage(props) {
                         {`(${book && book.total_review} reviews)`}
                       </div>
 
-                      <div className={classes.btnContainer}>
-                        {bookPriceBtn.map((item, index) => {
-                          return (
-                            <Buttons
-                              key={index}
-                              item={item}
-                              message={message}
-                              setMessage={setMessage}
-                            />
-                          );
-                        })}
-                      </div>
+                      {book && !book.price && (
+                          <div className={classes.btnContainer}>
+                            {bookPriceBtn.map((item, index) => {
+                              return (
+                                  <Buttons
+                                      key={index}
+                                      item={item}
+                                      message={message}
+                                      setMessage={setMessage}
+                                  />
+                              );
+                            })}
+                          </div>
+                      )}
 
                       <TabComponent
                         routeHistory={history}
@@ -324,7 +328,7 @@ function ProductPage(props) {
                   </div>
                 </div>
                 <div className='col-md-3 col-12'>
-                  <div className={`card ${classes.card}`}>
+                  <div className={`card ${classes.card} h-100`}>
                     <div className={`card-body ${classes.cardBody}`}>
                       <h2 id='bookPrice' className={classes.bookCode}>
                         Ksh {book && book.price}

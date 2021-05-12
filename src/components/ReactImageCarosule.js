@@ -118,15 +118,15 @@ const ReactImageCarosule = (props) => {
                     />
                 )}
             </div>
-            <Thumbnails>
-                <div className='thumbnails'>
-                    {images.map((item, index) => (
-                        <div key={index} className='singleimg'>
-                            <img loading='lazy' src={item} alt='img' onClick={ImgHandler}/>
-                        </div>
-                    ))}
-                </div>
-            </Thumbnails>
+            {/*<Thumbnails>*/}
+            {/*    <div className='thumbnails'>*/}
+            {/*        {images.map((item, index) => (*/}
+            {/*            <div key={index} className='singleimg'>*/}
+            {/*                <img loading='lazy' src={item} alt='img' onClick={ImgHandler}/>*/}
+            {/*            </div>*/}
+            {/*        ))}*/}
+            {/*    </div>*/}
+            {/*</Thumbnails>*/}
         </>
     );
 };
