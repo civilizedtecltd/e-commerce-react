@@ -336,9 +336,9 @@ function ProductPage(props) {
                       </h2>
 
                       <ul className={`nav flex-column ${classes.deliveryNav}`}>
-                        <li>Free delivery worldwide</li>
+                        <li>Free Delivery</li>
                         <li>
-                          Available. Dispatched from the UK in 2 business days
+                          Available. Dispatched in 24HRS.
                         </li>
                       </ul>
 
@@ -355,13 +355,13 @@ function ProductPage(props) {
                           className={`btn btn-block ${classes.cartBtn}`}
                           onClick={handleAddToCart}
                         >
-                          <FiShoppingCart /> add to cart
+                          <FiShoppingCart /> Buy Now
                         </button>
                         <button
                           className={`btn btn-block ${classes.favBtn}`}
                           onClick={handleAddFavorite}
                         >
-                          <AiOutlineStar /> add to fabourites
+                          <AiOutlineStar /> add to favourites
                         </button>
                       </div>
                     </div>
