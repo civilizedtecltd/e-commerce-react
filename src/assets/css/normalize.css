@@ -89,7 +89,7 @@ object {
   -moz-osx-font-smoothing: grayscale !important;
   text-rendering: optimizeLegibility !important;
   vertical-align: baseline;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Crimson Text', serif;
   font-weight: inherit;
   font-style: inherit;
   font-size: 100%;
@@ -117,7 +117,7 @@ section {
 }
 body {
   font-size: 12px;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Crimson Text', serif;
   height: auto;
   font-display: swap;
 }
@@ -129,7 +129,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Crimson Text', serif;
   font-weight: 700;
   color: #363636;
   font-display: swap;
@@ -157,7 +157,7 @@ h6 {
 p {
   font-size: 18px;
   line-height: 25px;
-  font-family: 'lato', serif;
+  font-family: 'Crimson Text', serif;
   color: #404041;
   font-weight: 500;
 }
@@ -222,7 +222,7 @@ input[type='button'],
   display: inline-block;
   text-align: center;
   border: none;
-  font-family: 'lato', serif;
+  font-family: 'Crimson Text', serif;
   color: #ffffff;
   font-weight: 700;
   font-size: 14px;
@@ -245,7 +245,7 @@ button:focus {
 }
 label {
   color: #363636;
-  font-family: 'lato', serif;
+  font-family: 'Crimson Text', serif;
   font-size: 17px;
   font-weight: 600;
 }
@@ -285,7 +285,7 @@ a:focus {
   text-decoration: none !important;
   color: #0b7bc1;
   /* font-size: 17px; */
-  font-family: 'lato', serif;
+  font-family: 'Crimson Text', serif;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;

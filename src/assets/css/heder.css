@@ -28,8 +28,8 @@
 }
 .navbar-expand-lg .navbar-nav .nav-link {
   color: #363636;
-  font-size: 16px;
-  font-family: 'lato', serif;
+  font-size: 15px;
+  font-family: 'Crimson Text', serif;
   font-weight: 500;
   font-display: swap;
 }
@@ -182,7 +182,7 @@
 .inner-mega-menu ul li a {
   color: #363636;
   font-size: 16px;
-  font-family: 'lato', serif;
+  font-family: 'Crimson Text', serif;
   font-weight: 600;
   font-display: swap;
 }
