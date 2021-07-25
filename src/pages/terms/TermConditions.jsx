@@ -43,7 +43,29 @@ const TermConditions = (props) => {
                                 <div className="helpContentArea">
                                     <h2>Terms and conditions</h2>
                                     <div className="helpPara mt-3">
-                                        <p>1. Returned items should be in the same condition as they were at the time of shipment.<br />2. We have a no refund policy however as our customer you are at liberty to choose any other<br />item of similar cost from our website.<br />3. Delivery charges are only refundable where goods are faulty and a refund is made.<br />4. The cost of returning the item to us is your responsibility.<br />5. There are no refunds on items damaged in delivery. In that case, you must file a claim with the<br />carrier.<br />6. In case of a refund, either partial or full, the transaction fees incurred by<br /><a href="https://abookstore.co.ke" target="_blank">https://abookstore.co.ke</a> &nbsp;will be deducted from the refund amount.<br />7. Facilitate delivery. Failure to which, <a target="_blank" href="https://abookstore.co.ke">https://abookstore.co.ke</a> &nbsp;will deliver the item to the<br />nearest or most convenient town/county.<br />8. For international orders (outside Kenya), the client will be required to contact <u>(insert name of<br />the bookshop)</u> before making an order for a shipping fee estimate</p>
+                                        <ul className="helptmlist">
+                                            <li>
+                                                Returned items should be in the same condition as they were at the time of shipment.<br />
+                                            </li>
+                                            <li>
+                                               We have a no refund policy however as our customer you are at liberty to choose any other item of similar cost from our website.<br/>
+                                            </li>
+                                            <li>
+                                                Delivery charges are only refundable where goods are faulty and a refund is made.<br />
+                                            </li>
+                                            <li>
+                                                The cost of returning the item to us is your responsibility.<br />
+                                            </li>
+                                            <li>
+                                                There are no refunds on items damaged in delivery. In that case, you must file a claim with the carrier.<br />
+                                            </li>
+                                            <li>
+                                                In case of a refund, either partial or full, the transaction fees incurred by <a href="https://abookstore.co.ke" target="_blank">https://abookstore.co.ke</a> will be deducted from the refund amount<br />
+                                            </li>
+                                            <li>
+                                                Facilitate delivery. Failure to which, <a href="https://abookstore.co.ke" target="_blank">https://abookstore.co.ke</a> will deliver the item to the nearest or most convenient town/county.
+                                            </li>
+                                        </ul>
                                     </div>
 
                                 </div>
