@@ -59,7 +59,7 @@ const Home = (props) => {
     return (
         <>
             <PageLoader loading={loading} />
-            <div className="allWrapper">
+            <div className="allWrapper lasdkjf">
                 <HeaderComponent
                     favorite_item={favoriteItem.length}
                     cartItem={totalItem}
