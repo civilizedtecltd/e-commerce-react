@@ -279,6 +279,8 @@ function ProductPage(props) {
                       <p className={classes.bookAuthor}>
                         <span>By</span> {book && book.book_author.name}
                       </p>
+
+
                       <div className={classes.bookRating}>
                         <TotalRating value={book && book.rating} />
                         {book && book.rating}{' '}
@@ -299,6 +301,24 @@ function ProductPage(props) {
                             })}
                           </div>
                       )}
+                      
+                      <div className="book_selection mt-1">
+                        <ul className="book_selectitem">
+                          <li className="bookswatch-element unselected">
+                            <a href="/home">
+                              <span className="book-swtitle">Hardcover</span>
+                              <span className="book-swprice">Ksh 20</span> 
+                              <span className="book-swprice book-swprice-offer">Ksh 10</span>
+                            </a>
+                          </li>
+                          <li className="bookswatch-element selected">
+                            <a href="/home">
+                              <span className="book-swtitle">Paperback</span>
+                              <span className="book-swprice">Ksh 90</span> 
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
 
                       <TabComponent
                         routeHistory={history}
@@ -327,6 +347,7 @@ function ProductPage(props) {
                     </div>
                   </div>
                 </div>
+
                 <div className='col-md-3 col-12'>
                   <div className={`card ${classes.card} h-100`}>
                     <div className={`card-body ${classes.cardBody}`}>
