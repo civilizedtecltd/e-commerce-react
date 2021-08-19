@@ -1746,3 +1746,12 @@ div#controlled-tab-example-tabpane-payPal {
   font-size: 18px;
 }
 .helpNavList li a.nav-link.active{color: #000000!important;}
+
+/* Discount Card area */
+.price-value span {
+  padding-right: 10px;
+}
+
+.discount-price {
+  text-decoration: line-through;
+}

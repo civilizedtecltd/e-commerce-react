@@ -18,10 +18,10 @@ export const useStyles = createUseStyles({
         fontSize: 13,
     },
     content: {
-        display: "flex",
         // justifyContent: "space-between",
+        display: "flex",        
         gap: "0.5rem",
-        padding: "0 1rem",
+        padding: "0 0.5rem",
         "@media (max-width: 1150px)": {
             flexWrap: "wrap",
             justifyContent: "center",
@@ -54,7 +54,7 @@ export const useStyles = createUseStyles({
         objectFit: "cover",
     },
     itemCardContent: {
-        padding: "0.5rem",
+        padding: "0.5rem",      
     },
     description: {
         height: "50px",
@@ -64,9 +64,9 @@ export const useStyles = createUseStyles({
         fontWeight: 400,
     },
     price: {
-        marginTop: "1.5rem",
+     /*    marginTop: "1.5rem", */
         color: "#f88824",
-        fontSize: "20px",
+        fontSize: "15px",
         textTransform: "capitalize",
     },
 });

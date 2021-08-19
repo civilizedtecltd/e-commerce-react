@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Tabs, Tab, Form, Button } from "react-bootstrap";
-import RatingComponent from "../ratingComponent/Rating";
-import ReviewComponent from "./ReviewComponent";
+//import RatingComponent from "../ratingComponent/Rating";
+//import ReviewComponent from "./ReviewComponent";
 import checkAuth from "../../helpers/checkAuth";
 import { postReview, showSingleBook } from "../../redux/actions/bookActions";
 import "../../assets/css/productTab.css";
