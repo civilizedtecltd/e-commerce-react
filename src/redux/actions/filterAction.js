@@ -4,7 +4,6 @@ import axios from 'axios';
 
 
 export const fetchMaxMinPrice = () => dispatch => {
-  console.log('----------------fetchMaxMinPrice')
   axios.get(URL.MAX_MIN_PRICE)
     .then(res => dispatch({
       type: Types.FETCH_MAX_MIN_PRICE,
@@ -18,7 +17,6 @@ export const fetchMaxMinPrice = () => dispatch => {
     .catch(error => console.log(error))
 }
 export const fetchMaxMinPriceByFilter = (data) => {
-  console.log('----------------fetchMaxMinPriceByFilter')
   console.log(data)
   return {
     type: Types.FETCH_MAX_MIN_PRICE,
@@ -32,8 +30,6 @@ export const fetchMaxMinPriceByFilter = (data) => {
 }
 
 export const fetchStages = (category_id) => dispatch => {
-  console.log('----------------fetchStages', {category_id})
-
   axios.get(URL._GET_STAGES(category_id))
     .then(res => dispatch({
       type: Types.GET_STAGE_LIST,
@@ -45,8 +41,6 @@ export const fetchStages = (category_id) => dispatch => {
 }
 
 export const fetchDiscipline = () => dispatch => {
-  console.log('----------------fetchDiscipline')
-
   axios.get(URL._GET_DISCIPLINES)
     .then(res => dispatch({
       type: Types.GET_DISCIPLINE_LIST,
@@ -58,7 +52,6 @@ export const fetchDiscipline = () => dispatch => {
 }
 
 export const fetchAuthors = () => dispatch => {
-  console.log('----------------fetchAuthors')
   axios.get(URL._GET_AUTHORS)
     .then(res => dispatch({
       type: Types.GET_AUTHOR_LIST,
@@ -70,7 +63,6 @@ export const fetchAuthors = () => dispatch => {
 }
 
 export const fetchPublishers = () => dispatch => {
-  console.log('----------------fetchPublishers')
   axios.get(URL._GET_PUBLISHERS)
     .then(res => dispatch({
       type: Types.GET_PUBLISHER_LIST,
@@ -82,7 +74,6 @@ export const fetchPublishers = () => dispatch => {
 }
 
 export const fetchPublishingYears = () => dispatch => {
-  console.log('----------------fetchPublishingYears')
   axios.get(URL._GET_PUBLISHING_YEARS)
     .then(res => dispatch({
       type: Types.GET_PUBLISHING_YEAR_LIST,
@@ -94,7 +85,6 @@ export const fetchPublishingYears = () => dispatch => {
 }
 
 export const fetchLanguages = () => dispatch => {
-  console.log('----------------fetchLanguages')
   axios.get(URL._GET_LANGUAGES)
     .then(res => dispatch({
       type: Types.GET_LANGUAGE_LIST,
@@ -106,7 +96,6 @@ export const fetchLanguages = () => dispatch => {
 }
 
 export const fetchBookCovers = () => dispatch => {
-  console.log('----------------fetchBookCovers')
   axios.get(URL._GET_BOOK_COVERS)
     .then(res => dispatch({
       type: Types.GET_BOOK_COVER_LIST,

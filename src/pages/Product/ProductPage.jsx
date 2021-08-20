@@ -24,19 +24,14 @@ import '../../assets/css/theme.css';
 import styled from 'styled-components';
 
 //react icons
-import { GiCommercialAirplane, GiSpeaker } from 'react-icons/gi';
-import {
-  AiOutlineCheckCircle,
-  AiOutlineMail,
-  AiOutlineStar,
-  AiOutlineTwitter,
-} from 'react-icons/ai';
-import { FaFacebookF, FaFilePdf, FaPinterestP } from 'react-icons/fa';
+import { GiSpeaker } from 'react-icons/gi';
+import { AiOutlineStar } from 'react-icons/ai';
+import { FaFilePdf} from 'react-icons/fa';
 import { BiBookBookmark } from 'react-icons/bi';
 import { SiPublons } from 'react-icons/si';
 import { FiShoppingCart } from 'react-icons/fi';
 import Buttons from '../../components/Product-page-buttons/Buttons';
-import ForYou from '../../components/forYouComponents/ForYou';
+//import ForYou from '../../components/forYouComponents/ForYou';
 //image slider react
 import ReactImageCarosule from '../../components/ReactImageCarosule';
 import TotalRating from '../../components/ratingComponent/TotalRating';

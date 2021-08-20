@@ -1,80 +1,8 @@
 import React, {useState, useEffect} from "react";
-import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { fetchTopSaleBooksLimit } from "../../redux/actions/bookActions";
 import { useStyles } from "./styled";
 import DifferentProductView from "./DifferentProductView";
-
-//===============slider====================
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import LazyLoad from 'react-lazyload';
-
-const settings = {
-    dots: false,
-    infinite: true,
-    /*
-    autoplay: true,
-    autoplaySpeed: 2000,
-    pauseOnHover: true */
-    slidesToShow: 6,
-    slidesToScroll: 1,
-    responsive: [
-        {
-            breakpoint: 1199,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                infinite: true,
-            }
-        }, {
-            breakpoint: 991,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
-            }
-        },
-        {
-            breakpoint: 767,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                initialSlide: 3
-            }
-        },
-        {
-            breakpoint: 575,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                initialSlide: 2
-            }
-        },
-        {
-            breakpoint: 453,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 380,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 336,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        }
-    ]
-};
 
 const TopSaleProducts = () => {
     const classes = useStyles();
