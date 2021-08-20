@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Alert, Tabs, Tab, Image } from 'react-bootstrap';
+import {  Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { setPayment } from '../redux/actions/authActions';
 import { setPaymentDetails } from '../redux/actions/shopActions';
@@ -80,7 +80,7 @@ const PaymentMethods = (props) => {
         }
     }
 
-    const selectPaymentType = type => {
+    /* const selectPaymentType = type => {
 
         setPaymentType(type);
 
@@ -97,7 +97,7 @@ const PaymentMethods = (props) => {
                 deliveryInfo: props.delivery[1]
             });
         }
-    }
+    } */
 
     const updatePaymentInfo = e => {
         // e.preventDefault();

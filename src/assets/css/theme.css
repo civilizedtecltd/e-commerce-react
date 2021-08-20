@@ -1755,3 +1755,9 @@ div#controlled-tab-example-tabpane-payPal {
 .discount-price {
   text-decoration: line-through;
 }
+
+.price-area {
+  color: #f88824;
+  font-size: 15px;
+  text-transform: capitalize;
+}

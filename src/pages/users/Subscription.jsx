@@ -21,7 +21,7 @@ const Subscription = (props) => {
     (async function(){      
       AllSubscriptions(auth.email);
     })();
-  }, [auth.email, updated])
+  }, [auth.email, updated, AllSubscriptions])
 
   const handleChange = (e) => {
 

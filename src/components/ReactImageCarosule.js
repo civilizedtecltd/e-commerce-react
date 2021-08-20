@@ -14,9 +14,9 @@ const ReactImageCarosule = (props) => {
     const [photoIndex, setPhotoIndex] = useState(0);
     const [images, setImages] = useState([]);
     const [coverImages, setCoverImage] = useState('');
-    let ImgHandler = (e) => {
+   /*  let ImgHandler = (e) => {
         setCoverImage(e.target.src);
-    };
+    }; */
 
     useRef(() => {
         if (count === 3) {
@@ -200,13 +200,13 @@ const Wrapper = styled.div`
   }
 `;
 
-const Thumbnails = styled.div`
+/* const Thumbnails = styled.div`
   .thumbnails {
     display: flex;
     justify-content: center;
     gap: 0.6rem;
     margin-top: 1rem;
-    /* flex-wrap: wrap; */
+    //flex-wrap: wrap; 
   }
 
   .singleimg img {
@@ -215,6 +215,6 @@ const Thumbnails = styled.div`
     object-fit: cover;
     cursor: pointer;
   }
-`;
+`; */
 
 export default ReactImageCarosule;
