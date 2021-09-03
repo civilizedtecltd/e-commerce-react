@@ -24,19 +24,14 @@ import '../../assets/css/theme.css';
 import styled from 'styled-components';
 
 //react icons
-import { GiCommercialAirplane, GiSpeaker } from 'react-icons/gi';
-import {
-  AiOutlineCheckCircle,
-  AiOutlineMail,
-  AiOutlineStar,
-  AiOutlineTwitter,
-} from 'react-icons/ai';
-import { FaFacebookF, FaFilePdf, FaPinterestP } from 'react-icons/fa';
+import { GiSpeaker } from 'react-icons/gi';
+import { AiOutlineStar } from 'react-icons/ai';
+import { FaFilePdf} from 'react-icons/fa';
 import { BiBookBookmark } from 'react-icons/bi';
 import { SiPublons } from 'react-icons/si';
 import { FiShoppingCart } from 'react-icons/fi';
 import Buttons from '../../components/Product-page-buttons/Buttons';
-import ForYou from '../../components/forYouComponents/ForYou';
+//import ForYou from '../../components/forYouComponents/ForYou';
 //image slider react
 import ReactImageCarosule from '../../components/ReactImageCarosule';
 import TotalRating from '../../components/ratingComponent/TotalRating';
@@ -279,6 +274,8 @@ function ProductPage(props) {
                       <p className={classes.bookAuthor}>
                         <span>By</span> {book && book.book_author.name}
                       </p>
+
+
                       <div className={classes.bookRating}>
                         <TotalRating value={book && book.rating} />
                         {book && book.rating}{' '}
@@ -299,6 +296,24 @@ function ProductPage(props) {
                             })}
                           </div>
                       )}
+                      
+                      <div className="book_selection mt-1">
+                        <ul className="book_selectitem">
+                          <li className="bookswatch-element unselected">
+                            <a href="/home">
+                              <span className="book-swtitle">Hardcover</span>
+                              <span className="book-swprice">Ksh 20</span> 
+                              <span className="book-swprice book-swprice-offer">Ksh 10</span>
+                            </a>
+                          </li>
+                          <li className="bookswatch-element selected">
+                            <a href="/home">
+                              <span className="book-swtitle">Paperback</span>
+                              <span className="book-swprice">Ksh 90</span> 
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
 
                       <TabComponent
                         routeHistory={history}
@@ -327,6 +342,7 @@ function ProductPage(props) {
                     </div>
                   </div>
                 </div>
+
                 <div className='col-md-3 col-12'>
                   <div className={`card ${classes.card} h-100`}>
                     <div className={`card-body ${classes.cardBody}`}>

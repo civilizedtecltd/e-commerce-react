@@ -10,8 +10,8 @@ require("dotenv").config({
 class APP_URL {
     constructor() {
         this.BASE = `https://admin.abookstore.co.ke`;
-        // this.BASE = `http://127.0.0.1:3333`;
-        this.LOCAL = `http://127.0.0.1:3333`;
+        //this.BASE = `http://127.0.0.1:3333`;
+        //this.LOCAL = `http://127.0.0.1:3333`;
         this.API = `${this.BASE}/api`;
     }
 

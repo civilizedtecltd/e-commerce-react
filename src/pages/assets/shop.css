@@ -15,5 +15,32 @@
     white-space: nowrap;
     text-overflow: ellipsis;  
 }
-
-
+.deliveryNav-0-2-12 li{font-size: 16px!important;}
+.book_selectitem{
+    display: flex;
+}
+.book_selectitem li{margin-right: 10px;}
+.bookswatch-element a{
+    background-color: #ececec;
+    padding: 5px 10px;
+    display: block;
+    border: 1px solid #7b7b7b;
+    font-weight: 600!important;
+    font-size: 16px;
+    line-height:20px;
+}
+.book-swtitle{display: block;color: #000000;}
+.book-swprice{
+    color: #0b7bc1;
+}
+.book-swprice-offer{
+    color: #828282;
+    padding-left: 5px;
+    text-decoration: line-through;
+}
+.book_selectitem .selected a{
+    border: 1px solid red;
+}
+.card-0-2-2 svg{
+    font-size: 18px;
+}
