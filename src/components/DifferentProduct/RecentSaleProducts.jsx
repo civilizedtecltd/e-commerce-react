@@ -21,6 +21,6 @@ const RecentSaleProducts = () => {
         }        
     }, [recentSaleBooks]);
 
-    return <DifferentProductView title = "Recent Sales Products" seeAllLink = "/top-products/recent-sale" bookList = {books} />;   
+    return ( books & books.length ? <DifferentProductView title = "Recent Sales Products" seeAllLink = "/top-products/recent-sale" bookList = {books} /> : <></>); 
 };
 export default RecentSaleProducts;
