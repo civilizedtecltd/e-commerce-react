@@ -28,7 +28,7 @@ export const useStyles = createUseStyles({
         fontSize: 16
     },
     btnContainer: {
-        justifyContent: 'space-between',
+        /* justifyContent: 'space-between', */
         display: 'flex',
         gap: '0.5rem',
         rowGap: '1rem',

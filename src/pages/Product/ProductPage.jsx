@@ -70,33 +70,36 @@ function ProductPage(props) {
     hardCover: false,
     ePub: false,
     audio: false,
+    text: ''
   });
 
   useEffect(() => {
+
+    const bookPriceArea = document.getElementById('bookPrice');
+    
     if (message.pdf) {
-      document.getElementById('bookPrice').innerHTML = `ksh ${
-        (book && book.price_pdf) || '0'
-      }`;
+      bookPriceArea.innerHTML = `ksh ${
+        (book && book.sales_price_pdf ? book.sales_price_pdf : book.price_pdf) || '0'
+      } <small>${message.text}</small>`;
     }
     if (message.hardCover) {
-      document.getElementById('bookPrice').innerHTML = `ksh ${
-        (book && book.price_hardcover) || '0'
-      }`;
+      bookPriceArea.innerHTML = `ksh ${
+        (book && book.sales_price_hardcover ? book.sales_price_hardcover : book.price_hardcover) || '0'
+      } <small>${message.text}</small>`;
     }
     if (message.ePub) {
-      document.getElementById('bookPrice').innerHTML = `ksh ${
-        (book && book.price_epub) || '0'
-      }`;
+      bookPriceArea.innerHTML = `ksh ${
+        (book && book.price_epub && book.sales_price_epub ? book.sales_price_epub : book.price_epub) || '0'
+      } <small>${message.text}</small>`;
     }
     if (message.audio) {
-      document.getElementById('bookPrice').innerHTML = `ksh ${
-        (book && book.price_audio) || '0'
-      }`;
+      bookPriceArea.innerHTML = `ksh ${
+        (book && book.sales_price_audiobook ? book.sales_price_audiobook : book.price_audiobook) || '0'
+      } <small>${message.text}</small>`;
     }
   }, [message]);
-  console.log(message);
 
-  //   ====================
+
   useEffect(() => {
     window.scrollTo(0, 0);
     showSingleBook(id);
@@ -148,84 +151,93 @@ function ProductPage(props) {
   //cart item number
   const [readmore, setReadmore] = useState(false);
 
-  const [bookPriceBtn, setBookPriceBtn] = useState([
-    {
-      text: 'not available',
-      name: 'hard cover',
-      icon: <BiBookBookmark />,
-      price: '',
-    },
-    {
-      text: 'not available',
-      name: 'audio book',
-      icon: <GiSpeaker />,
-      price: '',
-    },
-    {
-      text: 'not available',
-      name: 'e pub',
-      icon: <SiPublons />,
-      price: '',
-    },
-    {
-      text: 'not available',
-      name: 'pdf',
-      icon: <FaFilePdf />,
-      price: '',
-    },
-  ]);
+  const [bookPriceBtn, setBookPriceBtn] = useState([]);
 
   useEffect(() => {
+    const tempBookPriceBtn = [];
+    
     if(book && !book.price){
       if (book && book.price_hardcover) {
-        setBookPriceBtn([
-          ...bookPriceBtn,
-          {
-            text: book.stock && 'Available',
+        tempBookPriceBtn.push({
+            text: book.stock > 0 ? 'Available' : 'Unavailable',
             name: 'hard cover',
             icon: <BiBookBookmark />,
             price: book.price_hardcover,
-          },
-        ]);
+            sale_price: book.sales_price_hardcover
+          });
       }
       if (book && book.price_audiobook) {
-        setBookPriceBtn([
-          ...bookPriceBtn,
-          {
+        tempBookPriceBtn.push({
             text: book.book_files.audiobook_file && 'Available',
             name: 'audio book',
             icon: <GiSpeaker />,
-            price: book.price_hardcover,
-          },
-        ]);
+            price: book.price_audiobook,
+            sale_price: book.sales_price_audiobook
+          });
       }
       if (book && book.price_epub) {
-        setBookPriceBtn([
-          ...bookPriceBtn,
-          {
+        tempBookPriceBtn.push({
             text: book.book_files.epub_file && 'Available',
             name: 'e pub',
             icon: <SiPublons />,
             price: book.price_epub,
-          },
-        ]);
+            sale_price: book.sales_price_epub
+          });
       }
       if (book && book.price_pdf) {
-        setBookPriceBtn([
-          ...bookPriceBtn,
-          {
+        tempBookPriceBtn.push({
             text: book.book_files.pdf_file && 'Available',
             name: 'pdf',
             icon: <FaFilePdf />,
             price: book.price_pdf,
-          },
-        ]);
+            sale_price: book.sales_price_pdf
+          });
       }
+
+      switch(book.discount_type){
+        case 'HARD_COVER':
+            setMessage({ pdf: false, hardCover: true, ePub: false, audio: false, text: book.stock > 0 ? 'Available' : 'Unavailable' });           
+            book.book_type = 'Hardcover';
+            break;
+        case 'PDF':
+            setMessage({ pdf: true, hardCover: false, ePub: false, audio: false, text: book.book_files.pdf_file && 'Available' });
+            book.book_type = 'Pdf';  
+            break;
+        case 'EPUB':            
+            setMessage({ pdf: false, hardCover: false, ePub: true, audio: false, text: book.book_files.epub_file && 'Available' });
+            book.book_type = 'Epub'; 
+            break;
+        case 'AUDIO':
+            setMessage({ pdf: false, hardCover: false, ePub: false, audio: true, text: book.book_files.audiobook_file && 'Available' }); 
+            book.book_type = 'Audiobook';
+            break;
+        default:
+            if(book.price_hardcover > 0 && book.sales_price_hardcover === 0){
+
+              setMessage({ pdf: false, hardCover: true, ePub: false, audio: false, text: book.stock > 0 ? 'Available' : 'Unavailable' });
+              book.book_type = 'Hardcover'; 
+            }else if(book.price_pdf > 0 && book.sales_price_pdf === 0){
+
+              setMessage({ pdf: true, hardCover: false, ePub: false, audio: false, text: book.book_files.pdf_file && 'Available' });
+              book.book_type = 'Pdf';
+            }else if(book.price_epub > 0 && book.sales_price_epub === 0){
+
+              setMessage({ pdf: false, hardCover: false, ePub: true, audio: false, text: book.book_files.epub_file && 'Available' });
+              book.book_type = 'Epub';                
+            }else if(book.price_audiobook > 0 && book.sales_price_audiobook == 0){
+
+              setMessage({ pdf: false, hardCover: false, ePub: false, audio: true, text: book.book_files.audiobook_file && 'Available' });
+              book.book_type = 'Audiobook';
+            }                
+      }
+    }
+
+    if(tempBookPriceBtn.length > 0){
+      setBookPriceBtn([ ...tempBookPriceBtn ])
     }
   }, [book]);
 
-  console.log(book);
-
+  
   return (
     <>
       <PageLoader loading={pending && pending} />
@@ -284,37 +296,21 @@ function ProductPage(props) {
 
                       {book && !book.price && (
                           <div className={classes.btnContainer}>
-                            {bookPriceBtn.map((item, index) => {
-                              return (
-                                  <Buttons
-                                      key={index}
-                                      item={item}
-                                      message={message}
-                                      setMessage={setMessage}
-                                  />
-                              );
+                            {bookPriceBtn.length > 0 && bookPriceBtn.map((item, index) => {
+                              if(parseInt(item.price) > 0){
+                                return (
+                                    <Buttons
+                                        key={index}
+                                        item={item}
+                                        message={message}
+                                        setMessage={setMessage}
+                                    />
+                                );
+                              }
                             })}
                           </div>
                       )}
-                      
-                      <div className="book_selection mt-1">
-                        <ul className="book_selectitem">
-                          <li className="bookswatch-element unselected">
-                            <a href="/home">
-                              <span className="book-swtitle">Hardcover</span>
-                              <span className="book-swprice">Ksh 20</span> 
-                              <span className="book-swprice book-swprice-offer">Ksh 10</span>
-                            </a>
-                          </li>
-                          <li className="bookswatch-element selected">
-                            <a href="/home">
-                              <span className="book-swtitle">Paperback</span>
-                              <span className="book-swprice">Ksh 90</span> 
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-
+                                           
                       <TabComponent
                         routeHistory={history}
                         description={book ? book.long_description : ``}
@@ -346,15 +342,16 @@ function ProductPage(props) {
                 <div className='col-md-3 col-12'>
                   <div className={`card ${classes.card} h-100`}>
                     <div className={`card-body ${classes.cardBody}`}>
+                      <h3>{book && book.book_type}</h3>
                       <h2 id='bookPrice' className={classes.bookCode}>
-                        Ksh {book && book.price}
+                        Ksh {book && book.original_price}
                         <small>Available</small>
                       </h2>
 
                       <ul className={`nav flex-column ${classes.deliveryNav}`}>
                         <li>Free Delivery</li>
                         <li>
-                          Available. Dispatched in 24HRS.
+                          Dispatch in 24 Hrs.
                         </li>
                       </ul>
 
