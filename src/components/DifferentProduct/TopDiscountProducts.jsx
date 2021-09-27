@@ -66,6 +66,7 @@ const TopDiscountProduct = () => {
 
     }, [topDiscountBooks]);
 
-    return <DifferentProductView title = "Top Discount Products" seeAllLink = "/top-products/discount" bookList = {bookList}/>    
+    return ( bookList && bookList.length ? <DifferentProductView title = "Top Discount Products" seeAllLink = "/top-products/discount" bookList = {bookList}/> : <></> );
+     
 };
 export default TopDiscountProduct;
