@@ -178,8 +178,10 @@ class APP_URL {
     get _RECOVER_PASSWORD() {
         return `${this.API}/auth/recover-password`;
     }
-    __OAUTH(type) {
-        return `${this.API}/auth0/${type}`;
+
+    get __OAUTH() {
+        //return `${this.API}/auth0/${type}`;
+        return `${this.API}/oauth`;
     }
 
     __GET_SUBSCRIPTIONS(email) {

@@ -198,7 +198,7 @@ const updatePaymentMethod = (data) => (dispatch) => {
     }
 } */
 
-export const OauthLogin = (OauthData) => (dispatch) => {
+/* export const OauthLogin = (OauthData) => (dispatch) => {
 	removeAuthToken();
 	console.log(OauthData);
 	axios
@@ -207,6 +207,53 @@ export const OauthLogin = (OauthData) => (dispatch) => {
 				? OauthData.email
 				: OauthData.zu || OauthData.Au,
 		})
+		.then((res) => {
+			try {
+				const jwt = res.data.data;
+				const { data } = decode(jwt.token);
+				localStorage.setItem("authData", JSON.stringify(jwt));
+				setAuthToken(jwt.token);
+				return dispatch({
+					type: Types.USER_LOGIN,
+					payload: {
+						jwt: jwt,
+						user: data,
+						status: {
+							success: true,
+						},
+					},
+				});
+			} catch (error) {
+				console.log("Try Catch login error: ", error);
+				return dispatch({
+					type: Types.USER_LOGIN_ERROR,
+					payload: {
+						status: {
+							success: false,
+							error: error,
+						},
+					},
+				});
+			}
+		})
+		.catch((error) => {
+			return dispatch({
+				type: Types.USER_LOGIN_ERROR,
+				payload: {
+					status: {
+						success: false,
+						error: error.response,
+					},
+				},
+			});
+		});
+}; */
+
+export const Oauth = (OauthData) => (dispatch) => {
+	removeAuthToken();
+	console.log(OauthData);
+	axios
+		.post(URL.__OAUTH, OauthData)
 		.then((res) => {
 			try {
 				const jwt = res.data.data;
