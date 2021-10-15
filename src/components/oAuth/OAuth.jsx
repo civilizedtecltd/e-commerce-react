@@ -47,7 +47,7 @@ const OAuth = (props) => {
         const userInfo =  await socialAuth(provider);
                 
         if(userInfo){
-
+            props.login(userInfo);
         }
     }
 
@@ -64,7 +64,7 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (email) => dispatch(OauthLogin(email)),
+        login: (data) => dispatch(OauthLogin(data)),
         signup: (Oauth) => dispatch(OauthSignUp(Oauth)),
         emptyStatus: () => dispatch(emptyStatus()),
         showAllFavItem: () => dispatch(showFavItems()),
