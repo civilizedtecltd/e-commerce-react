@@ -198,15 +198,12 @@ const updatePaymentMethod = (data) => (dispatch) => {
     }
 } */
 
+
 export const OauthLogin = (OauthData) => (dispatch) => {
 	removeAuthToken();
-	console.log(OauthData);
+
 	axios
-		.post(URL.__OAUTH("login"), {
-			email: OauthData.email
-				? OauthData.email
-				: OauthData.zu || OauthData.Au,
-		})
+		.post(URL.__OAUTH, OauthData)
 		.then((res) => {
 			try {
 				const jwt = res.data.data;

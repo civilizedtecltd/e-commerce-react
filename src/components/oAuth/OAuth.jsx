@@ -1,8 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FacebookSignIn, GoogleSignIn } from "google-facebook-signin-react";
+//import { FacebookSignIn, GoogleSignIn } from "google-facebook-signin-react";
+import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import { OauthLogin, emptyStatus, OauthSignUp } from '../../redux/actions/authActions';
 import { showFavItems } from '../../redux/actions/favoriteActions';
+
+import { googleProvider } from '../../constants/authMethods';
+import socialAuth from '../../services/socialAuth';
+
+
+
 const OAuth = (props) => {
 
     const success = (res) => {
@@ -36,17 +43,18 @@ const OAuth = (props) => {
         console.log(err);
     }
 
+    const handleOnClick = async (provider) => {
+        const userInfo =  await socialAuth(provider);
+                
+        if(userInfo){
+            props.login(userInfo);
+        }
+    }
+
     return (
-        <div>
-
-            <FacebookSignIn appId={"1011773875863022"} onReject={error} onResolve={success} fieldsProfile={'first_name, last_name, email'} fetch_basic_profile={true}>
-                    Facebook
-            </FacebookSignIn>
-
-            <GoogleSignIn client_id={"959352266819-f73q6j7ph8vik97t2l25lb0ndqj1odrc.apps.googleusercontent.com"} onReject={error} onResolve={success}>
-                    Google
-            </GoogleSignIn>
-
+        <div>            
+            <FacebookLoginButton onClick={()=> alert('Facebook Button')} />
+            <GoogleLoginButton onClick={() => handleOnClick(googleProvider)} />
         </div>
     )
 }
@@ -56,7 +64,7 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (email) => dispatch(OauthLogin(email)),
+        login: (data) => dispatch(OauthLogin(data)),
         signup: (Oauth) => dispatch(OauthSignUp(Oauth)),
         emptyStatus: () => dispatch(emptyStatus()),
         showAllFavItem: () => dispatch(showFavItems()),

@@ -9,8 +9,8 @@ require("dotenv").config({
 
 class APP_URL {
     constructor() {
-        this.BASE = `https://admin.abookstore.co.ke`;
-        //this.BASE = `http://127.0.0.1:3333`;
+        //this.BASE = `https://admin.abookstore.co.ke`;
+        this.BASE = `http://127.0.0.1:3333`;
         //this.LOCAL = `http://127.0.0.1:3333`;
         this.API = `${this.BASE}/api`;
     }
@@ -178,8 +178,10 @@ class APP_URL {
     get _RECOVER_PASSWORD() {
         return `${this.API}/auth/recover-password`;
     }
-    __OAUTH(type) {
-        return `${this.API}/auth0/${type}`;
+
+    get __OAUTH() {
+        //return `${this.API}/auth0/${type}`;
+        return `${this.API}/oauth`;
     }
 
     __GET_SUBSCRIPTIONS(email) {
