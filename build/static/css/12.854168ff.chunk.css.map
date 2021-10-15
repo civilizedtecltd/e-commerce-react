@@ -1,0 +1,1 @@
+{"version":3,"sources":["favorite.css"],"names":[],"mappings":"AAAA,iBACI,aAAc,CACd,WAAY,CACZ,eAAgB,CAChB,kBAAmB,CACnB,sBACJ","file":"12.854168ff.chunk.css","sourcesContent":[".limit-character{\n    display: block;\n    width: 172px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;  \n}\n"]}
