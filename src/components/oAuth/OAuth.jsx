@@ -5,55 +5,22 @@ import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-butto
 import { OauthLogin, emptyStatus, OauthSignUp } from '../../redux/actions/authActions';
 import { showFavItems } from '../../redux/actions/favoriteActions';
 
-import { googleProvider } from '../../constants/authMethods';
+import { googleProvider, facebookProvider } from '../../constants/authMethods';
 import socialAuth from '../../services/socialAuth';
 
-
-
 const OAuth = (props) => {
-
-    const success = (res) => {
-        return new Promise((resolve, reject) => {
-            const path = window.location.pathname;
-            if (path ==='/login') {
-                if (res.provider === "google") {
-                    const loginData = res.data.Qt || res.data.Rt 
-                    props.login(loginData)
-                }
-                if (res.provider === 'facebook') {
-                    props.login(res.data)
-                }
-                resolve();
-            }
-
-            if (path === '/signup') {
-                if (res.provider === "google") {
-                    const OauthData = res.data.Qt ? res.data.Qt : res.data.Rt;
-                    props.signup(OauthData)
-                }
-                if (res.provider === 'facebook') {
-                    props.signup(res.data)
-                }
-                resolve();
-            }
-        });
-    }
-
-    const error =(err) =>{
-        console.log(err);
-    }
-
     const handleOnClick = async (provider) => {
         const userInfo =  await socialAuth(provider);
                 
         if(userInfo){
+            console.log(userInfo);
             props.login(userInfo);
         }
     }
 
     return (
         <div>            
-            <FacebookLoginButton onClick={()=> alert('Facebook Button')} />
+            <FacebookLoginButton onClick={()=> handleOnClick(facebookProvider)} />
             <GoogleLoginButton onClick={() => handleOnClick(googleProvider)} />
         </div>
     )
