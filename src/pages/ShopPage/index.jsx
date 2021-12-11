@@ -207,8 +207,9 @@ const ShopPage = (props) => {
 
     const [filterSortShow, setFilterSortShow] = useState(false)
 
-    console.log(width)
-
+    //console.log(width)
+    //console.log(data);
+    
     return (
         <>
             <PageLoader loading={pending}/>
@@ -317,7 +318,7 @@ const ShopPage = (props) => {
                                                                                     {book.book_author.name}
                                                                                 </h5>
                                                                                 <p className='productPrice'>
-                                                                                    Ksh {book.price}
+                                                                                    Ksh {book.price || book.price_audiobook || book.price_epub || book.price_hardcover || book.price_pdf}
                                                                                 </p>
                                                                             </div>
                                                                         </Card>
