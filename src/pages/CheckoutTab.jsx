@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Card, Form, Col, Row, Button, Alert, Modal } from 'react-bootstrap';
+import { Container, Card, Form, Col, Row, Button, Alert } from 'react-bootstrap';
 import PaypalExpressBtn from "react-paypal-express-checkout";
 import { Link, useHistory } from 'react-router-dom'
-import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
 import { setDeliveryAddress, setPaymentDetails } from '../redux/actions/shopActions';
-import { confirmOrder, setPayment } from '../redux/actions/authActions';
+import { confirmOrder } from '../redux/actions/authActions';
 import { clearPromo } from '../redux/actions/shopActions';
 import { setRedirectToOrder } from '../redux/actions/siteActions';
 import PaymentsMethods from './PaymentMethods';
@@ -20,7 +19,7 @@ import LoaderSm from './LoaderSm'
 
 const CheckoutTab = (props) => {
   const history = useHistory()
-  const [show, setShow] = useState(false);
+  const [ setShow ] = useState(false);
   const [step, setStep] = useState({ prev: 0, next: 1, show: false })
   const [iframe, setIframe] = useState('')
   const [iframeLoading, setIframeLoading] = useState(true)
@@ -59,7 +58,7 @@ const CheckoutTab = (props) => {
 
   const paymentDetails = props.payment
 
-  const deliveryCost = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.price : props.delivery[0].price;
+  //const deliveryCost = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.price : props.delivery[0].price;
   const deliveryTime = (paymentDetails.deliveryInfo) ? paymentDetails.deliveryInfo.delivery_time : props.delivery[0].delivery_time;
   const currencyExchangeRate = (props.currencyRate) ? props.currencyRate.kes : 1;
   const total_cost_in_usd = Math.ceil(props.costWithDelivery / currencyExchangeRate);
@@ -264,11 +263,11 @@ const CheckoutTab = (props) => {
       })
   }
 
-  const set_ifrm_success = () => {
+ /*  const set_ifrm_success = () => {
     const nifr = { ...iframe }
     nifr.iframe = `/swype_success/${btoa(nifr.orderRef)}`
     setIframe(nifr)
-  }
+  } */
 
 
   return (

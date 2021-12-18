@@ -27,9 +27,9 @@ import '../assets/css/theme.css'
 
 const PaymentMethods = (props) => {
 
-    const [paymentType, setPaymentType] = useState('swype');
+    const [ paymentType ] = useState('swype');
 
-    const [deliveryMethod, setDeliveryMethod] = useState({
+    const [ deliveryMethod ] = useState({
         standard: true,
         express: false
     });
@@ -50,7 +50,7 @@ const PaymentMethods = (props) => {
         }
     }, [deliveryMethod.standard, paymentType, props]);
 
-    const checkDelivery = (e) => {
+ /*    const checkDelivery = (e) => {
 
         if (e.target.name === 'standard') {
             setDeliveryMethod({
@@ -58,11 +58,11 @@ const PaymentMethods = (props) => {
                 express: false
             })
 
-            /* props.callback({
+            props.callback({
                 method: paymentType,
                 delivery: 1,
                 deliveryInfo: props.delivery[0]
-            }); */
+            }); 
 
         }
 
@@ -72,13 +72,13 @@ const PaymentMethods = (props) => {
                 express: true
             })
 
-            /* props.callback({
+            props.callback({
                 method: paymentType,
                 delivery: 2,
                 deliveryInfo: props.delivery[1]
-            }); */
+            });
         }
-    }
+    } */
 
     /* const selectPaymentType = type => {
 
